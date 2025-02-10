@@ -1,11 +1,9 @@
-import Hero from "../../ui/components/Hero/Hero";
-import Footer from "../../ui/components/Footer/Footer";
+import Hero from "../../ui/components/hero/Hero";
 
 const Home = () => {
   return (
     <main>
       <Hero />
-      <Footer />
     </main>
   );
 };

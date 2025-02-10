@@ -1,5 +1,6 @@
 import { Outlet } from "react-router";
-import Header from "../ui/components/Header/Header";
+import Header from "../header/Header";
+import Footer from "../footer/Footer";
 
 const Layout = () => {
   return (
@@ -10,6 +11,9 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 };
