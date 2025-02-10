@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <>
       <NavLink to="/">
-        <img src="../../../../public/images/Horizontal Logo Blue@100x-8 1.svg" />
+        <img src="/images/Horizontal Logo Blue@100x-8 1.svg" />
       </NavLink>
       <NavLink to="cart-items">Cart Items</NavLink>
     </>
