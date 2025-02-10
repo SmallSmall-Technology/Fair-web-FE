@@ -3,7 +3,9 @@ import { NavLink } from "react-router";
 const Header = () => {
   return (
     <>
-      <NavLink to="/">Home</NavLink>
+      <NavLink to="/">
+        <img src="../../../../public/images/Horizontal Logo Blue@100x-8 1.svg" />
+      </NavLink>
       <NavLink to="cart-items">Cart Items</NavLink>
     </>
   );
