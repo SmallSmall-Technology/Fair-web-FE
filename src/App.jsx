@@ -3,6 +3,7 @@ import CartItems from "./pages/cartItems/CartItems";
 import Home from "./pages/home/Home";
 import Layout from "./ui/components/layout/Layout";
 import PageNotFound from "./pages/pageNotFound/PageNotFound";
+
 const App = () => {
   return (
     <BrowserRouter>
