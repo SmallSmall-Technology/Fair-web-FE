@@ -18,7 +18,7 @@ const SingleProductCategory = ({ product }) => {
 export const ProductCategories = () => {
   return (
     <section>
-      <ul className="flex gap-8 px-4 md:justify-center overflow-scroll py-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+      <ul className="flex gap-8 mx-4 md:justify-center overflow-scroll py-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
         {productCategories.map((product) => (
           <SingleProductCategory product={product} key={product.id} />
         ))}
