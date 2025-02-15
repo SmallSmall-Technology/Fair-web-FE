@@ -1,10 +1,12 @@
 import Hero from "../../ui/components/hero/Hero";
+import Products from "../../ui/components/products/Products";
 
 const Home = () => {
   return (
-    <main>
+    <>
       <Hero />
-    </main>
+      <Products />
+    </>
   );
 };
 
