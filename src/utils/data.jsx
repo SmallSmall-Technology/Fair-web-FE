@@ -183,3 +183,34 @@ export const popularProducts = [
     link: "href/home/groceries",
   },
 ];
+
+export const popularProductsSort = [
+  {
+    id: 1,
+    image: "/images/american-man.svg",
+    name: "Shirts, jeans, tees and more",
+    category: "Men",
+    link: "href/men",
+  },
+  {
+    id: 2,
+    image: "/images/fashionable-young-woman.svg",
+    name: "Dresses, jewelries, hair and more ",
+    category: "Women",
+    link: "href/home/women",
+  },
+  {
+    id: 3,
+    image: "/images/american-kid.svg",
+    name: "Sofa, decor, appliance and more",
+    category: "Kids",
+    link: "href/home/kids",
+  },
+  {
+    id: 4,
+    image: "/images/living-room.svg",
+    name: "Sofa, decor, appliance and more",
+    category: "Home",
+    link: "href/home",
+  },
+];
