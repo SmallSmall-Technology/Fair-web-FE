@@ -1,11 +1,14 @@
 import { NavLink } from "react-router";
+import { ProductCard } from "./ProductCard";
 import { products } from "../../../utils/data";
-import { SingleProduct } from "./SingleProduct";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "../../../utils/Button";
-// import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export const NewProductsInStore = () => {
+export const NewProductsInStore = ({
+  onScrollProduct,
+  item_width,
+  containerRef,
+}) => {
   return (
     <>
       <div className="flex justify-between mt-12 mb-4">
@@ -33,26 +36,26 @@ export const NewProductsInStore = () => {
             </NavLink>
           </div>
         </div>
-        {/* This is reusable, just change the endpoint for mapping */}
         <div className="overflow-x-scroll scrollbar-hide">
-          <div className="grid grid-flow-col space-x-4 w-full overflow-x-scroll scrollbar-hide">
+          <div
+            className="grid grid-flow-col space-x-4 w-full overflow-x-scroll scrollbar-hide scroll-smooth "
+            ref={containerRef}
+          >
             {products.map((product) => (
               <div className="" key={product.id}>
-                <SingleProduct product={product} />
+                <ProductCard product={product} />
               </div>
             ))}
           </div>
           <div className="flex justify-between items-baseline space-x-2 ">
-            <div
-              className="border-2 bg-[#F2F2F2] w-full mt-8 rounded-md"
-              // style={{ width: `${scrollProgress}%`, height: "4px" }}
-            ></div>
+            <div className="border-2 bg-[#F2F2F2] w-full mt-8 rounded-md"></div>
 
             <div className="flex space-x-4">
               <Button
                 role="button"
                 aria-label="Previous item"
                 tabIndex="0"
+                onClick={() => onScrollProduct(-item_width)}
                 className="border border-[#E5E5E5] rounded-full shadow-custom w-[30px] h-[30px] flex justify-center items-center transition-transform duration-300 ease-in-out hover:translate-x-[-1px] focus:ring-2 focus:ring-black focus:outline-none"
               >
                 <ChevronLeft size={13} />
@@ -62,6 +65,7 @@ export const NewProductsInStore = () => {
                 role="button"
                 aria-label="Next item"
                 tabIndex="0"
+                onClick={() => onScrollProduct(item_width)}
                 className="border border-[#E5E5E5] rounded-full shadow-custom w-[30px] h-[30px] flex justify-center items-center transition-transform duration-300 ease-in-out hover:translate-x-1 focus:ring-2 focus:ring-black focus:outline-none"
               >
                 <ChevronRight size={13} />
@@ -73,73 +77,3 @@ export const NewProductsInStore = () => {
     </>
   );
 };
-
-// import { useRef, useState } from "react";
-// import { NavLink } from "react-router";
-// import { products } from "../../../utils/data";
-// import { SingleProduct } from "./SingleProduct";
-// import { ChevronLeft, ChevronRight } from "lucide-react";
-// import { Button } from "../../../utils/Button";
-
-// export const NewProductsInStore = () => {
-//   const scrollRef = useRef(null);
-//   const [progress, setProgress] = useState(0);
-
-//   const handleScroll = (shift) => {
-//     const container = scrollRef.current;
-//     container.scrollBy({ left: shift, behavior: "smooth" });
-//     const max = container.scrollWidth - container.clientWidth;
-//     setProgress(max ? (container.scrollLeft / max) * 100 : 0);
-//   };
-
-//   return (
-//     <>
-//       <div className="flex justify-between mt-12 mb-4">
-//         <h2 className="font-bold text-2xl">New in store</h2>
-//         <NavLink to="/new-products-in-store" className="underline">
-//           View all
-//         </NavLink>
-//       </div>
-
-//       <div className="grid grid-flow-row space-x-4 md:space-x-10 mb-8">
-//         <div className="px-4 bg-[#FFDE11] w-[195px] h-[218px] rounded flex flex-col justify-end pb-4">
-//           <span className="text-2xl font-semibold">New in store</span>
-//           <NavLink
-//             to="/new-products-in-store"
-//             className="hover:underline text-sm"
-//           >
-//             See all newly listed items
-//           </NavLink>
-//         </div>
-
-//         <div className="overflow-x-auto scrollbar-hide" ref={scrollRef}>
-//           <div className="flex space-x-4">
-//             {products.map((product) => (
-//               <SingleProduct key={product.id} product={product} />
-//             ))}
-//           </div>
-//         </div>
-
-//         <div className="flex mt-8">
-//           <div className="bg-[#F2F2F2] w-full h-1 rounded overflow-hidden">
-//             <div
-//               className="bg-black h-full"
-//               style={{ width: `${progress}%` }}
-//             ></div>
-//           </div>
-//           <div className="flex justify-between items-center mt-4">
-//             <Button
-//               onClick={() => handleScroll(-300)}
-//               aria-label="Previous item"
-//             >
-//               <ChevronLeft size={13} />
-//             </Button>
-//             <Button onClick={() => handleScroll(300)} aria-label="Next item">
-//               <ChevronRight size={13} />
-//             </Button>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
