@@ -4,12 +4,12 @@ import { products } from "../../../utils/data";
 import { Button } from "../../../utils/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
+export const TodaysDeal = ({ onScrollProduct, item_width, containerRef }) => {
   return (
     <>
       <div className="flex justify-between mt-12 mb-4">
-        <h2 className="font-bold text-2xl">Beauty</h2>
-        <NavLink to="/new-products-in-store" className="underline">
+        <h2 className="font-bold text-2xl">Today's Deal</h2>
+        <NavLink to={`/category/todays-deal`} className="underline">
           View all
         </NavLink>
       </div>
@@ -17,7 +17,7 @@ export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
       <div className="grid grid-flow-col space-x-4 md:space-x-10 mb-8 ">
         <div className="overflow-x-scroll scrollbar-hide">
           <div
-            className="grid grid-flow-col space-x-4 w-full overflow-x-scroll scrollbar-hide scroll-smooth"
+            className="grid grid-flow-col space-x-4 w-full overflow-x-auto scrollbar-hide scroll-smooth"
             ref={containerRef}
           >
             {products.map((product) => (

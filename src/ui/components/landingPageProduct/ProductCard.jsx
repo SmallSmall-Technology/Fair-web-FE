@@ -1,9 +1,9 @@
 import { NavLink } from "react-router";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../../../utils/Button";
 import { Share2, Star, Heart } from "lucide-react";
 
-export const ProductCard = ({ product, isLoading }) => {
+export const ProductCard = React.memo(({ product, isLoading }) => {
   // const [addToFavourite, setAddToFavourite] = useState([]);
   const [isFavourite, setIsFavourite] = useState(false);
 
@@ -54,6 +54,7 @@ export const ProductCard = ({ product, isLoading }) => {
             onClick={handleShareProduct}
           >
             <Share2 className="fill-black" size="15px" />
+            <span className="sr-only">Share this product</span>
           </Button>
         )}
 
@@ -64,6 +65,7 @@ export const ProductCard = ({ product, isLoading }) => {
             <img
               src={product.image}
               alt={product.name}
+              loading="lazy"
               className="h-fit w-fit object-cover mt-10"
             />
           )}
@@ -137,10 +139,11 @@ export const ProductCard = ({ product, isLoading }) => {
                 cursor="pointer"
                 fill={isFavourite ? "red" : "white"}
               />
+              <span className="sr-only">Add this product to Favourites</span>
             </Button>
           )}
         </div>
       </div>
     </>
   );
-};
+});
