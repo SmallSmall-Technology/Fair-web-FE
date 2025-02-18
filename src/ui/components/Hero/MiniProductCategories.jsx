@@ -15,7 +15,7 @@ const SingleProductCategory = ({ product }) => {
   );
 };
 
-export const ProductCategories = () => {
+export const MiniProductCategories = () => {
   return (
     <section>
       <ul className="flex gap-8 md:justify-center overflow-scroll py-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">

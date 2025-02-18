@@ -4,7 +4,6 @@ import { popularProductsSort } from "../../../../utils/data";
 export const PopularProductSort = () => (
   <div className="mt-12 mb-4">
     <div className="flex flex-wrap gap-4 justify-between 2xl:grid 2xl:grid-flow-col">
-      {/* <div className="grid gap-4 md:grid-flow-row md:grid-cols-2 lg:grid-cols-3 "> */}
       {popularProductsSort.map((product) => (
         <SinglePopularProduct key={product.id} product={product} />
       ))}

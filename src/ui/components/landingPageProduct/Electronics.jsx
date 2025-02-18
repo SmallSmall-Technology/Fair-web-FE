@@ -10,7 +10,7 @@ export const Electronics = ({ onScrollProduct, item_width, containerRef }) => {
     <section>
       <div className="flex justify-between mt-12 mb-4">
         <h2 className="font-bold text-2xl">Electronics</h2>
-        <NavLink to="/electronics" className="underline">
+        <NavLink to={`/category/electronics`} className="underline">
           View all
         </NavLink>
       </div>

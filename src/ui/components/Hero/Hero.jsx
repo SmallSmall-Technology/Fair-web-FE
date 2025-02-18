@@ -1,12 +1,12 @@
 import { HeroCards } from "./HeroCards";
 import { HeroText } from "./HeroText";
 import { ProductAds } from "./ProductAds";
-import { ProductCategories } from "./ProductCategories";
+import { MiniProductCategories } from "./MiniProductCategories";
 
 const Hero = () => {
   return (
     <section className="mx-6 md:mx-[76px]">
-      <ProductCategories />
+      <MiniProductCategories />
       <ProductAds />
       <HeroText />
       <HeroCards />
