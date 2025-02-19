@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { products } from "../../utils/data";
 import { ChevronRight } from "lucide-react";
 import { NavLink, useParams } from "react-router";
@@ -6,6 +6,10 @@ import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
 import { ProductCard } from "../../ui/components/landingPageProduct/ProductCard";
 
 const CategoryPage = () => {
+  const [filterByType, setFilterByType] = useState(0);
+  const [filterByBrand, setFilterByBrand] = useState(0);
+  const [filterByPrice, setFilterByPrice] = useState(0);
+
   const { categoryName } = useParams();
 
   const filteredProducts = useMemo(
@@ -26,6 +30,11 @@ const CategoryPage = () => {
       }, {}),
     [filteredProducts]
   );
+
+  //helper function
+  const getUniqueOptions = (products, key) => {
+    return [...new Set(products.map((product) => product[key]))];
+  };
 
   //screen readers
   useEffect(() => {
@@ -70,15 +79,13 @@ const CategoryPage = () => {
                 Type of {categoryName}
               </option>
 
-              {[
-                ...new Set(
-                  filteredProducts.map((product) => product.subcategory)
-                ),
-              ].map((subcategory, index) => (
-                <option key={index} value={subcategory}>
-                  {subcategory}
-                </option>
-              ))}
+              {getUniqueOptions(filteredProducts, "subcategory").map(
+                (subcategory, index) => (
+                  <option key={index} value={subcategory}>
+                    {subcategory}
+                  </option>
+                )
+              )}
             </select>
 
             <label htmlFor="brandSelect" className="sr-only">
@@ -93,15 +100,13 @@ const CategoryPage = () => {
               <option value="" disabled>
                 Choose Brand
               </option>
-              {[
-                ...new Set(
-                  filteredProducts.map((product) => product.subcategory)
-                ),
-              ].map((subcategory, index) => (
-                <option key={index} value={subcategory}>
-                  {subcategory}
-                </option>
-              ))}
+              {getUniqueOptions(filteredProducts, "subcategory").map(
+                (subcategory, index) => (
+                  <option key={index} value={subcategory}>
+                    {subcategory}
+                  </option>
+                )
+              )}
             </select>
 
             <label htmlFor="priceRange" className="sr-only">
