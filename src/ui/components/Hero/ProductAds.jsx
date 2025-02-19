@@ -7,7 +7,6 @@ export const ProductAds = () => {
     Array(productAds.length).fill(false)
   );
 
-  // Auto-rotate carousel
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % productAds.length);
@@ -16,7 +15,6 @@ export const ProductAds = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Handle image load
   const handleImageLoad = (index) => {
     setImageLoaded((prev) => {
       const newLoadedState = [...prev];
@@ -26,8 +24,7 @@ export const ProductAds = () => {
   };
 
   return (
-    <div className="relative w-[90%] mt-4 mx-auto">
-      {/* Carousel Container */}
+    <div className="relative mt-4 mx-auto">
       <div
         className="relative h-56 md:h-96 overflow-hidden rounded-lg"
         aria-live="polite"
@@ -42,12 +39,10 @@ export const ProductAds = () => {
             }`}
             aria-hidden={index !== currentIndex}
           >
-            {/* Loading Skeleton */}
             {!imageLoaded[index] && (
               <div className="w-full h-full bg-gray-200 animate-pulse"></div>
             )}
 
-            {/* Image */}
             <img
               src={productAd.image}
               alt={productAd.name}
@@ -63,7 +58,6 @@ export const ProductAds = () => {
         ))}
       </div>
 
-      {/* Carousel Navigation Buttons */}
       <div className="mt-4 flex justify-center space-x-4">
         {productAds.map((_, index) => (
           <button
