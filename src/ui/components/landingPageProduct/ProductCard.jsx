@@ -132,7 +132,7 @@ export const ProductCard = React.memo(({ product, isLoading }) => {
               }
               title={isFavourite ? "Remove from favourite" : "Add to favourite"}
               onClick={() => handleAddtoFavourite((prev) => [...prev, product])}
-              className="focus:outline-none focus:ring-2 focus:ring-black"
+              // className="focus:outline-none focus:ring-2 focus:ring-red"
             >
               <Heart
                 size={18}

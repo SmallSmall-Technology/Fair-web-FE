@@ -70,13 +70,13 @@ export const productCategories = [
     id: 9,
     productName: "Kids",
     productIcon: kids,
-    link: `category${"/toys"}`,
+    link: `/category${"/toys"}`,
   },
   {
     id: 10,
     productName: "Sports Items",
     productIcon: sports,
-    link: `category/${"toys"}`,
+    link: `/category/${"toys"}`,
   },
   {
     id: 11,
@@ -94,7 +94,7 @@ export const productCategories = [
     id: 13,
     productName: "Toys & Games",
     productIcon: toysgames,
-    link: `category/${"toys"}`,
+    link: `/category/${"toys"}`,
   },
 ];
 
