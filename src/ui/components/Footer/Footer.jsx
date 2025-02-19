@@ -67,14 +67,15 @@ const Footer = () => {
       </div>
 
       <div className=" border-t pt-7">
-        <p className="flex align-middle text-xs">
+        <div className="flex align-middle text-xs">
           <span className="pt-1 mr-2">
             <FaRegCopyright />
           </span>
-          <div className="pt-1">
-            <span className="mr-4 ">Fair by Smallsmall Technology 2025</span> <span>fairapp.ng</span>
-          </div>
-        </p>
+          <p className="pt-1">
+            <span className="mr-4 ">Fair by Smallsmall Technology 2025</span>{" "}
+            <span>fairapp.ng</span>
+          </p>
+        </div>
       </div>
     </div>
   );
