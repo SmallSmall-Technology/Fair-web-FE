@@ -149,10 +149,7 @@ export const heroCards = [
 // ];
 export const products = Array.from({ length: 10 }, (_, index) => ({
   id: index + 1,
-  name:
-    index % 2 === 0
-      ? "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple"
-      : "Television ",
+  name: index % 2 === 0 ? "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple" : "Television ",
   image: index % 2 === 0 ? "/images/iPhone.svg" : "/images/television.svg",
   price: "N207,000.00",
   discountPrice: "N225,000.00",
@@ -181,5 +178,50 @@ export const popularProducts = [
     name: "Rice, Yam, Chicken",
     category: "Groceries",
     link: "href/home/groceries",
+  },
+];
+
+export const menuFooter = [
+  {
+    title: "Fair",
+    links: [
+      { name: "About us", link: "/about-us" },
+      { name: "Privacy policy", link: "/privacy-policy" },
+      { name: "Feedback", link: "/feedback" },
+      { name: "Press", link: "/press" },
+      { name: "Legal", link: "/legal" },
+      { name: "Careers", link: "/careers" },
+    ],
+  },
+  {
+    title: "Shop",
+    links: [
+      { name: "Categories", link: "/categories" },
+      { name: "Deals", link: "/deals" },
+      { name: "Trending", link: "/trending" },
+      { name: "Buying guide", link: "/buying-guide" },
+      { name: "Gift card", link: "/gift-card" },
+      { name: "Create an account", link: "/create-account" },
+    ],
+  },
+  {
+    title: "Sell",
+    links: [
+      { name: "Start selling", link: "/start-selling" },
+      { name: "How to sell", link: "/how-to-sell" },
+      { name: "Getting paid", link: "/getting-paid" },
+      { name: "Vendor app", link: "/vendor-app" },
+    ],
+  },
+  {
+    title: "Support",
+    links: [
+      { name: "Contact us", link: "/contact-us" },
+      { name: "Help center", link: "/help-center" },
+      { name: "Market place guidelines", link: "/marketplace-guidelines" },
+      { name: "Buyer protection", link: "/buyer-protection" },
+      { name: "Seller protection", link: "/seller-protection" },
+      { name: "Refunds and returns", link: "/refunds-returns" },
+    ],
   },
 ];
