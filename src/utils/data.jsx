@@ -523,8 +523,7 @@ export const products = [
     name: "LG Double Door Refrigerator",
     category: "Electronics",
     subcategory: "Refrigerators",
-    image:
-      "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=500&q=60",
     price: "N400,000.00",
     discountPrice: "N420,000.00",
     ratings: "4.6",
@@ -535,8 +534,7 @@ export const products = [
     name: "Samsung Microwave Oven",
     category: "Electronics",
     subcategory: "Microwaves",
-    image:
-      "https://images.unsplash.com/photo-1570872626486-d2dc99b73f9f?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1570872626486-d2dc99b73f9f?auto=format&fit=crop&w=500&q=60",
     price: "N120,000.00",
     discountPrice: "N135,000.00",
     ratings: "4.7",
@@ -547,8 +545,7 @@ export const products = [
     name: "Panasonic 4-Burner Gas Cooker",
     category: "Electronics",
     subcategory: "Cookers",
-    image:
-      "https://images.unsplash.com/photo-1581638633717-b386f5d578f8?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1581638633717-b386f5d578f8?auto=format&fit=crop&w=500&q=60",
     price: "N150,000.00",
     discountPrice: "N165,000.00",
     ratings: "4.5",
@@ -559,8 +556,7 @@ export const products = [
     name: "Philips Air Fryer",
     category: "Electronics",
     subcategory: "Air Fryers",
-    image:
-      "https://images.unsplash.com/photo-1600483550065-4398d1e3d4c4?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1600483550065-4398d1e3d4c4?auto=format&fit=crop&w=500&q=60",
     price: "N85,000.00",
     discountPrice: "N95,000.00",
     ratings: "4.8",
@@ -571,8 +567,7 @@ export const products = [
     name: "Bosch Electric Kettle",
     category: "Electronics",
     subcategory: "Kettles",
-    image:
-      "https://images.unsplash.com/photo-1587049931198-e9f04b3ff0a8?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1587049931198-e9f04b3ff0a8?auto=format&fit=crop&w=500&q=60",
     price: "N25,000.00",
     discountPrice: "N30,000.00",
     ratings: "4.4",
@@ -583,8 +578,7 @@ export const products = [
     name: "Nutribullet Blender",
     category: "Electronics",
     subcategory: "Blenders",
-    image:
-      "https://images.unsplash.com/photo-1615312603974-cd717e5233e3?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1615312603974-cd717e5233e3?auto=format&fit=crop&w=500&q=60",
     price: "N45,000.00",
     discountPrice: "N50,000.00",
     ratings: "4.6",
@@ -595,8 +589,7 @@ export const products = [
     name: "Kenwood Food Processor",
     category: "Electronics",
     subcategory: "Food Processors",
-    image:
-      "https://images.unsplash.com/photo-1596900951767-7f3db0b260b7?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1596900951767-7f3db0b260b7?auto=format&fit=crop&w=500&q=60",
     price: "N65,000.00",
     discountPrice: "N70,000.00",
     ratings: "4.7",
@@ -607,8 +600,7 @@ export const products = [
     name: "Hisense Chest Freezer",
     category: "Electronics",
     subcategory: "Freezers",
-    image:
-      "https://images.unsplash.com/photo-1576710587602-7f8e8c6e98ec?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1576710587602-7f8e8c6e98ec?auto=format&fit=crop&w=500&q=60",
     price: "N210,000.00",
     discountPrice: "N225,000.00",
     ratings: "4.5",
@@ -619,8 +611,7 @@ export const products = [
     name: "Prestige Toaster",
     category: "Electronics",
     subcategory: "Toasters",
-    image:
-      "https://images.unsplash.com/photo-1525058807500-1e4d01d95063?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1525058807500-1e4d01d95063?auto=format&fit=crop&w=500&q=60",
     price: "N20,000.00",
     discountPrice: "N25,000.00",
     ratings: "4.3",
@@ -631,8 +622,7 @@ export const products = [
     name: "LG Dishwasher",
     category: "Kitchen Appliances",
     subcategory: "Dishwashers",
-    image:
-      "https://images.unsplash.com/photo-1566378245223-50227c8ad0fa?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1566378245223-50227c8ad0fa?auto=format&fit=crop&w=500&q=60",
     price: "N350,000.00",
     discountPrice: "N370,000.00",
     ratings: "4.7",
@@ -646,8 +636,7 @@ export const products = [
     name: "Maybelline Fit Me Foundation",
     category: "beauty",
     subcategory: "Makeup",
-    image:
-      "https://images.unsplash.com/photo-1584949035913-2f52ecf2a7c2?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1584949035913-2f52ecf2a7c2?auto=format&fit=crop&w=500&q=60",
     price: "N8,000.00",
     discountPrice: "N9,500.00",
     ratings: "4.7",
@@ -658,8 +647,7 @@ export const products = [
     name: "MAC Matte Lipstick",
     category: "beauty",
     subcategory: "Makeup",
-    image:
-      "https://images.unsplash.com/photo-1584949036477-9c86f18fef5b?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1584949036477-9c86f18fef5b?auto=format&fit=crop&w=500&q=60",
     price: "N12,000.00",
     discountPrice: "N13,500.00",
     ratings: "4.8",
@@ -670,8 +658,7 @@ export const products = [
     name: "Nivea Body Lotion",
     category: "beauty",
     subcategory: "Skincare",
-    image:
-      "https://images.unsplash.com/photo-1607611749438-4859c7b20f83?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1607611749438-4859c7b20f83?auto=format&fit=crop&w=500&q=60",
     price: "N3,500.00",
     discountPrice: "N4,000.00",
     ratings: "4.6",
@@ -682,8 +669,7 @@ export const products = [
     name: "CeraVe Foaming Facial Cleanser",
     category: "beauty",
     subcategory: "Skincare",
-    image:
-      "https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=500&q=60",
     price: "N6,000.00",
     discountPrice: "N6,800.00",
     ratings: "4.9",
@@ -694,8 +680,7 @@ export const products = [
     name: "L'Oreal Paris Shampoo",
     category: "beauty",
     subcategory: "Haircare",
-    image:
-      "https://images.unsplash.com/photo-1591238372982-7c12d2d0f698?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1591238372982-7c12d2d0f698?auto=format&fit=crop&w=500&q=60",
     price: "N2,800.00",
     discountPrice: "N3,200.00",
     ratings: "4.5",
@@ -706,8 +691,7 @@ export const products = [
     name: "Tresemme Conditioner",
     category: "beauty",
     subcategory: "Haircare",
-    image:
-      "https://images.unsplash.com/photo-1584268214172-dcbe15c1782f?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1584268214172-dcbe15c1782f?auto=format&fit=crop&w=500&q=60",
     price: "N3,200.00",
     discountPrice: "N3,600.00",
     ratings: "4.7",
@@ -718,8 +702,7 @@ export const products = [
     name: "Zara Women Summer Dress",
     category: "beauty",
     subcategory: "Clothing",
-    image:
-      "https://images.unsplash.com/photo-1596755097985-7ebd97401cc0?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1596755097985-7ebd97401cc0?auto=format&fit=crop&w=500&q=60",
     price: "N15,000.00",
     discountPrice: "N17,000.00",
     ratings: "4.5",
@@ -730,8 +713,7 @@ export const products = [
     name: "Nike Men's Running Shoes",
     category: "beauty",
     subcategory: "Clothing",
-    image:
-      "https://images.unsplash.com/photo-1598257006456-0c67f7dbe10b?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1598257006456-0c67f7dbe10b?auto=format&fit=crop&w=500&q=60",
     price: "N25,000.00",
     discountPrice: "N28,000.00",
     ratings: "4.8",
@@ -742,8 +724,7 @@ export const products = [
     name: "Rolex Gold Watch",
     category: "beauty",
     subcategory: "Accessories",
-    image:
-      "https://images.unsplash.com/photo-1515121066213-7b7c4b0c8288?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1515121066213-7b7c4b0c8288?auto=format&fit=crop&w=500&q=60",
     price: "N2,500,000.00",
     discountPrice: "N2,700,000.00",
     ratings: "4.9",
@@ -754,8 +735,7 @@ export const products = [
     name: "Ray-Ban Aviator Sunglasses",
     category: "beauty",
     subcategory: "Accessories",
-    image:
-      "https://images.unsplash.com/photo-1610383964865-6a1e14200b21?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1610383964865-6a1e14200b21?auto=format&fit=crop&w=500&q=60",
     price: "N35,000.00",
     discountPrice: "N40,000.00",
     ratings: "4.7",
@@ -767,8 +747,7 @@ export const products = [
     name: "LEGO Classic Creative Brick Box",
     category: "toys",
     subcategory: "Building Toys",
-    image:
-      "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
     price: "N15,000.00",
     discountPrice: "N18,000.00",
     ratings: "4.8",
@@ -779,8 +758,7 @@ export const products = [
     name: "Barbie Dreamhouse",
     category: "toys",
     subcategory: "Dolls & Accessories",
-    image:
-      "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
     price: "N45,000.00",
     discountPrice: "N50,000.00",
     ratings: "4.7",
@@ -791,8 +769,7 @@ export const products = [
     name: "Hot Wheels Ultimate Garage",
     category: "toys",
     subcategory: "Die-Cast Vehicles",
-    image:
-      "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
     price: "N25,000.00",
     discountPrice: "N28,000.00",
     ratings: "4.6",
@@ -803,8 +780,7 @@ export const products = [
     name: "Nerf N-Strike Elite Disruptor",
     category: "toys",
     subcategory: "Outdoor Toys",
-    image:
-      "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
     price: "N8,000.00",
     discountPrice: "N9,500.00",
     ratings: "4.5",
@@ -815,8 +791,7 @@ export const products = [
     name: "Monopoly Classic Board Game",
     category: "toys",
     subcategory: "Board Games",
-    image:
-      "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
     price: "N12,000.00",
     discountPrice: "N14,000.00",
     ratings: "4.9",
@@ -827,8 +802,7 @@ export const products = [
     name: "Play-Doh Fun Factory Deluxe Set",
     category: "toys",
     subcategory: "Creative Toys",
-    image:
-      "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
     price: "N6,000.00",
     discountPrice: "N7,000.00",
     ratings: "4.4",
@@ -839,8 +813,7 @@ export const products = [
     name: "Remote Control Drone with Camera",
     category: "toys",
     subcategory: "Remote Control Toys",
-    image:
-      "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
     price: "N30,000.00",
     discountPrice: "N35,000.00",
     ratings: "4.7",
@@ -851,8 +824,7 @@ export const products = [
     name: "Paw Patrol Marshall's Fire Truck",
     category: "toys",
     subcategory: "Action Figures",
-    image:
-      "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
     price: "N10,000.00",
     discountPrice: "N12,000.00",
     ratings: "4.6",
@@ -863,8 +835,7 @@ export const products = [
     name: "Jenga Classic Game",
     category: "toys",
     subcategory: "Stacking Games",
-    image:
-      "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
     price: "N7,000.00",
     discountPrice: "N8,000.00",
     ratings: "4.8",
@@ -875,8 +846,7 @@ export const products = [
     name: "Rubik's Cube 3x3",
     category: "toys",
     subcategory: "Puzzles",
-    image:
-      "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1594787319149-600e3abf4f6a?auto=format&fit=crop&w=500&q=60",
     price: "N3,000.00",
     discountPrice: "N3,500.00",
     ratings: "4.7",
@@ -908,33 +878,47 @@ export const popularProducts = [
   },
 ];
 
-export const popularProductsSort = [
+export const menuFooter = [
   {
-    id: 1,
-    image: "/images/american-man.svg",
-    name: "Shirts, jeans, tees and more",
-    category: "Men",
-    link: `/category/${"beauty"}`,
+    title: "Fair",
+    links: [
+      { name: "About us", link: "/about-us" },
+      { name: "Privacy policy", link: "/privacy-policy" },
+      { name: "Feedback", link: "/feedback" },
+      { name: "Press", link: "/press" },
+      { name: "Legal", link: "/legal" },
+      { name: "Careers", link: "/careers" },
+    ],
   },
   {
-    id: 2,
-    image: "/images/fashionable-young-woman.svg",
-    name: "Dresses, jewelries, hair and more ",
-    category: "Women",
-    link: `/category/${"beauty"}`,
+    title: "Shop",
+    links: [
+      { name: "Categories", link: "/categories" },
+      { name: "Deals", link: "/deals" },
+      { name: "Trending", link: "/trending" },
+      { name: "Buying guide", link: "/buying-guide" },
+      { name: "Gift card", link: "/gift-card" },
+      { name: "Create an account", link: "/create-account" },
+    ],
   },
   {
-    id: 3,
-    image: "/images/american-kid.svg",
-    name: "Sofa, decor, appliance and more",
-    category: "Kids",
-    link: `/category/${"toys"}`,
+    title: "Sell",
+    links: [
+      { name: "Start selling", link: "/start-selling" },
+      { name: "How to sell", link: "/how-to-sell" },
+      { name: "Getting paid", link: "/getting-paid" },
+      { name: "Vendor app", link: "/vendor-app" },
+    ],
   },
   {
-    id: 4,
-    image: "/images/living-room.svg",
-    name: "Sofa, decor, appliance and more",
-    category: "Home",
-    link: "./",
+    title: "Support",
+    links: [
+      { name: "Contact us", link: "/contact-us" },
+      { name: "Help center", link: "/help-center" },
+      { name: "Market place guidelines", link: "/marketplace-guidelines" },
+      { name: "Buyer protection", link: "/buyer-protection" },
+      { name: "Seller protection", link: "/seller-protection" },
+      { name: "Refunds and returns", link: "/refunds-returns" },
+    ],
   },
 ];
