@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { products } from "../../utils/data";
 import { ChevronRight } from "lucide-react";
 import { NavLink, useParams } from "react-router";
@@ -6,6 +6,10 @@ import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
 import { ProductCard } from "../../ui/components/landingPageProduct/ProductCard";
 
 const CategoryPage = () => {
+  const [filterByType, setFilterByType] = useState(0);
+  const [filterByBrand, setFilterByBrand] = useState(0);
+  const [filterByPrice, setFilterByPrice] = useState(0);
+
   const { categoryName } = useParams();
 
   const filteredProducts = useMemo(
@@ -26,6 +30,11 @@ const CategoryPage = () => {
       }, {}),
     [filteredProducts]
   );
+
+  //helper function
+  const getUniqueOptions = (products, key) => {
+    return [...new Set(products.map((product) => product[key]))];
+  };
 
   //screen readers
   useEffect(() => {
@@ -56,24 +65,27 @@ const CategoryPage = () => {
           <div className="flex items-center space-x-3 overflow-x-auto scrollbar-hide">
             <p>Filter</p>
             <label htmlFor="typeSelect" className="sr-only">
-              Type of Electronics
+              Type of {categoryName}
             </label>
+
             <select
               id="typeSelect"
               name="type"
-              aria-label="Select Type of Electronics"
+              aria-label={`Select Type of ${categoryName}`}
               defaultValue=""
               className="rounded-2xl border-2 bg-[#F7F7F7] text-xs p-2 px-3"
             >
               <option value="" disabled>
-                Type of electronics
+                Type of {categoryName}
               </option>
-              <option value="fridge">Fridge & Freezer</option>
-              <option value="tv">TV & Video</option>
-              <option value="ac">Air Conditioner & Fan</option>
-              <option value="kitchen">Kitchen Appliances</option>
-              <option value="phone">Phones & Tablets</option>
-              <option value="laptop">Laptops & Computers</option>
+
+              {getUniqueOptions(filteredProducts, "subcategory").map(
+                (subcategory, index) => (
+                  <option key={index} value={subcategory}>
+                    {subcategory}
+                  </option>
+                )
+              )}
             </select>
 
             <label htmlFor="brandSelect" className="sr-only">
@@ -86,16 +98,15 @@ const CategoryPage = () => {
               defaultValue=""
             >
               <option value="" disabled>
-                Brand
+                Choose Brand
               </option>
-              <option value="samsung">Samsung</option>
-              <option value="lg">LG</option>
-              <option value="sony">Sony</option>
-              <option value="whirlpool">Whirlpool</option>
-              <option value="panasonic">Panasonic</option>
-              <option value="tecno">Tecno</option>
-              <option value="hp">HP</option>
-              <option value="apple">Apple</option>
+              {getUniqueOptions(filteredProducts, "subcategory").map(
+                (subcategory, index) => (
+                  <option key={index} value={subcategory}>
+                    {subcategory}
+                  </option>
+                )
+              )}
             </select>
 
             <label htmlFor="priceRange" className="sr-only">
