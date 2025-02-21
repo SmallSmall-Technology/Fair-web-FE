@@ -5,7 +5,7 @@ import { PopularProductSort } from "./PopularProductSort";
 export const PopularProducts = () => (
   <div className="mt-12 mb-4">
     <h2 className="font-bold text-2xl">Explore popular categories</h2>
-    <div className="flex gap-4 justify-between 2xl:justify-start 2xl:gap-10 overflow-x-scroll scrollbar-hide mt-2">
+    <div className="flex gap-4 justify-between overflow-x-scroll scrollbar-hide 2xl:justify-start 2xl:gap-10 mt-2">
       {popularProducts.map((product) => (
         <SinglePopularProduct key={product.id} product={product} />
       ))}
