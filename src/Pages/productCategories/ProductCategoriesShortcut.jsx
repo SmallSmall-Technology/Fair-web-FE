@@ -13,11 +13,11 @@ const SingleProductCategory = ({ product }) => {
 
 export const ProductCategoriesShortcut = () => {
   return (
-    <section className="flex space-x-4 items-center justify-center md:justify-start">
-      <p className="bg-[#FFDE11] p-1 px-2 rounded-[20px] font-medium text-xs">
+    <section className="flex space-x-4 items-center justify-center md:justify-start xl:justify-center">
+      <p className="bg-[#FFDE11] p-1 w-fit px-2 rounded-[20px] font-medium text-xs">
         Sales
       </p>
-      <ul className="flex space-x-6 justify-center md:justify-start items-center overflow-scroll py-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+      <ul className="flex space-x-6 justify-center md:justify-start items-center overflow-x-auto py-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
         {productCategories.map((product) => (
           <SingleProductCategory product={product} key={product.id} />
         ))}

@@ -1,13 +1,16 @@
 import Home from "./Pages/home/Home";
+import ScrollToTop from "./utils/ScrollToTop";
 import Layout from "./ui/components/layout/Layout";
 import CartItems from "./pages/cartItems/CartItems";
 import { BrowserRouter, Route, Routes } from "react-router";
 import PageNotFound from "./pages/pageNotFound/PageNotFound";
-import CategoryPage from "./Pages/productCategories/CategoryPage";
+import SubCategoryPage from "./Pages/productCategories/SubCategoryPage";
+import CategoryPage from "./Pages/productCategories/categoryPage/CategoryPage";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="" element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -17,6 +20,10 @@ const App = () => {
             path="category/:categoryName"
             element={<CategoryPage />}
           ></Route>
+          <Route
+            path="category/:categoryName/:subcategory"
+            element={<SubCategoryPage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
