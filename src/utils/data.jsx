@@ -21,77 +21,77 @@ const girInHoodie = "/images/young-woman-in-hoodie.svg";
 
 export const productCategories = [
   {
-    id: 1,
+    id: 105,
     productName: "Men",
     productIcon: menshirt,
     link: `/category/${"beauty"}`,
   },
   {
-    id: 2,
+    id: 201,
     productName: "Women",
     productIcon: womenshirt,
     link: `/category/${"beauty"}`,
   },
   {
-    id: 3,
+    id: 300,
     productName: "Groceries",
     productIcon: groceries,
   },
   {
-    id: 4,
+    id: 400,
     productName: "Home & Office",
     productIcon: homeoffice,
   },
   {
-    id: 5,
+    id: 530,
     productName: "Computers",
     productIcon: computers,
     link: `/category/${"electronics"}`,
   },
   {
-    id: 6,
+    id: 630,
     productName: "Power",
     productIcon: power,
     link: `/category/${"electronics"}`,
   },
   {
-    id: 7,
+    id: 730,
     productName: "Electronics",
     productIcon: electronics,
     link: `/category/${"electronics"}`,
   },
   {
-    id: 8,
+    id: 82,
     productName: "Phones",
     productIcon: phones,
     link: `/category/${"electronics"}`,
   },
   {
-    id: 9,
+    id: 90,
     productName: "Kids",
     productIcon: kids,
     link: `/category${"/toys"}`,
   },
   {
-    id: 10,
+    id: 100,
     productName: "Sports Items",
     productIcon: sports,
     link: `/category/${"toys"}`,
   },
   {
-    id: 11,
+    id: 110,
     productName: "Health & Beauty",
     productIcon: healthbeauty,
     link: `/category/${"beauty"}`,
   },
   {
-    id: 12,
+    id: 120,
     productName: "Mobile Accessories",
     productIcon: mobileaccessories,
     link: `/category/${"electronics"}`,
   },
   {
-    id: 13,
+    id: 130,
     productName: "Toys & Games",
     productIcon: toysgames,
     link: `/category/${"toys"}`,
@@ -151,6 +151,7 @@ export const products = [
     discountPrice: "N225,000.00",
     ratings: "3.5",
     noOfProductSold: "20",
+    slug: "samsung-galaxy-note-10-plus",
   },
   {
     id: 2,
@@ -164,6 +165,7 @@ export const products = [
     discountPrice: "N520,000.00",
     ratings: "4.8",
     noOfProductSold: "50",
+    slug: "iphone-14-pro-max",
   },
   {
     id: 3,
@@ -177,6 +179,7 @@ export const products = [
     discountPrice: "N320,000.00",
     ratings: "4.6",
     noOfProductSold: "30",
+    slug: "google-pixel-7-pro",
   },
   {
     id: 4,
@@ -190,6 +193,7 @@ export const products = [
     discountPrice: "N300,000.00",
     ratings: "4.7",
     noOfProductSold: "25",
+    slug: "oneplus-10-pro",
   },
   {
     id: 5,
@@ -203,6 +207,7 @@ export const products = [
     discountPrice: "N220,000.00",
     ratings: "4.4",
     noOfProductSold: "22",
+    slug: "xiaomi-mi-12",
   },
   {
     id: 6,
@@ -216,6 +221,7 @@ export const products = [
     discountPrice: "N420,000.00",
     ratings: "4.9",
     noOfProductSold: "40",
+    slug: "samsung-galaxy-s22-ultra",
   },
   {
     id: 7,
@@ -229,6 +235,7 @@ export const products = [
     discountPrice: "N170,000.00",
     ratings: "4.3",
     noOfProductSold: "18",
+    slug: "iphone-se-2022",
   },
   {
     id: 8,
@@ -242,6 +249,7 @@ export const products = [
     discountPrice: "N200,000.00",
     ratings: "4.5",
     noOfProductSold: "28",
+    slug: "google-pixel-6a",
   },
   {
     id: 9,
@@ -255,6 +263,7 @@ export const products = [
     discountPrice: "N240,000.00",
     ratings: "4.6",
     noOfProductSold: "35",
+    slug: "oneplus-nord-2",
   },
   {
     id: 10,
@@ -268,6 +277,7 @@ export const products = [
     discountPrice: "N140,000.00",
     ratings: "4.2",
     noOfProductSold: "20",
+    slug: "xiaomi-redmi-note-11",
   },
 
   // Electronics - TV & Video (10 products)
@@ -283,6 +293,7 @@ export const products = [
     discountPrice: "N320,000.00",
     ratings: "4.7",
     noOfProductSold: "15",
+    slug: "samsung-55-inch-4k-smart-tv",
   },
   {
     id: 12,
@@ -296,6 +307,7 @@ export const products = [
     discountPrice: "N550,000.00",
     ratings: "4.9",
     noOfProductSold: "20",
+    slug: "lg-65-inch-oled-evo-tv",
   },
   {
     id: 13,
@@ -309,6 +321,7 @@ export const products = [
     discountPrice: "N800,000.00",
     ratings: "4.8",
     noOfProductSold: "10",
+    slug: "sony-bravia-xr-77-inch-oled-tv",
   },
   {
     id: 14,
@@ -322,6 +335,7 @@ export const products = [
     discountPrice: "N300,000.00",
     ratings: "4.6",
     noOfProductSold: "30",
+    slug: "tcl-50-inch-qled-tv",
   },
   {
     id: 15,
@@ -335,6 +349,7 @@ export const products = [
     discountPrice: "N370,000.00",
     ratings: "4.5",
     noOfProductSold: "25",
+    slug: "hisense-58-inch-uled-tv",
   },
   {
     id: 16,
@@ -348,6 +363,7 @@ export const products = [
     discountPrice: "N480,000.00",
     ratings: "4.7",
     noOfProductSold: "18",
+    slug: "panasonic-65-inch-4k-led-tv",
   },
   {
     id: 17,
@@ -361,6 +377,7 @@ export const products = [
     discountPrice: "N650,000.00",
     ratings: "4.8",
     noOfProductSold: "12",
+    slug: "sharp-70-inch-aquos-tv",
   },
   {
     id: 18,
@@ -374,6 +391,7 @@ export const products = [
     discountPrice: "N350,000.00",
     ratings: "4.6",
     noOfProductSold: "22",
+    slug: "vizio-55-inch-m-series-tv",
   },
   {
     id: 19,
@@ -387,6 +405,7 @@ export const products = [
     discountPrice: "N310,000.00",
     ratings: "4.5",
     noOfProductSold: "14",
+    slug: "philips-50-inch-ambilight-tv",
   },
   {
     id: 20,
@@ -400,6 +419,7 @@ export const products = [
     discountPrice: "N340,000.00",
     ratings: "4.6",
     noOfProductSold: "19",
+    slug: "toshiba-55-inch-fire-tv",
   },
 
   // Electronics - Fridge & Freezer (10 products)
@@ -414,6 +434,7 @@ export const products = [
     discountPrice: "N420,000.00",
     ratings: "4.6",
     noOfProductSold: "12",
+    slug: "lg-double-door-refrigerator",
   },
   {
     id: 31,
@@ -426,6 +447,7 @@ export const products = [
     discountPrice: "N520,000.00",
     ratings: "4.8",
     noOfProductSold: "20",
+    slug: "samsung-smart-tv-55-inch",
   },
   {
     id: 32,
@@ -438,6 +460,7 @@ export const products = [
     discountPrice: "N170,000.00",
     ratings: "4.5",
     noOfProductSold: "8",
+    slug: "sony-home-theater-system",
   },
   {
     id: 33,
@@ -450,6 +473,7 @@ export const products = [
     discountPrice: "N1,550,000.00",
     ratings: "4.9",
     noOfProductSold: "30",
+    slug: "apple-macbook-pro-16-inch",
   },
   {
     id: 34,
@@ -462,6 +486,7 @@ export const products = [
     discountPrice: "N750,000.00",
     ratings: "4.7",
     noOfProductSold: "15",
+    slug: "hp-envy-x360-laptop",
   },
   {
     id: 35,
@@ -474,6 +499,7 @@ export const products = [
     discountPrice: "N200,000.00",
     ratings: "4.8",
     noOfProductSold: "22",
+    slug: "bose-noise-cancelling-headphones",
   },
   {
     id: 36,
@@ -486,6 +512,7 @@ export const products = [
     discountPrice: "N950,000.00",
     ratings: "4.7",
     noOfProductSold: "10",
+    slug: "canon-eos-r6-camera",
   },
   {
     id: 37,
@@ -498,6 +525,7 @@ export const products = [
     discountPrice: "N320,000.00",
     ratings: "4.6",
     noOfProductSold: "18",
+    slug: "dell-ultrasharp-monitor",
   },
   {
     id: 38,
@@ -510,6 +538,7 @@ export const products = [
     discountPrice: "N90,000.00",
     ratings: "4.8",
     noOfProductSold: "40",
+    slug: "nike-air-max-sneakers",
   },
   {
     id: 39,
@@ -522,6 +551,7 @@ export const products = [
     discountPrice: "N2,100,000.00",
     ratings: "4.9",
     noOfProductSold: "5",
+    slug: "rolex-submariner-watch",
   },
 
   // Electroonics - Kitchen Appliances
@@ -538,6 +568,7 @@ export const products = [
     discountPrice: "N420,000.00",
     ratings: "4.6",
     noOfProductSold: "12",
+    slug: "lg-double-door-refrigerator",
   },
   {
     id: 42,
@@ -551,6 +582,7 @@ export const products = [
     discountPrice: "N135,000.00",
     ratings: "4.7",
     noOfProductSold: "25",
+    slug: "samsung-microwave-oven",
   },
   {
     id: 43,
@@ -564,6 +596,7 @@ export const products = [
     discountPrice: "N165,000.00",
     ratings: "4.5",
     noOfProductSold: "18",
+    slug: "panasonic-4-burner-gas-cooker",
   },
   {
     id: 44,
@@ -577,6 +610,7 @@ export const products = [
     discountPrice: "N95,000.00",
     ratings: "4.8",
     noOfProductSold: "30",
+    slug: "philips-air-fryer",
   },
   {
     id: 45,
@@ -590,6 +624,7 @@ export const products = [
     discountPrice: "N30,000.00",
     ratings: "4.4",
     noOfProductSold: "40",
+    slug: "bosch-electric-kettle",
   },
   {
     id: 46,
@@ -603,6 +638,7 @@ export const products = [
     discountPrice: "N50,000.00",
     ratings: "4.6",
     noOfProductSold: "22",
+    slug: "nutribullet-blender",
   },
   {
     id: 47,
@@ -616,6 +652,7 @@ export const products = [
     discountPrice: "N70,000.00",
     ratings: "4.7",
     noOfProductSold: "15",
+    slug: "kenwood-food-processor",
   },
   {
     id: 48,
@@ -629,6 +666,7 @@ export const products = [
     discountPrice: "N225,000.00",
     ratings: "4.5",
     noOfProductSold: "10",
+    slug: "hisense-chest-freezer",
   },
   {
     id: 49,
@@ -642,6 +680,7 @@ export const products = [
     discountPrice: "N25,000.00",
     ratings: "4.3",
     noOfProductSold: "35",
+    slug: "prestige-toaster",
   },
   {
     id: 50,
@@ -655,6 +694,7 @@ export const products = [
     discountPrice: "N370,000.00",
     ratings: "4.7",
     noOfProductSold: "8",
+    slug: "lg-dishwasher",
   },
 
   //Beauty
@@ -671,6 +711,7 @@ export const products = [
     discountPrice: "N9,500.00",
     ratings: "4.7",
     noOfProductSold: "120",
+    slug: "maybelline-fit-me-foundation",
   },
   {
     id: 61,
@@ -684,6 +725,7 @@ export const products = [
     discountPrice: "N13,500.00",
     ratings: "4.8",
     noOfProductSold: "150",
+    slug: "mac-matte-lipstick",
   },
   {
     id: 62,
@@ -697,6 +739,7 @@ export const products = [
     discountPrice: "N4,000.00",
     ratings: "4.6",
     noOfProductSold: "200",
+    slug: "nivea-body-lotion",
   },
   {
     id: 63,
@@ -710,6 +753,7 @@ export const products = [
     discountPrice: "N6,800.00",
     ratings: "4.9",
     noOfProductSold: "180",
+    slug: "cerave-foaming-facial-cleanser",
   },
   {
     id: 64,
@@ -723,6 +767,7 @@ export const products = [
     discountPrice: "N3,200.00",
     ratings: "4.5",
     noOfProductSold: "250",
+    slug: "loreal-paris-shampoo",
   },
   {
     id: 65,
@@ -736,6 +781,7 @@ export const products = [
     discountPrice: "N3,600.00",
     ratings: "4.7",
     noOfProductSold: "230",
+    slug: "tresemme-conditioner",
   },
   {
     id: 66,
@@ -749,6 +795,7 @@ export const products = [
     discountPrice: "N17,000.00",
     ratings: "4.5",
     noOfProductSold: "95",
+    slug: "zara-women-summer-dress",
   },
   {
     id: 67,
@@ -762,6 +809,7 @@ export const products = [
     discountPrice: "N28,000.00",
     ratings: "4.8",
     noOfProductSold: "130",
+    slug: "nike-mens-running-shoes",
   },
   {
     id: 68,
@@ -775,6 +823,7 @@ export const products = [
     discountPrice: "N2,700,000.00",
     ratings: "4.9",
     noOfProductSold: "15",
+    slug: "rolex-gold-watch",
   },
   {
     id: 69,
@@ -784,133 +833,11 @@ export const products = [
     subcategory: "Accessories",
     image:
       "https://images.unsplash.com/photo-1610383964865-6a1e14200b21?auto=format&fit=crop&w=500&q=60",
-    price: "N35,000.00",
-    discountPrice: "N40,000.00",
-    ratings: "4.7",
-    noOfProductSold: "75",
-  },
-
-  //Toy & Games
-  {
-    id: "TG001",
-    name: "LEGO Classic Creative Brick Box",
-    brand: "LEGO",
-    category: "toys",
-    subcategory: "Building Toys",
-    image: "https://images.lego.com/is/image/LEGO/11002_box1_v2?$main$",
-    price: "N15,000.00",
-    discountPrice: "N18,000.00",
-    ratings: "4.8",
-    noOfProductSold: "50",
-  },
-  {
-    id: "TG002",
-    name: "Barbie Dreamhouse",
-    brand: "Barbie",
-    category: "toys",
-    subcategory: "Dolls & Accessories",
-    image: "https://mattel.scene7.com/is/image/Mattel/GNH53_01?$oslarge$",
-    price: "N45,000.00",
-    discountPrice: "N50,000.00",
-    ratings: "4.7",
-    noOfProductSold: "35",
-  },
-  {
-    id: "TG003",
-    name: "Hot Wheels Ultimate Garage",
-    brand: "Hot Wheels",
-    category: "toys",
-    subcategory: "Die-Cast Vehicles",
-    image: "https://mattel.scene7.com/is/image/Mattel/GJL14_01?$oslarge$",
-    price: "N25,000.00",
-    discountPrice: "N28,000.00",
-    ratings: "4.6",
-    noOfProductSold: "40",
-  },
-  {
-    id: "TG004",
-    name: "Nerf N-Strike Elite Disruptor",
-    brand: "Nerf",
-    category: "toys",
-    subcategory: "Outdoor Toys",
-    image:
-      "https://images-na.ssl-images-amazon.com/images/I/71PZzqJdLlL._AC_SL1500_.jpg",
-    price: "N8,000.00",
-    discountPrice: "N9,500.00",
-    ratings: "4.5",
-    noOfProductSold: "60",
-  },
-  {
-    id: "TG005",
-    name: "Monopoly Classic Board Game",
-    brand: "Hasbro",
-    category: "toys",
-    subcategory: "Board Games",
-    image: "https://m.media-amazon.com/images/I/81OYcW5QpLL._AC_SL1500_.jpg",
-    price: "N12,000.00",
-    discountPrice: "N14,000.00",
+    price: "N2,500,000.00",
+    discountPrice: "N2,700,000.00",
     ratings: "4.9",
-    noOfProductSold: "45",
-  },
-  {
-    id: "TG006",
-    name: "Play-Doh Fun Factory Deluxe Set",
-    brand: "Play-Doh",
-    category: "toys",
-    subcategory: "Creative Toys",
-    image: "https://m.media-amazon.com/images/I/81Sjc4BPoQL._AC_SL1500_.jpg",
-    price: "N6,000.00",
-    discountPrice: "N7,000.00",
-    ratings: "4.4",
-    noOfProductSold: "55",
-  },
-  {
-    id: "TG007",
-    name: "Remote Control Drone with Camera",
-    brand: "DJI",
-    category: "toys",
-    subcategory: "Remote Control Toys",
-    image: "https://m.media-amazon.com/images/I/71mHDbvAroL._AC_SL1500_.jpg",
-    price: "N30,000.00",
-    discountPrice: "N35,000.00",
-    ratings: "4.7",
-    noOfProductSold: "20",
-  },
-  {
-    id: "TG008",
-    name: "Paw Patrol Marshall's Fire Truck",
-    brand: "Paw Patrol",
-    category: "toys",
-    subcategory: "Action Figures",
-    image: "https://m.media-amazon.com/images/I/81v3xd6XWzL._AC_SL1500_.jpg",
-    price: "N10,000.00",
-    discountPrice: "N12,000.00",
-    ratings: "4.6",
-    noOfProductSold: "30",
-  },
-  {
-    id: "TG009",
-    name: "Jenga Classic Game",
-    brand: "Hasbro",
-    category: "toys",
-    subcategory: "Stacking Games",
-    image: "https://m.media-amazon.com/images/I/91ANhPfI2CL._AC_SL1500_.jpg",
-    price: "N7,000.00",
-    discountPrice: "N8,000.00",
-    ratings: "4.8",
-    noOfProductSold: "65",
-  },
-  {
-    id: "TG010",
-    name: "Rubik's Cube 3x3",
-    brand: "Rubik's",
-    category: "toys",
-    subcategory: "Puzzles",
-    image: "https://m.media-amazon.com/images/I/61vV-Lw+TaL._AC_SL1000_.jpg",
-    price: "N3,000.00",
-    discountPrice: "N3,500.00",
-    ratings: "4.7",
-    noOfProductSold: "70",
+    noOfProductSold: "15",
+    slug: "Ray-Ban Aviator Sunglasses",
   },
 ];
 

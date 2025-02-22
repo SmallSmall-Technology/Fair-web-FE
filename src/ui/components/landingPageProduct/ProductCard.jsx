@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
-import React, { useEffect, useState } from "react";
 import { Button } from "../../../utils/Button";
+import React, { useState } from "react";
 import { Share2, Star, Heart } from "lucide-react";
 
 export const ProductCard = React.memo(({ product, isLoading }) => {

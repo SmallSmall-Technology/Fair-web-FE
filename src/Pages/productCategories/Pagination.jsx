@@ -39,8 +39,8 @@ export const Pagination = () => {
                    hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
         aria-label="Go to next page"
       >
-        <ChevronRightIcon size={8} />
         <span>Next</span>
+        <ChevronRightIcon size={8} />
       </button>
 
       <button
@@ -48,8 +48,8 @@ export const Pagination = () => {
                    hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
         aria-label="Go to last page"
       >
-        <ChevronsRightIcon size={8} />
         <span>Last</span>
+        <ChevronsRightIcon size={8} />
       </button>
     </div>
   );

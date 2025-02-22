@@ -5,6 +5,7 @@ import CartItems from "./pages/cartItems/CartItems";
 import { BrowserRouter, Route, Routes } from "react-router";
 import PageNotFound from "./pages/pageNotFound/PageNotFound";
 import SubCategoryPage from "./Pages/productCategories/SubCategoryPage";
+import SingleProductPage from "./Pages/productCategories/SingleProductPage";
 import CategoryPage from "./Pages/productCategories/categoryPage/CategoryPage";
 
 const App = () => {
@@ -16,13 +17,14 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="cart-items" element={<CartItems />} />
           <Route path="*" element={<PageNotFound />} />
-          <Route
-            path="category/:categoryName"
-            element={<CategoryPage />}
-          ></Route>
+          <Route path="category/:categoryName" element={<CategoryPage />} />
           <Route
             path="category/:categoryName/:subcategory"
             element={<SubCategoryPage />}
+          />
+          <Route
+            path="category/:categoryName/:subcategory/:id/:slug"
+            element={<SingleProductPage />}
           />
         </Route>
       </Routes>
