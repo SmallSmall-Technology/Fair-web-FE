@@ -26,6 +26,7 @@ const App = () => {
             path="category/:categoryName/:subcategory/:id/:slug"
             element={<SingleProductPage />}
           />
+          <Route path=":id/:slug" element={<SingleProductPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

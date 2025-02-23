@@ -10,11 +10,9 @@ import { MiniProductCategories } from "../../ui/components/hero/MiniProductCateg
 const SubCategoryPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { slug } = useParams();
   const products = location.state?.products || [];
   const { subcategory, categoryName } = useParams();
   const [sortedGroupedProducts, setSortedGroupedProducts] = useState({});
-  // const [selectedId, setSelectedId] = useState(id);
 
   const handleSortProducts = () => {
     const sorted = products
@@ -28,14 +26,6 @@ const SubCategoryPage = () => {
       }, {});
     setSortedGroupedProducts(sorted);
   };
-
-  // const handleUserClick = () => {
-  //   navigate(`/category/${categoryName}/${subcategory}/${product.id}/${slug}`);
-  // };
-
-  // const handleClick = (id, slug) => {
-  //   navigate(`/product/${id}/${slug}`); // Navigate to the product detail page
-  // };
 
   const productsToDisplay =
     Object.keys(sortedGroupedProducts).length > 0

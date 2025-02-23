@@ -141,7 +141,7 @@ export const products = [
   // Electronics - Mobile Phones (10 products)
   {
     id: 1,
-    name: "Samsung Galaxy Note 10 Plus",
+    name: "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
     brand: "Samsung",
     category: "Electronics",
     subcategory: "Mobile Phones",
@@ -149,6 +149,7 @@ export const products = [
       "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2Ftc3VuZyUyMHBob25lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
     price: "N207,000.00",
     discountPrice: "N225,000.00",
+    discountPercentage: "23",
     ratings: "3.5",
     noOfProductSold: "20",
     slug: "samsung-galaxy-note-10-plus",
@@ -162,7 +163,6 @@ export const products = [
     image:
       "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aXBob25lJTIwMTQlMjBwcm8lMjBtYXh8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
     price: "N500,000.00",
-    discountPrice: "N520,000.00",
     ratings: "4.8",
     noOfProductSold: "50",
     slug: "iphone-14-pro-max",

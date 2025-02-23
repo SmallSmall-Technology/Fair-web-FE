@@ -18,14 +18,9 @@ const ProductList = ({
                 className="text-[#222224] text-sm font-normal underline pl-3 cursor-pointer"
                 role="link"
                 onClick={() =>
-                  navigate(
-                    `/category/${categoryName}/${encodeURIComponent(
-                      String(subcategory)
-                    )}`,
-                    {
-                      state: { products: groupedProductsAll[subcategory] },
-                    }
-                  )
+                  navigate(`/category/${categoryName}/${subcategory}`, {
+                    state: { products: groupedProductsAll[subcategory] },
+                  })
                 }
               >
                 See all
