@@ -1,7 +1,11 @@
 import { CircleX } from "lucide-react";
 import { Formik, Form, Field } from "formik";
 
-const FilterForm = ({ categoryProducts, handleFilter, products }) => {
+const SubCategoryFilterForm = ({
+  categoryProducts,
+  handleFilter,
+  products,
+}) => {
   const getUniqueOptions = (products, key) => {
     return [...new Set(products.map((product) => product[key]))];
   };
@@ -22,30 +26,30 @@ const FilterForm = ({ categoryProducts, handleFilter, products }) => {
           <Form className="grid gap-4">
             {/* Filter Controls */}
             <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide">
-              {/* Type Select */}
+              {/* Size Select */}
               <div className="flex-1 min-w-[120px]">
-                <label htmlFor="type" className="sr-only">
-                  Type of product
+                <label htmlFor="size" className="sr-only">
+                  Size of product
                 </label>
                 <Field
                   as="select"
-                  id="type"
-                  name="type"
-                  value={values.type}
+                  id="size"
+                  name="size"
+                  value={values?.size}
                   onChange={handleChange}
                   className="w-full rounded-2xl border-2 bg-[#F7F7F7] text-xs p-2 px-3"
                 >
                   <option value="" disabled>
-                    Type
+                    Size
                   </option>
-                  {getUniqueOptions(
-                    categoryProducts || products,
-                    "subcategory"
-                  ).map((subcategory, index) => (
-                    <option key={index} value={subcategory}>
-                      {subcategory}
-                    </option>
-                  ))}
+
+                  {getUniqueOptions(categoryProducts || products, "Size").map(
+                    (size, index) => (
+                      <option key={index} value={size}>
+                        {size || "Size"}
+                      </option>
+                    )
+                  )}
                 </Field>
               </div>
 
@@ -63,7 +67,7 @@ const FilterForm = ({ categoryProducts, handleFilter, products }) => {
                   className="w-full rounded-2xl border-2 bg-[#F7F7F7] text-xs p-2 px-3"
                 >
                   <option value="" disabled>
-                    Choose Brand
+                    Brand
                   </option>
                   {getUniqueOptions(categoryProducts || products, "brand").map(
                     (brand, index) => (
@@ -84,7 +88,7 @@ const FilterForm = ({ categoryProducts, handleFilter, products }) => {
                   as="select"
                   id="price"
                   name="price"
-                  value={values.price}
+                  value={values?.price && 0}
                   onChange={handleChange}
                   className="w-full rounded-2xl border-2 bg-[#F7F7F7] text-xs p-2 px-3"
                 >
@@ -97,6 +101,34 @@ const FilterForm = ({ categoryProducts, handleFilter, products }) => {
                   <option value="500000+">₦500,000+</option>
                 </Field>
               </div>
+
+              {/* Sales Select */}
+
+              <div className="flex-1 min-w-[120px]">
+                <label htmlFor="brand" className="sr-only">
+                  Sales
+                </label>
+                <Field
+                  as="select"
+                  id="sales"
+                  name="sales"
+                  value={values?.sales && 0}
+                  onChange={handleChange}
+                  className="w-full rounded-2xl border-2 bg-[#F7F7F7] text-xs p-2 px-3"
+                >
+                  <option value="" disabled>
+                    Sales
+                  </option>
+                  {getUniqueOptions(categoryProducts || products, "sales").map(
+                    (sales, index) => (
+                      <option key={index} value={sales && 0}>
+                        {sales || "Sales"}
+                      </option>
+                    )
+                  )}
+                </Field>
+              </div>
+
               {/* <hr className="mb- w-full flex md:hidden" /> */}
 
               {/* Divider */}
@@ -173,4 +205,4 @@ const FilterForm = ({ categoryProducts, handleFilter, products }) => {
   );
 };
 
-export default FilterForm;
+export default SubCategoryFilterForm;

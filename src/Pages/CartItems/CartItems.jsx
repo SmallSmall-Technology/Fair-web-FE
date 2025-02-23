@@ -1,5 +1,8 @@
+import { useParams } from "react-router";
+
 const CartItems = () => {
-  return <p>CartItems</p>;
+  const { id, slug } = useParams();
+  return <p>CartItems{id}</p>;
 };
 
 export default CartItems;

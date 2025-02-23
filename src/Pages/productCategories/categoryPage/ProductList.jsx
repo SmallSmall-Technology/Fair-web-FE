@@ -29,7 +29,11 @@ const ProductList = ({
             <div className="grid grid-flow-row grid-cols-2 overflow-scroll md:overflow-clip md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:flex 2xl:flex-wrap 2xl:justify-between gap-6 scroll-smooth">
               {products.map((product) => (
                 <div key={product.id} className="mb-6">
-                  <ProductCard product={product} />
+                  <ProductCard
+                    product={product}
+                    categoryName={categoryName}
+                    subcategory={subcategory}
+                  />
                 </div>
               ))}
             </div>
