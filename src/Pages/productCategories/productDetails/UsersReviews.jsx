@@ -1,17 +1,26 @@
+import { useState } from "react";
+import { StarRating } from "./StarRating";
+import { UsersReviewsModal } from "./UsersReviewsModal";
+
 export const UsersReviews = ({ reviews }) => {
+  const firstFiveReviews = reviews.slice(0, 5);
+
   return (
     <ul className="grid grid-cols-1">
-      {reviews.map((review, index) => (
+      {firstFiveReviews.map((review, index) => (
         <UserReview key={index} review={review} />
       ))}
     </ul>
   );
 };
-const UserReview = ({ review }) => {
+
+export const UserReview = ({ review, rating, handleRating }) => {
   return (
     <>
       <li className="grid grid-cols-1 gap-4">
-        <div></div>
+        <div>
+          <StarRating rating={rating} handleRating={handleRating} />
+        </div>
         <p>{review?.comment}</p>
         <div className="flex space-x-3">
           <p className="text-xs">{review?.name || "Anonymous"}</p>

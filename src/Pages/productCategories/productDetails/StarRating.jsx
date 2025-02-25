@@ -1,8 +1,34 @@
 import { useState } from "react";
 
+export const TotalRatings = ({ maxRating = 5, reviews }) => {
+  const totalReviews = reviews.length;
+
+  const [totalRatings, setTotalRatings] = useState(totalReviews);
+
+  const handleTotalRatings = () => {
+    let rate = setTotalRatings((prevRating) => prevRating + rating);
+    rate;
+  };
+
+  return (
+    <div className="flex">
+      {Array.from({ length: maxRating }, (_, i) => {
+        return (
+          <Star
+            key={i}
+            full={totalRatings >= i + 1}
+            value={totalRatings}
+            onChange={() => handleTotalRatings()}
+          />
+        );
+      })}
+      {totalRatings.toFixed(1) || ""}
+    </div>
+  );
+};
+
 export const StarRating = ({ maxRating = 5 }) => {
   const [rating, setRating] = useState(0);
-  const [tempRating, setTempRating] = useState(0);
 
   const handleRating = (rating) => {
     setRating(rating);
@@ -14,27 +40,19 @@ export const StarRating = ({ maxRating = 5 }) => {
         return (
           <Star
             key={i}
-            full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
+            full={rating >= i + 1}
             onRate={() => handleRating(i + 1)}
-            onHoverIn={() => setTempRating(i + 1)}
-            onHoverOut={() => setTempRating(0)}
           />
         );
       })}
-      {tempRating || rating || ""}
+      {rating.toFixed(1) || ""}
     </div>
   );
 };
 
-const Star = ({ onRate, full, onHoverIn, onHoverOut }) => {
+const Star = ({ onRate, full }) => {
   return (
-    <div
-      className="flex gap-4"
-      onClick={onRate}
-      onMouseEnter={onHoverIn}
-      onMouseLeave={onHoverOut}
-      role="button"
-    >
+    <div className="flex gap-4" onClick={onRate} role="button">
       {full ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"

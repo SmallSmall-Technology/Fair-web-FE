@@ -2,10 +2,13 @@ import { Formik, Form, Field } from "formik";
 import { CircleArrowUp } from "lucide-react";
 import { useState } from "react";
 import { UsersReviews } from "./UsersReviews";
-import { StarRating } from "./StarRating";
+import { UsersReviewsModal } from "./UsersReviewsModal";
+import { TotalRatings } from "./StarRating";
 
 export const CommentBar = () => {
   const [reviews, setReviews] = useState([]);
+  // const [ratingAverage, setRatingAaverage] = useState(rating);
+  // const [rating, setRating] = useState(0);
 
   const handleSubmitComment = (values, { resetForm }) => {
     if (values) {
@@ -47,11 +50,12 @@ export const CommentBar = () => {
         )}
       </Formik>
       <section className="grid grid-cols-1 gap-6">
-        <div>
+        <div className="mb-8">
           <p>Reviews</p>
-          <StarRating />
+          <TotalRatings reviews={reviews} />
         </div>
         <UsersReviews reviews={reviews} />
+        <UsersReviewsModal reviews={reviews} />
       </section>
     </>
   );
