@@ -21,7 +21,7 @@ const App = () => {
           <Route
             path="category/:categoryName/:subcategory"
             element={<SubCategoryPage />}
-          />
+          ></Route>
           <Route
             path="category/:categoryName/:subcategory/:id/:slug"
             element={<SingleProductPage />}

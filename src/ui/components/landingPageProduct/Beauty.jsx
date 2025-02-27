@@ -20,11 +20,13 @@ export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
             className="grid grid-flow-col space-x-4 w-full overflow-x-scroll scrollbar-hide scroll-smooth"
             ref={containerRef}
           >
-            {products.map((product) => (
-              <div className="" key={product.id}>
-                <ProductCard product={product} />
-              </div>
-            ))}
+            {products
+              .filter((product) => product.category === "beauty")
+              .map((product) => (
+                <div key={product.id}>
+                  <ProductCard product={product} />
+                </div>
+              ))}
           </div>
           <div className="flex justify-between items-baseline space-x-2 ">
             <div className="border-2 bg-[#F2F2F2] w-full mt-8 rounded-md"></div>

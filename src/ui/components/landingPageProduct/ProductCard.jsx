@@ -1,12 +1,11 @@
 import { NavLink, useNavigate, useParams } from "react-router";
 import { Button } from "../../../utils/Button";
-import React, { useState } from "react";
-import { Share2, Star, Heart } from "lucide-react";
+import React from "react";
+import { Share2, Star } from "lucide-react";
+import { AddFavourite } from "../../../utils/AddFavourite";
 
 export const ProductCard = React.memo(
   ({ product, isLoading, categoryName, subcategory }) => {
-    // const [addToFavourite, setAddToFavourite] = useState([]);
-    const [isFavourite, setIsFavourite] = useState(false);
     const navigate = useNavigate();
 
     const handleShareProduct = () => {
@@ -22,23 +21,6 @@ export const ProductCard = React.memo(
       } else {
         alert("Web Share API not supported on this browser.");
       }
-    };
-
-    const handleAddtoFavourite = () => {
-      // setAddToFavourite((prev) => {
-      //   const favouritesSet = new Set(prev.map((item) => item.id));
-
-      //   if (favouritesSet.has(product.id)) {
-      //     // Remove from favourites
-      //     return prev.filter((item) => item.id !== product.id);
-      //   } else {
-      //     // Add to favourites
-      //     return [...prev, product];
-      //   }
-      // });
-
-      // Toggle favourite state
-      setIsFavourite((prev) => !prev);
     };
 
     return (
@@ -97,7 +79,7 @@ export const ProductCard = React.memo(
         <div className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2 group-hover:pb-2">
           {/* Product Name */}
           <p
-            className="text-sm leading-[16.94px] h-12 cursor-pointer hover:underline focus:underline focus:outline-none"
+            className="text-sm leading-[16.94px] min-h-12 cursor-pointer hover:underline focus:underline focus:outline-none"
             onClick={() => navigate(`/${product.id}/${product.slug}`)}
             tabIndex={0}
             role="link"
@@ -141,24 +123,8 @@ export const ProductCard = React.memo(
             </NavLink>
 
             {/* Add to Favourite Button */}
-            <Button
-              aria-label={
-                isFavourite ? "Remove from favourite" : "Add to favourite"
-              }
-              title={isFavourite ? "Remove from favourite" : "Add to favourite"}
-              onClick={() => handleAddtoFavourite((prev) => [...prev, product])}
-              className="focus:outline-none focus:ring-2 focus:ring-black"
-            >
-              <Heart
-                size={18}
-                cursor="pointer"
-                fill={isFavourite ? "red" : "white"}
-                aria-hidden="true"
-              />
-              <span className="sr-only">
-                {isFavourite ? "Remove from favourite" : "Add to favourite"}
-              </span>
-            </Button>
+
+            <AddFavourite product={product} />
           </div>
         </div>
       </article>
