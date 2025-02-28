@@ -4,7 +4,7 @@ import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
 import { useNavigate, useParams } from "react-router";
 import { ProductCard } from "../../ui/components/landingPageProduct/ProductCard";
 import { products } from "../../utils/data";
-import { SingleProductDetails } from "./productDetails/SingleProductDetails";
+import { SingleProductDetails } from "./SingleProductDetails";
 
 const SingleProductPage = () => {
   const { categoryName, subcategory } = useParams();

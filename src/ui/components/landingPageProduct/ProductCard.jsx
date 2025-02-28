@@ -26,7 +26,6 @@ export const ProductCard = React.memo(
     return (
       <article
         className="w-fit rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg hover:pb-[px]"
-        // className="transition-all duration-300 ease-in-out hover:shadow-[1px_0_15px_-5px_rgba(0,0,0,0.3),-10px_0_15px_-5px_rgba(0,0,0,0.3)]"
         tabIndex={0}
         role="article"
         aria-label={`Product: ${product.name}`}
@@ -59,7 +58,7 @@ export const ProductCard = React.memo(
             {product.discountPrice && (
               <p className="bg-[#FFF8CF] w-[51px] flex justify-center items-center rounded-[20px]">
                 <span className="font-medium text-xs">
-                  -{product?.discountPercentage || 0}%
+                  -{product.discountPercentage || 0}%
                 </span>
               </p>
             )}
@@ -68,8 +67,8 @@ export const ProductCard = React.memo(
           {/* Product Image */}
           <div className="relative flex justify-center items-center mx-auto w-[80px] h-[99px] md:w-[136px] md:h-[169px]">
             <img
-              src={product?.image}
-              alt={product?.name}
+              src={product.image}
+              alt={product.name}
               loading="lazy"
               className="h-fit w-fit object-cover mt-10"
             />
@@ -92,7 +91,7 @@ export const ProductCard = React.memo(
           <div className="flex items-center flex-wrap md:space-x-2">
             <p className="font-semibold text-base">{product.price}</p>
             <p className="text-sm line-through text-[#96959F]">
-              {product?.discountPrice}
+              {product.discountPrice}
             </p>
           </div>
 
@@ -110,7 +109,7 @@ export const ProductCard = React.memo(
             {/* Add to Cart Button */}
             <NavLink to="product:id" aria-label="Add to cart">
               <div
-                className="bg-[#FFDE11] h-10 w-10 rounded-full flex justify-center items-center focus:outline-none focus:ring-2 focus:ring-black"
+                className="bg-[#FFDE11] h-10 w-10 rounded-full flex justify-center focus:outline-none focus:ring-2 focus:ring-black"
                 tabIndex={0}
                 role="button"
               >
