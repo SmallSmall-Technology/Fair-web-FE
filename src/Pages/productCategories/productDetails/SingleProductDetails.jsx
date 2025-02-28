@@ -1,12 +1,11 @@
-import { NavLink, useLocation, useNavigate } from "react-router";
 import { CommentBar } from "./CommentBar";
-import { ProductImage } from "./ProductImage";
+import { HeartHandshake } from "lucide-react";
+import { ProductImage } from "../ProductImage";
 import { products } from "../../../utils/data";
-import { Button, YellowButton } from "../../../utils/Button";
-import { Heart, HeartHandshake } from "lucide-react";
-import { ProductCard } from "../../../ui/components/landingPageProduct/ProductCard";
-import { useEffect } from "react";
 import { AddFavourite } from "../../../utils/AddFavourite";
+import { Button, YellowButton } from "../../../utils/Button";
+import { NavLink, useLocation, useNavigate } from "react-router";
+import { ProductCard } from "../../../ui/components/landingPageProduct/ProductCard";
 
 export const SingleProductDetails = ({ product }) => {
   // Array of images for the aside section
