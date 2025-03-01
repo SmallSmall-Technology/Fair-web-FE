@@ -1,14 +1,13 @@
-import { ChevronRight } from "lucide-react";
-import { MiniProductCategories } from "../../ui/components/hero/MiniProductCategories";
-import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
-import { useNavigate, useParams } from "react-router";
 import { products } from "../../utils/data";
+import { ChevronRight } from "lucide-react";
+import { useNavigate, useParams } from "react-router";
+import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
 import { SingleProductDetails } from "./productDetails/SingleProductDetails";
+import { MiniProductCategories } from "../../ui/components/hero/MiniProductCategories";
 
 const SingleProductPage = () => {
-  const { categoryName, subcategory } = useParams();
+  const { categoryName, subcategory, slug, id } = useParams();
   const navigate = useNavigate();
-  const { id } = useParams();
   const data = products.find((product) => product.id === Number(id));
 
   return (

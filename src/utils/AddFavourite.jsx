@@ -1,7 +1,6 @@
-import { Heart } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./Button";
-import { products } from "./data";
+import { Heart } from "lucide-react";
 
 export const AddFavourite = ({ product }) => {
   const [favourites, setFavourites] = useState([]);
