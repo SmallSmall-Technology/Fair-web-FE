@@ -14,20 +14,28 @@ const App = () => {
       <ScrollToTop />
       <Routes>
         <Route path="" element={<Layout />}>
+          {/* Home route */}
           <Route path="/" element={<Home />} />
+
+          {/* Cart items route */}
           <Route path="cart-items" element={<CartItems />} />
-          <Route path="*" element={<PageNotFound />} />
+
+          {/* Category and subcategory routes */}
           <Route path="category/:categoryName" element={<CategoryPage />} />
           <Route
             path="category/:categoryName/:subcategory"
             element={<SubCategoryPage />}
-          ></Route>
+          />
+          {/* Nested route for single product */}
           <Route
             path="category/:categoryName/:subcategory/:id/:slug"
             element={<SingleProductPage />}
           />
           <Route path=":id/:slug" element={<SingleProductPage />} />
         </Route>
+
+        {/* Catch-all route for 404 */}
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

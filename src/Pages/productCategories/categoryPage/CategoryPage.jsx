@@ -1,8 +1,8 @@
 import ProductList from "./ProductList";
 import { useParams } from "react-router";
-import { ArrowUpDown, ChevronRight } from "lucide-react";
 import { products } from "../../../utils/data";
 import { useEffect, useMemo, useState } from "react";
+import { ArrowUpDown, ChevronRight } from "lucide-react";
 import CategoryFilterForm from "../filterForms/CategoryFilterForm";
 import { ProductCategoriesShortcut } from "../ProductCategoriesShortcut";
 import { MiniProductCategories } from "../../../ui/components/hero/MiniProductCategories";
