@@ -1,0 +1,24 @@
+Revert "feat: Star rating component for product reviews implemeted"
+
+This reverts commit 68cb0d8e35cefd610d10715846c2e0273c358e6b.
+
+# Conflicts:
+#	src/Pages/productCategories/productDetails/CommentBar.jsx
+#	src/Pages/productCategories/productDetails/SingleProductDetails.jsx
+#	src/Pages/productCategories/productDetails/StarRating.jsx
+#	src/Pages/productCategories/productDetails/UsersReviews.jsx
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch static-pages
+# You are currently reverting commit 68cb0d8.
+#
+# Changes to be committed:
+#	modified:   package-lock.json
+#	modified:   package.json
+#	new file:   src/Pages/productCategories/SingleProductDetails.jsx
+#	modified:   src/Pages/productCategories/SingleProductPage.jsx
+#	deleted:    src/Pages/productCategories/productDetails/ProductImage.jsx
+#	modified:   src/ui/components/landingPageProduct/ProductCard.jsx
+#
