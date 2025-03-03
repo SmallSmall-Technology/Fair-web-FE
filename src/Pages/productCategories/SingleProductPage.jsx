@@ -12,7 +12,7 @@ const SingleProductPage = () => {
 
   return (
     <>
-      <main className="mx-6 lg:mx-[76px] mb-20">
+      <main className="mx-6 lg:mx-[76px] mb-20 hidden md:block">
         <div className="hidden md:flex">
           <ProductCategoriesShortcut />
         </div>
@@ -45,7 +45,9 @@ const SingleProductPage = () => {
           </div>
         </section>
       </main>
-      <section className="mt-8 mx-5 lg:mx-[40px] mb-12">
+      <section className="mt-8 lg:mx-[40px] mb-12 ">
+        {/* <section className="mt-8 mx-5 lg:mx-[40px] mb-12"> */}
+
         <SingleProductDetails product={data} />
       </section>
     </>

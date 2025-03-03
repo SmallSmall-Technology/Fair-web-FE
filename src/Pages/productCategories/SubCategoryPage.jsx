@@ -1,17 +1,22 @@
 import { useState } from "react";
 import { Pagination } from "./Pagination";
+import { products } from "../../utils/data";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
-import { Link, Outlet, useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import SubCategoryFilterForm from "./filterForms/SubCategoryFilterForm";
 import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
 import { ProductCard } from "../../ui/components/landingPageProduct/ProductCard";
 import { MiniProductCategories } from "../../ui/components/hero/MiniProductCategories";
-import { products } from "../../utils/data";
 
 const SubCategoryPage = () => {
   const navigate = useNavigate();
   const { subcategory, categoryName } = useParams();
-  const [sortedGroupedProducts, setSortedGroupedProducts] = useState({});
+  const data = products.filter(
+    (product) =>
+      product?.subcategory?.toLowerCase() === subcategory?.toLowerCase()
+  );
+
+  const [sortedGroupedProducts, setSortedGroupedProducts] = useState({ data });
 
   const handleSortProducts = () => {
     const sorted = products
@@ -29,7 +34,7 @@ const SubCategoryPage = () => {
   const productsToDisplay =
     Object.keys(sortedGroupedProducts).length > 0
       ? Object.values(sortedGroupedProducts).flat()
-      : products;
+      : data;
 
   return (
     <main className="mx-6 lg:mx-[76px] mb-20">
@@ -59,7 +64,8 @@ const SubCategoryPage = () => {
           <header className="mt-8 mb-5 flex items-baseline space-x-2">
             <h1 className="font-bold text-2xl capitalize">{subcategory}</h1>
             <p className="text-xs text-[#6B6B6B]">
-              ({products.length}) {products.length === 1 ? "result" : "results"}
+              ({subcategory.length}){" "}
+              {subcategory.length === 1 ? "result" : "results"}
             </p>
           </header>
           <div
@@ -90,7 +96,7 @@ const SubCategoryPage = () => {
               to={`/category/${categoryName}/${subcategory}/${product.id}/${product.slug}`}
               key={product.id}
             >
-              <div key={product.id} className="mb-6">
+              <div key={product.id} className="mb-6 ">
                 <ProductCard product={product} />
               </div>
             </Link>
@@ -100,7 +106,6 @@ const SubCategoryPage = () => {
           <Pagination />
         </div>
       </section>
-      <Outlet />
     </main>
   );
 };
