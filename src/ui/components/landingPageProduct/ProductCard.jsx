@@ -39,44 +39,53 @@ export const ProductCard = React.memo(({ product }) => {
       aria-labelledby={`product-${product.id}-title`}
     >
       {/* Product Image Section */}
-      <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl cursor-pointer">
-        {/* Share Button */}
-        <div className="absolute top-2 flex justify-between w-full px-2">
-          <Button
-            aria-label="Share this product"
-            title="Share"
-            className="  rounded-full bg-white p-2 cursor-pointer hover:shadow-lg transition-all duration-300 ease-in-out focus:border-2 focus:border-black hover:bg-white focus:outline-none focus:ring-2 focus:ring-black"
-            onClick={handleShareProduct}
-          >
-            <Share2 className="fill-black" size="15px" />
-            <span className="sr-only">Share this product</span>
-          </Button>
+      <Link to={`/${product.id}/${product.slug}`} className="block">
+        <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl cursor-pointer">
+          {/* Share Button */}
+          <div className="absolute top-2 flex justify-between w-full px-2">
+            <Button
+              aria-label="Share this product"
+              title="Share"
+              className="rounded-full bg-white p-2 cursor-pointer hover:shadow-lg transition-all duration-300 ease-in-out focus:border-2 focus:border-black hover:bg-white focus:outline-none focus:ring-2 focus:ring-black"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleShareProduct();
+              }}
+            >
+              <Share2 className="fill-black" size="15px" />
+              <span className="sr-only">Share this product</span>
+            </Button>
 
-          {product.discountPrice && (
-            <p className="bg-[#FFF8CF] w-[51px] flex justify-center items-center rounded-[20px]">
-              <span className="font-medium text-xs">
-                -{product.discountPercentage || 0}%
-              </span>
-            </p>
-          )}
-        </div>
+            {product.discountPrice && (
+              <p className="bg-[#FFF8CF] w-[51px] flex justify-center items-center rounded-[20px]">
+                <span className="font-medium text-xs">
+                  -{product.discountPercentage || 0}%
+                </span>
+              </p>
+            )}
+          </div>
 
-        {/* Product Image */}
-        <div className="relative flex justify-center items-center mx-auto w-[80px] h-[99px] md:w-[136px] md:h-[169px]">
-          <img
-            src={product.image}
-            alt={product.name}
-            loading="lazy"
-            className="h-fit w-fit object-cover mt-10"
-          />
+          {/* Product Image */}
+          <div className="relative flex justify-center items-center mx-auto w-[80px] h-[99px] md:w-[136px] md:h-[169px]">
+            <img
+              src={product.image}
+              alt={product.name}
+              loading="lazy"
+              className="h-fit w-fit object-cover mt-10"
+            />
+          </div>
         </div>
-      </div>
+      </Link>
+
       {/* Product Details Section */}
       <div className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2 group-hover:pb-2">
         {/* Product Name */}
-        <Link to={`/${product.id}/${product.slug}`}>
+        <Link
+          to={`/${product.id}/${product.slug}`}
+          className="hover:underline focus:underline focus:outline-none"
+        >
           <p
-            className="text-sm leading-[16.94px] min-h-12 cursor-pointer hover:underline focus:underline focus:outline-none"
+            className="text-sm leading-[16.94px] min-h-12 cursor-pointer"
             tabIndex={0}
             role="link"
             aria-label={`View details for ${product.name}`}
@@ -94,7 +103,7 @@ export const ProductCard = React.memo(({ product }) => {
         </div>
 
         {/* Product Ratings */}
-        <div className="flex items-center space-x-1 ">
+        <div className="flex items-center space-x-1">
           <Star fill="black" className="w-3" aria-hidden="true" />{" "}
           {/* Hide from screen readers */}
           <p>
@@ -110,6 +119,10 @@ export const ProductCard = React.memo(({ product }) => {
               className="bg-[#FFDE11] h-10 w-10 rounded-full flex justify-center focus:outline-none focus:ring-2 focus:ring-black"
               tabIndex={0}
               role="button"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent event propagation
+                handleAddToCart();
+              }}
             >
               <img
                 src="/images/shopping-bag-add.svg"
@@ -120,8 +133,14 @@ export const ProductCard = React.memo(({ product }) => {
           </NavLink>
 
           {/* Add to Favourite Button */}
-
-          <AddFavourite product={product} />
+          <div
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent event propagation
+              handleAddToFavourite(product);
+            }}
+          >
+            <AddFavourite product={product} />
+          </div>
         </div>
       </div>
     </article>
