@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { Pagination } from "./Pagination";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { Link, Outlet, useNavigate, useParams } from "react-router";
 import SubCategoryFilterForm from "./filterForms/SubCategoryFilterForm";
 import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
 import { ProductCard } from "../../ui/components/landingPageProduct/ProductCard";
 import { MiniProductCategories } from "../../ui/components/hero/MiniProductCategories";
+import { products } from "../../utils/data";
 
 const SubCategoryPage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const products = location.state?.products || [];
   const { subcategory, categoryName } = useParams();
   const [sortedGroupedProducts, setSortedGroupedProducts] = useState({});
 
@@ -87,23 +86,21 @@ const SubCategoryPage = () => {
         <hr className="mb-6" />{" "}
         <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-40 xl:grid-cols-5 xl:gap-4 2xl:flex 2xl:flex-wrap 2xl:justify-between lg:gap-">
           {productsToDisplay.map((product) => (
-            <div
+            <Link
+              to={`/category/${categoryName}/${subcategory}/${product.id}/${product.slug}`}
               key={product.id}
-              className="mb-6"
-              onClick={() =>
-                navigate(
-                  `/category/${categoryName}/${subcategory}/${product.id}/${product.slug}`
-                )
-              }
             >
-              <ProductCard product={product} />
-            </div>
+              <div key={product.id} className="mb-6">
+                <ProductCard product={product} />
+              </div>
+            </Link>
           ))}
         </section>
         <div className="flex justify-center md:justify-start">
           <Pagination />
         </div>
       </section>
+      <Outlet />
     </main>
   );
 };

@@ -1,7 +1,11 @@
+import { useNavigate } from "react-router";
+
 function PageNotFound() {
+  const navigate = useNavigate();
   return (
     <div>
-      Ooops!!! page not found <button onClick={() => navigate(-1)}>&larr;go back home</button>
+      Ooops!!! page not found{" "}
+      <button onClick={() => navigate(-1)}>&larr;go back home</button>
     </div>
   );
 }
