@@ -701,7 +701,7 @@ export const products = [
 
   {
     id: 60,
-    name: "Maybelline Fit Me Foundation",
+    name: "MAC Matte Lipstick",
     brand: "Maybelline",
     category: "beauty",
     subcategory: "Makeup",
@@ -715,7 +715,7 @@ export const products = [
   },
   {
     id: 61,
-    name: "MAC Matte Lipstick",
+    name: "Maybelline Fit Me Foundation",
     brand: "MAC",
     category: "beauty",
     subcategory: "Makeup",
