@@ -1,22 +1,30 @@
 import Home from "./Pages/home/Home";
+import ScrollToTop from "./utils/ScrollToTop";
 import Layout from "./ui/components/layout/Layout";
 import CartItems from "./pages/cartItems/CartItems";
 import { BrowserRouter, Route, Routes } from "react-router";
 import PageNotFound from "./pages/pageNotFound/PageNotFound";
-import CategoryPage from "./Pages/productCategories/CategoryPage";
-import SignUp from "./pages/signUp/SignUp";
+import SubCategoryPage from "./Pages/productCategories/SubCategoryPage";
+import SingleProductPage from "./Pages/productCategories/SingleProductPage";
+import CategoryPage from "./Pages/productCategories/categoryPage/CategoryPage";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="" element={<Layout />}>
+          {/* Home route */}
           <Route path="/" element={<Home />} />
+
+          {/* Cart items route */}
           <Route path="cart-items" element={<CartItems />} />
-          <Route path="category/:categoryName" element={<CategoryPage />}></Route>
           <Route path="*" element={<PageNotFound />} />
+          <Route path="category/:categoryName" element={<CategoryPage />}></Route>
         </Route>
-        <Route path="sign-up" element={<SignUp />} />
+
+        {/* Catch-all route for 404 */}
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
