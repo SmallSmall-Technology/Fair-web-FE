@@ -2,7 +2,10 @@ import { Link } from "react-router";
 import { styled } from "styled-components";
 
 const StyledLink = styled(Link)`
-  border-radius: 20px;
+  // border-radius: 20px;
+  text-decoration: none;
+  width: 100%;
+  display: inline-block;
   // background: #ffde11;
   font-size: 14px;
 `;
