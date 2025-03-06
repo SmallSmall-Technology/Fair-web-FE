@@ -56,10 +56,10 @@ const Footer = () => {
             <p className="mb-4">Get the app</p>
             <div className=" flex ">
               <Link className="mr-2">
-                <img src="/images/play-store.svg" alt="" />
+                <img src="/images/play-store.svg" alt="play store logo" />
               </Link>
               <Link>
-                <img src="/images/app-store.svg" alt="" />
+                <img src="/images/app-store.svg" alt="app store logo" />
               </Link>
             </div>
           </div>
@@ -72,8 +72,7 @@ const Footer = () => {
             <FaRegCopyright />
           </span>
           <p className="pt-1">
-            <span className="mr-4 ">Fair by Smallsmall Technology 2025</span>{" "}
-            <span>fairapp.ng</span>
+            <span className="mr-4 ">Fair by Smallsmall Technology 2025</span> <span>fairapp.ng</span>
           </p>
         </div>
       </div>
