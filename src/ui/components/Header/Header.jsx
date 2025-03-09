@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <>
       <NavLink to="/">
-        <img src="/images/Horizontal Logo Blue@100x-8 1.svg" alt="Fair Logo" />
+        <img src="/images/fair-logo.svg" alt="Fair Logo" />
       </NavLink>
     </>
   );

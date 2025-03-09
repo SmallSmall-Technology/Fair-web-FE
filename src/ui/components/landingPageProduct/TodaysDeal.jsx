@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { ProductCard } from "./ProductCard";
+import { ProductCard } from "../../../features/product/ProductCard";
 import { products } from "../../../utils/data";
 import { Button } from "../../../utils/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";

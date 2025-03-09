@@ -5,8 +5,9 @@ import { ArrowUpDown, ChevronRight } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import SubCategoryFilterForm from "./filterForms/SubCategoryFilterForm";
 import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
-import { ProductCard } from "../../ui/components/landingPageProduct/ProductCard";
+
 import { MiniProductCategories } from "../../ui/components/hero/MiniProductCategories";
+import { ProductCard } from "../../features/product/ProductCard";
 
 const SubCategoryPage = () => {
   const navigate = useNavigate();

@@ -1,13 +1,18 @@
 import { CommentBar } from "./CommentBar";
-import { HeartHandshake } from "lucide-react";
-import { products } from "../../../utils/data";
+import { useEffect, useState } from "react";
 import { ProductImage } from "../ProductImage";
+import { products } from "../../../utils/data";
 import { NavLink, useNavigate } from "react-router";
 import { AddFavourite } from "../../../utils/AddFavourite";
+import { ChevronsRight, HeartHandshake } from "lucide-react";
 import { Button, YellowButton } from "../../../utils/Button";
-import { ProductCard } from "../../../ui/components/landingPageProduct/ProductCard";
+import { ProductCard } from "../../../features/product/ProductCard";
+
+const Aside = () => {};
 
 export const SingleProductDetails = ({ product }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   // Array of images for the aside section
   const productImages = [
     product.image,
@@ -16,6 +21,13 @@ export const SingleProductDetails = ({ product }) => {
     product.image,
     product.image,
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % productImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   const navigate = useNavigate();
   // const location = useLocation();
@@ -30,11 +42,26 @@ export const SingleProductDetails = ({ product }) => {
 
   return (
     <>
+      <div className="hidden lg:flex justify-end space-x-2 mb-3 mx-5 lg:mx-0 ">
+        <p className="flex items-center text-sm text-[#222224] cursor-pointer">
+          Add to favorite{" "}
+          <span className="pl-1">
+            <AddFavourite />
+          </span>
+        </p>
+        <p className="flex items-center text-sm text-[#222224] cursor-pointer">
+          <span>Share </span>
+          <span className="pl-1">
+            <img src="/public/images/share-square.svg" alt="A share icon" />
+          </span>
+        </p>
+      </div>
       {/* Main Product Section */}
+
       <div className="flex flex-wrap w-full justify-between">
         {/* Left Section - Product Images */}
         <main className="w-full lg:w-1/2 mx-5 lg:mx-0">
-          <div className="flex justify-between gap-5">
+          <div className="flex justify-between gap-5 lg:mb-20">
             {/* Aside - Thumbnail Images */}
             <aside className="w-[100px] hidden lg:grid">
               <ul className="hidden lg:grid grid-cols-1 gap-2">
@@ -51,16 +78,56 @@ export const SingleProductDetails = ({ product }) => {
 
             {/* Main Product Image */}
             <main className="flex-1">
-              <div className="lg:bg-[#F2F2F2] rounded-2xl w-full h-[363px] lg:h-[589px] flex justify-center items-center">
+              <div className="hidden lg:bg-[#F2F2F2] rounded-2xl w-full h-[363px] lg:h-[589px] llg:w-[589px] lg:flex justify-center items-center">
                 <img
                   src={product.image}
                   alt={product.slug}
-                  className="w-[90%] lg:w-full h-full object-cover"
+                  className="w-[full] lg:w-[487px] lg:h-[487px] object-cover"
                 />
               </div>
-              <div className=" lg:hidden mb-4 w-fit shadow-[2px_4px_7px_1px_rgba(0,0,0,0.2)] ml-auto p-2 flex items-center rounded-[10px] ">
-                <AddFavourite />
-              </div>
+              {/* Carousel images for mobile view */}
+              <section className="relative flex justify-center mb-8 md:hidden">
+                <div
+                  className="flex w-full lg:hidden overflow-hidden h-[363px] "
+                  aria-live="polite"
+                  role="group"
+                  aria-roledescription="carousel"
+                >
+                  {productImages.map((product, index) => (
+                    <img
+                      key={index}
+                      src={product}
+                      className={`absolute h-full w-full transition-opacity duration-700 ease-in-out ${
+                        index === currentIndex ? "opacity-100" : "opacity-0"
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Carousel button for mobile view */}
+                <div className="absolute bottom-2 p flex justify-center space-x-4 bg-[#323232] w-fit p-1 rounded-xl">
+                  {productImages.map((_, index) => (
+                    <button
+                      key={index}
+                      className={`w-2 h-2 rounded-full transition-all ${
+                        index === currentIndex
+                          ? "bg-[#FFFFFF] scale-125"
+                          : "bg-[#A3A3A2]"
+                      }`}
+                      onClick={() => setCurrentIndex(index)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          setCurrentIndex(index);
+                        }
+                      }}
+                    ></button>
+                  ))}
+                </div>
+
+                <div className="absolute bottom-0 right-0 lg:hidden w-fit shadow-[2px_4px_7px_1px_rgba(0,0,0,0.2)] ml-auto p-2 flex items-center rounded-[10px] ">
+                  <AddFavourite />
+                </div>
+              </section>
             </main>
           </div>
           <section className="hidden lg:grid mt-8">
@@ -73,7 +140,7 @@ export const SingleProductDetails = ({ product }) => {
 
         {/* Right Section - Product Details */}
         <aside className="w-full lg:w-1/2 lg:pl-10">
-          <div className="hidden lg:flex justify-end space-x-2 mb-3 mx-5 lg:mx-0">
+          {/* <div className="hidden lg:flex justify-end space-x-2 mb-3 mx-5 lg:mx-0 ">
             <p className="flex items-center text-sm text-[#222224] cursor-pointer">
               Add to favorite{" "}
               <span className="pl-1">
@@ -86,7 +153,7 @@ export const SingleProductDetails = ({ product }) => {
                 <img src="/public/images/share-square.svg" alt="A share icon" />
               </span>
             </p>
-          </div>
+          </div> */}
           <h1 className="text-xl lg:text-2xl font-bold mx-5 lg:mx-0">
             {product.name}
           </h1>
@@ -112,10 +179,10 @@ export const SingleProductDetails = ({ product }) => {
                 </span>
               </div>
             </div>
-            <p className="text-xs mt-3">
+            <p className="text-xs mt-3 hidden lg:block">
               Brand <span className="font-medium">{product.brand}</span>
             </p>
-            <p className="text-[27px] font-semibold mt-4 mb-6">
+            <p className="text-[27px] font-semibold lg:mt-3 mb-6">
               {product.price}
             </p>
             <p className="flex items-center space-x-2">
@@ -138,47 +205,53 @@ export const SingleProductDetails = ({ product }) => {
           {/* Right Section - Pay in instalments */}
 
           <div>
-            <p className="hidden lg:block text-xs mb-3">Pay in instalments</p>
+            <p className=" hidden lg:block text-xs mb-3">Pay in instalments</p>
 
-            <article className="bg-[#F2F2F2] rounded-[10px] py-10 flex justify-center lg:justify-start mx-5 lg:mx-0">
-              <div className="flex space-x-6 lg:ml-10 ">
-                <div className="max-w-[80px] grid gap-2 text-center">
-                  <img
-                    src="/public/images/half-circle.svg"
-                    alt="A diameter of a circle"
-                    className="mx-auto"
-                  />
-                  <div className="grid grid-cols-1 ">
-                    <p className="text-xs font-medium">N200.000</p>
-                    <span className="text-[11px]">Pay now today</span>
+            <article className=" bg-[#F2F2F2] rounded-[10px] py-3 lg:py-5 flex flex-col justify-center lg:justify-start mx-5 lg:mx-0">
+              <div className="flex lg:hidden justify-end w-full pr-3">
+                <ChevronsRight className=" " role="button" />
+              </div>
+
+              <div className="flex justify-center lg:justify-start">
+                <div className="flex space-x-6 lg:ml-10 ">
+                  <div className="max-w-[80px] grid gap-2 text-center">
+                    <img
+                      src="/public/images/half-circle.svg"
+                      alt="A diameter of a circle"
+                      className="mx-auto"
+                    />
+                    <div className="grid grid-cols-1 ">
+                      <p className="text-xs font-medium">N200.000</p>
+                      <span className="text-[11px]">Pay now today</span>
+                    </div>
                   </div>
-                </div>
 
-                <div className="max-w-[80px] grid gap-2 text-center">
-                  <img
-                    src="/public/images/one-quater-circle.svg"
-                    alt="A diameter of a circle"
-                    className="mx-auto"
-                  />
-                  <div className="grid grid-cols-1 ">
-                    <p className="text-xs font-medium">N200.000</p>
-                    <span className="text-[11px]">
-                      Next payment 24 Jun, 2024
-                    </span>
+                  <div className="max-w-[80px] grid gap-2 text-center">
+                    <img
+                      src="/public/images/one-quater-circle.svg"
+                      alt="A diameter of a circle"
+                      className="mx-auto"
+                    />
+                    <div className="grid grid-cols-1 ">
+                      <p className="text-xs font-medium">N200.000</p>
+                      <span className="text-[11px]">
+                        Next payment 24 Jun, 2024
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <div className="max-w-[80px] grid gap-2 text-center">
-                  <img
-                    src="/public/images/full-circle.svg"
-                    alt="A diameter of a circle"
-                    className="mx-auto"
-                  />
-                  <div className="grid grid-cols-1 ">
-                    <p className="text-xs font-medium">N200.000</p>
-                    <span className="text-[11px]">
-                      Final payment 24 Jul, 2024
-                    </span>
+                  <div className="max-w-[80px] grid gap-2 text-center">
+                    <img
+                      src="/public/images/full-circle.svg"
+                      alt="A diameter of a circle"
+                      className="mx-auto"
+                    />
+                    <div className="grid grid-cols-1 ">
+                      <p className="text-xs font-medium">N200.000</p>
+                      <span className="text-[11px]">
+                        Final payment 24 Jul, 2024
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -188,10 +261,9 @@ export const SingleProductDetails = ({ product }) => {
           </div>
           {/* Right Section - Pay in ful */}
 
-          {/* <div className="mx-"> */}
           <p className="text-xs mb-3 mx-5 lg:mx-0">Pay in full</p>
 
-          <article className="bg-[#F2F2F2] rounded-[10px] py-6 pl-8 lg:pl-0 flex justify-start mb-6 mx-5 lg:mx-0">
+          <article className="bg-[#F2F2F2] rounded-[10px] py-4 pl-8 lg:pl-0 flex justify-start mb-6 mx-5 lg:mx-0">
             <div className="flex space-x-6 lg:ml-10 ">
               <div className="flex gap-2 items-start">
                 <img
@@ -211,7 +283,6 @@ export const SingleProductDetails = ({ product }) => {
               Add to cart
             </YellowButton>
           </div>
-          {/* </div> */}
 
           <div className="mt-10 lg:hidden">
             <div className="border-y-4 rounded-2xl"></div>
