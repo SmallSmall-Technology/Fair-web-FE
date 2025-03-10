@@ -12,7 +12,7 @@ const SingleProductPage = () => {
 
   return (
     <>
-      <main className="mx-6 lg:mx-[76px] mb-20 hidden md:block">
+      <main className="mx-6 lg:mx-[76px] mb-5 hidden md:block">
         <div className="hidden md:flex">
           <ProductCategoriesShortcut />
         </div>

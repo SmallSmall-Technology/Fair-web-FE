@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router";
-import { ProductCard } from "../../../ui/components/landingPageProduct/ProductCard";
+import { ProductCard } from "../../../features/product/ProductCard";
 
 const ProductList = ({
   categoryName,
