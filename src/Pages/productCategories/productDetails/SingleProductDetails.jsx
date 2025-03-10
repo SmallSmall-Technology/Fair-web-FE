@@ -1,17 +1,21 @@
 import { CommentBar } from "./CommentBar";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { ProductImage } from "../ProductImage";
 import { products } from "../../../utils/data";
 import { NavLink, useNavigate } from "react-router";
-import { AddFavourite } from "../../../utils/AddFavourite";
 import { ChevronsRight, HeartHandshake } from "lucide-react";
 import { Button, YellowButton } from "../../../utils/Button";
+import { handleAddToCart } from "../../../features/cart/AddToCart";
 import { ProductCard } from "../../../features/product/ProductCard";
+import { AddFavourite } from "../../../features/favourite/AddFavourite";
+import { handleShareProduct } from "../../../features/product/ShareProduct";
 
-const Aside = () => {};
+// const Aside = () => {};
 
 export const SingleProductDetails = ({ product }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const dispatch = useDispatch();
 
   // Array of images for the aside section
   const productImages = [
@@ -46,10 +50,13 @@ export const SingleProductDetails = ({ product }) => {
         <p className="flex items-center text-sm text-[#222224] cursor-pointer">
           Add to favorite{" "}
           <span className="pl-1">
-            <AddFavourite />
+            <AddFavourite product={product} />
           </span>
         </p>
-        <p className="flex items-center text-sm text-[#222224] cursor-pointer">
+        <p
+          className="flex items-center text-sm text-[#222224] cursor-pointer"
+          onClick={handleShareProduct}
+        >
           <span>Share </span>
           <span className="pl-1">
             <img src="/public/images/share-square.svg" alt="A share icon" />
@@ -279,7 +286,7 @@ export const SingleProductDetails = ({ product }) => {
             </div>
           </article>
           <div className="mx-5 lg:mx-0">
-            <YellowButton onClick={() => console.log("AddtoCart")}>
+            <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
               Add to cart
             </YellowButton>
           </div>
