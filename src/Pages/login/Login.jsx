@@ -21,20 +21,20 @@ const HeadingText = styled.p`
 const CustomText = styled.div`
   p:nth-child(1) {
     color: #222224;
-    font-size: 35px;
+    font-size: ${(props) => props.fontSize1 || "35px"};
     font-weight: 400;
     line-height: 1.2em
   },
   
   p:nth-child(2) {
     color: #222224;
-    font-size: 47px;
+    font-size: ${(props) => props.fontSize2 || "47px"};
     font-weight: 400;
     line-height: 1.2em
   },
   p:nth-child(3) {
     color: #222224;
-    font-size: 70px;
+    font-size: ${(props) => props.fontSize2 || "70px"};
     font-weight: 700;
     letter-spacing: 2.1px;
     line-height: 1.2em
@@ -118,6 +118,19 @@ function Login() {
                   </div>
                 </Col>
               </Row>
+            </Col>
+          </Row>
+
+          <Row className="d-md-none d-flex">
+            <Col>
+              <div className="d-flex justify-center">
+                <Image src="/images/login-img.svg" className="w-50" alt="" role="decorative" />
+              </div>
+              <CustomText className="text-center mt-5" fontSize1="18px" fontSize2="32px" fontSize3="36px">
+                <p className="mb-0">Your needs can’t wait</p>
+                <p className="mb-0">Meet them on</p>
+                <p className="mb-0">Fair</p>
+              </CustomText>
             </Col>
           </Row>
         </Col>
