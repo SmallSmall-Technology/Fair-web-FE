@@ -8,6 +8,7 @@ import SubCategoryPage from "./Pages/productCategories/SubCategoryPage";
 import SingleProductPage from "./Pages/productCategories/SingleProductPage";
 import CategoryPage from "./Pages/productCategories/categoryPage/CategoryPage";
 import SignUp from "./pages/signUp/SignUp";
+import Login from "./pages/login/Login";
 
 const App = () => {
   return (
@@ -29,7 +30,8 @@ const App = () => {
           <Route path=":id/:slug" element={<SingleProductPage />} />
         </Route>
 
-        <Route path="sign-up" element={<SignUp />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
 
         {/* Catch-all route for 404 */}
         <Route path="*" element={<PageNotFound />} />
