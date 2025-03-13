@@ -147,11 +147,11 @@ export const products = [
     subcategory: "Mobile Phones",
     image:
       "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2Ftc3VuZyUyMHBob25lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-    price: "N207,000.00",
-    discountPrice: "N225,000.00",
-    discountPercentage: "23",
-    ratings: "3.5",
-    noOfProductSold: "20",
+    price: 207000,
+    discountPrice: 225000,
+    discountPercentage: 23,
+    ratings: 3.5,
+    noOfProductSold: 20,
     slug: "samsung-galaxy-note-10-plus",
   },
   {
@@ -162,9 +162,9 @@ export const products = [
     subcategory: "Mobile Phones",
     image:
       "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aXBob25lJTIwMTQlMjBwcm8lMjBtYXh8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-    price: "N500,000.00",
-    ratings: "4.8",
-    noOfProductSold: "50",
+    price: 500000,
+    ratings: 4.8,
+    noOfProductSold: 50,
     slug: "iphone-14-pro-max",
   },
   {
@@ -175,10 +175,10 @@ export const products = [
     subcategory: "Mobile Phones",
     image:
       "https://images.unsplash.com/photo-1666919643134-d97687c1826c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z29vZ2xlJTIwcGl4ZWwlMjA3JTIwcHJvfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-    price: "N300,000.00",
-    discountPrice: "N320,000.00",
-    ratings: "4.6",
-    noOfProductSold: "30",
+    price: 300000,
+    discountPrice: 320000,
+    ratings: 4.6,
+    noOfProductSold: 30,
     slug: "google-pixel-7-pro",
   },
   {
@@ -189,10 +189,10 @@ export const products = [
     subcategory: "Mobile Phones",
     image:
       "https://images.unsplash.com/photo-1647427014769-706a64d7cbf9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b25lcGx1cyUyMDEwJTIwcHJvfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-    price: "N280,000.00",
-    discountPrice: "N300,000.00",
-    ratings: "4.7",
-    noOfProductSold: "25",
+    price: 280000,
+    discountPrice: 10,
+    ratings: 4.7,
+    noOfProductSold: 25,
     slug: "oneplus-10-pro",
   },
   {
@@ -203,10 +203,10 @@ export const products = [
     subcategory: "Mobile Phones",
     image:
       "https://images.unsplash.com/photo-1647427014769-706a64d7cbf9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b25lcGx1cyUyMDEwJTIwcHJvfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-    price: "N200,000.00",
-    discountPrice: "N220,000.00",
-    ratings: "4.4",
-    noOfProductSold: "22",
+    price: 200000,
+    discountPrice: 220000,
+    ratings: 4.4,
+    noOfProductSold: 22,
     slug: "xiaomi-mi-12",
   },
   {
@@ -217,10 +217,10 @@ export const products = [
     subcategory: "Mobile Phones",
     image:
       "https://images.unsplash.com/photo-1647427014769-706a64d7cbf9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b25lcGx1cyUyMDEwJTIwcHJvfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-    price: "N400,000.00",
-    discountPrice: "N420,000.00",
-    ratings: "4.9",
-    noOfProductSold: "40",
+    price: 400000,
+    discountPrice: 420000,
+    ratings: 4.9,
+    noOfProductSold: 40,
     slug: "samsung-galaxy-s22-ultra",
   },
   {
@@ -231,10 +231,10 @@ export const products = [
     subcategory: "Mobile Phones",
     image:
       "https://images.unsplash.com/photo-1647427014769-706a64d7cbf9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b25lcGx1cyUyMDEwJTIwcHJvfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-    price: "N150,000.00",
-    discountPrice: "N170,000.00",
-    ratings: "4.3",
-    noOfProductSold: "18",
+    price: 150000,
+    discountPrice: 170000,
+    ratings: 4.3,
+    noOfProductSold: 18,
     slug: "iphone-se-2022",
   },
   {
@@ -245,10 +245,10 @@ export const products = [
     subcategory: "Mobile Phones",
     image:
       "https://images.unsplash.com/photo-1647427014769-706a64d7cbf9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b25lcGx1cyUyMDEwJTIwcHJvfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-    price: "N180,000.00",
-    discountPrice: "N200,000.00",
-    ratings: "4.5",
-    noOfProductSold: "28",
+    price: 180000,
+    discountPrice: 200000,
+    ratings: 4.5,
+    noOfProductSold: 28,
     slug: "google-pixel-6a",
   },
   {
@@ -259,10 +259,10 @@ export const products = [
     subcategory: "Mobile Phones",
     image:
       "https://images.unsplash.com/photo-1647427014769-706a64d7cbf9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b25lcGx1cyUyMDEwJTIwcHJvfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-    price: "N220,000.00",
-    discountPrice: "N240,000.00",
-    ratings: "4.6",
-    noOfProductSold: "35",
+    price: 220000,
+    discountPrice: 240000,
+    ratings: 4.6,
+    noOfProductSold: 35,
     slug: "oneplus-nord-2",
   },
   {
@@ -273,10 +273,10 @@ export const products = [
     subcategory: "Mobile Phones",
     image:
       "https://images.unsplash.com/photo-1647427014769-706a64d7cbf9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b25lcGx1cyUyMDEwJTIwcHJvfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-    price: "N120,000.00",
-    discountPrice: "N140,000.00",
-    ratings: "4.2",
-    noOfProductSold: "20",
+    price: 120000,
+    discountPrice: 140000,
+    ratings: 4.2,
+    noOfProductSold: 20,
     slug: "xiaomi-redmi-note-11",
   },
 

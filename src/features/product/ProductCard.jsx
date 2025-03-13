@@ -1,24 +1,35 @@
 import React from "react";
+import { Link } from "react-router";
+import { useSelector } from "react-redux";
 import { Share2, Star } from "lucide-react";
-import { Link, NavLink } from "react-router";
-import { Button } from "../../../utils/Button";
-import { AddFavourite } from "../../../utils/AddFavourite";
+import { Button } from "../../utils/Button";
+import { AddToCart } from "../cart/AddToCart";
+import { AddFavourite } from "../favourite/AddFavourite";
+import { getTotalCartQuantity, getTotalCartPrice } from "../cart/cartSlice";
+import { formatCurrency } from "../../utils/FormatCurrency";
+import { handleShareProduct } from "./ShareProduct";
 
 export const ProductCard = React.memo(({ product }) => {
-  const handleShareProduct = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: product.name,
-          text: `Check out this product: ${product.name}`,
-          url: window.location.href,
-        })
-        .then(() => console.log("Product shared successfully"))
-        .catch((error) => console.error("Error sharing:", error));
-    } else {
-      alert("Web Share API not supported on this browser.");
-    }
-  };
+  const totalCartQuantity = useSelector(getTotalCartQuantity);
+  const totalCartPrice = useSelector(getTotalCartPrice);
+  const cart = useSelector((state) => state.cart.cart);
+  console.log(formatCurrency(totalCartPrice));
+  console.log(totalCartQuantity);
+  console.log(cart);
+
+  const {
+    id,
+    name,
+    brand,
+    category,
+    subcategory,
+    image,
+    price,
+    discountPrice,
+    ratings,
+    noOfProductSold,
+    slug,
+  } = product;
 
   return (
     <article
@@ -39,6 +50,7 @@ export const ProductCard = React.memo(({ product }) => {
       aria-labelledby={`product-${product.id}-title`}
     >
       {/* Product Image Section */}
+
       <Link to={`/${product.id}/${product.slug}`} className="block">
         <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl cursor-pointer">
           {/* Share Button */}
@@ -96,9 +108,12 @@ export const ProductCard = React.memo(({ product }) => {
 
         {/* Product Price */}
         <div className="flex items-center flex-wrap md:space-x-2">
-          <p className="font-semibold text-base">{product.price}</p>
+          <p className="font-semibold text-base">
+            {formatCurrency(product.price)}
+          </p>
+
           <p className="text-sm line-through text-[#96959F]">
-            {product.discountPrice}
+            {discountPrice ? `${formatCurrency(product.discountPrice)}` : ""}
           </p>
         </div>
 
@@ -114,31 +129,10 @@ export const ProductCard = React.memo(({ product }) => {
         {/* Action Buttons */}
         <div className="flex items-center space-x-6">
           {/* Add to Cart Button */}
-          <NavLink to="product:id" aria-label="Add to cart">
-            <div
-              className="bg-[#FFDE11] h-10 w-10 rounded-full flex justify-center focus:outline-none focus:ring-2 focus:ring-black"
-              tabIndex={0}
-              role="button"
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent event propagation
-                handleAddToCart();
-              }}
-            >
-              <img
-                src="/images/shopping-bag-add.svg"
-                alt="Add to shopping cart"
-                className="w-5"
-              />
-            </div>
-          </NavLink>
+          <AddToCart product={product} />
 
           {/* Add to Favourite Button */}
-          <div
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent event propagation
-              handleAddToFavourite(product);
-            }}
-          >
+          <div>
             <AddFavourite product={product} />
           </div>
         </div>

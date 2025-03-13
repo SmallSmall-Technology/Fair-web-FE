@@ -1,9 +1,9 @@
 import { NavLink } from "react-router";
-import { ProductCard } from "./ProductCard";
+
 import { products } from "../../../utils/data";
 import { Button } from "../../../utils/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef, useState } from "react";
+import { ProductCard } from "../../../features/product/ProductCard";
 
 export const Electronics = ({ onScrollProduct, item_width, containerRef }) => {
   return (

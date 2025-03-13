@@ -1,7 +1,8 @@
 import Home from "./Pages/home/Home";
+import SignUp from "./pages/signUp/SignUp";
 import ScrollToTop from "./utils/ScrollToTop";
 import Layout from "./ui/components/layout/Layout";
-import CartItems from "./pages/cartItems/CartItems";
+import CartItems from "./Pages/cartItems/CartItems";
 import { BrowserRouter, Route, Routes } from "react-router";
 import PageNotFound from "./pages/pageNotFound/PageNotFound";
 import SubCategoryPage from "./Pages/productCategories/SubCategoryPage";

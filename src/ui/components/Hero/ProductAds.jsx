@@ -7,6 +7,7 @@ export const ProductAds = () => {
     Array(productAds.length).fill(false)
   );
 
+  // Auto-rotate carousel
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % productAds.length);
