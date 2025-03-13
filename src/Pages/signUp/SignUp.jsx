@@ -8,20 +8,20 @@ import { Link } from "react-router";
 import LinkButton from "../../utils/LinkButton";
 import { styled } from "styled-components";
 
+const Heading = styled.h1`
+  font-size: 24px;
+  font-weight: 600;
+`;
+const HeadingText = styled.p`
+  color: #222224;
+  font-size: 14px;
+  font-weight: 400;
+`;
+
 function SignUp() {
   useEffect(() => {
     import("bootstrap/dist/css/bootstrap.min.css");
   }, []);
-
-  const Heading = styled.h1`
-    font-size: 24px;
-    font-weight: 600;
-  `;
-  const HeadingText = styled.p`
-    color: #222224;
-    font-size: 14px;
-    font-weight: 400;
-  `;
 
   return (
     <Container fluid>
@@ -38,7 +38,7 @@ function SignUp() {
               <img src="/images/fair-logo.svg" alt="Fair Logo" />
             </div>
             <div className="d-block d-md-none">
-              <Link className="text-dark" to="#">
+              <Link className="text-dark" to="/login">
                 Log in
               </Link>
             </div>
@@ -46,7 +46,7 @@ function SignUp() {
           <Row className="justify-content-center">
             <Col md={7}>
               <Row>
-                <Col md={12}>
+                <Col md={12} className="text-center text-md-start">
                   <Heading>Create your free account</Heading>
                   <HeadingText>Lorem ipsum dolor sit amet, consectetur adipiscing elit</HeadingText>
                 </Col>
@@ -73,7 +73,10 @@ function SignUp() {
 
                   <div className="text-center d-none d-md-block">
                     <p>Already have an account?</p>
-                    <LinkButton className="bg-[#FFF8CF] text-center rounded-full border-[#FFDE11] w-full   md:px-12 py-3 text-lg font-medium text-black hover:bg-[#FFDE11] hover:text-black">
+                    <LinkButton
+                      link="/login"
+                      className="bg-[#FFF8CF] text-center rounded-full border-[#FFDE11] w-full   md:px-12 py-3 text-lg font-medium text-black hover:bg-[#FFDE11] hover:text-black"
+                    >
                       Log in
                     </LinkButton>
                   </div>

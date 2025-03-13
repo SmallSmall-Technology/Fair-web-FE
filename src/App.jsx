@@ -1,4 +1,5 @@
 import Home from "./Pages/home/Home";
+import Login from "./pages/login/Login";
 import SignUp from "./pages/signUp/SignUp";
 import ScrollToTop from "./utils/ScrollToTop";
 import Layout from "./ui/components/layout/Layout";
@@ -18,9 +19,6 @@ const App = () => {
           {/* Home route */}
           <Route path="/" element={<Home />} />
 
-          {/* Cart items route */}
-          <Route path="cart-items" element={<CartItems />} />
-
           {/* Category and subcategory routes */}
           <Route path="category/:categoryName" element={<CategoryPage />} />
           <Route
@@ -35,7 +33,10 @@ const App = () => {
           <Route path=":id/:slug" element={<SingleProductPage />} />
         </Route>
 
-        <Route path="sign-up" element={<SignUp />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        {/* Cart items route */}
+        <Route path="cart-items" element={<CartItems />} />
 
         {/* Catch-all route for 404 */}
         <Route path="*" element={<PageNotFound />} />
