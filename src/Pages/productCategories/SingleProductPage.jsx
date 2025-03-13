@@ -9,7 +9,6 @@ const SingleProductPage = () => {
   const { categoryName, subcategory, slug, id } = useParams();
   const navigate = useNavigate();
   const data = products.find((product) => product.id === Number(id));
-
   return (
     <>
       <main className="mx-6 lg:mx-[76px] mb-5 hidden md:block">

@@ -1,22 +1,13 @@
 import React from "react";
 import { Link } from "react-router";
-import { useSelector } from "react-redux";
 import { Share2, Star } from "lucide-react";
 import { Button } from "../../utils/Button";
 import { AddToCart } from "../cart/AddToCart";
-import { AddFavourite } from "../favourite/AddFavourite";
-import { getTotalCartQuantity, getTotalCartPrice } from "../cart/cartSlice";
-import { formatCurrency } from "../../utils/FormatCurrency";
 import { handleShareProduct } from "./ShareProduct";
+import { AddFavourite } from "../favourite/AddFavourite";
+import { formatCurrency } from "../../utils/FormatCurrency";
 
 export const ProductCard = React.memo(({ product }) => {
-  const totalCartQuantity = useSelector(getTotalCartQuantity);
-  const totalCartPrice = useSelector(getTotalCartPrice);
-  const cart = useSelector((state) => state.cart.cart);
-  console.log(formatCurrency(totalCartPrice));
-  console.log(totalCartQuantity);
-  console.log(cart);
-
   const {
     id,
     name,
