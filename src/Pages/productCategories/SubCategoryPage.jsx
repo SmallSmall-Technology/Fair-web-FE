@@ -3,11 +3,10 @@ import { Pagination } from "./Pagination";
 import { products } from "../../utils/data";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
+import { ProductCard } from "../../features/product/ProductCard";
 import SubCategoryFilterForm from "./filterForms/SubCategoryFilterForm";
 import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
-
-import { MiniProductCategories } from "../../ui/components/hero/MiniProductCategories";
-import { ProductCard } from "../../features/product/ProductCard";
+import { MiniProductCategories } from "../home/hero/MiniProductCategories";
 
 const SubCategoryPage = () => {
   const navigate = useNavigate();

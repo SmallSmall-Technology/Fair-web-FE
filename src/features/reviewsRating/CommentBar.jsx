@@ -1,14 +1,12 @@
-import { Formik, Form, Field } from "formik";
-import { CircleArrowUp } from "lucide-react";
 import { useState } from "react";
-import { UsersReviews } from "./UsersReviews";
-import { UsersReviewsModal } from "./UsersReviewsModal";
-import { TotalRatings } from "./StarRating";
+import { Formik, Form, Field } from "formik";
+import { TotalRatings } from "./TotalRatings";
+import { CircleArrowUp } from "lucide-react";
+import { UsersReviews } from "../../Pages/productCategories/productDetails/UsersReviews";
+import { UsersReviewsModal } from "../../Pages/productCategories/productDetails/UsersReviewsModal";
 
 export const CommentBar = () => {
   const [reviews, setReviews] = useState([]);
-  // const [ratingAverage, setRatingAaverage] = useState(rating);
-  // const [rating, setRating] = useState(0);
 
   const handleSubmitComment = (values, { resetForm }) => {
     if (values) {
@@ -22,7 +20,6 @@ export const CommentBar = () => {
     <>
       <Formik
         initialValues={{ comment: "", name: "" }}
-        // validationSchema={validationSchema}
         onSubmit={handleSubmitComment}
         onReset={""}
       >

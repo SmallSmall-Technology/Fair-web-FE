@@ -1,6 +1,6 @@
-import Hero from "../../ui/components/hero/Hero";
-import GetApp from "../../ui/components/getApp/getApp";
-import Products from "../../ui/components/landingPageProduct/Products";
+import Hero from "./hero/Hero";
+import GetApp from "./getApp/getApp";
+import Products from "./landingPageProduct/Products";
 
 const Home = () => {
   return (
