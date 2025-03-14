@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
 import CategoryFilterForm from "../filterForms/CategoryFilterForm";
 import { ProductCategoriesShortcut } from "../ProductCategoriesShortcut";
-import { MiniProductCategories } from "../../../ui/components/hero/MiniProductCategories";
+import { MiniProductCategories } from "../../home/hero/MiniProductCategories";
 
 const CategoryPage = () => {
   const { categoryName } = useParams();

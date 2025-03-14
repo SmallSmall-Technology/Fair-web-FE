@@ -3,13 +3,12 @@ import { ChevronRight } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
 import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
 import { SingleProductDetails } from "./productDetails/SingleProductDetails";
-import { MiniProductCategories } from "../../ui/components/hero/MiniProductCategories";
+import { MiniProductCategories } from "../home/hero/MiniProductCategories";
 
 const SingleProductPage = () => {
   const { categoryName, subcategory, slug, id } = useParams();
   const navigate = useNavigate();
   const data = products.find((product) => product.id === Number(id));
-
   return (
     <>
       <main className="mx-6 lg:mx-[76px] mb-5 hidden md:block">
