@@ -1,11 +1,11 @@
 import Home from "./Pages/home/Home";
-import Login from "./pages/login/Login";
-import SignUp from "./pages/signUp/SignUp";
+import Login from "./Pages/login/Login";
+import SignUp from "./Pages/signUp/SignUp";
 import ScrollToTop from "./utils/ScrollToTop";
 import Layout from "./ui/components/layout/Layout";
 import CartItems from "./Pages/cartItems/CartItems";
 import { BrowserRouter, Route, Routes } from "react-router";
-import PageNotFound from "./pages/pageNotFound/PageNotFound";
+import PageNotFound from "./Pages/pageNotFound/PageNotFound";
 import SubCategoryPage from "./Pages/productCategories/SubCategoryPage";
 import SingleProductPage from "./Pages/productCategories/SingleProductPage";
 import CategoryPage from "./Pages/productCategories/categoryPage/CategoryPage";

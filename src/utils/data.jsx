@@ -16,6 +16,8 @@ const valentineAd = "/images/large-fair-web-banner.svg";
 const preciousGift = "/images/precious-gift.png";
 const loveFair = "/images/love-fair.png";
 const shoppingCart = "/images/shopping-bag.svg";
+const happyMan =
+  "/public/images/one-happy-young-african-american-man-sitting-on-hi(3).svg";
 
 const girInHoodie = "/images/young-woman-in-hoodie.svg";
 
@@ -119,7 +121,7 @@ export const productAds = [
 export const heroCards = [
   {
     id: 1,
-    image: loveFair,
+    image: happyMan,
     alt: "An Image of a lady sitting on the sofa while wearing hoodie",
   },
   {
