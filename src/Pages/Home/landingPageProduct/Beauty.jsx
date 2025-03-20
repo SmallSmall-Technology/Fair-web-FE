@@ -1,8 +1,8 @@
 import { NavLink } from "react-router";
-import { ProductCard } from "../../../features/product/ProductCard";
 import { products } from "../../../utils/data";
 import { Button } from "../../../utils/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ProductCard } from "../../../utils/ProductCard";
 
 export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
   return (

@@ -1,18 +1,17 @@
-import { useSelector } from "react-redux";
 import {
   getTotalCartPrice,
   getTotalCartQuantity,
 } from "../../features/cart/cartSlice";
-import { formatCurrency } from "../../utils/FormatCurrency";
+import { useSelector } from "react-redux";
 import { YellowButton } from "../../utils/Button";
+import { formatCurrency } from "../../utils/FormatCurrency";
 
-export const CartSummary = () => {
+export const CartSummary = ({ onHandleCheckout }) => {
   const cart = useSelector((state) => state.cart.cart);
   const totalCartQuantity = useSelector(getTotalCartQuantity);
   const totalCartPrice = useSelector(getTotalCartPrice);
   const VAT = (7.5 / 100) * totalCartPrice;
   const shippingFee = +1200;
-
   const subtTotal = totalCartPrice + VAT + shippingFee;
   return (
     <>
@@ -56,10 +55,10 @@ export const CartSummary = () => {
           </div>
         </div>
         <div className="hidden lg:block">
-          <YellowButton>Checkout</YellowButton>
+          <YellowButton onClick={onHandleCheckout}>Checkout</YellowButton>
         </div>
         <div className="lg:hidden">
-          <YellowButton>Go to Checkout</YellowButton>
+          <YellowButton onClick={onHandleCheckout}>Go to Checkout</YellowButton>
         </div>
       </div>
     </>

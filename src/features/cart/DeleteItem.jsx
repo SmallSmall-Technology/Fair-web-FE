@@ -1,9 +1,14 @@
+import { removeItem } from "./cartSlice";
+import { useDispatch } from "react-redux";
 import { Button } from "../../utils/Button";
 
-export const handleRemoveItem = () => {
-  if (item) dispatch(removeItem(item.id));
-};
-export const DeleteItem = () => {
+export const DeleteItem = ({ id }) => {
+  const dispatch = useDispatch();
+
+  const handleRemoveItem = () => {
+    if (id) dispatch(removeItem(id));
+  };
+
   return (
     <Button
       className="underline text-[#DB1C5E]"

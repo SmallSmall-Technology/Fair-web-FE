@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 import { products } from "../../../utils/data";
 import { Button } from "../../../utils/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { ProductCard } from "../../../features/product/ProductCard";
+import { ProductCard } from "../../../utils/ProductCard";
 
 export const Electronics = ({ onScrollProduct, item_width, containerRef }) => {
   return (

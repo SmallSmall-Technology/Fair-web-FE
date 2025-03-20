@@ -67,7 +67,7 @@ export const CartItem = ({ item }) => {
                   Save for later
                 </button>
                 <hr className="border-l border-gray-300 h-4" />
-                <DeleteItem item={item} />
+                <DeleteItem id={item.id} />
               </div>
 
               <p className="text-xs">
@@ -103,7 +103,7 @@ export const CartItem = ({ item }) => {
 
           <div className="flex space-x-2 items-center mb-2">
             <SaveItemForLater />
-            <DeleteItem item={item} />
+            <DeleteItem id={item.id} />
           </div>
         </div>
       </div>

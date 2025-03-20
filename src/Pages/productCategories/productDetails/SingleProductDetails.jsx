@@ -4,7 +4,7 @@ import { Button } from "../../../utils/Button";
 import { ProductImage } from "../ProductImage";
 import { products } from "../../../utils/data";
 import { NavLink, useNavigate } from "react-router";
-import { ProductCard } from "../../../features/product/ProductCard";
+import { ProductCard } from "../../../utils/ProductCard";
 import { CommentBar } from "../../../features/reviewsRating/CommentBar";
 import { AddFavourite } from "../../../features/favourite/AddFavourite";
 import { SingleProductDetailsAside } from "./SingleProductDetailsAside";

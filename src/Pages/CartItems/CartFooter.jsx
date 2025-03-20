@@ -3,7 +3,7 @@ import { Copyright } from "lucide-react";
 
 export const CartFooter = () => {
   return (
-    <footer>
+    <footer className="pb-10 mt-40 mx-6 lg:mx-[76px]">
       <ul className="flex flex-wrap gap-4">
         <li className="underline cursor-pointer  text-xs">
           <Link to="/about-us">About us</Link>
