@@ -1,30 +1,18 @@
-import { CommentBar } from "../../../features/reviewsRating/CommentBar";
-import { ChevronsRight, HeartHandshake } from "lucide-react";
+import { useDispatch } from "react-redux";
 import { YellowButton } from "../../../utils/Button";
+import { ChevronsRight, HeartHandshake } from "lucide-react";
 import { formatCurrency } from "../../../utils/FormatCurrency";
 import { handleAddToCart } from "../../../features/cart/AddToCart";
+import { CommentBar } from "../../../features/reviewsRating/CommentBar";
 
 export const SingleProductDetailsAside = ({
   product,
   shippingDate,
   category,
 }) => {
+  const dispatch = useDispatch();
   return (
     <aside className="w-full lg:w-1/2 lg:pl-10">
-      {/* <div className="hidden lg:flex justify-end space-x-2 mb-3 mx-5 lg:mx-0 ">
-            <p className="flex items-center text-sm text-[#222224] cursor-pointer">
-              Add to favorite{" "}
-              <span className="pl-1">
-                <AddFavourite />
-              </span>
-            </p>
-            <p className="flex items-center text-sm text-[#222224] cursor-pointer">
-              <span>Share </span>
-              <span className="pl-1">
-                <img src="/public/images/share-square.svg" alt="A share icon" />
-              </span>
-            </p>
-          </div> */}
       <h1 className="text-xl lg:text-2xl font-bold mx-5 lg:mx-0">
         {product.name}
       </h1>

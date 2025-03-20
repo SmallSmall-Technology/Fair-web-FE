@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Pagination } from "./Pagination";
 import { products } from "../../utils/data";
+import { ProductCard } from "../../utils/ProductCard";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
-import { ProductCard } from "../../features/product/ProductCard";
 import SubCategoryFilterForm from "./filterForms/SubCategoryFilterForm";
 import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
 import { MiniProductCategories } from "../home/hero/MiniProductCategories";
