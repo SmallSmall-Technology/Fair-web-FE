@@ -1,11 +1,11 @@
 import React from "react";
+import { Button } from "./Button";
 import { Link } from "react-router";
 import { Share2, Star } from "lucide-react";
-import { Button } from "../../utils/Button";
-import { AddToCart } from "../cart/AddToCart";
-import { handleShareProduct } from "./ShareProduct";
-import { AddFavourite } from "../favourite/AddFavourite";
-import { formatCurrency } from "../../utils/FormatCurrency";
+import { formatCurrency } from "./FormatCurrency";
+import { AddToCart } from "../features/cart/AddToCart";
+import { AddFavourite } from "../features/favourite/AddFavourite";
+import { handleShareProduct } from "../features/product/ShareProduct";
 
 export const ProductCard = React.memo(({ product }) => {
   const {
@@ -69,12 +69,12 @@ export const ProductCard = React.memo(({ product }) => {
           </div>
 
           {/* Product Image */}
-          <div className="relative flex justify-center items-center mx-auto w-[80px] h-[99px] md:w-[136px] md:h-[169px]">
+          <div className="relative flex justify-center items-center mx-auto w-[80px] h-[99px] md:min-w-[136px] md:h-[169px] ">
             <img
               src={product.image}
               alt={product.name}
               loading="lazy"
-              className="h-fit w-fit object-cover mt-10"
+              className="h-fit w-full object-cover mt-10"
             />
           </div>
         </div>

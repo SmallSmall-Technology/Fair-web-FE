@@ -16,7 +16,7 @@ export const CartCoupon = () => {
         {({ isValid, isSubmitting }) => {
           return (
             <Form>
-              <div className="grid gap-2 w-[70%]">
+              <div className="grid gap-2 lg:w-[70%]">
                 <label htmlFor="coupon" className="flex items-center">
                   <span>
                     <img

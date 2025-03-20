@@ -1,8 +1,8 @@
-import { Link } from "react-router";
 import { CartItem } from "./CartItem";
 import { CartFooter } from "./CartFooter";
 import { useSelector } from "react-redux";
 import { CartSummary } from "./CartSummary";
+import { Link, useNavigate } from "react-router";
 import { YellowButton } from "../../utils/Button";
 import Header from "../../ui/components/header/Header";
 import { CartSummaryExtrasAndCoupon } from "./CartSummaryExtrasAndCoupon";
@@ -10,11 +10,15 @@ import { getTotalCartQuantity, getCart } from "../../features/cart/cartSlice";
 
 const CartItems = () => {
   const cart = useSelector(getCart);
-
+  const navigate = useNavigate();
   const totalCartQuantity = useSelector(getTotalCartQuantity);
 
+  const handleCheckout = () => {
+    navigate("checkout");
+  };
+
   return (
-    <div className="flex flex-col justify-between h-screen">
+    <div className="flex flex-col min-h-screen justify-between">
       <Header />
       <main className="my-5">
         <div className="mx-6 lg:mx-[76px] 2xl:mx-[150px]">
@@ -25,7 +29,7 @@ const CartItems = () => {
         </div>
         <hr className="lg:hidden my-6" />
         <div className="lg:hidden mx-6 lg:mx-[76px] 2xl:mx-[150px]">
-          <YellowButton>Go to Checkout</YellowButton>
+          <YellowButton onClick={handleCheckout}>Go to Checkout</YellowButton>
           <div className="flex gap-2 mt-6 font-medium text-xl">
             <p>Subtotal</p>({totalCartQuantity}{" "}
             {totalCartQuantity === 1 ? "items" : "item"})
@@ -36,18 +40,18 @@ const CartItems = () => {
           {cart.length < 1 ? (
             <>
               <p className="mt-4 text-gray-500">Your cart is empty.</p>
-              <Link to="/">Go bacck home to add products to cart</Link>
+              <Link to="/">Go back home to add products to cart</Link>
             </>
           ) : (
             <>
               <div className="grid grid-cols-1 w-full lg:grid-cols-[60%_36%] gap-6 justify-between mt-6 ">
-                <div className="grid grid-cols-1 gap-10 h-fit">
+                <div className="grid grid-cols-1 gap-10 h-screen overflow-y-scroll">
                   {cart.map((item, index) => (
                     <CartItem item={item} key={index} />
                   ))}
                 </div>
                 <aside>
-                  <CartSummary />
+                  <CartSummary onHandleCheckout={handleCheckout} />
                   <CartSummaryExtrasAndCoupon />
                 </aside>
               </div>

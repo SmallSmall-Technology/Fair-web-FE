@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router";
-import { ProductCard } from "../../../features/product/ProductCard";
+import { ProductCard } from "../../../utils/ProductCard";
 
 const ProductList = ({
   categoryName,
@@ -14,16 +14,10 @@ const ProductList = ({
           <div key={subcategory} className="mb-8">
             <h1 className="font-bold text-xl capitalize mb-4 flex items-baseline">
               {subcategory}
-              {/* {subcategory} path="category/:categoryName/:subcategory" */}
               <Link to={`/category/${categoryName}/${subcategory}`}>
                 <p
                   className="text-[#222224] text-sm font-normal underline pl-3 cursor-pointer"
                   role="link"
-                  // onClick={() =>
-                  // navigate(`/category/${categoryName}/${subcategory}`, {
-                  // state: { products: groupedProductsAll[subcategory] },
-                  // })
-                  // }
                 >
                   See all
                 </p>
