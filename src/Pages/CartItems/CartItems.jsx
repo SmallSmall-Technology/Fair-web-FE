@@ -21,14 +21,14 @@ const CartItems = () => {
     <div className="flex flex-col min-h-screen justify-between">
       <Header />
       <main className="my-5">
-        <div className="mx-6 lg:mx-[76px] 2xl:mx-[150px]">
+        <div className="mx-6 lg:mx-[60px] 2xl:mx-[150px]">
           <h1 className="hidden lg:flex font-semibold text-3xl">Your Cart</h1>
           <h1 className="flex lg:hidden font-semibold text-3xl">
             Shopping Cart
           </h1>
         </div>
         <hr className="lg:hidden my-6" />
-        <div className="lg:hidden mx-6 lg:mx-[76px] 2xl:mx-[150px]">
+        <div className="lg:hidden mx-6 lg:mx-[60px] 2xl:mx-[150px]">
           <YellowButton onClick={handleCheckout}>Go to Checkout</YellowButton>
           <div className="flex gap-2 mt-6 font-medium text-xl">
             <p>Subtotal</p>({totalCartQuantity}{" "}
@@ -36,7 +36,7 @@ const CartItems = () => {
           </div>
         </div>
         <hr className="lg:hidden mt-6 mb-4" />
-        <section className="mx-6 lg:mx-[76px] 2xl:mx-[150px]">
+        <section className="mx-6 lg:mx-[60px] 2xl:mx-[150px]">
           {cart.length < 1 ? (
             <>
               <p className="mt-4 text-gray-500">Your cart is empty.</p>
@@ -59,7 +59,7 @@ const CartItems = () => {
           )}
         </section>
       </main>
-      <div className="mx-6 lg:mx-[76px] pb-10 mt-40">
+      <div className="mx-6 lg:mx-[60px] pb-10 mt-40">
         <CartFooter />
       </div>
     </div>

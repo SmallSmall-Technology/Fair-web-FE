@@ -74,7 +74,7 @@ const CategoryPage = () => {
   }, [filteredProducts]);
 
   return (
-    <main className="mx-6 lg:mx-[76px]">
+    <main className="mx-6 lg:mx-[60px]">
       <div className="hidden md:flex">
         <ProductCategoriesShortcut />
       </div>

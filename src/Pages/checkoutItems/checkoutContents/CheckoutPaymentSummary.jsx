@@ -9,6 +9,7 @@ import {
   getTotalCartPrice,
   getTotalCartQuantity,
 } from "../../../features/cart/cartSlice.js";
+import { useNavigate } from "react-router";
 
 export const CheckoutPaymentSummary = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -18,6 +19,11 @@ export const CheckoutPaymentSummary = () => {
   const shippingFee = +1200;
   const subtTotal = totalCartPrice;
   const total = totalCartPrice + VAT + shippingFee;
+  const navigate = useNavigate();
+
+  const handleSubmitPaymentMethod = (values) => {
+    navigate("/cart-items/checkout/payment-success");
+  };
 
   return (
     <>
@@ -57,7 +63,9 @@ export const CheckoutPaymentSummary = () => {
               <p>{formatCurrency(total)}</p>
             </div>
             <div className="lg:hidden flex flex-col justify-center  gap-5">
-              <YellowButton>Pay now</YellowButton>
+              <YellowButton onClick={handleSubmitPaymentMethod}>
+                Pay now
+              </YellowButton>
               <div className="mx-auto">
                 <CancelPurchase />
               </div>

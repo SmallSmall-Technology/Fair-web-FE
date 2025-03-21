@@ -1,9 +1,12 @@
 import { YellowButton } from "../../../utils/Button.jsx";
 import { Field, Form, Formik } from "formik";
 import { formatCurrency } from "../../../utils/FormatCurrency.jsx";
+import { useNavigate } from "react-router";
 
 export const CheckoutPaymentMethod = () => {
+  const navigate = useNavigate();
   const handleSubmitPaymentMethod = (values, { resetForm }) => {
+    navigate("/cart-items/checkout/payment-success");
     resetForm();
   };
   return (
@@ -72,7 +75,9 @@ export const CheckoutPaymentMethod = () => {
               </div>
             </div>
             <div className="hidden lg:block">
-              <YellowButton>Pay now</YellowButton>
+              <YellowButton onClick={handleSubmitPaymentMethod}>
+                Pay now
+              </YellowButton>
             </div>
           </Form>
         )}
