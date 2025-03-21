@@ -37,7 +37,7 @@ const SubCategoryPage = () => {
       : data;
 
   return (
-    <main className="mx-6 lg:mx-[76px] mb-20">
+    <main className="mx-6 lg:mx-[60px] mb-20">
       <div className="hidden md:flex">
         <ProductCategoriesShortcut />
       </div>
