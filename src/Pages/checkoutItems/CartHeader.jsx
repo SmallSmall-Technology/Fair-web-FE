@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
-import { Button } from "../../utils/Button";
 import { Link } from "react-router";
+import { Button } from "../../utils/Button";
 
 export const CartHeader = () => {
   return (
