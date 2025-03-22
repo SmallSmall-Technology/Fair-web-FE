@@ -5,7 +5,7 @@ import { UserDashboard } from "../../../pages/userDashboard/UserDashboard";
 
 const UserDashboardLayout = () => {
   return (
-    <div className="flex flex-col min-h-screen justify-between">
+    <div className="flex flex-col justify-between">
       <Header />
       <Outlet />
       <CartFooter />
