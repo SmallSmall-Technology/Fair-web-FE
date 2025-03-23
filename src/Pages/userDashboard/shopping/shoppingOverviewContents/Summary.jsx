@@ -1,8 +1,13 @@
 import { Link } from "react-router";
 import { WalletBalance } from "./Wallet";
-import { RecentlyViewed } from "./RecentlyViewed";
+import { SingleRecentlyViewed } from "./RecentlyViewed";
+import { useSelector } from "react-redux";
+import { getRecentlyViewed } from "../../../../features/product/recentlyViewedSlice";
+// import { RecentlyViewed } from "./RecentlyViewed";
 
 export const Summary = () => {
+  const recentlyViewed = useSelector(getRecentlyViewed);
+
   return (
     <section className="grid grid-cols-1 gap-6">
       <article>
@@ -51,10 +56,22 @@ export const Summary = () => {
               to="/user-dashboard/shopping-overview/recently-viewed"
               className="underline font-medium"
             >
-              See all
+              {recentlyViewed === 0 ? "" : "See all"}
             </Link>
           </div>
-          <RecentlyViewed />
+          <section className="grid grid-cols-1 gap-4 border w-full rounded-[10px] p-2">
+            {recentlyViewed.length === 0 ? (
+              <p className="text-center text-gray-500">
+                No recently viewed items
+              </p>
+            ) : (
+              recentlyViewed
+                .slice(0, 2)
+                .map((item) => (
+                  <SingleRecentlyViewed item={item} key={item.id} />
+                ))
+            )}
+          </section>
         </div>
       </div>
     </section>

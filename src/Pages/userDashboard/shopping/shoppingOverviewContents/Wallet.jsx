@@ -19,7 +19,10 @@ export const WalletBalance = () => {
           <p>Available balance</p>
           <p className="flex items-center space-x-2 font-semibold text-3xl">
             N953.66{" "}
-            <Link to="/user-dashboard/shopping-overview/wallet">
+            <Link
+              to="/user-dashboard/shopping-overview/wallet"
+              aria-label="see more"
+            >
               <ChevronRight size={24} className="cursor-pointer" />
             </Link>
           </p>
