@@ -27,3 +27,7 @@
   background-color: black;
   display: none;
 }
+
+.recentlyviewed-item:last-child hr:last-child {
+  display: none;
+}
