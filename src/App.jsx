@@ -114,6 +114,10 @@ const App = () => {
                 // element={<Summary />}
               ></Route>
             </Route>
+            <Route
+              path="/user-dashboard/:id/:slug"
+              element={<SingleProductPage />}
+            />
           </Route>
         </Route>
       </Routes>
