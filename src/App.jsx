@@ -1,5 +1,4 @@
 import Home from "./Pages/home/Home";
-import SignUp from "./pages/signUp/SignUp";
 import ScrollToTop from "./utils/ScrollToTop";
 import Layout from "./ui/components/layout/Layout";
 import CartItems from "./Pages/cartItems/CartItems";
