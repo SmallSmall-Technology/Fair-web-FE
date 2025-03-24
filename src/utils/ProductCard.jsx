@@ -1,22 +1,19 @@
 import React from "react";
+import { Button } from "./Button";
 import { Link } from "react-router";
-import { useSelector } from "react-redux";
-import { Share2, Star } from "lucide-react";
-import { Button } from "../../utils/Button";
-import { AddToCart } from "../cart/AddToCart";
-import { AddFavourite } from "../favourite/AddFavourite";
-import { getTotalCartQuantity, getTotalCartPrice } from "../cart/cartSlice";
-import { formatCurrency } from "../../utils/FormatCurrency";
-import { handleShareProduct } from "./ShareProduct";
+import { useDispatch } from "react-redux";
+import { formatCurrency } from "./FormatCurrency";
+import { Image, Share2, Star } from "lucide-react";
+import { AddToCart } from "../features/cart/AddToCart";
+import { AddFavourite } from "../features/favourite/AddFavourite";
+import { handleShareProduct } from "../features/product/ShareProduct";
+import { addItemToRecentlyViewed } from "../features/product/recentlyViewedSlice";
 
 export const ProductCard = React.memo(({ product }) => {
-  const totalCartQuantity = useSelector(getTotalCartQuantity);
-  const totalCartPrice = useSelector(getTotalCartPrice);
-  const cart = useSelector((state) => state.cart.cart);
-  console.log(formatCurrency(totalCartPrice));
-  console.log(totalCartQuantity);
-  console.log(cart);
-
+  const dispatch = useDispatch();
+  const handleAddtoRecentlyViewed = (id) => {
+    dispatch(addItemToRecentlyViewed(id));
+  };
   const {
     id,
     name,
@@ -78,19 +75,22 @@ export const ProductCard = React.memo(({ product }) => {
           </div>
 
           {/* Product Image */}
-          <div className="relative flex justify-center items-center mx-auto w-[80px] h-[99px] md:w-[136px] md:h-[169px]">
+          <div className="relative flex justify-center items-center mx-auto w-[80px] h-[99px] md:min-w-[136px] md:h-[169px] ">
             <img
-              src={product.image}
+              src={product.image || <Image />}
               alt={product.name}
               loading="lazy"
-              className="h-fit w-fit object-cover mt-10"
+              className="h-fit w-full mt-10"
             />
           </div>
         </div>
       </Link>
 
       {/* Product Details Section */}
-      <div className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2 group-hover:pb-2">
+      <div
+        className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2 group-hover:pb-2"
+        onClick={() => handleAddtoRecentlyViewed(product)}
+      >
         {/* Product Name */}
         <Link
           to={`/${product.id}/${product.slug}`}

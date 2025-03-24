@@ -16,6 +16,8 @@ const valentineAd = "/images/large-fair-web-banner.svg";
 const preciousGift = "/images/precious-gift.png";
 const loveFair = "/images/love-fair.png";
 const shoppingCart = "/images/shopping-bag.svg";
+const happyMan =
+  "/public/images/one-happy-young-african-american-man-sitting-on-hi(3).svg";
 
 const girInHoodie = "/images/young-woman-in-hoodie.svg";
 
@@ -119,7 +121,7 @@ export const productAds = [
 export const heroCards = [
   {
     id: 1,
-    image: loveFair,
+    image: happyMan,
     alt: "An Image of a lady sitting on the sofa while wearing hoodie",
   },
   {
@@ -707,8 +709,8 @@ export const products = [
     subcategory: "Makeup",
     image:
       "https://images.unsplash.com/photo-1584949035913-2f52ecf2a7c2?auto=format&fit=crop&w=500&q=60",
-    price: "N8,000.00",
-    discountPrice: "N9,500.00",
+    price: 8000,
+    discountPrice: 9500,
     ratings: "4.7",
     noOfProductSold: "120",
     slug: "maybelline-fit-me-foundation",
@@ -721,8 +723,8 @@ export const products = [
     subcategory: "Makeup",
     image:
       "https://images.unsplash.com/photo-1584949036477-9c86f18fef5b?auto=format&fit=crop&w=500&q=60",
-    price: "N12,000.00",
-    discountPrice: "N13,500.00",
+    price: 12000,
+    discountPrice: 13500,
     ratings: "4.8",
     noOfProductSold: "150",
     slug: "mac-matte-lipstick",
@@ -735,8 +737,8 @@ export const products = [
     subcategory: "Skincare",
     image:
       "https://images.unsplash.com/photo-1607611749438-4859c7b20f83?auto=format&fit=crop&w=500&q=60",
-    price: "N3,500.00",
-    discountPrice: "N4,000.00",
+    price: 3500,
+    discountPrice: 4000,
     ratings: "4.6",
     noOfProductSold: "200",
     slug: "nivea-body-lotion",
@@ -749,8 +751,8 @@ export const products = [
     subcategory: "Skincare",
     image:
       "https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=500&q=60",
-    price: "N6,000.00",
-    discountPrice: "N6,800.00",
+    price: 6000,
+    discountPrice: 6800,
     ratings: "4.9",
     noOfProductSold: "180",
     slug: "cerave-foaming-facial-cleanser",
@@ -763,8 +765,8 @@ export const products = [
     subcategory: "Haircare",
     image:
       "https://images.unsplash.com/photo-1591238372982-7c12d2d0f698?auto=format&fit=crop&w=500&q=60",
-    price: "N2,800.00",
-    discountPrice: "N3,200.00",
+    price: 2800,
+    discountPrice: 3200,
     ratings: "4.5",
     noOfProductSold: "250",
     slug: "loreal-paris-shampoo",
@@ -777,8 +779,8 @@ export const products = [
     subcategory: "Haircare",
     image:
       "https://images.unsplash.com/photo-1584268214172-dcbe15c1782f?auto=format&fit=crop&w=500&q=60",
-    price: "N3,200.00",
-    discountPrice: "N3,600.00",
+    price: 3200,
+    discountPrice: 3600,
     ratings: "4.7",
     noOfProductSold: "230",
     slug: "tresemme-conditioner",
@@ -791,8 +793,8 @@ export const products = [
     subcategory: "Clothing",
     image:
       "https://images.unsplash.com/photo-1596755097985-7ebd97401cc0?auto=format&fit=crop&w=500&q=60",
-    price: "N15,000.00",
-    discountPrice: "N17,000.00",
+    price: 15000,
+    discountPrice: 17000,
     ratings: "4.5",
     noOfProductSold: "95",
     slug: "zara-women-summer-dress",
@@ -805,8 +807,8 @@ export const products = [
     subcategory: "Clothing",
     image:
       "https://images.unsplash.com/photo-1598257006456-0c67f7dbe10b?auto=format&fit=crop&w=500&q=60",
-    price: "N25,000.00",
-    discountPrice: "N28,000.00",
+    price: 25000,
+    discountPrice: 28000,
     ratings: "4.8",
     noOfProductSold: "130",
     slug: "nike-mens-running-shoes",
@@ -819,8 +821,8 @@ export const products = [
     subcategory: "Accessories",
     image:
       "https://images.unsplash.com/photo-1515121066213-7b7c4b0c8288?auto=format&fit=crop&w=500&q=60",
-    price: "N2,500,000.00",
-    discountPrice: "N2,700,000.00",
+    price: 2500,
+    discountPrice: 2700,
     ratings: "4.9",
     noOfProductSold: "15",
     slug: "rolex-gold-watch",
@@ -833,8 +835,8 @@ export const products = [
     subcategory: "Accessories",
     image:
       "https://images.unsplash.com/photo-1610383964865-6a1e14200b21?auto=format&fit=crop&w=500&q=60",
-    price: "N2,500,000.00",
-    discountPrice: "N2,700,000.00",
+    price: 2500,
+    discountPrice: 2700,
     ratings: "4.9",
     noOfProductSold: "15",
     slug: "Ray-Ban Aviator Sunglasses",
@@ -939,4 +941,44 @@ export const menuFooter = [
       { name: "Refunds and returns", link: "/refunds-returns" },
     ],
   },
+];
+
+export const states = [
+  { name: "Abia" },
+  { name: "Adamawa" },
+  { name: "Akwa Ibom" },
+  { name: "Anambra" },
+  { name: "Bauchi" },
+  { name: "Bayelsa" },
+  { name: "Benue" },
+  { name: "Borno" },
+  { name: "Cross River" },
+  { name: "Delta" },
+  { name: "Ebonyi" },
+  { name: "Edo" },
+  { name: "Ekiti" },
+  { name: "Enugu" },
+  { name: "Gombe" },
+  { name: "Imo" },
+  { name: "Jigawa" },
+  { name: "Kaduna" },
+  { name: "Kano" },
+  { name: "Katsina" },
+  { name: "Kebbi" },
+  { name: "Kogi" },
+  { name: "Kwara" },
+  { name: "Lagos" },
+  { name: "Nasarawa" },
+  { name: "Niger" },
+  { name: "Ogun" },
+  { name: "Ondo" },
+  { name: "Osun" },
+  { name: "Oyo" },
+  { name: "Plateau" },
+  { name: "Rivers" },
+  { name: "Sokoto" },
+  { name: "Taraba" },
+  { name: "Yobe" },
+  { name: "Zamfara" },
+  { name: "Federal Capital Territory (FCT)" },
 ];

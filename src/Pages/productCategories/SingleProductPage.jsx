@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
 import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
 import { SingleProductDetails } from "./productDetails/SingleProductDetails";
-import { MiniProductCategories } from "../../ui/components/hero/MiniProductCategories";
+import { MiniProductCategories } from "../home/hero/MiniProductCategories";
 
 const SingleProductPage = () => {
   const { categoryName, subcategory, slug, id } = useParams();
@@ -12,7 +12,7 @@ const SingleProductPage = () => {
 
   return (
     <>
-      <main className="mx-6 lg:mx-[76px] mb-5 hidden md:block">
+      <main className="mx-6 lg:mx-[60px] mb-5 hidden md:block">
         <div className="hidden md:flex">
           <ProductCategoriesShortcut />
         </div>

@@ -31,7 +31,7 @@ export const handleAddToCart = (dispatch, product) => {
     noOfProductSold,
     slug,
     quantity: 1,
-    totalPrice: price,
+    totalPrice: price * 1,
   };
 
   dispatch(addItem(newItem));

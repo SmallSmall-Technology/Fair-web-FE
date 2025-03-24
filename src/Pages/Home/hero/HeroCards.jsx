@@ -1,36 +1,23 @@
 import { useEffect, useState } from "react";
-import { heroCards } from "../../../utils/data";
 import { Button } from "../../../utils/Button";
+import { heroCards } from "../../../utils/data";
 
 export const HeroCards = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (heroCards.length === 0) return;
+
     const interval = setInterval(() => {
-      if (!isPaused) {
-        setCurrentIndex((prev) => (prev + 1) % heroCards.length);
-      }
+      setCurrentIndex((prev) => (prev + 1) % heroCards.length);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isPaused]);
-
-  const isMiddleCard = (index) => {
-    const middleOffset = Math.floor(heroCards.length / 2);
-    const middleIndex = (currentIndex + middleOffset) % heroCards.length;
-    return index === middleIndex;
-  };
+  }, [heroCards.length]);
 
   return (
     <>
-      <div
-        className="relative grid gap-6 lg:justify-center items-center overflow-hidden md:overflow-visible"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onFocus={() => setIsPaused(true)}
-        onBlur={() => setIsPaused(false)}
-      >
+      <div className="relative grid gap-6 lg:justify-center items-center overflow-hidden md:overflow-visible">
         <div className="hidden lg:flex justify-around items-center absolute bg-[#FFDE11] w-[90%] 2xl:hidden h-60 z-0 overflow-clip">
           <img
             src="/images/hero-card-bg.svg"
@@ -44,15 +31,26 @@ export const HeroCards = () => {
           />
         </div>
 
-        <div className="flex gap-4 justify-center items-center relative z-10">
-          {heroCards.map((heroCard, index) => (
-            <div key={heroCard.id} className="hidden lg:block">
-              <SingleHeroCard
-                heroCard={heroCard}
-                isMiddle={isMiddleCard(index)}
-              />
-            </div>
-          ))}
+        <div>
+          <ul className="hidden lg:flex gap-4 justify-center items-center relative z-10 h-96 my-8">
+            {heroCards.map((heroCard, index) => (
+              <li
+                key={index}
+                className={`hidden lg:flex h-full transition-all duration-700 ease-in-out ${
+                  index === 1 ? "h-[440px] w-[620px]" : "h-[402px] w-[342px]"
+                }`}
+              >
+                <span
+                  className={`flex h-full w-full ${
+                    index === currentIndex ? "opacity-100" : "opacity-100"
+                  }
+                  `}
+                >
+                  <img src={heroCard.image} />
+                </span>
+              </li>
+            ))}
+          </ul>
 
           <ul className="lg:hidden relative flex h-56 md:h-96 rounded-lg w-full">
             {heroCards.map((heroCard, index) => (

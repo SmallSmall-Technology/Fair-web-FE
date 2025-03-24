@@ -1,51 +1,32 @@
 import { NavLink } from "react-router";
-import { ProductCard } from "../../../features/product/ProductCard";
 import { products } from "../../../utils/data";
 import { Button } from "../../../utils/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ProductCard } from "../../../utils/ProductCard";
 
-export const NewProductsInStore = ({
-  onScrollProduct,
-  item_width,
-  containerRef,
-}) => {
+export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
   return (
     <>
       <div className="flex justify-between mt-12 mb-4">
-        <h2 className="font-bold text-2xl">New in store</h2>
-        <NavLink to="/new-products-in-store" className="underline">
+        <h2 className="font-bold text-2xl">Beauty</h2>
+        <NavLink to={`/category/beauty`} className="underline">
           View all
         </NavLink>
       </div>
 
       <div className="grid grid-flow-col space-x-4 md:space-x-10 mb-8 ">
-        <div className="px-1 md:px-4 bg-[#FFDE11] w-[129px] h-[146px] md:w-[195px] md:h-[218px] rounded-[4px] flex flex-col justify-end pb-4">
-          <div className="grid grid-cols-1 space-y-1 pl-3">
-            <span className="text-lg md:text-2xl font-semibold">
-              New in store
-            </span>
-            <NavLink to="/new-products-in-store" className="hover:underline">
-              <span className="text-sm">See all newly listed items</span>
-              <div className="mt-2 flex justify-end">
-                <img
-                  src="/images/arrow-circle-right.svg"
-                  alt="arrow right icon"
-                  className="w-6 h-6"
-                />
-              </div>
-            </NavLink>
-          </div>
-        </div>
         <div className="overflow-x-scroll scrollbar-hide">
           <div
-            className="grid grid-flow-col space-x-4 w-full overflow-x-scroll scrollbar-hide scroll-smooth "
+            className="grid grid-flow-col space-x-4 w-full overflow-x-scroll scrollbar-hide scroll-smooth"
             ref={containerRef}
           >
-            {products.map((product) => (
-              <div className="" key={product.id}>
-                <ProductCard product={product} />
-              </div>
-            ))}
+            {products
+              .filter((product) => product.category === "beauty")
+              .map((product) => (
+                <div key={product.id}>
+                  <ProductCard product={product} />
+                </div>
+              ))}
           </div>
           <div className="flex justify-between items-baseline space-x-2 ">
             <div className="border-2 bg-[#F2F2F2] w-full mt-8 rounded-md"></div>

@@ -12,3 +12,22 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* option:disabled {
+  color: #96959f !important;
+} */
+
+@layer base {
+  option:disabled {
+    color: #96959f !important;
+  }
+}
+
+.checkout-item:last-child hr:last-child {
+  background-color: black;
+  display: none;
+}
+
+.recentlyviewed-item:last-child hr:last-child {
+  display: none;
+}

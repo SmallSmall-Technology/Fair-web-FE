@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Pagination } from "./Pagination";
 import { products } from "../../utils/data";
+import { ProductCard } from "../../utils/ProductCard";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import SubCategoryFilterForm from "./filterForms/SubCategoryFilterForm";
 import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
-
-import { MiniProductCategories } from "../../ui/components/hero/MiniProductCategories";
-import { ProductCard } from "../../features/product/ProductCard";
+import { MiniProductCategories } from "../home/hero/MiniProductCategories";
 
 const SubCategoryPage = () => {
   const navigate = useNavigate();
@@ -38,7 +37,7 @@ const SubCategoryPage = () => {
       : data;
 
   return (
-    <main className="mx-6 lg:mx-[76px] mb-20">
+    <main className="mx-6 lg:mx-[60px] mb-20">
       <div className="hidden md:flex">
         <ProductCategoriesShortcut />
       </div>

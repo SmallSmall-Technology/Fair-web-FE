@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
 import CategoryFilterForm from "../filterForms/CategoryFilterForm";
 import { ProductCategoriesShortcut } from "../ProductCategoriesShortcut";
-import { MiniProductCategories } from "../../../ui/components/hero/MiniProductCategories";
+import { MiniProductCategories } from "../../home/hero/MiniProductCategories";
 
 const CategoryPage = () => {
   const { categoryName } = useParams();
@@ -74,7 +74,7 @@ const CategoryPage = () => {
   }, [filteredProducts]);
 
   return (
-    <main className="mx-6 lg:mx-[76px]">
+    <main className="mx-6 lg:mx-[60px]">
       <div className="hidden md:flex">
         <ProductCategoriesShortcut />
       </div>
