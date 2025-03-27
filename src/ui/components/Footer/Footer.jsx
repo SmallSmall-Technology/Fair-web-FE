@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { Button } from "../../../utils/Button";
 import LinkButton from "../../../utils/LinkButton";
 import { FaRegCopyright } from "react-icons/fa6";
@@ -72,7 +72,8 @@ const Footer = () => {
             <FaRegCopyright />
           </span>
           <p className="pt-1">
-            <span className="mr-4 ">Fair by Smallsmall Technology 2025</span> <span>fairapp.ng</span>
+            <span className="mr-4 ">Fair by Smallsmall Technology 2025</span>{" "}
+            <span>fairapp.ng</span>
           </p>
         </div>
       </div>

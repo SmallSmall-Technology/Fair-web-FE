@@ -1,10 +1,10 @@
 import {
   getTotalCartPrice,
   getTotalCartQuantity,
-} from "../../features/cart/cartSlice";
+} from "../../../features/cart/cartSlice";
 import { useSelector } from "react-redux";
-import { YellowButton } from "../../utils/Button";
-import { formatCurrency } from "../../utils/FormatCurrency";
+import { YellowButton } from "../../../utils/Button";
+import { formatCurrency } from "../../../utils/FormatCurrency";
 
 export const CartSummary = ({ onHandleCheckout }) => {
   const cart = useSelector((state) => state.cart.cart);

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 
 import { products } from "../../../utils/data";
 import { Button } from "../../../utils/Button";

@@ -3,15 +3,15 @@ import Login from "./pages/login/Login";
 import SignUp from "./pages/signUp/SignUp";
 import ScrollToTop from "./utils/ScrollToTop";
 import Layout from "./ui/components/layout/Layout";
-import CartItems from "./pages/cartItems/CartItems";
-import { BrowserRouter, Route, Routes } from "react-router";
 import PageNotFound from "./pages/pageNotFound/PageNotFound";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { UserDashboard } from "./pages/userDashboard/UserDashboard";
 import { CheckoutItems } from "./pages/checkoutItems/CheckoutItems";
 import SubCategoryPage from "./pages/productCategories/SubCategoryPage";
-import UserDashboardLayout from "./ui/components/Layout/UserDashboardLayout";
 import SingleProductPage from "./pages/productCategories/SingleProductPage";
+import UserDashboardLayout from "./ui/components/Layout/UserDashboardLayout";
 import CategoryPage from "./pages/productCategories/categoryPage/CategoryPage";
+import CartItemsContentSection from "./pages/cartItems/cartItemsContent/CartItems";
 import { Notifications } from "./pages/userDashboard/notifications/Notifications";
 import { AccountProfile } from "./pages/userDashboard/accountProfile/AccountProfile";
 import { Wallet } from "./pages/userDashboard/shopping/shoppingOverviewContents/Wallet";
@@ -45,7 +45,7 @@ const App = () => {
           <Route path=":id/:slug" element={<SingleProductPage />} />
         </Route>
         {/* Cart items route and checkout */}
-        <Route path="cart-items" element={<CartItems />} />
+        <Route path="cart-items" element={<CartItemsContentSection />} />
         <Route path="cart-items/checkout" element={<CheckoutItems />}></Route>
         <Route
           path="cart-items/checkout/payment-success"

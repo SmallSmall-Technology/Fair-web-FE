@@ -1,6 +1,6 @@
 import { products } from "../../utils/data";
 import { ChevronRight } from "lucide-react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
 import { SingleProductDetails } from "./productDetails/SingleProductDetails";
 import { MiniProductCategories } from "../home/hero/MiniProductCategories";

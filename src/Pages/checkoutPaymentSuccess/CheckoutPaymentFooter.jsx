@@ -1,5 +1,5 @@
 import { Copyright } from "lucide-react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 export const CheckoutPaymentFooter = () => {
   return (
