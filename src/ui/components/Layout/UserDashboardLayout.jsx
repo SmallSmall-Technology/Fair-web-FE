@@ -1,7 +1,6 @@
-import { Outlet } from "react-router";
 import Header from "../header/Header";
+import { Outlet } from "react-router-dom";
 import { CartFooter } from "../../../pages/cartItems/CartFooter";
-import { UserDashboard } from "../../../pages/userDashboard/UserDashboard";
 
 const UserDashboardLayout = () => {
   return (

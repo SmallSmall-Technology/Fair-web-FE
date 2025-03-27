@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import { useEffect } from "react";
 import SignUpForm from "./SignUpForm";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import LinkButton from "../../utils/LinkButton";
 import { styled } from "styled-components";
 
@@ -48,12 +48,16 @@ function SignUp() {
               <Row>
                 <Col md={12} className="text-center text-md-start">
                   <Heading>Create your free account</Heading>
-                  <HeadingText>Lorem ipsum dolor sit amet, consectetur adipiscing elit</HeadingText>
+                  <HeadingText>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                  </HeadingText>
                 </Col>
                 <Col md={12}>
                   <SignUpForm />
                   <div className="text-center">
-                    <p className="text-sm m-0">By clicking Create account, you agree to our</p>
+                    <p className="text-sm m-0">
+                      By clicking Create account, you agree to our
+                    </p>
                     <p className="text-sm ">
                       {" "}
                       <Link to="#" className="text-danger text-decoration-none">
@@ -66,7 +70,13 @@ function SignUp() {
                     </p>
                   </div>
                   <div className="my-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="2" viewBox="0 0 480 2" fill="none">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="100%"
+                      height="2"
+                      viewBox="0 0 480 2"
+                      fill="none"
+                    >
                       <path d="M0 1H480" stroke="#ECEDF1" />
                     </svg>
                   </div>

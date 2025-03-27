@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import { PaymentPlan } from "./PaymentPlan";
-import { DeleteItem } from "../../features/cart/DeleteItem";
-import { formatCurrency } from "../../utils/FormatCurrency";
-import { getCurrentQuantityById } from "../../features/cart/cartSlice";
-import { SaveItemForLater } from "../../features/cart/SaveItemForLater";
-import { UpdateItemQuantity } from "../../features/cart/UpdateItemQuantity";
+import { DeleteItem } from "../../../features/cart/DeleteItem";
+import { formatCurrency } from "../../../utils/FormatCurrency";
+import { getCurrentQuantityById } from "../../../features/cart/cartSlice";
+import { SaveItemForLater } from "../../../features/cart/SaveItemForLater";
+import { UpdateItemQuantity } from "../../../features/cart/UpdateItemQuantity";
 
 export const CartItem = ({ item }) => {
   const currentQuantity = useSelector(getCurrentQuantityById(item.id));
@@ -12,7 +12,7 @@ export const CartItem = ({ item }) => {
   return (
     <article
       key={item.id}
-      className="md:border-[1px] pb-4 md:border-[#E5E5E5]  rounded-[10px] w-full"
+      className="md:border-[1px] pb-4 md:border-[#E5E5E5] rounded-[10px] w-full h-fit"
     >
       <div className="">
         {/* Product Details */}
@@ -26,9 +26,9 @@ export const CartItem = ({ item }) => {
             <p className="underline">Fair</p>
           </div>
 
-          <div className="grid md:grid-flow-col  items-center justify-between 2xl:px-10">
+          <div className="grid md:grid-flow-col items-center justify-between 2xl:px-10">
             <div className="flex items-start gap-4 ">
-              <div className="w-[69px] h-[69px] md:w-[135px] md:h-[135px] ">
+              <div className="product-image ">
                 <img
                   src={item.image}
                   alt={item.name}

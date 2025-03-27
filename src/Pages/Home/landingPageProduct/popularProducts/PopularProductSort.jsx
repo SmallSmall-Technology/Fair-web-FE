@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 import { popularProductsSort } from "../../../../utils/data";
 
 export const PopularProductSort = () => (

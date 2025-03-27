@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { CheckoutItem } from "./CheckoutItem.jsx";
 import { useSelector, useDispatch } from "react-redux";
-import { CartFooter } from "../../cartItems/CartFooter.jsx";
 import { CheckoutPaymentSummary } from "./CheckoutPaymentSummary.jsx";
 import { CheckoutDeliveryAddressButton } from "../../../utils/Button.jsx";
 import { CheckoutPaymentMethod } from "../checkoutContents/CheckoutPaymentMethod.jsx";
@@ -10,6 +9,7 @@ import {
   editDeliveryAddress,
   saveDeliveryAddress,
 } from "../../../features/user/userSlice.js";
+import { CartFooter } from "../../cartItems/CartFooter.jsx";
 
 export const CheckoutItemsContentSection = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -38,10 +38,11 @@ export const CheckoutItemsContentSection = () => {
 
   return (
     <section className="grid lg:grid-cols-[60%_40%] lg:px-[76p]">
-      <main className="w-full pt-8  lg:block">
-        <section className="lg:hidden">
+      <main className="w-full pt-8  lg:block lg:px-8">
+        <section className=" lg:hidden">
           <CheckoutItem />
         </section>
+
         <div className=" lg:hidden border border-t-2 border-[#E5E5E5] w-full h-0 my-4"></div>
         {deliveryAddress.length !== 0 ? (
           <div className="px-8 pt-8">
@@ -79,14 +80,17 @@ export const CheckoutItemsContentSection = () => {
             ))}
           </div>
         ) : (
-          <CheckoutDeliveryAddressForm
-            deliveryAddress={deliveryAddress}
-            handleEditedDeliveryAddress={handleEditedDeliveryAddress}
-            handleOpenCheckoutDeliveryAddressForm={
-              handleOpenCheckoutDeliveryAddressForm
-            }
-            handleSubmitDeliveryAddress={handleSubmitDeliveryAddress}
-          />
+          <>
+            {/* <p>Delivery Form</p> */}
+            <CheckoutDeliveryAddressForm
+              deliveryAddress={deliveryAddress}
+              handleEditedDeliveryAddress={handleEditedDeliveryAddress}
+              handleOpenCheckoutDeliveryAddressForm={
+                handleOpenCheckoutDeliveryAddressForm
+              }
+              handleSubmitDeliveryAddress={handleSubmitDeliveryAddress}
+            />
+          </>
         )}
         <section className="mt-8 hidden lg:block px-8">
           <div className=" grid font-medium mb-4">
