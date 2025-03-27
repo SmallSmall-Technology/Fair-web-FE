@@ -1,5 +1,5 @@
-import { Link } from "react-router";
-import { CartCoupon } from "../../features/cart/CartCoupon";
+import { Link } from "react-router-dom";
+import { CartCoupon } from "../../../features/cart/CartCoupon";
 
 export const CartSummaryExtrasAndCoupon = () => {
   const coupon = true;

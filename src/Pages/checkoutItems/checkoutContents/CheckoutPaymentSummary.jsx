@@ -1,15 +1,15 @@
 import { Dot } from "lucide-react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { CancelPurchase } from "../CartHeader.jsx";
 import { YellowButton } from "../../../utils/Button.jsx";
-import { CartFooter } from "../../cartItems/CartFooter.jsx";
 import { CartCoupon } from "../../../features/cart/CartCoupon.jsx";
 import { formatCurrency } from "../../../utils/FormatCurrency.jsx";
 import {
   getTotalCartPrice,
   getTotalCartQuantity,
 } from "../../../features/cart/cartSlice.js";
-import { useNavigate } from "react-router";
+import { CartFooter } from "../../cartItems/CartFooter.jsx";
 
 export const CheckoutPaymentSummary = () => {
   const cart = useSelector((state) => state.cart.cart);

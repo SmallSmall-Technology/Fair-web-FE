@@ -1,7 +1,7 @@
 import { YellowButton } from "../../../utils/Button.jsx";
 import { Field, Form, Formik } from "formik";
 import { formatCurrency } from "../../../utils/FormatCurrency.jsx";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 export const CheckoutPaymentMethod = () => {
   const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 import { popularProducts } from "../../../../utils/data";
 import { PopularProductSort } from "./PopularProductSort";
 

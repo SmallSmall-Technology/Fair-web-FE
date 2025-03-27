@@ -3,7 +3,7 @@ import { Pagination } from "./Pagination";
 import { products } from "../../utils/data";
 import { ProductCard } from "../../utils/ProductCard";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import SubCategoryFilterForm from "./filterForms/SubCategoryFilterForm";
 import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
 import { MiniProductCategories } from "../home/hero/MiniProductCategories";

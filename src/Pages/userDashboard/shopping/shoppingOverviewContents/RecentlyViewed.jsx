@@ -5,7 +5,7 @@ import {
 } from "../../../../features/product/recentlyViewedSlice";
 import { formatCurrency } from "../../../../utils/FormatCurrency";
 import { ChevronRight } from "lucide-react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { YellowButton } from "../../../../utils/Button";
 
 export const RecentlyViewed = () => {
@@ -28,7 +28,7 @@ export const RecentlyViewed = () => {
           </YellowButton>
         )}
       </div>
-      <ul className="grid grid-cols-1 gap-4 lg:overflow-y-auto lg:h-96 border w-full rounded-[10px]">
+      <ul className="grid grid-cols-1 gap-4 lg:overflow-y-auto lg:h-96 w-full rounded-[10px]">
         {recentlyViewed.length === 0 ? (
           <p className="text-center text-gray-500">No recently viewed items</p>
         ) : (

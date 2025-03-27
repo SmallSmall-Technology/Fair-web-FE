@@ -31,3 +31,15 @@
 .recentlyviewed-item:last-child hr:last-child {
   display: none;
 }
+
+.product-image {
+  min-width: 69px;
+  max-width: 69px;
+  height: 69px;
+
+  @media (min-width: 768px) {
+    min-width: 135px;
+    max-width: 135px;
+    height: 135px;
+  }
+}

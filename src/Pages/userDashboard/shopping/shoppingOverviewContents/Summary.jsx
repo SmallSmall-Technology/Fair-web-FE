@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { WalletBalance } from "./Wallet";
 import { SingleRecentlyViewed } from "./RecentlyViewed";
 import { useSelector } from "react-redux";
@@ -9,7 +9,7 @@ export const Summary = () => {
   const recentlyViewed = useSelector(getRecentlyViewed);
 
   return (
-    <section className="grid grid-cols-1 gap-6">
+    <section className="grid grid-cols-1 gap-6 ">
       <article>
         <h1 className="font-semibold text-2xl mb-3"> Purchases</h1>
         <div className="border rounded-[10px] pt-4 pb-8 px-5 w-full">
@@ -56,7 +56,7 @@ export const Summary = () => {
               to="/user-dashboard/shopping-overview/recently-viewed"
               className="underline font-medium"
             >
-              {recentlyViewed === 0 ? "" : "See all"}
+              {recentlyViewed < 1 ? "" : "See all"}
             </Link>
           </div>
           <section className="grid grid-cols-1 gap-4 border w-full rounded-[10px] p-2">

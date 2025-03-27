@@ -41,11 +41,9 @@ export const AddToCart = ({ product }) => {
   const dispatch = useDispatch();
 
   return (
-    <div
+    <button
       className="bg-[#FFDE11] h-10 w-10 rounded-full flex justify-center focus:outline-none focus:ring-2 focus:ring-black"
-      tabIndex={0}
       aria-label="Add to cart"
-      role="button"
       onClick={() => handleAddToCart(dispatch, product)}
     >
       <img
@@ -53,6 +51,6 @@ export const AddToCart = ({ product }) => {
         alt="Add to shopping cart"
         className="w-5"
       />
-    </div>
+    </button>
   );
 };

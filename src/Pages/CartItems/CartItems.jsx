@@ -1,69 +1,15 @@
-import { CartItem } from "./CartItem";
 import { CartFooter } from "./CartFooter";
-import { useSelector } from "react-redux";
-import { CartSummary } from "./CartSummary";
-import { Link, useNavigate } from "react-router";
-import { YellowButton } from "../../utils/Button";
 import Header from "../../ui/components/header/Header";
-import { CartSummaryExtrasAndCoupon } from "./CartSummaryExtrasAndCoupon";
-import { getTotalCartQuantity, getCart } from "../../features/cart/cartSlice";
+import CartItemsContentSection from "./cartItemsContent/CartItems";
 
 const CartItems = () => {
-  const cart = useSelector(getCart);
-  const navigate = useNavigate();
-  const totalCartQuantity = useSelector(getTotalCartQuantity);
-
-  const handleCheckout = () => {
-    navigate("checkout");
-  };
-
   return (
-    <div className="flex flex-col min-h-screen justify-between">
+    <>
       <Header />
-      <main className="my-5">
-        <div className="mx-6 lg:mx-[60px] 2xl:mx-[150px]">
-          <h1 className="hidden lg:flex font-semibold text-3xl">Your Cart</h1>
-          <h1 className="flex lg:hidden font-semibold text-3xl">
-            Shopping Cart
-          </h1>
-        </div>
-        <hr className="lg:hidden my-6" />
-        <div className="lg:hidden mx-6 lg:mx-[60px] 2xl:mx-[150px]">
-          <YellowButton onClick={handleCheckout}>Go to Checkout</YellowButton>
-          <div className="flex gap-2 mt-6 font-medium text-xl">
-            <p>Subtotal</p>({totalCartQuantity}{" "}
-            {totalCartQuantity === 1 ? "items" : "item"})
-          </div>
-        </div>
-        <hr className="lg:hidden mt-6 mb-4" />
-        <section className="mx-6 lg:mx-[60px] 2xl:mx-[150px]">
-          {cart.length < 1 ? (
-            <>
-              <p className="mt-4 text-gray-500">Your cart is empty.</p>
-              <Link to="/">Go back home to add products to cart</Link>
-            </>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 w-full lg:grid-cols-[60%_36%] gap-6 justify-between mt-6 ">
-                <div className="grid grid-cols-1 gap-10 h-screen overflow-y-scroll">
-                  {cart.map((item, index) => (
-                    <CartItem item={item} key={index} />
-                  ))}
-                </div>
-                <aside>
-                  <CartSummary onHandleCheckout={handleCheckout} />
-                  <CartSummaryExtrasAndCoupon />
-                </aside>
-              </div>
-            </>
-          )}
-        </section>
-      </main>
+      <CartItemsContentSection />
       <div className="mx-6 lg:mx-[60px] pb-10 mt-40">
         <CartFooter />
       </div>
-    </div>
+    </>
   );
 };
-
-export default CartItems;
