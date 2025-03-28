@@ -17,7 +17,7 @@ import { AccountProfile } from "./pages/userDashboard/accountProfile/AccountProf
 import { Wallet } from "./pages/userDashboard/shopping/shoppingOverviewContents/Wallet";
 import { Summary } from "./pages/userDashboard/shopping/shoppingOverviewContents/Summary";
 import { Favorites } from "./pages/userDashboard/shopping/shoppingOverviewContents/Favorites";
-import { Purchases } from "./pages/userDashboard/shopping/shoppingOverviewContents/Purchases";
+import { Purchases } from "./pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases";
 import { CheckoutPaymentSuccess } from "./pages/checkoutPaymentSuccess/CheckoutPaymentSuccess";
 import { ShoppingOverview } from "./pages/userDashboard/shopping/shoppingOverview/ShoppingOverview";
 import { RecentlyViewed } from "./pages/userDashboard/shopping/shoppingOverviewContents/RecentlyViewed";
