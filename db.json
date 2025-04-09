@@ -706,7 +706,7 @@
   ],
   "cart": [
     {
-      "id": "cart1744156540846",
+      "id": "cart1744204641978",
       "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
       "userId": "user123",
       "productId": "1",
@@ -715,49 +715,13 @@
       "totalPrice": 207000
     },
     {
-      "id": "cart1744156542112",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 2,
-      "price": 500000,
-      "totalPrice": 1000000
-    },
-    {
-      "id": "cart1744156543317",
+      "id": "cart1744204727184",
       "name": "Google Pixel 7 Pro",
       "userId": "user123",
       "productId": "3",
       "quantity": 1,
       "price": 300000,
       "totalPrice": 300000
-    },
-    {
-      "id": "cart1744156544488",
-      "name": "OnePlus 10 Pro",
-      "userId": "user123",
-      "productId": "4",
-      "quantity": 2,
-      "price": 280000,
-      "totalPrice": 560000
-    },
-    {
-      "id": "cart1744156545763",
-      "name": "Xiaomi Mi 12",
-      "userId": "user123",
-      "productId": "5",
-      "quantity": 2,
-      "price": 200000,
-      "totalPrice": 400000
-    },
-    {
-      "id": "cart1744184385716",
-      "name": "OnePlus Nord 2",
-      "userId": "user123",
-      "productId": "9",
-      "quantity": 1,
-      "price": 220000,
-      "totalPrice": 220000
     }
   ]
 }

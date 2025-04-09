@@ -1,72 +1,16 @@
-import { memo } from "react"; // Added memo for optimization
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { User } from "lucide-react";
+import { Heart } from "lucide-react";
 import { getTotalCartQuantity } from "../../../features/cart/cartSlice";
 import { getTotalFavouritesQuantity } from "../../../features/favourite/favouriteSlice";
-import Hamburger from "hamburger-react";
-import { SearchQuery } from "./SearchQuery";
-import { NavBar } from "./NavBar";
 
-const Header = () => {
-  return (
-    <header
-      className="fixed top-0 left-0 right-0 bg-white z-30 py-4 flex justify-between border-b border-gray-200 pb-2 transition-all motion-safe:duration-200"
-      role="banner"
-      aria-label="Main site navigation"
-    >
-      <div className="hidden lg:flex justify-between items-center w-full px-4 sm:px-6 lg:px-16 max-w-full mx-auto">
-        <Link
-          to="/"
-          aria-label="Fair Home"
-          className="transition-transform hover:scale-105 focus:scale-105 focus:outline-none"
-        >
-          <img
-            src="/images/fair-logo.svg"
-            alt="Fair Logo"
-            width={120}
-            height={40}
-            loading="eager"
-            className="motion-safe:transition-transform"
-          />
-        </Link>
-        <SearchQuery />
-        <NavBar />
-      </div>
-
-      {/* Mobile view header */}
-      <div className="grid gap-4 lg:hidden w-full px-4 sm:px-6 lg:px-16 max-w-full mx-auto">
-        <div className="flex justify-between items-center">
-          <Link
-            to="/"
-            aria-label="Fair Home"
-            className="transition-transform hover:scale-105 focus:scale-105 focus:outline-none"
-          >
-            <img
-              src="/images/fair-logo.svg"
-              alt="Fair Logo"
-              width={120}
-              height={40}
-              loading="eager"
-              className="motion-safe:transition-transform"
-            />
-          </Link>
-          <MobileNavBar />
-        </div>
-
-        <SearchQuery />
-      </div>
-    </header>
-  );
-};
-
-const MobileNavBar = () => {
+export const NavBar = () => {
   const totalProductsInCart = useSelector(getTotalCartQuantity);
   const totalFavouritesProduct = useSelector(getTotalFavouritesQuantity);
 
   return (
     <nav aria-label="Main navigation">
-      {/* <ul className="flex items-center space-x-6">
+      <ul className="flex items-center space-x-6">
         <li className="flex items-center space-x-1 font-medium text-[#333]">
           <a
             href="/download"
@@ -167,39 +111,7 @@ const MobileNavBar = () => {
             </span>
           </button>
         </li>
-      </ul> */}
-      <ul className="flex items-center space-x-6">
-        <li>
-          <Link to="user-dashboard">
-            <User />
-          </Link>
-        </li>
-        <li className="relative">
-          {totalProductsInCart > 0 && (
-            <div className="bg-[#FFDE11] text-xs font-bold p-1 rounded-full absolute bottom-4 left-3 min-w-5 flex justify-center">
-              {totalProductsInCart}
-            </div>
-          )}
-          <Link
-            to="/cart-items"
-            aria-label="View shopping cart"
-            className="rounded transition-transform motion-safe:duration-200 hover:scale-110 active:scale-90"
-          >
-            <img
-              src="/images/shopping-cart.svg"
-              alt="Shopping cart"
-              width={24}
-              height={24}
-              loading="lazy"
-              className="transition-all hover:brightness-125 motion-safe:duration-200"
-            />
-          </Link>
-        </li>
-        <li>
-          <Hamburger />
-        </li>
       </ul>
     </nav>
   );
 };
-export default memo(Header); // Memoize Header for performance

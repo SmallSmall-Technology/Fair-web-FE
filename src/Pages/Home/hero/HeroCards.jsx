@@ -48,7 +48,7 @@ export const HeroCards = () => {
                   }
                   `}
                 >
-                  <img src={heroCard.image} />
+                  <img src={heroCard.image} alt={heroCard.alt} />
                 </span>
               </li>
             ))}
