@@ -18,10 +18,7 @@ export const CartCoupon = () => {
               <div className="grid gap-2 lg:w-[70%]">
                 <label htmlFor="coupon" className="flex items-center">
                   <span>
-                    <img
-                      src="../../../public/images/label.svg"
-                      alt="label logo"
-                    />
+                    <img src="../../../images/label.svg" alt="label logo" />
                   </span>
                   Apply a coupon code
                 </label>

@@ -1,6 +1,6 @@
 import { Dot } from "lucide-react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+
 import { CancelPurchase } from "../CartHeader.jsx";
 import { YellowButton } from "../../../utils/Button.jsx";
 import { CartCoupon } from "../../../features/cart/CartCoupon.jsx";
@@ -11,7 +11,7 @@ import {
 } from "../../../features/cart/cartSlice.js";
 import { CartFooter } from "../../cartItems/CartFooter.jsx";
 
-export const CheckoutPaymentSummary = () => {
+export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const cart = useSelector((state) => state.cart.cart);
   const totalCartQuantity = useSelector(getTotalCartQuantity);
   const totalCartPrice = useSelector(getTotalCartPrice);
@@ -19,11 +19,6 @@ export const CheckoutPaymentSummary = () => {
   const shippingFee = +1200;
   const subtTotal = totalCartPrice;
   const total = totalCartPrice + VAT + shippingFee;
-  const navigate = useNavigate();
-
-  const handleSubmitPaymentMethod = (values) => {
-    navigate("/cart-items/checkout/payment-success");
-  };
 
   return (
     <>
@@ -62,8 +57,8 @@ export const CheckoutPaymentSummary = () => {
               <p>Total</p>
               <p>{formatCurrency(total)}</p>
             </div>
-            <div className="lg:hidden flex flex-col justify-center  gap-5">
-              <YellowButton onClick={handleSubmitPaymentMethod}>
+            <div className="lg:hidden flex flex-col justify-center gap-5">
+              <YellowButton onClick={onSubmitPaymentMethod}>
                 Pay now
               </YellowButton>
               <div className="mx-auto">

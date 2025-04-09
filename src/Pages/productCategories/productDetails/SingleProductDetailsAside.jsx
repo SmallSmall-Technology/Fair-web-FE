@@ -182,7 +182,7 @@ export const SingleProductDetailsAside = React.memo(
           <div className="flex justify-between">
             <div className="flex items-center space-x-2">
               <img
-                src="/public/images/sold-by-fair.svg"
+                src="/images/sold-by-fair.svg"
                 alt="An icon representing files"
               />
               <p className="text-sm">
@@ -192,10 +192,7 @@ export const SingleProductDetailsAside = React.memo(
             <div className="flex items-center text-sm text-[#222224] lg:hidden bg-[#323232] rounded-[10px] px-3">
               <span className="text-white">Share </span>
               <span className="pl-1">
-                <img
-                  src="/public/images/share-square-white.svg"
-                  alt="A share icon"
-                />
+                <img src="/images/share-square-white.svg" alt="A share icon" />
               </span>
             </div>
           </div>
@@ -207,7 +204,7 @@ export const SingleProductDetailsAside = React.memo(
           </p>
           <p className="flex items-center space-x-2">
             <img
-              src="/public/images/digital-payment.svg"
+              src="/images/digital-payment.svg"
               alt="An icon for a phone making transaction"
               width={24}
             />
@@ -230,7 +227,7 @@ export const SingleProductDetailsAside = React.memo(
             <div className="flex space-x-6 lg:ml-10">
               <div className="max-w-[80px] grid gap-2 text-center">
                 <img
-                  src="/public/images/half-circle.svg"
+                  src="/images/half-circle.svg"
                   alt="A diameter of a circle"
                   className="mx-auto"
                 />
@@ -241,7 +238,7 @@ export const SingleProductDetailsAside = React.memo(
               </div>
               <div className="max-w-[80px] grid gap-2 text-center">
                 <img
-                  src="/public/images/one-quater-circle.svg"
+                  src="/images/one-quater-circle.svg"
                   alt="A diameter of a circle"
                   className="mx-auto"
                 />
@@ -252,7 +249,7 @@ export const SingleProductDetailsAside = React.memo(
               </div>
               <div className="max-w-[80px] grid gap-2 text-center">
                 <img
-                  src="/public/images/full-circle.svg"
+                  src="/images/full-circle.svg"
                   alt="A diameter of a circle"
                   className="mx-auto"
                 />
@@ -272,7 +269,7 @@ export const SingleProductDetailsAside = React.memo(
           <div className="flex space-x-6 lg:ml-10">
             <div className="flex gap-2 items-start">
               <img
-                src="/public/images/full-circle.svg"
+                src="/images/full-circle.svg"
                 alt="A diameter of a circle"
                 className="mx-auto"
               />
@@ -338,7 +335,7 @@ export const SingleProductDetailsAside = React.memo(
           <ul className="list-none grid gap-4">
             <li className="flex space-x-2">
               <img
-                src="/public/images/calendar-day.svg"
+                src="/images/calendar-day.svg"
                 alt="calender icon"
                 className="mr-2"
               />
@@ -349,7 +346,7 @@ export const SingleProductDetailsAside = React.memo(
             </li>
             <li className="flex space-x-2">
               <img
-                src="/public/images/box-alt.svg"
+                src="/images/box-alt.svg"
                 alt="A box icon"
                 className="mr-2"
               />

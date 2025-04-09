@@ -1,139 +1,159 @@
 import { useState } from "react";
 import { Search } from "lucide-react";
 import { Field, Form, Formik } from "formik";
-import { PurchaseOngoing } from "./purchaseContentSection/PurchaseOngoing";
+import { useSelector, useDispatch } from "react-redux";
 import { PurchaseCompleted } from "./purchaseContentSection/PurchaseCompleted";
 import { PurchaseCancelled } from "./purchaseContentSection/PurchaseCancelled";
+import {
+  getOngoingOrders,
+  getCompletedOrders,
+  getCancelledOrders,
+} from "/src/features/order/orderSlice.js";
+import { PurchaseItemsOngoing } from "./purchaseContentSection/PurchaseItemsOngoing";
 
 export const Purchases = () => {
   const [activeTab, setActiveTab] = useState("ongoing");
   const [formIsActive, setFormIsActive] = useState(false);
+
+  // Get orders from Redux store
+  const ongoingOrders = useSelector(getOngoingOrders);
+  const completedOrders = useSelector(getCompletedOrders);
+  const cancelledOrders = useSelector(getCancelledOrders);
+  const allOrders = useSelector((state) => state.order.orders);
 
   const initialValues = {
     search: "",
   };
 
   const handleSearchQuery = (values, { resetForm }) => {
-    // console.log(values);
+    const searchTerm = values.search.trim().toLowerCase();
+    if (searchTerm) {
+      // Filter orders by order ID (or extend to product name, etc.)
+      const filteredOrders = allOrders.filter((order) =>
+        order.id.toLowerCase().includes(searchTerm)
+      );
+    }
     resetForm();
-    setFormIsActive();
+    setFormIsActive(false);
   };
 
   return (
-    <section>
-      <div className="flex justify-between">
-        <h1 className="font-semibold text-2xl mb-3"> Purchases</h1>
-        <div className="flex lg:hidden">
-          <Formik
-            initialValues={initialValues}
-            onSubmit={handleSearchQuery}
-            onReset=""
-          >
-            <Form>
-              {formIsActive ? (
-                <>
-                  {/* <label></label> */}
+    <div className="mx-6 lg:mx-[60px] py-8">
+      <section>
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="font-semibold text-2xl">Purchases</h1>
+          {/* Mobile Search Toggle */}
+          <div className="flex lg:hidden">
+            <Formik initialValues={initialValues} onSubmit={handleSearchQuery}>
+              <Form>
+                {formIsActive ? (
                   <div className="flex items-center space-x-1 relative">
                     <Field
                       type="text"
                       name="search"
-                      placeholder="Search by order id"
-                      className=" rounded-md p-2 border pl-2"
+                      placeholder="Search by order ID"
+                      className="rounded-md p-2 border pl-2 text-sm w-40"
                     />
                     <button
                       type="submit"
-                      className="absolute flex right-[2px] text-xs items-center border-[#737376] py-[10px] px-1 bg-[#FFDE11] rounded"
+                      className="absolute right-1 flex items-center text-xs py-1 px-2 bg-[#FFDE11] rounded border-[#737376]"
                     >
-                      {" "}
                       <Search size={12} /> Search
                     </button>
                   </div>
-                </>
-              ) : (
+                ) : (
+                  <button
+                    type="button"
+                    className="flex items-center border-[#737376] p-2 bg-[#FFDE11] rounded"
+                    onClick={() => setFormIsActive(true)}
+                  >
+                    <Search size={15} /> Search
+                  </button>
+                )}
+              </Form>
+            </Formik>
+          </div>
+        </div>
+
+        {allOrders?.length < 1 ? (
+          <p className="w-full py-20 rounded-md bg-[#F6F6F6] text-center text-gray-500">
+            No orders were found
+          </p>
+        ) : (
+          <>
+            <div className="flex justify-between items-center">
+              {/* Tabs */}
+              <div className="flex justify-between w-full lg:justify-start lg:space-x-3">
                 <button
-                  type="submit"
-                  className=" flex items-center border-[#737376] p-2 bg-[#FFDE11] rounded"
-                  onClick={() => setFormIsActive(true)}
+                  className={`p-2 rounded-[30px] text-sm lg:text-base border ${
+                    activeTab === "ongoing"
+                      ? "border-black text-black font-medium"
+                      : "border-[#737376] text-[#737376]"
+                  }`}
+                  onClick={() => setActiveTab("ongoing")}
+                  aria-label="View ongoing orders"
                 >
-                  {" "}
-                  <Search size={15} /> Search
+                  Ongoing <span>({ongoingOrders.length})</span>
                 </button>
-              )}
-            </Form>
-          </Formik>
-        </div>
-      </div>
-
-      <div className="flex justify-between">
-        <div className="flex justify-between w-full lg:justify-start lg:space-x-3">
-          <button
-            className={`p-2 rounded-[30px] text-sm lg:text-base border 
-            ${
-              activeTab === "ongoing"
-                ? "border-black text-black font-medium"
-                : "border-[#737376] text-[#737376]"
-            }`}
-            onClick={() => setActiveTab("ongoing")}
-          >
-            Ongoing <span>(2)</span>
-          </button>
-          <button
-            className={`p-2 rounded-[30px] text-sm lg:text-base border 
-              ${
-                activeTab === "completed"
-                  ? "border-black text-black font-medium"
-                  : "border-[#737376] text-[#737376]"
-              }`}
-            onClick={() => setActiveTab("completed")}
-          >
-            Completed <span>(1)</span>
-          </button>{" "}
-          <button
-            className={`p-2 rounded-[30px] text-sm lg:text-base border 
-              ${
-                activeTab === "cancelled"
-                  ? "border-black text-black font-medium"
-                  : "border-[#737376] text-[#737376]"
-              }`}
-            onClick={() => setActiveTab("cancelled")}
-          >
-            Cancelled <span>(1)</span>
-          </button>
-        </div>
-
-        <div className="hidden lg:block">
-          <Formik
-            initialValues={initialValues}
-            onSubmit={handleSearchQuery}
-            onReset=""
-          >
-            <Form>
-              {/* <label></label> */}
-              <div className="flex space-x-1">
-                <Field
-                  type="text"
-                  name="search"
-                  placeholder="Search by order id"
-                  className="rounded-md p-2 border"
-                />
                 <button
-                  type="submit"
-                  className=" flex items-center border-[#737376] p-2 bg-[#FFDE11] rounded"
+                  className={`p-2 rounded-[30px] text-sm lg:text-base border ${
+                    activeTab === "completed"
+                      ? "border-black text-black font-medium"
+                      : "border-[#737376] text-[#737376]"
+                  }`}
+                  onClick={() => setActiveTab("completed")}
+                  aria-label="View completed orders"
                 >
-                  {" "}
-                  <Search size={15} /> Search
+                  Completed <span>({completedOrders?.length})</span>
+                </button>
+                <button
+                  className={`p-2 rounded-[30px] text-sm lg:text-base border ${
+                    activeTab === "cancelled"
+                      ? "border-black text-black font-medium"
+                      : "border-[#737376] text-[#737376]"
+                  }`}
+                  onClick={() => setActiveTab("cancelled")}
+                  aria-label="View cancelled orders"
+                >
+                  Cancelled <span>({cancelledOrders?.length})</span>
                 </button>
               </div>
-            </Form>
-          </Formik>
-        </div>
-      </div>
 
-      <hr className="my-4" />
+              {/* Desktop Search */}
+              <div className="hidden lg:block">
+                <Formik
+                  initialValues={initialValues}
+                  onSubmit={handleSearchQuery}
+                >
+                  <Form className="flex space-x-1">
+                    <Field
+                      type="text"
+                      name="search"
+                      placeholder="Search by order ID"
+                      className="rounded-md p-2 border text-sm"
+                    />
+                    <button
+                      type="submit"
+                      className="flex items-center border-[#737376] p-2 bg-[#FFDE11] rounded"
+                    >
+                      <Search size={15} /> Search
+                    </button>
+                  </Form>
+                </Formik>
+              </div>
+            </div>
 
-      {activeTab === "ongoing" && <PurchaseOngoing />}
-      {activeTab === "completed" && <PurchaseCompleted />}
-      {activeTab === "cancelled" && <PurchaseCancelled />}
-    </section>
+            <hr className="my-4" />
+
+            {/* Tab Content */}
+            {activeTab === "ongoing" && <PurchaseItemsOngoing />}
+            {activeTab === "completed" && <PurchaseCompleted />}
+            {activeTab === "cancelled" && <PurchaseCancelled />}
+          </>
+        )}
+      </section>
+    </div>
   );
 };
+
+export default Purchases;

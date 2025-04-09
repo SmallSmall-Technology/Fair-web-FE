@@ -1,8 +1,8 @@
 import { CartFooter } from "./CartFooter";
 import Header from "../../ui/components/header/Header";
-import CartItemsContentSection from "./cartItemsContent/CartItems";
+import CartItemsContentSection from "./cartItemsContent/CartItemsContentSection";
 
-const CartItems = () => {
+export const CartItems = () => {
   return (
     <>
       <Header />
