@@ -1,7 +1,9 @@
 import { addItem } from "./cartSlice";
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-export const handleAddToCart = (dispatch, product) => {
+export const handleAddToCart = (dispatch, product, navigate) => {
   if (!product) return;
 
   const {
@@ -35,6 +37,25 @@ export const handleAddToCart = (dispatch, product) => {
   };
 
   dispatch(addItem(newItem));
+
+  // toast
+  //   .success
+  //   <div className="flex items-center space-x-2">
+  //     <span>Item added to cart</span>
+  //     <span className="text-black">|</span>
+  //     <button
+  //       onClick={() => navigate("/cart-items")}
+  //       className="underline text-sm"
+  //     >
+  //       View cart
+  //     </button>
+  //   </div>
+  //   {
+  //     className: "bg-[#FFDE11] text-black text-sm px-2 py-1 rounded-md min-h-0",
+  //     bodyClassName: "m-0 p-0",
+  //     closeButton: false,
+  //   }
+  //   ();
 };
 
 export const AddToCart = ({ product }) => {

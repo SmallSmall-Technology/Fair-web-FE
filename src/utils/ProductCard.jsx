@@ -1,8 +1,8 @@
 import { Button } from "./Button";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Share2, Star } from "lucide-react";
 import { formatCurrency } from "./FormatCurrency";
-import { Image, Share2, Star } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { AddToCart } from "../features/cart/AddToCart";
 import { AddFavourite } from "../features/favourite/AddFavourite";
@@ -117,7 +117,7 @@ export const ProductCard = ({ product }) => {
           </div>
           <div className="flex justify-center items-center mx-auto w-[80px] h-[99px] md:w-[136px] md:h-[169px]">
             <img
-              src={image || "fallback-image-url"} // Provide a real fallback URL
+              src={image || "fallback-image-url"}
               alt={name}
               loading="lazy"
               className="h-fit w-full mt-10"
@@ -134,7 +134,7 @@ export const ProductCard = ({ product }) => {
             {name}
           </p>
         </Link>
-        <div className="flex flex-col space-y-1">
+        <div className="flex flex-col md:flex-row space-x-2 items-center space-y-1">
           <p className="font-semibold text-base">{formatCurrency(price)}</p>
           {discountPrice && (
             <p className="text-sm line-through text-[#827db1]">
@@ -156,5 +156,6 @@ export const ProductCard = ({ product }) => {
     </article>
   );
 
+  // return <Content />;
   return <>{isLoading ? <Skeleton /> : <Content />}</>;
 };
