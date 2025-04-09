@@ -178,7 +178,7 @@ export const SingleProductDetails = React.memo(({ product }) => {
         >
           <span>Share</span>
           <span className="pl-1">
-            <img src="/public/images/share-square.svg" alt="A share icon" />
+            <img src="/images/share-square.svg" alt="A share icon" />
           </span>
         </p>
       </div>

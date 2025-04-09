@@ -31,7 +31,7 @@ export const CheckoutDeliveryAddressForm = ({
       }}
     >
       {(formik) => (
-        <Form className="mx-8 mt-10">
+        <Form className="mt-10">
           <h1 className="font-medium text-[21px] mb-3 hidden lg:block">
             Delivery Form
           </h1>

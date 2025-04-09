@@ -31,3 +31,5 @@ export const { updateName, saveDeliveryAddress, editDeliveryAddress } =
   userSlice.actions;
 
 export default userSlice.reducer;
+
+export const getDeliveryAddress = (state) => state.user.user.deliveryAddress;

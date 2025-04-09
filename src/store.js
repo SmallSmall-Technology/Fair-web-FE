@@ -1,39 +1,45 @@
 import storage from "redux-persist/lib/storage";
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { persistReducer, persistStore } from "redux-persist";
 import userReducer from "./features/user/userSlice";
 import cartReducer from "./features/cart/cartSlice";
-import { persistReducer, persistStore } from "redux-persist";
 import favouriteReducer from "./features/favourite/favouriteSlice";
 import recentlyViewedReducer from "./features/product/recentlyViewedSlice";
+import productReducer from "./features/product/productSlice";
+import orderReducer from "./features/order/orderSlice";
 
+// Combine all reducers into a root reducer
+const rootReducer = combineReducers({
+  user: userReducer,
+  cart: cartReducer,
+  favourite: favouriteReducer,
+  recentlyViewed: recentlyViewedReducer,
+  products: productReducer,
+  order: orderReducer,
+});
+
+// Single persist config for the root reducer
 const persistConfig = {
-  key: "cart",
+  key: "root",
   storage,
-  whitelist: ["cart", "favourite", "user", "recentlyViewed"],
+  whitelist: [
+    "cart",
+    "favourite",
+    "user",
+    "recentlyViewed",
+    "products",
+    "order",
+  ],
 };
 
-const persistedCartReducer = persistReducer(persistConfig, cartReducer);
-const persistedFavouriteReducer = persistReducer(
-  persistConfig,
-  favouriteReducer
-);
-const persistedUserReducer = persistReducer(persistConfig, userReducer);
-const persistedRecentlyViewed = persistReducer(
-  persistConfig,
-  recentlyViewedReducer
-);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    user: persistedUserReducer,
-    cart: persistedCartReducer,
-    favourite: persistedFavouriteReducer,
-    recentlyViewed: persistedRecentlyViewed,
-  },
-  middleware: (defaultMiddleware) =>
-    defaultMiddleware({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ["persist/PERSIST"],
+        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
       },
     }),
 });

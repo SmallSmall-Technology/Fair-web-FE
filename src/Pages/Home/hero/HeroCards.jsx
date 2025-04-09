@@ -18,7 +18,7 @@ export const HeroCards = () => {
   return (
     <>
       <div className="relative grid gap-6 lg:justify-center items-center overflow-hidden md:overflow-visible">
-        <div className="hidden lg:flex justify-around items-center absolute bg-[#FFDE11] w-[90%] 2xl:hidden h-60 z-0 overflow-clip">
+        <div className="hidden lg:flex justify-center mx-auto items-center absolute bg-[#FFDE11] w-[100%] 2xl:hidden h-60 z-0 overflow-clip">
           <img
             src="/images/hero-card-bg.svg"
             alt="Decorative background"
@@ -32,12 +32,14 @@ export const HeroCards = () => {
         </div>
 
         <div>
-          <ul className="hidden lg:flex gap-4 justify-center items-center relative z-10 h-96 my-8">
+          <ul className="hidden lg:flex gap-4 justify-between items-center relative z-10 mx-auto h-96 my-8 ">
             {heroCards.map((heroCard, index) => (
               <li
                 key={index}
-                className={`hidden lg:flex h-full transition-all duration-700 ease-in-out ${
-                  index === 1 ? "h-[440px] w-[620px]" : "h-[402px] w-[342px]"
+                className={`hidden lg:block justify-between h-full transition-all duration-700 ease-in-out ${
+                  index === 1
+                    ? "min-h-[440px] min-w-[620px]"
+                    : "h-[402px] w-full"
                 }`}
               >
                 <span

@@ -14,10 +14,12 @@ const toysgames = "/images/toys-games.svg";
 
 const valentineAd = "/images/large-fair-web-banner.svg";
 const preciousGift = "/images/precious-gift.png";
+const YellowBox = "/images/YellowBox.svg";
+
 const loveFair = "/images/love-fair.png";
 const shoppingCart = "/images/shopping-bag.svg";
 const happyMan =
-  "/public/images/one-happy-young-african-american-man-sitting-on-hi(3).svg";
+  "/images/one-happy-young-african-american-man-sitting-on-hi(3).svg";
 
 const girInHoodie = "/images/young-woman-in-hoodie.svg";
 
@@ -134,7 +136,7 @@ export const heroCards = [
   },
   {
     id: 3,
-    image: preciousGift,
+    image: YellowBox,
     alt: "An Image of a lady sitting on the sofa while wearing hoodie",
   },
 ];
@@ -431,7 +433,7 @@ export const products = [
     brand: "LG",
     category: "Electronics",
     subcategory: "Fridge & Freezer",
-    image: "/public/images/Hisense-fridge.svg",
+    image: "/images/Hisense-fridge.svg",
     price: "N400,000.00",
     discountPrice: "N420,000.00",
     ratings: "4.6",
@@ -444,7 +446,7 @@ export const products = [
     brand: "Samsung",
     category: "Electronics",
     subcategory: "Television",
-    image: "/public/images/Hisense-fridge.svg",
+    image: "/images/Hisense-fridge.svg",
     price: "N500,000.00",
     discountPrice: "N520,000.00",
     ratings: "4.8",

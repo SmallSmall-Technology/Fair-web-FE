@@ -6,6 +6,10 @@ export const fetchAllProducts = async () => {
   return response.json();
 };
 
-// fetchAllProducts()
-//   .then((data) => console.log("Products fetched:", data))
-//   .catch((error) => console.error("Fetch error:", error));
+export const fetchAllOrders = async () => {
+  const response = await fetch("http://localhost:3000/orders");
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
+};

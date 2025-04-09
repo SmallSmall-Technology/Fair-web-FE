@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CheckoutItem } from "./CheckoutItem.jsx";
 import { useSelector, useDispatch } from "react-redux";
+import { CartFooter } from "../../cartItems/CartFooter.jsx";
 import { CheckoutPaymentSummary } from "./CheckoutPaymentSummary.jsx";
 import { CheckoutDeliveryAddressButton } from "../../../utils/Button.jsx";
 import { CheckoutPaymentMethod } from "../checkoutContents/CheckoutPaymentMethod.jsx";
@@ -9,14 +10,16 @@ import {
   editDeliveryAddress,
   saveDeliveryAddress,
 } from "../../../features/user/userSlice.js";
-import { CartFooter } from "../../cartItems/CartFooter.jsx";
+import {
+  createOrder,
+  makePayment,
+} from "../../../features/order/orderSlice.js";
 
 export const CheckoutItemsContentSection = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showCheckoutDeliveryAddressForm, setShowCheckoutDeliveryAddressForm] =
     useState(false);
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
 
   const handleSubmitDeliveryAddress = (values, { resetForm }) => {
     dispatch(saveDeliveryAddress(values));
@@ -34,6 +37,11 @@ export const CheckoutItemsContentSection = () => {
   //handle function to update the form visibility
   const handleOpenCheckoutDeliveryAddressForm = () => {
     setShowCheckoutDeliveryAddressForm((show) => !show);
+  };
+
+  const handleSubmitPaymentMethod = (values) => {
+    if (values) dispatch(makePayment());
+    navigate("/cart-items/checkout/payment-success");
   };
 
   return (
@@ -97,7 +105,9 @@ export const CheckoutItemsContentSection = () => {
             <h2 className=" text-[21px]">Payment method</h2>
             <p className=" text-[#96959F] ">All transactions are secured</p>
           </div>
-          <CheckoutPaymentMethod />
+          <CheckoutPaymentMethod
+            onSubmitPaymentMethod={handleSubmitPaymentMethod}
+          />
           <CartFooter />
         </section>
       </main>
@@ -110,10 +120,14 @@ export const CheckoutItemsContentSection = () => {
         </div>
         <div className=" lg:hidden border border-t-2 border-[#E5E5E5] w-full h-0 my-4"></div>
         <section className=" lg:hidden">
-          <CheckoutPaymentMethod />
+          <CheckoutPaymentMethod
+            onSubmitPaymentMethod={handleSubmitPaymentMethod}
+          />
         </section>
         <div className=" lg:hidden border border-t-2 border-[#E5E5E5] w-full h-0 my-4"></div>
-        <CheckoutPaymentSummary cart={cart} />
+        <CheckoutPaymentSummary
+          onSubmitPaymentMethod={handleSubmitPaymentMethod}
+        />
       </aside>
     </section>
   );

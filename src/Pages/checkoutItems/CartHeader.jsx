@@ -7,7 +7,7 @@ export const CartHeader = () => {
     <header className="fixed bg-white w-full lg:flex lg:justify-between items-center pt-4 px-6 py-2 lg:px-[76p] z-50 lg:border-b-2">
       <div className="flex items-center space-x-4">
         <img
-          src="/public/images/fair-logo.svg"
+          src="/images/fair-logo.svg"
           alt="Company Logo"
           className="w-20 lg:w-24"
         />

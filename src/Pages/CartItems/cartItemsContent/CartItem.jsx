@@ -7,11 +7,11 @@ import { SaveItemForLater } from "../../../features/cart/SaveItemForLater";
 import { UpdateItemQuantity } from "../../../features/cart/UpdateItemQuantity";
 
 export const CartItem = ({ item }) => {
-  const currentQuantity = useSelector(getCurrentQuantityById(item.id));
+  const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
 
   return (
     <article
-      key={item.id}
+      key={item.productId}
       className="md:border-[1px] pb-4 md:border-[#E5E5E5] rounded-[10px] w-full h-fit"
     >
       <div className="">
@@ -19,7 +19,7 @@ export const CartItem = ({ item }) => {
         <section className="p-4">
           <div className="flex space-x-1 items-center mb-1 2xl:px-10">
             <img
-              src="/public/images/sold-by-fair.svg"
+              src="/images/sold-by-fair.svg"
               alt="Fair company logo"
               className="w-6 h-6"
             />
@@ -39,7 +39,7 @@ export const CartItem = ({ item }) => {
                 <h2 className="text-[#222224] font-medium text-sm text-balance mb-3">
                   {item.name}
                 </h2>
-                <div className="text-[#222224] font-medium text-sm">
+                <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
                   <p>Qty: </p>
                   <UpdateItemQuantity
                     id={item.id}
@@ -103,7 +103,73 @@ export const CartItem = ({ item }) => {
 
           <div className="flex space-x-2 items-center mb-2">
             <SaveItemForLater />
-            <DeleteItem id={item.id} />
+            <DeleteItem id={item.productId} />
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export const CartItemSkeleton = () => {
+  return (
+    <article className="md:border-[1px] pb-4 md:border-[#E5E5E5] rounded-[10px] w-full h-fit animate-pulse">
+      <div className="">
+        {/* Product Details */}
+        <section className="p-4">
+          <div className="flex space-x-1 items-center mb-1 2xl:px-10">
+            <div className="w-6 h-6 bg-gray-200 rounded-full" />
+            <div className="h-4 w-12 bg-gray-200 rounded" />
+          </div>
+
+          <div className="grid md:grid-flow-col items-center justify-between 2xl:px-10">
+            <div className="flex items-start gap-4">
+              <div className="product-image">
+                <div className="w-20 h-20 bg-gray-200 rounded" />
+              </div>
+              <div className="space-y-3">
+                <div className="h-4 w-40 bg-gray-200 rounded" />
+                <div className="flex items-center space-x-2">
+                  <div className="h-4 w-10 bg-gray-200 rounded" />
+                  <div className="h-6 w-16 bg-gray-200 rounded" />
+                </div>
+                <div className="h-6 w-20 bg-gray-200 rounded md:hidden" />
+              </div>
+            </div>
+
+            <div className="hidden md:grid space-y-3">
+              <div className="h-6 w-24 bg-gray-200 rounded" />
+              <div className="h-3 w-28 bg-gray-200 rounded" />
+              <div className="h-5 w-20 bg-gray-200 rounded" />
+              <div className="flex space-x-2 items-center">
+                <div className="h-4 w-20 bg-gray-200 rounded" />
+                <div className="h-4 w-4 bg-gray-200 rounded" />
+              </div>
+              <div className="h-3 w-32 bg-gray-200 rounded" />
+            </div>
+          </div>
+        </section>
+
+        {/* Payment Plan Header */}
+        <div className="hidden md:flex items-center">
+          <hr className="flex-grow border-[#E5E5E5]" />
+          <div className="px-4 py-2 h-6 w-24 bg-gray-200 rounded-[20px]" />
+          <hr className="flex-grow border-[#E5E5E5]" />
+        </div>
+
+        {/* Placeholder for PaymentPlan */}
+        <div className="p-4">
+          <div className="h-20 w-full bg-gray-200 rounded" />
+        </div>
+
+        <div className="flex justify-between mt-4 md:hidden p-4">
+          <div className="space-y-2">
+            <div className="h-3 w-24 bg-gray-200 rounded" />
+            <div className="h-4 w-20 bg-gray-200 rounded" />
+          </div>
+          <div className="flex space-x-2 items-center">
+            <div className="h-4 w-20 bg-gray-200 rounded" />
+            <div className="h-4 w-4 bg-gray-200 rounded" />
           </div>
         </div>
       </div>
