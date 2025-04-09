@@ -1,3 +1,168 @@
+// import "./index.css";
+// import { lazy, Suspense } from "react";
+// import ScrollToTop from "./utils/ScrollToTop";
+// import "react-toastify/dist/ReactToastify.css";
+// import Layout from "./ui/components/layout/Layout";
+// import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import UserDashboardLayout from "./ui/components/Layout/UserDashboardLayout";
+
+// // Lazy-loaded components
+// const Home = lazy(() => import("./pages/home/Home"));
+// const Login = lazy(() => import("./pages/login/Login"));
+// const SignUp = lazy(() => import("./pages/signUp/SignUp"));
+// const CartItems = lazy(() => import("./pages/cartItems/CartItems"));
+// const PageNotFound = lazy(() => import("./pages/pageNotFound/PageNotFound"));
+// const UserDashboard = lazy(() => import("./pages/userDashboard/UserDashboard"));
+// const CheckoutItems = lazy(() => import("./pages/checkoutItems/CheckoutItems"));
+// const SubCategoryPage = lazy(() =>
+//   import("./pages/productCategories/SubCategoryPage")
+// );
+// const SingleProductPage = lazy(() =>
+//   import("./pages/productCategories/SingleProductPage")
+// );
+// const CategoryPage = lazy(() =>
+//   import("./pages/productCategories/categoryPage/CategoryPage")
+// );
+// const Notifications = lazy(() =>
+//   import("./pages/userDashboard/notifications/Notifications")
+// );
+// const AccountProfile = lazy(() =>
+//   import("./pages/userDashboard/accountProfile/AccountProfile")
+// );
+// const Wallet = lazy(() =>
+//   import("./pages/userDashboard/shopping/shoppingOverviewContents/Wallet")
+// );
+// const Summary = lazy(() =>
+//   import("./pages/userDashboard/shopping/shoppingOverviewContents/Summary")
+// );
+// const Favorites = lazy(() =>
+//   import("./pages/userDashboard/shopping/shoppingOverviewContents/Favorites")
+// );
+// const CheckoutPaymentSuccess = lazy(() =>
+//   import("./pages/checkoutPaymentSuccess/CheckoutPaymentSuccess")
+// );
+// const ShoppingOverview = lazy(() =>
+//   import("./pages/userDashboard/shopping/shoppingOverview/ShoppingOverview")
+// );
+// const Purchases = lazy(() =>
+//   import(
+//     "./pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases"
+//   )
+// );
+// const RecentlyViewed = lazy(() =>
+//   import(
+//     "./pages/userDashboard/shopping/shoppingOverviewContents/RecentlyViewed"
+//   )
+// );
+// const ToastContainer = lazy(() =>
+//   import("react-toastify").then((module) => ({
+//     default: module.ToastContainer,
+//   }))
+// );
+
+// const App = () => {
+//   return (
+//     <>
+//       <Suspense fallback={null}>
+//         <ToastContainer
+//           position="bottom-left"
+//           autoClose={5000}
+//           hideProgressBar={true}
+//           newestOnTop={false}
+//           closeOnClick
+//           rtl={false}
+//           pauseOnFocusLoss
+//           draggable
+//           pauseOnHover
+//           theme="yellow"
+//         />
+//       </Suspense>
+//       <BrowserRouter>
+//         <ScrollToTop />
+//         <Suspense
+//           fallback={
+//             <div className="flex justify-center items-center bg-slate-400 h-screen w-full">
+//               Normalizing quality standard of living....
+//               <div className="lds-ripple">
+//                 <div></div>
+//                 <div></div>
+//               </div>
+//             </div>
+//           }
+//         >
+//           <Routes>
+//             <Route path="" element={<Layout />}>
+//               <Route path="/" element={<Home />} />
+//               <Route path="category/:categoryName" element={<CategoryPage />} />
+//               <Route
+//                 path="category/:categoryName/:subcategory"
+//                 element={<SubCategoryPage />}
+//               />
+//               <Route
+//                 path="category/:categoryName/:subcategory/:id/:slug"
+//                 element={<SingleProductPage />}
+//               />
+//               <Route path=":id/:slug" element={<SingleProductPage />} />
+//             </Route>
+//             <Route path="cart-items" element={<CartItems />} />
+//             <Route path="cart-items/checkout" element={<CheckoutItems />} />
+//             <Route
+//               path="cart-items/checkout/payment-success"
+//               element={<CheckoutPaymentSuccess />}
+//             />
+//             <Route path="/sign-up" element={<SignUp />} />
+//             <Route path="/login" element={<Login />} />
+//             <Route path="*" element={<PageNotFound />} />
+//             <Route path="" element={<UserDashboardLayout />}>
+//               <Route path="/user-dashboard" element={<UserDashboard />}>
+//                 <Route
+//                   path="/user-dashboard/shopping-overview"
+//                   element={<ShoppingOverview />}
+//                 >
+//                   <Route
+//                     path="/user-dashboard/shopping-overview/summary"
+//                     element={<Summary />}
+//                   />
+//                   <Route
+//                     path="/user-dashboard/shopping-overview/purchases"
+//                     element={<Purchases />}
+//                   />
+//                   <Route
+//                     path="/user-dashboard/shopping-overview/wallet"
+//                     element={<Wallet />}
+//                   />
+//                   <Route
+//                     path="/user-dashboard/shopping-overview/favorites"
+//                     element={<Favorites />}
+//                   />
+//                   <Route
+//                     path="/user-dashboard/shopping-overview/recently-viewed"
+//                     element={<RecentlyViewed />}
+//                   />
+//                 </Route>
+//                 <Route
+//                   path="/user-dashboard/notifications"
+//                   element={<Notifications />}
+//                 />
+//                 <Route
+//                   path="/user-dashboard/account-profile"
+//                   element={<AccountProfile />}
+//                 />
+//                 <Route
+//                   path="/user-dashboard/:id/:slug"
+//                   element={<SingleProductPage />}
+//                 />
+//               </Route>
+//             </Route>
+//           </Routes>
+//         </Suspense>
+//       </BrowserRouter>
+//     </>
+//   );
+// };
+
+// export default App;
+
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signUp/SignUp";

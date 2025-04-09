@@ -20,7 +20,7 @@ const CartItemsContentSection = React.memo(() => {
   };
 
   return (
-    <main className="my-5">
+    <main className="my-5 pt-28">
       <div className="mx-6 lg:mx-[60px] 2xl:mx-[150px]">
         <h1 className="hidden lg:flex font-semibold text-3xl">Your Cart</h1>
         <h1 className="flex lg:hidden font-semibold text-3xl">Shopping Cart</h1>
