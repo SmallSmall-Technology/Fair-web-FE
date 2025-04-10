@@ -29,3 +29,8 @@ export const { addItemToFavourite, removeItemFromFavourite, clearFavourite } =
 export default favouriteSlice.reducer;
 
 export const getFavourites = (state) => state.favourite.favourite;
+
+export const getTotalFavouritesQuantity = (state) =>
+  (state.favourite.favourite || []).reduce((total, item) => {
+    return item && item.quantity ? total + item.quantity : total;
+  }, 0);
