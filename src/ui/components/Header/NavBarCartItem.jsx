@@ -1,4 +1,3 @@
-"use client";
 import { useSelector } from "react-redux";
 import { getCurrentQuantityById } from "../../../features/cart/cartSlice";
 import { UpdateItemQuantity } from "../../../features/cart/UpdateItemQuantity";
@@ -24,7 +23,7 @@ export const NavBarCartItem = ({ item }) => {
             />
           </div>
 
-          <div className="flex flex-col justify-between w-full">
+          <div className="flex flex-col space-y- justify-between w-full">
             <p>{item.name}</p>
             <div className="flex justify-between w-full">
               <div className="flex space-x-4">
@@ -38,7 +37,9 @@ export const NavBarCartItem = ({ item }) => {
                 </div>
                 <DeleteItemFromCart id={item.id} />
               </div>
-              <p className="">{formatCurrency(item.price * currentQuantity)}</p>
+              <p className="text-[#222224]">
+                {formatCurrency(item.price * currentQuantity)}
+              </p>
             </div>
           </div>
         </div>

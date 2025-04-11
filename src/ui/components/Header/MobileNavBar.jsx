@@ -1,17 +1,21 @@
-"use client";
-import { useState } from "react";
+import { Shop } from "./Shop";
 import { Link } from "react-router-dom";
 import Hamburger from "hamburger-react";
-import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { ChevronRight, User, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { UserMenuDropdown } from "./UserMenuDropdown";
+import { CartDropdownItems } from "./CartDropdownItems";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronRight, ShoppingCart, User, X } from "lucide-react";
 import { getTotalCartQuantity } from "../../../features/cart/cartSlice";
 
 export const MobileNavBar = () => {
   const menuRef = useRef(null);
+  const [shopIsOpen, setShopIsOpen] = useState(false);
+  const [userMenuIsOpen, setUserMenuIsOpen] = useState(false);
   const totalProductsInCart = useSelector(getTotalCartQuantity);
   const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   // Lock scroll when menu is open
   useEffect(() => {
@@ -38,104 +42,136 @@ export const MobileNavBar = () => {
     };
   }, [hamburgerIsOpen]);
 
+  const handleShopMenu = () => {
+    setShopIsOpen(!shopIsOpen);
+  };
+
+  const handleUserMenuDropdown = () => {
+    setUserMenuIsOpen(!userMenuIsOpen);
+  };
+
+  const hanldeCartDropdownItems = () => {
+    setIsOpen(!isOpen);
+    // console.log(setIsOpen);
+  };
+
   return (
-    <nav aria-label="Main navigation">
-      <ul className="flex items-center gap-4">
-        <li>
-          <Link to="user-dashboard">
-            <User />
-          </Link>
-        </li>
-        <li className="relative">
-          {totalProductsInCart > 0 && (
-            <div className="bg-[#FFDE11] text-xs font-bold p-1 rounded-full absolute bottom-4 left-3 min-w-5 flex justify-center">
-              {totalProductsInCart}
+    <>
+      <nav aria-label="Main navigation">
+        <ul className="flex items-center gap-4">
+          <li className="cursor-pointer">
+            <User onClick={handleUserMenuDropdown} />
+          </li>
+
+          <div>
+            <li className="relative" onClick={hanldeCartDropdownItems}>
+              {totalProductsInCart > 0 && (
+                <div className="bg-[#FB0202] text-white text-[11px] font-medium p-1 rounded-full absolute bottom-[14px] left-3 min-w-6 flex justify-center">
+                  {totalProductsInCart}
+                </div>
+              )}
+              <button aria-label="View shopping cart">
+                <ShoppingCart size={26} aria-hidden="true" />
+              </button>
+            </li>
+
+            <div className="absolute right-2 top-[4.02rem] w-[412px]">
+              <CartDropdownItems isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
-          )}
-          <Link to="/cart-items" aria-label="View shopping cart">
-            <img
-              src="/images/shopping-cart.svg"
-              alt="Shopping cart"
-              width={24}
-              height={24}
-              loading="lazy"
-            />
-          </Link>
-        </li>
-        <li className="relative">
-          <Hamburger toggled={hamburgerIsOpen} toggle={setHamburgerIsOpen} />
-        </li>
+          </div>
 
-        <AnimatePresence>
-          {hamburgerIsOpen && (
-            <>
-              <motion.div
-                className="fixed inset-0 bg-black bg-opacity-50 z-40"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setHamburgerIsOpen(false)}
-              />
+          <li className="relative">
+            <Hamburger toggled={hamburgerIsOpen} toggle={setHamburgerIsOpen} />
+          </li>
 
-              <motion.div
-                ref={menuRef}
-                initial={{ y: "-100%" }}
-                animate={{ y: 0 }}
-                exit={{ y: "-100%" }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="absolute inset-0 bg-white z-50 h-screen"
-              >
-                <button
-                  className="w-full flex justify-end pt-5 pr-5"
+          <AnimatePresence>
+            {hamburgerIsOpen && (
+              <>
+                <motion.div
+                  className="fixed inset-0 bg-black bg-opacity-50 z-40"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   onClick={() => setHamburgerIsOpen(false)}
+                />
+
+                <motion.div
+                  ref={menuRef}
+                  initial={{ y: "-100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "-100%" }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="absolute inset-0 bg-white z-50 h-screen"
                 >
-                  <X />
-                </button>
-                <ul className="flex flex-col space-y-6 p-6 pt-10 h-full w-full">
-                  {[
-                    { label: "Shop", href: "/download" },
-                    { label: "Gift card" },
-                    { label: "Sell" },
-                    { label: "Help" },
-                  ].map((item, index) => (
-                    <li
-                      key={index}
-                      className="font-semibold"
-                      onClick={() => setHamburgerIsOpen(false)}
-                    >
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          className="flex items-center justify-between"
-                          aria-label={item.label}
-                        >
-                          <span>{item.label}</span>
-                          <ChevronRight />
-                        </a>
-                      ) : (
-                        item.label
-                      )}
+                  <button
+                    className="w-full flex justify-end pt-5 pr-5"
+                    onClick={() => setHamburgerIsOpen(false)}
+                  >
+                    <X />
+                  </button>
+                  <ul className="flex flex-col space-y-6 p-6 pt-10 h-full w-full">
+                    {[
+                      { label: "Shop" },
+                      { label: "Gift card" },
+                      { label: "Sell" },
+                      { label: "Help" },
+                    ].map((item, index) => (
+                      <li
+                        key={index}
+                        className="text-base font-semibold  cursor-pointer transition-colors duration-200 hover:underline focus:outline-none focus:text-black"
+                        // onClick={() => setHamburgerIsOpen(false)}
+                      >
+                        {item.label === "Shop" ? (
+                          <p
+                            className="flex items-center justify-between cursor-pointer"
+                            aria-label={item.label}
+                            onClick={handleShopMenu}
+                          >
+                            <span>{item.label}</span>
+                            <ChevronRight />
+                          </p>
+                        ) : (
+                          item.label
+                        )}
+                      </li>
+                    ))}
+                    <hr className="my-2" />
+                    <li className="font-semibold flex space-x-3">
+                      <Link
+                        to="/login"
+                        onClick={() => setHamburgerIsOpen(false)}
+                      >
+                        Log in
+                      </Link>
+                      <span className="text-[#89898A]">or</span>
+                      <Link
+                        to="/sign-up"
+                        onClick={() => setHamburgerIsOpen(false)}
+                      >
+                        Create account
+                      </Link>
                     </li>
-                  ))}
-                  <hr className="my-2" />
-                  <li className="font-semibold flex space-x-3">
-                    <Link to="/login" onClick={() => setHamburgerIsOpen(false)}>
-                      Log in
-                    </Link>
-                    <span className="text-[#89898A]">or</span>
-                    <Link
-                      to="/sign-up"
-                      onClick={() => setHamburgerIsOpen(false)}
-                    >
-                      Create account
-                    </Link>
-                  </li>
-                </ul>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-      </ul>
-    </nav>
+                  </ul>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </ul>
+      </nav>
+      {shopIsOpen && (
+        <Shop
+          setHamburgerIsOpen={setHamburgerIsOpen}
+          setShopIsOpen={setShopIsOpen}
+          shopIsOpen={shopIsOpen}
+        />
+      )}
+
+      {userMenuIsOpen && (
+        <UserMenuDropdown
+          userMenuIsOpen={userMenuIsOpen}
+          setUserMenuIsOpen={setUserMenuIsOpen}
+        />
+      )}
+    </>
   );
 };
