@@ -20,7 +20,7 @@ import userSlice, {
 
 const API_URL = "http://localhost:3000";
 
-export const CheckoutPaymentMethod = () => {
+export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
   const onDeliveryAddress = useSelector(getDeliveryAddress);
 
   const dispatch = useDispatch();
@@ -257,7 +257,11 @@ export const CheckoutPaymentMethod = () => {
               className="text-red-500 text-xs mt-3"
             />
             <div className="hidden lg:block">
-              <YellowButton type="submit" disabled={isSubmitting}>
+              <YellowButton
+                type="submit"
+                disabled={isSubmitting}
+                onClick={onSubmitPaymentMethod}
+              >
                 {isSubmitting ? "Processing..." : "Pay now"}
               </YellowButton>
             </div>

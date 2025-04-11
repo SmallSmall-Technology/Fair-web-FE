@@ -1,12 +1,25 @@
+"use client";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Heart } from "lucide-react";
-import { getTotalCartQuantity } from "../../../features/cart/cartSlice";
+import { Heart, ShoppingCart } from "lucide-react";
+import {
+  getTotalCartPrice,
+  getTotalCartQuantity,
+} from "../../../features/cart/cartSlice";
 import { getTotalFavouritesQuantity } from "../../../features/favourite/favouriteSlice";
+import { formatCurrency } from "../../../utils/FormatCurrency";
+import { YellowButton } from "../../../utils/Button";
+import { CartDropdownItems } from "./CartDropdownItems";
 
 export const NavBar = () => {
   const totalProductsInCart = useSelector(getTotalCartQuantity);
   const totalFavouritesProduct = useSelector(getTotalFavouritesQuantity);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const hanldeCartDropdownItems = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <nav aria-label="Main navigation">
@@ -15,7 +28,7 @@ export const NavBar = () => {
           <a
             href="/download"
             aria-label="Download our mobile app"
-            className="text-[#737376] hover:text-[#FFDE11] focus:text-[#FFDE11] focus:outline-none focus:ring-2 focus:ring-[#FFDE11] transition-colors motion-safe:duration-200 hover:underline"
+            className="text-[#737376] hover:text-black focus:text-black focus:outline-none focus:ring-2 focus:ring-black transition-colors motion-safe:duration-200 hover:underline"
           >
             Download app
             <img
@@ -32,7 +45,7 @@ export const NavBar = () => {
           <Link
             to="/sign-up"
             aria-label="Create a new account"
-            className="text-[#737376] hover:text-[#FFDE11] focus:text-[#FFDE11] focus:outline-none focus:ring-2 focus:ring-[#FFDE11] transition-colors motion-safe:duration-200 hover:underline"
+            className="text-[#737376] hover:text-black focus:text-black focus:outline-none focus:ring-2 focus:ring-black transition-colors motion-safe:duration-200 hover:underline"
           >
             Sign up
           </Link>
@@ -41,7 +54,7 @@ export const NavBar = () => {
           <Link
             to="/login"
             aria-label="Log in to your account"
-            className="text-[#737376] hover:text-[#FFDE11] focus:text-[#FFDE11] focus:outline-none focus:ring-2 focus:ring-[#FFDE11] transition-colors motion-safe:duration-200 hover:underline"
+            className="text-[#737376] hover:text-black  focus:text-black focus:outline-none focus:ring-2 focus:ring-black transition-colors motion-safe:duration-200 hover:underline"
           >
             Log in
           </Link>
@@ -67,42 +80,40 @@ export const NavBar = () => {
         </li>
         <li className="relative">
           {totalFavouritesProduct > 0 && (
-            <div className="bg-[#FFDE11] text-xs font-bold p-1 rounded-full absolute bottom-[14px] left-3 min-w-5 flex justify-center">
+            <div className="bg-[#FB0202] text-white text-[11px] font-medium p-1 rounded-full absolute bottom-[10px] left-3 min-w-6 flex justify-center">
               {totalFavouritesProduct}
             </div>
           )}
           <Link
             to="/user-dashboard/shopping-overview/favorites"
             aria-label="View favorite items"
-            className="text-[#333] rounded transition-colors motion-safe:duration-200 hover:scale-110 active:scale-90"
+            // className="rounded transition-colors motion-safe:duration-200 hover:scale-110 active:scale-90"
           >
-            <Heart size={20} aria-hidden="true" />
+            <Heart size={24} aria-hidden="true" />
           </Link>
         </li>
-        <li className="relative">
-          {totalProductsInCart > 0 && (
-            <div className="bg-[#FFDE11] text-xs font-bold p-1 rounded-full absolute bottom-4 left-3 min-w-5 flex justify-center">
-              {totalProductsInCart}
-            </div>
-          )}
-          <Link
-            to="/cart-items"
-            aria-label="View shopping cart"
-            className="rounded transition-transform motion-safe:duration-200 hover:scale-110 active:scale-90"
-          >
-            <img
-              src="/images/shopping-cart.svg"
-              alt="Shopping cart"
-              width={24}
-              height={24}
-              loading="lazy"
-              className="transition-all hover:brightness-125 motion-safe:duration-200"
-            />
-          </Link>
-        </li>
+        <div>
+          <li className="relative" onClick={hanldeCartDropdownItems}>
+            {totalProductsInCart > 0 && (
+              <div className="bg-[#FB0202] text-white text-[11px] font-medium p-1 rounded-full absolute bottom-[14px] left-3 min-w-6 flex justify-center">
+                {totalProductsInCart}
+              </div>
+            )}
+            <button
+              aria-label="View shopping cart"
+              // className="rounded transition-colors motion-safe:duration-200 hover:scale-110 active:scale-90"
+            >
+              <ShoppingCart size={26} aria-hidden="true" />
+            </button>
+          </li>
+
+          <div className="absolute right-2 top-[4.02rem] w-[412px]">
+            <CartDropdownItems isOpen={isOpen} setIsOpen={setIsOpen} />
+          </div>
+        </div>
         <li>
           <button
-            type="button" // Changed to "button" for clarity
+            type="button"
             className="group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[#FFDE11] border-2 border-[#FFDE11] px-4 py-2 text-lg font-medium text-black hover:bg-gray-50 hover:text-black transition-all motion-safe:duration-200 hover:scale-105 active:scale-95"
           >
             <span className="absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all duration-400 ease-in-out group-hover:top-0 group-hover:h-full"></span>
@@ -113,5 +124,21 @@ export const NavBar = () => {
         </li>
       </ul>
     </nav>
+  );
+};
+
+export const Subtotal = () => {
+  const subTotal = useSelector(getTotalCartPrice);
+
+  return (
+    <article className="px-5 py-5 pb-10 top-shadow">
+      <div className="flex items-center justify-between mb-4">
+        <p>Subtotal</p>
+        <p>{formatCurrency(subTotal)}</p>
+      </div>
+      <div className="w-[90%] mx-auto">
+        <YellowButton>Checkout</YellowButton>
+      </div>
+    </article>
   );
 };
