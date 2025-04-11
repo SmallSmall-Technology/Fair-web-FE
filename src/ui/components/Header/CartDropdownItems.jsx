@@ -1,4 +1,3 @@
-"use client";
 import { X } from "lucide-react";
 import { Subtotal } from "./NavBar";
 import { useEffect, useRef } from "react";

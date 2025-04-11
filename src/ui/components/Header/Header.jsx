@@ -1,4 +1,3 @@
-// "use client";
 import { memo } from "react";
 import { NavBar } from "./NavBar";
 import { Link } from "react-router-dom";
@@ -16,7 +15,7 @@ const Header = () => {
         <Link
           to="/"
           aria-label="Fair Home"
-          className="transition-transform hover:scale-105 focus:scale-105 focus:outline-none"
+          className="transition-transform focus:scale-105 focus:outline-none"
         >
           <img
             src="/images/fair-logo.svg"

@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -137,7 +136,7 @@ export const Subtotal = () => {
         <p>{formatCurrency(subTotal)}</p>
       </div>
       <div className="w-[90%] mx-auto">
-        <YellowButton>Checkout</YellowButton>
+        <YellowButton>Check Out</YellowButton>
       </div>
     </article>
   );
