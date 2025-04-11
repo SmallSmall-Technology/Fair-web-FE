@@ -20,6 +20,7 @@ export const CheckoutItemsContentSection = () => {
   const [showCheckoutDeliveryAddressForm, setShowCheckoutDeliveryAddressForm] =
     useState(false);
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
   const handleSubmitDeliveryAddress = (values, { resetForm }) => {
     dispatch(saveDeliveryAddress(values));

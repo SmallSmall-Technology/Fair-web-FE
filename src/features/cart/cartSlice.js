@@ -34,12 +34,28 @@ export const addItem = createAsyncThunk(
 
       const cartItem = {
         id: `cart${Date.now()}`,
+        image: product.image,
         name: product.name,
         userId: "user123",
         productId: product.id,
         quantity: 1,
         price: Number(product.price),
         totalPrice: Number(product.price),
+
+        // id: `cart${Date.now()}`,
+        // userId: "user123",
+        // name: product.name,
+        // brand: product.brand,
+        // category: product.category,
+        // subcategory: product.subcategory,
+        // image: product.image,
+        // price: Number(product.price),
+        // discountPrice: product.discountPrice,
+        // ratings: product.ratings,
+        // noOfProductSold: 1,
+        // slug: product.slug,
+        // quantity: 1,
+        // totalPrice: Number(product.price),
       };
 
       const response = await axios.post(`${API_URL}/cart`, cartItem);
