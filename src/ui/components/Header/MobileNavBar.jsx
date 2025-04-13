@@ -8,14 +8,16 @@ import { CartDropdownItems } from "./CartDropdownItems";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, ShoppingCart, User, X } from "lucide-react";
 import { getTotalCartQuantity } from "../../../features/cart/cartSlice";
+import { getUserIsAuthenticated } from "../../../features/auth/authSlice";
 
 export const MobileNavBar = () => {
   const menuRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
   const [shopIsOpen, setShopIsOpen] = useState(false);
   const [userMenuIsOpen, setUserMenuIsOpen] = useState(false);
   const totalProductsInCart = useSelector(getTotalCartQuantity);
   const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const isAuthenticated = useSelector(getUserIsAuthenticated);
 
   // Lock scroll when menu is open
   useEffect(() => {
@@ -52,7 +54,6 @@ export const MobileNavBar = () => {
 
   const hanldeCartDropdownItems = () => {
     setIsOpen(!isOpen);
-    // console.log(setIsOpen);
   };
 
   return (
@@ -64,13 +65,16 @@ export const MobileNavBar = () => {
           </li>
 
           <div>
-            <li className="relative" onClick={hanldeCartDropdownItems}>
+            <li className="relative">
               {totalProductsInCart > 0 && (
                 <div className="bg-[#FB0202] text-white text-[11px] font-medium p-1 rounded-full absolute bottom-[14px] left-3 min-w-6 flex justify-center">
                   {totalProductsInCart}
                 </div>
               )}
-              <button aria-label="View shopping cart">
+              <button
+                aria-label="View shopping cart"
+                onClick={hanldeCartDropdownItems}
+              >
                 <ShoppingCart size={26} aria-hidden="true" />
               </button>
             </li>
@@ -136,21 +140,23 @@ export const MobileNavBar = () => {
                       </li>
                     ))}
                     <hr className="my-2" />
-                    <li className="font-semibold flex space-x-3">
-                      <Link
-                        to="/login"
-                        onClick={() => setHamburgerIsOpen(false)}
-                      >
-                        Log in
-                      </Link>
-                      <span className="text-[#89898A]">or</span>
-                      <Link
-                        to="/sign-up"
-                        onClick={() => setHamburgerIsOpen(false)}
-                      >
-                        Create account
-                      </Link>
-                    </li>
+                    {!isAuthenticated && (
+                      <li className="font-semibold flex space-x-3">
+                        <Link
+                          to="/login"
+                          onClick={() => setHamburgerIsOpen(false)}
+                        >
+                          Log in
+                        </Link>
+                        <span className="text-[#89898A]">or</span>
+                        <Link
+                          to="/sign-up"
+                          onClick={() => setHamburgerIsOpen(false)}
+                        >
+                          Create account
+                        </Link>
+                      </li>
+                    )}
                   </ul>
                 </motion.div>
               </>

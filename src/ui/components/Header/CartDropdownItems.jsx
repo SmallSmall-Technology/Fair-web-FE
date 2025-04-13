@@ -41,21 +41,22 @@ export const CartDropdownItems = ({ isOpen, setIsOpen }) => {
       {isOpen && (
         <>
           <motion.div
-            className=" bg-black bg-opacity-50 z-40"
+            className="fixed inset-0 bg-opacity-50 z-40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
           />
+
           <motion.div
             ref={menuRef}
             initial={{ y: "-5%", opacity: 0.5 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0.5 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="z-50 bg-white w-full shadow-md"
+            className="absolute inset-0 bg-white z-50 h-fit top-5 shadow-md"
           >
-            <div className="flex justify-between items-center  px-5 my-5">
+            <div className="flex justify-between items-center px-5 mb-5">
               <p className="min-w-fit pt-4">Cart Summary</p>
               <button
                 className="w-full flex justify-end"

@@ -16,7 +16,7 @@ export const SearchQuery = () => {
   );
 
   return (
-    <div className="flex w-full lg:w-1/3 z-0">
+    <div className="flex w-full lg:w-1/3">
       <Formik initialValues={initialValues} onSubmit={handleSearchQuery}>
         <Form className="w-full">
           <label htmlFor="search" className="sr-only">
