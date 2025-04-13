@@ -1,23 +1,36 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Heart, ShoppingCart } from "lucide-react";
 import {
   getTotalCartPrice,
   getTotalCartQuantity,
 } from "../../../features/cart/cartSlice";
-import { getTotalFavouritesQuantity } from "../../../features/favourite/favouriteSlice";
-import { formatCurrency } from "../../../utils/FormatCurrency";
+import {
+  getUserIsAuthenticated,
+  getUserName,
+} from "../../../features/auth/authSlice";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { YellowButton } from "../../../utils/Button";
 import { CartDropdownItems } from "./CartDropdownItems";
+import { LoggedInUserDropdown } from "./LoggedInUserDropdown";
+import { formatCurrency } from "../../../utils/FormatCurrency";
+import { ChevronDown, Heart, ShoppingCart } from "lucide-react";
+import { getTotalFavouritesQuantity } from "../../../features/favourite/favouriteSlice";
 
 export const NavBar = () => {
+  const user = useSelector(getUserName);
+  const [isOpen, setIsOpen] = useState(false);
+  const [loggedInUserDropdown, setLoggedInUserDropdown] = useState(false);
+
+  const isAuthenticated = useSelector(getUserIsAuthenticated);
   const totalProductsInCart = useSelector(getTotalCartQuantity);
   const totalFavouritesProduct = useSelector(getTotalFavouritesQuantity);
-  const [isOpen, setIsOpen] = useState(false);
 
   const hanldeCartDropdownItems = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleUserAuthDropdown = () => {
+    setLoggedInUserDropdown(!loggedInUserDropdown);
   };
 
   return (
@@ -40,24 +53,46 @@ export const NavBar = () => {
             />
           </a>
         </li>
-        <li className="font-medium text-[#333]">
-          <Link
-            to="/sign-up"
-            aria-label="Create a new account"
-            className="text-[#737376] hover:text-black focus:text-black focus:outline-none focus:ring-2 focus:ring-black transition-colors motion-safe:duration-200 hover:underline"
-          >
-            Sign up
-          </Link>
-        </li>
-        <li className="font-medium text-[#333]">
-          <Link
-            to="/login"
-            aria-label="Log in to your account"
-            className="text-[#737376] hover:text-black  focus:text-black focus:outline-none focus:ring-2 focus:ring-black transition-colors motion-safe:duration-200 hover:underline"
-          >
-            Log in
-          </Link>
-        </li>
+        {!isAuthenticated ? (
+          <>
+            <li className="font-medium text-[#333]">
+              <Link
+                to="/sign-up"
+                aria-label="Create a new account"
+                className="text-[#737376] hover:text-black focus:text-black focus:outline-none focus:ring-2 focus:ring-black transition-colors motion-safe:duration-200 hover:underline"
+              >
+                Sign up
+              </Link>
+            </li>
+            <li className="font-medium text-[#333]">
+              <Link
+                to="/login"
+                aria-label="Log in to your account"
+                className="text-[#737376] hover:text-black  focus:text-black focus:outline-none focus:ring-2 focus:ring-black transition-colors motion-safe:duration-200 hover:underline"
+              >
+                Log in
+              </Link>
+            </li>
+          </>
+        ) : (
+          <div>
+            <li
+              className="font-medium flex items-center space-x-1 cursor-pointer"
+              onClick={handleUserAuthDropdown}
+            >
+              <span className="text-[#737376]">Hi,</span>
+              <span>{user}!</span>
+              <ChevronDown size={20} />
+            </li>
+            <div className="absolute right top-[4.02rem] w-56 h-[184px] rounded-[10px]">
+              <LoggedInUserDropdown
+                loggedInUserDropdown={loggedInUserDropdown}
+                setLoggedInUserDropdown={setLoggedInUserDropdown}
+              />
+            </div>
+          </div>
+        )}
+
         <li aria-hidden="true">
           <hr className="mx-2 h-[22px] w-[1.5px] bg-[#DEDEDE]" />
         </li>
@@ -86,7 +121,6 @@ export const NavBar = () => {
           <Link
             to="/user-dashboard/shopping-overview/favorites"
             aria-label="View favorite items"
-            // className="rounded transition-colors motion-safe:duration-200 hover:scale-110 active:scale-90"
           >
             <Heart size={24} aria-hidden="true" />
           </Link>
@@ -98,10 +132,7 @@ export const NavBar = () => {
                 {totalProductsInCart}
               </div>
             )}
-            <button
-              aria-label="View shopping cart"
-              // className="rounded transition-colors motion-safe:duration-200 hover:scale-110 active:scale-90"
-            >
+            <button aria-label="View shopping cart">
               <ShoppingCart size={26} aria-hidden="true" />
             </button>
           </li>

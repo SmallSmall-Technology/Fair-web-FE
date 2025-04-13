@@ -40,7 +40,7 @@ export const Shop = ({ setHamburgerIsOpen, shopIsOpen, setShopIsOpen }) => {
               </button>
 
               <h1 className="font-medium text-xl pl-6">Categories</h1>
-              <ul className="flex flex-col space-y-3 p-6 pt-2 h-full w-full">
+              <ul className="flex flex-col space-y-3 p-6 pt-2 w-full">
                 {[
                   { label: "Men", href: "/category/beauty" },
                   { label: "Women", href: "/category/beauty" },

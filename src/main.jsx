@@ -17,9 +17,9 @@ ReactDOM.createRoot(document.getElementById("app")).render(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <App />
-          <ReactQueryDevtools
+          {/* <ReactQueryDevtools
             initialIsOpen={process.env.NODE_ENV === "development"}
-          />
+          /> */}
         </PersistGate>
       </Provider>
     </QueryClientProvider>

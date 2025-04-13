@@ -1,6 +1,7 @@
 import { Button } from "./Button";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Image as ImageIcon } from "lucide-react";
 import { Share2, Star } from "lucide-react";
 import { formatCurrency } from "./FormatCurrency";
 import React, { useEffect, useState } from "react";
@@ -10,6 +11,7 @@ import { handleShareProduct } from "../features/product/ShareProduct";
 import { addItemToRecentlyViewed } from "../features/product/recentlyViewedSlice";
 
 export const ProductCard = ({ product }) => {
+  const [imgError, setImgError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 
@@ -95,6 +97,7 @@ export const ProductCard = ({ product }) => {
     >
       <Link to={`/${id}/${slug}`} className="block">
         <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl cursor-pointer">
+          {/* <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] lg:w-[218px] lg:h-[218px] rounded-2xl cursor-pointer"> */}
           <div className="absolute top-2 flex justify-between w-full px-2">
             <Button
               aria-label="Share this product"
@@ -115,13 +118,18 @@ export const ProductCard = ({ product }) => {
               </p>
             )}
           </div>
-          <div className="flex justify-center items-center mx-auto w-[80px] h-[99px] md:w-[136px] md:h-[169px]">
-            <img
-              src={image || "fallback-image-url"}
-              alt={name}
-              loading="lazy"
-              className="h-fit w-full mt-10"
-            />
+          <div className="flex justify-center items-center mx-auto w-[80px] h-[99px] md:w-[136px] md:h-[169px] lg:w-[159px] lg:h-[159px]">
+            {!imgError ? (
+              <img
+                src={image}
+                alt={name}
+                loading="lazy"
+                onError={() => setImgError(true)}
+                className="h-fit w-full mt-10 object-contain"
+              />
+            ) : (
+              <ImageIcon className="h-fit w-full mt-10 object-contain" />
+            )}
           </div>
         </div>
       </Link>
@@ -130,27 +138,34 @@ export const ProductCard = ({ product }) => {
           to={`/${id}/${slug}`}
           className="hover:underline focus:underline focus:outline-none"
         >
-          <p className="text-sm leading-[16.94px] min-h-12 cursor-pointer">
+          {/* <p className="text-sm leading-[16.94px] min-h-12 cursor-pointer">
+            {name}
+          </p> */}
+          <p className="text-sm font-normal leading-[16.94px] min-h-12 cursor-pointer overflow-hidden lg:overflow-visible line-clamp-2 lg:line-clamp-none">
             {name}
           </p>
         </Link>
-        <div className="flex flex-col md:flex-row space-x-2 items-center space-y-1">
+        <div className="flex flex-col lg:flex-row lg:space-x-2 lg:items-center space-y-1">
           <p className="font-semibold text-base">{formatCurrency(price)}</p>
-          {discountPrice && (
+          {discountPrice ? (
             <p className="text-sm line-through text-[#827db1]">
               {formatCurrency(discountPrice)}
             </p>
+          ) : (
+            <p className="opacity-0 text-sm line-through">null</p>
           )}
         </div>
-        <div className="flex items-center space-x-1">
-          <Star fill="black" className="w-3" aria-hidden="true" />
-          <p>
-            {ratings} ({noOfProductSold})
-          </p>
-        </div>
-        <div className="flex items-center space-x-6">
-          <AddToCart product={product} />
-          <AddFavourite product={product} />
+        <div className="flex items-center justify-between lg:flex-col lg:items-start lg:space-y-3">
+          <div className="flex items-center lg:space-x-1">
+            <Star fill="black" size={14} aria-hidden="true" />
+            <p className="text-sm">
+              {ratings} ({noOfProductSold})
+            </p>
+          </div>
+          <div className="w-1/2 flex flex-row-reverse lg:flex-row items-center space-x-1 lg:space-x-6 ">
+            <AddToCart product={product} />
+            <AddFavourite product={product} />
+          </div>
         </div>
       </div>
     </article>

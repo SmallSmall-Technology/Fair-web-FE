@@ -7,8 +7,8 @@ import favouriteReducer from "./features/favourite/favouriteSlice";
 import recentlyViewedReducer from "./features/product/recentlyViewedSlice";
 import productReducer from "./features/product/productSlice";
 import orderReducer from "./features/order/orderSlice";
+import authReducer from "./features/auth/authSlice";
 
-// Combine all reducers into a root reducer
 const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
@@ -16,9 +16,9 @@ const rootReducer = combineReducers({
   recentlyViewed: recentlyViewedReducer,
   products: productReducer,
   order: orderReducer,
+  auth: authReducer,
 });
 
-// Single persist config for the root reducer
 const persistConfig = {
   key: "root",
   storage,
@@ -29,6 +29,7 @@ const persistConfig = {
     "recentlyViewed",
     "products",
     "order",
+    "auth",
   ],
 };
 
