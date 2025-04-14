@@ -66,15 +66,9 @@ const App = () => {
 
             {/* Category and subcategory routes */}
             <Route path="category/:categoryName" element={<CategoryPage />} />
-            <Route
-              path="category/:categoryName/:subcategory"
-              element={<SubCategoryPage />}
-            />
+            <Route path="category/:categoryName/:subcategory" element={<SubCategoryPage />} />
             {/* Nested route for single product */}
-            <Route
-              path="category/:categoryName/:subcategory/:id/:slug"
-              element={<SingleProductPage />}
-            />
+            <Route path="category/:categoryName/:subcategory/:id/:slug" element={<SingleProductPage />} />
             <Route path=":id/:slug" element={<SingleProductPage />} />
           </Route>
           {/* Cart items route and checkout */}
@@ -82,15 +76,9 @@ const App = () => {
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
-            <Route
-              path="cart-items/checkout"
-              element={<CheckoutItems />}
-            ></Route>
+            <Route path="cart-items/checkout" element={<CheckoutItems />} />
 
-            <Route
-              path="cart-items/checkout/payment-success"
-              element={<CheckoutPaymentSuccess />}
-            ></Route>
+            <Route path="cart-items/checkout/payment-success" element={<CheckoutPaymentSuccess />} />
           </Route>
 
           <Route path="/sign-up" element={<SignUp />} />
@@ -104,62 +92,35 @@ const App = () => {
             <Route path="" element={<UserDashboardLayout />}>
               <Route path="/user-dashboard" element={<UserDashboard />}>
                 {/* Shopping overview */}
-                <Route
-                  path="/user-dashboard/shopping-overview"
-                  element={<ShoppingOverview />}
-                >
+                <Route path="/user-dashboard/shopping-overview" element={<ShoppingOverview />}>
                   {/* Shopping overview summary */}
-                  <Route
-                    path="/user-dashboard/shopping-overview/summary"
-                    element={<Summary />}
-                  />
+                  <Route path="/user-dashboard/shopping-overview/summary" element={<Summary />} />
                   {/* Shopping overview purchases */}
-                  <Route
-                    path="/user-dashboard/shopping-overview/purchases"
-                    element={<Purchases />}
-                  />
+                  <Route path="/user-dashboard/shopping-overview/purchases" element={<Purchases />} />
                   {/* Shopping overview wallet */}
-                  <Route
-                    path="/user-dashboard/shopping-overview/wallet"
-                    element={<Wallet />}
-                  />
+                  <Route path="/user-dashboard/shopping-overview/wallet" element={<Wallet />} />
                   {/* Shopping overview favorites */}
-                  <Route
-                    path="/user-dashboard/shopping-overview/favorites"
-                    element={<Favorites />}
-                  />
+                  <Route path="/user-dashboard/shopping-overview/favorites" element={<Favorites />} />
                   {/* Shopping overview recently viewes */}
-                  <Route
-                    path="/user-dashboard/shopping-overview/recently-viewed"
-                    element={<RecentlyViewed />}
-                  />
+                  <Route path="/user-dashboard/shopping-overview/recently-viewed" element={<RecentlyViewed />} />
                 </Route>
 
                 {/* Notifications */}
-                <Route
-                  path="/user-dashboard/notifications"
-                  element={<Notifications />}
-                >
+                <Route path="/user-dashboard/notifications" element={<Notifications />}>
                   <Route
                     path="/user-dashboard/notifications/acc"
                     // element={<Summary />}
-                  ></Route>
+                  />
                 </Route>
 
                 {/* Account profile */}
-                <Route
-                  path="/user-dashboard/account-profile"
-                  element={<AccountProfile />}
-                >
+                <Route path="/user-dashboard/account-profile" element={<AccountProfile />}>
                   <Route
                     path="/user-dashboard/account-profile/"
                     // element={<Summary />}
-                  ></Route>
+                  />
                 </Route>
-                <Route
-                  path="/user-dashboard/:id/:slug"
-                  element={<SingleProductPage />}
-                />
+                <Route path="/user-dashboard/:id/:slug" element={<SingleProductPage />} />
               </Route>
             </Route>
           </Route>
