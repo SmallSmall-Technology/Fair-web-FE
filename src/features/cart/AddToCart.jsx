@@ -70,7 +70,7 @@ export const AddToCart = ({ product }) => {
       <img
         src="/images/shopping-bag-add.svg"
         alt="Add to shopping cart"
-        className="w-5"
+        className="w-[18.5px] lg:w-5"
       />
     </button>
   );

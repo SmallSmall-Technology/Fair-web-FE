@@ -90,13 +90,15 @@ const SubCategoryPage = () => {
           </div>
         </div>
         <hr className="mb-6" />{" "}
-        <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-40 xl:grid-cols-5 xl:gap-4 2xl:flex 2xl:flex-wrap 2xl:justify-between lg:gap-">
+        {/* <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-6 2xl:flex 2xl:flex-wrap 2xl:justify-between 2xl:grid-cols-none"> */}
+        {/* <section className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6"> */}
+        <section className="flex justify-between flex-wrap">
           {productsToDisplay.map((product) => (
             <Link
               to={`/category/${categoryName}/${subcategory}/${product.id}/${product.slug}`}
               key={product.id}
             >
-              <div key={product.id} className="mb-6 ">
+              <div key={product.id} className="mb-6">
                 <ProductCard product={product} />
               </div>
             </Link>

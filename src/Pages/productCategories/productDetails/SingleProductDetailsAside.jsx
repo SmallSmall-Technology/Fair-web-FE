@@ -218,13 +218,14 @@ export const SingleProductDetailsAside = React.memo(
           </p>
         </div>
         <hr className="my-4 hidden lg:block" />
+        <p className="font-medium mb-4">Choose how you want to pay</p>
         <p className="hidden lg:block text-xs mb-3">Pay in instalments</p>
         <article className="bg-[#F2F2F2] rounded-[10px] py-3 lg:py-5 flex flex-col justify-center lg:justify-start mx-5 lg:mx-0">
           <div className="flex lg:hidden justify-end w-full pr-3">
             <ChevronsRight className="" role="button" />
           </div>
-          <div className="flex justify-center lg:justify-start">
-            <div className="flex space-x-6 lg:ml-10">
+          <div className="flex justify-between items-center lg:px-10">
+            <div className="flex space-x-6">
               <div className="max-w-[80px] grid gap-2 text-center">
                 <img
                   src="/images/half-circle.svg"
@@ -261,12 +262,22 @@ export const SingleProductDetailsAside = React.memo(
                 </div>
               </div>
             </div>
+            <div className="mx-5 lg:mx-0">
+              <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
+                Add to cart
+              </YellowButton>
+            </div>
           </div>
         </article>
-        <hr className="my-4 mx-5 lg:mx-0" />
+        <div className="flex items-center">
+          <hr className="flex-grow my-4 mx-5 lg:mx-0" />
+          <span className="mx-4">or</span>
+          <hr className="flex-grow my-4 mx-5 lg:mx-0" />
+        </div>
+
         <p className="text-xs mb-3 mx-5 lg:mx-0">Pay in full</p>
-        <article className="bg-[#F2F2F2] rounded-[10px] py-4 pl-8 lg:pl-0 flex justify-start mb-6 mx-5 lg:mx-0">
-          <div className="flex space-x-6 lg:ml-10">
+        <article className="bg-[rgb(242,242,242)] rounded-[10px] py-4 pl-8 lg:pl-0 flex justify-start mb-6 mx-5 lg:mx-0">
+          <div className="flex items-center justify-between w-full lg:px-10">
             <div className="flex gap-2 items-start">
               <img
                 src="/images/full-circle.svg"
@@ -278,13 +289,13 @@ export const SingleProductDetailsAside = React.memo(
                 <span className="text-[11px]">Pay now Today</span>
               </div>
             </div>
+            <div className="mx-5 lg:mx-0">
+              <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
+                Add to cart
+              </YellowButton>
+            </div>
           </div>
         </article>
-        <div className="mx-5 lg:mx-0">
-          <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
-            Add to cart
-          </YellowButton>
-        </div>
         <div className="mt-10 lg:hidden">
           <div className="border-y-4 rounded-2xl"></div>
           <div className="grid grid-flow-col lg:hidden mt-4 mx-5">
@@ -306,69 +317,71 @@ export const SingleProductDetailsAside = React.memo(
           </div>
         </div>
         <hr className="mt-6 mb-3 mx-5 lg:mx-0" />
-        <div className="mb-16 mx-5 lg:mx-0">
-          <h2 className="mb-4 text-lg font-medium">Item description</h2>
-          <p>
-            {product.description ||
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"}
-          </p>
-        </div>
-        <hr className="mb-4 mx-5 lg:mx-0" />
-        <div className="mb-16 mx-5 lg:mx-0">
-          <h2 className="mb-4 text-lg font-medium">About Item</h2>
-          <p>
-            {product.about ||
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"}
-          </p>
-        </div>
-        <hr className="mb-4 mx-5 lg:mx-0" />
-        <section className="grid lg:hidden mt-8 mx-5 lg:mx-0">
-          <p className="font-semibold text-lg mb-4">
-            Customer ratings and review
-          </p>
-          <CommentBar />
-        </section>
-        <div className="hidden lg:grid mb-16">
-          <h2 className="mb-4 text-lg font-medium">
-            Delivery & Return policies
-          </h2>
-          <ul className="list-none grid gap-4">
-            <li className="flex space-x-2">
-              <img
-                src="/images/calendar-day.svg"
-                alt="calender icon"
-                className="mr-2"
-              />
-              Estimated delivery date{" "}
-              <span className="font-medium">
-                {product.deliverydate || new Date().toLocaleDateString()}
-              </span>
-            </li>
-            <li className="flex space-x-2">
-              <img
-                src="/images/box-alt.svg"
-                alt="A box icon"
-                className="mr-2"
-              />
-              Returns & refund accepted within{" "}
-              <span className="font-medium">2 days</span>
-            </li>
-          </ul>
-        </div>
-        <div className="bg-[#FFF8CF] py-4 px-6 hidden lg:block">
-          <div className="flex items-start space-x-2">
-            <HeartHandshake size={24} />
-            <div>
-              <p className="font-medium text-[13px] mb-3">
-                Fair purchase protection
-              </p>
-              <p className="text-xs max-w-80">
-                Shop confidently on Fair knowing if something goes wrong with an
-                order, we've got your back for all eligible purchases.
-              </p>
+        <section className="lg:overflow-y-auto lg:h-96">
+          <div className="mb-16 mx-5 lg:mx-0">
+            <h2 className="mb-4 text-lg font-medium">Item description</h2>
+            <p>
+              {product.description ||
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"}
+            </p>
+          </div>
+          <hr className="mb-4 mx-5 lg:mx-0" />
+          <div className="mb-16 mx-5 lg:mx-0">
+            <h2 className="mb-4 text-lg font-medium">About Item</h2>
+            <p>
+              {product.about ||
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"}
+            </p>
+          </div>
+          <hr className="mb-4 mx-5 lg:mx-0" />
+          <section className="grid lg:hidden mt-8 mx-5 lg:mx-0">
+            <p className="font-semibold text-lg mb-4">
+              Customer ratings and review
+            </p>
+            <CommentBar />
+          </section>
+          <div className="hidden lg:grid mb-16">
+            <h2 className="mb-4 text-lg font-medium">
+              Delivery & Return policies
+            </h2>
+            <ul className="list-none grid gap-4">
+              <li className="flex space-x-2">
+                <img
+                  src="/images/calendar-day.svg"
+                  alt="calender icon"
+                  className="mr-2"
+                />
+                Estimated delivery date{" "}
+                <span className="font-medium">
+                  {product.deliverydate || new Date().toLocaleDateString()}
+                </span>
+              </li>
+              <li className="flex space-x-2">
+                <img
+                  src="/images/box-alt.svg"
+                  alt="A box icon"
+                  className="mr-2"
+                />
+                Returns & refund accepted within{" "}
+                <span className="font-medium">2 days</span>
+              </li>
+            </ul>
+          </div>
+          <div className="bg-[#FFF8CF] py-4 px-6 hidden lg:block">
+            <div className="flex items-start space-x-2">
+              <HeartHandshake size={24} />
+              <div>
+                <p className="font-medium text-[13px] mb-3">
+                  Fair purchase protection
+                </p>
+                <p className="text-xs max-w-80">
+                  Shop confidently on Fair knowing if something goes wrong with
+                  an order, we've got your back for all eligible purchases.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </aside>
     );
 
