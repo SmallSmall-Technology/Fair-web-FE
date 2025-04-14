@@ -1,15 +1,23 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { WalletBalance } from "./Wallet";
 import { SingleRecentlyViewed } from "./RecentlyViewed";
 import { useSelector } from "react-redux";
 import { getRecentlyViewed } from "../../../../features/product/recentlyViewedSlice";
+import {
+  getCancelledOrders,
+  getCompletedOrders,
+  getOngoingOrders,
+} from "../../../../features/order/orderSlice";
 // import { RecentlyViewed } from "./RecentlyViewed";
 
 export const Summary = () => {
   const recentlyViewed = useSelector(getRecentlyViewed);
+  const ongoingOrders = useSelector(getOngoingOrders);
+  const onCompletedOrders = useSelector(getCompletedOrders);
+  const onCancelledOrders = useSelector(getCancelledOrders);
 
   return (
-    <section className="grid grid-cols-1 gap-6">
+    <section className="grid grid-cols-1 gap-6 ">
       <article>
         <h1 className="font-semibold text-2xl mb-3"> Purchases</h1>
         <div className="border rounded-[10px] pt-4 pb-8 px-5 w-full">
@@ -20,7 +28,9 @@ export const Summary = () => {
                 <span>
                   <img src="/images/time-half-past.svg" alt="clock" />
                 </span>
-                <span className="font-semibold text-3xl">3</span>
+                <span className="font-semibold text-3xl">
+                  {ongoingOrders.length}
+                </span>
               </p>
             </li>
 
@@ -30,7 +40,9 @@ export const Summary = () => {
                 <span>
                   <img src="/images/export-box.svg" alt="export box" />
                 </span>
-                <span className="font-semibold text-3xl">5</span>
+                <span className="font-semibold text-3xl">
+                  {onCompletedOrders.length}
+                </span>
               </p>
             </li>
 
@@ -40,7 +52,9 @@ export const Summary = () => {
                 <span>
                   <img src="/images/export-box.svg" alt="export box" />
                 </span>
-                <span className="font-semibold text-3xl">0</span>
+                <span className="font-semibold text-3xl">
+                  {onCancelledOrders.length}
+                </span>
               </p>
             </li>
           </ul>
@@ -56,7 +70,7 @@ export const Summary = () => {
               to="/user-dashboard/shopping-overview/recently-viewed"
               className="underline font-medium"
             >
-              {recentlyViewed === 0 ? "" : "See all"}
+              {recentlyViewed < 1 ? "" : "See all"}
             </Link>
           </div>
           <section className="grid grid-cols-1 gap-4 border w-full rounded-[10px] p-2">
@@ -65,11 +79,11 @@ export const Summary = () => {
                 No recently viewed items
               </p>
             ) : (
-              recentlyViewed
-                .slice(0, 2)
-                .map((item) => (
+              recentlyViewed.slice(0, 2).map((item, index) => (
+                <div key={index}>
                   <SingleRecentlyViewed item={item} key={item.id} />
-                ))
+                </div>
+              ))
             )}
           </section>
         </div>

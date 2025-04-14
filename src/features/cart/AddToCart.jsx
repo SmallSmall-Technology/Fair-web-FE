@@ -1,7 +1,9 @@
 import { addItem } from "./cartSlice";
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-export const handleAddToCart = (dispatch, product) => {
+export const handleAddToCart = (dispatch, product, navigate) => {
   if (!product) return;
 
   const {
@@ -35,24 +37,41 @@ export const handleAddToCart = (dispatch, product) => {
   };
 
   dispatch(addItem(newItem));
+
+  // toast
+  //   .success
+  //   <div className="flex items-center space-x-2">
+  //     <span>Item added to cart</span>
+  //     <span className="text-black">|</span>
+  //     <button
+  //       onClick={() => navigate("/cart-items")}
+  //       className="underline text-sm"
+  //     >
+  //       View cart
+  //     </button>
+  //   </div>
+  //   {
+  //     className: "bg-[#FFDE11] text-black text-sm px-2 py-1 rounded-md min-h-0",
+  //     bodyClassName: "m-0 p-0",
+  //     closeButton: false,
+  //   }
+  //   ();
 };
 
 export const AddToCart = ({ product }) => {
   const dispatch = useDispatch();
 
   return (
-    <div
+    <button
       className="bg-[#FFDE11] h-10 w-10 rounded-full flex justify-center focus:outline-none focus:ring-2 focus:ring-black"
-      tabIndex={0}
       aria-label="Add to cart"
-      role="button"
       onClick={() => handleAddToCart(dispatch, product)}
     >
       <img
         src="/images/shopping-bag-add.svg"
         alt="Add to shopping cart"
-        className="w-5"
+        className="w-[18.5px] lg:w-5"
       />
-    </div>
+    </button>
   );
 };

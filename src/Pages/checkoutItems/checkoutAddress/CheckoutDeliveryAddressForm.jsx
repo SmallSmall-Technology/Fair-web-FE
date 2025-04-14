@@ -31,7 +31,14 @@ export const CheckoutDeliveryAddressForm = ({
       }}
     >
       {(formik) => (
-        <Form>
+        <Form className="mt-10">
+          <h1 className="font-medium text-[21px] mb-3 hidden lg:block">
+            Delivery Form
+          </h1>
+          <h1 className="font-medium text-[21px] mb-3 lg:hidden">
+            Shipping Form
+          </h1>
+
           {/* State Dropdown */}
           <div>
             <label htmlFor="state" className="sr-only">

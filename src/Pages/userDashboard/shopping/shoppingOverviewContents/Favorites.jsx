@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { Trash2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { YellowButton } from "../../../../utils/Button";
@@ -21,7 +21,7 @@ export const Favorites = () => {
   };
   return (
     <section>
-      <div className="flex ml-auto w-fit">
+      <div className="flex ml-auto w-fit mb-4">
         {favourites.length === 0 ? (
           ""
         ) : (
@@ -32,7 +32,7 @@ export const Favorites = () => {
         )}
       </div>
 
-      <ul className="grid grid-cols-1 gap-4 lg:overflow-y-auto lg:h-80">
+      <ul className="grid grid-cols-1 gap-4 lg:overflow-y-auto lg:h-96">
         {favourites.length === 0 ? (
           <p className="text-center text-gray-500">No Favourite items</p>
         ) : (

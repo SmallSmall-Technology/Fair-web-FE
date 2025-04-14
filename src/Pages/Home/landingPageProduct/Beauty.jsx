@@ -1,10 +1,15 @@
-import { NavLink } from "react-router";
-import { products } from "../../../utils/data";
+import { NavLink } from "react-router-dom";
 import { Button } from "../../../utils/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductCard } from "../../../utils/ProductCard";
+import { useQuery } from "@tanstack/react-query";
+import { fetchAllProducts } from "../../../api";
 
 export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchAllProducts,
+  });
   return (
     <>
       <div className="flex justify-between mt-12 mb-4">
@@ -20,8 +25,8 @@ export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
             className="grid grid-flow-col space-x-4 w-full overflow-x-scroll scrollbar-hide scroll-smooth"
             ref={containerRef}
           >
-            {products
-              .filter((product) => product.category === "beauty")
+            {data
+              ?.filter((product) => product.category === "beauty")
               .map((product) => (
                 <div key={product.id}>
                   <ProductCard product={product} />

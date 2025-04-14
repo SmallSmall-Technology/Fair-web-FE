@@ -1,11 +1,16 @@
-import { NavLink } from "react-router";
-
-import { products } from "../../../utils/data";
+import { NavLink } from "react-router-dom";
+import { fetchAllProducts } from "../../../api";
 import { Button } from "../../../utils/Button";
+import { useQuery } from "@tanstack/react-query";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductCard } from "../../../utils/ProductCard";
 
 export const Electronics = ({ onScrollProduct, item_width, containerRef }) => {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchAllProducts,
+  });
+
   return (
     <section>
       <div className="flex justify-between mt-12 mb-4">
@@ -21,7 +26,7 @@ export const Electronics = ({ onScrollProduct, item_width, containerRef }) => {
             className="flex  space-x-4 w-full overflow-x-auto scrollbar-hide scroll-smooth"
             ref={containerRef}
           >
-            {products.map((product) => (
+            {data?.map((product) => (
               <div key={product.id} className="product-card">
                 <ProductCard product={product} />
               </div>

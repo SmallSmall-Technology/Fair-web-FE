@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { formatCurrency } from "../../utils/FormatCurrency";
 import { getTotalCartPrice } from "../../features/cart/cartSlice";
@@ -10,11 +10,7 @@ export const CheckoutPaymentSuccessContent = () => {
     <article className="">
       <section className="border rounded-md px-3 lg:px-7 pt-5 lg:w-[510px] ">
         <div className="pt-3">
-          <img
-            src="/public/images/check 1.svg"
-            alt="Company Logo"
-            className="mb-2"
-          />
+          <img src="/images/check 1.svg" alt="Company Logo" className="mb-2" />
           <h1 className="font-bold text-xl">Thank you for your payment</h1>
           <p className="text-[#96959F]">
             Your order was completed successfully.
@@ -67,10 +63,7 @@ export const CheckoutPaymentSuccessContent = () => {
           <Link to="/" className="flex items-center space-x-1 mt-6 pb-3 mb-4">
             <p className="font-medium underline">Continue shopping </p>
             <span>
-              <img
-                src="/public/images/shopping-basket 1.svg"
-                alt="shopping basket"
-              />
+              <img src="/images/shopping-basket 1.svg" alt="shopping basket" />
             </span>
           </Link>
         </div>

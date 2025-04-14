@@ -1,5 +1,5 @@
 import ProductList from "./ProductList";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { products } from "../../../utils/data";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowUpDown, ChevronRight } from "lucide-react";
@@ -58,7 +58,6 @@ const CategoryPage = () => {
       }, {});
 
     setSortedGroupedProducts(sorted);
-    console.log(sortedGroupedProducts);
   };
 
   // Determine which grouped products to use

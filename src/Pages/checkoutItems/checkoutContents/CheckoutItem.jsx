@@ -15,7 +15,7 @@ export const CheckoutItem = () => {
             key={item.id}
           >
             <div className="flex space-x-2  px-8 lg:px-0">
-              <div className="w-[69px] h-[69px] md:w-[135px] md:h-[135px]">
+              <div className="w-[69px] h-[69px] md:min-w-[135px] md:min-h-[135px]">
                 <img
                   src={item.image}
                   alt={item.name}

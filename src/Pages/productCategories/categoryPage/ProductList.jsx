@@ -1,12 +1,11 @@
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import { ProductCard } from "../../../utils/ProductCard";
 
 const ProductList = ({
   categoryName,
-  groupedProductsAll,
+  // groupedProductsAll,
   groupedProductsWithLimit,
 }) => {
-  const navigate = useNavigate();
   return (
     <>
       {Object.entries(groupedProductsWithLimit).map(
