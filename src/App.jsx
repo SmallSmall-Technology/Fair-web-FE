@@ -56,8 +56,6 @@ const App = () => {
         theme="yellow"
       />
       <BrowserRouter>
-        {/* <ToastContainer position="top-right" autoClose={3000} /> */}
-
         <ScrollToTop />
         <Routes>
           <Route path="" element={<Layout />}>
