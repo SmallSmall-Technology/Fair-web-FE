@@ -21,6 +21,7 @@ import { Purchases } from "./pages/userDashboard/shopping/shoppingOverviewConten
 import { CheckoutPaymentSuccess } from "./pages/checkoutPaymentSuccess/CheckoutPaymentSuccess";
 import { ShoppingOverview } from "./pages/userDashboard/shopping/shoppingOverview/ShoppingOverview";
 import { RecentlyViewed } from "./pages/userDashboard/shopping/shoppingOverviewContents/RecentlyViewed";
+import HowItWorks from "./pages/howItWorks/HowItWorks";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="" element={<Layout />}>
           {/* Home route */}
           <Route path="/" element={<Home />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
 
           {/* Category and subcategory routes */}
           <Route path="category/:categoryName" element={<CategoryPage />} />
