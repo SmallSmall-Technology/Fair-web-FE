@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Search } from "lucide-react";
+import { useSelector } from "react-redux";
 import { Field, Form, Formik } from "formik";
-import { useSelector, useDispatch } from "react-redux";
 import { PurchaseCompleted } from "./purchaseContentSection/PurchaseCompleted";
 import { PurchaseCancelled } from "./purchaseContentSection/PurchaseCancelled";
 import {
@@ -16,7 +16,7 @@ export const Purchases = () => {
   const [formIsActive, setFormIsActive] = useState(false);
 
   // Get orders from Redux store
-  const ongoingOrders = useSelector(getOngoingOrders);
+  const onGoingOrders = useSelector(getOngoingOrders);
   const completedOrders = useSelector(getCompletedOrders);
   const cancelledOrders = useSelector(getCancelledOrders);
   const allOrders = useSelector((state) => state.order.orders);
@@ -93,7 +93,7 @@ export const Purchases = () => {
                   onClick={() => setActiveTab("ongoing")}
                   aria-label="View ongoing orders"
                 >
-                  Ongoing <span>({ongoingOrders.length})</span>
+                  Ongoing <span>({onGoingOrders.length})</span>
                 </button>
                 <button
                   className={`p-2 rounded-[30px] text-sm lg:text-base border ${
