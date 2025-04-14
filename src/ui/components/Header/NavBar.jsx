@@ -7,7 +7,7 @@ import {
   getUserName,
 } from "../../../features/auth/authSlice";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { YellowButton } from "../../../utils/Button";
 import { CartDropdownItems } from "./CartDropdownItems";
@@ -158,7 +158,11 @@ export const NavBar = () => {
 };
 
 export const Subtotal = () => {
+  const navigate = useNavigate();
   const subTotal = useSelector(getTotalCartPrice);
+  const handleCheckout = () => {
+    navigate("cart-items/checkout");
+  };
 
   return (
     <article className="px-5 py-5 pb-10 top-shadow">
@@ -167,7 +171,7 @@ export const Subtotal = () => {
         <p>{formatCurrency(subTotal)}</p>
       </div>
       <div className="w-[90%] mx-auto">
-        <YellowButton>Check Out</YellowButton>
+        <YellowButton onClick={handleCheckout}>Check Out</YellowButton>
       </div>
     </article>
   );

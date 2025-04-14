@@ -1,6 +1,5 @@
 import { Dot } from "lucide-react";
 import { useSelector } from "react-redux";
-
 import { CancelPurchase } from "../CartHeader.jsx";
 import { YellowButton } from "../../../utils/Button.jsx";
 import { CartCoupon } from "../../../features/cart/CartCoupon.jsx";
