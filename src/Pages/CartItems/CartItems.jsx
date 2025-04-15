@@ -1,6 +1,6 @@
-import { CartFooter } from "./CartFooter";
-import Header from "../../ui/components/header/Header";
-import CartItemsContentSection from "./cartItemsContent/CartItemsContentSection";
+import { CartFooter } from './CartFooter';
+import Header from '../../ui/components/header/Header';
+import CartItemsContentSection from './cartItemsContent/CartItemsContentSection';
 
 export const CartItems = () => {
   return (

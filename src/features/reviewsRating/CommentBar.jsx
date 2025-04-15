@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { Formik, Form, Field } from "formik";
-import { TotalRatings } from "./TotalRatings";
-import { CircleArrowUp } from "lucide-react";
-import { UsersReviews } from "../../Pages/productCategories/productDetails/UsersReviews";
-import { UsersReviewsModal } from "../../Pages/productCategories/productDetails/UsersReviewsModal";
+import React, { useState } from 'react';
+import { Formik, Form, Field } from 'formik';
+import { TotalRatings } from './TotalRatings';
+import { CircleArrowUp } from 'lucide-react';
+import { UsersReviews } from '../../Pages/productCategories/productDetails/UsersReviews';
+import { UsersReviewsModal } from '../../Pages/productCategories/productDetails/UsersReviewsModal';
 
-export const CommentBar = () => {
+export const CommentBar = React.memo(() => {
   const [reviews, setReviews] = useState([]);
 
   const handleSubmitComment = (values, { resetForm }) => {
     if (values) {
-      const reviewWithDefault = { ...values, name: values.name || "Anonymous" };
+      const reviewWithDefault = { ...values, name: values.name || 'Anonymous' };
       setReviews((prevReview) => [...prevReview, reviewWithDefault]);
       resetForm();
     }
@@ -19,9 +19,9 @@ export const CommentBar = () => {
   return (
     <>
       <Formik
-        initialValues={{ comment: "", name: "" }}
+        initialValues={{ comment: '', name: '' }}
         onSubmit={handleSubmitComment}
-        onReset={""}
+        onReset={''}
       >
         {(formik) => (
           <Form>
@@ -56,4 +56,4 @@ export const CommentBar = () => {
       </section>
     </>
   );
-};
+});

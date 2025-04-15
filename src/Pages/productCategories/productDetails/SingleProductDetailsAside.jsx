@@ -1,13 +1,13 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { YellowButton } from "../../../utils/Button";
-import { ChevronsRight, HeartHandshake } from "lucide-react";
-import { formatCurrency } from "../../../utils/FormatCurrency";
-import { handleAddToCart } from "../../../features/cart/AddToCart";
-import { CommentBar } from "../../../features/reviewsRating/CommentBar";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { YellowButton } from '../../../utils/Button';
+import { ChevronsRight, HeartHandshake } from 'lucide-react';
+import { formatCurrency } from '../../../utils/FormatCurrency';
+import { handleAddToCart } from '../../../features/cart/AddToCart';
+import { CommentBar } from '../../../features/reviewsRating/CommentBar';
 
 // Reusable SkeletonBox for placeholders
-const SkeletonBox = ({ width = "100%", height = "1rem", className = "" }) => (
+const SkeletonBox = ({ width = '100%', height = '1rem', className = '' }) => (
   <div
     className={`bg-gray-200 animate-pulse rounded ${className}`}
     style={{ width, height }}
@@ -173,7 +173,7 @@ export const SingleProductDetailsAside = React.memo(
 
     // Content Component
     const Content = () => (
-      <aside className="w-full lg:w-1/2 lg:pl-10">
+      <aside className="w-full xl:w-[45%]">
         <h1 className="text-xl lg:text-2xl font-bold mx-5 lg:mx-0">
           {product.name}
         </h1>
@@ -218,13 +218,13 @@ export const SingleProductDetailsAside = React.memo(
           </p>
         </div>
         <hr className="my-4 hidden lg:block" />
-        <p className="font-medium mb-4">Choose how you want to pay</p>
+        <p className="font-medium mb-4 mx-4 ">Choose how you want to pay</p>
         <p className="hidden lg:block text-xs mb-3">Pay in instalments</p>
-        <article className="bg-[#F2F2F2] rounded-[10px] py-3 lg:py-5 flex flex-col justify-center lg:justify-start mx-5 lg:mx-0">
+        <article className="bg-[#F2F2F2] rounded-[10px] py-5 flex flex-col justify-center lg:justify-start mx-5 lg:mx-0">
           <div className="flex lg:hidden justify-end w-full pr-3">
             <ChevronsRight className="" role="button" />
           </div>
-          <div className="flex justify-between items-center lg:px-10">
+          <div className="flex flex-col lg:flex-row gap-4 justify-between items-center px-10 w-full">
             <div className="flex space-x-6">
               <div className="max-w-[80px] grid gap-2 text-center">
                 <img
@@ -234,7 +234,9 @@ export const SingleProductDetailsAside = React.memo(
                 />
                 <div className="grid grid-cols-1">
                   <p className="text-xs font-medium">N200.000</p>
-                  <span className="text-[11px]">Pay now today</span>
+                  <span className="text-[11px]">
+                    Pay now <br /> today
+                  </span>
                 </div>
               </div>
               <div className="max-w-[80px] grid gap-2 text-center">
@@ -262,7 +264,8 @@ export const SingleProductDetailsAside = React.memo(
                 </div>
               </div>
             </div>
-            <div className="mx-5 lg:mx-0">
+            <div className="w-full h-[1px] bg-[#E5E5E5] lg:hidden"></div>
+            <div className="mx-5 lg:mx-0 w-full lg:w-fit">
               <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
                 Add to cart
               </YellowButton>
@@ -276,9 +279,9 @@ export const SingleProductDetailsAside = React.memo(
         </div>
 
         <p className="text-xs mb-3 mx-5 lg:mx-0">Pay in full</p>
-        <article className="bg-[rgb(242,242,242)] rounded-[10px] py-4 pl-8 lg:pl-0 flex justify-start mb-6 mx-5 lg:mx-0">
-          <div className="flex items-center justify-between w-full lg:px-10">
-            <div className="flex gap-2 items-start">
+        <article className="bg-[hsl(0,0%,95%)] rounded-[10px] py-5 lg:pl-8 pl-0 flex justify-start mb-6 mx-5 lg:mx-0 ">
+          <div className="flex flex-col lg:flex-row gap-2 justify-between items-center px-10 w-full">
+            <div className="flex gap-2 items-start mr-auto">
               <img
                 src="/images/full-circle.svg"
                 alt="A diameter of a circle"
@@ -289,7 +292,8 @@ export const SingleProductDetailsAside = React.memo(
                 <span className="text-[11px]">Pay now Today</span>
               </div>
             </div>
-            <div className="mx-5 lg:mx-0">
+            <div className="w-full h-[1px] bg-[#E5E5E5] my-2 lg:hidden"></div>
+            <div className="mx-5 lg:mx-0 w-full lg:w-fit">
               <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
                 Add to cart
               </YellowButton>
@@ -306,9 +310,9 @@ export const SingleProductDetailsAside = React.memo(
             </div>
             <div className="mt-4">
               <p>
-                Est.delivery date{" "}
+                Est.delivery date{' '}
                 <span className="font-medium">
-                  {shippingDate || "20 Jan, 2025"}
+                  {shippingDate || '20 Jan, 2025'}
                 </span>
               </p>
               <p>{product.brand}</p>
@@ -322,7 +326,7 @@ export const SingleProductDetailsAside = React.memo(
             <h2 className="mb-4 text-lg font-medium">Item description</h2>
             <p>
               {product.description ||
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"}
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'}
             </p>
           </div>
           <hr className="mb-4 mx-5 lg:mx-0" />
@@ -330,7 +334,7 @@ export const SingleProductDetailsAside = React.memo(
             <h2 className="mb-4 text-lg font-medium">About Item</h2>
             <p>
               {product.about ||
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"}
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'}
             </p>
           </div>
           <hr className="mb-4 mx-5 lg:mx-0" />
@@ -351,7 +355,7 @@ export const SingleProductDetailsAside = React.memo(
                   alt="calender icon"
                   className="mr-2"
                 />
-                Estimated delivery date{" "}
+                Estimated delivery date{' '}
                 <span className="font-medium">
                   {product.deliverydate || new Date().toLocaleDateString()}
                 </span>
@@ -362,7 +366,7 @@ export const SingleProductDetailsAside = React.memo(
                   alt="A box icon"
                   className="mr-2"
                 />
-                Returns & refund accepted within{" "}
+                Returns & refund accepted within{' '}
                 <span className="font-medium">2 days</span>
               </li>
             </ul>

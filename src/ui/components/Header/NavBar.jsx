@@ -1,20 +1,20 @@
 import {
   getTotalCartPrice,
   getTotalCartQuantity,
-} from "../../../features/cart/cartSlice";
+} from '../../../features/cart/cartSlice';
 import {
   getUserIsAuthenticated,
   getUserName,
-} from "../../../features/auth/authSlice";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { YellowButton } from "../../../utils/Button";
-import { CartDropdownItems } from "./CartDropdownItems";
-import { LoggedInUserDropdown } from "./LoggedInUserDropdown";
-import { formatCurrency } from "../../../utils/FormatCurrency";
-import { ChevronDown, Heart, ShoppingCart } from "lucide-react";
-import { getTotalFavouritesQuantity } from "../../../features/favourite/favouriteSlice";
+} from '../../../features/auth/authSlice';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { YellowButton } from '../../../utils/Button';
+import { CartDropdownItems } from './CartDropdownItems';
+import { LoggedInUserDropdown } from './LoggedInUserDropdown';
+import { formatCurrency } from '../../../utils/FormatCurrency';
+import { ChevronDown, Heart, ShoppingCart } from 'lucide-react';
+import { getTotalFavouritesQuantity } from '../../../features/favourite/favouriteSlice';
 
 export const NavBar = () => {
   const user = useSelector(getUserName);
@@ -161,7 +161,7 @@ export const Subtotal = () => {
   const navigate = useNavigate();
   const subTotal = useSelector(getTotalCartPrice);
   const handleCheckout = () => {
-    navigate("cart-items/checkout");
+    navigate('cart-items/checkout');
   };
 
   return (

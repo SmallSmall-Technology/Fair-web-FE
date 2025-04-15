@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
-import { PaymentPlan } from "./PaymentPlan";
-import { DeleteItem } from "../../../features/cart/DeleteItem";
-import { formatCurrency } from "../../../utils/FormatCurrency";
-import { getCurrentQuantityById } from "../../../features/cart/cartSlice";
-import { SaveItemForLater } from "../../../features/cart/SaveItemForLater";
-import { UpdateItemQuantity } from "../../../features/cart/UpdateItemQuantity";
+import { useSelector } from 'react-redux';
+import { PaymentPlan } from './PaymentPlan';
+import { DeleteItem } from '../../../features/cart/DeleteItem';
+import { formatCurrency } from '../../../utils/FormatCurrency';
+import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
+import { SaveItemForLater } from '../../../features/cart/SaveItemForLater';
+import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 
 export const CartItem = ({ item }) => {
   const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
@@ -16,16 +16,29 @@ export const CartItem = ({ item }) => {
     >
       <div className="">
         {/* Product Details */}
-        <section className="p-4">
-          <div className="flex space-x-1 items-center mb-1 2xl:px-10">
-            <img
-              src="/images/sold-by-fair.svg"
-              alt="Fair company logo"
-              className="w-6 h-6"
-            />
-            <p className="underline">Fair</p>
-          </div>
+        <section className="md:p-4">
+          <div className="flex justify-between mb-3">
+            <div className="flex space-x-1 items-center mb-1 2xl:px-10">
+              <img
+                src="/images/sold-by-fair.svg"
+                alt="Fair company logo"
+                className="w-6 h-6"
+              />
+              <p className="underline">Fair</p>
+            </div>
 
+            <button
+              type="submit"
+              onClick={onClick}
+              className=" group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[#FFDE11] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black"
+            >
+              <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11]"></span>
+
+              <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-base">
+                Change Plan
+              </span>
+            </button>
+          </div>
           <div className="grid md:grid-flow-col items-center justify-between 2xl:px-10">
             <div className="flex items-start gap-4 ">
               <div className="product-image ">
@@ -53,28 +66,33 @@ export const CartItem = ({ item }) => {
             </div>
 
             <div className="hidden md:grid">
-              <p className="text-xl font-semibold mb-6">
-                {formatCurrency(item.price * currentQuantity)}
-              </p>
-              <p className="text-xs">Interest-free credit</p>
-              <p className="text-[#DB1C5E] mb-4">
-                {formatCurrency(item?.interest || 20000)}
-              </p>
+              <div className="flex flex-col items-end">
+                <p className="text-xl font-semibold mb-6">
+                  {formatCurrency(item.price * currentQuantity)}
+                </p>
+                <p className="text-xs">Interest-free credit</p>
+                <p className="text-[#DB1C5E] mb-4">
+                  {formatCurrency(item?.interest || 20000)}
+                </p>
+              </div>
 
               {/* Actions */}
-              <div className="flex space-x-2 items-center mb-2">
-                <button className="underline" aria-label="Save for later">
+              <div className="flex space-x-2 items-center mb-2 justify-end">
+                <button
+                  className="underline text-sm font-normal"
+                  aria-label="Save for later"
+                >
                   Save for later
                 </button>
                 <hr className="border-l border-gray-300 h-4" />
                 <DeleteItem id={item.id} />
               </div>
 
-              <p className="text-xs">
-                Shipping: Arrives by{" "}
+              <p className="text-sm font-normal">
+                Shipping: Arrives by{' '}
                 <span className="font-medium">
-                  {" "}
-                  {item?.deliveryDate || "Jan, 20 2025"}
+                  {' '}
+                  {item?.deliveryDate || 'Jan, 20 2025'}
                 </span>
               </p>
             </div>
@@ -92,12 +110,12 @@ export const CartItem = ({ item }) => {
 
         <PaymentPlan />
         <div className="flex justify-between mt-4 md:hidden ">
-          <p className="text-xs">
+          <p className="text-xs font-semibold">
             Shipping: Arrives by
             <br />
             <span className="font-medium">
-              {" "}
-              {item?.deliveryDate || "Jan, 20 2025"}
+              {' '}
+              {item?.deliveryDate || 'Jan, 20 2025'}
             </span>
           </p>
 

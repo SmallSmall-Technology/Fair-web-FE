@@ -2,19 +2,19 @@ import {
   createAsyncThunk,
   createSlice,
   createSelector,
-} from "@reduxjs/toolkit";
-import axios from "axios";
+} from '@reduxjs/toolkit';
+import axios from 'axios';
 
-const API_URL = "http://localhost:3000";
+const API_URL = 'http://localhost:3000';
 
 // Fetch orders from json-server
-export const fetchOrders = createAsyncThunk("order/fetchOrders", async () => {
+export const fetchOrders = createAsyncThunk('order/fetchOrders', async () => {
   const response = await axios.get(`${API_URL}/orders`);
   return response.data;
 });
 
 export const createOrder = createAsyncThunk(
-  "order/createOrder",
+  'order/createOrder',
   async ({ cartItems, initialPayment }, { rejectWithValue }) => {
     try {
       const totalAmount = cartItems.reduce(
@@ -34,12 +34,12 @@ export const createOrder = createAsyncThunk(
         totalAmount,
         paidAmount: parseFloat(initialPayment),
         remainingAmount: totalAmount - parseFloat(initialPayment),
-        status: "ongoing",
+        status: 'ongoing',
         createdAt: new Date().toISOString(),
-        orderDate: new Date().toLocaleDateString("en-US", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
+        orderDate: new Date().toLocaleDateString('en-US', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
         }),
       };
       const response = await axios.post(`${API_URL}/orders`, newOrder);
@@ -51,13 +51,13 @@ export const createOrder = createAsyncThunk(
 );
 
 export const makePayment = createAsyncThunk(
-  "order/makePayment",
+  'order/makePayment',
   async ({ orderId, amount }, { rejectWithValue }) => {
     try {
       const orderResponse = await axios.get(`${API_URL}/orders/${orderId}`);
       const order = orderResponse.data;
 
-      if (order && order.status === "ongoing") {
+      if (order && order.status === 'ongoing') {
         const updatedOrder = {
           ...order,
           paidAmount: order.paidAmount + parseFloat(amount),
@@ -65,8 +65,8 @@ export const makePayment = createAsyncThunk(
             order.totalAmount - (order.paidAmount + parseFloat(amount)),
           status:
             order.totalAmount - (order.paidAmount + parseFloat(amount)) <= 0
-              ? "completed"
-              : "ongoing",
+              ? 'completed'
+              : 'ongoing',
         };
         if (updatedOrder.remainingAmount <= 0) {
           updatedOrder.remainingAmount = 0;
@@ -77,7 +77,7 @@ export const makePayment = createAsyncThunk(
         );
         return response.data;
       }
-      throw new Error("Order not found or not ongoing");
+      throw new Error('Order not found or not ongoing');
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -85,21 +85,21 @@ export const makePayment = createAsyncThunk(
 );
 
 export const cancelOrder = createAsyncThunk(
-  "order/cancelOrder",
+  'order/cancelOrder',
   async (orderId, { rejectWithValue }) => {
     try {
       const orderResponse = await axios.get(`${API_URL}/orders/${orderId}`);
       const order = orderResponse.data;
 
-      if (order && order.status === "ongoing") {
-        const updatedOrder = { ...order, status: "cancelled" };
+      if (order && order.status === 'ongoing') {
+        const updatedOrder = { ...order, status: 'cancelled' };
         const response = await axios.put(
           `${API_URL}/orders/${orderId}`,
           updatedOrder
         );
         return response.data;
       }
-      throw new Error("Order not found or not ongoing");
+      throw new Error('Order not found or not ongoing');
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -108,25 +108,25 @@ export const cancelOrder = createAsyncThunk(
 
 const initialState = {
   orders: [],
-  status: "idle",
+  status: 'idle',
   error: null,
 };
 
 const orderSlice = createSlice({
-  name: "order",
+  name: 'order',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchOrders.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(fetchOrders.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.orders = action.payload;
       })
       .addCase(fetchOrders.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = 'failed';
         state.error = action.error.message;
       })
       .addCase(createOrder.fulfilled, (state, action) => {
@@ -149,13 +149,13 @@ export default orderSlice.reducer;
 const selectOrders = (state) => state.order.orders;
 
 export const getOngoingOrders = createSelector([selectOrders], (orders) =>
-  (orders || []).filter((order) => order.status === "ongoing")
+  (orders || []).filter((order) => order.status === 'ongoing')
 );
 
 export const getCompletedOrders = createSelector([selectOrders], (orders) =>
-  (orders || []).filter((order) => order.status === "completed")
+  (orders || []).filter((order) => order.status === 'completed')
 );
 
 export const getCancelledOrders = createSelector([selectOrders], (orders) =>
-  (orders || []).filter((order) => order.status === "cancelled")
+  (orders || []).filter((order) => order.status === 'cancelled')
 );

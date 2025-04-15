@@ -1,14 +1,14 @@
-import { Dot } from "lucide-react";
-import { useSelector } from "react-redux";
-import { CancelPurchase } from "../CartHeader.jsx";
-import { YellowButton } from "../../../utils/Button.jsx";
-import { CartCoupon } from "../../../features/cart/CartCoupon.jsx";
-import { formatCurrency } from "../../../utils/FormatCurrency.jsx";
+import { Dot } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { CancelPurchase } from '../CartHeader.jsx';
+import { YellowButton } from '../../../utils/Button.jsx';
+import { CartCoupon } from '../../../features/cart/CartCoupon.jsx';
+import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 import {
   getTotalCartPrice,
   getTotalCartQuantity,
-} from "../../../features/cart/cartSlice.js";
-import { CartFooter } from "../../cartItems/CartFooter.jsx";
+} from '../../../features/cart/cartSlice.js';
+import { CartFooter } from '../../cartItems/CartFooter.jsx';
 
 export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const cart = useSelector((state) => state.cart.cart);
@@ -31,7 +31,7 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
               <p className="text-sm font-medium">Subtotal</p>
               <span className="flex text-sm font-medium">
                 <Dot />
-                {totalCartQuantity} {cart.length > 1 ? "items" : "item"}
+                {totalCartQuantity} {cart.length > 1 ? 'items' : 'item'}
               </span>
             </div>
             <p className="font-normal text-base">{formatCurrency(subtTotal)}</p>

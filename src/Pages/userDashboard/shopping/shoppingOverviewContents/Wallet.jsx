@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { Link } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
 
 export const Wallet = () => {
   return (
@@ -18,7 +18,7 @@ export const WalletBalance = () => {
         <div className="grid gap-2">
           <p>Available balance</p>
           <p className="flex items-center space-x-2 font-semibold text-3xl">
-            N953.66{" "}
+            N953.66{' '}
             <Link
               to="/user-dashboard/shopping-overview/wallet"
               aria-label="see more"

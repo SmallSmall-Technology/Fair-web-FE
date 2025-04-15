@@ -1,5 +1,5 @@
-import { CartHeader } from "./CartHeader";
-import { CheckoutItemsContentSection } from "./checkoutContents/CheckoutItemsContentSection";
+import { CartHeader } from './CartHeader';
+import { CheckoutItemsContentSection } from './checkoutContents/CheckoutItemsContentSection';
 
 export const CheckoutItems = () => {
   return (

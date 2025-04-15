@@ -1,9 +1,9 @@
-import { Beauty } from "./Beauty";
-import { useRef, useState } from "react";
-import { TodaysDeal } from "./TodaysDeal";
-import { Electronics } from "./Electronics";
-import { NewProductsInStore } from "./NewProductsInStore";
-import { PopularProducts } from "./popularProducts/PopularProducts";
+import { Beauty } from './Beauty';
+import { useRef, useState } from 'react';
+import { TodaysDeal } from './TodaysDeal';
+import { Electronics } from './Electronics';
+import { NewProductsInStore } from './NewProductsInStore';
+import { PopularProducts } from './popularProducts/PopularProducts';
 
 const Products = () => {
   const [newProductsScroll, setNewProductsScroll] = useState(0);

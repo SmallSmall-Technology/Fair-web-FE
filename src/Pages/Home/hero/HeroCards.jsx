@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { Button } from "../../../utils/Button";
-import { heroCards } from "../../../utils/data";
+import { useEffect, useState } from 'react';
+import { Button } from '../../../utils/Button';
+import { heroCards } from '../../../utils/data';
 
 export const HeroCards = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,13 +38,13 @@ export const HeroCards = () => {
                 key={index}
                 className={`hidden lg:block justify-between h-full transition-all duration-700 ease-in-out ${
                   index === 1
-                    ? "min-h-[440px] min-w-[620px]"
-                    : "h-[402px] w-full"
+                    ? 'min-h-[440px] min-w-[620px]'
+                    : 'h-[402px] w-full'
                 }`}
               >
                 <span
                   className={`flex h-full w-full ${
-                    index === currentIndex ? "opacity-100" : "opacity-100"
+                    index === currentIndex ? 'opacity-100' : 'opacity-100'
                   }
                   `}
                 >
@@ -59,7 +59,7 @@ export const HeroCards = () => {
               <li
                 key={heroCard.id}
                 className={`absolute flex w-full h-full transition-opacity duration-700 ease-in-out ${
-                  index === currentIndex ? "opacity-100" : "opacity-0"
+                  index === currentIndex ? 'opacity-100' : 'opacity-0'
                 }`}
                 aria-hidden={index !== currentIndex}
               >
@@ -79,11 +79,11 @@ export const HeroCards = () => {
               aria-label={`Go to card ${index + 1}`}
               key={index}
               className={`w-2 h-2 rounded-full transition-all ${
-                index === currentIndex ? "bg-[#CDCBCC]" : "bg-[#ECEAEA]"
+                index === currentIndex ? 'bg-[#CDCBCC]' : 'bg-[#ECEAEA]'
               }`}
               onClick={() => setCurrentIndex(index)}
               onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
+                if (e.key === 'Enter' || e.key === ' ') {
                   setCurrentIndex(index);
                 }
               }}
@@ -128,8 +128,8 @@ const SingleHeroCard = ({ heroCard, isMiddle }) => {
     <div
       className={`${
         isMiddle
-          ? "md:w-[620px] md:h-[440px] z-20 rounded-lg transform transition-transform duration-300"
-          : "w-[440px] h-[350px] md:w-[342px] md:h-[402px] rounded-xl"
+          ? 'md:w-[620px] md:h-[440px] z-20 rounded-lg transform transition-transform duration-300'
+          : 'w-[440px] h-[350px] md:w-[342px] md:h-[402px] rounded-xl'
       } relative`}
     >
       <img

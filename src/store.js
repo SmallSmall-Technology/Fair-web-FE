@@ -1,13 +1,13 @@
-import storage from "redux-persist/lib/storage";
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { persistReducer, persistStore } from "redux-persist";
-import userReducer from "./features/user/userSlice";
-import cartReducer from "./features/cart/cartSlice";
-import favouriteReducer from "./features/favourite/favouriteSlice";
-import recentlyViewedReducer from "./features/product/recentlyViewedSlice";
-import productReducer from "./features/product/productSlice";
-import orderReducer from "./features/order/orderSlice";
-import authReducer from "./features/auth/authSlice";
+import storage from 'redux-persist/lib/storage';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { persistReducer, persistStore } from 'redux-persist';
+import userReducer from './features/user/userSlice';
+import cartReducer from './features/cart/cartSlice';
+import favouriteReducer from './features/favourite/favouriteSlice';
+import recentlyViewedReducer from './features/product/recentlyViewedSlice';
+import productReducer from './features/product/productSlice';
+import orderReducer from './features/order/orderSlice';
+import authReducer from './features/auth/authSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -20,16 +20,16 @@ const rootReducer = combineReducers({
 });
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
   whitelist: [
-    "cart",
-    "favourite",
-    "user",
-    "recentlyViewed",
-    "products",
-    "order",
-    "auth",
+    'cart',
+    'favourite',
+    'user',
+    'recentlyViewed',
+    'products',
+    'order',
+    'auth',
   ],
 };
 
@@ -40,7 +40,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
       },
     }),
 });

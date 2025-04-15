@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
-import { Button } from "../../../utils/Button";
-import LinkButton from "../../../utils/LinkButton";
-import { FaRegCopyright } from "react-icons/fa6";
-import FooterNav from "./FooterNav";
-import { menuFooter } from "../../../utils/data";
+import { Link } from 'react-router-dom';
+import { Button } from '../../../utils/Button';
+import LinkButton from '../../../utils/LinkButton';
+import { FaRegCopyright } from 'react-icons/fa6';
+import FooterNav from './FooterNav';
+import { menuFooter } from '../../../utils/data';
 
 const Footer = () => {
   return (
@@ -72,7 +72,7 @@ const Footer = () => {
             <FaRegCopyright />
           </span>
           <p className="pt-1">
-            <span className="mr-4 ">Fair by Smallsmall Technology 2025</span>{" "}
+            <span className="mr-4 ">Fair by Smallsmall Technology 2025</span>{' '}
             <span>fairapp.ng</span>
           </p>
         </div>

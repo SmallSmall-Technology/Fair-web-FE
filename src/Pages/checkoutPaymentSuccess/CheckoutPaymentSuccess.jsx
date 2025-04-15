@@ -1,8 +1,8 @@
-import { Suspense } from "react";
-import { CartFooter } from "../cartItems/CartFooter";
-import { CheckoutPaymentFooter } from "./CheckoutPaymentFooter";
-import { CheckoutPaymentSuccessHeader } from "./CheckoutPaymentSuccessHeader";
-import { CheckoutPaymentSuccessContent } from "./CheckoutPaymentSuccessContent";
+import { Suspense } from 'react';
+import { CartFooter } from '../cartItems/CartFooter';
+import { CheckoutPaymentFooter } from './CheckoutPaymentFooter';
+import { CheckoutPaymentSuccessHeader } from './CheckoutPaymentSuccessHeader';
+import { CheckoutPaymentSuccessContent } from './CheckoutPaymentSuccessContent';
 
 export const CheckoutPaymentSuccess = () => {
   return (

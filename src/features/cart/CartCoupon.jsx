@@ -1,8 +1,8 @@
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field } from 'formik';
 
 export const CartCoupon = () => {
   const initialValues = {
-    coupon: "",
+    coupon: '',
   };
 
   const handleSubmit = (values, actions) => {
@@ -34,7 +34,7 @@ export const CartCoupon = () => {
                     className="absolute right-2 top-1/2 -translate-y-1/2  px-4 py-2 rounded"
                     disabled={!isValid || isSubmitting}
                   >
-                    {isSubmitting ? "Applying..." : "Apply"}
+                    {isSubmitting ? 'Applying...' : 'Apply'}
                   </button>
                 </div>
               </div>

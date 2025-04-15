@@ -1,8 +1,11 @@
-import { Button } from "../../utils/Button";
+import { Button } from '../../utils/Button';
 
 export const SaveItemForLater = () => {
   return (
-    <Button className="underline" aria-label="Save for later">
+    <Button
+      className="underline text-sm font-normal"
+      aria-label="Save for later"
+    >
       Save for later
     </Button>
   );

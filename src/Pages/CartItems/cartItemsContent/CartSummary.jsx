@@ -1,10 +1,10 @@
 import {
   getTotalCartPrice,
   getTotalCartQuantity,
-} from "../../../features/cart/cartSlice";
-import { useSelector } from "react-redux";
-import { YellowButton } from "../../../utils/Button";
-import { formatCurrency } from "../../../utils/FormatCurrency";
+} from '../../../features/cart/cartSlice';
+import { useSelector } from 'react-redux';
+import { YellowButton } from '../../../utils/Button';
+import { formatCurrency } from '../../../utils/FormatCurrency';
 
 export const CartSummary = ({ onHandleCheckout }) => {
   const cart = useSelector((state) => state.cart.cart);
@@ -20,7 +20,7 @@ export const CartSummary = ({ onHandleCheckout }) => {
         <div className="space-y-4">
           <div className="flex justify-between">
             <p className="hidden lg:flex font-medium">
-              {cart.length > 1 ? "items" : "item"} ({totalCartQuantity}) total
+              {cart.length > 1 ? 'items' : 'item'} ({totalCartQuantity}) total
             </p>
             <p className="lg:hidden font-medium">Item </p>
 
@@ -43,7 +43,7 @@ export const CartSummary = ({ onHandleCheckout }) => {
             <div className="flex gap-1">
               <p>Subtotal</p>
               <span>
-                ({totalCartQuantity} {cart.length > 1 ? "items" : "item"})
+                ({totalCartQuantity} {cart.length > 1 ? 'items' : 'item'})
               </span>
             </div>
             <p>{formatCurrency(subtTotal)}</p>

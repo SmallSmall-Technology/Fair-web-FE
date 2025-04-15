@@ -13,6 +13,19 @@
   box-sizing: border-box;
 }
 
+@media screen and (min-width: 1740px) {
+  html {
+    display: grid;
+    justify-items: center;
+    width: 100%;
+  }
+
+  body {
+    max-width: 1740px;
+    width: 100%;
+  }
+}
+
 /* option:disabled {
   color: #96959f !important;
 } */

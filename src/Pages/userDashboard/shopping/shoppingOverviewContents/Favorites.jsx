@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import { Trash2 } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
-import { YellowButton } from "../../../../utils/Button";
+import { Link } from 'react-router-dom';
+import { Trash2 } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { YellowButton } from '../../../../utils/Button';
 import {
   clearFavourite,
   getFavourites,
   removeItemFromFavourite,
-} from "../../../../features/favourite/favouriteSlice";
+} from '../../../../features/favourite/favouriteSlice';
 
 export const Favorites = () => {
   const favourites = useSelector(getFavourites);
@@ -23,10 +23,10 @@ export const Favorites = () => {
     <section>
       <div className="flex ml-auto w-fit mb-4">
         {favourites.length === 0 ? (
-          ""
+          ''
         ) : (
           <YellowButton onClick={handleClearFavourites}>
-            {" "}
+            {' '}
             Clear all
           </YellowButton>
         )}

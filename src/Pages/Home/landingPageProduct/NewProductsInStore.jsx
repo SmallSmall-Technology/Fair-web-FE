@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
-import { Button } from "../../../utils/Button";
-import { useQuery } from "@tanstack/react-query";
-import { fetchAllProducts } from "../../../api";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { ProductCard } from "../../../utils/ProductCard";
+import { NavLink } from 'react-router-dom';
+import { Button } from '../../../utils/Button';
+import { useQuery } from '@tanstack/react-query';
+import { fetchAllProducts } from '../../../api';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ProductCard } from '../../../utils/ProductCard';
 
 export const NewProductsInStore = ({
   onScrollProduct,
@@ -11,7 +11,7 @@ export const NewProductsInStore = ({
   containerRef,
 }) => {
   const { data, error, isLoading } = useQuery({
-    queryKey: ["products"],
+    queryKey: ['products'],
     queryFn: fetchAllProducts,
   });
   return (

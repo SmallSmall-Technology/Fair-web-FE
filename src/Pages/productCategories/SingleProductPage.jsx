@@ -1,9 +1,9 @@
-import { products } from "../../utils/data";
-import { ChevronRight } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom";
-import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
-import { SingleProductDetails } from "./productDetails/SingleProductDetails";
-import { MiniProductCategories } from "../home/hero/MiniProductCategories";
+import { products } from '../../utils/data';
+import { ChevronRight } from 'lucide-react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ProductCategoriesShortcut } from './ProductCategoriesShortcut';
+import { SingleProductDetails } from './productDetails/SingleProductDetails';
+import { MiniProductCategories } from '../home/hero/MiniProductCategories';
 
 const SingleProductPage = () => {
   const { categoryName, subcategory, slug, id } = useParams();
@@ -12,7 +12,7 @@ const SingleProductPage = () => {
 
   return (
     <>
-      <main className="mx-6 lg:mx-[60px] mb-5 hidden md:block">
+      <main className="mx-6 lg:mx-10 mb-5 hidden md:block w-full">
         <div className="hidden md:flex">
           <ProductCategoriesShortcut />
         </div>
@@ -46,8 +46,6 @@ const SingleProductPage = () => {
         </section>
       </main>
       <section className="mt-8 lg:mx-[40px] mb-12 ">
-        {/* <section className="mt-8 mx-5 lg:mx-[40px] mb-12"> */}
-
         <SingleProductDetails product={data} />
       </section>
     </>

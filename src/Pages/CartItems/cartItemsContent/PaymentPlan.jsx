@@ -1,31 +1,31 @@
 export const PaymentPlan = () => {
-  const options = { day: "2-digit", month: "short", year: "numeric" };
-  const todaysDate = new Date().toLocaleDateString("en-GB", options);
+  const options = { day: '2-digit', month: 'short', year: 'numeric' };
+  const todaysDate = new Date().toLocaleDateString('en-GB', options);
 
   const payments = [
     {
-      amount: "N200.000",
-      label: "Pay now today",
+      amount: 'N200.000',
+      label: 'Pay now today',
       date: todaysDate,
-      icon: "/images/half-circle.svg",
+      icon: '/images/half-circle.svg',
     },
     {
-      amount: "N200.000",
-      label: "Next payment",
-      date: "24 Jun, 2024",
-      icon: "/images/full-circle.svg",
+      amount: 'N200.000',
+      label: 'Next payment',
+      date: '24 Jun, 2024',
+      icon: '/images/full-circle.svg',
     },
     {
-      amount: "N200.000",
-      label: "Next payment",
-      date: "24 Jun, 2024",
-      icon: "/images/full-circle.svg",
+      amount: 'N200.000',
+      label: 'Next payment',
+      date: '24 Jun, 2024',
+      icon: '/images/full-circle.svg',
     },
     {
-      amount: "N200.000",
-      label: "Final payment",
-      date: "24 Jun, 2024",
-      icon: "/images/full-circle.svg",
+      amount: 'N200.000',
+      label: 'Final payment',
+      date: '24 Jun, 2024',
+      icon: '/images/full-circle.svg',
     },
   ];
 

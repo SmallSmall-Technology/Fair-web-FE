@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import { productCategories } from "../../utils/data";
+import { NavLink } from 'react-router-dom';
+import { productCategories } from '../../utils/data';
 
 const SingleProductCategory = ({ product }) => {
   return (

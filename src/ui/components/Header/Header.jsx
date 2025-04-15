@@ -1,8 +1,8 @@
-import { memo } from "react";
-import { NavBar } from "./NavBar";
-import { Link } from "react-router-dom";
-import { SearchQuery } from "./SearchQuery";
-import { MobileNavBar } from "./MobileNavBar";
+import { memo } from 'react';
+import { NavBar } from './NavBar';
+import { Link } from 'react-router-dom';
+import { SearchQuery } from './SearchQuery';
+import { MobileNavBar } from './MobileNavBar';
 
 const Header = () => {
   return (
@@ -11,7 +11,7 @@ const Header = () => {
       role="banner"
       aria-label="Main site navigation"
     >
-      <div className="hidden lg:flex justify-between items-center w-full px-4 sm:px-6 lg:px-16 max-w-full mx-auto">
+      <div className="hidden lg:flex justify-between items-center w-full px-4 sm:px-6 lg:px-10 max-w-full mx-auto">
         <Link
           to="/"
           aria-label="Fair Home"

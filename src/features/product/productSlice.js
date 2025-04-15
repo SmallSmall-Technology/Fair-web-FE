@@ -1,9 +1,9 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchAllProducts } from "../../api";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchAllProducts } from '../../api';
 const productData = fetchAllProducts;
 
 export const fetchProductsByCategory = createAsyncThunk(
-  "products/fetchByCategory",
+  'products/fetchByCategory',
   async (category, { rejectWithValue }) => {
     try {
       const filteredProducts = productData.filter(
@@ -11,19 +11,19 @@ export const fetchProductsByCategory = createAsyncThunk(
       );
       return { category, products: filteredProducts };
     } catch (error) {
-      return rejectWithValue("Error filtering products");
+      return rejectWithValue('Error filtering products');
     }
   }
 );
 
 const initialState = {
   productsByCategory: {},
-  loading: "idle",
+  loading: 'idle',
   error: null,
 };
 
 const productSlice = createSlice({
-  name: "products",
+  name: 'products',
   initialState,
   reducers: {
     clearError: (state) => {
@@ -33,19 +33,19 @@ const productSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductsByCategory.pending, (state) => {
-        state.loading = "pending";
+        state.loading = 'pending';
       })
       .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
         // Added action parameter
-        state.loading = "succeeded";
+        state.loading = 'succeeded';
         state.productsByCategory[action.payload.category] =
           action.payload.products;
         state.error = null;
       })
       .addCase(fetchProductsByCategory.rejected, (state, action) => {
         // Added action parameter
-        state.loading = "failed";
-        state.error = action.payload || "Failed to fetch products";
+        state.loading = 'failed';
+        state.error = action.payload || 'Failed to fetch products';
       });
   },
 });

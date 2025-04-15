@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 export const TopBar = () => {
   return (
@@ -9,8 +9,8 @@ export const TopBar = () => {
           to="/user-dashboard/shopping-overview"
           className={({ isActive }) =>
             isActive
-              ? "text-[#222224] border-b-2 border-black pb-[14px]"
-              : "text-[#737376]"
+              ? 'text-[#222224] border-b-2 border-black pb-[14px]'
+              : 'text-[#737376]'
           }
         >
           Shopping overview
@@ -21,25 +21,25 @@ export const TopBar = () => {
           to="/user-dashboard/notifications"
           className={({ isActive }) =>
             isActive
-              ? "text-[#222224] border-b-2 border-black pb-[14px]"
-              : "text-[#737376]"
+              ? 'text-[#222224] border-b-2 border-black pb-[14px]'
+              : 'text-[#737376]'
           }
         >
           Notifications
         </NavLink>
-      </li>{" "}
+      </li>{' '}
       <li>
         <NavLink
           to="/user-dashboard/account-profile"
           className={({ isActive }) =>
             isActive
-              ? "text-[#222224] border-b-2 border-black pb-[14px]"
-              : "text-[#737376]"
+              ? 'text-[#222224] border-b-2 border-black pb-[14px]'
+              : 'text-[#737376]'
           }
         >
           Account profile
         </NavLink>
-      </li>{" "}
+      </li>{' '}
     </ul>
   );
 };

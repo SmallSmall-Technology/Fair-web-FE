@@ -1,7 +1,7 @@
-import { addItem } from "./cartSlice";
-import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { addItem } from './cartSlice';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export const handleAddToCart = (dispatch, product, navigate) => {
   if (!product) return;
