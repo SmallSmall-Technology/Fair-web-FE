@@ -11,6 +11,8 @@ import {
   saveDeliveryAddress,
 } from '../../../features/user/userSlice.js';
 import { makePayment } from '../../../features/order/orderSlice.js';
+import { startTransition } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const CheckoutItemsContentSection = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -18,6 +20,7 @@ export const CheckoutItemsContentSection = () => {
   const [showCheckoutDeliveryAddressForm, setShowCheckoutDeliveryAddressForm] =
     useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmitDeliveryAddress = (values, { resetForm }) => {
     dispatch(saveDeliveryAddress(values));
@@ -41,8 +44,12 @@ export const CheckoutItemsContentSection = () => {
   };
 
   const handleSubmitPaymentMethod = (values) => {
-    if (values) dispatch(makePayment());
-    navigate('/cart-items/checkout/payment-success');
+    if (values) {
+      dispatch(makePayment());
+      startTransition(() => {
+        navigate('/cart-items/checkout/payment-success');
+      });
+    }
   };
 
   return (

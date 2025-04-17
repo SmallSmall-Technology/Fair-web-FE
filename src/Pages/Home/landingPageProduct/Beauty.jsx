@@ -1,21 +1,30 @@
 import { NavLink } from 'react-router-dom';
 import { Button } from '../../../utils/Button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { ProductCard } from '../../../utils/ProductCard';
+import ProductCard from '../../../utils/ProductCard';
 import { useQuery } from '@tanstack/react-query';
-import { fetchAllProducts } from '../../../api';
+import { fetchAllProducts } from '../../../services/api';
 
 export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ['products'],
     queryFn: fetchAllProducts,
   });
+
+  // const BeautyProducts = data.filter((data) => data.category === 'Beauty');
+
   return (
     <>
       <div className="flex justify-between mt-12 mb-4">
         <h2 className="font-bold text-2xl">Beauty</h2>
-        <NavLink to={`/category/beauty`} className="underline">
+
+        <NavLink
+          to={`/category/beauty`}
+          className="underline"
+          aria-label="View all Beauty"
+        >
           View all
+          <span className="sr-only">View all Beauty</span>
         </NavLink>
       </div>
 

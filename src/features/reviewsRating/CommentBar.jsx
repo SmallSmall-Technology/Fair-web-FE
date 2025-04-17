@@ -9,6 +9,7 @@ export const CommentBar = React.memo(() => {
   const [reviews, setReviews] = useState([]);
 
   const handleSubmitComment = (values, { resetForm }) => {
+    // e.preventDefault();
     if (values) {
       const reviewWithDefault = { ...values, name: values.name || 'Anonymous' };
       setReviews((prevReview) => [...prevReview, reviewWithDefault]);

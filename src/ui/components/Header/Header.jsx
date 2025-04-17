@@ -7,7 +7,7 @@ import { MobileNavBar } from './MobileNavBar';
 const Header = () => {
   return (
     <header
-      className="fixed top-0 left-0 right-0 bg-white z-30 py-4 flex justify-between border-b border-gray-200 pb-2 transition-all motion-safe:duration-200"
+      className="max-w-[1740px] mx-auto w-full fixed top-0 left-0 right-0 bg-white z-30 py-4 flex justify-between border-b border-gray-200 pb-2 transition-all motion-safe:duration-200"
       role="banner"
       aria-label="Main site navigation"
     >

@@ -8,14 +8,13 @@ import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 
 export const CartItem = ({ item }) => {
   const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
-
+  // console.log(item);
   return (
     <article
       key={item.productId}
       className="md:border-[1px] pb-4 md:border-[#E5E5E5] rounded-[10px] w-full h-fit"
     >
       <div className="">
-        {/* Product Details */}
         <section className="md:p-4">
           <div className="flex justify-between mb-3">
             <div className="flex space-x-1 items-center mb-1 2xl:px-10">
@@ -29,10 +28,10 @@ export const CartItem = ({ item }) => {
 
             <button
               type="submit"
-              onClick={onClick}
-              className=" group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[#FFDE11] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black"
+              onClick={''}
+              className=" group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[#FFDE11] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black hover:underline"
             >
-              <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11]"></span>
+              <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11] "></span>
 
               <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-base">
                 Change Plan
@@ -76,7 +75,6 @@ export const CartItem = ({ item }) => {
                 </p>
               </div>
 
-              {/* Actions */}
               <div className="flex space-x-2 items-center mb-2 justify-end">
                 <button
                   className="underline text-sm font-normal"
@@ -108,7 +106,7 @@ export const CartItem = ({ item }) => {
           <hr className="flex-grow border-[#E5E5E5]" />
         </div>
 
-        <PaymentPlan />
+        <PaymentPlan item={item} />
         <div className="flex justify-between mt-4 md:hidden ">
           <p className="text-xs font-semibold">
             Shipping: Arrives by

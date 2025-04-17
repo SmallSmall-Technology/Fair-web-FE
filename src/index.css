@@ -14,15 +14,14 @@
 }
 
 @media screen and (min-width: 1740px) {
-  html {
+  body {
     display: grid;
     justify-items: center;
-    width: 100%;
   }
 
-  body {
-    max-width: 1740px;
+  #app {
     width: 100%;
+    max-width: 1740px;
   }
 }
 

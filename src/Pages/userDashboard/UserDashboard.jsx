@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import { MarketingAds } from './userDashboardContent/MarketingAds';
 import { TopBar } from './userDashboardContent/TopBar';
+import { MarketingAds } from './userDashboardContent/MarketingAds';
 
-export const UserDashboard = () => {
+const UserDashboard = () => {
   return (
     <main className="mx-6 lg:mx-[60px] mt-4 pt-36 lg:pt-28">
       <MarketingAds />
@@ -16,3 +16,5 @@ export const UserDashboard = () => {
     </main>
   );
 };
+
+export default UserDashboard;

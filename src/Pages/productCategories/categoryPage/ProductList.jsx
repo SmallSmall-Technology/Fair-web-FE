@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ProductCard } from '../../../utils/ProductCard';
+import ProductCard from '../../../utils/ProductCard';
 
 const ProductList = ({
   categoryName,

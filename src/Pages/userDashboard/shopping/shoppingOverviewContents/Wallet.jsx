@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 
-export const Wallet = () => {
+const Wallet = () => {
   return (
     <section>
       <article className="border rounded-[10px] h-44 bg-[F6F6F6]"></article>
@@ -9,6 +9,8 @@ export const Wallet = () => {
     </section>
   );
 };
+
+export default Wallet;
 
 export const WalletBalance = () => {
   return (

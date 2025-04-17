@@ -10,7 +10,7 @@ import {
 } from '../../../../features/order/orderSlice';
 // import { RecentlyViewed } from "./RecentlyViewed";
 
-export const Summary = () => {
+const Summary = () => {
   const recentlyViewed = useSelector(getRecentlyViewed);
   const ongoingOrders = useSelector(getOngoingOrders);
   const onCompletedOrders = useSelector(getCompletedOrders);
@@ -91,3 +91,5 @@ export const Summary = () => {
     </section>
   );
 };
+
+export default Summary;

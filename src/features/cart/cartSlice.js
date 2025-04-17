@@ -4,13 +4,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const API_URL = 'http://localhost:3000';
 
-// Fetch cart items
 export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
   const response = await axios.get(`${API_URL}/cart?userId=user123`);
   return response.data;
 });
 
-// Add item to cart
 export const addItem = createAsyncThunk(
   'cart/addItem',
   async (product, { getState, rejectWithValue }) => {
@@ -41,21 +39,19 @@ export const addItem = createAsyncThunk(
         quantity: 1,
         price: Number(product.price),
         totalPrice: Number(product.price),
-
-        // id: `cart${Date.now()}`,
-        // userId: "user123",
-        // name: product.name,
-        // brand: product.brand,
-        // category: product.category,
-        // subcategory: product.subcategory,
-        // image: product.image,
-        // price: Number(product.price),
-        // discountPrice: product.discountPrice,
-        // ratings: product.ratings,
-        // noOfProductSold: 1,
-        // slug: product.slug,
-        // quantity: 1,
-        // totalPrice: Number(product.price),
+        paymentOptions: [
+          {
+            type: 'upfront',
+            amount: product.price,
+          },
+          {
+            type: 'installments',
+            months: 12,
+            upfrontPayment: product.price * 0.4,
+            monthlyPayment: (product.price * 0.6) / 12,
+            totalPrice: product.price,
+          },
+        ],
       };
 
       const response = await axios.post(`${API_URL}/cart`, cartItem);

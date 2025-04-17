@@ -32,8 +32,8 @@ export const RecentlyViewed = () => {
         {recentlyViewed.length === 0 ? (
           <p className="text-center text-gray-500">No recently viewed items</p>
         ) : (
-          recentlyViewed.map((item) => (
-            <SingleRecentlyViewed key={item.id} item={item} />
+          recentlyViewed.map((item, index) => (
+            <SingleRecentlyViewed key={index} item={item} />
           ))
         )}
       </ul>

@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import { fetchAllProducts } from '../../../api';
+import { fetchAllProducts } from '../../../services/api';
 import { Button } from '../../../utils/Button';
 import { useQuery } from '@tanstack/react-query';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { ProductCard } from '../../../utils/ProductCard';
+import ProductCard from '../../../utils/ProductCard';
+import ProductCardSkeleton from '../../../ui/components/Skeletons/ProductCardSkeleton';
 
 export const Electronics = ({ onScrollProduct, item_width, containerRef }) => {
   const { data, error, isLoading } = useQuery({
@@ -11,12 +12,23 @@ export const Electronics = ({ onScrollProduct, item_width, containerRef }) => {
     queryFn: fetchAllProducts,
   });
 
+  if (isLoading) return <ProductCardSkeleton />;
+
+  const ElectronicProducts =
+    data?.filter((item) => item.category === 'Electronics') || [];
+
   return (
     <section>
       <div className="flex justify-between mt-12 mb-4">
         <h2 className="font-bold text-2xl">Electronics</h2>
-        <NavLink to={`/category/electronics`} className="underline">
+
+        <NavLink
+          to={`/category/electronics`}
+          className="underline"
+          aria-label="View all Electronics"
+        >
           View all
+          <span className="sr-only">View all Electronics</span>
         </NavLink>
       </div>
 
@@ -26,7 +38,7 @@ export const Electronics = ({ onScrollProduct, item_width, containerRef }) => {
             className="flex  space-x-4 w-full overflow-x-auto scrollbar-hide scroll-smooth"
             ref={containerRef}
           >
-            {data?.map((product) => (
+            {ElectronicProducts?.map((product) => (
               <div key={product.id} className="product-card">
                 <ProductCard product={product} />
               </div>

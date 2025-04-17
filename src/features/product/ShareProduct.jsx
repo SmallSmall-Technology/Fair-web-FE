@@ -1,4 +1,4 @@
-export const handleShareProduct = () => {
+export const handleShareProduct = (product) => {
   if (navigator.share) {
     navigator
       .share({

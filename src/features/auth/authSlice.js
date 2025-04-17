@@ -104,7 +104,7 @@ const authSlice = createSlice({
         state.token = action.payload.token;
       })
       .addCase(restoreSession.rejected, (state, action) => {
-        console.log('Restore session rejected:', action.payload);
+        // console.log('Restore session rejected:', action.payload);
         state.loading = false;
         state.error = action.payload;
         state.isAuthenticated = false;

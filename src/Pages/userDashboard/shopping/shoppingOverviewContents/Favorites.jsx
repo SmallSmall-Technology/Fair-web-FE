@@ -8,7 +8,7 @@ import {
   removeItemFromFavourite,
 } from '../../../../features/favourite/favouriteSlice';
 
-export const Favorites = () => {
+const Favorites = () => {
   const favourites = useSelector(getFavourites);
   const dispatch = useDispatch();
 
@@ -49,6 +49,8 @@ export const Favorites = () => {
     </section>
   );
 };
+
+export default Favorites;
 
 const SingleFavouriteProduct = ({ favourite, onRemoveItem }) => {
   return (

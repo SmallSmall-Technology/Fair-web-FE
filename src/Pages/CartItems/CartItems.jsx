@@ -2,7 +2,7 @@ import { CartFooter } from './CartFooter';
 import Header from '../../ui/components/header/Header';
 import CartItemsContentSection from './cartItemsContent/CartItemsContentSection';
 
-export const CartItems = () => {
+const CartItems = () => {
   return (
     <>
       <Header />
@@ -13,3 +13,5 @@ export const CartItems = () => {
     </>
   );
 };
+
+export default CartItems;

@@ -7,7 +7,6 @@ export const ProductAds = () => {
     Array(productAds.length).fill(false)
   );
 
-  // Auto-rotate carousel
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % productAds.length);
@@ -26,10 +25,15 @@ export const ProductAds = () => {
 
   return (
     <div className="relative mt-4 mx-auto">
+      <h2 id="product-carousel-heading" className="sr-only">
+        Product advertisements
+      </h2>
+
       <div
         className="relative h-56 md:h-96 overflow-hidden rounded-lg"
         aria-live="polite"
-        role="group"
+        role="region"
+        aria-labelledby="product-carousel-heading"
         aria-roledescription="carousel"
       >
         {productAds.map((productAd, index) => (
@@ -51,9 +55,9 @@ export const ProductAds = () => {
                 imageLoaded[index] ? 'block' : 'hidden'
               }`}
               onLoad={() => handleImageLoad(index)}
-              // loading={index === 0 ? "eager" : "lazy"}
-              // fetchpriority={index === 0 ? "high" : "auto"}
-              // decoding="async"
+              loading={index === 0 ? 'eager' : 'lazy'}
+              fetchpriority={index === 0 ? 'high' : 'auto'}
+              decoding="async"
             />
           </div>
         ))}
@@ -73,7 +77,7 @@ export const ProductAds = () => {
                 setCurrentIndex(index);
               }
             }}
-          ></button>
+          />
         ))}
       </div>
     </div>
