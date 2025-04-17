@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   recentlyViewed: [],
@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const recentlyViewedSlice = createSlice({
-  name: "recentlyViewed",
+  name: 'recentlyViewed',
   initialState,
   reducers: {
     addItemToRecentlyViewed(state, action) {

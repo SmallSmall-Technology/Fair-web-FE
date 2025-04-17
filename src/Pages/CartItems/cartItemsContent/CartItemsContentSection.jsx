@@ -1,22 +1,28 @@
-import { CartItem } from "./CartItem";
-import { useSelector } from "react-redux";
-import { CartSummary } from "./CartSummary";
-import { Link, useNavigate } from "react-router-dom";
-import { YellowButton } from "../../../utils/Button";
-import { CartSummaryExtrasAndCoupon } from "./CartSummaryExtrasAndCoupon";
+import { CartItem } from './CartItem';
+import { useSelector } from 'react-redux';
+import { CartSummary } from './CartSummary';
+import { Link, useNavigate } from 'react-router-dom';
+import { YellowButton } from '../../../utils/Button';
+import { CartSummaryExtrasAndCoupon } from './CartSummaryExtrasAndCoupon';
 import {
   getTotalCartQuantity,
   getCart,
-} from "../../../features/cart/cartSlice";
-import React from "react";
+  getTotalCartPrice,
+} from '../../../features/cart/cartSlice';
+import React from 'react';
+import { formatCurrency } from '../../../utils/FormatCurrency';
 
 const CartItemsContentSection = React.memo(() => {
   const cart = useSelector(getCart);
   const navigate = useNavigate();
+  const totalCartPrice = useSelector(getTotalCartPrice);
+  const VAT = (7.5 / 100) * totalCartPrice;
+  const shippingFee = +1200;
   const totalCartQuantity = useSelector(getTotalCartQuantity);
+  const subtTotal = totalCartPrice + VAT + shippingFee;
 
   const handleCheckout = () => {
-    navigate("checkout");
+    navigate('checkout');
   };
 
   return (
@@ -26,15 +32,18 @@ const CartItemsContentSection = React.memo(() => {
         <h1 className="flex lg:hidden font-semibold text-3xl">Shopping Cart</h1>
       </div>
       {cart.length < 1 ? (
-        ""
+        ''
       ) : (
         <>
           <hr className="lg:hidden my-6" />
           <div className="lg:hidden mx-6 lg:mx-[60px] 2xl:mx-[150px]">
             <YellowButton onClick={handleCheckout}>Go to Checkout</YellowButton>
-            <div className="flex gap-2 mt-6 font-medium text-xl">
-              <p>Subtotal</p>({totalCartQuantity}{" "}
-              {totalCartQuantity === 1 ? "items" : "item"})
+            <div className="flex justify-between items-baseline">
+              <div className="flex gap-2 mt-6 font-medium text-xl">
+                <p>Subtotal</p>({totalCartQuantity}{' '}
+                {totalCartQuantity === 1 ? 'items' : 'item'})
+              </div>
+              <p className="font-medium mb-0">{formatCurrency(subtTotal)}</p>
             </div>
           </div>
         </>

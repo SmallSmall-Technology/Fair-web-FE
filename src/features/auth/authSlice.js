@@ -1,4 +1,9 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  createSelector,
+} from '@reduxjs/toolkit';
+const selectAuth = (state) => state.auth;
 
 const initialState = {
   user: null,
@@ -9,54 +14,54 @@ const initialState = {
 };
 
 export const login = createAsyncThunk(
-  "auth/login",
+  'auth/login',
   async ({ email, password }, { rejectWithValue }) => {
     await new Promise((res) => setTimeout(res, 1000));
 
-    if (email === "admin@smallsmall.com" && password === "admin") {
+    if (email === 'admin@smallsmall.com' && password === 'admin') {
       return {
-        user: { email, username: "Sade", fullName: "Sade Brown" },
-        token: "fake-jwt-token",
+        user: { email, username: 'Sade', fullName: 'Sade Brown' },
+        token: 'fake-jwt-token',
       };
     } else {
-      return rejectWithValue("Invalid credentials");
+      return rejectWithValue('Invalid credentials');
     }
   }
 );
 
 export const restoreSession = createAsyncThunk(
-  "auth/restoreSession",
+  'auth/restoreSession',
   async (_, { rejectWithValue }) => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem('authToken');
     if (!token) {
-      return rejectWithValue("No token found");
+      return rejectWithValue('No token found');
     }
     try {
       return await new Promise((resolve, reject) => {
         setTimeout(() => {
-          if (token === "fake-jwt-token") {
+          if (token === 'fake-jwt-token') {
             resolve({
               user: {
-                email: "admin@smallsmall.com",
-                username: "Sade",
-                fullName: "Sade Brown",
+                email: 'admin@smallsmall.com',
+                username: 'Sade',
+                fullName: 'Sade Brown',
               },
               token,
             });
           } else {
-            reject(new Error("Invalid token"));
+            reject(new Error('Invalid token'));
           }
         }, 500);
       });
     } catch (error) {
-      localStorage.removeItem("authToken");
-      return rejectWithValue(error.message || "Invalid token");
+      localStorage.removeItem('authToken');
+      return rejectWithValue(error.message || 'Invalid token');
     }
   }
 );
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     logout: (state) => {
@@ -64,7 +69,7 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
       state.error = null;
-      localStorage.removeItem("authToken");
+      localStorage.removeItem('authToken');
     },
     clearError: (state) => {
       state.error = null;
@@ -81,10 +86,10 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
         state.user = action.payload.user;
         state.token = action.payload.token;
-        localStorage.setItem("authToken", action.payload.token);
+        localStorage.setItem('authToken', action.payload.token);
       })
       .addCase(login.rejected, (state, action) => {
-        console.log("Login rejected:", action.payload);
+        console.log('Login rejected:', action.payload);
         state.loading = false;
         state.error = action.payload;
       })
@@ -99,13 +104,13 @@ const authSlice = createSlice({
         state.token = action.payload.token;
       })
       .addCase(restoreSession.rejected, (state, action) => {
-        console.log("Restore session rejected:", action.payload);
+        // console.log('Restore session rejected:', action.payload);
         state.loading = false;
         state.error = action.payload;
         state.isAuthenticated = false;
         state.user = null;
         state.token = null;
-        localStorage.removeItem("authToken");
+        localStorage.removeItem('authToken');
       });
   },
 });
@@ -113,6 +118,21 @@ const authSlice = createSlice({
 export const { logout, clearError } = authSlice.actions;
 export default authSlice.reducer;
 
-export const getUserName = (state) => state.auth.user?.username;
-export const getUserFullName = (state) => state.auth.user?.fullName;
-export const getUserIsAuthenticated = (state) => state.auth.isAuthenticated;
+// export const getUserName = (state) => state.auth.user?.username;
+
+export const getUserName = createSelector(
+  [selectAuth],
+  (auth) => auth.user?.username
+);
+// export const getUserFullName = (state) => state.auth.user?.fullName;
+// export const getUserIsAuthenticated = (state) => state.auth.isAuthenticated;
+
+export const getUserFullName = createSelector(
+  [selectAuth],
+  (auth) => auth.user?.fullName
+);
+
+export const getUserIsAuthenticated = createSelector(
+  [selectAuth],
+  (auth) => auth.isAuthenticated
+);

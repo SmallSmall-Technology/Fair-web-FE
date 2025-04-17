@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 export const ShoppingOverviewSideBar = () => {
   return (
@@ -9,8 +9,8 @@ export const ShoppingOverviewSideBar = () => {
           to="/user-dashboard/shopping-overview/summary"
           className={({ isActive }) =>
             isActive
-              ? "font-semibold bg-[#F6F6F6] rounded-[20px] px-6 lg:pr-20 py-2"
-              : "font-semibold px-6"
+              ? 'font-semibold bg-[#F6F6F6] rounded-[20px] px-6 lg:pr-20 py-2'
+              : 'font-semibold px-6'
           }
         >
           Summary
@@ -21,32 +21,32 @@ export const ShoppingOverviewSideBar = () => {
           to="/user-dashboard/shopping-overview/purchases"
           className={({ isActive }) =>
             isActive
-              ? "font-semibold bg-[#F6F6F6] rounded-[20px] px-6 lg:pr-[76px] py-2 "
-              : "font-semibold px-6"
+              ? 'font-semibold bg-[#F6F6F6] rounded-[20px] px-6 lg:pr-[76px] py-2 '
+              : 'font-semibold px-6'
           }
         >
           Purchases
         </NavLink>
-      </li>{" "}
+      </li>{' '}
       <li>
         <NavLink
           to="/user-dashboard/shopping-overview/wallet"
           className={({ isActive }) =>
             isActive
-              ? "font-semibold bg-[#F6F6F6] rounded-[20px] px-6 lg:pr-[105px] py-2 "
-              : "font-semibold px-6"
+              ? 'font-semibold bg-[#F6F6F6] rounded-[20px] px-6 lg:pr-[105px] py-2 '
+              : 'font-semibold px-6'
           }
         >
           Wallet
         </NavLink>
-      </li>{" "}
+      </li>{' '}
       <li>
         <NavLink
           to="/user-dashboard/shopping-overview/favorites"
           className={({ isActive }) =>
             isActive
-              ? "font-semibold bg-[#F6F6F6] rounded-[20px] px-6 lg:pr-20 py-2 "
-              : "font-semibold px-6"
+              ? 'font-semibold bg-[#F6F6F6] rounded-[20px] px-6 lg:pr-20 py-2 '
+              : 'font-semibold px-6'
           }
         >
           Favorites
@@ -57,8 +57,8 @@ export const ShoppingOverviewSideBar = () => {
           to="/user-dashboard/shopping-overview/recently-viewed"
           className={({ isActive }) =>
             isActive
-              ? "font-semibold bg-[#F6F6F6] rounded-[20px] px-6 py-2 "
-              : "font-semibold px-6"
+              ? 'font-semibold bg-[#F6F6F6] rounded-[20px] px-6 py-2 '
+              : 'font-semibold px-6'
           }
         >
           Recently viewed

@@ -1,14 +1,14 @@
-import { Button } from "../../../utils/Button";
-import { BuyAGiftCard } from "./BuyAGiftCard";
+import { Button } from '../../../utils/Button';
+import { BuyAGiftCard } from './BuyAGiftCard';
 
 const GetApp = () => {
   return (
     <section className="grid grid-cols-1 mx-6 md:mx-[76px] mb-28">
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-0 items-center justify-between  bg-[#F2F2F2] rounded-2xl mt-14 ">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-0 items-center justify-between bg-[#F2F2F2] rounded-2xl mt-14 ">
         <div className="grid gap-4 lg:gap-3 lg:pl-12 text-center lg:text-start mx-auto lg:mx-0">
           <h1 className="items-center lg:items-start text-[23px] font-semibold pt-8 lg:pt-0">
             Get the app
-          </h1>{" "}
+          </h1>{' '}
           <p className="max-w-[289px] lg:min-w-[468px] mx-auto lg:mx-0 mb-1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore e

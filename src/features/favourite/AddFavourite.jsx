@@ -1,7 +1,7 @@
-import { Heart } from "lucide-react";
-import { Button } from "../../utils/Button";
-import { useSelector, useDispatch } from "react-redux";
-import { addItemToFavourite, removeItemFromFavourite } from "./favouriteSlice";
+import { Heart } from 'lucide-react';
+import { Button } from '../../utils/Button';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItemToFavourite, removeItemFromFavourite } from './favouriteSlice';
 
 export const AddFavourite = ({ product = {} }) => {
   const dispatch = useDispatch();
@@ -56,21 +56,21 @@ export const AddFavourite = ({ product = {} }) => {
       onClick={handleAddToFavourite}
       aria-label={
         favourite.some((item) => item.id === id)
-          ? "Remove from favourite"
-          : "Add to favourite"
+          ? 'Remove from favourite'
+          : 'Add to favourite'
       }
       className="focus:outline-none"
     >
       <Heart
         size={18}
         cursor="pointer"
-        fill={favourite.some((item) => item.id === id) ? "red" : "white"}
+        fill={favourite.some((item) => item.id === id) ? 'red' : 'white'}
         aria-hidden="true"
       />
       <span className="sr-only">
         {favourite.some((item) => item.id === id)
-          ? "Remove from favourite"
-          : "Add to favourite"}
+          ? 'Remove from favourite'
+          : 'Add to favourite'}
       </span>
     </Button>
   );

@@ -1,11 +1,11 @@
-import { debounce } from "lodash";
-import { Field, Form, Formik } from "formik";
-import { Search } from "lucide-react";
-import { useCallback, useMemo } from "react";
+import { debounce } from 'lodash';
+import { Field, Form, Formik } from 'formik';
+import { Search } from 'lucide-react';
+import { useCallback, useMemo } from 'react';
 
 // Define SearchQuery as a component
 export const SearchQuery = () => {
-  const initialValues = useMemo(() => ({ search: "" }), []);
+  const initialValues = useMemo(() => ({ search: '' }), []);
 
   const handleSearchQuery = useCallback(
     debounce((values, { resetForm }) => {

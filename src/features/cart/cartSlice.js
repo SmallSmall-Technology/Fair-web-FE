@@ -1,18 +1,16 @@
-import axios from "axios";
-import { toast } from "react-toastify";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const API_URL = "http://localhost:3000";
+const API_URL = 'http://localhost:3000';
 
-// Fetch cart items
-export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
+export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
   const response = await axios.get(`${API_URL}/cart?userId=user123`);
   return response.data;
 });
 
-// Add item to cart
 export const addItem = createAsyncThunk(
-  "cart/addItem",
+  'cart/addItem',
   async (product, { getState, rejectWithValue }) => {
     try {
       const state = getState();
@@ -23,10 +21,10 @@ export const addItem = createAsyncThunk(
 
       if (exists) {
         toast.dismiss();
-        toast.error("Item already added to cart", {
+        toast.error('Item already added to cart', {
           className:
-            "bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0",
-          bodyClassName: "m-0 p-0",
+            'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          bodyClassName: 'm-0 p-0',
           closeButton: false,
         });
         return;
@@ -36,26 +34,24 @@ export const addItem = createAsyncThunk(
         id: `cart${Date.now()}`,
         image: product.image,
         name: product.name,
-        userId: "user123",
+        userId: 'user123',
         productId: product.id,
         quantity: 1,
         price: Number(product.price),
         totalPrice: Number(product.price),
-
-        // id: `cart${Date.now()}`,
-        // userId: "user123",
-        // name: product.name,
-        // brand: product.brand,
-        // category: product.category,
-        // subcategory: product.subcategory,
-        // image: product.image,
-        // price: Number(product.price),
-        // discountPrice: product.discountPrice,
-        // ratings: product.ratings,
-        // noOfProductSold: 1,
-        // slug: product.slug,
-        // quantity: 1,
-        // totalPrice: Number(product.price),
+        paymentOptions: [
+          {
+            type: 'upfront',
+            amount: product.price,
+          },
+          {
+            type: 'installments',
+            months: 12,
+            upfrontPayment: product.price * 0.4,
+            monthlyPayment: (product.price * 0.6) / 12,
+            totalPrice: product.price,
+          },
+        ],
       };
 
       const response = await axios.post(`${API_URL}/cart`, cartItem);
@@ -65,10 +61,10 @@ export const addItem = createAsyncThunk(
       //   throw new Error("Invalid cart item received from API");
       // }
       toast.dismiss();
-      toast.success("Item added to cart", {
+      toast.success('Item added to cart', {
         className:
-          "bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0",
-        bodyClassName: "m-0 p-0",
+          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+        bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
 
@@ -81,7 +77,7 @@ export const addItem = createAsyncThunk(
 
 // Remove item from cart
 export const removeItem = createAsyncThunk(
-  "cart/removeItem",
+  'cart/removeItem',
   async (id, { rejectWithValue }) => {
     try {
       await axios.delete(`${API_URL}/cart/${id}`);
@@ -94,12 +90,12 @@ export const removeItem = createAsyncThunk(
 
 // Increase item quantity
 export const increaseItemQuantity = createAsyncThunk(
-  "cart/increaseItemQuantity",
+  'cart/increaseItemQuantity',
   async (id, { getState, rejectWithValue }) => {
     try {
       const state = getState();
       const item = state.cart.cart.find((item) => item.id === id);
-      if (!item) throw new Error("Item not found");
+      if (!item) throw new Error('Item not found');
       const updatedItem = {
         ...item,
         quantity: item.quantity + 1,
@@ -115,13 +111,13 @@ export const increaseItemQuantity = createAsyncThunk(
 
 // Decrease item quantity
 export const decreaseItemQuantity = createAsyncThunk(
-  "cart/decreaseItemQuantity",
+  'cart/decreaseItemQuantity',
   async (id, { getState, rejectWithValue }) => {
     try {
       const state = getState();
       const item = state.cart.cart.find((item) => item.id === id);
       if (!item || item.quantity <= 1)
-        throw new Error("Cannot decrease quantity below 1");
+        throw new Error('Cannot decrease quantity below 1');
       const updatedItem = {
         ...item,
         quantity: item.quantity - 1,
@@ -136,7 +132,7 @@ export const decreaseItemQuantity = createAsyncThunk(
 );
 
 // Clear cart
-export const clearCart = createAsyncThunk("cart/clearCart", async () => {
+export const clearCart = createAsyncThunk('cart/clearCart', async () => {
   const response = await axios.get(`${API_URL}/cart?userId=user123`);
   const cartItems = response.data;
   await Promise.all(
@@ -147,25 +143,25 @@ export const clearCart = createAsyncThunk("cart/clearCart", async () => {
 
 const initialState = {
   cart: [],
-  status: "idle",
+  status: 'idle',
   error: null,
 };
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchCart.fulfilled, (state, action) => {
         state.cart = action.payload;
-        state.status = "succeeded";
+        state.status = 'succeeded';
       })
       // .addCase(addItem.fulfilled, (state, action) => {
       //   state.cart.push(action.payload);
       // })
       .addCase(addItem.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         if (action.payload && action.payload.quantity) {
           state.cart.push(action.payload);
         } else {

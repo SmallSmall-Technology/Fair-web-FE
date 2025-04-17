@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
-import { popularProducts } from "../../../../utils/data";
-import { PopularProductSort } from "./PopularProductSort";
+import { NavLink } from 'react-router-dom';
+import { popularProducts } from '../../../../utils/data';
+import { PopularProductSort } from './PopularProductSort';
 
 export const PopularProducts = () => (
   <div className="mt-12 mb-4">

@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { formatCurrency } from "../../utils/FormatCurrency";
-import { getTotalCartPrice } from "../../features/cart/cartSlice";
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { formatCurrency } from '../../utils/FormatCurrency';
+import { getTotalCartPrice } from '../../features/cart/cartSlice';
 
 export const CheckoutPaymentSuccessContent = () => {
-  const orderNumber = "I7xAA6b";
+  const orderNumber = 'I7xAA6b';
   const total = useSelector(getTotalCartPrice);
   return (
     <article className="">
@@ -55,7 +55,7 @@ export const CheckoutPaymentSuccessContent = () => {
           <p className="leading-7 ">
             We appreciate your business and hope you enjoy your purchase! If you
             have any questions or need assistance, feel free to reach out to our
-            customer support team at{" "}
+            customer support team at{' '}
             <span className="underline">
               <Link to="/">help@fairapp.ng</Link>
             </span>

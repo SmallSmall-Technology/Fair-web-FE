@@ -1,20 +1,20 @@
 import {
   getTotalCartPrice,
   getTotalCartQuantity,
-} from "../../../features/cart/cartSlice";
+} from '../../../features/cart/cartSlice';
 import {
   getUserIsAuthenticated,
   getUserName,
-} from "../../../features/auth/authSlice";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { YellowButton } from "../../../utils/Button";
-import { CartDropdownItems } from "./CartDropdownItems";
-import { LoggedInUserDropdown } from "./LoggedInUserDropdown";
-import { formatCurrency } from "../../../utils/FormatCurrency";
-import { ChevronDown, Heart, ShoppingCart } from "lucide-react";
-import { getTotalFavouritesQuantity } from "../../../features/favourite/favouriteSlice";
+} from '../../../features/auth/authSlice';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { YellowButton } from '../../../utils/Button';
+import { CartDropdownItems } from './CartDropdownItems';
+import { LoggedInUserDropdown } from './LoggedInUserDropdown';
+import { formatCurrency } from '../../../utils/FormatCurrency';
+import { ChevronDown, Heart, ShoppingCart } from 'lucide-react';
+import { getTotalFavouritesQuantity } from '../../../features/favourite/favouriteSlice';
 
 export const NavBar = () => {
   const user = useSelector(getUserName);
@@ -125,8 +125,8 @@ export const NavBar = () => {
             <Heart size={24} aria-hidden="true" />
           </Link>
         </li>
-        <div>
-          <li className="relative" onClick={hanldeCartDropdownItems}>
+        <li>
+          <div className="relative" onClick={hanldeCartDropdownItems}>
             {totalProductsInCart > 0 && (
               <div className="bg-[#FB0202] text-white text-[11px] font-medium p-1 rounded-full absolute bottom-[14px] left-3 min-w-6 flex justify-center">
                 {totalProductsInCart}
@@ -135,12 +135,12 @@ export const NavBar = () => {
             <button aria-label="View shopping cart">
               <ShoppingCart size={26} aria-hidden="true" />
             </button>
-          </li>
+          </div>
 
           <div className="absolute right-2 top-[4.02rem] w-[412px]">
             <CartDropdownItems isOpen={isOpen} setIsOpen={setIsOpen} />
           </div>
-        </div>
+        </li>
         <li>
           <button
             type="button"
@@ -161,7 +161,7 @@ export const Subtotal = () => {
   const navigate = useNavigate();
   const subTotal = useSelector(getTotalCartPrice);
   const handleCheckout = () => {
-    navigate("cart-items/checkout");
+    navigate('cart-items/checkout');
   };
 
   return (

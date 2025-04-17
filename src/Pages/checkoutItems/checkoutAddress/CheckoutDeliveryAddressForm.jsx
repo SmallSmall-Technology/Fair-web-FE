@@ -1,26 +1,25 @@
-import * as Yup from "yup";
-import { states } from "../../../utils/data";
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import { CheckoutDeliveryAddressButton } from "../../../utils/Button";
+import * as Yup from 'yup';
+import { states } from '../../../utils/data';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { CheckoutDeliveryAddressButton } from '../../../utils/Button';
 
 export const CheckoutDeliveryAddressForm = ({
   deliveryAddress,
   isSubmitted,
   handleEditedDeliveryAddress,
   handleSubmitDeliveryAddress,
-  handleOpenCheckoutDeliveryAddressForm,
   inputRef,
 }) => {
   const validationSchema = Yup.object({
-    state: Yup.string().required("State is required"),
+    state: Yup.string().required('State is required'),
     address: Yup.string()
-      .min(5, "Must be at least 5 characters")
-      .required("Address is required"),
+      .min(5, 'Must be at least 5 characters')
+      .required('Address is required'),
   });
 
   return (
     <Formik
-      initialValues={{ state: "", address: "" }}
+      initialValues={{ state: '', address: '' }}
       validationSchema={validationSchema}
       onSubmit={(values, action) => {
         if (deliveryAddress.length > 0) {
@@ -113,7 +112,7 @@ export const CheckoutDeliveryAddressForm = ({
             className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg w-[30%]"
             // onClick={handleCloseForm}
           >
-            {isSubmitted ? "Edit delivery address" : "Save delivery address"}
+            {isSubmitted ? 'Edit delivery address' : 'Save delivery address'}
           </CheckoutDeliveryAddressButton>
         </Form>
       )}

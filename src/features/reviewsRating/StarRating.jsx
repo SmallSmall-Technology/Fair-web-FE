@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Star } from "./Star";
+import { Star } from './Star';
+import { useState } from 'react';
 
 export const StarRating = ({ maxRating = 5 }) => {
   const [rating, setRating] = useState(0);
@@ -19,7 +19,7 @@ export const StarRating = ({ maxRating = 5 }) => {
           />
         );
       })}
-      {rating.toFixed(1) || ""}
+      {rating.toFixed(1) || ''}
     </div>
   );
 };

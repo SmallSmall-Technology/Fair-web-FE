@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux";
-import { getCurrentQuantityById } from "../../../features/cart/cartSlice";
-import { UpdateItemQuantity } from "../../../features/cart/UpdateItemQuantity";
-import { formatCurrency } from "../../../utils/FormatCurrency";
-import { DeleteItemFromCart } from "../../../features/cart/DeleteItem";
+import { useSelector } from 'react-redux';
+import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
+import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
+import { formatCurrency } from '../../../utils/FormatCurrency';
+import { DeleteItemFromCart } from '../../../features/cart/DeleteItem';
 
 export const NavBarCartItem = ({ item }) => {
   const currentQuantity = useSelector(getCurrentQuantityById(item.productId));

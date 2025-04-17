@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { Copyright } from "lucide-react";
+import { Link } from 'react-router-dom';
+import { Copyright } from 'lucide-react';
 
 export const CartFooter = () => {
   return (

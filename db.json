@@ -6,13 +6,23 @@
       "brand": "Samsung",
       "category": "Electronics",
       "subcategory": "Mobile Phones",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "207000",
       "discountPrice": "225000",
       "discountPercentage": "23",
       "ratings": "3.5",
       "noOfProductSold": "20",
-      "slug": "samsung-galaxy-note-10-plus"
+      "slug": "samsung-galaxy-note-10-plus",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 207000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 62100,
+          "monthlyPayment": 48300,
+          "totalPrice": 207000
+        }
+      ]
     },
     {
       "id": "2",
@@ -20,11 +30,21 @@
       "brand": "Apple",
       "category": "Electronics",
       "subcategory": "Mobile Phones",
-      "image": "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "500000",
       "ratings": "4.8",
       "noOfProductSold": "50",
-      "slug": "iphone-14-pro-max"
+      "slug": "iphone-14-pro-max",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 500000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 150000,
+          "monthlyPayment": 116666.67,
+          "totalPrice": 500000
+        }
+      ]
     },
     {
       "id": "3",
@@ -32,12 +52,22 @@
       "brand": "Google",
       "category": "Electronics",
       "subcategory": "Mobile Phones",
-      "image": "https://images.unsplash.com/photo-1666919643134-d97687c1826c?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/163100/pexels-photo-163100.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "300000",
       "discountPrice": "320000",
       "ratings": "4.6",
       "noOfProductSold": "30",
-      "slug": "google-pixel-7-pro"
+      "slug": "google-pixel-7-pro",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 300000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 90000,
+          "monthlyPayment": 70000,
+          "totalPrice": 300000
+        }
+      ]
     },
     {
       "id": "4",
@@ -45,12 +75,22 @@
       "brand": "OnePlus",
       "category": "Electronics",
       "subcategory": "Mobile Phones",
-      "image": "https://images.unsplash.com/photo-1647427014769-706a64d7cbf9?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/47261/pexels-photo-47261.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "280000",
       "discountPrice": "10",
       "ratings": "4.7",
       "noOfProductSold": "25",
-      "slug": "oneplus-10-pro"
+      "slug": "oneplus-10-pro",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 280000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 84000,
+          "monthlyPayment": 65333.33,
+          "totalPrice": 280000
+        }
+      ]
     },
     {
       "id": "5",
@@ -58,12 +98,22 @@
       "brand": "Xiaomi",
       "category": "Electronics",
       "subcategory": "Mobile Phones",
-      "image": "https://images.unsplash.com/photo-1634048419636-344df95db45b?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "200000",
       "discountPrice": "220000",
       "ratings": "4.4",
       "noOfProductSold": "22",
-      "slug": "xiaomi-mi-12"
+      "slug": "xiaomi-mi-12",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 200000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 60000,
+          "monthlyPayment": 46666.67,
+          "totalPrice": 200000
+        }
+      ]
     },
     {
       "id": "6",
@@ -71,12 +121,22 @@
       "brand": "Samsung",
       "category": "Electronics",
       "subcategory": "Mobile Phones",
-      "image": "https://images.unsplash.com/photo-1643762711098-2c1d4f5c5e25?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "400000",
       "discountPrice": "420000",
       "ratings": "4.9",
       "noOfProductSold": "40",
-      "slug": "samsung-galaxy-s22-ultra"
+      "slug": "samsung-galaxy-s22-ultra",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 400000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 120000,
+          "monthlyPayment": 93333.33,
+          "totalPrice": 400000
+        }
+      ]
     },
     {
       "id": "7",
@@ -84,12 +144,22 @@
       "brand": "Apple",
       "category": "Electronics",
       "subcategory": "Mobile Phones",
-      "image": "https://images.unsplash.com/photo-1651322009289-03fc183f3588?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "150000",
       "discountPrice": "170000",
       "ratings": "4.3",
       "noOfProductSold": "18",
-      "slug": "iphone-se-2022"
+      "slug": "iphone-se-2022",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 150000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 45000,
+          "monthlyPayment": 35000,
+          "totalPrice": 150000
+        }
+      ]
     },
     {
       "id": "8",
@@ -97,12 +167,22 @@
       "brand": "Google",
       "category": "Electronics",
       "subcategory": "Mobile Phones",
-      "image": "https://images.unsplash.com/photo-1655396722168-4193e6e63c93?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/821652/pexels-photo-821652.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "180000",
       "discountPrice": "200000",
       "ratings": "4.5",
       "noOfProductSold": "28",
-      "slug": "google-pixel-6a"
+      "slug": "google-pixel-6a",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 180000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 54000,
+          "monthlyPayment": 42000,
+          "totalPrice": 180000
+        }
+      ]
     },
     {
       "id": "9",
@@ -110,12 +190,22 @@
       "brand": "OnePlus",
       "category": "Electronics",
       "subcategory": "Mobile Phones",
-      "image": "https://images.unsplash.com/photo-1626685677220-17d052261789?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "220000",
       "discountPrice": "240000",
       "ratings": "4.6",
       "noOfProductSold": "35",
-      "slug": "oneplus-nord-2"
+      "slug": "oneplus-nord-2",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 220000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 66000,
+          "monthlyPayment": 51333.33,
+          "totalPrice": 220000
+        }
+      ]
     },
     {
       "id": "10",
@@ -123,12 +213,22 @@
       "brand": "Xiaomi",
       "category": "Electronics",
       "subcategory": "Mobile Phones",
-      "image": "https://images.unsplash.com/photo-1642491358977-32aa436c9b5c?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "120000",
       "discountPrice": "140000",
       "ratings": "4.2",
       "noOfProductSold": "20",
-      "slug": "xiaomi-redmi-note-11"
+      "slug": "xiaomi-redmi-note-11",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 120000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 36000,
+          "monthlyPayment": 28000,
+          "totalPrice": 120000
+        }
+      ]
     },
     {
       "id": "11",
@@ -136,12 +236,22 @@
       "brand": "Samsung",
       "category": "Electronics",
       "subcategory": "TV & Video",
-      "image": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=500&q=60",
-      "price": "N300000.00",
-      "discountPrice": "N320000.00",
+      "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "300000",
+      "discountPrice": "320000",
       "ratings": "4.7",
       "noOfProductSold": "15",
-      "slug": "samsung-55-inch-4k-smart-tv"
+      "slug": "samsung-55-inch-4k-smart-tv",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 300000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 90000,
+          "monthlyPayment": 70000,
+          "totalPrice": 300000
+        }
+      ]
     },
     {
       "id": "12",
@@ -149,12 +259,22 @@
       "brand": "LG",
       "category": "Electronics",
       "subcategory": "TV & Video",
-      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=500&q=60",
-      "price": "N500000.00",
-      "discountPrice": "N550000.00",
+      "image": "https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "500000",
+      "discountPrice": "550000",
       "ratings": "4.9",
       "noOfProductSold": "20",
-      "slug": "lg-65-inch-oled-evo-tv"
+      "slug": "lg-65-inch-oled-evo-tv",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 500000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 150000,
+          "monthlyPayment": 116666.67,
+          "totalPrice": 500000
+        }
+      ]
     },
     {
       "id": "13",
@@ -162,12 +282,22 @@
       "brand": "Sony",
       "category": "Electronics",
       "subcategory": "TV & Video",
-      "image": "https://images.unsplash.com/photo-1586125182680-43e51d6a59ef?auto=format&fit=crop&w=500&q=60",
-      "price": "N750000.00",
-      "discountPrice": "N800000.00",
+      "image": "https://images.pexels.com/photos/5552789/pexels-photo-5552789.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "750000",
+      "discountPrice": "800000",
       "ratings": "4.8",
       "noOfProductSold": "10",
-      "slug": "sony-bravia-xr-77-inch-oled-tv"
+      "slug": "sony-bravia-xr-77-inch-oled-tv",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 750000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 225000,
+          "monthlyPayment": 175000,
+          "totalPrice": 750000
+        }
+      ]
     },
     {
       "id": "14",
@@ -175,12 +305,22 @@
       "brand": "TCL",
       "category": "Electronics",
       "subcategory": "TV & Video",
-      "image": "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=500&q=60",
-      "price": "N280000.00",
-      "discountPrice": "N300000.00",
+      "image": "https://images.pexels.com/photos/704555/pexels-photo-704555.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "280000",
+      "discountPrice": "300000",
       "ratings": "4.6",
       "noOfProductSold": "30",
-      "slug": "tcl-50-inch-qled-tv"
+      "slug": "tcl-50-inch-qled-tv",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 280000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 84000,
+          "monthlyPayment": 65333.33,
+          "totalPrice": 280000
+        }
+      ]
     },
     {
       "id": "15",
@@ -188,12 +328,22 @@
       "brand": "Hisense",
       "category": "Electronics",
       "subcategory": "TV & Video",
-      "image": "https://images.unsplash.com/photo-1616443136967-0dfd0eb36eec?auto=format&fit=crop&w=500&q=60",
-      "price": "N peat350000.00",
-      "discountPrice": "N370000.00",
+      "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "350000",
+      "discountPrice": "370000",
       "ratings": "4.5",
       "noOfProductSold": "25",
-      "slug": "hisense-58-inch-uled-tv"
+      "slug": "hisense-58-inch-uled-tv",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 350000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 105000,
+          "monthlyPayment": 81666.67,
+          "totalPrice": 350000
+        }
+      ]
     },
     {
       "id": "16",
@@ -201,12 +351,22 @@
       "brand": "Panasonic",
       "category": "Electronics",
       "subcategory": "TV & Video",
-      "image": "https://images.unsplash.com/photo-1569169332365-4cba327a6e0c?auto=format&fit=crop&w=500&q=60",
-      "price": "N450000.00",
-      "discountPrice": "N480000.00",
+      "image": "https://images.pexels.com/photos/7234737/pexels-photo-7234737.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "450000",
+      "discountPrice": "480000",
       "ratings": "4.7",
       "noOfProductSold": "18",
-      "slug": "panasonic-65-inch-4k-led-tv"
+      "slug": "panasonic-65-inch-4k-led-tv",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 450000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 135000,
+          "monthlyPayment": 105000,
+          "totalPrice": 450000
+        }
+      ]
     },
     {
       "id": "17",
@@ -214,12 +374,22 @@
       "brand": "Sharp",
       "category": "Electronics",
       "subcategory": "TV & Video",
-      "image": "https://images.unsplash.com/photo-1516192518150-0d8fee5425e3?auto=format&fit=crop&w=500&q=60",
-      "price": "N600000.00",
-      "discountPrice": "N650000.00",
+      "image": "https://images.pexels.com/photos/3769747/pexels-photo-3769747.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "600000",
+      "discountPrice": "650000",
       "ratings": "4.8",
       "noOfProductSold": "12",
-      "slug": "sharp-70-inch-aquos-tv"
+      "slug": "sharp-70-inch-aquos-tv",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 600000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 180000,
+          "monthlyPayment": 140000,
+          "totalPrice": 600000
+        }
+      ]
     },
     {
       "id": "18",
@@ -227,12 +397,22 @@
       "brand": "Vizio",
       "category": "Electronics",
       "subcategory": "TV & Video",
-      "image": "https://images.unsplash.com/photo-1558875212-efe031b62d1c?auto=format&fit=crop&w=500&q=60",
-      "price": "N320000.00",
-      "discountPrice": "N350000.00",
+      "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "320000",
+      "discountPrice": "350000",
       "ratings": "4.6",
       "noOfProductSold": "22",
-      "slug": "vizio-55-inch-m-series-tv"
+      "slug": "vizio-55-inch-m-series-tv",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 320000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 96000,
+          "monthlyPayment": 74666.67,
+          "totalPrice": 320000
+        }
+      ]
     },
     {
       "id": "19",
@@ -240,12 +420,22 @@
       "brand": "Philips",
       "category": "Electronics",
       "subcategory": "TV & Video",
-      "image": "https://images.unsplash.com/photo-1604072363254-9d70d34fd678?auto=format&fit=crop&w=500&q=60",
-      "price": "N280000.00",
-      "discountPrice": "N310000.00",
+      "image": "https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "280000",
+      "discountPrice": "310000",
       "ratings": "4.5",
       "noOfProductSold": "14",
-      "slug": "philips-50-inch-ambilight-tv"
+      "slug": "philips-50-inch-ambilight-tv",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 280000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 84000,
+          "monthlyPayment": 65333.33,
+          "totalPrice": 280000
+        }
+      ]
     },
     {
       "id": "20",
@@ -253,12 +443,22 @@
       "brand": "Toshiba",
       "category": "Electronics",
       "subcategory": "TV & Video",
-      "image": "https://images.unsplash.com/photo-1598336001173-944fc87c5457?auto=format&fit=crop&w=500&q=60",
-      "price": "N310000.00",
-      "discountPrice": "N340000.00",
+      "image": "https://images.pexels.com/photos/704555/pexels-photo-704555.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "310000",
+      "discountPrice": "340000",
       "ratings": "4.6",
       "noOfProductSold": "19",
-      "slug": "toshiba-55-inch-fire-tv"
+      "slug": "toshiba-55-inch-fire-tv",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 310000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 93000,
+          "monthlyPayment": 72333.33,
+          "totalPrice": 310000
+        }
+      ]
     },
     {
       "id": "30",
@@ -266,12 +466,22 @@
       "brand": "LG",
       "category": "Electronics",
       "subcategory": "Fridge & Freezer",
-      "image": "https://images.unsplash.com/photo-1615874959474-d20b9c88b4f4?auto=format&fit=crop&w=500&q=60",
-      "price": "N400000.00",
-      "discountPrice": "N420000.00",
+      "image": "https://images.pexels.com/photos/731082/pexels-photo-731082.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "400000",
+      "discountPrice": "420000",
       "ratings": "4.6",
       "noOfProductSold": "12",
-      "slug": "lg-double-door-refrigerator"
+      "slug": "lg-double-door-refrigerator",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 400000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 120000,
+          "monthlyPayment": 93333.33,
+          "totalPrice": 400000
+        }
+      ]
     },
     {
       "id": "31",
@@ -279,12 +489,22 @@
       "brand": "Samsung",
       "category": "Electronics",
       "subcategory": "Television",
-      "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=60",
-      "price": "N500000.00",
-      "discountPrice": "N520000.00",
+      "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "500000",
+      "discountPrice": "520000",
       "ratings": "4.8",
       "noOfProductSold": "20",
-      "slug": "samsung-smart-tv-55-inch"
+      "slug": "samsung-smart-tv-55-inch",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 500000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 150000,
+          "monthlyPayment": 116666.67,
+          "totalPrice": 500000
+        }
+      ]
     },
     {
       "id": "32",
@@ -292,12 +512,22 @@
       "brand": "Sony",
       "category": "Electronics",
       "subcategory": "Audio",
-      "image": "https://images.unsplash.com/photo-1585435465945-bef5a93e03e5?auto=format&fit=crop&w=500&q=60",
-      "price": "N150000.00",
-      "discountPrice": "N170000.00",
+      "image": "https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "150000",
+      "discountPrice": "170000",
       "ratings": "4.5",
       "noOfProductSold": "8",
-      "slug": "sony-home-theater-system"
+      "slug": "sony-home-theater-system",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 150000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 45000,
+          "monthlyPayment": 35000,
+          "totalPrice": 150000
+        }
+      ]
     },
     {
       "id": "33",
@@ -305,12 +535,22 @@
       "brand": "Apple",
       "category": "Electronics",
       "subcategory": "Laptop",
-      "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=60",
-      "price": "N1500000.00",
-      "discountPrice": "N1550000.00",
+      "image": "https://images.pexels.com/photos/303383/pexels-photo-303383.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "1500000",
+      "discountPrice": "1550000",
       "ratings": "4.9",
       "noOfProductSold": "30",
-      "slug": "apple-macbook-pro-16-inch"
+      "slug": "apple-macbook-pro-16-inch",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 1500000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 450000,
+          "monthlyPayment": 350000,
+          "totalPrice": 1500000
+        }
+      ]
     },
     {
       "id": "34",
@@ -318,12 +558,22 @@
       "brand": "HP",
       "category": "Electronics",
       "subcategory": "Laptop",
-      "image": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=500&q=60",
-      "price": "N700000.00",
-      "discountPrice": "N750000.00",
+      "image": "https://images.pexels.com/photos/7974/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=500",
+      "price": "700000",
+      "discountPrice": "750000",
       "ratings": "4.7",
       "noOfProductSold": "15",
-      "slug": "hp-envy-x360-laptop"
+      "slug": "hp-envy-x360-laptop",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 700000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 210000,
+          "monthlyPayment": 163333.33,
+          "totalPrice": 700000
+        }
+      ]
     },
     {
       "id": "35",
@@ -331,12 +581,22 @@
       "brand": "Bose",
       "category": "Electronics",
       "subcategory": "Headphones",
-      "image": "https://images.unsplash.com/photo-1618366712010-f9ae5c5a004e?auto=format&fit=crop&w=500&q=60",
-      "price": "N180000.00",
-      "discountPrice": "N200000.00",
+      "image": "https://images.pexels.com/photos/205926/pexels-photo-205926.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "180000",
+      "discountPrice": "200000",
       "ratings": "4.8",
       "noOfProductSold": "22",
-      "slug": "bose-noise-cancelling-headphones"
+      "slug": "bose-noise-cancelling-headphones",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 180000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 54000,
+          "monthlyPayment": 42000,
+          "totalPrice": 180000
+        }
+      ]
     },
     {
       "id": "36",
@@ -344,12 +604,22 @@
       "brand": "Canon",
       "category": "Electronics",
       "subcategory": "Camera",
-      "image": "https://images.unsplash.com/photo-1519638831568-d9897f066bb6?auto=format&fit=crop&w=500&q=60",
-      "price": "N900000.00",
-      "discountPrice": "N950000.00",
+      "image": "https://images.pexels.com/photos/51383/pexels-photo-51383.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "900000",
+      "discountPrice": "950000",
       "ratings": "4.7",
       "noOfProductSold": "10",
-      "slug": "canon-eos-r6-camera"
+      "slug": "canon-eos-r6-camera",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 900000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 270000,
+          "monthlyPayment": 210000,
+          "totalPrice": 900000
+        }
+      ]
     },
     {
       "id": "37",
@@ -357,12 +627,22 @@
       "brand": "Dell",
       "category": "Electronics",
       "subcategory": "Monitor",
-      "image": "https://images.unsplash.com/photo-1586771107445-3e46f1e35016?auto=format&fit=crop&w=500&q=60",
-      "price": "N300000.00",
-      "discountPrice": "N320000.00",
+      "image": "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "300000",
+      "discountPrice": "320000",
       "ratings": "4.6",
       "noOfProductSold": "18",
-      "slug": "dell-ultrasharp-monitor"
+      "slug": "dell-ultrasharp-monitor",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 300000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 90000,
+          "monthlyPayment": 70000,
+          "totalPrice": 300000
+        }
+      ]
     },
     {
       "id": "38",
@@ -370,12 +650,22 @@
       "brand": "Nike",
       "category": "Fashion",
       "subcategory": "Shoes",
-      "image": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=500&q=60",
-      "price": "N80000.00",
-      "discountPrice": "N90000.00",
+      "image": "https://images.pexels.com/photos/1240892/pexels-photo-1240892.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "80000",
+      "discountPrice": "90000",
       "ratings": "4.8",
       "noOfProductSold": "40",
-      "slug": "nike-air-max-sneakers"
+      "slug": "nike-air-max-sneakers",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 80000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 24000,
+          "monthlyPayment": 18666.67,
+          "totalPrice": 80000
+        }
+      ]
     },
     {
       "id": "39",
@@ -383,12 +673,22 @@
       "brand": "Rolex",
       "category": "Fashion",
       "subcategory": "Watches",
-      "image": "https://images.unsplash.com/photo-1524592094714-0f25a6143e2f?auto=format&fit=crop&w=500&q=60",
-      "price": "N2000000.00",
-      "discountPrice": "N2100000.00",
+      "image": "https://images.pexels.com/photos/277319/pexels-photo-277319.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "2000000",
+      "discountPrice": "2100000",
       "ratings": "4.9",
       "noOfProductSold": "5",
-      "slug": "rolex-submariner-watch"
+      "slug": "rolex-submariner-watch",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 2000000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 600000,
+          "monthlyPayment": 466666.67,
+          "totalPrice": 2000000
+        }
+      ]
     },
     {
       "id": "41",
@@ -396,12 +696,22 @@
       "brand": "LG",
       "category": "Electronics",
       "subcategory": "Refrigerators",
-      "image": "https://images.unsplash.com/photo-1615874959474-d20b9c88b4f4?auto=format&fit=crop&w=500&q=60",
-      "price": "N400000.00",
-      "discountPrice": "N420000.00",
+      "image": "https://images.pexels.com/photos/731082/pexels-photo-731082.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "400000",
+      "discountPrice": "420000",
       "ratings": "4.6",
       "noOfProductSold": "12",
-      "slug": "lg-double-door-refrigerator"
+      "slug": "lg-double-door-refrigerator",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 400000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 120000,
+          "monthlyPayment": 93333.33,
+          "totalPrice": 400000
+        }
+      ]
     },
     {
       "id": "42",
@@ -409,12 +719,22 @@
       "brand": "Samsung",
       "category": "Electronics",
       "subcategory": "Microwaves",
-      "image": "https://images.unsplash.com/photo-1613564834360-1576b7e7c24b?auto=format&fit=crop&w=500&q=60",
-      "price": "N120000.00",
-      "discountPrice": "N135000.00",
+      "image": "https://images.pexels.com/photos/534119/pexels-photo-534119.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "120000",
+      "discountPrice": "135000",
       "ratings": "4.7",
       "noOfProductSold": "25",
-      "slug": "samsung-microwave-oven"
+      "slug": "samsung-microwave-oven",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 120000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 36000,
+          "monthlyPayment": 28000,
+          "totalPrice": 120000
+        }
+      ]
     },
     {
       "id": "43",
@@ -422,12 +742,22 @@
       "brand": "Panasonic",
       "category": "Electronics",
       "subcategory": "Cookers",
-      "image": "https://images.unsplash.com/photo-1617634661841-68a8e8ebd51b?auto=format&fit=crop&w=500&q=60",
-      "price": "N150000.00",
-      "discountPrice": "N165000.00",
+      "image": "https://images.pexels.com/photos/279135/pexels-photo-279135.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "150000",
+      "discountPrice": "165000",
       "ratings": "4.5",
       "noOfProductSold": "18",
-      "slug": "panasonic-4-burner-gas-cooker"
+      "slug": "panasonic-4-burner-gas-cooker",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 150000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 45000,
+          "monthlyPayment": 35000,
+          "totalPrice": 150000
+        }
+      ]
     },
     {
       "id": "44",
@@ -435,12 +765,22 @@
       "brand": "Philips",
       "category": "Electronics",
       "subcategory": "Air Fryers",
-      "image": "https://images.unsplash.com/photo-1602285006030-57e12089c3b4?auto=format&fit=crop&w=500&q=60",
-      "price": "N85000.00",
-      "discountPrice": "N95000.00",
+      "image": "https://images.pexels.com/photos/4397892/pexels-photo-4397892.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "85000",
+      "discountPrice": "95000",
       "ratings": "4.8",
       "noOfProductSold": "30",
-      "slug": "philips-air-fryer"
+      "slug": "philips-air-fryer",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 85000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 25500,
+          "monthlyPayment": 19833.33,
+          "totalPrice": 85000
+        }
+      ]
     },
     {
       "id": "45",
@@ -448,12 +788,22 @@
       "brand": "Bosch",
       "category": "Electronics",
       "subcategory": "Kettles",
-      "image": "https://images.unsplash.com/photo-1617989829829-76768cfc2a43?auto=format&fit=crop&w=500&q=60",
-      "price": "N25000.00",
-      "discountPrice": "N30000.00",
+      "image": "https://images.pexels.com/photos/1034584/pexels-photo-1034584.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "25000",
+      "discountPrice": "30000",
       "ratings": "4.4",
       "noOfProductSold": "40",
-      "slug": "bosch-electric-kettle"
+      "slug": "bosch-electric-kettle",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 25000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 7500,
+          "monthlyPayment": 5833.33,
+          "totalPrice": 25000
+        }
+      ]
     },
     {
       "id": "46",
@@ -461,12 +811,22 @@
       "brand": "Nutribullet",
       "category": "Electronics",
       "subcategory": "Blenders",
-      "image": "https://images.unsplash.com/photo-1622202452170-44bda9f65c64?auto=format&fit=crop&w=500&q=60",
-      "price": "N45000.00",
-      "discountPrice": "N50000.00",
+      "image": "https://images.pexels.com/photos/128865/pexels-photo-128865.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "45000",
+      "discountPrice": "50000",
       "ratings": "4.6",
       "noOfProductSold": "22",
-      "slug": "nutribullet-blender"
+      "slug": "nutribullet-blender",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 45000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 13500,
+          "monthlyPayment": 10500,
+          "totalPrice": 45000
+        }
+      ]
     },
     {
       "id": "47",
@@ -474,12 +834,22 @@
       "brand": "Kenwood",
       "category": "Electronics",
       "subcategory": "Food Processors",
-      "image": "https://images.unsplash.com/photo-1617634272385-5e05de9bdef6?auto=format&fit=crop&w=500&q=60",
-      "price": "N65000.00",
-      "discountPrice": "N70000.00",
+      "image": "https://images.pexels.com/photos/4397892/pexels-photo-4397892.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "65000",
+      "discountPrice": "70000",
       "ratings": "4.7",
       "noOfProductSold": "15",
-      "slug": "kenwood-food-processor"
+      "slug": "kenwood-food-processor",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 65000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 19500,
+          "monthlyPayment": 15166.67,
+          "totalPrice": 65000
+        }
+      ]
     },
     {
       "id": "48",
@@ -487,12 +857,22 @@
       "brand": "Hisense",
       "category": "Electronics",
       "subcategory": "Freezers",
-      "image": "https://images.unsplash.com/photo-1596901177920-0a3e3a6a1ec4?auto=format&fit=crop&w=500&q=60",
-      "price": "N210000.00",
-      "discountPrice": "N225000.00",
+      "image": "https://images.pexels.com/photos/731082/pexels-photo-731082.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "210000",
+      "discountPrice": "225000",
       "ratings": "4.5",
       "noOfProductSold": "10",
-      "slug": "hisense-chest-freezer"
+      "slug": "hisense-chest-freezer",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 210000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 63000,
+          "monthlyPayment": 49000,
+          "totalPrice": 210000
+        }
+      ]
     },
     {
       "id": "49",
@@ -500,12 +880,22 @@
       "brand": "Prestige",
       "category": "Electronics",
       "subcategory": "Toasters",
-      "image": "https://images.unsplash.com/photo-1585602551062-2a3a91d19a6a?auto=format&fit=crop&w=500&q=60",
-      "price": "N20000.00",
-      "discountPrice": "N25000.00",
+      "image": "https://images.pexels.com/photos/534119/pexels-photo-534119.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "20000",
+      "discountPrice": "25000",
       "ratings": "4.3",
       "noOfProductSold": "35",
-      "slug": "prestige-toaster"
+      "slug": "prestige-toaster",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 20000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 6000,
+          "monthlyPayment": 4666.67,
+          "totalPrice": 20000
+        }
+      ]
     },
     {
       "id": "50",
@@ -513,12 +903,22 @@
       "brand": "LG",
       "category": "Kitchen Appliances",
       "subcategory": "Dishwashers",
-      "image": "https://images.unsplash.com/photo-1596461404969-9ee7c4a83f65?auto=format&fit=crop&w=500&q=60",
-      "price": "N350000.00",
-      "discountPrice": "N370000.00",
+      "image": "https://images.pexels.com/photos/6237918/pexels-photo-6237918.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "price": "350000",
+      "discountPrice": "370000",
       "ratings": "4.7",
       "noOfProductSold": "8",
-      "slug": "lg-dishwasher"
+      "slug": "lg-dishwasher",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 350000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 105000,
+          "monthlyPayment": 81666.67,
+          "totalPrice": 350000
+        }
+      ]
     },
     {
       "id": "60",
@@ -526,12 +926,22 @@
       "brand": "Maybelline",
       "category": "beauty",
       "subcategory": "Makeup",
-      "image": "https://images.unsplash.com/photo-1584949035913-2f52ecf2a7c2?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "8000",
       "discountPrice": "9500",
       "ratings": "4.7",
       "noOfProductSold": "120",
-      "slug": "maybelline-fit-me-foundation"
+      "slug": "maybelline-fit-me-foundation",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 8000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 2400,
+          "monthlyPayment": 1866.67,
+          "totalPrice": 8000
+        }
+      ]
     },
     {
       "id": "61",
@@ -539,12 +949,22 @@
       "brand": "MAC",
       "category": "beauty",
       "subcategory": "Makeup",
-      "image": "https://images.unsplash.com/photo-1584949036477-9c86f18fef5b?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/3373745/pexels-photo-3373745.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "12000",
       "discountPrice": "13500",
       "ratings": "4.8",
       "noOfProductSold": "150",
-      "slug": "mac-matte-lipstick"
+      "slug": "mac-matte-lipstick",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 12000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 3600,
+          "monthlyPayment": 2800,
+          "totalPrice": 12000
+        }
+      ]
     },
     {
       "id": "62",
@@ -552,12 +972,22 @@
       "brand": "Nivea",
       "category": "beauty",
       "subcategory": "Skincare",
-      "image": "https://images.unsplash.com/photo-1607611749438-4859c7b20f83?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/4465124/pexels-photo-4465124.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "3500",
       "discountPrice": "4000",
       "ratings": "4.6",
       "noOfProductSold": "200",
-      "slug": "nivea-body-lotion"
+      "slug": "nivea-body-lotion",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 3500 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 1050,
+          "monthlyPayment": 816.67,
+          "totalPrice": 3500
+        }
+      ]
     },
     {
       "id": "63",
@@ -565,12 +995,22 @@
       "brand": "CeraVe",
       "category": "beauty",
       "subcategory": "Skincare",
-      "image": "https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/4465835/pexels-photo-4465835.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "6000",
       "discountPrice": "6800",
       "ratings": "4.9",
       "noOfProductSold": "180",
-      "slug": "cerave-foaming-facial-cleanser"
+      "slug": "cerave-foaming-facial-cleanser",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 6000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 1800,
+          "monthlyPayment": 1400,
+          "totalPrice": 6000
+        }
+      ]
     },
     {
       "id": "64",
@@ -578,12 +1018,22 @@
       "brand": "L'Oreal Paris",
       "category": "beauty",
       "subcategory": "Haircare",
-      "image": "https://images.unsplash.com/photo-1591238372982-7c12d2d0f698?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/4465831/pexels-photo-4465831.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "2800",
       "discountPrice": "3200",
       "ratings": "4.5",
       "noOfProductSold": "250",
-      "slug": "loreal-paris-shampoo"
+      "slug": "loreal-paris-shampoo",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 2800 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 840,
+          "monthlyPayment": 653.33,
+          "totalPrice": 2800
+        }
+      ]
     },
     {
       "id": "65",
@@ -591,12 +1041,22 @@
       "brand": "Tresemme",
       "category": "beauty",
       "subcategory": "Haircare",
-      "image": "https://images.unsplash.com/photo-1584268214172-dcbe15c1782f?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/4465832/pexels-photo-4465832.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "3200",
       "discountPrice": "3600",
       "ratings": "4.7",
       "noOfProductSold": "230",
-      "slug": "tresemme-conditioner"
+      "slug": "tresemme-conditioner",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 3200 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 960,
+          "monthlyPayment": 746.67,
+          "totalPrice": 3200
+        }
+      ]
     },
     {
       "id": "66",
@@ -604,12 +1064,22 @@
       "brand": "Zara",
       "category": "beauty",
       "subcategory": "Clothing",
-      "image": "https://images.unsplash.com/photo-1596755097985-7ebd97401cc0?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/974911/pexels-photo-974911.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "15000",
       "discountPrice": "17000",
       "ratings": "4.5",
       "noOfProductSold": "95",
-      "slug": "zara-women-summer-dress"
+      "slug": "zara-women-summer-dress",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 15000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 4500,
+          "monthlyPayment": 3500,
+          "totalPrice": 15000
+        }
+      ]
     },
     {
       "id": "67",
@@ -617,12 +1087,22 @@
       "brand": "Nike",
       "category": "beauty",
       "subcategory": "Clothing",
-      "image": "https://images.unsplash.com/photo-1598257006456-0c67f7dbe10b?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "25000",
       "discountPrice": "28000",
       "ratings": "4.8",
       "noOfProductSold": "130",
-      "slug": "nike-mens-running-shoes"
+      "slug": "nike-mens-running-shoes",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 25000 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 7500,
+          "monthlyPayment": 5833.33,
+          "totalPrice": 25000
+        }
+      ]
     },
     {
       "id": "68",
@@ -630,12 +1110,22 @@
       "brand": "Rolex",
       "category": "beauty",
       "subcategory": "Accessories",
-      "image": "https://images.unsplash.com/photo-1515121066213-7b7c4b0c8288?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/277319/pexels-photo-277319.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "2500",
       "discountPrice": "2700",
       "ratings": "4.9",
       "noOfProductSold": "15",
-      "slug": "rolex-gold-watch"
+      "slug": "rolex-gold-watch",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 2500 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 750,
+          "monthlyPayment": 583.33,
+          "totalPrice": 2500
+        }
+      ]
     },
     {
       "id": "69",
@@ -643,274 +1133,25 @@
       "brand": "Ray-Ban",
       "category": "beauty",
       "subcategory": "Accessories",
-      "image": "https://images.unsplash.com/photo-1610383964865-6a1e14200b21?auto=format&fit=crop&w=500&q=60",
+      "image": "https://images.pexels.com/photos/343720/pexels-photo-343720.jpeg?auto=compress&cs=tinysrgb&w=500",
       "price": "2500",
       "discountPrice": "2700",
       "ratings": "4.9",
       "noOfProductSold": "15",
-      "slug": "ray-ban-aviator-sunglasses"
+      "slug": "ray-ban-aviator-sunglasses",
+      "paymentOptions": [
+        { "type": "upfront", "amount": 2500 },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 750,
+          "monthlyPayment": 583.33,
+          "totalPrice": 2500
+        }
+      ]
     }
   ],
-  "orders": [
-    {
-      "id": "ORD1744156718930",
-      "items": [
-        {
-          "productId": "1",
-          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-          "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-          "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
-        {
-          "productId": "2",
-          "name": "iPhone 14 Pro Max",
-          "image": "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?auto=format&fit=crop&w=500&q=60",
-          "soldBy": "Apple",
-          "price": 500000,
-          "quantity": 2
-        },
-        {
-          "productId": "3",
-          "name": "Google Pixel 7 Pro",
-          "image": "https://images.unsplash.com/photo-1666919643134-d97687c1826c?auto=format&fit=crop&w=500&q=60",
-          "soldBy": "Google",
-          "price": 300000,
-          "quantity": 1
-        },
-        {
-          "productId": "4",
-          "name": "OnePlus 10 Pro",
-          "image": "https://images.unsplash.com/photo-1647427014769-706a64d7cbf9?auto=format&fit=crop&w=500&q=60",
-          "soldBy": "OnePlus",
-          "price": 280000,
-          "quantity": 2
-        },
-        {
-          "productId": "5",
-          "name": "Xiaomi Mi 12",
-          "image": "https://images.unsplash.com/photo-1634048419636-344df95db45b?auto=format&fit=crop&w=500&q=60",
-          "soldBy": "Xiaomi",
-          "price": 200000,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 2267000,
-      "paidAmount": 2267000,
-      "remainingAmount": 0,
-      "status": "ongoing",
-      "createdAt": "2025-04-08T23:58:38.930Z",
-      "orderDate": "Apr 09, 2025"
-    },
-    {
-      "id": "ORD1744290834607",
-      "items": [
-        {
-          "productId": "1",
-          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-          "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-          "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
-        {
-          "productId": "3",
-          "name": "Google Pixel 7 Pro",
-          "image": "https://images.unsplash.com/photo-1666919643134-d97687c1826c?auto=format&fit=crop&w=500&q=60",
-          "soldBy": "Google",
-          "price": 300000,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 507000,
-      "paidAmount": 507000,
-      "remainingAmount": 0,
-      "status": "completed",
-      "createdAt": "2025-04-10T13:13:54.607Z",
-      "orderDate": "Apr 10, 2025"
-    }
-  ],
-  "cart": [
-    {
-      "id": "cart1744355535848",
-      "image": "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?auto=format&fit=crop&w=500&q=60",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 2,
-      "price": 500000,
-      "totalPrice": 1000000
-    },
-    {
-      "id": "cart1744540315145",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2Ftc3VuZyUyMHBob25lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": 1,
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744540630737",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744540632560",
-      "image": "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?auto=format&fit=crop&w=500&q=60",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000
-    },
-    {
-      "id": "cart1744541788465",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744542192205",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744542388474",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 2,
-      "price": 207000,
-      "totalPrice": 414000
-    },
-    {
-      "id": "cart1744543110317",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744543218292",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744543356533",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744543896633",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744544020716",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744550666250",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744553903225",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744569678393",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744569927899",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744573872433",
-      "image": "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?auto=format&fit=crop&w=500&q=60",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000
-    },
-    {
-      "id": "cart1744620108186",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 2,
-      "price": 207000,
-      "totalPrice": 414000
-    }
-  ]
+
+  "orders": [],
+  "cart": []
 }

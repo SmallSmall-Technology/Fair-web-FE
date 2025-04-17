@@ -1,7 +1,7 @@
-import { removeItem } from "./cartSlice";
-import { useDispatch } from "react-redux";
-import { Button } from "../../utils/Button";
-import { Trash2 } from "lucide-react";
+import { removeItem } from './cartSlice';
+import { useDispatch } from 'react-redux';
+import { Button } from '../../utils/Button';
+import { Trash2 } from 'lucide-react';
 
 export const DeleteItem = ({ id }) => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ export const DeleteItem = ({ id }) => {
 
   return (
     <Button
-      className="underline text-[#DB1C5E]"
+      className="underline text-sm font-normal"
       onClick={handleRemoveItem}
       aria-label="Remove item"
     >

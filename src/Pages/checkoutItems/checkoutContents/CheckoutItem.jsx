@@ -1,7 +1,7 @@
-import { X } from "lucide-react";
-import { useSelector } from "react-redux";
-import { formatCurrency } from "../../../utils/FormatCurrency";
-import { UpdateItemQuantity } from "../../../features/cart/UpdateItemQuantity";
+import { X } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { formatCurrency } from '../../../utils/FormatCurrency';
+import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 
 export const CheckoutItem = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -43,8 +43,8 @@ export const CheckoutItem = () => {
                   </p>
                   <p className="text-xs">Delivery</p>
                   <p className="text-xs font-medium">
-                    Est. delivery: by{" "}
-                    <span>{item.deliveryDate || "Jan, 20, 2025"}</span>
+                    Est. delivery: by{' '}
+                    <span>{item.deliveryDate || 'Jan, 20, 2025'}</span>
                   </p>
                 </div>
               </div>

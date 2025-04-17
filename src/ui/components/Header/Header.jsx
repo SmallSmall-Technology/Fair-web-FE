@@ -1,17 +1,17 @@
-import { memo } from "react";
-import { NavBar } from "./NavBar";
-import { Link } from "react-router-dom";
-import { SearchQuery } from "./SearchQuery";
-import { MobileNavBar } from "./MobileNavBar";
+import { memo } from 'react';
+import { NavBar } from './NavBar';
+import { Link } from 'react-router-dom';
+import { SearchQuery } from './SearchQuery';
+import { MobileNavBar } from './MobileNavBar';
 
 const Header = () => {
   return (
     <header
-      className="fixed top-0 left-0 right-0 bg-white z-30 py-4 flex justify-between border-b border-gray-200 pb-2 transition-all motion-safe:duration-200"
+      className="max-w-[1740px] mx-auto w-full fixed top-0 left-0 right-0 bg-white z-30 py-4 flex justify-between border-b border-gray-200 pb-2 transition-all motion-safe:duration-200"
       role="banner"
       aria-label="Main site navigation"
     >
-      <div className="hidden lg:flex justify-between items-center w-full px-4 sm:px-6 lg:px-16 max-w-full mx-auto">
+      <div className="hidden lg:flex justify-between items-center w-full px-4 sm:px-6 lg:px-10 max-w-full mx-auto">
         <Link
           to="/"
           aria-label="Fair Home"

@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
-import { ShoppingOverviewSideBar } from "./ShoppingOverviewSideBar";
+import { Outlet } from 'react-router-dom';
+import { ShoppingOverviewSideBar } from './ShoppingOverviewSideBar';
 
-export const ShoppingOverview = () => {
+const ShoppingOverview = () => {
   return (
     <>
       <section className="grid grid-cols-1 lg:grid-cols-[18%_80%] mt-8">
@@ -11,3 +11,5 @@ export const ShoppingOverview = () => {
     </>
   );
 };
+
+export default ShoppingOverview;
