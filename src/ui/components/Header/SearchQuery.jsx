@@ -1,11 +1,11 @@
-import { debounce } from "lodash";
-import { Field, Form, Formik } from "formik";
-import { Search } from "lucide-react";
-import { useCallback, useMemo } from "react";
+import { debounce } from 'lodash';
+import { Field, Form, Formik } from 'formik';
+import { Search } from 'lucide-react';
+import { useCallback, useMemo } from 'react';
 
 // Define SearchQuery as a component
 export const SearchQuery = () => {
-  const initialValues = useMemo(() => ({ search: "" }), []);
+  const initialValues = useMemo(() => ({ search: '' }), []);
 
   const handleSearchQuery = useCallback(
     debounce((values, { resetForm }) => {
@@ -28,7 +28,7 @@ export const SearchQuery = () => {
               id="search"
               name="search"
               placeholder="Search for anything"
-              className="rounded-md px-2 py-[10px] border text-sm w-full focus:ring-2 focus:ring-[#FFDE11] focus:border-transparent transition-all hover:border-[#FFDE11] motion-safe:duration-200"
+              className="rounded-md px-2 py-[10px] border text-sm w-full focus:ring-2 focus:ring-[#FFDE11] focus:border-transparent transition-all hover:border-[#FFDE11] motion-safe:duration-200 bg-[#ECEDF1]"
               aria-describedby="search-button"
             />
             <button

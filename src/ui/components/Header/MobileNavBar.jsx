@@ -1,14 +1,18 @@
-import { Shop } from "./Shop";
-import { Link } from "react-router-dom";
-import Hamburger from "hamburger-react";
-import { useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
-import { UserMenuDropdown } from "./UserMenuDropdown";
-import { CartDropdownItems } from "./CartDropdownItems";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ShoppingCart, User, X } from "lucide-react";
-import { getTotalCartQuantity } from "../../../features/cart/cartSlice";
-import { getUserIsAuthenticated } from "../../../features/auth/authSlice";
+import { Shop } from './Shop';
+import { Link } from 'react-router-dom';
+import Hamburger from 'hamburger-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { UserMenuDropdown } from './UserMenuDropdown';
+import { CartDropdownItems } from './CartDropdownItems';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronRight, ShoppingCart, User, X } from 'lucide-react';
+import { getTotalCartQuantity } from '../../../features/cart/cartSlice';
+import {
+  getUserIsAuthenticated,
+  logout,
+} from '../../../features/auth/authSlice';
+import { toast } from 'react-toastify';
 
 export const MobileNavBar = () => {
   const menuRef = useRef(null);
@@ -18,12 +22,24 @@ export const MobileNavBar = () => {
   const totalProductsInCart = useSelector(getTotalCartQuantity);
   const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false);
   const isAuthenticated = useSelector(getUserIsAuthenticated);
+  const dispatch = useDispatch();
+
+  const handleLogOutUser = () => {
+    dispatch(logout());
+    toast.dismiss();
+    toast.success('Logged Out Successfully', {
+      className: 'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+      bodyClassName: 'm-0 p-0',
+      closeButton: false,
+    });
+    setHamburgerIsOpen(false);
+  };
 
   // Lock scroll when menu is open
   useEffect(() => {
-    document.body.style.overflow = hamburgerIsOpen ? "hidden" : "auto";
+    document.body.style.overflow = hamburgerIsOpen ? 'hidden' : 'auto';
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     };
   }, [hamburgerIsOpen]);
 
@@ -38,22 +54,22 @@ export const MobileNavBar = () => {
         setHamburgerIsOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [hamburgerIsOpen]);
 
   const handleShopMenu = () => {
-    setShopIsOpen(!shopIsOpen);
+    setShopIsOpen((shopIsOpen) => !shopIsOpen);
   };
 
   const handleUserMenuDropdown = () => {
-    setUserMenuIsOpen(!userMenuIsOpen);
+    setUserMenuIsOpen((userMenuIsOpen) => !userMenuIsOpen);
   };
 
   const hanldeCartDropdownItems = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((isOpen) => !isOpen);
   };
 
   return (
@@ -61,7 +77,10 @@ export const MobileNavBar = () => {
       <nav aria-label="Main navigation">
         <ul className="flex items-center gap-4">
           <li className="cursor-pointer">
-            <User onClick={handleUserMenuDropdown} />
+            <User
+              onClick={handleUserMenuDropdown}
+              color={isAuthenticated ? '#FFDE11' : undefined}
+            />
           </li>
 
           <div>
@@ -101,10 +120,10 @@ export const MobileNavBar = () => {
 
                 <motion.div
                   ref={menuRef}
-                  initial={{ y: "-100%" }}
+                  initial={{ y: '-100%' }}
                   animate={{ y: 0 }}
-                  exit={{ y: "-100%" }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  exit={{ y: '-100%' }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
                   className="absolute inset-0 bg-white z-50 h-screen"
                 >
                   <button
@@ -115,19 +134,18 @@ export const MobileNavBar = () => {
                   </button>
                   <ul className="flex flex-col space-y-6 p-6 pt-10 h-full w-full">
                     {[
-                      { label: "Shop" },
-                      { label: "Gift card" },
-                      { label: "Sell" },
-                      { label: "Help" },
+                      { label: 'Shop' },
+                      { label: 'Gift card' },
+                      { label: 'Sell' },
+                      { label: 'Help' },
                     ].map((item, index) => (
                       <li
                         key={index}
                         className="text-base font-semibold  cursor-pointer transition-colors duration-200 hover:underline focus:outline-none focus:text-black"
-                        // onClick={() => setHamburgerIsOpen(false)}
                       >
-                        {item.label === "Shop" ? (
+                        {item.label === 'Shop' ? (
                           <p
-                            className="flex items-center justify-between cursor-pointer"
+                            className="flex items-center justify-between cursor-pointer mb-0"
                             aria-label={item.label}
                             onClick={handleShopMenu}
                           >
@@ -140,7 +158,7 @@ export const MobileNavBar = () => {
                       </li>
                     ))}
                     <hr className="my-2" />
-                    {!isAuthenticated && (
+                    {!isAuthenticated ? (
                       <li className="font-semibold flex space-x-3">
                         <Link
                           to="/login"
@@ -155,6 +173,10 @@ export const MobileNavBar = () => {
                         >
                           Create account
                         </Link>
+                      </li>
+                    ) : (
+                      <li className="font-semibold" onClick={handleLogOutUser}>
+                        Log out
                       </li>
                     )}
                   </ul>

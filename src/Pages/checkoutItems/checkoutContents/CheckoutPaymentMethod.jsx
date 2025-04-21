@@ -1,54 +1,48 @@
-import axios from "axios";
-import * as Yup from "yup";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { YellowButton } from "../../../utils/Button.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import { formatCurrency } from "../../../utils/FormatCurrency.jsx";
+import axios from 'axios';
+import * as Yup from 'yup';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { YellowButton } from '../../../utils/Button.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 import {
   getTotalCartPrice,
   clearCart,
-} from "../../../features/cart/cartSlice.js";
+} from '../../../features/cart/cartSlice.js';
 import {
   createOrder,
   makePayment,
-} from "../../../features/order/orderSlice.js";
+} from '../../../features/order/orderSlice.js';
 import userSlice, {
   getDeliveryAddress,
-} from "../../../features/user/userSlice.js";
+} from '../../../features/user/userSlice.js';
 
-const API_URL = "http://localhost:3000";
+const API_URL = 'http://localhost:3000';
 
 export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
-  const onDeliveryAddress = useSelector(getDeliveryAddress);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const totalCartPrice = useSelector(getTotalCartPrice);
   const cartItems = useSelector((state) => state.cart.cart);
-
-  const VAT = (7.5 / 100) * totalCartPrice;
-  const shippingFee = 1200;
-  const subTotal = totalCartPrice;
-  const total = totalCartPrice + VAT + shippingFee;
+  const onDeliveryAddress = useSelector(getDeliveryAddress);
 
   const validationSchema = Yup.object({
-    picked: Yup.string().required("Please select a payment option"),
+    picked: Yup.string().required('Please select a payment option'),
   });
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     if (cartItems.length === 0) {
-      toast.error("Your cart is empty!");
+      toast.error('Your cart is empty!');
       return;
     }
 
     if (onDeliveryAddress.length === 0) {
       toast.dismiss();
-      toast.error("Please input your delivery address", {
+      toast.error('Please input your delivery address', {
         className:
-          "bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0",
-        bodyClassName: "m-0 p-0",
+          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+        bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
       return;
@@ -71,7 +65,7 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
         })
       );
 
-      if (values.picked === "interest-free-credit") {
+      if (values.picked === 'interest-free-credit') {
         // const initialPayment = totalCartPrice * 0.1;
         const initialPayment = totalCartPrice;
 
@@ -85,13 +79,13 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
           )} initial payment!`,
           {
             className:
-              "bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0",
-            bodyClassName: "m-0 p-0",
+              'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+            bodyClassName: 'm-0 p-0',
             closeButton: false,
           }
         );
 
-        navigate("/user-dashboard/shopping-overview/purchases");
+        navigate('/cart-items/checkout/payment-success');
       } else {
         const order = await dispatch(
           createOrder({
@@ -108,22 +102,23 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
             `Payment of ₦${totalCartPrice} successful via ${values.picked}!`,
             {
               className:
-                "bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0",
-              bodyClassName: "m-0 p-0",
+                'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+              bodyClassName: 'm-0 p-0',
               closeButton: false,
             }
           );
+          navigate('/cart-items/checkout/payment-success');
 
-          navigate("/user-dashboard/shopping-overview/purchases");
+          // navigate('/user-dashboard/shopping-overview/purchases');
         }, 2000);
       }
       resetForm();
     } catch (error) {
       toast.dismiss();
-      toast.error("Payment failed. Please try again.", {
+      toast.error('Payment failed. Please try again.', {
         className:
-          "bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0",
-        bodyClassName: "m-0 p-0",
+          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+        bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
     } finally {
@@ -131,10 +126,14 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
     }
   };
 
+  const currentPlan = cartItems.find(
+    (item) => item.paymentPlan === 'installments'
+  );
+
   return (
     <div>
       <Formik
-        initialValues={{ picked: "" }}
+        initialValues={{ picked: '' }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
@@ -143,8 +142,7 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
             <h1 className="lg:hidden text-lg font-bold mt-6 mb-3">
               Payment method
             </h1>
-            {/* <p className="mb-4">Total: {formatCurrency(total)}</p> */}
-            {totalCartPrice > 100000 ? (
+            {!currentPlan ? (
               <div
                 role="group"
                 aria-labelledby="my-radio-group"
@@ -154,7 +152,7 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
                   Payment Options
                 </span>
 
-                <div className="lg:px-4 py-1 lg:py-2">
+                {/* <div className="lg:px-4 py-1 lg:py-2">
                   <label htmlFor="wallet" className="text-sm">
                     <Field
                       type="radio"
@@ -163,12 +161,12 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
                       value="wallet"
                       className="px-4 py-10 mr-2"
                     />
-                    Wallet{" "}
+                    Wallet{' '}
                     <span className="text-[#96959F] text-xs">
                       (Balance: {formatCurrency(45000)})
                     </span>
                   </label>
-                </div>
+                </div> */}
 
                 <hr className="hidden lg:block" />
                 <div className="lg:px-4 py-1 lg:py-2">
@@ -180,7 +178,7 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
                       value="debit card"
                       className="px-4 py-10 mr-2"
                     />
-                    Debit card{" "}
+                    Debit card{' '}
                   </label>
                 </div>
                 <hr className="hidden lg:block" />
@@ -194,7 +192,7 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
                       value="interest-free-credit"
                       className="px-4 py-10 mr-2"
                     />
-                    Smallsmall Interest Free Credit{" "}
+                    Smallsmall Interest Free Credit{' '}
                     <span className="text-[#96959F] text-xs">
                       (Balance: {formatCurrency(0)})
                     </span>
@@ -243,7 +241,7 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
                       value="interest-free-credit"
                       className="px-4 py-10 mr-2"
                     />
-                    Smallsmall Interest Free Credit{" "}
+                    Smallsmall Interest Free Credit{' '}
                     <span className="text-[#96959F] text-xs">
                       (Balance: {formatCurrency(0)})
                     </span>
@@ -260,9 +258,9 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
               <YellowButton
                 type="submit"
                 disabled={isSubmitting}
-                onClick={onSubmitPaymentMethod}
+                // onClick={onSubmitPaymentMethod}
               >
-                {isSubmitting ? "Processing..." : "Pay now"}
+                {isSubmitting ? 'Processing...' : 'Pay now'}
               </YellowButton>
             </div>
           </Form>

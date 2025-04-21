@@ -1,14 +1,19 @@
-import { Link } from "react-router-dom";
-import { CartCoupon } from "../../../features/cart/CartCoupon";
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { CartCoupon } from '../../../features/cart/CartCoupon';
+import { getUserIsAuthenticated } from '../../../features/auth/authSlice';
 
 export const CartSummaryExtrasAndCoupon = () => {
-  const coupon = true;
+  const couponIsActive = true;
+  const isAuthenticated = useSelector(getUserIsAuthenticated);
   return (
     <article className="pl-8 mt-4 hidden md:block">
-      <Link to="/login" className="underline">
-        Login or Join
-      </Link>
-      {coupon && <CartCoupon />}
+      {!isAuthenticated && (
+        <Link to="/login" className="underline">
+          Login or Join
+        </Link>
+      )}
+      {couponIsActive && <CartCoupon />}
     </article>
   );
 };

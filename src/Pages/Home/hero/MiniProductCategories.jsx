@@ -1,4 +1,4 @@
-import { productCategories } from "../../../utils/data";
+import { productCategories } from '../../../utils/data';
 
 const SingleProductCategory = ({ product }) => {
   return (

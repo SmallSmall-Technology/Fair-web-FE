@@ -1,5 +1,5 @@
-import { CircleX } from "lucide-react";
-import { Formik, Form, Field } from "formik";
+import { CircleX } from 'lucide-react';
+import { Formik, Form, Field } from 'formik';
 
 const CategoryFilterForm = ({ categoryProducts, handleFilter, products }) => {
   const getUniqueOptions = (products, key) => {
@@ -8,7 +8,7 @@ const CategoryFilterForm = ({ categoryProducts, handleFilter, products }) => {
 
   return (
     <Formik
-      initialValues={{ type: "", brand: "", price: "" }}
+      initialValues={{ type: '', brand: '', price: '' }}
       onSubmit={handleFilter}
     >
       {({ values, handleChange, resetForm }) => {
@@ -40,7 +40,7 @@ const CategoryFilterForm = ({ categoryProducts, handleFilter, products }) => {
                   </option>
                   {getUniqueOptions(
                     categoryProducts || products,
-                    "subcategory"
+                    'subcategory'
                   ).map((subcategory, index) => (
                     <option key={index} value={subcategory}>
                       {subcategory}
@@ -65,7 +65,7 @@ const CategoryFilterForm = ({ categoryProducts, handleFilter, products }) => {
                   <option value="" disabled>
                     Choose Brand
                   </option>
-                  {getUniqueOptions(categoryProducts || products, "brand").map(
+                  {getUniqueOptions(categoryProducts || products, 'brand').map(
                     (brand, index) => (
                       <option key={index} value={brand}>
                         {brand}
@@ -111,10 +111,10 @@ const CategoryFilterForm = ({ categoryProducts, handleFilter, products }) => {
                 >
                   <span>
                     {filterCount === 0
-                      ? "No filter(s) applied"
+                      ? 'No filter(s) applied'
                       : filterCount > 1
-                      ? `${filterCount} filters applied`
-                      : `${filterCount} filter applied`}
+                        ? `${filterCount} filters applied`
+                        : `${filterCount} filter applied`}
                   </span>
                   <button
                     type="submit"
@@ -144,10 +144,10 @@ const CategoryFilterForm = ({ categoryProducts, handleFilter, products }) => {
               >
                 <span>
                   {filterCount === 0
-                    ? "No filter(s) applied"
+                    ? 'No filter(s) applied'
                     : filterCount > 1
-                    ? `${filterCount} filters applied`
-                    : `${filterCount} filter applied`}
+                      ? `${filterCount} filters applied`
+                      : `${filterCount} filter applied`}
                 </span>
                 <button
                   type="submit"

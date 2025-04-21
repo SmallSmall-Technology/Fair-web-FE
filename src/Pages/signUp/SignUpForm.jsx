@@ -1,6 +1,6 @@
-import Form from "react-bootstrap/Form";
+import Form from 'react-bootstrap/Form';
 
-import { Button } from "../../utils/Button";
+import { Button } from '../../utils/Button';
 
 function SignUpForm() {
   return (

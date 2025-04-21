@@ -1,11 +1,10 @@
-// src/components/LoginForm.js
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
-import Form from "react-bootstrap/Form";
-import { Button } from "../../utils/Button";
-import { login, clearError } from "../../features/auth/authSlice";
+import { toast } from 'react-toastify';
+import Form from 'react-bootstrap/Form';
+import { Button } from '../../utils/Button';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { login, clearError } from '../../features/auth/authSlice';
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -15,21 +14,21 @@ function LoginForm() {
     (state) => state.auth
   );
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   // Navigate on successful login
   useEffect(() => {
     if (isAuthenticated) {
-      const from = location.state?.from?.pathname || "/";
+      const from = location.state?.from?.pathname || '/';
 
       toast.dismiss();
-      toast.success("Login successful!", {
+      toast.success('Login successful!', {
         autoClose: 3000,
         className:
-          "bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0",
-        bodyClassName: "m-0 p-0",
+          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+        bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
       navigate(from, { replace: true });
@@ -39,7 +38,7 @@ function LoginForm() {
   // Reset password on error
   useEffect(() => {
     if (error) {
-      setFormData((prev) => ({ ...prev, password: "" }));
+      setFormData((prev) => ({ ...prev, password: '' }));
     }
   }, [error]);
 
@@ -52,11 +51,11 @@ function LoginForm() {
     e.preventDefault();
     if (!formData.email || !formData.password) {
       toast.dismiss();
-      toast.error("Please fill in all fields", {
+      toast.error('Please fill in all fields', {
         autoClose: 3000,
         className:
-          "bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0",
-        bodyClassName: "m-0 p-0",
+          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+        bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
       return;
@@ -65,11 +64,11 @@ function LoginForm() {
       await dispatch(login(formData)).unwrap();
     } catch (err) {
       toast.dismiss();
-      toast.error("Please fill in all fields", {
+      toast.error('Please fill in all fields', {
         autoClose: 3000,
         className:
-          "bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0",
-        bodyClassName: "m-0 p-0",
+          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+        bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
     }
@@ -108,7 +107,7 @@ function LoginForm() {
         className="text-center overflow-hidden bg-[#FFDE11] rounded-full border-[#FFDE11] w-full md:px-12 md:py-3 py-[10px] text-lg font-medium text-black hover:bg-gray-100 hover:text-black"
         disabled={loading}
       >
-        {loading ? "Logging in..." : "Log in"}
+        {loading ? 'Logging in...' : 'Log in'}
       </Button>
 
       <p className="mt-3 text-muted">

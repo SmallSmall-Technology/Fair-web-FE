@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { Pagination } from "./Pagination";
-import { products } from "../../utils/data";
-import { ProductCard } from "../../utils/ProductCard";
-import { ArrowUpDown, ChevronRight } from "lucide-react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import SubCategoryFilterForm from "./filterForms/SubCategoryFilterForm";
-import { ProductCategoriesShortcut } from "./ProductCategoriesShortcut";
-import { MiniProductCategories } from "../home/hero/MiniProductCategories";
+import { useState } from 'react';
+import { Pagination } from './Pagination';
+import { products } from '../../utils/data';
+import ProductCard from '../../utils/ProductCard';
+import { ArrowUpDown, ChevronRight } from 'lucide-react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import SubCategoryFilterForm from './filterForms/SubCategoryFilterForm';
+import { ProductCategoriesShortcut } from './ProductCategoriesShortcut';
+import { MiniProductCategories } from '../home/hero/MiniProductCategories';
 
 const SubCategoryPage = () => {
   const navigate = useNavigate();
@@ -64,8 +64,8 @@ const SubCategoryPage = () => {
           <header className="mt-8 mb-5 flex items-baseline space-x-2">
             <h1 className="font-bold text-2xl capitalize">{subcategory}</h1>
             <p className="text-xs text-[#6B6B6B]">
-              ({subcategory.length}){" "}
-              {subcategory.length === 1 ? "result" : "results"}
+              ({subcategory.length}){' '}
+              {subcategory.length === 1 ? 'result' : 'results'}
             </p>
           </header>
           <div
@@ -89,7 +89,7 @@ const SubCategoryPage = () => {
             </>
           </div>
         </div>
-        <hr className="mb-6" />{" "}
+        <hr className="mb-6" />{' '}
         {/* <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-6 2xl:flex 2xl:flex-wrap 2xl:justify-between 2xl:grid-cols-none"> */}
         {/* <section className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6"> */}
         <section className="flex justify-between flex-wrap">

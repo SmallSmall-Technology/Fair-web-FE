@@ -3,7 +3,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronsRightIcon,
-} from "lucide-react";
+} from 'lucide-react';
 
 export const Pagination = () => {
   return (

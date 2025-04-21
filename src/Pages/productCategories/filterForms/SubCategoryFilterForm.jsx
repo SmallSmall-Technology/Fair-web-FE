@@ -1,5 +1,5 @@
-import { CircleX } from "lucide-react";
-import { Formik, Form, Field } from "formik";
+import { CircleX } from 'lucide-react';
+import { Formik, Form, Field } from 'formik';
 
 const SubCategoryFilterForm = ({
   categoryProducts,
@@ -12,7 +12,7 @@ const SubCategoryFilterForm = ({
 
   return (
     <Formik
-      initialValues={{ type: "", brand: "", price: "" }}
+      initialValues={{ type: '', brand: '', price: '' }}
       onSubmit={handleFilter}
     >
       {({ values, handleChange, resetForm }) => {
@@ -43,10 +43,10 @@ const SubCategoryFilterForm = ({
                     Size
                   </option>
 
-                  {getUniqueOptions(categoryProducts || products, "Size").map(
+                  {getUniqueOptions(categoryProducts || products, 'Size').map(
                     (size, index) => (
                       <option key={index} value={size}>
-                        {size || "Size"}
+                        {size || 'Size'}
                       </option>
                     )
                   )}
@@ -69,7 +69,7 @@ const SubCategoryFilterForm = ({
                   <option value="" disabled>
                     Brand
                   </option>
-                  {getUniqueOptions(categoryProducts || products, "brand").map(
+                  {getUniqueOptions(categoryProducts || products, 'brand').map(
                     (brand, index) => (
                       <option key={index} value={brand}>
                         {brand}
@@ -119,10 +119,10 @@ const SubCategoryFilterForm = ({
                   <option value="" disabled>
                     Sales
                   </option>
-                  {getUniqueOptions(categoryProducts || products, "sales").map(
+                  {getUniqueOptions(categoryProducts || products, 'sales').map(
                     (sales, index) => (
                       <option key={index} value={sales && 0}>
-                        {sales || "Sales"}
+                        {sales || 'Sales'}
                       </option>
                     )
                   )}
@@ -143,10 +143,10 @@ const SubCategoryFilterForm = ({
                 >
                   <span>
                     {filterCount === 0
-                      ? "No filter(s) applied"
+                      ? 'No filter(s) applied'
                       : filterCount > 1
-                      ? `${filterCount} filters applied`
-                      : `${filterCount} filter applied`}
+                        ? `${filterCount} filters applied`
+                        : `${filterCount} filter applied`}
                   </span>
                   <button
                     type="submit"
@@ -176,10 +176,10 @@ const SubCategoryFilterForm = ({
               >
                 <span>
                   {filterCount === 0
-                    ? "No filter(s) applied"
+                    ? 'No filter(s) applied'
                     : filterCount > 1
-                    ? `${filterCount} filters applied`
-                    : `${filterCount} filter applied`}
+                      ? `${filterCount} filters applied`
+                      : `${filterCount} filter applied`}
                 </span>
                 <button
                   type="submit"

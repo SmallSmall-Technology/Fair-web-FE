@@ -1,6 +1,6 @@
-import { X } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Button } from "../../utils/Button";
+import { X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Button } from '../../utils/Button';
 
 export const CartHeader = () => {
   return (
@@ -32,7 +32,7 @@ export const CancelPurchase = () => {
       <Link to="/cart-items">
         <Button className="flex space-x-1 items-center hover:shadow-lg p-2  border border-[#ECEDF1]">
           <X color="#EF4237" />
-          <span className="font-medium text-sm">Cancel purchase</span>{" "}
+          <span className="font-medium text-sm">Cancel purchase</span>{' '}
         </Button>
       </Link>
     </div>

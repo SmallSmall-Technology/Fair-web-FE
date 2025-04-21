@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { Search } from "lucide-react";
-import { useSelector } from "react-redux";
-import { Field, Form, Formik } from "formik";
-import { PurchaseCompleted } from "./purchaseContentSection/PurchaseCompleted";
-import { PurchaseCancelled } from "./purchaseContentSection/PurchaseCancelled";
+import { useState } from 'react';
+import { Search } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { Field, Form, Formik } from 'formik';
+import PurchaseCompleted from './purchaseContentSection/PurchaseCompleted';
+import PurchaseCancelled from './purchaseContentSection/PurchaseCancelled';
 import {
   getOngoingOrders,
   getCompletedOrders,
   getCancelledOrders,
-} from "/src/features/order/orderSlice.js";
-import { PurchaseItemsOngoing } from "./purchaseContentSection/PurchaseItemsOngoing";
+} from '/src/features/order/orderSlice.js';
+import PurchaseItemsOngoing from './purchaseContentSection/PurchaseItemsOngoing';
 
-export const Purchases = () => {
-  const [activeTab, setActiveTab] = useState("ongoing");
+const Purchases = () => {
+  const [activeTab, setActiveTab] = useState('ongoing');
   const [formIsActive, setFormIsActive] = useState(false);
 
   // Get orders from Redux store
@@ -22,7 +22,7 @@ export const Purchases = () => {
   const allOrders = useSelector((state) => state.order.orders);
 
   const initialValues = {
-    search: "",
+    search: '',
   };
 
   const handleSearchQuery = (values, { resetForm }) => {
@@ -38,7 +38,7 @@ export const Purchases = () => {
   };
 
   return (
-    <div className="mx-6 lg:mx-[60px] py-8">
+    <div className="lg:mx-[60px] py-8">
       <section>
         <div className="flex justify-between items-center mb-4">
           <h1 className="font-semibold text-2xl">Purchases</h1>
@@ -86,33 +86,33 @@ export const Purchases = () => {
               <div className="flex justify-between w-full lg:justify-start lg:space-x-3">
                 <button
                   className={`p-2 rounded-[30px] text-sm lg:text-base border ${
-                    activeTab === "ongoing"
-                      ? "border-black text-black font-medium"
-                      : "border-[#737376] text-[#737376]"
+                    activeTab === 'ongoing'
+                      ? 'border-black text-black font-medium'
+                      : 'border-[#737376] text-[#737376]'
                   }`}
-                  onClick={() => setActiveTab("ongoing")}
+                  onClick={() => setActiveTab('ongoing')}
                   aria-label="View ongoing orders"
                 >
                   Ongoing <span>({onGoingOrders.length})</span>
                 </button>
                 <button
                   className={`p-2 rounded-[30px] text-sm lg:text-base border ${
-                    activeTab === "completed"
-                      ? "border-black text-black font-medium"
-                      : "border-[#737376] text-[#737376]"
+                    activeTab === 'completed'
+                      ? 'border-black text-black font-medium'
+                      : 'border-[#737376] text-[#737376]'
                   }`}
-                  onClick={() => setActiveTab("completed")}
+                  onClick={() => setActiveTab('completed')}
                   aria-label="View completed orders"
                 >
                   Completed <span>({completedOrders?.length})</span>
                 </button>
                 <button
                   className={`p-2 rounded-[30px] text-sm lg:text-base border ${
-                    activeTab === "cancelled"
-                      ? "border-black text-black font-medium"
-                      : "border-[#737376] text-[#737376]"
+                    activeTab === 'cancelled'
+                      ? 'border-black text-black font-medium'
+                      : 'border-[#737376] text-[#737376]'
                   }`}
-                  onClick={() => setActiveTab("cancelled")}
+                  onClick={() => setActiveTab('cancelled')}
                   aria-label="View cancelled orders"
                 >
                   Cancelled <span>({cancelledOrders?.length})</span>
@@ -146,9 +146,9 @@ export const Purchases = () => {
             <hr className="my-4" />
 
             {/* Tab Content */}
-            {activeTab === "ongoing" && <PurchaseItemsOngoing />}
-            {activeTab === "completed" && <PurchaseCompleted />}
-            {activeTab === "cancelled" && <PurchaseCancelled />}
+            {activeTab === 'ongoing' && <PurchaseItemsOngoing />}
+            {activeTab === 'completed' && <PurchaseCompleted />}
+            {activeTab === 'cancelled' && <PurchaseCancelled />}
           </>
         )}
       </section>

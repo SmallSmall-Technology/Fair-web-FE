@@ -1,14 +1,14 @@
-import { useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const UserMenuDropdown = ({ setUserMenuIsOpen, userMenuIsOpen }) => {
   const menuRef = useRef(null);
 
   // Lock scroll when menu is open
   useEffect(() => {
-    document.body.style.overflow = userMenuIsOpen ? "hidden" : "auto";
+    document.body.style.overflow = userMenuIsOpen ? 'hidden' : 'auto';
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     };
   }, [userMenuIsOpen]);
 
@@ -23,9 +23,9 @@ export const UserMenuDropdown = ({ setUserMenuIsOpen, userMenuIsOpen }) => {
         setUserMenuIsOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [userMenuIsOpen]);
   return (
@@ -43,18 +43,18 @@ export const UserMenuDropdown = ({ setUserMenuIsOpen, userMenuIsOpen }) => {
 
             <motion.div
               ref={menuRef}
-              initial={{ y: "-2%", opacity: 0.5 }}
+              initial={{ y: '-2%', opacity: 0.5 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ x: "100%", opacity: 0.5 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              exit={{ x: '100%', opacity: 0.5 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="absolute inset-0 bg-white z-50 h-fit pb-80 top-20 bottom-shadow"
             >
               <ul className="flex flex-col space-y-3 p-6 pt-2 h-full w-full">
                 {[
-                  { label: "My account", href: "/user-dashboard" },
-                  { label: "Shopping overview", href: "" },
-                  { label: "Notifications", href: "#" },
-                  { label: "Account profile", href: "#" },
+                  { label: 'My account', href: '/user-dashboard' },
+                  { label: 'Shopping overview', href: '' },
+                  { label: 'Notifications', href: '#' },
+                  { label: 'Account profile', href: '#' },
                 ].map((item, index) => (
                   <li
                     key={index}

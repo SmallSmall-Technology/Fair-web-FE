@@ -1,10 +1,10 @@
-import { useState } from "react";
-import Modal from "react-modal";
-import { UserReview } from "./UsersReviews";
-import { SidebarClose } from "lucide-react";
-import { YellowButton } from "../../../utils/Button";
+import { useState } from 'react';
+import Modal from 'react-modal';
+import { UserReview } from './UsersReviews';
+import { SidebarClose } from 'lucide-react';
+import { YellowButton } from '../../../utils/Button';
 
-Modal.setAppElement("#app");
+Modal.setAppElement('#app');
 
 export const UsersReviewsModal = ({ reviews }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -22,7 +22,7 @@ export const UsersReviewsModal = ({ reviews }) => {
   return (
     <>
       <div>
-        {" "}
+        {' '}
         <YellowButton onClick={openModal}>See more</YellowButton>
         <Modal
           isOpen={modalIsOpen}

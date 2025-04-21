@@ -1,7 +1,7 @@
-import { HeroCards } from "./HeroCards";
-import { HeroText } from "./HeroText";
-import { ProductAds } from "./ProductAds";
-import { MiniProductCategories } from "./MiniProductCategories";
+import { HeroCards } from './HeroCards';
+import { HeroText } from './HeroText';
+import { ProductAds } from './ProductAds';
+import { MiniProductCategories } from './MiniProductCategories';
 
 const Hero = () => {
   return (

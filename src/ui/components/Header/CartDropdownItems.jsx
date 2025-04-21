@@ -1,13 +1,13 @@
-import { X } from "lucide-react";
-import { Subtotal } from "./NavBar";
-import { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { NavBarCartItem } from "./NavBarCartItem";
-import { motion, AnimatePresence } from "framer-motion";
+import { X } from 'lucide-react';
+import { Subtotal } from './NavBar';
+import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { NavBarCartItem } from './NavBarCartItem';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   getCart,
   getTotalCartQuantity,
-} from "../../../features/cart/cartSlice";
+} from '../../../features/cart/cartSlice';
 
 export const CartDropdownItems = ({ isOpen, setIsOpen }) => {
   const CartItems = useSelector(getCart);
@@ -17,9 +17,9 @@ export const CartDropdownItems = ({ isOpen, setIsOpen }) => {
 
   // Lock scroll when menu is open
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
 
@@ -30,9 +30,9 @@ export const CartDropdownItems = ({ isOpen, setIsOpen }) => {
         setIsOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen]);
 
@@ -50,10 +50,10 @@ export const CartDropdownItems = ({ isOpen, setIsOpen }) => {
 
           <motion.div
             ref={menuRef}
-            initial={{ y: "-5%", opacity: 0.5 }}
+            initial={{ y: '-5%', opacity: 0.5 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ x: "100%", opacity: 0.5 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            exit={{ x: '100%', opacity: 0.5 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="absolute inset-0 bg-white z-50 h-fit top-5 shadow-md"
           >
             <div className="flex justify-between items-center px-5 mb-5">
@@ -69,7 +69,7 @@ export const CartDropdownItems = ({ isOpen, setIsOpen }) => {
             <section>
               {CartQuantity >= 1 ? (
                 <p className="text-[#16161A] px-5">
-                  You have {CartQuantity} {CartQuantity > 1 ? "items" : "item"}{" "}
+                  You have {CartQuantity} {CartQuantity > 1 ? 'items' : 'item'}{' '}
                   in your cart.
                 </p>
               ) : (
@@ -85,7 +85,7 @@ export const CartDropdownItems = ({ isOpen, setIsOpen }) => {
                 ))}
               </ul>
             </section>
-            {CartQuantity >= 1 ? <Subtotal /> : ""}
+            {CartQuantity >= 1 ? <Subtotal /> : ''}
           </motion.div>
         </>
       )}

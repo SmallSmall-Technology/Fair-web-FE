@@ -1,16 +1,159 @@
-import { Button } from "./Button";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Image as ImageIcon } from "lucide-react";
-import { Share2, Star } from "lucide-react";
-import { formatCurrency } from "./FormatCurrency";
-import React, { useEffect, useState } from "react";
-import { AddToCart } from "../features/cart/AddToCart";
-import { AddFavourite } from "../features/favourite/AddFavourite";
-import { handleShareProduct } from "../features/product/ShareProduct";
-import { addItemToRecentlyViewed } from "../features/product/recentlyViewedSlice";
+// import { Button } from './Button';
+// import { Link } from 'react-router-dom';
+// import { useDispatch } from 'react-redux';
+// import { Share2, Star } from 'lucide-react';
+// import { Image as ImageIcon } from 'lucide-react';
+// import { formatCurrency } from './FormatCurrency';
+// import React, { useEffect, useState } from 'react';
+// import { AddToCart } from '../features/cart/AddToCart';
+// import { AddFavourite } from '../features/favourite/AddFavourite';
+// import { handleShareProduct } from '../features/product/ShareProduct';
+// import { addItemToRecentlyViewed } from '../features/product/recentlyViewedSlice';
+// import Skeleton from 'react-loading-skeleton';
 
-export const ProductCard = ({ product }) => {
+// export const ProductCard = React.memo(({ product }) => {
+//   const [imgError, setImgError] = useState(false);
+
+//   const dispatch = useDispatch();
+
+//   const handleAddToRecentlyViewed = () => {
+//     dispatch(addItemToRecentlyViewed(product.id));
+//   };
+
+//   const {
+//     id,
+//     name,
+//     brand,
+//     category,
+//     subcategory,
+//     image,
+//     price,
+//     discountPrice,
+//     ratings,
+//     noOfProductSold,
+//     slug,
+//   } = product;
+
+//   const cardStyles = {
+//     base: 'w-fit rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg hover:pb-[1px]',
+//     transform: { transform: 'scale(1)', transformOrigin: 'center' },
+//   };
+
+//   const ProductCard = () => (
+//     <article
+//       className={cardStyles.base}
+//       tabIndex={0}
+//       role="article"
+//       aria-label={`Product: ${name}`}
+//       style={cardStyles.transform}
+//       onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.01)')}
+//       onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+//       onClick={handleAddToRecentlyViewed}
+//     >
+//       <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl cursor-pointer">
+//         <div className="absolute top-2 flex justify-between w-full px-2">
+//           <Button
+//             aria-label="Share this product"
+//             title="Share"
+//             className="rounded-full bg-white p-2 hover:shadow-lg transition-all duration-300 ease-in-out focus:border-2 focus:border-black focus:outline-none focus:ring-2 focus:ring-black text-black"
+//             onClick={(e) => {
+//               e.stopPropagation();
+//               handleShareProduct(product);
+//             }}
+//           >
+//             <Share2 className="fill-black" size="15px" />
+//             <span className="sr-only">Share this product</span>
+//           </Button>
+
+//           {discountPrice && (
+//             <p className="bg-[#FFF8CF] w-[51px] flex justify-center items-center rounded-[20px]">
+//               <span className="font-medium text-xs text-black">
+//                 {Math.round(((price - discountPrice) / price) * 100)}%
+//               </span>
+//             </p>
+//           )}
+//         </div>
+//         <div className="flex justify-center items-center m-auto w-[80px] h-[99px] md:w-[136px] md:h-[149px]">
+//           {!imgError ? (
+//             <img
+//               src={image}
+//               alt={name}
+//               loading="lazy"
+//               onError={() => setImgError(true)}
+//               className="h-full w-full object-cover mt-20"
+//             />
+//           ) : (
+//             <ImageIcon className="h-fit w-full mt-20 object-fill" />
+//           )}
+//         </div>
+//       </div>
+
+//       {/* Skeleton for loading */}
+//       <div className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2">
+//         {!product ? (
+//           <Skeleton height={20} width="80%" />
+//         ) : (
+//           <Link
+//             to={`/${id}/${slug}`}
+//             className="hover:underline focus:underline focus:outline-none text-black no-underline"
+//           >
+//             <p className="text-sm font-normal leading-[16.94px] min-h-12 cursor-pointer overflow-hidden lg:overflow-visible line-clamp-2 lg:line-clamp-none">
+//               {name}
+//             </p>
+//           </Link>
+//         )}
+
+//         <div className="flex flex-col lg:flex-row lg:space-x-2 lg:items-center space-y-1">
+//           {!product ? (
+//             <Skeleton height={20} width="40%" />
+//           ) : (
+//             <p className="font-semibold text-base">{formatCurrency(price)}</p>
+//           )}
+
+//           {discountPrice ? (
+//             <p className="text-sm line-through text-gray-700">
+//               {formatCurrency(discountPrice)}
+//             </p>
+//           ) : (
+//             <p className="opacity-0 text-sm line-through">null</p>
+//           )}
+//         </div>
+//         <div className="flex items-center justify-between lg:flex-col lg:items-start lg:space-y-3">
+//           <div className="flex items-center lg:space-x-1">
+//             <Skeleton circle height={20} width={20} />
+//             <p className="text-sm">
+//               {ratings} ({noOfProductSold})
+//             </p>
+//           </div>
+//           <div className="w-1/2 flex flex-row-reverse lg:flex-row items-center space-x-1 lg:space-x-6 ">
+//             <AddToCart product={product} />
+//             <AddFavourite product={product} />
+//           </div>
+//         </div>
+//       </div>
+//     </article>
+//   );
+
+//   return (
+//     <>
+//       <ProductCard />
+//     </>
+//   );
+// });
+
+import { Button } from './Button';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Image as ImageIcon } from 'lucide-react';
+import { Share2, Star } from 'lucide-react';
+import { formatCurrency } from './FormatCurrency';
+import React, { useEffect, useState } from 'react';
+import { AddToCart } from '../features/cart/AddToCart';
+import { AddFavourite } from '../features/favourite/AddFavourite';
+import { handleShareProduct } from '../features/product/ShareProduct';
+import { addItemToRecentlyViewed } from '../features/product/recentlyViewedSlice';
+
+const ProductCard = ({ product }) => {
   const [imgError, setImgError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -39,8 +182,8 @@ export const ProductCard = ({ product }) => {
   } = product;
 
   const cardStyles = {
-    base: "w-fit rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg hover:pb-[1px]",
-    transform: { transform: "scale(1)", transformOrigin: "center" },
+    base: 'w-fit rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg hover:pb-[1px]',
+    transform: { transform: 'scale(1)', transformOrigin: 'center' },
   };
 
   const Skeleton = () => (
@@ -50,8 +193,8 @@ export const ProductCard = ({ product }) => {
       role="article"
       aria-label={`Loading product`}
       style={cardStyles.transform}
-      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.01)")}
-      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+      onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.01)')}
+      onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
     >
       <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl">
         <div className="absolute top-2 flex justify-between w-full px-2">
@@ -91,8 +234,8 @@ export const ProductCard = ({ product }) => {
       role="article"
       aria-label={`Product: ${name}`}
       style={cardStyles.transform}
-      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.01)")}
-      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+      onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.01)')}
+      onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
       onClick={handleAddToRecentlyViewed}
     >
       <Link to={`/${id}/${slug}`} className="block">
@@ -120,12 +263,25 @@ export const ProductCard = ({ product }) => {
           </div>
           <div className="flex justify-center items-center mx-auto w-[80px] h-[99px] md:w-[136px] md:h-[169px] lg:w-[159px] lg:h-[159px]">
             {!imgError ? (
+              // <img
+              //   src={image}
+              //   alt={name}
+              //   loading="lazy"
+              //   onError={() => setImgError(true)}
+              //   className="h-fit w-full mt-10 object-contain"
+              // />
               <img
-                src={image}
-                alt={name}
+                src={`${image}?w=218`}
+                srcSet={`
+    ${image}?w=146 146w,
+    ${image}?w=218 218w
+  `}
+                sizes="(max-width: 768px) 146px, 218px"
+                // alt={name}
                 loading="lazy"
+                decoding="async"
                 onError={() => setImgError(true)}
-                className="h-fit w-full mt-10 object-contain"
+                className="h-full w-full object-cover mt-20 "
               />
             ) : (
               <ImageIcon className="h-fit w-full mt-10 object-contain" />
@@ -171,6 +327,7 @@ export const ProductCard = ({ product }) => {
     </article>
   );
 
-  // return <Content />;
   return <>{isLoading ? <Skeleton /> : <Content />}</>;
 };
+
+export default ProductCard;

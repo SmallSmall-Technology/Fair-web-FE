@@ -1,12 +1,12 @@
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Image from "react-bootstrap/Image";
-import { useEffect } from "react";
-import SignUpForm from "./SignUpForm";
-import { Link } from "react-router-dom";
-import LinkButton from "../../utils/LinkButton";
-import { styled } from "styled-components";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+import { useEffect } from 'react';
+import SignUpForm from './SignUpForm';
+import { Link } from 'react-router-dom';
+import LinkButton from '../../utils/LinkButton';
+import { styled } from 'styled-components';
 
 const Heading = styled.h1`
   font-size: 24px;
@@ -20,7 +20,7 @@ const HeadingText = styled.p`
 
 function SignUp() {
   useEffect(() => {
-    import("bootstrap/dist/css/bootstrap.min.css");
+    import('bootstrap/dist/css/bootstrap.min.css');
   }, []);
 
   return (
@@ -59,14 +59,14 @@ function SignUp() {
                       By clicking Create account, you agree to our
                     </p>
                     <p className="text-sm ">
-                      {" "}
+                      {' '}
                       <Link to="#" className="text-danger text-decoration-none">
                         Terms of use
-                      </Link>{" "}
-                      and{" "}
+                      </Link>{' '}
+                      and{' '}
                       <Link to="#" className="text-danger text-decoration-none">
                         privacy policy
-                      </Link>{" "}
+                      </Link>{' '}
                     </p>
                   </div>
                   <div className="my-4">

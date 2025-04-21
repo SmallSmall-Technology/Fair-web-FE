@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { StarRating } from "./StarRating";
-import { UsersReviewsModal } from "./UsersReviewsModal";
+import { useState } from 'react';
+import { StarRating } from './StarRating';
+import { UsersReviewsModal } from './UsersReviewsModal';
 
 export const UsersReviews = ({ reviews }) => {
   const firstFiveReviews = reviews.slice(0, 5);
@@ -23,7 +23,7 @@ export const UserReview = ({ review, rating, handleRating }) => {
         </div>
         <p>{review?.comment}</p>
         <div className="flex space-x-3">
-          <p className="text-xs">{review?.name || "Anonymous"}</p>
+          <p className="text-xs">{review?.name || 'Anonymous'}</p>
           <p className="text-xs">{new Date().toLocaleDateString()}</p>
         </div>
         <hr className="my-4" />

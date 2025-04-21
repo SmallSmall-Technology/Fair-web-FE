@@ -1,10 +1,11 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { CircleUserRound, Power } from "lucide-react";
-import { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { getUserFullName } from "../../../features/auth/authSlice";
-import { Link } from "react-router-dom";
-import { getOngoingOrders } from "../../../features/order/orderSlice";
+import { Power } from 'lucide-react';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
+import { getOngoingOrders } from '../../../features/order/orderSlice';
+import { getUserFullName, logout } from '../../../features/auth/authSlice';
 
 export const LoggedInUserDropdown = ({
   loggedInUserDropdown,
@@ -12,13 +13,14 @@ export const LoggedInUserDropdown = ({
 }) => {
   const menuRef = useRef(null);
   const userFullName = useSelector(getUserFullName);
-  const onGoingOrders = useSelector(getOngoingOrders);
+  const ongoingOrders = useSelector(getOngoingOrders);
+  const dispatch = useDispatch();
 
   // Lock scroll when menu is open
   useEffect(() => {
-    document.body.style.overflow = loggedInUserDropdown ? "hidden" : "auto";
+    document.body.style.overflow = loggedInUserDropdown ? 'hidden' : 'auto';
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     };
   }, [loggedInUserDropdown]);
 
@@ -33,11 +35,21 @@ export const LoggedInUserDropdown = ({
         setLoggedInUserDropdown(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [loggedInUserDropdown]);
+
+  const handleLogOutUser = () => {
+    dispatch(logout());
+    toast.dismiss();
+    toast.success('Logged Out Successfully', {
+      className: 'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+      bodyClassName: 'm-0 p-0',
+      closeButton: false,
+    });
+  };
 
   return (
     <AnimatePresence>
@@ -53,29 +65,34 @@ export const LoggedInUserDropdown = ({
 
           <motion.div
             ref={menuRef}
-            initial={{ y: "-5%", opacity: 0.5 }}
+            initial={{ y: '-5%', opacity: 0.5 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: "-10%", opacity: 0.5 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            exit={{ y: '-10%', opacity: 0.5 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="absolute inset-0 bg-white h-full z-50 top-2 shadow-md rounded-[10px]"
           >
             <div className="bg-white h-full grid py-2 shadow-lg rounded-[10px]">
               <div className="flex items-center space-x-2 px-3 py-3">
-                <img src="/public/images/user.svg" alt="" />
+                <img src="/images/user.svg" alt="User avatar" />
                 <p className="flex text-xs text-balance mb-0">{userFullName}</p>
               </div>
               <hr />
               <div className="px-3 my-1 grid gap-2 py-2 text-xs pb-4">
-                <Link>My Account settings</Link>
-                <Link className="flex justify-between w-full items-center">
+                <Link className="text-black no-underline">
+                  My Account settings
+                </Link>
+                <Link className="flex justify-between w-full items-center text-black no-underline">
                   <span>Purchases</span>
-                  <span className="bg-[#FFDE11] px-3 text-[10px]">
-                    {onGoingOrders.length}
+                  <span className="bg-[#FFDE11] px-3 text-[10px] ">
+                    {ongoingOrders.length}
                   </span>
                 </Link>
               </div>
               <hr />
-              <div className="flex items-center space-x-2 px-3">
+              <div
+                className="flex items-center space-x-2 px-3"
+                onClick={handleLogOutUser}
+              >
                 <span>
                   <Power size={14} />
                 </span>
