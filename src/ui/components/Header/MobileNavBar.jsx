@@ -61,15 +61,15 @@ export const MobileNavBar = () => {
   }, [hamburgerIsOpen]);
 
   const handleShopMenu = () => {
-    setShopIsOpen(!shopIsOpen);
+    setShopIsOpen((shopIsOpen) => !shopIsOpen);
   };
 
   const handleUserMenuDropdown = () => {
-    setUserMenuIsOpen(!userMenuIsOpen);
+    setUserMenuIsOpen((userMenuIsOpen) => !userMenuIsOpen);
   };
 
   const hanldeCartDropdownItems = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((isOpen) => !isOpen);
   };
 
   return (

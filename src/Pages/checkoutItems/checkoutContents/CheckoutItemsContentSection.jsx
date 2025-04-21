@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { startTransition } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CheckoutItem } from './CheckoutItem.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { CartFooter } from '../../cartItems/CartFooter.jsx';
@@ -11,8 +13,6 @@ import {
   saveDeliveryAddress,
 } from '../../../features/user/userSlice.js';
 import { makePayment } from '../../../features/order/orderSlice.js';
-import { startTransition } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export const CheckoutItemsContentSection = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);

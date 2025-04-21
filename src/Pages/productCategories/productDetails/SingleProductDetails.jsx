@@ -46,7 +46,7 @@ export const SingleProductDetails = React.memo(({ product }) => {
             <AddFavourite product={product} />
           </span>
         </p>
-        <p
+        <button
           className="flex items-center text-sm text-[#222224] cursor-pointer"
           onClick={() => handleShareProduct(product)}
         >
@@ -54,7 +54,7 @@ export const SingleProductDetails = React.memo(({ product }) => {
           <span className="pl-1">
             <img src="/images/share-square.svg" alt="A share icon" />
           </span>
-        </p>
+        </button>
       </div>
       <div className="flex flex-wrap w-full justify-between gap-2">
         <main className="w-full lg:w-full xl:w-[52%] mx-5 md:mx-0">

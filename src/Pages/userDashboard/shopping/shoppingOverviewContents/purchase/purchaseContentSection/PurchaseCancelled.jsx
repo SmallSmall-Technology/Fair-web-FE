@@ -1,4 +1,4 @@
-export const PurchaseCancelled = ({ orders }) => {
+const PurchaseCancelled = ({ orders }) => {
   const cancelledOrders = orders || [];
 
   return (
@@ -19,6 +19,8 @@ export const PurchaseCancelled = ({ orders }) => {
     </section>
   );
 };
+
+export default PurchaseCancelled;
 
 // Reuse the same PurchasedItem component
 const PurchasedItem = ({ item }) => {

@@ -60,7 +60,7 @@ export const makePayment = createAsyncThunk(
       if (order && order.status === 'ongoing') {
         const updatedOrder = {
           ...order,
-          paidAmount: order.paidAmount + parseFloat(amount),
+          paidAmount: order.paidAmount + parseFloat(amount + amount * 7.5),
           remainingAmount:
             order.totalAmount - (order.paidAmount + parseFloat(amount)),
           status:
@@ -159,3 +159,5 @@ export const getCompletedOrders = createSelector([selectOrders], (orders) =>
 export const getCancelledOrders = createSelector([selectOrders], (orders) =>
   (orders || []).filter((order) => order.status === 'cancelled')
 );
+
+export const getOrderId = (state) => state.order.orders.id;

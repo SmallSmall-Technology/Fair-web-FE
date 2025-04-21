@@ -277,11 +277,11 @@ const ProductCard = ({ product }) => {
     ${image}?w=218 218w
   `}
                 sizes="(max-width: 768px) 146px, 218px"
-                alt={name}
+                // alt={name}
                 loading="lazy"
                 decoding="async"
                 onError={() => setImgError(true)}
-                className="h-full w-full object-cover mt-20"
+                className="h-full w-full object-cover mt-20 "
               />
             ) : (
               <ImageIcon className="h-fit w-full mt-10 object-contain" />

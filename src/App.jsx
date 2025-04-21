@@ -55,6 +55,12 @@ const Purchases = lazy(
 const Wallet = lazy(
   () => import('./pages/userDashboard/shopping/shoppingOverviewContents/Wallet')
 );
+const DirectDebit = lazy(
+  () =>
+    import(
+      './pages/userDashboard/shopping/shoppingOverviewContents/DirectDebit'
+    )
+);
 const Favorites = lazy(
   () =>
     import('./pages/userDashboard/shopping/shoppingOverviewContents/Favorites')
@@ -199,19 +205,98 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<PageNotFound />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="" element={<UserDashboardLayout />}>
-              <Route path="user-dashboard" element={<UserDashboard />}>
-                <Route path="shopping-overview" element={<ShoppingOverview />}>
-                  <Route path="summary" element={<Summary />} />
-                  <Route path="purchases" element={<Purchases />} />
-                  <Route path="wallet" element={<Wallet />} />
-                  <Route path="favorites" element={<Favorites />} />
-                  <Route path="recently-viewed" element={<RecentlyViewed />} />
+            <Route element={<UserDashboardLayout />}>
+              <Route
+                path="user-dashboard"
+                element={
+                  <Suspense fallback={<p>Loading Dashboard...</p>}>
+                    <UserDashboard />
+                  </Suspense>
+                }
+              >
+                <Route
+                  path="shopping-overview"
+                  element={
+                    <Suspense fallback={<p>Loading Shopping Overview...</p>}>
+                      <ShoppingOverview />
+                    </Suspense>
+                  }
+                >
+                  <Route
+                    path="summary"
+                    element={
+                      <Suspense fallback={<p>Loading Summary...</p>}>
+                        <Summary />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="purchases"
+                    element={
+                      <Suspense fallback={<p>Loading Purchases...</p>}>
+                        <Purchases />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="wallet"
+                    element={
+                      <Suspense fallback={<p>Loading Wallet...</p>}>
+                        <Wallet />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="favorites"
+                    element={
+                      <Suspense fallback={<p>Loading Favorites...</p>}>
+                        <Favorites />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="direct-debit"
+                    element={
+                      <Suspense fallback={<p>Loading Favorites...</p>}>
+                        <DirectDebit />
+                      </Suspense>
+                    }
+                  />
+
+                  <Route
+                    path="recently-viewed"
+                    element={
+                      <Suspense fallback={<p>Loading Recently Viewed...</p>}>
+                        <RecentlyViewed />
+                      </Suspense>
+                    }
+                  />
                 </Route>
 
-                <Route path="notifications" element={<Notifications />} />
-                <Route path="account-profile" element={<AccountProfile />} />
-                <Route path=":id/:slug" element={<SingleProductPage />} />
+                <Route
+                  path="notifications"
+                  element={
+                    <Suspense fallback={<p>Loading Notifications...</p>}>
+                      <Notifications />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="account-profile"
+                  element={
+                    <Suspense fallback={<p>Loading Account Profile...</p>}>
+                      <AccountProfile />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path=":id/:slug"
+                  element={
+                    <Suspense fallback={<p>Loading Product Page...</p>}>
+                      <SingleProductPage />
+                    </Suspense>
+                  }
+                />
               </Route>
             </Route>
           </Route>

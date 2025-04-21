@@ -1,16 +1,42 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
-import { YellowButton } from '../../../utils/Button';
-import { ChevronsRight, HeartHandshake } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Button, YellowButton } from '../../../utils/Button';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import { handleAddToCart } from '../../../features/cart/AddToCart';
 import { CommentBar } from '../../../features/reviewsRating/CommentBar';
+import { ChevronsLeft, ChevronsRight, HeartHandshake } from 'lucide-react';
+
+const item_width = 70;
 
 export const SingleProductDetailsAside = React.memo(
   ({ product, shippingDate, category, isLoading }) => {
     const dispatch = useDispatch();
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
+    const paymentMethodRef = useRef(null);
 
     if (!product) return <div>Product not found</div>;
+
+    const updateScrollButtons = () => {
+      const el = paymentMethodRef.current;
+      if (!el) return;
+      setCanScrollLeft(el.scrollLeft > 0);
+      setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
+    };
+
+    const handleScroll = (scrollAmount) => {
+      const el = paymentMethodRef.current;
+      if (!el) return;
+      el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    };
+
+    useEffect(() => {
+      const el = paymentMethodRef.current;
+      if (!el) return;
+      el.addEventListener('scroll', updateScrollButtons);
+      updateScrollButtons();
+      return () => el.removeEventListener('scroll', updateScrollButtons);
+    }, []);
 
     const getPaymentDates = (startDate, months) => {
       const dates = [];
@@ -29,26 +55,29 @@ export const SingleProductDetailsAside = React.memo(
       return dates;
     };
 
+    const installmentOption = product.paymentOptions?.[1] || {};
+    const fullPaymentOption = product.paymentOptions?.[0] || {};
+
     const paymentsInstallment = [
       {
-        amount: product.paymentOptions[1].upfrontPayment,
+        amount: installmentOption.upfrontPayment,
         label: 'Pay now today',
         icon: '/images/quater-circle.svg',
       },
       {
-        amount: product.paymentOptions[1].monthlyPayment,
-        label: 'Next Payment',
+        amount: installmentOption.monthlyPayment,
+        label: '2nd Payment',
         date: getPaymentDates(new Date(), 3)[0],
         icon: '/images/half-circle.svg',
       },
       {
-        amount: product.paymentOptions[1].monthlyPayment,
+        amount: installmentOption.monthlyPayment,
         label: '3rd Payment',
         date: getPaymentDates(new Date(), 3)[1],
         icon: '/images/one-third-circle.svg',
       },
       {
-        amount: product.paymentOptions[1].monthlyPayment,
+        amount: installmentOption.monthlyPayment,
         label: 'Final Payment',
         date: getPaymentDates(new Date(), 3)[2],
         icon: '/images/full-circle.svg',
@@ -57,7 +86,7 @@ export const SingleProductDetailsAside = React.memo(
 
     const paymentsInFull = [
       {
-        amount: product.paymentOptions[0].amount,
+        amount: fullPaymentOption.amount,
         label: 'Pay in full today',
         date: new Date(),
         icon: '/images/full-circle.svg',
@@ -81,12 +110,12 @@ export const SingleProductDetailsAside = React.memo(
                 Sold by <span className="font-semibold">Fair</span>
               </p>
             </div>
-            <div className="flex items-center text-sm text-[#222224] lg:hidden bg-[#323232] rounded-[10px] px-3">
+            <button className="flex items-center text-sm text-[#222224] lg:hidden bg-[#323232] rounded-[10px] px-3">
               <span className="text-white">Share </span>
               <span className="pl-1">
                 <img src="/images/share-square-white.svg" alt="A share icon" />
               </span>
-            </div>
+            </button>
           </div>
           <p className="text-xs mt-3 hidden lg:block">
             Brand <span className="font-medium">{product.brand}</span>
@@ -112,37 +141,57 @@ export const SingleProductDetailsAside = React.memo(
         <hr className="my-4 hidden lg:block" />
         <p className="font-medium mb-4 mx-4 ">Choose how you want to pay</p>
         <p className="hidden lg:block text-xs mb-3">Pay in instalments</p>
-        <article className="bg-[#F2F2F2] rounded-[10px] py-5 flex flex-col justify-center lg:justify-start mx-5 lg:mx-0">
-          <div className="flex lg:hidden justify-end w-full pr-3">
-            <ChevronsRight className="" role="button" />
-          </div>
-          <div className="flex gap-4 justify-between items-start px-10 w-full">
-            {paymentsInstallment.map((payment, index) => (
-              <div key={index} className="flex flex-col justify-center">
-                <div className="grid justify-center items-center ">
-                  <img
-                    src={payment.icon}
-                    alt={payment.label}
-                    className="mx-auto max-h-[19px]"
-                  />
-                  <div className="grid ">
-                    <p className="flex justify-center text-xs font-medium">
-                      {formatCurrency(payment?.amount)}
-                    </p>
-                    <span className="text-[11px] text-center">
-                      {payment.label}
-                    </span>
+
+        <article className="bg-[#F2F2F2] rounded-[10px] py-5 flex flex-col justify-center lg:justify-start mx-5 lg:mx-0 relative">
+          {canScrollRight && (
+            <Button
+              onClick={() => handleScroll(item_width)}
+              className="absolute right-2 top-5 -translate-y-1/2 z-10 lg:hidden"
+            >
+              <ChevronsRight />
+            </Button>
+          )}
+          {canScrollLeft && (
+            <Button
+              onClick={() => handleScroll(-item_width)}
+              className="absolute left-2 top-5 -translate-y-1/2 z-10 lg:hidden"
+            >
+              <ChevronsLeft />
+            </Button>
+          )}
+
+          <div className="grid lg:flex gap-4 lg:justify-between items-start px-10 w-full mt-4">
+            <div
+              ref={paymentMethodRef}
+              className="flex space-x-9 lg:space-x-3 w-full overflow-x-auto scrollbar-hide "
+            >
+              {paymentsInstallment.map((payment, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center min-w-24 lg:min-w-fit"
+                >
+                  <div className="h-7 w-7">
+                    <img
+                      src={payment.icon}
+                      alt={payment.label}
+                      className="h-full w-full"
+                    />
                   </div>
-                </div>
-                <div className="flex text-center md:flex-col md:items-end lg:hidden xl:flex ml-auto">
+                  <p className="text-xs font-medium mt-1">
+                    {formatCurrency(payment?.amount)}
+                  </p>
+                  <span className="text-[11px] text-center ">
+                    {payment.label}
+                  </span>
                   {payment.date && (
-                    <span className="text-[11px]">{payment?.date}</span>
+                    <span className="text-[11px] text-center mt-1">
+                      {payment.date}
+                    </span>
                   )}
                 </div>
-              </div>
-            ))}
-            <div className="w-full h-[1px] bg-[#E5E5E5] lg:hidden"></div>
-            <div className="mx-5 lg:mx-0 w-full lg:w-fit">
+              ))}
+            </div>
+            <div className=" lg:mx-0 lg:min-w-fit">
               <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
                 Add to cart
               </YellowButton>
@@ -156,23 +205,25 @@ export const SingleProductDetailsAside = React.memo(
         </div>
 
         <p className="text-xs mb-3 mx-5 lg:mx-0">Pay in full</p>
-        <article className="bg-[hsl(0,0%,95%)] rounded-[10px] py-5 lg:pl-8 pl-0 flex justify-start mb-6 mx-5 lg:mx-0 ">
+
+        <article className="bg-[#F2F2F2] rounded-[10px] py-5 flex justify-start mb-6 mx-5 lg:mx-0">
           <div className="flex flex-col lg:flex-row gap-2 justify-between items-center px-10 w-full">
             <div className="flex gap-2 items-start mr-auto">
-              <img
-                src="/images/full-circle.svg"
-                alt="A diameter of a circle"
-                className="mx-auto min-h-[28px]"
-              />
-              <div className="grid grid-cols-1">
+              <div className="h-7 w-7">
+                <img
+                  src={paymentsInFull[0].icon}
+                  alt="Full payment icon"
+                  className="h-full w-full"
+                />
+              </div>
+              <div className="grid">
                 <p className="font-medium">
                   {formatCurrency(paymentsInFull[0].amount)}
                 </p>
-                <span className="text-[11px]">Pay now Today</span>
+                <span className="text-[11px]">{paymentsInFull[0].label}</span>
               </div>
             </div>
-            <div className="w-full h-[1px] bg-[#E5E5E5] my-2 lg:hidden"></div>
-            <div className="mx-5 lg:mx-0 w-full lg:w-fit">
+            <div className="mx-5 lg:mx-0 lg:w-fit w-full">
               <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
                 Add to cart
               </YellowButton>

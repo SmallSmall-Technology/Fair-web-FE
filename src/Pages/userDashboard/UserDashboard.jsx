@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import { TopBar } from './userDashboardContent/TopBar';
-import { MarketingAds } from './userDashboardContent/MarketingAds';
+import TopBar from './userDashboardContent/TopBar';
+import MarketingAds from './userDashboardContent/MarketingAds';
 
 const UserDashboard = () => {
   return (

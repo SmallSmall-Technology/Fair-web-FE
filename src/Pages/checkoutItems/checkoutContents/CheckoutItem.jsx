@@ -6,6 +6,20 @@ import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 export const CheckoutItem = () => {
   const cart = useSelector((state) => state.cart.cart);
 
+  // const item = cart.map((item) => item);
+  // console.log(item);
+
+  // const installmentPlan = item.paymentOptions.find(
+  //   (option) => option.type === 'installments'
+  // );
+
+  // const getDisplayedPrice = () => {
+  //   if (item.paymentPlan === 'upfront') {
+  //     return formatCurrency(item.price * currentQuantity);
+  //   }
+  //   return formatCurrency(installmentPlan.upfrontPayment * currentQuantity);
+  // };
+
   return (
     <ul className="grid grid-cols-1 lg:px-8 gap-4 pt-20 lg:pt-10">
       {cart.map((item) => (
@@ -39,7 +53,9 @@ export const CheckoutItem = () => {
                     />
                   </div>
                   <p className=" font-semibold mb-3">
-                    {formatCurrency(item.price * item.quantity)}
+                    {item.paymentPlan === 'upfront'
+                      ? formatCurrency(item.paymentOptions[0].amount)
+                      : formatCurrency(item.paymentOptions[1].upfrontPayment)}
                   </p>
                   <p className="text-xs">Delivery</p>
                   <p className="text-xs font-medium">
@@ -51,7 +67,9 @@ export const CheckoutItem = () => {
             </div>
 
             <p className="hidden lg:block font-semibold">
-              {formatCurrency(item.price * item.quantity)}
+              {item.paymentPlan === 'upfront'
+                ? formatCurrency(item.paymentOptions[0].amount)
+                : formatCurrency(item.paymentOptions[1].upfrontPayment)}
             </p>
           </li>
           <hr className="lg:hidden my-4" />

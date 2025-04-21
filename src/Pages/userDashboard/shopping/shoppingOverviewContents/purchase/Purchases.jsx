@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { Search } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { Field, Form, Formik } from 'formik';
-import { PurchaseCompleted } from './purchaseContentSection/PurchaseCompleted';
-import { PurchaseCancelled } from './purchaseContentSection/PurchaseCancelled';
+import PurchaseCompleted from './purchaseContentSection/PurchaseCompleted';
+import PurchaseCancelled from './purchaseContentSection/PurchaseCancelled';
 import {
   getOngoingOrders,
   getCompletedOrders,
   getCancelledOrders,
 } from '/src/features/order/orderSlice.js';
-import { PurchaseItemsOngoing } from './purchaseContentSection/PurchaseItemsOngoing';
+import PurchaseItemsOngoing from './purchaseContentSection/PurchaseItemsOngoing';
 
-export const Purchases = () => {
+const Purchases = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
   const [formIsActive, setFormIsActive] = useState(false);
 
@@ -38,7 +38,7 @@ export const Purchases = () => {
   };
 
   return (
-    <div className="mx-6 lg:mx-[60px] py-8">
+    <div className="lg:mx-[60px] py-8">
       <section>
         <div className="flex justify-between items-center mb-4">
           <h1 className="font-semibold text-2xl">Purchases</h1>

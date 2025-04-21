@@ -6,9 +6,19 @@ import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
 import { SaveItemForLater } from '../../../features/cart/SaveItemForLater';
 import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 
-export const CartItem = ({ item }) => {
+export const CartItem = ({ item, onTogglePlan }) => {
   const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
-  // console.log(item);
+  const installmentPlan = item.paymentOptions.find(
+    (option) => option.type === 'installments'
+  );
+
+  const getDisplayedPrice = () => {
+    if (item.paymentPlan === 'upfront') {
+      return formatCurrency(item.price * currentQuantity);
+    }
+    return formatCurrency(installmentPlan.upfrontPayment * currentQuantity);
+  };
+
   return (
     <article
       key={item.productId}
@@ -28,12 +38,12 @@ export const CartItem = ({ item }) => {
 
             <button
               type="submit"
-              onClick={''}
+              onClick={() => onTogglePlan(item.id)}
               className=" group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[#FFDE11] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black hover:underline"
             >
               <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11] "></span>
 
-              <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-base">
+              <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-xs">
                 Change Plan
               </span>
             </button>
@@ -59,7 +69,7 @@ export const CartItem = ({ item }) => {
                   />
                 </div>
                 <p className="text-xl font-semibold mb-6 md:hidden mt-4">
-                  {formatCurrency(item.price * currentQuantity)}
+                  {getDisplayedPrice()}
                 </p>
               </div>
             </div>
@@ -67,7 +77,7 @@ export const CartItem = ({ item }) => {
             <div className="hidden md:grid">
               <div className="flex flex-col items-end">
                 <p className="text-xl font-semibold mb-6">
-                  {formatCurrency(item.price * currentQuantity)}
+                  {getDisplayedPrice()}
                 </p>
                 <p className="text-xs">Interest-free credit</p>
                 <p className="text-[#DB1C5E] mb-4">
@@ -97,8 +107,7 @@ export const CartItem = ({ item }) => {
           </div>
         </section>
 
-        {/* Payment Plan Header */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex items-center mx-4">
           <hr className="flex-grow border-[#E5E5E5]" />
           <p className="px-4 py-2 text-xs font-semibold text-gray-700 bg-[#F6F6F6] rounded-[20px]">
             Payment Plan
@@ -106,7 +115,7 @@ export const CartItem = ({ item }) => {
           <hr className="flex-grow border-[#E5E5E5]" />
         </div>
 
-        <PaymentPlan item={item} />
+        <PaymentPlan item={item} togglePlan={onTogglePlan} />
         <div className="flex justify-between mt-4 md:hidden ">
           <p className="text-xs font-semibold">
             Shipping: Arrives by
@@ -131,7 +140,6 @@ export const CartItemSkeleton = () => {
   return (
     <article className="md:border-[1px] pb-4 md:border-[#E5E5E5] rounded-[10px] w-full h-fit animate-pulse">
       <div className="">
-        {/* Product Details */}
         <section className="p-4">
           <div className="flex space-x-1 items-center mb-1 2xl:px-10">
             <div className="w-6 h-6 bg-gray-200 rounded-full" />
@@ -166,14 +174,12 @@ export const CartItemSkeleton = () => {
           </div>
         </section>
 
-        {/* Payment Plan Header */}
         <div className="hidden md:flex items-center">
           <hr className="flex-grow border-[#E5E5E5]" />
           <div className="px-4 py-2 h-6 w-24 bg-gray-200 rounded-[20px]" />
           <hr className="flex-grow border-[#E5E5E5]" />
         </div>
 
-        {/* Placeholder for PaymentPlan */}
         <div className="p-4">
           <div className="h-20 w-full bg-gray-200 rounded" />
         </div>
