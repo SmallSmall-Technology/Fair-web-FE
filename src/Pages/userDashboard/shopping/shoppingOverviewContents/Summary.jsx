@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { WalletBalance } from './Wallet';
+import WalletBalance from './Wallet';
 import { SingleRecentlyViewed } from './RecentlyViewed';
 import { useSelector } from 'react-redux';
 import { getRecentlyViewed } from '../../../../features/product/recentlyViewedSlice';
@@ -8,7 +8,6 @@ import {
   getCompletedOrders,
   getOngoingOrders,
 } from '../../../../features/order/orderSlice';
-// import { RecentlyViewed } from "./RecentlyViewed";
 
 const Summary = () => {
   const recentlyViewed = useSelector(getRecentlyViewed);

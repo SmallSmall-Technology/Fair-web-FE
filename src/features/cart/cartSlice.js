@@ -39,6 +39,7 @@ export const addItem = createAsyncThunk(
         quantity: 1,
         price: Number(product.price),
         totalPrice: Number(product.price),
+        paymentPlan: 'installments',
         paymentOptions: [
           {
             type: 'upfront',
@@ -46,9 +47,9 @@ export const addItem = createAsyncThunk(
           },
           {
             type: 'installments',
-            months: 12,
+            months: 3,
             upfrontPayment: product.price * 0.4,
-            monthlyPayment: (product.price * 0.6) / 12,
+            monthlyPayment: (product.price * 0.6) / 3,
             totalPrice: product.price,
           },
         ],
@@ -75,7 +76,6 @@ export const addItem = createAsyncThunk(
   }
 );
 
-// Remove item from cart
 export const removeItem = createAsyncThunk(
   'cart/removeItem',
   async (id, { rejectWithValue }) => {
@@ -88,7 +88,6 @@ export const removeItem = createAsyncThunk(
   }
 );
 
-// Increase item quantity
 export const increaseItemQuantity = createAsyncThunk(
   'cart/increaseItemQuantity',
   async (id, { getState, rejectWithValue }) => {
@@ -109,7 +108,6 @@ export const increaseItemQuantity = createAsyncThunk(
   }
 );
 
-// Decrease item quantity
 export const decreaseItemQuantity = createAsyncThunk(
   'cart/decreaseItemQuantity',
   async (id, { getState, rejectWithValue }) => {
@@ -131,7 +129,6 @@ export const decreaseItemQuantity = createAsyncThunk(
   }
 );
 
-// Clear cart
 export const clearCart = createAsyncThunk('cart/clearCart', async () => {
   const response = await axios.get(`${API_URL}/cart?userId=user123`);
   const cartItems = response.data;
@@ -145,12 +142,24 @@ const initialState = {
   cart: [],
   status: 'idle',
   error: null,
+  paymentPlan: 'installments',
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
-  reducers: {},
+  reducers: {
+    setPaymentPlan: (state, action) => {
+      state.paymentPlan = action.payload;
+    },
+    setItemPaymentPlan: (state, action) => {
+      const { id, plan } = action.payload;
+      const item = state.cart.find((item) => item.id === id);
+      if (item) {
+        item.paymentPlan = plan;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCart.fulfilled, (state, action) => {
@@ -200,7 +209,25 @@ export const getTotalCartQuantity = (state) =>
   (state.cart.cart || []).reduce((total, item) => {
     return item && item.quantity ? total + item.quantity : total;
   }, 0);
-export const getTotalCartPrice = (state) =>
-  state.cart.cart.reduce((sum, item) => sum + item.totalPrice, 0);
+
+export const getTotalCartPrice = (state) => {
+  return state.cart.cart.reduce((sum, item) => {
+    const option = item.paymentOptions.find(
+      (opt) =>
+        (item.paymentPlan === 'upfront' && opt.type === 'upfront') ||
+        (item.paymentPlan === 'installments' && opt.type === 'installments')
+    );
+
+    if (!option) return sum;
+
+    const price =
+      item.paymentPlan === 'upfront' ? option.amount : option.upfrontPayment;
+
+    return sum + price * (item.quantity || 1);
+  }, 0);
+};
+
 export const getCurrentQuantityById = (id) => (state) =>
   state.cart.cart.find((item) => item.productId === id)?.quantity ?? 0;
+
+export const { setPaymentPlan, setItemPaymentPlan } = cartSlice.actions;

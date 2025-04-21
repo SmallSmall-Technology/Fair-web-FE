@@ -8,7 +8,7 @@ import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { YellowButton } from '../../../../utils/Button';
 
-export const RecentlyViewed = () => {
+const RecentlyViewed = () => {
   const recentlyViewed = useSelector(getRecentlyViewed);
   const dispatch = useDispatch();
 
@@ -40,6 +40,8 @@ export const RecentlyViewed = () => {
     </section>
   );
 };
+
+export default RecentlyViewed;
 
 export const SingleRecentlyViewed = ({ item }) => {
   return (
@@ -75,5 +77,3 @@ export const SingleRecentlyViewed = ({ item }) => {
     </li>
   );
 };
-
-export default RecentlyViewed;

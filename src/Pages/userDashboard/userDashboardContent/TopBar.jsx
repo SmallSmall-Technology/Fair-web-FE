@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export const TopBar = () => {
+const TopBar = () => {
   return (
     <ul className="hidden lg:flex space-x-3 border-b-2 w-full pb-3">
       <li>
@@ -43,3 +42,5 @@ export const TopBar = () => {
     </ul>
   );
 };
+
+export default TopBar;

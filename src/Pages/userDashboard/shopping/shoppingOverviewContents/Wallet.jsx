@@ -12,7 +12,7 @@ const Wallet = () => {
 
 export default Wallet;
 
-export const WalletBalance = () => {
+const WalletBalance = () => {
   return (
     <section>
       <h1 className="font-semibold text-2xl mb-4"> Wallet balance</h1>

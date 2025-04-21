@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-export const ShoppingOverviewSideBar = () => {
+const ShoppingOverviewSideBar = () => {
   return (
     <ul className="flex items-center lg:items-start pt-2 space-x-3 mb-4 border-b-2 w-full pb-4 lg:border-none lg:pb-0 overflow-x-auto lg:overflow-x-clip lg:flex-col lg:space-y-4 lg:space-x-0">
       {/* <li className="border-b-2 border-black pb-[15px] lg:border-none lg:pb-0"> */}
@@ -28,6 +28,18 @@ export const ShoppingOverviewSideBar = () => {
           Purchases
         </NavLink>
       </li>{' '}
+      <li className="min-w-fit">
+        <NavLink
+          to="/user-dashboard/shopping-overview/direct-debit"
+          className={({ isActive }) =>
+            isActive
+              ? 'font-semibold bg-[#F6F6F6] rounded-[20px] px-6 lg:pr-20 py-2 '
+              : 'font-semibold px-6'
+          }
+        >
+          Direct Debit
+        </NavLink>
+      </li>
       <li>
         <NavLink
           to="/user-dashboard/shopping-overview/wallet"
@@ -67,3 +79,5 @@ export const ShoppingOverviewSideBar = () => {
     </ul>
   );
 };
+
+export default ShoppingOverviewSideBar;

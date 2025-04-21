@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { getOngoingOrders } from '../../../../../../features/order/orderSlice';
 
-export const PurchaseItemsOngoing = () => {
+const PurchaseItemsOngoing = () => {
   const ongoingOrders = useSelector(getOngoingOrders);
   return (
     <section>
@@ -21,6 +21,9 @@ export const PurchaseItemsOngoing = () => {
     </section>
   );
 };
+
+export default PurchaseItemsOngoing;
+
 const PurchasedItem = ({ item }) => {
   const orderItems = item.items || [];
 

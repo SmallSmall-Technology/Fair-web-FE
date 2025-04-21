@@ -21,17 +21,11 @@ import userSlice, {
 const API_URL = 'http://localhost:3000';
 
 export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
-  const onDeliveryAddress = useSelector(getDeliveryAddress);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const totalCartPrice = useSelector(getTotalCartPrice);
   const cartItems = useSelector((state) => state.cart.cart);
-
-  const VAT = (7.5 / 100) * totalCartPrice;
-  const shippingFee = 1200;
-  const subTotal = totalCartPrice;
-  const total = totalCartPrice + VAT + shippingFee;
+  const onDeliveryAddress = useSelector(getDeliveryAddress);
 
   const validationSchema = Yup.object({
     picked: Yup.string().required('Please select a payment option'),
@@ -91,7 +85,7 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
           }
         );
 
-        navigate('/user-dashboard/shopping-overview/purchases');
+        navigate('/cart-items/checkout/payment-success');
       } else {
         const order = await dispatch(
           createOrder({
@@ -113,8 +107,9 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
               closeButton: false,
             }
           );
+          navigate('/cart-items/checkout/payment-success');
 
-          navigate('/user-dashboard/shopping-overview/purchases');
+          // navigate('/user-dashboard/shopping-overview/purchases');
         }, 2000);
       }
       resetForm();
@@ -131,6 +126,10 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
     }
   };
 
+  const currentPlan = cartItems.find(
+    (item) => item.paymentPlan === 'installments'
+  );
+
   return (
     <div>
       <Formik
@@ -143,8 +142,7 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
             <h1 className="lg:hidden text-lg font-bold mt-6 mb-3">
               Payment method
             </h1>
-            {/* <p className="mb-4">Total: {formatCurrency(total)}</p> */}
-            {totalCartPrice > 100000 ? (
+            {!currentPlan ? (
               <div
                 role="group"
                 aria-labelledby="my-radio-group"
@@ -154,7 +152,7 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
                   Payment Options
                 </span>
 
-                <div className="lg:px-4 py-1 lg:py-2">
+                {/* <div className="lg:px-4 py-1 lg:py-2">
                   <label htmlFor="wallet" className="text-sm">
                     <Field
                       type="radio"
@@ -168,7 +166,7 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
                       (Balance: {formatCurrency(45000)})
                     </span>
                   </label>
-                </div>
+                </div> */}
 
                 <hr className="hidden lg:block" />
                 <div className="lg:px-4 py-1 lg:py-2">
@@ -260,7 +258,7 @@ export const CheckoutPaymentMethod = ({ onSubmitPaymentMethod }) => {
               <YellowButton
                 type="submit"
                 disabled={isSubmitting}
-                onClick={onSubmitPaymentMethod}
+                // onClick={onSubmitPaymentMethod}
               >
                 {isSubmitting ? 'Processing...' : 'Pay now'}
               </YellowButton>
