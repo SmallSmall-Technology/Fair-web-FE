@@ -111,7 +111,7 @@ export const productAds = [
   {
     id: 2,
     name: "Valentine's Special",
-    image: preciousGift,
+    image: valentineAd,
   },
   {
     id: 3,

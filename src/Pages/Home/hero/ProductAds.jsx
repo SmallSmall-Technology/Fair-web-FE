@@ -1,11 +1,17 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { productAds } from '../../../utils/data';
 
-export const ProductAds = () => {
+const ProductAds = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(
     Array(productAds.length).fill(false)
   );
+
+  // Preload the first image immediately
+  useEffect(() => {
+    const img = new Image();
+    img.src = productAds[0].image;
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -56,9 +62,28 @@ export const ProductAds = () => {
               }`}
               onLoad={() => handleImageLoad(index)}
               loading={index === 0 ? 'eager' : 'lazy'}
-              fetchpriority={index === 0 ? 'high' : 'auto'}
+              fetchpriority={index === 0 ? 'high' : 'low'}
               decoding="async"
+              // width="1920"
+              // height="1080"
             />
+            {/* <img
+              src={productAd.image}
+              alt={productAd.name}
+              className={`w-full h-full object-cover ${
+                imageLoaded[index] ? 'block' : 'hidden'
+              }`}
+              onLoad={() => handleImageLoad(index)}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              fetchpriority={index === 0 ? 'high' : 'low'}
+              decoding="async"
+              width="1920"
+              height="1080"
+              style={{
+                contentVisibility: 'auto',
+                aspectRatio: '16/9',
+              }}
+            /> */}
           </div>
         ))}
       </div>
@@ -83,3 +108,5 @@ export const ProductAds = () => {
     </div>
   );
 };
+
+export default React.memo(ProductAds);
