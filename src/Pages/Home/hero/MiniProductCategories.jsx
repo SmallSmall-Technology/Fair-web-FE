@@ -26,3 +26,5 @@ export const MiniProductCategories = () => {
     </section>
   );
 };
+
+// export default MiniProductCategories;

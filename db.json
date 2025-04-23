@@ -1617,7 +1617,51 @@
       "status": "completed",
       "createdAt": "2025-04-19T15:05:33.494Z",
       "orderDate": "Apr 19, 2025"
+    },
+    {
+      "id": "ORD1745443384798",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 207000,
+      "paidAmount": 82800,
+      "remainingAmount": 124200,
+      "status": "ongoing",
+      "createdAt": "2025-04-23T21:23:04.798Z",
+      "orderDate": "Apr 23, 2025"
     }
   ],
-  "cart": []
+  "cart": [
+    {
+      "id": "cart1745334873630",
+      "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+      "userId": "user123",
+      "productId": "1",
+      "quantity": 1,
+      "price": 207000,
+      "totalPrice": 207000,
+      "paymentPlan": "installments",
+      "paymentOptions": [
+        {
+          "type": "upfront",
+          "amount": "207000"
+        },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 82800,
+          "monthlyPayment": 41400,
+          "totalPrice": "207000"
+        }
+      ]
+    }
+  ]
 }

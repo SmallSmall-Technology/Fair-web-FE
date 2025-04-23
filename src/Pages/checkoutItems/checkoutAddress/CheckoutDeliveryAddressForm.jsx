@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+import { addressSchema } from '../../../utils/Validation';
 import { states } from '../../../utils/data';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { CheckoutDeliveryAddressButton } from '../../../utils/Button';
@@ -10,17 +10,10 @@ export const CheckoutDeliveryAddressForm = ({
   handleSubmitDeliveryAddress,
   inputRef,
 }) => {
-  const validationSchema = Yup.object({
-    state: Yup.string().required('State is required'),
-    address: Yup.string()
-      .min(5, 'Must be at least 5 characters')
-      .required('Address is required'),
-  });
-
   return (
     <Formik
       initialValues={{ state: '', address: '' }}
-      validationSchema={validationSchema}
+      validationSchema={addressSchema}
       onSubmit={(values, action) => {
         if (deliveryAddress.length > 0) {
           handleEditedDeliveryAddress(values, action);

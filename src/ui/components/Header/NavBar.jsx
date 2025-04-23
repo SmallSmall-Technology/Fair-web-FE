@@ -6,11 +6,11 @@ import {
   getUserIsAuthenticated,
   getUserName,
 } from '../../../features/auth/authSlice';
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import React, { Suspense, useState } from 'react';
+import CartDropdownItems from './CartDropdownItems';
 import { Link, useNavigate } from 'react-router-dom';
 import { YellowButton } from '../../../utils/Button';
-import { CartDropdownItems } from './CartDropdownItems';
 import { LoggedInUserDropdown } from './LoggedInUserDropdown';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import { ChevronDown, Heart, ShoppingCart } from 'lucide-react';
@@ -92,7 +92,6 @@ export const NavBar = () => {
             </div>
           </div>
         )}
-
         <li aria-hidden="true">
           <hr className="mx-2 h-[22px] w-[1.5px] bg-[#DEDEDE]" />
         </li>

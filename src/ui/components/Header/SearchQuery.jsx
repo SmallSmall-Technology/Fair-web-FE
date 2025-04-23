@@ -1,9 +1,8 @@
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import { Field, Form, Formik } from 'formik';
 import { Search } from 'lucide-react';
 import { useCallback, useMemo } from 'react';
 
-// Define SearchQuery as a component
 export const SearchQuery = () => {
   const initialValues = useMemo(() => ({ search: '' }), []);
 
