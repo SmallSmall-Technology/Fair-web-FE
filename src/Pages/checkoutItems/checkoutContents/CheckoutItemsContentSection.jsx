@@ -7,7 +7,7 @@ import { CartFooter } from '../../cartItems/CartFooter.jsx';
 import { CheckoutPaymentSummary } from './CheckoutPaymentSummary.jsx';
 import { CheckoutDeliveryAddressButton } from '../../../utils/Button.jsx';
 import { CheckoutPaymentMethod } from '../checkoutContents/CheckoutPaymentMethod.jsx';
-import { CheckoutDeliveryAddressForm } from '../checkoutAddress/CheckoutDeliveryAddressForm.jsx';
+import CheckoutDeliveryAddressForm from '../checkoutAddress/CheckoutDeliveryAddressForm.jsx';
 import {
   editDeliveryAddress,
   saveDeliveryAddress,
@@ -21,18 +21,6 @@ export const CheckoutItemsContentSection = () => {
     useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // const handleSubmitDeliveryAddress = (values, { resetForm }) => {
-  //   dispatch(saveDeliveryAddress(values));
-  //   setIsSubmitted(true);
-  //   resetForm();
-  //   setShowCheckoutDeliveryAddressForm(false);
-  // };
-  // const handleEditedDeliveryAddress = (values, { resetForm }) => {
-  //   dispatch(editDeliveryAddress(values));
-  //   resetForm();
-  //   setShowCheckoutDeliveryAddressForm(false);
-  // };
 
   const handleSubmitDeliveryAddress = (values, { resetForm }) => {
     dispatch(saveDeliveryAddress(values));

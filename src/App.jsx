@@ -19,6 +19,7 @@ import ProductDetailsSkeleton from './ui/components/Skeletons/ProductDetailsSkel
 import CheckoutItemsSkeleton from './ui/components/Skeletons/CheckoutItemsSkeleton';
 import CheckoutPaymentSkeleton from './ui/components/Skeletons/CheckoutPaymentSkeleton';
 import CartItemsSkeleton from './ui/components/Skeletons/CartItemsSkeleton';
+import DashboardSummarySkeleton from './ui/components/Skeletons/DashboardSummarySkeleton';
 
 // Lazy-loaded pages
 const CartItems = lazy(() => import('./pages/cartItems/CartItems'));
@@ -226,7 +227,7 @@ const App = () => {
                   <Route
                     path="summary"
                     element={
-                      <Suspense fallback={<p>Loading Summary...</p>}>
+                      <Suspense fallback={<DashboardSummarySkeleton />}>
                         <Summary />
                       </Suspense>
                     }
@@ -234,7 +235,7 @@ const App = () => {
                   <Route
                     path="purchases"
                     element={
-                      <Suspense fallback={<p>Loading Purchases...</p>}>
+                      <Suspense fallback={<DashboardSummarySkeleton />}>
                         <Purchases />
                       </Suspense>
                     }
@@ -242,7 +243,7 @@ const App = () => {
                   <Route
                     path="wallet"
                     element={
-                      <Suspense fallback={<p>Loading Wallet...</p>}>
+                      <Suspense fallback={<DashboardSummarySkeleton />}>
                         <Wallet />
                       </Suspense>
                     }
@@ -250,7 +251,7 @@ const App = () => {
                   <Route
                     path="favorites"
                     element={
-                      <Suspense fallback={<p>Loading Favorites...</p>}>
+                      <Suspense fallback={<DashboardSummarySkeleton />}>
                         <Favorites />
                       </Suspense>
                     }
@@ -258,7 +259,7 @@ const App = () => {
                   <Route
                     path="direct-debit"
                     element={
-                      <Suspense fallback={<p>Loading Favorites...</p>}>
+                      <Suspense fallback={<DashboardSummarySkeleton />}>
                         <DirectDebit />
                       </Suspense>
                     }
@@ -267,7 +268,7 @@ const App = () => {
                   <Route
                     path="recently-viewed"
                     element={
-                      <Suspense fallback={<p>Loading Recently Viewed...</p>}>
+                      <Suspense fallback={<DashboardSummarySkeleton />}>
                         <RecentlyViewed />
                       </Suspense>
                     }
@@ -277,7 +278,7 @@ const App = () => {
                 <Route
                   path="notifications"
                   element={
-                    <Suspense fallback={<p>Loading Notifications...</p>}>
+                    <Suspense fallback={<DashboardSummarySkeleton />}>
                       <Notifications />
                     </Suspense>
                   }
@@ -285,7 +286,7 @@ const App = () => {
                 <Route
                   path="account-profile"
                   element={
-                    <Suspense fallback={<p>Loading Account Profile...</p>}>
+                    <Suspense fallback={<DashboardSummarySkeleton />}>
                       <AccountProfile />
                     </Suspense>
                   }
@@ -293,7 +294,7 @@ const App = () => {
                 <Route
                   path=":id/:slug"
                   element={
-                    <Suspense fallback={<p>Loading Product Page...</p>}>
+                    <Suspense fallback={<DashboardSummarySkeleton />}>
                       <SingleProductPage />
                     </Suspense>
                   }

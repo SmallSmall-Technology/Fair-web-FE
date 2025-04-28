@@ -1640,26 +1640,74 @@
   ],
   "cart": [
     {
-      "id": "cart1745334873630",
-      "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+      "id": "cart1745483707538",
+      "image": "https://images.pexels.com/photos/163100/pexels-photo-163100.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "name": "Google Pixel 7 Pro",
       "userId": "user123",
-      "productId": "1",
+      "productId": "3",
       "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000,
+      "price": 300000,
+      "totalPrice": 300000,
       "paymentPlan": "installments",
       "paymentOptions": [
         {
           "type": "upfront",
-          "amount": "207000"
+          "amount": "300000"
         },
         {
           "type": "installments",
           "months": 3,
-          "upfrontPayment": 82800,
-          "monthlyPayment": 41400,
-          "totalPrice": "207000"
+          "upfrontPayment": 120000,
+          "monthlyPayment": 60000,
+          "totalPrice": "300000"
+        }
+      ]
+    },
+    {
+      "id": "cart1745834961001",
+      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "name": "iPhone 14 Pro Max",
+      "userId": "user123",
+      "productId": "2",
+      "quantity": 1,
+      "price": 500000,
+      "totalPrice": 500000,
+      "paymentPlan": "installments",
+      "paymentOptions": [
+        {
+          "type": "upfront",
+          "amount": "500000"
+        },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 200000,
+          "monthlyPayment": 100000,
+          "totalPrice": "500000"
+        }
+      ]
+    },
+    {
+      "id": "cart1745834966162",
+      "image": "https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "name": "Samsung Galaxy S22 Ultra",
+      "userId": "user123",
+      "productId": "6",
+      "quantity": 1,
+      "price": 400000,
+      "totalPrice": 400000,
+      "paymentPlan": "installments",
+      "paymentOptions": [
+        {
+          "type": "upfront",
+          "amount": "400000"
+        },
+        {
+          "type": "installments",
+          "months": 3,
+          "upfrontPayment": 160000,
+          "monthlyPayment": 80000,
+          "totalPrice": "400000"
         }
       ]
     }

@@ -99,18 +99,7 @@ export const MobileNavBar = () => {
               </button>
             </li>
 
-            <Suspense
-              fallback={
-                <div class="max-w-sm p-4 border rounded-lg shadow-md bg-white">
-                  <div class="animate-pulse space-y-4">
-                    <div class="h-48 bg-gray-300 rounded-lg"></div>
-
-                    <div class="h-6 bg-gray-300 rounded w-3/4"></div>
-                    <div class="h-6 bg-gray-300 rounded w-1/2"></div>
-                  </div>
-                </div>
-              }
-            >
+            <Suspense fallback={''}>
               <div className="absolute right-2 top-[4.02rem] w-[412px]">
                 <CartDropdownItems isOpen={isOpen} setIsOpen={setIsOpen} />
               </div>

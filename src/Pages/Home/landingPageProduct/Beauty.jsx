@@ -4,8 +4,9 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from '../../../utils/ProductCard';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllProducts } from '../../../services/api';
+import { memo } from 'react';
 
-export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
+const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ['products'],
     queryFn: fetchAllProducts,
@@ -48,7 +49,7 @@ export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
             <div className="flex space-x-4">
               <Button
                 role="button"
-                aria-label="Previous item"
+                aria-label="See Previous item"
                 tabIndex="0"
                 onClick={() => onScrollProduct(-item_width)}
                 className="border border-[#E5E5E5] rounded-full shadow-custom w-[30px] h-[30px] flex justify-center items-center transition-transform duration-300 ease-in-out hover:translate-x-[-1px] focus:ring-2 focus:ring-black focus:outline-none"
@@ -58,7 +59,7 @@ export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
 
               <Button
                 role="button"
-                aria-label="Next item"
+                aria-label="See Next item"
                 tabIndex="0"
                 onClick={() => onScrollProduct(item_width)}
                 className="border border-[#E5E5E5] rounded-full shadow-custom w-[30px] h-[30px] flex justify-center items-center transition-transform duration-300 ease-in-out hover:translate-x-1 focus:ring-2 focus:ring-black focus:outline-none"
@@ -72,3 +73,5 @@ export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
     </>
   );
 };
+
+export default Beauty;

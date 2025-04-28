@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { NavBar } from './NavBar';
 import { Link } from 'react-router-dom';
-import { SearchQuery } from './SearchQuery';
+import SearchQuery from './SearchQuery';
 import { MobileNavBar } from './MobileNavBar';
 
 const Header = () => {

@@ -1,7 +1,10 @@
+import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { CartCoupon } from '../../../features/cart/CartCoupon';
 import { getUserIsAuthenticated } from '../../../features/auth/authSlice';
+
+Modal.setAppElement('#app');
 
 export const CartSummaryExtrasAndCoupon = () => {
   const couponIsActive = true;

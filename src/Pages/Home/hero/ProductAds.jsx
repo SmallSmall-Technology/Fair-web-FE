@@ -64,8 +64,6 @@ const ProductAds = () => {
               loading={index === 0 ? 'eager' : 'lazy'}
               fetchpriority={index === 0 ? 'high' : 'low'}
               decoding="async"
-              // width="1920"
-              // height="1080"
             />
             {/* <img
               src={productAd.image}

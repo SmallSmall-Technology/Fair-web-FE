@@ -1,12 +1,10 @@
-import { object, string } from 'yup';
+import { z } from 'zod';
 
-export const addressSchema = object({
-  state: string().required('State is required'),
-  address: string()
-    .min(5, 'Must be at least 5 characters')
-    .required('Address is required'),
+export const addressSchema = z.object({
+  state: z.string().min(1, 'State is required'),
+  address: z.string().min(5, 'Must be at least 5 characters'),
 });
 
-export const paymentOptionSchema = object({
-  picked: string().required('Please select a payment option'),
+export const paymentOptionSchema = z.object({
+  picked: z.string().min(1, 'Please select a payment option'),
 });
