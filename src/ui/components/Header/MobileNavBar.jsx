@@ -1,10 +1,7 @@
-import { Shop } from './Shop';
 import { Link } from 'react-router-dom';
 import Hamburger from 'hamburger-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
-import { UserMenuDropdown } from './UserMenuDropdown';
-import { CartDropdownItems } from './CartDropdownItems';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ShoppingCart, User, X } from 'lucide-react';
 import { getTotalCartQuantity } from '../../../features/cart/cartSlice';
@@ -13,6 +10,10 @@ import {
   logout,
 } from '../../../features/auth/authSlice';
 import { toast } from 'react-toastify';
+
+const CartDropdownItems = React.lazy(() => import('./CartDropdownItems'));
+const UserMenuDropdown = React.lazy(() => import('./UserMenuDropdown'));
+const Shop = React.lazy(() => import('./Shop'));
 
 export const MobileNavBar = () => {
   const menuRef = useRef(null);
@@ -98,9 +99,22 @@ export const MobileNavBar = () => {
               </button>
             </li>
 
-            <div className="absolute right-2 top-[4.02rem] w-[412px]">
-              <CartDropdownItems isOpen={isOpen} setIsOpen={setIsOpen} />
-            </div>
+            <Suspense
+              fallback={
+                <div class="max-w-sm p-4 border rounded-lg shadow-md bg-white">
+                  <div class="animate-pulse space-y-4">
+                    <div class="h-48 bg-gray-300 rounded-lg"></div>
+
+                    <div class="h-6 bg-gray-300 rounded w-3/4"></div>
+                    <div class="h-6 bg-gray-300 rounded w-1/2"></div>
+                  </div>
+                </div>
+              }
+            >
+              <div className="absolute right-2 top-[4.02rem] w-[412px]">
+                <CartDropdownItems isOpen={isOpen} setIsOpen={setIsOpen} />
+              </div>
+            </Suspense>
           </div>
 
           <li className="relative">
@@ -187,18 +201,44 @@ export const MobileNavBar = () => {
         </ul>
       </nav>
       {shopIsOpen && (
-        <Shop
-          setHamburgerIsOpen={setHamburgerIsOpen}
-          setShopIsOpen={setShopIsOpen}
-          shopIsOpen={shopIsOpen}
-        />
+        <Suspense
+          fallback={
+            <div class="max-w-sm p-4 border rounded-lg shadow-md bg-white">
+              <div class="animate-pulse space-y-4">
+                <div class="h-48 bg-gray-300 rounded-lg"></div>
+
+                <div class="h-6 bg-gray-300 rounded w-3/4"></div>
+                <div class="h-6 bg-gray-300 rounded w-1/2"></div>
+              </div>
+            </div>
+          }
+        >
+          <Shop
+            setHamburgerIsOpen={setHamburgerIsOpen}
+            setShopIsOpen={setShopIsOpen}
+            shopIsOpen={shopIsOpen}
+          />
+        </Suspense>
       )}
 
       {userMenuIsOpen && (
-        <UserMenuDropdown
-          userMenuIsOpen={userMenuIsOpen}
-          setUserMenuIsOpen={setUserMenuIsOpen}
-        />
+        <Suspense
+          fallback={
+            <div class="max-w-sm p-4 border rounded-lg shadow-md bg-white">
+              <div class="animate-pulse space-y-4">
+                <div class="h-48 bg-gray-300 rounded-lg"></div>
+
+                <div class="h-6 bg-gray-300 rounded w-3/4"></div>
+                <div class="h-6 bg-gray-300 rounded w-1/2"></div>
+              </div>
+            </div>
+          }
+        >
+          <UserMenuDropdown
+            userMenuIsOpen={userMenuIsOpen}
+            setUserMenuIsOpen={setUserMenuIsOpen}
+          />
+        </Suspense>
       )}
     </>
   );

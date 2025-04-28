@@ -4,18 +4,18 @@ import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { NavBarCartItem } from './NavBarCartItem';
 import { motion, AnimatePresence } from 'framer-motion';
+
 import {
   getCart,
   getTotalCartQuantity,
 } from '../../../features/cart/cartSlice';
 
-export const CartDropdownItems = ({ isOpen, setIsOpen }) => {
+const CartDropdownItems = ({ isOpen, setIsOpen }) => {
   const CartItems = useSelector(getCart);
   const CartQuantity = useSelector(getTotalCartQuantity);
 
   const menuRef = useRef(null);
 
-  // Lock scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
     return () => {
@@ -23,7 +23,6 @@ export const CartDropdownItems = ({ isOpen, setIsOpen }) => {
     };
   }, [isOpen]);
 
-  // Close menu on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target) && isOpen) {
@@ -92,3 +91,5 @@ export const CartDropdownItems = ({ isOpen, setIsOpen }) => {
     </AnimatePresence>
   );
 };
+
+export default CartDropdownItems;

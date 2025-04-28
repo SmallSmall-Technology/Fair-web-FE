@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export const UserMenuDropdown = ({ setUserMenuIsOpen, userMenuIsOpen }) => {
+const UserMenuDropdown = ({ setUserMenuIsOpen, userMenuIsOpen }) => {
   const menuRef = useRef(null);
 
   // Lock scroll when menu is open
@@ -74,3 +74,5 @@ export const UserMenuDropdown = ({ setUserMenuIsOpen, userMenuIsOpen }) => {
     </>
   );
 };
+
+export default UserMenuDropdown;

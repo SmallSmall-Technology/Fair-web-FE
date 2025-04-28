@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 import { NavBar } from './NavBar';
 import { Link } from 'react-router-dom';
 import { SearchQuery } from './SearchQuery';
@@ -55,4 +55,4 @@ const Header = () => {
   );
 };
 
-export default memo(Header);
+export default React.memo(Header);

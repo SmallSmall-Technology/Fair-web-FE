@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowLeft } from 'lucide-react';
 
-export const Shop = ({ setHamburgerIsOpen, shopIsOpen, setShopIsOpen }) => {
+const Shop = ({ setHamburgerIsOpen, shopIsOpen, setShopIsOpen }) => {
   return (
     <>
       <AnimatePresence>
@@ -85,3 +85,5 @@ export const Shop = ({ setHamburgerIsOpen, shopIsOpen, setShopIsOpen }) => {
     </>
   );
 };
+
+export default Shop;

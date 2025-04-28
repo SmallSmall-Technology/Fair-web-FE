@@ -22,12 +22,25 @@ export const CheckoutItemsContentSection = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // const handleSubmitDeliveryAddress = (values, { resetForm }) => {
+  //   dispatch(saveDeliveryAddress(values));
+  //   setIsSubmitted(true);
+  //   resetForm();
+  //   setShowCheckoutDeliveryAddressForm(false);
+  // };
+  // const handleEditedDeliveryAddress = (values, { resetForm }) => {
+  //   dispatch(editDeliveryAddress(values));
+  //   resetForm();
+  //   setShowCheckoutDeliveryAddressForm(false);
+  // };
+
   const handleSubmitDeliveryAddress = (values, { resetForm }) => {
     dispatch(saveDeliveryAddress(values));
     setIsSubmitted(true);
     resetForm();
     setShowCheckoutDeliveryAddressForm(false);
   };
+
   const handleEditedDeliveryAddress = (values, { resetForm }) => {
     dispatch(editDeliveryAddress(values));
     resetForm();
