@@ -8,6 +8,7 @@ const SingleProductCategory = ({ product }) => {
           src={product.productIcon}
           alt={`${product.productName} + 'icon'`}
           className="w-full h-full"
+          loading="lazy"
         />
       </div>
       <p className="text-xs font-medium text-nowrap">{product.productName}</p>

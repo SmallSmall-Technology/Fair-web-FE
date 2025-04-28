@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { Button } from '../../../utils/Button';
 import { heroCards } from '../../../utils/data';
 
-const HeroCards = () => {
+const HeroCards = memo(() => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const cardLength = useRef(heroCards.length);
@@ -19,7 +19,6 @@ const HeroCards = () => {
 
   return (
     <>
-      {/* Carousel region for screen readers */}
       <div
         className="relative grid gap-6 lg:justify-center items-center overflow-hidden md:overflow-visible"
         aria-roledescription="carousel"
@@ -34,16 +33,17 @@ const HeroCards = () => {
             alt=""
             aria-hidden="true"
             className="object-contain w-full h-full"
+            loading="lazy"
           />
           <img
             src="/images/hero-card-bg.svg"
             alt=""
             aria-hidden="true"
+            loading="lazy"
             className="object-contain w-full h-full"
           />
         </div>
 
-        {/* Desktop carousel view */}
         <div>
           <ul className="hidden lg:flex gap-4 justify-between items-center relative z-10 mx-auto h-96 my-8">
             {heroCards.map((heroCard, index) => (
@@ -140,11 +140,10 @@ const HeroCards = () => {
       <hr className="mb-" />
     </>
   );
-};
+});
 
 export default React.memo(HeroCards);
 
-// Optional: If you use SingleHeroCard elsewhere, make sure it's used effectively
 const SingleHeroCard = ({ heroCard, isMiddle }) => {
   return (
     <div

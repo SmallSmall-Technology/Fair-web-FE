@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from '../../../utils/ProductCard';
 import ProductCardSkeleton from '../../../ui/components/Skeletons/ProductCardSkeleton';
 
-export const Electronics = ({ onScrollProduct, item_width, containerRef }) => {
+const Electronics = ({ onScrollProduct, item_width, containerRef }) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ['products'],
     queryFn: fetchAllProducts,
@@ -77,3 +77,5 @@ export const Electronics = ({ onScrollProduct, item_width, containerRef }) => {
     </section>
   );
 };
+
+export default Electronics;

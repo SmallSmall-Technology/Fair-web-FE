@@ -5,7 +5,7 @@ import { products } from '../../../utils/data';
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import ProductCard from '../../../utils/ProductCard';
-import { CommentBar } from '../../../features/reviewsRating/CommentBar';
+import CommentBar from '../../../features/reviewsRating/CommentBar';
 import { AddFavourite } from '../../../features/favourite/AddFavourite';
 import { SingleProductDetailsAside } from './SingleProductDetailsAside';
 import { handleShareProduct } from '../../../features/product/ShareProduct';

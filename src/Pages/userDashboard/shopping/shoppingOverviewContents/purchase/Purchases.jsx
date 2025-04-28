@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Search } from 'lucide-react';
 import { useSelector } from 'react-redux';
-import { Field, Form, Formik } from 'formik';
+import { useForm } from 'react-hook-form';
 import PurchaseCompleted from './purchaseContentSection/PurchaseCompleted';
 import PurchaseCancelled from './purchaseContentSection/PurchaseCancelled';
 import {
@@ -21,19 +21,33 @@ const Purchases = () => {
   const cancelledOrders = useSelector(getCancelledOrders);
   const allOrders = useSelector((state) => state.order.orders);
 
-  const initialValues = {
-    search: '',
-  };
+  // Mobile search form
+  const {
+    register: registerMobile,
+    handleSubmit: handleSubmitMobile,
+    reset: resetMobile,
+  } = useForm({
+    defaultValues: { search: '' },
+  });
 
-  const handleSearchQuery = (values, { resetForm }) => {
-    const searchTerm = values.search.trim().toLowerCase();
+  // Desktop search form
+  const {
+    register: registerDesktop,
+    handleSubmit: handleSubmitDesktop,
+    reset: resetDesktop,
+  } = useForm({
+    defaultValues: { search: '' },
+  });
+
+  const handleSearchQuery = (data, reset) => {
+    const searchTerm = data.search.trim().toLowerCase();
     if (searchTerm) {
-      // Filter orders by order ID (or extend to product name, etc.)
       const filteredOrders = allOrders.filter((order) =>
         order.id.toLowerCase().includes(searchTerm)
       );
+      // Note: filteredOrders is computed but not used; consider dispatching to Redux or updating state
     }
-    resetForm();
+    reset();
     setFormIsActive(false);
   };
 
@@ -42,36 +56,37 @@ const Purchases = () => {
       <section>
         <div className="flex justify-between items-center mb-4">
           <h1 className="font-semibold text-2xl">Purchases</h1>
-          {/* Mobile Search Toggle */}
           <div className="flex lg:hidden">
-            <Formik initialValues={initialValues} onSubmit={handleSearchQuery}>
-              <Form>
-                {formIsActive ? (
-                  <div className="flex items-center space-x-1 relative">
-                    <Field
-                      type="text"
-                      name="search"
-                      placeholder="Search by order ID"
-                      className="rounded-md p-2 border pl-2 text-sm w-40"
-                    />
-                    <button
-                      type="submit"
-                      className="absolute right-1 flex items-center text-xs py-1 px-2 bg-[#FFDE11] rounded border-[#737376]"
-                    >
-                      <Search size={12} /> Search
-                    </button>
-                  </div>
-                ) : (
+            <form
+              onSubmit={handleSubmitMobile((data) =>
+                handleSearchQuery(data, resetMobile)
+              )}
+            >
+              {formIsActive ? (
+                <div className="flex items-center space-x-1 relative">
+                  <input
+                    type="text"
+                    {...registerMobile('search')}
+                    placeholder="Search by order ID"
+                    className="rounded-md p-2 border pl-2 text-sm w-40"
+                  />
                   <button
-                    type="button"
-                    className="flex items-center border-[#737376] p-2 bg-[#FFDE11] rounded"
-                    onClick={() => setFormIsActive(true)}
+                    type="submit"
+                    className="absolute right-1 flex items-center text-xs py-1 px-2 bg-[#FFDE11] rounded border-[#737376]"
                   >
-                    <Search size={15} /> Search
+                    <Search size={12} /> Search
                   </button>
-                )}
-              </Form>
-            </Formik>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  className="flex items-center border-[#737376] p-2 bg-[#FFDE11] rounded"
+                  onClick={() => setFormIsActive(true)}
+                >
+                  <Search size={15} /> Search
+                </button>
+              )}
+            </form>
           </div>
         </div>
 
@@ -82,7 +97,6 @@ const Purchases = () => {
         ) : (
           <>
             <div className="flex justify-between items-center">
-              {/* Tabs */}
               <div className="flex justify-between w-full lg:justify-start lg:space-x-3">
                 <button
                   className={`p-2 rounded-[30px] text-sm lg:text-base border ${
@@ -119,16 +133,16 @@ const Purchases = () => {
                 </button>
               </div>
 
-              {/* Desktop Search */}
               <div className="hidden lg:block">
-                <Formik
-                  initialValues={initialValues}
-                  onSubmit={handleSearchQuery}
+                <form
+                  onSubmit={handleSubmitDesktop((data) =>
+                    handleSearchQuery(data, resetDesktop)
+                  )}
                 >
-                  <Form className="flex space-x-1">
-                    <Field
+                  <div className="flex space-x-1">
+                    <input
                       type="text"
-                      name="search"
+                      {...registerDesktop('search')}
                       placeholder="Search by order ID"
                       className="rounded-md p-2 border text-sm"
                     />
@@ -138,14 +152,13 @@ const Purchases = () => {
                     >
                       <Search size={15} /> Search
                     </button>
-                  </Form>
-                </Formik>
+                  </div>
+                </form>
               </div>
             </div>
 
             <hr className="my-4" />
 
-            {/* Tab Content */}
             {activeTab === 'ongoing' && <PurchaseItemsOngoing />}
             {activeTab === 'completed' && <PurchaseCompleted />}
             {activeTab === 'cancelled' && <PurchaseCancelled />}
@@ -156,4 +169,4 @@ const Purchases = () => {
   );
 };
 
-export default Purchases;
+export default memo(Purchases);

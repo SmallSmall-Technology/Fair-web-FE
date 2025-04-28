@@ -5,11 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from '../../../utils/ProductCard';
 import { fetchAllProducts } from '../../../services/api';
 
-export const NewProductsInStore = ({
-  onScrollProduct,
-  item_width,
-  containerRef,
-}) => {
+const NewProductsInStore = ({ onScrollProduct, item_width, containerRef }) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ['products'],
     queryFn: fetchAllProducts,
@@ -88,3 +84,5 @@ export const NewProductsInStore = ({
     </>
   );
 };
+
+export default NewProductsInStore;
