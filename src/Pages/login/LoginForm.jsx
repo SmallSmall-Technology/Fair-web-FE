@@ -1,10 +1,10 @@
 import { toast } from 'react-toastify';
-import Form from 'react-bootstrap/Form';
-import { Button } from '../../utils/Button';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { login, clearError } from '../../features/auth/authSlice';
+import { Button } from '../../utils/Button';
+import { Eye, EyeOff } from 'lucide-react';
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -17,8 +17,8 @@ function LoginForm() {
     email: '',
     password: '',
   });
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
-  // Navigate on successful login
   useEffect(() => {
     if (isAuthenticated) {
       const from = location.state?.from?.pathname || '/';
@@ -35,7 +35,6 @@ function LoginForm() {
     }
   }, [isAuthenticated, navigate, location]);
 
-  // Reset password on error
   useEffect(() => {
     if (error) {
       setFormData((prev) => ({ ...prev, password: '' }));
@@ -64,7 +63,7 @@ function LoginForm() {
       await dispatch(login(formData)).unwrap();
     } catch (err) {
       toast.dismiss();
-      toast.error('Please fill in all fields', {
+      toast.error('Error logging in. Please try again.', {
         autoClose: 3000,
         className:
           'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
@@ -75,47 +74,65 @@ function LoginForm() {
   };
 
   return (
-    <Form className="my-3" onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formGroupEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
+    <form className="my-3 space-y-4 max-w-md" onSubmit={handleSubmit}>
+      <div className="space-y-2">
+        <label htmlFor="email" className="text-sm font-medium sr-only">
+          Email address
+        </label>
+        <input
           type="email"
+          id="email"
           name="email"
-          placeholder="e.g., admin@smallsmall.com"
+          placeholder="Email"
           value={formData.email}
           onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
           disabled={loading}
         />
-      </Form.Group>
+      </div>
 
-      <Form.Group className="mb-3" controlId="formGroupPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          name="password"
-          placeholder="e.g., admin"
-          value={formData.password}
-          onChange={handleChange}
-          disabled={loading}
-        />
-      </Form.Group>
+      <div className="space-y-2">
+        <label htmlFor="password" className="text-sm font-medium sr-only">
+          Password
+        </label>
+        <div className="relative">
+          <input
+            type={passwordVisible ? 'text' : 'password'}
+            id="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
+            disabled={loading}
+          />
+          <button
+            type="button"
+            onClick={() => setPasswordVisible(!passwordVisible)}
+            className="absolute top-3 right-3 text-gray-500 hover:text-[#FFDE11]"
+          >
+            {passwordVisible ? <EyeOff /> : <Eye />}
+          </button>
+        </div>
+      </div>
 
-      {error && <p className="text-danger mb-3">{error}</p>}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
 
       <Button
         type="submit"
-        className="text-center overflow-hidden bg-[#FFDE11] rounded-full border-[#FFDE11] w-full md:px-12 md:py-3 py-[10px] text-lg font-medium text-black hover:bg-gray-100 hover:text-black"
+        className="w-full bg-[#FFDE11] text-black rounded-full py-3 text-lg font-medium hover:bg-gray-100 hover:text-black disabled:opacity-50"
         disabled={loading}
       >
         {loading ? 'Logging in...' : 'Log in'}
       </Button>
+      <p className="font-semibold flex justify-center">Forgot Password?</p>
 
-      <p className="mt-3 text-muted">
+      {/* <p className="mt-3 text-sm text-gray-500">
         For testing, use: <br />
         Email: admin@smallsmall.com <br />
         Password: admin
-      </p>
-    </Form>
+      </p> */}
+    </form>
   );
 }
 

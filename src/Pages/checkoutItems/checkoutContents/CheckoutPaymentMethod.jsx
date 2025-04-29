@@ -15,7 +15,7 @@ import {
 import { getDeliveryAddress } from '../../../features/user/userSlice.js';
 import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const API_URL = 'http://localhost:3000';
 
@@ -33,7 +33,7 @@ export const CheckoutPaymentMethod = () => {
     reset,
   } = useForm({
     defaultValues: { picked: '' },
-    resolver: yupResolver(paymentOptionSchema),
+    resolver: zodResolver(paymentOptionSchema),
   });
 
   const onSubmit = async (values) => {

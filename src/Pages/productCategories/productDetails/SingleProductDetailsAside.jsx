@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button, YellowButton } from '../../../utils/Button';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import { handleAddToCart } from '../../../features/cart/AddToCart';
-import { CommentBar } from '../../../features/reviewsRating/CommentBar';
+import CommentBar from '../../../features/reviewsRating/CommentBar';
 import { ChevronsLeft, ChevronsRight, HeartHandshake } from 'lucide-react';
 
 const item_width = 70;
