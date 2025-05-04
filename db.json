@@ -729,178 +729,26 @@
       "status": "completed",
       "createdAt": "2025-04-10T13:13:54.607Z",
       "orderDate": "Apr 10, 2025"
+    },
+    {
+      "id": "ORD1744626134724",
+      "items": [
+        {
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?auto=format&fit=crop&w=500&q=60",
+          "soldBy": "Apple",
+          "price": 500000,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 500000,
+      "paidAmount": 500000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-04-14T10:22:14.724Z",
+      "orderDate": "Apr 14, 2025"
     }
   ],
-  "cart": [
-    {
-      "id": "cart1744355535848",
-      "image": "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?auto=format&fit=crop&w=500&q=60",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 2,
-      "price": 500000,
-      "totalPrice": 1000000
-    },
-    {
-      "id": "cart1744540315145",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2Ftc3VuZyUyMHBob25lfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": 1,
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744540630737",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744540632560",
-      "image": "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?auto=format&fit=crop&w=500&q=60",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000
-    },
-    {
-      "id": "cart1744541788465",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744542192205",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744542388474",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 2,
-      "price": 207000,
-      "totalPrice": 414000
-    },
-    {
-      "id": "cart1744543110317",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744543218292",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744543356533",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744543896633",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744544020716",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744550666250",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744553903225",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744569678393",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744569927899",
-      "image": "https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?auto=format&fit=crop&w=500&q=60",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000
-    },
-    {
-      "id": "cart1744573872433",
-      "image": "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?auto=format&fit=crop&w=500&q=60",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000
-    }
-  ]
+  "cart": []
 }

@@ -27,6 +27,7 @@ import { CheckoutPaymentSuccess } from "./pages/checkoutPaymentSuccess/CheckoutP
 import { ShoppingOverview } from "./pages/userDashboard/shopping/shoppingOverview/ShoppingOverview";
 import { Purchases } from "./pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases";
 import { RecentlyViewed } from "./pages/userDashboard/shopping/shoppingOverviewContents/RecentlyViewed";
+import HowItWorks from "./pages/howItWorks/HowItWorks";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -63,6 +64,7 @@ const App = () => {
           <Route path="" element={<Layout />}>
             {/* Home route */}
             <Route path="/" element={<Home />} />
+            <Route path="/howItWorks" element={<HowItWorks />} />
 
             {/* Category and subcategory routes */}
             <Route path="category/:categoryName" element={<CategoryPage />} />
