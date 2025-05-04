@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Layout from "../../ui/components/layout/Layout";
+import Layout from '../../ui/components/layout/Layout';
 
 function HowItWorks() {
   return (

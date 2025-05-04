@@ -1,11 +1,11 @@
-import ProductList from "./ProductList";
-import { useParams } from "react-router-dom";
-import { products } from "../../../utils/data";
-import { useEffect, useMemo, useState } from "react";
-import { ArrowUpDown, ChevronRight } from "lucide-react";
-import CategoryFilterForm from "../filterForms/CategoryFilterForm";
-import { ProductCategoriesShortcut } from "../ProductCategoriesShortcut";
-import { MiniProductCategories } from "../../home/hero/MiniProductCategories";
+import ProductList from './ProductList';
+import { useParams } from 'react-router-dom';
+import { products } from '../../../utils/data';
+import { useEffect, useMemo, useState } from 'react';
+import { ArrowUpDown, ChevronRight } from 'lucide-react';
+import CategoryFilterForm from '../filterForms/CategoryFilterForm';
+import { ProductCategoriesShortcut } from '../ProductCategoriesShortcut';
+import { MiniProductCategories } from '../../home/hero/MiniProductCategories';
 
 const CategoryPage = () => {
   const { categoryName } = useParams();
@@ -68,7 +68,7 @@ const CategoryPage = () => {
 
   // Focus on results section for screen readers
   useEffect(() => {
-    const resultsSection = document.getElementById("results");
+    const resultsSection = document.getElementById('results');
     if (resultsSection) resultsSection.focus();
   }, [filteredProducts]);
 
@@ -92,8 +92,8 @@ const CategoryPage = () => {
           <header className="mt-8 mb-5 flex items-baseline space-x-2">
             <h1 className="font-bold text-2xl capitalize">{categoryName}</h1>
             <p className="text-xs text-[#6B6B6B]">
-              ({categoryProducts.length}){" "}
-              {categoryProducts.length === 1 ? "result" : "results"}
+              ({categoryProducts.length}){' '}
+              {categoryProducts.length === 1 ? 'result' : 'results'}
             </p>
           </header>
           <div

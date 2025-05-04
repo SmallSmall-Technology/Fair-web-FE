@@ -1,16 +1,16 @@
-import { Button } from "./Button";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Image as ImageIcon } from "lucide-react";
-import { Share2, Star } from "lucide-react";
-import { formatCurrency } from "./FormatCurrency";
-import React, { useEffect, useState } from "react";
-import { AddToCart } from "../features/cart/AddToCart";
-import { AddFavourite } from "../features/favourite/AddFavourite";
-import { handleShareProduct } from "../features/product/ShareProduct";
-import { addItemToRecentlyViewed } from "../features/product/recentlyViewedSlice";
+import { Button } from './Button';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Image as ImageIcon } from 'lucide-react';
+import { Share2, Star } from 'lucide-react';
+import { formatCurrency } from './FormatCurrency';
+import React, { memo, useEffect, useState } from 'react';
+import { AddToCart } from '../features/cart/AddToCart';
+import { AddFavourite } from '../features/favourite/AddFavourite';
+import { handleShareProduct } from '../features/product/ShareProduct';
+import { addItemToRecentlyViewed } from '../features/product/recentlyViewedSlice';
 
-export const ProductCard = ({ product }) => {
+const ProductCard = ({ product }) => {
   const [imgError, setImgError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -39,8 +39,8 @@ export const ProductCard = ({ product }) => {
   } = product;
 
   const cardStyles = {
-    base: "w-fit rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg hover:pb-[1px]",
-    transform: { transform: "scale(1)", transformOrigin: "center" },
+    base: 'w-fit rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg hover:pb-[1px]',
+    transform: { transform: 'scale(1)', transformOrigin: 'center' },
   };
 
   const Skeleton = () => (
@@ -50,8 +50,8 @@ export const ProductCard = ({ product }) => {
       role="article"
       aria-label={`Loading product`}
       style={cardStyles.transform}
-      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.01)")}
-      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+      onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.01)')}
+      onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
     >
       <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl">
         <div className="absolute top-2 flex justify-between w-full px-2">
@@ -91,8 +91,8 @@ export const ProductCard = ({ product }) => {
       role="article"
       aria-label={`Product: ${name}`}
       style={cardStyles.transform}
-      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.01)")}
-      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+      onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.01)')}
+      onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
       onClick={handleAddToRecentlyViewed}
     >
       <Link to={`/${id}/${slug}`} className="block">
@@ -100,16 +100,16 @@ export const ProductCard = ({ product }) => {
           {/* <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] lg:w-[218px] lg:h-[218px] rounded-2xl cursor-pointer"> */}
           <div className="absolute top-2 flex justify-between w-full px-2">
             <Button
-              aria-label="Share this product"
-              title="Share"
               className="rounded-full bg-white p-2 hover:shadow-lg transition-all duration-300 ease-in-out focus:border-2 focus:border-black focus:outline-none focus:ring-2 focus:ring-black"
               onClick={(e) => {
                 e.stopPropagation();
                 handleShareProduct();
               }}
             >
+              <span className="sr-only">Share this product</span>
               <Share2 className="fill-black" size="15px" />
             </Button>
+
             {discountPrice && (
               <p className="bg-[#FFF8CF] w-[51px] flex justify-center items-center rounded-[20px]">
                 <span className="font-medium text-xs">
@@ -171,6 +171,7 @@ export const ProductCard = ({ product }) => {
     </article>
   );
 
-  // return <Content />;
   return <>{isLoading ? <Skeleton /> : <Content />}</>;
 };
+
+export default ProductCard;

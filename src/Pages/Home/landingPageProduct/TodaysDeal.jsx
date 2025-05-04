@@ -1,21 +1,27 @@
-import { NavLink } from "react-router-dom";
-import { Button } from "../../../utils/Button";
-import { useQuery } from "@tanstack/react-query";
-import { fetchAllProducts } from "../../../api";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { ProductCard } from "../../../utils/ProductCard";
+import { NavLink } from 'react-router-dom';
+import { Button } from '../../../utils/Button';
+import { useQuery } from '@tanstack/react-query';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import ProductCard from '../../../utils/ProductCard';
+import { fetchAllProducts } from '../../../services/api';
 
-export const TodaysDeal = ({ onScrollProduct, item_width, containerRef }) => {
+const TodaysDeal = ({ onScrollProduct, item_width, containerRef }) => {
   const { data, error, isLoading } = useQuery({
-    queryKey: ["products"],
+    queryKey: ['products'],
     queryFn: fetchAllProducts,
   });
   return (
     <>
       <div className="flex justify-between mt-12 mb-4">
         <h2 className="font-bold text-2xl">Today's Deal</h2>
-        <NavLink to={`/category/todays-deal`} className="underline">
+
+        <NavLink
+          to={'new-products-in-store'}
+          className="underline"
+          aria-label="View all Today's deal"
+        >
           View all
+          <span className="sr-only">View all Today's deal</span>
         </NavLink>
       </div>
 
@@ -61,3 +67,5 @@ export const TodaysDeal = ({ onScrollProduct, item_width, containerRef }) => {
     </>
   );
 };
+
+export default TodaysDeal;

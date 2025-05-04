@@ -1,4 +1,4 @@
-import { productCategories } from "../../../utils/data";
+import { productCategories } from '../../../utils/data';
 
 const SingleProductCategory = ({ product }) => {
   return (
@@ -8,6 +8,7 @@ const SingleProductCategory = ({ product }) => {
           src={product.productIcon}
           alt={`${product.productName} + 'icon'`}
           className="w-full h-full"
+          loading="lazy"
         />
       </div>
       <p className="text-xs font-medium text-nowrap">{product.productName}</p>
@@ -26,3 +27,5 @@ export const MiniProductCategories = () => {
     </section>
   );
 };
+
+// export default MiniProductCategories;

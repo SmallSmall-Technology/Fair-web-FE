@@ -1,7 +1,7 @@
-import { CartHeader } from "./CartHeader";
-import { CheckoutItemsContentSection } from "./checkoutContents/CheckoutItemsContentSection";
+import { CartHeader } from './CartHeader';
+import { CheckoutItemsContentSection } from './checkoutContents/CheckoutItemsContentSection';
 
-export const CheckoutItems = () => {
+const CheckoutItems = () => {
   return (
     <main className="flex flex-col min-h-screen justify-between">
       <CartHeader />
@@ -10,3 +10,5 @@ export const CheckoutItems = () => {
     </main>
   );
 };
+
+export default CheckoutItems;

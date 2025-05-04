@@ -1,36 +1,40 @@
-import { useState } from "react";
-import { CheckoutItem } from "./CheckoutItem.jsx";
-import { useSelector, useDispatch } from "react-redux";
-import { CartFooter } from "../../cartItems/CartFooter.jsx";
-import { CheckoutPaymentSummary } from "./CheckoutPaymentSummary.jsx";
-import { CheckoutDeliveryAddressButton } from "../../../utils/Button.jsx";
-import { CheckoutPaymentMethod } from "../checkoutContents/CheckoutPaymentMethod.jsx";
-import { CheckoutDeliveryAddressForm } from "../checkoutAddress/CheckoutDeliveryAddressForm.jsx";
+import { useState } from 'react';
+import { startTransition } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { CheckoutItem } from './CheckoutItem.jsx';
+import { useSelector, useDispatch } from 'react-redux';
+import { CartFooter } from '../../cartItems/CartFooter.jsx';
+import { CheckoutPaymentSummary } from './CheckoutPaymentSummary.jsx';
+import { CheckoutDeliveryAddressButton } from '../../../utils/Button.jsx';
+import { CheckoutPaymentMethod } from '../checkoutContents/CheckoutPaymentMethod.jsx';
+import CheckoutDeliveryAddressForm from '../checkoutAddress/CheckoutDeliveryAddressForm.jsx';
 import {
   editDeliveryAddress,
   saveDeliveryAddress,
-} from "../../../features/user/userSlice.js";
-import {
-  createOrder,
-  makePayment,
-} from "../../../features/order/orderSlice.js";
+} from '../../../features/user/userSlice.js';
+import { makePayment } from '../../../features/order/orderSlice.js';
 
 export const CheckoutItemsContentSection = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+
   const [showCheckoutDeliveryAddressForm, setShowCheckoutDeliveryAddressForm] =
     useState(false);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmitDeliveryAddress = (values, { resetForm }) => {
     dispatch(saveDeliveryAddress(values));
     setIsSubmitted(true);
     resetForm();
+    setShowCheckoutDeliveryAddressForm(false);
   };
+
   const handleEditedDeliveryAddress = (values, { resetForm }) => {
     dispatch(editDeliveryAddress(values));
     resetForm();
+    setShowCheckoutDeliveryAddressForm(false);
   };
+
   const deliveryAddress = useSelector(
     (state) => state.user.user.deliveryAddress
   );
@@ -41,8 +45,12 @@ export const CheckoutItemsContentSection = () => {
   };
 
   const handleSubmitPaymentMethod = (values) => {
-    if (values) dispatch(makePayment());
-    navigate("/cart-items/checkout/payment-success");
+    if (values) {
+      dispatch(makePayment());
+      startTransition(() => {
+        navigate('/cart-items/checkout/payment-success');
+      });
+    }
   };
 
   return (

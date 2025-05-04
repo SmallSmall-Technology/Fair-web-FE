@@ -1,16 +1,15 @@
-import { Link } from "react-router-dom";
-import { WalletBalance } from "./Wallet";
-import { SingleRecentlyViewed } from "./RecentlyViewed";
-import { useSelector } from "react-redux";
-import { getRecentlyViewed } from "../../../../features/product/recentlyViewedSlice";
+import { Link } from 'react-router-dom';
+import WalletBalance from './Wallet';
+import { SingleRecentlyViewed } from './RecentlyViewed';
+import { useSelector } from 'react-redux';
+import { getRecentlyViewed } from '../../../../features/product/recentlyViewedSlice';
 import {
   getCancelledOrders,
   getCompletedOrders,
   getOngoingOrders,
-} from "../../../../features/order/orderSlice";
-// import { RecentlyViewed } from "./RecentlyViewed";
+} from '../../../../features/order/orderSlice';
 
-export const Summary = () => {
+const Summary = () => {
   const recentlyViewed = useSelector(getRecentlyViewed);
   const ongoingOrders = useSelector(getOngoingOrders);
   const onCompletedOrders = useSelector(getCompletedOrders);
@@ -70,7 +69,7 @@ export const Summary = () => {
               to="/user-dashboard/shopping-overview/recently-viewed"
               className="underline font-medium"
             >
-              {recentlyViewed < 1 ? "" : "See all"}
+              {recentlyViewed < 1 ? '' : 'See all'}
             </Link>
           </div>
           <section className="grid grid-cols-1 gap-4 border w-full rounded-[10px] p-2">
@@ -91,3 +90,5 @@ export const Summary = () => {
     </section>
   );
 };
+
+export default Summary;

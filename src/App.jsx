@@ -1,33 +1,85 @@
-import { useEffect } from "react";
-import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
-import SignUp from "./pages/signUp/SignUp";
-import ProtectedRoute from "./ProtectedRoute";
-import ScrollToTop from "./utils/ScrollToTop";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
-import Layout from "./ui/components/layout/Layout";
-import { useDispatch, useSelector } from "react-redux";
-import { CartItems } from "./pages/cartItems/CartItems";
-import { restoreSession } from "./features/auth/authSlice";
-import PageNotFound from "./pages/pageNotFound/PageNotFound";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { UserDashboard } from "./pages/userDashboard/UserDashboard";
-import { CheckoutItems } from "./pages/checkoutItems/CheckoutItems";
-import SubCategoryPage from "./pages/productCategories/SubCategoryPage";
-import SingleProductPage from "./pages/productCategories/SingleProductPage";
-import UserDashboardLayout from "./ui/components/Layout/UserDashboardLayout";
-import CategoryPage from "./pages/productCategories/categoryPage/CategoryPage";
-import { Notifications } from "./pages/userDashboard/notifications/Notifications";
-import { AccountProfile } from "./pages/userDashboard/accountProfile/AccountProfile";
-import { Wallet } from "./pages/userDashboard/shopping/shoppingOverviewContents/Wallet";
-import { Summary } from "./pages/userDashboard/shopping/shoppingOverviewContents/Summary";
-import { Favorites } from "./pages/userDashboard/shopping/shoppingOverviewContents/Favorites";
-import { CheckoutPaymentSuccess } from "./pages/checkoutPaymentSuccess/CheckoutPaymentSuccess";
-import { ShoppingOverview } from "./pages/userDashboard/shopping/shoppingOverview/ShoppingOverview";
-import { Purchases } from "./pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases";
-import { RecentlyViewed } from "./pages/userDashboard/shopping/shoppingOverviewContents/RecentlyViewed";
-import HowItWorks from "./pages/howItWorks/HowItWorks";
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, Suspense, lazy } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+
+import ScrollToTop from './utils/ScrollToTop';
+import ProtectedRoute from './ProtectedRoute';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import { restoreSession } from './features/auth/authSlice';
+
+// Eagerly load layout and essential UI wrappers
+import Home from './pages/home/Home';
+import Login from './pages/login/Login';
+import SignUp from './pages/signUp/SignUp';
+import Layout from './ui/components/layout/Layout';
+import UserDashboardLayout from './ui/components/Layout/UserDashboardLayout';
+import ProductDetailsSkeleton from './ui/components/Skeletons/ProductDetailsSkeleton';
+import CheckoutItemsSkeleton from './ui/components/Skeletons/CheckoutItemsSkeleton';
+import CheckoutPaymentSkeleton from './ui/components/Skeletons/CheckoutPaymentSkeleton';
+import CartItemsSkeleton from './ui/components/Skeletons/CartItemsSkeleton';
+import DashboardSummarySkeleton from './ui/components/Skeletons/DashboardSummarySkeleton';
+
+// Lazy-loaded pages
+const CartItems = lazy(() => import('./pages/cartItems/CartItems'));
+const CheckoutItems = lazy(() => import('./pages/checkoutItems/CheckoutItems'));
+const CheckoutPaymentSuccess = lazy(
+  () => import('./pages/checkoutPaymentSuccess/CheckoutPaymentSuccess')
+);
+const PageNotFound = lazy(() => import('./pages/pageNotFound/PageNotFound'));
+
+const CategoryPage = lazy(
+  () => import('./pages/productCategories/categoryPage/CategoryPage')
+);
+const SubCategoryPage = lazy(
+  () => import('./pages/productCategories/SubCategoryPage')
+);
+const SingleProductPage = lazy(
+  () => import('./pages/productCategories/SingleProductPage')
+);
+
+const UserDashboard = lazy(() => import('./pages/userDashboard/UserDashboard'));
+const ShoppingOverview = lazy(
+  () =>
+    import('./pages/userDashboard/shopping/shoppingOverview/ShoppingOverview')
+);
+const Summary = lazy(
+  () =>
+    import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
+);
+const Purchases = lazy(
+  () =>
+    import(
+      './pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases'
+    )
+);
+const Wallet = lazy(
+  () => import('./pages/userDashboard/shopping/shoppingOverviewContents/Wallet')
+);
+const DirectDebit = lazy(
+  () =>
+    import(
+      './pages/userDashboard/shopping/shoppingOverviewContents/DirectDebit'
+    )
+);
+const Favorites = lazy(
+  () =>
+    import('./pages/userDashboard/shopping/shoppingOverviewContents/Favorites')
+);
+const RecentlyViewed = lazy(
+  () =>
+    import(
+      './pages/userDashboard/shopping/shoppingOverviewContents/RecentlyViewed'
+    )
+);
+
+const Notifications = lazy(
+  () => import('./pages/userDashboard/notifications/Notifications')
+);
+const AccountProfile = lazy(
+  () => import('./pages/userDashboard/accountProfile/AccountProfile')
+);
 
 const App = () => {
   const dispatch = useDispatch();
@@ -44,85 +96,209 @@ const App = () => {
 
   return (
     <>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={5000}
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="yellow"
-      />
       <BrowserRouter>
-        {/* <ToastContainer position="top-right" autoClose={3000} /> */}
-
         <ScrollToTop />
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="yellow"
+        />
         <Routes>
           <Route path="" element={<Layout />}>
-            {/* Home route */}
             <Route path="/" element={<Home />} />
-            <Route path="/howItWorks" element={<HowItWorks />} />
+            <Route
+              path="category/:categoryName"
+              element={
+                <Suspense
+                  fallback={
+                    <ProductDetailsSkeleton
+                      showAside={true}
+                      showRecommendations={true}
+                    />
+                  }
+                >
+                  <CategoryPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="category/:categoryName/:subcategory"
+              element={
+                <Suspense
+                  fallback={
+                    <ProductDetailsSkeleton
+                      showAside={true}
+                      showRecommendations={true}
+                    />
+                  }
+                >
+                  <SubCategoryPage />
+                </Suspense>
+              }
+            />
 
-            {/* Category and subcategory routes */}
-            <Route path="category/:categoryName" element={<CategoryPage />} />
-            <Route path="category/:categoryName/:subcategory" element={<SubCategoryPage />} />
-            {/* Nested route for single product */}
-            <Route path="category/:categoryName/:subcategory/:id/:slug" element={<SingleProductPage />} />
-            <Route path=":id/:slug" element={<SingleProductPage />} />
+            <Route
+              path="category/:categoryName/:subcategory/:id/:slug"
+              element={
+                <Suspense
+                  fallback={
+                    <ProductDetailsSkeleton
+                      showAside={true}
+                      showRecommendations={true}
+                    />
+                  }
+                >
+                  <SingleProductPage />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path=":id/:slug"
+              element={
+                <Suspense
+                  fallback={
+                    <ProductDetailsSkeleton
+                      showAside={true}
+                      showRecommendations={true}
+                    />
+                  }
+                >
+                  <SingleProductPage />
+                </Suspense>
+              }
+            />
           </Route>
-          {/* Cart items route and checkout */}
-          <Route path="cart-items" element={<CartItems />} />
+          <Route
+            path="cart-items"
+            element={
+              <Suspense fallback={<CartItemsSkeleton />}>
+                <CartItems />
+              </Suspense>
+            }
+          />
 
-          {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
-            <Route path="cart-items/checkout" element={<CheckoutItems />} />
-
-            <Route path="cart-items/checkout/payment-success" element={<CheckoutPaymentSuccess />} />
+            <Route
+              path="cart-items/checkout"
+              element={
+                <Suspense fallback={<CheckoutItemsSkeleton />}>
+                  <CheckoutItems />
+                </Suspense>
+              }
+            />
+            <Route
+              path="cart-items/checkout/payment-success"
+              element={
+                <Suspense fallback={<CheckoutPaymentSkeleton />}>
+                  <CheckoutPaymentSuccess />
+                </Suspense>
+              }
+            />
           </Route>
-
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-
-          {/* Catch-all route for 404 */}
           <Route path="*" element={<PageNotFound />} />
-
-          {/* User Dashboard */}
           <Route element={<ProtectedRoute />}>
-            <Route path="" element={<UserDashboardLayout />}>
-              <Route path="/user-dashboard" element={<UserDashboard />}>
-                {/* Shopping overview */}
-                <Route path="/user-dashboard/shopping-overview" element={<ShoppingOverview />}>
-                  {/* Shopping overview summary */}
-                  <Route path="/user-dashboard/shopping-overview/summary" element={<Summary />} />
-                  {/* Shopping overview purchases */}
-                  <Route path="/user-dashboard/shopping-overview/purchases" element={<Purchases />} />
-                  {/* Shopping overview wallet */}
-                  <Route path="/user-dashboard/shopping-overview/wallet" element={<Wallet />} />
-                  {/* Shopping overview favorites */}
-                  <Route path="/user-dashboard/shopping-overview/favorites" element={<Favorites />} />
-                  {/* Shopping overview recently viewes */}
-                  <Route path="/user-dashboard/shopping-overview/recently-viewed" element={<RecentlyViewed />} />
-                </Route>
-
-                {/* Notifications */}
-                <Route path="/user-dashboard/notifications" element={<Notifications />}>
+            <Route element={<UserDashboardLayout />}>
+              <Route
+                path="user-dashboard"
+                element={
+                  <Suspense fallback={<p>Loading Dashboard...</p>}>
+                    <UserDashboard />
+                  </Suspense>
+                }
+              >
+                <Route
+                  path="shopping-overview"
+                  element={
+                    <Suspense fallback={<p>Loading Shopping Overview...</p>}>
+                      <ShoppingOverview />
+                    </Suspense>
+                  }
+                >
                   <Route
-                    path="/user-dashboard/notifications/acc"
-                    // element={<Summary />}
+                    path="summary"
+                    element={
+                      <Suspense fallback={<DashboardSummarySkeleton />}>
+                        <Summary />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="purchases"
+                    element={
+                      <Suspense fallback={<DashboardSummarySkeleton />}>
+                        <Purchases />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="wallet"
+                    element={
+                      <Suspense fallback={<DashboardSummarySkeleton />}>
+                        <Wallet />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="favorites"
+                    element={
+                      <Suspense fallback={<DashboardSummarySkeleton />}>
+                        <Favorites />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="direct-debit"
+                    element={
+                      <Suspense fallback={<DashboardSummarySkeleton />}>
+                        <DirectDebit />
+                      </Suspense>
+                    }
+                  />
+
+                  <Route
+                    path="recently-viewed"
+                    element={
+                      <Suspense fallback={<DashboardSummarySkeleton />}>
+                        <RecentlyViewed />
+                      </Suspense>
+                    }
                   />
                 </Route>
 
-                {/* Account profile */}
-                <Route path="/user-dashboard/account-profile" element={<AccountProfile />}>
-                  <Route
-                    path="/user-dashboard/account-profile/"
-                    // element={<Summary />}
-                  />
-                </Route>
-                <Route path="/user-dashboard/:id/:slug" element={<SingleProductPage />} />
+                <Route
+                  path="notifications"
+                  element={
+                    <Suspense fallback={<DashboardSummarySkeleton />}>
+                      <Notifications />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="account-profile"
+                  element={
+                    <Suspense fallback={<DashboardSummarySkeleton />}>
+                      <AccountProfile />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path=":id/:slug"
+                  element={
+                    <Suspense fallback={<DashboardSummarySkeleton />}>
+                      <SingleProductPage />
+                    </Suspense>
+                  }
+                />
               </Route>
             </Route>
           </Route>

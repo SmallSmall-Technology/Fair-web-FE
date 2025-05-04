@@ -1,7 +1,8 @@
-import { addItem } from "./cartSlice";
-import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { addItem } from './cartSlice';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { startTransition } from 'react';
 
 export const handleAddToCart = (dispatch, product, navigate) => {
   if (!product) return;
@@ -18,7 +19,19 @@ export const handleAddToCart = (dispatch, product, navigate) => {
     ratings,
     noOfProductSold,
     slug,
+    paymentOptions,
   } = product;
+
+  const [
+    { type: firstPaymentType, amount },
+    {
+      type: secondPaymentType,
+      months,
+      upfrontPayment,
+      monthlyPayment,
+      totalPrice,
+    },
+  ] = paymentOptions;
 
   const newItem = {
     id,
@@ -34,28 +47,22 @@ export const handleAddToCart = (dispatch, product, navigate) => {
     slug,
     quantity: 1,
     totalPrice: price * 1,
+    paymentOptions: [
+      {
+        type: firstPaymentType,
+        amount,
+      },
+      {
+        type: secondPaymentType,
+        months,
+        upfrontPayment,
+        monthlyPayment,
+        totalPrice,
+      },
+    ],
   };
 
   dispatch(addItem(newItem));
-
-  // toast
-  //   .success
-  //   <div className="flex items-center space-x-2">
-  //     <span>Item added to cart</span>
-  //     <span className="text-black">|</span>
-  //     <button
-  //       onClick={() => navigate("/cart-items")}
-  //       className="underline text-sm"
-  //     >
-  //       View cart
-  //     </button>
-  //   </div>
-  //   {
-  //     className: "bg-[#FFDE11] text-black text-sm px-2 py-1 rounded-md min-h-0",
-  //     bodyClassName: "m-0 p-0",
-  //     closeButton: false,
-  //   }
-  //   ();
 };
 
 export const AddToCart = ({ product }) => {
@@ -75,3 +82,21 @@ export const AddToCart = ({ product }) => {
     </button>
   );
 };
+// toast
+//   .success
+//   <div className="flex items-center space-x-2">
+//     <span>Item added to cart</span>
+//     <span className="text-black">|</span>
+//     <button
+//       onClick={() => navigate("/cart-items")}
+//       className="underline text-sm"
+//     >
+//       View cart
+//     </button>
+//   </div>
+//   {
+//     className: "bg-[#FFDE11] text-black text-sm px-2 py-1 rounded-md min-h-0",
+//     bodyClassName: "m-0 p-0",
+//     closeButton: false,
+//   }
+//   ();

@@ -1,11 +1,21 @@
-import { useSelector } from "react-redux";
-import { getCurrentQuantityById } from "../../../features/cart/cartSlice";
-import { UpdateItemQuantity } from "../../../features/cart/UpdateItemQuantity";
-import { formatCurrency } from "../../../utils/FormatCurrency";
-import { DeleteItemFromCart } from "../../../features/cart/DeleteItem";
+import { useSelector } from 'react-redux';
+import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
+import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
+import { formatCurrency } from '../../../utils/FormatCurrency';
+import { DeleteItemFromCart } from '../../../features/cart/DeleteItem';
 
 export const NavBarCartItem = ({ item }) => {
   const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
+  const installmentPlan = item.paymentOptions.find(
+    (option) => option.type === 'installments'
+  );
+
+  const getDisplayedPrice = () => {
+    if (item.paymentPlan === 'upfront') {
+      return formatCurrency(item.price * currentQuantity);
+    }
+    return formatCurrency(installmentPlan.upfrontPayment * currentQuantity);
+  };
 
   return (
     <>
@@ -37,9 +47,7 @@ export const NavBarCartItem = ({ item }) => {
                 </div>
                 <DeleteItemFromCart id={item.id} />
               </div>
-              <p className="text-[#222224]">
-                {formatCurrency(item.price * currentQuantity)}
-              </p>
+              <p className="text-[#222224]">{getDisplayedPrice()}</p>
             </div>
           </div>
         </div>

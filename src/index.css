@@ -13,6 +13,18 @@
   box-sizing: border-box;
 }
 
+@media screen and (min-width: 1740px) {
+  body {
+    display: grid;
+    justify-items: center;
+  }
+
+  #app {
+    width: 100%;
+    max-width: 1740px;
+  }
+}
+
 /* option:disabled {
   color: #96959f !important;
 } */
@@ -101,4 +113,9 @@
 
 .bottom-shadow {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.outline-image {
+  outline: 1px solid black;
+  outline-offset: 3px;
 }

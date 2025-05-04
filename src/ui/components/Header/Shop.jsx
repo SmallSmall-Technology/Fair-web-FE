@@ -1,7 +1,7 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowLeft } from "lucide-react";
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, ArrowLeft } from 'lucide-react';
 
-export const Shop = ({ setHamburgerIsOpen, shopIsOpen, setShopIsOpen }) => {
+const Shop = ({ setHamburgerIsOpen, shopIsOpen, setShopIsOpen }) => {
   return (
     <>
       <AnimatePresence>
@@ -16,10 +16,10 @@ export const Shop = ({ setHamburgerIsOpen, shopIsOpen, setShopIsOpen }) => {
             />
 
             <motion.div
-              initial={{ x: "100%" }}
+              initial={{ x: '100%' }}
               animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              exit={{ x: '-100%' }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
               className="absolute inset-0 bg-white z-50 h-screen"
             >
               <button
@@ -42,22 +42,22 @@ export const Shop = ({ setHamburgerIsOpen, shopIsOpen, setShopIsOpen }) => {
               <h1 className="font-medium text-xl pl-6">Categories</h1>
               <ul className="flex flex-col space-y-3 p-6 pt-2 w-full">
                 {[
-                  { label: "Men", href: "/category/beauty" },
-                  { label: "Women", href: "/category/beauty" },
-                  { label: "Groceries", href: "#" },
-                  { label: "Home&Office", href: "#" },
-                  { label: "Computers", href: "/category/electronics" },
-                  { label: "Power", href: "/category/electronics" },
-                  { label: "Electronics", href: "/category/electronics" },
-                  { label: "Phones", href: "/category/electronics" },
-                  { label: "Kids", href: "/category/toys" },
-                  { label: "Sports Items", href: "/category/toys" },
-                  { label: "Health&Beauty", href: "/category/beauty" },
+                  { label: 'Men', href: '/category/beauty' },
+                  { label: 'Women', href: '/category/beauty' },
+                  { label: 'Groceries', href: '#' },
+                  { label: 'Home&Office', href: '#' },
+                  { label: 'Computers', href: '/category/electronics' },
+                  { label: 'Power', href: '/category/electronics' },
+                  { label: 'Electronics', href: '/category/electronics' },
+                  { label: 'Phones', href: '/category/electronics' },
+                  { label: 'Kids', href: '/category/toys' },
+                  { label: 'Sports Items', href: '/category/toys' },
+                  { label: 'Health&Beauty', href: '/category/beauty' },
                   {
-                    label: "Mobile accessories",
-                    href: "/category/electronics",
+                    label: 'Mobile accessories',
+                    href: '/category/electronics',
                   },
-                  { label: "Toys&Games", href: "/category/toys" },
+                  { label: 'Toys&Games', href: '/category/toys' },
                 ].map((item, index) => (
                   <li
                     key={index}
@@ -85,3 +85,5 @@ export const Shop = ({ setHamburgerIsOpen, shopIsOpen, setShopIsOpen }) => {
     </>
   );
 };
+
+export default Shop;

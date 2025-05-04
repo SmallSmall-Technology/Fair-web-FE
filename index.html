@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -14,6 +14,7 @@
       type="image/svg+xml"
       href="/images/Horizontal Logo Blue@100x-8 1.svg"
     />
+    <link rel="preload" href="/images/large-fair-web-banner.svg" as="image" />
 
     <!-- Open Graph (for Facebook, LinkedIn) -->
     <meta property="og:title" content="Fair App - Best Products Online" />
@@ -35,6 +36,12 @@
     <meta name="twitter:image" content="/images/preview-image.jpg" />
 
     <title>Fair by Smallsmall</title>
+
+    <!-- Content Security Policy (CSP) -->
+    <!-- <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' http://localhost:3000;"
+    /> -->
   </head>
   <body>
     <div id="app"></div>

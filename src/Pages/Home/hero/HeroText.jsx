@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
-export const HeroText = () => {
+const HeroText = () => {
   return (
     <section className="flex flex-col gap-4 justify-center items-center my-8 mx-4">
       <h1 className="font-bold text-4xl md:text-5xl mb-2 text-balance text-center">
@@ -39,3 +39,5 @@ export const HeroText = () => {
     </section>
   );
 };
+
+export default HeroText;

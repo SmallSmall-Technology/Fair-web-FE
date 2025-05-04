@@ -1,22 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   favourite: [],
 };
 
 const favouriteSlice = createSlice({
-  name: "favourite",
+  name: 'favourite',
   initialState,
   reducers: {
     addItemToFavourite(state, action) {
       state.favourite.push(action.payload);
-      localStorage.setItem("favourite", JSON.stringify(state.favourite));
+      localStorage.setItem('favourite', JSON.stringify(state.favourite));
     },
     removeItemFromFavourite(state, action) {
       state.favourite = state.favourite.filter(
         (item) => item.id !== action.payload.id
       );
-      localStorage.setItem("favourite", JSON.stringify(state.favourite));
+      localStorage.setItem('favourite', JSON.stringify(state.favourite));
     },
     clearFavourite(state) {
       state.favourite = [];

@@ -1,7 +1,9 @@
-import { HeroCards } from "./HeroCards";
-import { HeroText } from "./HeroText";
-import { ProductAds } from "./ProductAds";
-import { MiniProductCategories } from "./MiniProductCategories";
+import { Suspense, lazy } from 'react';
+import HeroCards from './HeroCards';
+import HeroText from './HeroText';
+import ProductAds from './ProductAds';
+
+import { MiniProductCategories } from './MiniProductCategories';
 
 const Hero = () => {
   return (

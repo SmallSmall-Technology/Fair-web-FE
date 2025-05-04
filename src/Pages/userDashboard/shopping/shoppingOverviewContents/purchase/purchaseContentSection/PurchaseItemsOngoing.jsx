@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
-import { getOngoingOrders } from "../../../../../../features/order/orderSlice";
+import { useSelector } from 'react-redux';
+import { getOngoingOrders } from '../../../../../../features/order/orderSlice';
 
-export const PurchaseItemsOngoing = () => {
+const PurchaseItemsOngoing = () => {
   const ongoingOrders = useSelector(getOngoingOrders);
   return (
     <section>
@@ -21,6 +21,9 @@ export const PurchaseItemsOngoing = () => {
     </section>
   );
 };
+
+export default PurchaseItemsOngoing;
+
 const PurchasedItem = ({ item }) => {
   const orderItems = item.items || [];
 
@@ -34,14 +37,14 @@ const PurchasedItem = ({ item }) => {
           <div className="flex items-ceter justify-between space-x-3">
             <div className="h-24 min-w-24 max-w-24">
               <img
-                src={orderItem.image || "/placeholder-image.jpg"}
+                src={orderItem.image || '/placeholder-image.jpg'}
                 className="h-full w-full rounded-lg object-cover border bg-[#FAFAFA] border-[#E8EBEA] p-1"
-                alt={orderItem.name || "Product image"}
+                alt={orderItem.name || 'Product image'}
               />
             </div>
             <div className="flex-1 ml-4">
               <p className="mb-4 font-medium">
-                {orderItem.name || "Unnamed Product"}
+                {orderItem.name || 'Unnamed Product'}
               </p>
 
               <div className="flex justify-between space-x-5 ">
@@ -49,19 +52,19 @@ const PurchasedItem = ({ item }) => {
                   <div>
                     <p className="text-[11px] text-[#222224]">Order ID</p>
                     <p className="text-[12px] text-[#222224]">
-                      <strong>{item.id || "I7xAA6b"}</strong>
+                      <strong>{item.id || 'I7xAA6b'}</strong>
                     </p>
                   </div>
                   <div>
                     <p className="text-[11px] text-[#222224]">Order Date</p>
                     <p className="text-[12px] text-[#222224]">
-                      <strong>{item.orderDate || "20 Jan, 2025"}</strong>
+                      <strong>{item.orderDate || '20 Jan, 2025'}</strong>
                     </p>
                   </div>
                   <div>
                     <p className="text-[11px] text-[#222224]">Sold By</p>
                     <p className="text-[12px] text-[#222224]">
-                      <strong>{orderItem.soldBy || "Fair"}</strong>
+                      <strong>{orderItem.soldBy || 'Fair'}</strong>
                     </p>
                   </div>
                 </div>
@@ -83,7 +86,7 @@ const PurchasedItem = ({ item }) => {
                         <img src="/images/time-half-past.svg" alt="clock" />
                       </p>
                     </div>
-                  </div>{" "}
+                  </div>{' '}
                   <div>
                     <p className="text-[11px] text-[#222224]">Payment type</p>
                     <p className="text-[12px] text-[#222224]">Direct debit</p>

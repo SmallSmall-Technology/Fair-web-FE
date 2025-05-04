@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
-import { Button } from "../../../utils/Button";
-import LinkButton from "../../../utils/LinkButton";
-import { FaRegCopyright } from "react-icons/fa6";
-import FooterNav from "./FooterNav";
-import { menuFooter } from "../../../utils/data";
+import { Link } from 'react-router-dom';
+import { Button } from '../../../utils/Button';
+import LinkButton from '../../../utils/LinkButton';
+import FooterNav from './FooterNav';
+import { menuFooter } from '../../../utils/data';
+import React from 'react';
+import { Copyright } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -69,10 +70,10 @@ const Footer = () => {
       <div className=" border-t pt-7">
         <div className="flex align-middle text-xs">
           <span className="pt-1 mr-2">
-            <FaRegCopyright />
+            <Copyright />
           </span>
           <p className="pt-1">
-            <span className="mr-4 ">Fair by Smallsmall Technology 2025</span>{" "}
+            <span className="mr-4 ">Fair by Smallsmall Technology 2025</span>{' '}
             <span>fairapp.ng</span>
           </p>
         </div>
@@ -81,4 +82,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer);

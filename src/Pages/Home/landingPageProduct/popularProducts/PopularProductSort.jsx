@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import { popularProductsSort } from "../../../../utils/data";
+import { NavLink } from 'react-router-dom';
+import { popularProductsSort } from '../../../../utils/data';
 
 export const PopularProductSort = () => (
   <div className="mt-12 mb-4">
@@ -17,6 +17,7 @@ const SinglePopularProduct = ({ product }) => (
       src={product.image}
       alt={product.name}
       className="relative h-full w-full object-cover  rounded-[10px] mb-4 md:mb-0"
+      loading="lazy"
     />
     <div className="absolute flex-col px-6">
       <p className="text-sm font-semibold mb-2">{product.name}</p>

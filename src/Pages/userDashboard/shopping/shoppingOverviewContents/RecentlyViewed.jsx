@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import {
   clearRecentlyViewed,
   getRecentlyViewed,
-} from "../../../../features/product/recentlyViewedSlice";
-import { formatCurrency } from "../../../../utils/FormatCurrency";
-import { ChevronRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import { YellowButton } from "../../../../utils/Button";
+} from '../../../../features/product/recentlyViewedSlice';
+import { formatCurrency } from '../../../../utils/FormatCurrency';
+import { ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { YellowButton } from '../../../../utils/Button';
 
-export const RecentlyViewed = () => {
+const RecentlyViewed = () => {
   const recentlyViewed = useSelector(getRecentlyViewed);
   const dispatch = useDispatch();
 
@@ -32,14 +32,16 @@ export const RecentlyViewed = () => {
         {recentlyViewed.length === 0 ? (
           <p className="text-center text-gray-500">No recently viewed items</p>
         ) : (
-          recentlyViewed.map((item) => (
-            <SingleRecentlyViewed key={item.id} item={item} />
+          recentlyViewed.map((item, index) => (
+            <SingleRecentlyViewed key={index} item={item} />
           ))
         )}
       </ul>
     </section>
   );
 };
+
+export default RecentlyViewed;
 
 export const SingleRecentlyViewed = ({ item }) => {
   return (
@@ -49,18 +51,18 @@ export const SingleRecentlyViewed = ({ item }) => {
           <div className="flex items-center space-x-2">
             <div className="h-24 min-w-24 max-w-24">
               <img
-                src={item.image || "/placeholder-image.jpg"}
+                src={item.image || '/placeholder-image.jpg'}
                 className="h-full w-full rounded-lg object-cover"
               />
             </div>
             <div>
               <p className="mb-4 font-medium">
-                {item.name || "Unnamed Product"}
+                {item.name || 'Unnamed Product'}
               </p>
               <p className="text-gray-600">
                 {item.price
                   ? `${formatCurrency(item.price)}`
-                  : "Price not available"}
+                  : 'Price not available'}
               </p>
             </div>
           </div>
@@ -75,5 +77,3 @@ export const SingleRecentlyViewed = ({ item }) => {
     </li>
   );
 };
-
-export default RecentlyViewed;

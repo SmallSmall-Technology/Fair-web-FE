@@ -1,21 +1,31 @@
-import { NavLink } from "react-router-dom";
-import { Button } from "../../../utils/Button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { ProductCard } from "../../../utils/ProductCard";
-import { useQuery } from "@tanstack/react-query";
-import { fetchAllProducts } from "../../../api";
+import { NavLink } from 'react-router-dom';
+import { Button } from '../../../utils/Button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import ProductCard from '../../../utils/ProductCard';
+import { useQuery } from '@tanstack/react-query';
+import { fetchAllProducts } from '../../../services/api';
+import { memo } from 'react';
 
-export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
+const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
   const { data, error, isLoading } = useQuery({
-    queryKey: ["products"],
+    queryKey: ['products'],
     queryFn: fetchAllProducts,
   });
+
+  // const BeautyProducts = data.filter((data) => data.category === 'Beauty');
+
   return (
     <>
       <div className="flex justify-between mt-12 mb-4">
         <h2 className="font-bold text-2xl">Beauty</h2>
-        <NavLink to={`/category/beauty`} className="underline">
+
+        <NavLink
+          to={`/category/beauty`}
+          className="underline"
+          aria-label="View all Beauty"
+        >
           View all
+          <span className="sr-only">View all Beauty</span>
         </NavLink>
       </div>
 
@@ -26,7 +36,7 @@ export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
             ref={containerRef}
           >
             {data
-              ?.filter((product) => product.category === "beauty")
+              ?.filter((product) => product.category === 'beauty')
               .map((product) => (
                 <div key={product.id}>
                   <ProductCard product={product} />
@@ -39,7 +49,7 @@ export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
             <div className="flex space-x-4">
               <Button
                 role="button"
-                aria-label="Previous item"
+                aria-label="See Previous item"
                 tabIndex="0"
                 onClick={() => onScrollProduct(-item_width)}
                 className="border border-[#E5E5E5] rounded-full shadow-custom w-[30px] h-[30px] flex justify-center items-center transition-transform duration-300 ease-in-out hover:translate-x-[-1px] focus:ring-2 focus:ring-black focus:outline-none"
@@ -49,7 +59,7 @@ export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
 
               <Button
                 role="button"
-                aria-label="Next item"
+                aria-label="See Next item"
                 tabIndex="0"
                 onClick={() => onScrollProduct(item_width)}
                 className="border border-[#E5E5E5] rounded-full shadow-custom w-[30px] h-[30px] flex justify-center items-center transition-transform duration-300 ease-in-out hover:translate-x-1 focus:ring-2 focus:ring-black focus:outline-none"
@@ -63,3 +73,5 @@ export const Beauty = ({ onScrollProduct, item_width, containerRef }) => {
     </>
   );
 };
+
+export default Beauty;

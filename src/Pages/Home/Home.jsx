@@ -1,6 +1,7 @@
-import Hero from "./hero/Hero";
-import GetApp from "./getApp/getApp";
-import Products from "./landingPageProduct/Products";
+import Hero from './hero/Hero';
+import GetApp from './getApp/getApp';
+import Products from './landingPageProduct/Products';
+import React from 'react';
 
 const Home = () => {
   return (
@@ -12,4 +13,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default React.memo(Home);

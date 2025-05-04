@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export const TotalRatings = ({ maxRating = 5, reviews }) => {
   const totalReviews = reviews.length;
@@ -22,7 +22,7 @@ export const TotalRatings = ({ maxRating = 5, reviews }) => {
           />
         );
       })}
-      {totalRatings.toFixed(1) || ""}
+      {totalRatings.toFixed(1) || ''}
     </div>
   );
 };
@@ -45,7 +45,7 @@ export const StarRating = ({ maxRating = 5 }) => {
           />
         );
       })}
-      {rating.toFixed(1) || ""}
+      {rating.toFixed(1) || ''}
     </div>
   );
 };
