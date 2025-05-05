@@ -14,7 +14,6 @@ const ProductCard = ({ product }) => {
   const [imgError, setImgError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);

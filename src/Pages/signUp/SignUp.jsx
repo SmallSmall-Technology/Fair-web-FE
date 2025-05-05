@@ -7,16 +7,23 @@ function SignUp() {
     <div className="flex flex-col md:flex-row min-h-screen">
       <div className="md:w-1/3 hidden md:block">
         <img
-          src="/images/sign-up-bg.png"
+          // src="/images/signupImage.webp"
+          src="/images/signupImage.webp"
           className="h-full object-cover w-full"
           alt="Background"
+          loading="eager"
         />
       </div>
 
       <div className="flex-1 p-5 py-12 lg:w-2/3">
         <div className="flex justify-between items-center mb-10 lg:justify-end lg:pr-8">
-          <div>
-            <img src="/images/fair-logo.svg" alt="Fair Logo" />
+          <div className="h-[50px] w-[100px]">
+            <img
+              src="/images/fair-logo.svg"
+              alt="Fair Logo"
+              width="100%"
+              height="100%"
+            />
           </div>
           <div className="md:hidden">
             <Link to="/login" className="text-dark">
@@ -40,11 +47,11 @@ function SignUp() {
               By clicking Create account, you agree to our
             </p>
             <p className="text-sm">
-              <Link to="#" className="text-red-500 underline">
+              <Link to="#" className="text-red-700 underline ">
                 Terms of use
               </Link>{' '}
               and{' '}
-              <Link to="#" className="text-red-500 underline">
+              <Link to="#" className="text-red-700 underline">
                 privacy policy
               </Link>
             </p>

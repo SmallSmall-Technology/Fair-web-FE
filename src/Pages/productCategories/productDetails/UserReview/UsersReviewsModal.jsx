@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 import { UserReview } from './UsersReviews';
 import { SidebarClose } from 'lucide-react';
-import { YellowButton } from '../../../utils/Button';
+import { YellowButton } from '../../../../utils/Button';
 
 Modal.setAppElement('#app');
 
@@ -23,7 +23,7 @@ export const UsersReviewsModal = ({ reviews }) => {
     <>
       <div>
         {' '}
-        <YellowButton onClick={openModal}>See more</YellowButton>
+        {/* <YellowButton onClick={openModal}>See more</YellowButton> */}
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}

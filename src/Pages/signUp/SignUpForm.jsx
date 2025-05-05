@@ -29,7 +29,7 @@ function SignUpForm() {
           type="email"
           id="email"
           placeholder="Enter email"
-          className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 
+          className={`mt-1 block w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 
                       ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:ring-yellow-500`}
           {...register('email', {
             required: 'Email is required',
@@ -55,7 +55,7 @@ function SignUpForm() {
           type="text"
           id="phone"
           placeholder="Phone number"
-          className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 
+          className={`mt-1 block w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 
                       ${errors.phone ? 'border-red-500' : 'border-gray-300'} focus:ring-yellow-500`}
           {...register('phone', {
             required: 'Phone number is required',
@@ -82,7 +82,7 @@ function SignUpForm() {
             type={showPassword ? 'text' : 'password'}
             id="password"
             placeholder="Password"
-            className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 
+            className={`mt-1 block w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 
                         ${errors.password ? 'border-red-500' : 'border-gray-300'} focus:ring-yellow-500`}
             {...register('password', {
               required: 'Password is required',
@@ -94,11 +94,22 @@ function SignUpForm() {
           />
           <button
             type="button"
+            id="al"
+            aria-label="Eye visibility"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute top-3 right-3 text-gray-500 hover:text-yellow-500"
+            className="absolute top-1 right-2 text-gray-500 hover:text-yellow-500 w-11 h-11 flex items-center justify-center rounded"
           >
             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
           </button>
+          {/* <button
+            type="button"
+            id="al"
+            aria-label="Toggle password visibility"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute bottom-1 right-2 text-gray-500 hover:text-yellow-500 w-11 h-11 flex items-center justify-center rounded"
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button> */}
         </div>
         {errors.password && (
           <span className="text-red-500 text-sm">

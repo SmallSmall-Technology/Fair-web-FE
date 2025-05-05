@@ -62,7 +62,7 @@ export const CartSummary = ({
           <button
             type="submit"
             onClick={onHandleCheckout}
-            className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[#FFDE11]  border-2  w-full mx-auto  md:px-12 py-2 text-lg font-medium  hover:bg-gray-50   ${!isUpgraded ? 'bg-[#E5E5E5] text-[#CDCBCC]' : 'bg-yellow-300 text-black'}`}
+            className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[#FFDE11]  border-2  w-full mx-auto  md:px-12 py-2 text-lg font-medium  hover:bg-gray-50   ${subtTotal >= 1000000 && !isUpgraded ? 'bg-[#E5E5E5] text-[#CDCBCC]' : 'bg-yellow-300 text-black'}`}
           >
             <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11]"></span>
 
@@ -75,7 +75,7 @@ export const CartSummary = ({
           <button
             type="submit"
             onClick={onHandleCheckout}
-            className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[#FFDE11]  border-2  w-full mx-auto  md:px-12 py-2 text-lg font-medium  hover:bg-gray-50   ${!isUpgraded ? 'bg-[#E5E5E5] text-[#CDCBCC]' : 'bg-yellow-300 text-black'}`}
+            className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[#FFDE11]  border-2  w-full mx-auto  md:px-12 py-2 text-lg font-medium  hover:bg-gray-50   ${subtTotal >= 1000000 && !isUpgraded ? 'bg-[#E5E5E5] text-[#CDCBCC]' : 'bg-yellow-300 text-black'}`}
           >
             <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11]"></span>
 

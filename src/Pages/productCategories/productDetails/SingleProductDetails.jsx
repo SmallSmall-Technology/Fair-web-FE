@@ -1,18 +1,22 @@
 import { useDispatch } from 'react-redux';
-import { Button } from '../../../utils/Button';
+import React, { useState } from 'react';
 import { ProductImage } from '../ProductImage';
 import { products } from '../../../utils/data';
-import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
 import ProductCard from '../../../utils/ProductCard';
+import { NavLink, useNavigate } from 'react-router-dom';
 import CommentBar from '../../../features/reviewsRating/CommentBar';
 import { AddFavourite } from '../../../features/favourite/AddFavourite';
 import { SingleProductDetailsAside } from './SingleProductDetailsAside';
+import { FullPayment } from './productPlan/FullPaymentPlan/FullPayment';
+import { DailyPayment } from './productPlan/DailyPaymentPlan/DailyPayment';
 import { handleShareProduct } from '../../../features/product/ShareProduct';
+import { WeeklyPayment } from './productPlan/WeeklyPaymentPlan/WeeklyPayment';
+import { MonthlyPayment } from './productPlan/MonthlyPaymentPlan/MonthlyPayment';
 
 export const SingleProductDetails = React.memo(({ product }) => {
-  const [isLoading, setIsLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selected, setSelected] = useState('');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,14 +28,6 @@ export const SingleProductDetails = React.memo(({ product }) => {
     product?.image || '',
   ];
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentIndex((prev) => (prev + 1) % productImages.length);
-  //   }, 3000);
-
-  //   return () => clearInterval(interval);
-  // }, [productImages.length]);
-
   const category = product?.category || '';
   const shippingDate = '20 Jan, 2025';
 
@@ -39,7 +35,7 @@ export const SingleProductDetails = React.memo(({ product }) => {
 
   const SingleProductDetails = () => (
     <>
-      <div className="hidden xl:flex justify-end space-x-2 mb-3 mx-5 xl:mx-0">
+      <div className="hidden xl:flex justify-end space-x-2 mb-3 px-5 xl:mx-0">
         <p className="flex items-center text-sm text-[#222224] cursor-pointer">
           Add to favorite{' '}
           <span className="pl-1">
@@ -56,7 +52,7 @@ export const SingleProductDetails = React.memo(({ product }) => {
           </span>
         </button>
       </div>
-      <div className="flex flex-wrap w-full justify-between gap-2">
+      <div className="flex flex-wrap w-full justify-between gap-2 lg:px-4">
         <main className="w-full lg:w-full xl:w-[52%] mx-5 md:mx-0">
           <div className="flex justify-between items-center md:items-start gap-5 md:mb-20">
             <aside className="w-[100px] hidden md:grid">
@@ -127,11 +123,43 @@ export const SingleProductDetails = React.memo(({ product }) => {
             </p>
             <CommentBar />
           </section>
+          <div className="hidden lg:block">
+            {selected === 'daily' && (
+              <>
+                <WeeklyPayment product={product} />
+                <MonthlyPayment product={product} />
+                <FullPayment product={product} />
+              </>
+            )}
+            {selected === 'weekly' && (
+              <>
+                <DailyPayment product={product} />
+                <MonthlyPayment product={product} />
+                <FullPayment product={product} />
+              </>
+            )}
+            {selected === 'monthly' && (
+              <>
+                <DailyPayment product={product} />
+                <WeeklyPayment product={product} />
+                <FullPayment product={product} />
+              </>
+            )}
+            {selected === 'upfront' && (
+              <>
+                <DailyPayment product={product} />
+                <WeeklyPayment product={product} />
+                <MonthlyPayment product={product} />
+              </>
+            )}
+          </div>
         </main>
         <SingleProductDetailsAside
           product={product}
           shippingDate={shippingDate}
           category={category}
+          selected={selected}
+          setSelected={setSelected}
         />
       </div>
       <section className="mb-24 mx-5 xl:mx-0">
@@ -178,7 +206,6 @@ export const SingleProductDetails = React.memo(({ product }) => {
 
   return (
     <>
-      {' '}
       <SingleProductDetails />
     </>
   );

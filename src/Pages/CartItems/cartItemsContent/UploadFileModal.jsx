@@ -21,7 +21,7 @@ export const UploadFileModal = ({ onUpgrade, closeModal, modalIsOpen }) => {
           shouldCloseOnOverlayClick={false}
           contentLabel="User Reviews Modal"
           overlayClassName="bg-black/50 fixed inset-0 flex justify-center items-center z-50"
-          className="relative mt-24 w-[479px] rounded-[7px] bg-[#F2F2F2] border outline-none"
+          className="relative mt-24 w-[376px] lg:w-[479px] rounded-[7px] bg-[#F2F2F2] border outline-none mx-2 lg:mx-0"
           preventScroll={true}
         >
           <section className="relative">

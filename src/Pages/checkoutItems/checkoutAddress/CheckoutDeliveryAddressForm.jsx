@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 import { states } from '../../../utils/data';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -112,4 +112,4 @@ const CheckoutDeliveryAddressForm = ({
   );
 };
 
-export default CheckoutDeliveryAddressForm;
+export default memo(CheckoutDeliveryAddressForm);
