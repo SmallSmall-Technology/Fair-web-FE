@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { StarRating } from './StarRating';
-import { UsersReviewsModal } from './UsersReviewsModal';
 
 export const UsersReviews = ({ reviews }) => {
   const firstFiveReviews = reviews.slice(0, 5);

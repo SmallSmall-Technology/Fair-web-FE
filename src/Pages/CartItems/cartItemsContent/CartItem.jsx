@@ -9,7 +9,7 @@ import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 export const CartItem = ({ item, onTogglePlan }) => {
   const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
   const installmentPlan = item.paymentOptions.find(
-    (option) => option.type === 'installments'
+    (option) => option.type === 'monthly'
   );
 
   const getDisplayedPrice = () => {

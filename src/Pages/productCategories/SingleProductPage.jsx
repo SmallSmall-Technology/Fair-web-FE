@@ -3,9 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ProductCategoriesShortcut } from './ProductCategoriesShortcut';
 import { SingleProductDetails } from './productDetails/SingleProductDetails';
 import { MiniProductCategories } from '../home/hero/MiniProductCategories';
-import { products } from '../../utils/data';
 // import { useQuery } from '@tanstack/react-query';
 // import { fetchAllProducts } from '../../services/api';
+import { products } from '../../utils/data';
 
 const SingleProductPage = () => {
   const { categoryName, subcategory, slug, id } = useParams();
@@ -17,9 +17,10 @@ const SingleProductPage = () => {
   // });
 
   const product = products?.find((product) => product.id === id);
+
   return (
     <>
-      <main className="mx-6 lg:mx-10 mb-5 hidden md:block w-full">
+      <main className="px-6 lg:px-10 mb-5 hidden lg:block w-full">
         <div className="hidden md:flex">
           <ProductCategoriesShortcut />
         </div>
@@ -27,9 +28,9 @@ const SingleProductPage = () => {
           <MiniProductCategories />
         </div>
 
-        <section className="lg:mx-16">
+        <section className="lg:px-6">
           <div className="flex space-x-1 items-center mt-4">
-            <p className="text-[#222224] text-sm">Fair</p>
+            <p className="text-[#222224] text-sm">Smallsmall</p>
             <ChevronRight size={11} className="text-[#6B6B6B]" />
             <p className="text-[#222224] text-sm cursor-pointer">
               {categoryName &&
@@ -52,7 +53,7 @@ const SingleProductPage = () => {
           </div>
         </section>
       </main>
-      <section className="mt-8 lg:mx-[40px] mb-12 ">
+      <section className="mt-8 lg:mx-[40px] mb-12">
         <SingleProductDetails product={product} />
       </section>
     </>

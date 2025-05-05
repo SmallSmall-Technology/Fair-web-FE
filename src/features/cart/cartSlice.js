@@ -9,6 +9,76 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
   return response.data;
 });
 
+// export const addItem = createAsyncThunk(
+//   'cart/addItem',
+//   async (product, { getState, rejectWithValue }) => {
+//     try {
+//       const state = getState();
+
+//       const exists = state.cart.cart.find(
+//         (item) => item.productId === product.id
+//       );
+
+//       if (exists) {
+//         toast.dismiss();
+//         toast.error('Item already added to cart', {
+//           className:
+//             'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+//           bodyClassName: 'm-0 p-0',
+//           closeButton: false,
+//         });
+//         return;
+//       }
+
+//       const cartItem = {
+//         id: `cart${Date.now()}`,
+//         image: product.image,
+//         name: product.name,
+//         userId: 'user123',
+//         productId: product.id,
+//         quantity: 1,
+//         price: Number(product.price),
+//         totalPrice: Number(product.price),
+//         paymentPlan: 'monthly',
+//         paymentOptions: [
+//           {
+//             type: 'upfront',
+//             amount: product.price,
+//           },
+//           {
+//             type: 'monthly',
+//             months: 3,
+//             upfrontPayment: product.price * 0.4,
+//             monthlyPayment: (product.price * 0.6) / 3,
+//             weeklyPayment: (product.price * 0.9) / 12,
+//             dailyPayment: (product.price * 0.9) / 36,
+
+//             totalPrice: product.price,
+//           },
+//         ],
+//       };
+
+//       const response = await axios.post(`${API_URL}/cart`, cartItem);
+
+//       // // Validate API response
+//       // if (!response.data || !response.data.quantity) {
+//       //   throw new Error("Invalid cart item received from API");
+//       // }
+//       toast.dismiss();
+//       toast.success('Item added to cart', {
+//         className:
+//           'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+//         bodyClassName: 'm-0 p-0',
+//         closeButton: false,
+//       });
+
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
 export const addItem = createAsyncThunk(
   'cart/addItem',
   async (product, { getState, rejectWithValue }) => {
@@ -30,37 +100,35 @@ export const addItem = createAsyncThunk(
         return;
       }
 
+      const defaultPlan = 'upfront';
+      const selectedOption = product.paymentOptions.find(
+        (opt) => opt.type === defaultPlan
+      );
+
+      if (!selectedOption) {
+        throw new Error(
+          'Upfront payment option not available for this product'
+        );
+      }
+
+      const quantity = 1;
+      const price = selectedOption.amount;
+
       const cartItem = {
         id: `cart${Date.now()}`,
         image: product.image,
         name: product.name,
         userId: 'user123',
         productId: product.id,
-        quantity: 1,
-        price: Number(product.price),
-        totalPrice: Number(product.price),
-        paymentPlan: 'installments',
-        paymentOptions: [
-          {
-            type: 'upfront',
-            amount: product.price,
-          },
-          {
-            type: 'installments',
-            months: 3,
-            upfrontPayment: product.price * 0.4,
-            monthlyPayment: (product.price * 0.6) / 3,
-            totalPrice: product.price,
-          },
-        ],
+        quantity,
+        price,
+        totalPrice: price * quantity,
+        paymentPlan: defaultPlan,
+        paymentOptions: product.paymentOptions,
       };
 
       const response = await axios.post(`${API_URL}/cart`, cartItem);
 
-      // // Validate API response
-      // if (!response.data || !response.data.quantity) {
-      //   throw new Error("Invalid cart item received from API");
-      // }
       toast.dismiss();
       toast.success('Item added to cart', {
         className:
@@ -142,7 +210,7 @@ const initialState = {
   cart: [],
   status: 'idle',
   error: null,
-  paymentPlan: 'installments',
+  paymentPlan: 'monthly',
 };
 
 const cartSlice = createSlice({
@@ -152,11 +220,30 @@ const cartSlice = createSlice({
     setPaymentPlan: (state, action) => {
       state.paymentPlan = action.payload;
     },
+
     setItemPaymentPlan: (state, action) => {
       const { id, plan } = action.payload;
       const item = state.cart.find((item) => item.id === id);
       if (item) {
         item.paymentPlan = plan;
+
+        const option = item.paymentOptions.find((opt) => opt.type === plan);
+        if (!option) return;
+
+        let price = 0;
+
+        if (plan === 'upfront') {
+          price = option.amount;
+        } else if (plan === 'monthly') {
+          price = option.monthlyPayment * (option.months || 1);
+        } else if (plan === 'weekly') {
+          price = option.weeklyPayment * (option.weeks || 1);
+        } else if (plan === 'daily') {
+          price = option.dailyPayment * (option.days || 1);
+        }
+
+        item.price = price;
+        item.totalPrice = price * (item.quantity || 1);
       }
     },
   },
@@ -212,18 +299,7 @@ export const getTotalCartQuantity = (state) =>
 
 export const getTotalCartPrice = (state) => {
   return state.cart.cart.reduce((sum, item) => {
-    const option = item.paymentOptions.find(
-      (opt) =>
-        (item.paymentPlan === 'upfront' && opt.type === 'upfront') ||
-        (item.paymentPlan === 'installments' && opt.type === 'installments')
-    );
-
-    if (!option) return sum;
-
-    const price =
-      item.paymentPlan === 'upfront' ? option.amount : option.upfrontPayment;
-
-    return sum + price * (item.quantity || 1);
+    return sum + (item.totalPrice || 0);
   }, 0);
 };
 

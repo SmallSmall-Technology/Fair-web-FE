@@ -127,9 +127,7 @@ export const CheckoutPaymentMethod = () => {
     }
   };
 
-  const currentPlan = cartItems.find(
-    (item) => item.paymentPlan === 'installments'
-  );
+  const currentPlan = cartItems.find((item) => item.paymentPlan === 'monthly');
 
   return (
     <div>
