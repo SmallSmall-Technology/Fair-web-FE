@@ -10,7 +10,7 @@ export const CheckoutItem = () => {
   // console.log(item);
 
   // const installmentPlan = item.paymentOptions.find(
-  //   (option) => option.type === 'installments'
+  //   (option) => option.type === 'monthly'
   // );
 
   // const getDisplayedPrice = () => {

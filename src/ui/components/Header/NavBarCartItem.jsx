@@ -7,7 +7,7 @@ import { DeleteItemFromCart } from '../../../features/cart/DeleteItem';
 export const NavBarCartItem = ({ item }) => {
   const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
   const installmentPlan = item.paymentOptions.find(
-    (option) => option.type === 'installments'
+    (option) => option.type === 'monthly'
   );
 
   const getDisplayedPrice = () => {

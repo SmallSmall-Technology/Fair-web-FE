@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
+import { Button } from '../../../utils/Button';
+import { useEffect, useRef, useState } from 'react';
+import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
-import { useEffect, useRef, useState } from 'react';
-import { Button } from '../../../utils/Button';
-import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 
 export const PaymentPlan = ({ item }) => {
   const paymentMethodRef = useRef(null);
@@ -51,7 +51,7 @@ export const PaymentPlan = ({ item }) => {
   };
 
   const installmentPlan = item.paymentOptions.find(
-    (option) => option.type === 'installments'
+    (option) => option.type === 'monthly'
   );
 
   const paymentsInstallment = [
