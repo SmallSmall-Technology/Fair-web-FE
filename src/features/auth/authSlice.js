@@ -89,7 +89,7 @@ const authSlice = createSlice({
         localStorage.setItem('authToken', action.payload.token);
       })
       .addCase(login.rejected, (state, action) => {
-        console.log('Login rejected:', action.payload);
+        // console.log('Login rejected:', action.payload);
         state.loading = false;
         state.error = action.payload;
       })

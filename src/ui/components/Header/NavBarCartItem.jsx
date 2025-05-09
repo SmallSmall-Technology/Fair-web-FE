@@ -6,15 +6,23 @@ import { DeleteItemFromCart } from '../../../features/cart/DeleteItem';
 
 export const NavBarCartItem = ({ item }) => {
   const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
-  const installmentPlan = item.paymentOptions.find(
-    (option) => option.type === 'monthly'
-  );
 
   const getDisplayedPrice = () => {
-    if (item.paymentPlan === 'upfront') {
-      return formatCurrency(item.price * currentQuantity);
+    const { paymentPlan, paymentPlanDetails, price } = item;
+    switch (paymentPlan) {
+      case 'upfront':
+        return formatCurrency(
+          (paymentPlanDetails?.amount || price) * currentQuantity
+        );
+      case 'monthly':
+        return `${formatCurrency(paymentPlanDetails?.monthlyPayment * currentQuantity || 0)} `;
+      case 'weekly':
+        return `${formatCurrency(paymentPlanDetails?.weeklyPayment * currentQuantity || 0)}`;
+      case 'daily':
+        return `${formatCurrency(paymentPlanDetails?.dailyPayment * currentQuantity || 0)} `;
+      default:
+        return formatCurrency(price * currentQuantity);
     }
-    return formatCurrency(installmentPlan.upfrontPayment * currentQuantity);
   };
 
   return (
@@ -24,12 +32,12 @@ export const NavBarCartItem = ({ item }) => {
           <img src="/images/fair-logo.svg" alt="" width={48} />
           <p className="pb-0">Fair</p>
         </div>
-        <div className="flex space-x-2 ">
-          <div className="min-w-[78px] h-[78px] p-1 flex justify-center items-center border border-[#DADADA] rounded-[12px]">
+        <div className="flex space-x-2">
+          <div className="w-[40%] h-[100px] p-2 flex justify-center items-center border border-[#DADADA] rounded-[12px]">
             <img
               src={item.image}
               alt={item.name}
-              className="w-full h-full object-cover rounded-[8px]"
+              className="w-[100%] h-full object-cover rounded-[8px]"
             />
           </div>
 

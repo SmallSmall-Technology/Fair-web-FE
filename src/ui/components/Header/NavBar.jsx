@@ -6,14 +6,14 @@ import {
   getUserIsAuthenticated,
   getUserName,
 } from '../../../features/auth/authSlice';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import React, { Suspense, useState } from 'react';
 import CartDropdownItems from './CartDropdownItems';
 import { Link, useNavigate } from 'react-router-dom';
 import { YellowButton } from '../../../utils/Button';
 import { LoggedInUserDropdown } from './LoggedInUserDropdown';
 import { formatCurrency } from '../../../utils/FormatCurrency';
-import { ChevronDown, Heart, ShoppingCart } from 'lucide-react';
+import { ChevronDown, ChevronUp, Heart, ShoppingCart } from 'lucide-react';
 import { getTotalFavouritesQuantity } from '../../../features/favourite/favouriteSlice';
 
 export const NavBar = () => {
@@ -30,7 +30,7 @@ export const NavBar = () => {
   };
 
   const handleUserAuthDropdown = () => {
-    setLoggedInUserDropdown(!loggedInUserDropdown);
+    setLoggedInUserDropdown((prev) => !prev);
   };
 
   return (
@@ -82,7 +82,11 @@ export const NavBar = () => {
             >
               <span className="text-[#737376]">Hi,</span>
               <span>{user}!</span>
-              <ChevronDown size={20} />
+              {loggedInUserDropdown ? (
+                <ChevronUp size={20} />
+              ) : (
+                <ChevronDown size={20} />
+              )}
             </li>
             <div className="absolute right top-[4.02rem] w-56 h-[184px] rounded-[10px]">
               <LoggedInUserDropdown

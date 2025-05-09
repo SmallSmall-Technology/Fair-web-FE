@@ -11,7 +11,7 @@ export default defineConfig({
     visualizer({ open: true }),
   ],
   optimizeDeps: {
-    include: ['react-router-dom', 'framer-motion'],
+    include: ['react-router-dom'],
   },
   build: {
     sourcemap: true,
@@ -20,7 +20,6 @@ export default defineConfig({
         manualChunks(id) {
           if (id.includes('node_modules')) {
             if (id.includes('react-router-dom')) return 'react-router-dom';
-            if (id.includes('framer-motion')) return 'framer-motion';
             if (id.includes('lodash-es')) return 'lodash';
             return 'vendor';
           }

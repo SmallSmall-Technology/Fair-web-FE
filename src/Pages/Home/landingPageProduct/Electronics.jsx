@@ -16,7 +16,7 @@ const Electronics = ({ onScrollProduct, item_width, containerRef }) => {
 
   const ElectronicProducts =
     data?.filter((item) => item.category === 'Electronics') || [];
-
+  // console.log(ElectronicProducts);
   return (
     <section>
       <div className="flex justify-between mt-12 mb-4">
