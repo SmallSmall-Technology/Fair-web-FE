@@ -1,7 +1,7 @@
 import { StarRating } from './StarRating';
 
 export const UsersReviews = ({ reviews }) => {
-  const firstFiveReviews = reviews.slice(0, 5);
+  const firstFiveReviews = reviews.slice(0, 4);
 
   return (
     <ul className="grid grid-cols-1">
@@ -15,12 +15,12 @@ export const UsersReviews = ({ reviews }) => {
 export const UserReview = ({ review, rating, handleRating }) => {
   return (
     <>
-      <li className="grid grid-cols-1 gap-4">
+      <li className="grid grid-cols-1">
         <div>
           <StarRating rating={rating} handleRating={handleRating} />
         </div>
-        <p>{review?.comment}</p>
-        <div className="flex space-x-3">
+        <p className="mt-2">{review?.comment}</p>
+        <div className="flex space-x-3 mt-4">
           <p className="text-xs">{review?.name || 'Anonymous'}</p>
           <p className="text-xs">{new Date().toLocaleDateString()}</p>
         </div>

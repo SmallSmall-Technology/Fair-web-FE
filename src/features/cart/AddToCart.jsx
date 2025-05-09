@@ -6,7 +6,6 @@ import { startTransition } from 'react';
 
 export const handleAddToCart = (dispatch, product, navigate) => {
   if (!product) return;
-
   const {
     id,
     name,
@@ -19,22 +18,19 @@ export const handleAddToCart = (dispatch, product, navigate) => {
     ratings,
     noOfProductSold,
     slug,
-    paymentOptions,
+    paymentOptions = [],
   } = product;
-
-  const [
-    { type: firstPaymentType, amount },
-    {
-      type: secondPaymentType,
-      months,
-      upfrontPayment,
-      monthlyPayment,
-      totalPrice,
-    },
-  ] = paymentOptions;
+  console.log(product);
+  const paymentMap = {};
+  paymentOptions.forEach((option) => {
+    if (option.type) {
+      paymentMap[option.type] = option;
+    }
+  });
 
   const newItem = {
     id,
+    // id: `cart-${product.id}-${getSelectedPaymentPlan}-${Date.now()}`,
     name,
     brand,
     category,
@@ -49,30 +45,55 @@ export const handleAddToCart = (dispatch, product, navigate) => {
     totalPrice: price * 1,
     paymentOptions: [
       {
-        type: firstPaymentType,
-        amount,
+        type: 'upfront',
+        amount: paymentMap.upfront?.amount || 0,
+        totalPrice: paymentMap.upfront?.totalPrice || price,
       },
       {
-        type: secondPaymentType,
-        months,
-        upfrontPayment,
-        monthlyPayment,
-        totalPrice,
+        type: 'monthly',
+        months: paymentMap.monthly?.months || 0,
+        monthlyPayment: paymentMap.monthly?.monthlyPayment || 0,
+        totalPrice: paymentMap.monthly?.totalPrice || price,
+      },
+      {
+        type: 'weekly',
+        weeks: paymentMap.weekly?.weeks || 0,
+        weeklyPayment: paymentMap.weekly?.weeklyPayment || 0,
+        totalPrice: paymentMap.weekly?.totalPrice || price,
+      },
+      {
+        type: 'daily',
+        days: paymentMap.daily?.days || 0,
+        dailyPayment: paymentMap.daily?.dailyPayment || 0,
+        totalPrice: paymentMap.daily?.totalPrice || price,
       },
     ],
   };
 
   dispatch(addItem(newItem));
+
+  // console.log(newItem);
 };
 
 export const AddToCart = ({ product }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    if (!product) return;
+
+    dispatch(addItem(product))
+      .unwrap()
+      .catch((error) => {
+        console.error('Add to cart failed:', error);
+      });
+  };
 
   return (
     <button
       className="bg-[#FFDE11] h-10 w-10 rounded-full flex justify-center focus:outline-none focus:ring-2 focus:ring-black"
       aria-label="Add to cart"
-      onClick={() => handleAddToCart(dispatch, product)}
+      onClick={() => startTransition(() => handleAddToCart())}
     >
       <img
         src="/images/shopping-bag-add.svg"

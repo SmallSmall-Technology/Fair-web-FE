@@ -39,7 +39,6 @@ export const CheckoutItemsContentSection = () => {
     (state) => state.user.user.deliveryAddress
   );
 
-  //handle function to update the form visibility
   const handleOpenCheckoutDeliveryAddressForm = () => {
     setShowCheckoutDeliveryAddressForm((show) => !show);
   };

@@ -12,23 +12,45 @@ import {
   setItemPaymentPlan,
 } from '../../../features/cart/cartSlice';
 import { CartSummaryExtrasAndCoupon } from './CartSummaryExtrasAndCoupon';
+import axios from 'axios';
 
 const CartItemsContentSection = React.memo(() => {
   const shippingFee = +1200;
   const cart = useSelector(getCart);
   const navigate = useNavigate();
   const [isUpgraded, setIsUpgraded] = useState(false);
+  const [planModalItemId, setPlanModalItemId] = useState(null);
+  const [paymentOptions, setPaymentOptions] = useState([]);
   const totalCartPrice = useSelector(getTotalCartPrice);
   const VAT = (7.5 / 100) * totalCartPrice;
   const totalCartQuantity = useSelector(getTotalCartQuantity);
   const subtTotal = totalCartPrice + VAT + shippingFee;
   const dispatch = useDispatch();
 
-  const togglePlan = (id) => {
-    const item = cart.find((item) => item.id === id);
-    const newPlan = item.paymentPlan === 'monthly' ? 'upfront' : 'monthly';
+  const fetchPaymentOptions = async (productId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/products/${productId}`
+      );
+      return response.data.paymentOptions || [];
+    } catch (error) {
+      console.error('Failed to fetch payment options:', error);
+      return [];
+    }
+  };
 
-    dispatch(setItemPaymentPlan({ id, plan: newPlan }));
+  const togglePlan = async (id) => {
+    const item = cart.find((item) => item.id === id);
+    if (!item) return;
+
+    const options = await fetchPaymentOptions(item.productId);
+    setPaymentOptions(options);
+    setPlanModalItemId(id);
+  };
+
+  const handlePlanChange = (id, newPlan) => {
+    dispatch(setItemPaymentPlan({ id, plan: newPlan, paymentOptions }));
+    setPlanModalItemId(null);
   };
 
   const handleCheckout = () => {
@@ -55,10 +77,9 @@ const CartItemsContentSection = React.memo(() => {
             <button
               type="submit"
               onClick={handleCheckout}
-              className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[#FFDE11]  border-2  w-full mx-auto  md:px-12 py-2 text-lg font-medium  hover:bg-gray-50   ${subtTotal >= 1000000 && !isUpgraded ? 'bg-[#E5E5E5] text-[#CDCBCC]' : 'bg-yellow-300 text-black'}`}
+              className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[#FFDE11] border-2 w-full mx-auto md:px-12 py-2 text-lg font-medium hover:bg-gray-50 ${subtTotal >= 1000000 && !isUpgraded ? 'bg-[#E5E5E5] text-[#CDCBCC]' : 'bg-yellow-300 text-black'}`}
             >
               <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11]"></span>
-
               <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-base">
                 Go to Checkout
               </span>
@@ -82,8 +103,8 @@ const CartItemsContentSection = React.memo(() => {
           </>
         ) : (
           <>
-            <div className="grid grid-cols-1 w-full lg:grid-cols-[60%_36%] gap-6 justify-between mt-6 ">
-              <div className="grid grid-cols-1 gap-6 lg:h-scree lg:overflow-y-auto">
+            <div className="grid grid-cols-1 w-full lg:grid-cols-[60%_36%] gap-6 justify-between mt-6">
+              <div className="grid grid-cols-1 gap-6 lg:h-screen lg:overflow-y-auto">
                 {cart.map((item, index) => (
                   <CartItem item={item} key={index} onTogglePlan={togglePlan} />
                 ))}
@@ -101,6 +122,35 @@ const CartItemsContentSection = React.memo(() => {
           </>
         )}
       </section>
+      {planModalItemId && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg max-w-sm w-full">
+            <h2 className="text-lg font-semibold mb-4">Select Payment Plan</h2>
+            <select
+              defaultValue={
+                cart.find((item) => item.id === planModalItemId).paymentPlan
+              }
+              onChange={(e) =>
+                handlePlanChange(planModalItemId, e.target.value)
+              }
+              className="w-full p-2 border rounded mb-4"
+            >
+              <option value="upfront">Full Payment</option>
+              <option value="monthly">Monthly Installments</option>
+              <option value="weekly">Weekly Installments</option>
+              <option value="daily">Daily Installments</option>
+            </select>
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setPlanModalItemId(null)}
+                className="px-4 py-2 bg-gray-200 rounded"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 });

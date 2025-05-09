@@ -261,7 +261,6 @@ export const products = [
         type: 'monthly',
         label: 'Monthly',
         months: 6,
-        upfrontPayment: 150000,
         monthlyPayment: 150000,
         totalPrice: 500000,
       },

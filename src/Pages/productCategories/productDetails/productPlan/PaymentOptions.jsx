@@ -5,15 +5,22 @@ import { DailyPayment } from './DailyPaymentPlan/DailyPayment';
 import { WeeklyPayment } from './WeeklyPaymentPlan/WeeklyPayment';
 import { formatCurrency } from '../../../../utils/FormatCurrency';
 import { MonthlyPayment } from './MonthlyPaymentPlan/MonthlyPayment';
+import { handleAddToCart } from '../../../../features/cart/AddToCart';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getSelectedPaymentPlan,
+  setSelectedPaymentPlan,
+} from '../../../../features/cart/cartSlice';
 
-export const PaymentOptions = ({ selected, setSelected, product }) => {
+export const PaymentOptions = React.memo(({ product }) => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const dispatch = useDispatch();
+  const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
 
   const paymentMethodRef = useRef(null);
 
   if (!product) return <div>Product not found</div>;
-
   const updateScrollButtons = () => {
     const el = paymentMethodRef.current;
     if (!el) return;
@@ -38,7 +45,7 @@ export const PaymentOptions = ({ selected, setSelected, product }) => {
   return (
     <>
       <div className="block lg:hidden">
-        {selected === 'daily' && (
+        {selectedPaymentPlan === 'daily' && (
           <DailyPayment
             product={product}
             handleScroll={handleScroll}
@@ -47,7 +54,7 @@ export const PaymentOptions = ({ selected, setSelected, product }) => {
             paymentMethodRef={paymentMethodRef}
           />
         )}
-        {selected === 'weekly' && (
+        {selectedPaymentPlan === 'weekly' && (
           <WeeklyPayment
             product={product}
             handleScroll={handleScroll}
@@ -56,7 +63,7 @@ export const PaymentOptions = ({ selected, setSelected, product }) => {
             paymentMethodRef={paymentMethodRef}
           />
         )}
-        {selected === 'monthly' && (
+        {selectedPaymentPlan === 'monthly' && (
           <MonthlyPayment
             product={product}
             handleScroll={handleScroll}
@@ -65,8 +72,8 @@ export const PaymentOptions = ({ selected, setSelected, product }) => {
             paymentMethodRef={paymentMethodRef}
           />
         )}
-        {selected === 'upfront' && <FullPayment product={product} />}
-        {selected && (
+        {selectedPaymentPlan === 'upfront' && <FullPayment product={product} />}
+        {selectedPaymentPlan && (
           <div className=" lg:mx-0 lg:w-[80%] mt-4 mx-5">
             <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
               Add to cart
@@ -80,38 +87,43 @@ export const PaymentOptions = ({ selected, setSelected, product }) => {
           {product.paymentOptions.map((option, index) => {
             let price = '';
             let unit = '';
+            let tag = '';
 
             switch (option.type) {
               case 'daily':
                 price = option.dailyPayment;
                 unit = 'per day';
+                tag = '';
                 break;
               case 'weekly':
                 price = option.weeklyPayment;
                 unit = 'per week';
+                tag = '';
                 break;
               case 'monthly':
                 price = option.monthlyPayment;
                 unit = 'per month';
+                tag = 'Popular';
                 break;
               case 'upfront':
                 price = option.amount;
                 unit = 'one time';
+                tag = '';
+
                 break;
               default:
                 price = '';
             }
-
             return (
               <label
                 key={`${option.type}-${index}`}
                 htmlFor={option.type}
                 className={`relative flex items-start gap-3 border rounded-md p-4 cursor-pointer transition 
-          ${selected === option.type ? 'bg-yellow-50 border-yellow-500 ring-1 ring-yellow-400' : 'hover:border-gray-400'}`}
+          ${selectedPaymentPlan === option.type ? 'bg-yellow-50 border-yellow-500 ring-1 ring-yellow-400' : 'hover:border-gray-400'}`}
               >
                 <div className="pt-1">
                   <div className="h-2 w-2 rounded-full border border-1 border-black flex items-center justify-center">
-                    {selected === option.type && (
+                    {selectedPaymentPlan === option.type && (
                       <div className="h-2 w-2 bg-black rounded-full"></div>
                     )}
                   </div>
@@ -122,8 +134,8 @@ export const PaymentOptions = ({ selected, setSelected, product }) => {
                   type="radio"
                   name="payment"
                   value={option.type}
-                  checked={selected === option.type}
-                  onChange={() => setSelected(option.type)}
+                  checked={selectedPaymentPlan === option.type}
+                  onChange={() => dispatch(setSelectedPaymentPlan(option.type))}
                   className="sr-only"
                 />
 
@@ -134,10 +146,9 @@ export const PaymentOptions = ({ selected, setSelected, product }) => {
                     <span className="text-xs">{unit}</span>
                   </span>
                 </div>
-
-                {option.tag && (
+                {tag && (
                   <span className="absolute bottom-[68px] right-4 bg-yellow-400 text-xs text-black px-1 rounded">
-                    {option.tag}
+                    {tag}
                   </span>
                 )}
               </label>
@@ -146,7 +157,7 @@ export const PaymentOptions = ({ selected, setSelected, product }) => {
         </div>
       </div>
       <div className="hidden lg:block">
-        {selected === 'daily' && (
+        {selectedPaymentPlan === 'daily' && (
           <DailyPayment
             product={product}
             handleScroll={handleScroll}
@@ -155,7 +166,7 @@ export const PaymentOptions = ({ selected, setSelected, product }) => {
             paymentMethodRef={paymentMethodRef}
           />
         )}
-        {selected === 'weekly' && (
+        {selectedPaymentPlan === 'weekly' && (
           <WeeklyPayment
             product={product}
             handleScroll={handleScroll}
@@ -164,7 +175,7 @@ export const PaymentOptions = ({ selected, setSelected, product }) => {
             paymentMethodRef={paymentMethodRef}
           />
         )}
-        {selected === 'monthly' && (
+        {selectedPaymentPlan === 'monthly' && (
           <MonthlyPayment
             product={product}
             handleScroll={handleScroll}
@@ -173,8 +184,8 @@ export const PaymentOptions = ({ selected, setSelected, product }) => {
             paymentMethodRef={paymentMethodRef}
           />
         )}
-        {selected === 'upfront' && <FullPayment product={product} />}
-        {selected && (
+        {selectedPaymentPlan === 'upfront' && <FullPayment product={product} />}
+        {selectedPaymentPlan && (
           <div className=" lg:mx-0 lg:w-[80%] mt-4 mx-5">
             <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
               Add to cart
@@ -184,4 +195,4 @@ export const PaymentOptions = ({ selected, setSelected, product }) => {
       </div>
     </>
   );
-};
+});
