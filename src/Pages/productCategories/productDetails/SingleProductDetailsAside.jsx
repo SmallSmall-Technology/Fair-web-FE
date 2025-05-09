@@ -4,11 +4,7 @@ import { useIsInView } from '../../../hooks/useIsInView';
 import { PaymentOptions } from './productPlan/PaymentOptions';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import CommentBar from '../../../features/reviewsRating/CommentBar';
-import { SingleProductStickyHeader } from '../ProductCategoriesShortcut';
-import { WeeklyPayment } from './productPlan/WeeklyPaymentPlan/WeeklyPayment';
-import { DailyPayment } from './productPlan/DailyPaymentPlan/DailyPayment';
-import { MonthlyPayment } from './productPlan/MonthlyPaymentPlan/MonthlyPayment';
-import { FullPayment } from './productPlan/FullPaymentPlan/FullPayment';
+import { SingleProductStickyHeader } from '../../../ui/components/header/SingleProductStickyHeader';
 
 export const item_width = 70;
 
@@ -30,8 +26,9 @@ export const getPaymentDates = (startDate, months) => {
 };
 
 export const SingleProductDetailsAside = React.memo(
-  ({ product, shippingDate, category, selected, setSelected }) => {
+  ({ product, shippingDate, category }) => {
     const [targetRef, isInView] = useIsInView();
+    // const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
 
     return (
       <aside className="w-full xl:w-[45%]">
@@ -88,19 +85,9 @@ export const SingleProductDetailsAside = React.memo(
         <p className="lg:hidden font-medium mb-3 mx-5 lg:mx-0">
           Choose how you want to pay
         </p>
-        {/* <div className="block lg:hidden">
-          {selected === 'daily' && <DailyPayment product={product} />}
-          {selected === 'weekly' && <WeeklyPayment product={product} />}
-          {selected === 'monthly' && <MonthlyPayment product={product} />}
-          {selected === 'upfront' && <FullPayment product={product} />}
-        </div> */}
 
         <div>
-          <PaymentOptions
-            selected={selected}
-            setSelected={setSelected}
-            product={product}
-          />
+          <PaymentOptions product={product} />
         </div>
 
         <div className="mt-10 lg:hidden">
@@ -190,18 +177,9 @@ export const SingleProductDetailsAside = React.memo(
           </div>
         </section>
         <div className="hidden lg:block">
-          {!isInView && (
-            <SingleProductStickyHeader
-              product={product}
-              PaymentOptions={PaymentOptions}
-              selected={selected}
-              setSelected={setSelected}
-            />
-          )}
+          {!isInView && <SingleProductStickyHeader product={product} />}
         </div>
       </aside>
     );
   }
 );
-
-// export default SingleProductDetailsAside;

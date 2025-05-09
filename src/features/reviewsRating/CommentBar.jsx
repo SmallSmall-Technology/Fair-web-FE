@@ -46,6 +46,7 @@ const CommentBar = () => {
           <button
             type="submit"
             className="absolute right-3 top-1/2 transform -translate-y-1/2"
+            aria-label="Submit"
           >
             <CircleArrowUp size={30} fill="#A6A6A6" color="white" />
           </button>

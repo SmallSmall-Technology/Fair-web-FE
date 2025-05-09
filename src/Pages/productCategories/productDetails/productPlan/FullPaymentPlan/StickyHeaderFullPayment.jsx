@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 
-export const StickyHeaderFullPayment = ({ product }) => {
+export const StickyHeaderFullPayment = React.memo(({ product }) => {
   const paymentsInFull = [
     {
       amount: product.amount,
@@ -36,4 +36,4 @@ export const StickyHeaderFullPayment = ({ product }) => {
       </div>
     </article>
   );
-};
+});

@@ -119,3 +119,7 @@
   outline: 1px solid black;
   outline-offset: 3px;
 }
+
+.sticky-header {
+  will-change: transform;
+}

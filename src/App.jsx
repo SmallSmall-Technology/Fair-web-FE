@@ -20,6 +20,7 @@ import CheckoutItemsSkeleton from './ui/components/Skeletons/CheckoutItemsSkelet
 import CheckoutPaymentSkeleton from './ui/components/Skeletons/CheckoutPaymentSkeleton';
 import CartItemsSkeleton from './ui/components/Skeletons/CartItemsSkeleton';
 import DashboardSummarySkeleton from './ui/components/Skeletons/DashboardSummarySkeleton';
+import VerificationSent from './pages/cartItems/cartItemsContent/VerificationSent';
 
 // Lazy-loaded pages
 const CartItems = lazy(() => import('./pages/cartItems/CartItems'));
@@ -298,6 +299,10 @@ const App = () => {
                       <SingleProductPage />
                     </Suspense>
                   }
+                />
+                <Route
+                  path="verification-sent"
+                  element={<VerificationSent />}
                 />
               </Route>
             </Route>

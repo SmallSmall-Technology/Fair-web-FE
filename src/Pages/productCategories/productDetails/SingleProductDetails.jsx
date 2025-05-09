@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ProductImage } from '../ProductImage';
 import { products } from '../../../utils/data';
 import ProductCard from '../../../utils/ProductCard';
@@ -8,6 +8,7 @@ import CommentBar from '../../../features/reviewsRating/CommentBar';
 import { AddFavourite } from '../../../features/favourite/AddFavourite';
 import { SingleProductDetailsAside } from './SingleProductDetailsAside';
 import { FullPayment } from './productPlan/FullPaymentPlan/FullPayment';
+import { getSelectedPaymentPlan } from '../../../features/cart/cartSlice';
 import { DailyPayment } from './productPlan/DailyPaymentPlan/DailyPayment';
 import { handleShareProduct } from '../../../features/product/ShareProduct';
 import { WeeklyPayment } from './productPlan/WeeklyPaymentPlan/WeeklyPayment';
@@ -15,9 +16,8 @@ import { MonthlyPayment } from './productPlan/MonthlyPaymentPlan/MonthlyPayment'
 
 export const SingleProductDetails = React.memo(({ product }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selected, setSelected] = useState('');
+  const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const productImages = [
@@ -124,28 +124,28 @@ export const SingleProductDetails = React.memo(({ product }) => {
             <CommentBar />
           </section>
           <div className="hidden lg:block">
-            {selected === 'daily' && (
+            {selectedPaymentPlan === 'daily' && (
               <>
                 <WeeklyPayment product={product} />
                 <MonthlyPayment product={product} />
                 <FullPayment product={product} />
               </>
             )}
-            {selected === 'weekly' && (
+            {selectedPaymentPlan === 'weekly' && (
               <>
                 <DailyPayment product={product} />
                 <MonthlyPayment product={product} />
                 <FullPayment product={product} />
               </>
             )}
-            {selected === 'monthly' && (
+            {selectedPaymentPlan === 'monthly' && (
               <>
                 <DailyPayment product={product} />
                 <WeeklyPayment product={product} />
                 <FullPayment product={product} />
               </>
             )}
-            {selected === 'upfront' && (
+            {selectedPaymentPlan === 'upfront' && (
               <>
                 <DailyPayment product={product} />
                 <WeeklyPayment product={product} />
@@ -158,8 +158,7 @@ export const SingleProductDetails = React.memo(({ product }) => {
           product={product}
           shippingDate={shippingDate}
           category={category}
-          selected={selected}
-          setSelected={setSelected}
+          // selectPlan={selectedPaymentPlan}
         />
       </div>
       <section className="mb-24 mx-5 xl:mx-0">

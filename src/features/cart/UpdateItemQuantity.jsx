@@ -4,7 +4,6 @@ import { decreaseItemQuantity, increaseItemQuantity } from './cartSlice';
 
 export const UpdateItemQuantity = ({ id, currentQuantity }) => {
   const dispatch = useDispatch();
-
   return (
     <>
       <div className="flex items-center space-x-2 lg:space-x-1">
