@@ -5,51 +5,56 @@ const categories = [
   {
     title: 'Home & Living',
     items: [
-      'Decor',
-      'Furniture',
-      'Kitchen & Dinning',
-      'Home improvement',
-      'Bed & Bath',
-      'Garden & Outdoor',
-      'Sales & Offers',
+      { name: 'Decor', icon: '/images/decor.svg' },
+      { name: 'Furniture', icon: '/images/furniture.svg' },
+      { name: 'Bed & Bath', icon: '/images/bed.svg' },
+      { name: 'Kitchen & Dinning', icon: '/images/kitchen.svg' },
+      { name: 'Garden & outdoor', icon: '/images/garden.svg' },
+      { name: 'Home improvement', icon: '/images/home.svg' },
     ],
   },
   {
     title: 'Lifestyle & Consumer goods',
     items: [
-      'Personal care',
-      'Beauty',
-      'Fashion',
-      'Health & Wellness',
-      'Baby & Mothercare',
-      'Household essentials',
-      'Toys',
-      'Entertainment',
-      'Books',
-      'Sales & Offers',
+      { name: 'Personal care', icon: '/images/personal.svg' },
+      { name: 'Toys', icon: '/images/toys.svg' },
+      { name: 'Beauty', icon: '/images/beauty.svg' },
+      { name: 'Fashion', icon: '/images/fashion.svg' },
+      { name: 'Household essentials', icon: '/images/household.svg' },
+      { name: 'Entertainment', icon: '/images/entertainment.svg' },
+      { name: 'Books', icon: '/images/books.svg' },
+      { name: 'Baby&Mother care', icon: '/images/baby.svg' },
+      { name: 'Health&wellness', icon: '/images/health.svg' },
     ],
   },
   {
     title: 'Electronics',
     items: [
-      'Phones',
-      'Computers',
-      'TV',
-      'Home audio & Theater',
-      'Video games',
-      'Gadget',
-      'House appliance',
-      'Accessories',
-      'Sales & Offers',
+      { name: 'Phones', icon: '/images/phone.svg' },
+      { name: 'Computers', icon: '/images/computers.svg' },
+      { name: 'TV', icon: '/images/tv.svg' },
+      { name: 'Home Appliances', icon: '/images/home-appliances.svg' },
+      { name: 'Gadgets', icon: '/images/gadgets.svg' },
+      { name: 'Accessories', icon: '/images/accessories.svg' },
+      { name: 'Home audio&Theater', icon: '/images/audio.svg' },
+      { name: 'Video games', icon: '/images/games.svg' },
     ],
   },
   {
     title: 'Food & Drink',
-    items: ['Grocery', 'Confectionery', 'Beverages', 'Sales & Offers'],
+    items: [
+      { name: 'Grocery', icon: '/images/grocery.svg' },
+      { name: 'Confectionery', icon: '/images/confectionery.svg' },
+      { name: 'Beverage', icon: '/images/beverages.svg' },
+    ],
   },
   {
     title: 'Real Estate',
-    items: ['Rent', 'Shortlet', 'Buy'],
+    items: [
+      { name: 'RentSmallsmall' },
+      { name: 'StaySmallsmall' },
+      { name: 'BuySmallsmall' },
+    ],
   },
 ];
 
@@ -77,52 +82,55 @@ const Shop = ({ isOpen, onClose }) => {
       />
 
       <div
-        className={`absolute inset-0 bg-white h-screen overflow-y-auto transition-transform duration-300 ${
+        className={`absolute top-0 left-0 w-full h-full bg-white transition-transform duration-300 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex flex-col justify-between items-center px-4 pt-10 w-full">
-          <button onClick={onClose} className=" w-full flex justify-end">
-            <X className="w-5 h-5" />
-          </button>
-          <button
-            onClick={onClose}
-            className="flex items-center text-sm w-full justify-start"
-          >
-            <ArrowLeft className="w-4 h-4 mr-1" />
-            Back
-          </button>
+        <div className="sticky top-0 z-10 bg-white">
+          <div className="flex justify-end px-4 pt-6">
+            <button onClick={onClose}>
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="px-4 pt-4 pb-2">
+            <h2 className="text-xl font-semibold">Browse departments</h2>
+            <hr className="mt-2" />
+          </div>
         </div>
 
-        <h2 className="text-lg font-semibold px-4 pt-3 pb-2 border-">
-          Browse departments
-        </h2>
-        <hr className="ml-4 w-[73%]" />
-        <div className="px-4 py-4 space-y-6">
+        <div className="px-4 py-4 space-y-6 overflow-y-auto h-[calc(100%-100px)]">
           {categories.map((group) => (
             <div key={group.title}>
-              <h3 className=" underline mb-2 text-sm">{group.title}</h3>
-              <div className="bg-[#F5F5F7] rounded-md p-4 space-y-2 text-sm text-gray-800 w-[80%]">
+              <h3 className="text-base font-semibold text-gray-700 mb-2">
+                {group.title}
+              </h3>
+              <div className="flex flex-wrap gap-2">
                 {group.items.map((item) => (
                   <div
-                    key={item}
-                    className={
-                      item === 'Sales & Offers' ? 'text-rose-500 ' : ''
-                    }
+                    key={item.name}
+                    className="flex space-x-2 items-center justify-center px-4 py-2 rounded-full text-sm bg-[#F5F5F7] hover:bg-gray-200 transition whitespace-nowrap"
                   >
-                    {item}
+                    {item.icon && (
+                      <img
+                        src={item.icon}
+                        alt={item.name}
+                        className="w-[30px] h-[30px] mr-1"
+                      />
+                    )}
+                    {item.name}
                   </div>
                 ))}
               </div>
             </div>
           ))}
-        </div>
 
-        <div className="px-4 py-6">
-          <button onClick={onClose} className="flex items-center text-sm">
-            <ArrowLeft className="w-4 h-4 mr-1" />
-            Back
-          </button>
+          <div className="pt-8">
+            <button onClick={onClose} className="flex items-center text-sm">
+              <ArrowLeft className="w-4 h-4 mr-1" />
+              Back
+            </button>
+          </div>
         </div>
       </div>
     </div>

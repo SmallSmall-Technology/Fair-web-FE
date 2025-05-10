@@ -196,6 +196,10 @@ const App = () => {
               }
             />
             <Route
+              path="verification-document-sent"
+              element={<VerificationSent />}
+            />
+            <Route
               path="cart-items/checkout/payment-success"
               element={
                 <Suspense fallback={<CheckoutPaymentSkeleton />}>
@@ -299,10 +303,6 @@ const App = () => {
                       <SingleProductPage />
                     </Suspense>
                   }
-                />
-                <Route
-                  path="verification-sent"
-                  element={<VerificationSent />}
                 />
               </Route>
             </Route>
