@@ -5,7 +5,7 @@ export const StickyHeaderFullPayment = React.memo(({ product }) => {
   const paymentsInFull = [
     {
       amount: product.amount,
-      label: 'Pay in full today',
+      label: 'Pay in full now today',
       date: new Date(),
       icon: '/images/full-circle.svg',
     },

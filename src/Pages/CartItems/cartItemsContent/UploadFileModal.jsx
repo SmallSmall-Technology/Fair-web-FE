@@ -15,9 +15,9 @@ export const UploadFileModal = ({ onUpgrade, closeModal, modalIsOpen }) => {
   };
 
   const handleSend = () => {
-    if (onUpgrade) onUpgrade();
+    // if (onUpgrade) onUpgrade();
     closeModal();
-    navigate('/verification-sent');
+    navigate('/verification-document-sent');
   };
 
   return (

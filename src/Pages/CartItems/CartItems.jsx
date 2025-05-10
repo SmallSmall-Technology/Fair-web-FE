@@ -7,7 +7,7 @@ const CartItems = () => {
     <>
       <Header />
       <CartItemsContentSection />
-      <div className="mx-6 lg:mx-[60px] pb-10 mt-40">
+      <div className="lg:mx-[60px] pb-10 mt-40">
         <CartFooter />
       </div>
     </>

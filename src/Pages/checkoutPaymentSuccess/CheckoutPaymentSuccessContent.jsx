@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { formatCurrency } from '../../utils/FormatCurrency';
 import { getTotalCartPrice } from '../../features/cart/cartSlice';
