@@ -61,6 +61,7 @@ export const AddFavourite = ({ product = {} }) => {
       }
       className="focus:outline-none"
     >
+      <span className="sr-only">Add to favourite</span>
       <Heart
         size={18}
         cursor="pointer"

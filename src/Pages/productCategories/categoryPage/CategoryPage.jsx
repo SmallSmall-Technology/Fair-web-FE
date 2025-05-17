@@ -12,7 +12,6 @@ const CategoryPage = () => {
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [sortedGroupedProducts, setSortedGroupedProducts] = useState({});
 
-  // Filter products by category
   const categoryProducts = useMemo(
     () =>
       filteredProducts.filter(

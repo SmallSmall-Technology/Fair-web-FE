@@ -80,7 +80,7 @@ export const MobileNavBar = () => {
 
   return (
     <>
-      <nav aria-label="Main navigation">
+      <nav aria-label="Main navigation ">
         <ul className="flex items-center gap-4">
           <li>
             <User
@@ -102,7 +102,7 @@ export const MobileNavBar = () => {
               </button>
             </div>
 
-            <div className="absolute right-0 top-[4.02rem] min-w-[320px] max-w-[412px]">
+            <div className="absolute right-0 top-[4.02rem] min-w-[320px] max-w-[412px] bg-gray-700">
               <CartDropdownItems isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
           </li>

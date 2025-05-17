@@ -27,7 +27,7 @@ export const NavBarCartItem = ({ item }) => {
 
   return (
     <>
-      <li className="grid grid-cols-1 py-4 px-5">
+      <li className="grid grid-cols-1 py-4 lg:px-5">
         <div className="flex items-baseline mb-4 space-x-2">
           <img src="/images/fair-logo.svg" alt="" width={48} />
           <p className="pb-0">Fair</p>

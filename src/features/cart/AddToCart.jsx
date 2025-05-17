@@ -2,7 +2,7 @@ import { addItem } from './cartSlice';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { startTransition } from 'react';
+import { startTransition, useState } from 'react';
 
 export const handleAddToCart = (dispatch, product, navigate) => {
   if (!product) return;
@@ -84,22 +84,24 @@ export const AddToCart = ({ product }) => {
 
     dispatch(addItem(product))
       .unwrap()
-      .catch((error) => {
-        console.error('Add to cart failed:', error);
-      });
+      .catch((error) => {});
   };
 
   return (
     <button
-      className="bg-[#FFDE11] h-10 w-10 rounded-full flex justify-center focus:outline-none focus:ring-2 focus:ring-black"
-      aria-label="Add to cart"
+      className="group bg-[#FFDE11] flex items-center rounded-[20px] px-2 py-2 overflow-hidden transition-all duration-300 mb-"
       onClick={() => startTransition(() => handleAddToCart())}
     >
-      <img
-        src="/images/shopping-bag-add.svg"
-        alt="Add to shopping cart"
-        className="w-[18.5px] lg:w-5"
-      />
+      <div className="flex items-center transition-all duration-300 max-w-[22px] group-hover:max-w-[120px]">
+        <img
+          src="/images/shopping-bag-add.svg"
+          alt="Add to shopping cart"
+          className="w-[18px] lg:w-5 shrink-0"
+        />
+        <span className="ml-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          Add to cart
+        </span>
+      </div>
     </button>
   );
 };
