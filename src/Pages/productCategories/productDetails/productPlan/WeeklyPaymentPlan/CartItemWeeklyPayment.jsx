@@ -36,28 +36,31 @@ export const CartItemWeeklyPayment = React.memo(({ product }) => {
     : [];
 
   return (
-    <article className="flex w-[95%] mx-auto overflow-x-auto">
-      <div className="flex gap-6 ">
-        {paymentWeekly.map((payment, index) => (
-          <div key={index} className="flex items-center space-x-2 min-w-fit">
-            <div className="h- w-7">
-              <img
-                src={payment.icon}
-                alt={`${payment.label} payment icon`}
-                className="h-full w-full"
-              />
+    <section className="w-full px-2">
+      <p className="lg:ml-5 text-xs font-semibold mb-2 lg:mt-[-10px]">Weekly</p>
+      <article className="flex w-[95%] mx-auto overflow-x-auto">
+        <div className="flex gap-6 ">
+          {paymentWeekly.map((payment, index) => (
+            <div key={index} className="flex items-center space-x-2 min-w-fit">
+              <div className="h- w-7">
+                <img
+                  src={payment.icon}
+                  alt={`${payment.label} payment icon`}
+                  className="h-full w-full"
+                />
+              </div>
+              <div className="flex flex-col items-start">
+                <p className="text-xs font-medium mt-1">
+                  {formatCurrency(payment.amount)}
+                </p>
+                <span className="text-[11px] text-center min-w-fit bg-bl">
+                  {payment.label}
+                </span>
+              </div>
             </div>
-            <div className="flex flex-col items-start">
-              <p className="text-xs font-medium mt-1">
-                {formatCurrency(payment.amount)}
-              </p>
-              <span className="text-[11px] text-center min-w-fit bg-bl">
-                {payment.label}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </article>
+          ))}
+        </div>
+      </article>
+    </section>
   );
 });

@@ -94,7 +94,6 @@ const CategoryFilterForm = ({ categoryProducts, handleFilter, products }) => {
           </select>
         </div>
 
-        {/* Divider */}
         <div className="flex items-center">
           <hr className="w-full my-4 md:w-0.5 md:h-8 bg-gray-300 mr-4" />
 

@@ -1,13 +1,12 @@
 // PaymentPlan.jsx (unchanged, for reference)
 import { useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
-import { ChevronsLeft, ChevronsRight } from 'lucide-react';
-import { formatCurrency } from '../../../utils/FormatCurrency';
 import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
-import { StickyHeaderFullPayment } from '../../productCategories/productDetails/productPlan/FullPaymentPlan/StickyHeaderFullPayment';
 import { CartItemMonthlyPayment } from '../../productCategories/productDetails/productPlan/MonthlyPaymentPlan/CartItemMonthlyPayment';
 import { CartItemDailyPayment } from '../../productCategories/productDetails/productPlan/DailyPaymentPlan/CartItemDailyPayment';
 import { CartItemWeeklyPayment } from '../../productCategories/productDetails/productPlan/WeeklyPaymentPlan/CartItemWeeklyPayment';
+import CartItemFulllPayment from '../../productCategories/productDetails/productPlan/FullPaymentPlan/CartItemFullPayment';
+// import { CartItemFulllPayment } from '../../productCategories/productDetails/productPlan/FullPaymentPlan/CartItemFulllPayment';
 
 export const PaymentPlan = ({ item }) => {
   const paymentMethodRef = useRef(null);
@@ -38,13 +37,11 @@ export const PaymentPlan = ({ item }) => {
   }, []);
 
   return (
-    <section className="mx-4 overflow-x-auto">
+    <section className="lg:mx-4 overflow-x-auto">
       <div
         className={`flex ${currentPlan !== 'upfront' ? 'justify-center' : 'justify-start px-4'} py-2 border md:border-0 rounded-[10px] 2xl:px-10`}
       >
-        {currentPlan === 'upfront' && (
-          <StickyHeaderFullPayment product={item} />
-        )}
+        {currentPlan === 'upfront' && <CartItemFulllPayment product={item} />}
         {currentPlan === 'monthly' && <CartItemMonthlyPayment product={item} />}
         {currentPlan === 'weekly' && <CartItemWeeklyPayment product={item} />}
         {currentPlan === 'daily' && <CartItemDailyPayment product={item} />}

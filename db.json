@@ -2143,6 +2143,31 @@
       },
       "deliveryDate": "Jan, 20 2025",
       "interest": 0
+    },
+    {
+      "id": "cart-17-upfront-1747402919103",
+      "image": "https://images.pexels.com/photos/3769747/pexels-photo-3769747.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "name": "Sharp 70-inch Aquos TV",
+      "userId": "user123",
+      "productId": "17",
+      "quantity": 1,
+      "price": 600000,
+      "totalPrice": 600000,
+      "paymentPlan": "upfront",
+      "paymentPlanDetails": {
+        "type": "upfront",
+        "amount": 600000,
+        "months": 0,
+        "monthlyPayment": 0,
+        "weeks": 0,
+        "weeklyPayment": 0,
+        "days": 0,
+        "dailyPayment": 0,
+        "totalPrice": "600000",
+        "upfrontPayment": 0
+      },
+      "deliveryDate": "Jan, 20 2025",
+      "interest": 0
     }
   ]
 }

@@ -68,9 +68,11 @@ const CartItemsContentSection = React.memo(() => {
       </div>
       {cart.length > 0 && (
         <>
-          <hr className="lg:hidden my-6" />
+          {/* <hr className="lg:hidden my-6" /> */}
           <div className="lg:hidden mx-4">
-            <IncomeUpgrade onUpgrade={() => setIsUpgraded(true)} />
+            {subtTotal > 1000000 && (
+              <IncomeUpgrade onUpgrade={() => setIsUpgraded(true)} />
+            )}
           </div>
           <hr className="lg:hidden mt-8 mb-6" />
           <div className="lg:hidden mx-6 lg:mx-[60px] 2xl:mx-[150px]">
@@ -104,7 +106,7 @@ const CartItemsContentSection = React.memo(() => {
         ) : (
           <>
             <div className="grid grid-cols-1 w-full lg:grid-cols-[60%_36%] gap-6 justify-between mt-6">
-              <div className="grid grid-cols-1 gap-6 lg:h-screen lg:overflow-y-auto">
+              <div className="flex flex-col gap-6 lg:h-screen lg:overflow-y-auto">
                 {cart.map((item, index) => (
                   <CartItem item={item} key={index} onTogglePlan={togglePlan} />
                 ))}
