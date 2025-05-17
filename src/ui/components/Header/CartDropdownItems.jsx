@@ -53,7 +53,7 @@ const CartDropdownItems = ({ isOpen, setIsOpen }) => {
 
       <div
         ref={menuRef}
-        className={`fixed w-[412px] h-fit right-0 bg-white z-50 pb-52 top-[83px] transform transition-all duration-300 ease-in-out shadow-lg ${
+        className={`fixed max-w-[412px] h-fit right-0 bg-white z-50 pb-52 top-[75px] transform transition-all duration-300 ease-in-out shadow-lg ${
           isOpen ? 'translate-y-0 opacity-100' : 'translate-y-[-5%] opacity-0'
         }`}
       >
@@ -81,7 +81,7 @@ const CartDropdownItems = ({ isOpen, setIsOpen }) => {
             </p>
           )}
 
-          <ul className="overflow-y-auto h-[] mt-4">
+          <ul className="overflow-y-auto h-[50svh] mt-4">
             {CartItems.map((item, index) => (
               <NavBarCartItem item={item} key={index} />
             ))}
@@ -89,7 +89,7 @@ const CartDropdownItems = ({ isOpen, setIsOpen }) => {
         </section>
 
         {CartQuantity >= 1 && (
-          <div className="absolute bottom-0 w-full pb-4">
+          <div className="absolute bottom-10 w-full">
             <Subtotal />
           </div>
         )}
