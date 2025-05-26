@@ -53,7 +53,7 @@ const CartDropdownItems = ({ isOpen, setIsOpen }) => {
 
       <div
         ref={menuRef}
-        className={`fixed max-w-[412px] h-fit right-0 bg-white z-50 pb-52 top-[75px] transform transition-all duration-300 ease-in-out shadow-lg ${
+        className={`fixed w-[320px] md:w-[420px] h-fit right-0 bg-white z-50 pb-52 top-[75px] transform transition-all duration-300 ease-in-out shadow-lg ${
           isOpen ? 'translate-y-0 opacity-100' : 'translate-y-[-5%] opacity-0'
         }`}
       >

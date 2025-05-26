@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { formatCurrency } from '../../utils/FormatCurrency';
 import { getTotalCartPrice } from '../../features/cart/cartSlice';
+import { Link } from 'react-router-dom';
 
 export const CheckoutPaymentSuccessContent = () => {
   const cartItems = useSelector((state) => state.cart.cart);

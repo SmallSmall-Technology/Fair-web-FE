@@ -15,49 +15,37 @@ export const DailyPayment = React.memo(
     function getDailyPaymentDates(startDate, numberOfDays) {
       return Array.from({ length: numberOfDays }, (_, index) => {
         const date = new Date(startDate);
-        date.setDate(date.getDate() + index * 1);
+        date.setDate(date.getDate() + index);
         return date.toISOString().split('T')[0];
       });
     }
 
-    const installmentOption = product.paymentOptions.find(
+    const installmentOption = product.paymentOptions?.find(
       (paymentOption) => paymentOption.label === 'Daily'
     );
-    const paymentDaily = installmentOption
-      ? Array.from({ length: installmentOption.dailyPayment }, (_, index) => {
-          const icons = [
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/quater-circle.svg',
-            '/images/half-circle.svg',
-            '/images/one-third-circle.svg',
-            '/images/one-third-circle.svg',
-            '/images/one-third-circle.svg',
-            '/images/full-circle.svg',
-          ];
-          const paymentNumber = index + 1;
-          return {
-            amount: installmentOption.dailyPayment,
-            label: index === 0 ? 'Pay now today' : `Payment ${paymentNumber}`,
-            date: getDailyPaymentDates(
-              new Date(),
-              installmentOption.dailyPayment
-            )[index],
-            icon: icons[index % icons.length],
-          };
-        })
-      : [];
+
+    if (!installmentOption || !installmentOption.days) {
+      return <div>No daily payment plan available</div>;
+    }
+
+    const paymentDaily = Array.from(
+      { length: installmentOption.days },
+      (_, index) => {
+        const icons = [
+          '/images/quater-circle.svg',
+          '/images/half-circle.svg',
+          '/images/one-third-circle.svg',
+          '/images/full-circle.svg',
+        ];
+        const paymentNumber = index + 1;
+        return {
+          amount: installmentOption.dailyPayment,
+          label: index === 0 ? 'Pay now today' : `Payment ${paymentNumber}`,
+          date: getDailyPaymentDates(new Date(), installmentOption.days)[index],
+          icon: icons[index % icons.length],
+        };
+      }
+    );
 
     return (
       <>
@@ -88,13 +76,14 @@ export const DailyPayment = React.memo(
               {paymentDaily.map((payment, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center min-w-24 lg:min-w-fi"
+                  className="flex flex-col items-center min-w-24 lg:min-w-fit"
                 >
-                  <div className="h- w-7">
+                  <div className="h-7 w-7">
                     <img
                       src={payment.icon}
                       alt={`${payment.label} payment icon`}
                       className="h-full w-full"
+                      loading="lazy"
                     />
                   </div>
                   <p className="text-xs font-medium mt-1">

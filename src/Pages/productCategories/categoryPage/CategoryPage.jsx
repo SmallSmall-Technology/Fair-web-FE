@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { ArrowUpDown, ChevronRight } from 'lucide-react';
 import CategoryFilterForm from '../filterForms/CategoryFilterForm';
 import { ProductCategoriesShortcut } from '../ProductCategoriesShortcut';
-import { MiniProductCategories } from '../../home/hero/MiniProductCategories';
+// import { MiniProductCategories } from '../../home/hero/MiniProductCategories';
 
 const CategoryPage = () => {
   const { categoryName } = useParams();
@@ -77,7 +77,7 @@ const CategoryPage = () => {
         <ProductCategoriesShortcut />
       </div>
       <div className="flex md:hidden overflow-x-auto scrollbar-hide">
-        <MiniProductCategories />
+        {/* <MiniProductCategories /> */}
       </div>
       <section className="lg:mx-16">
         <div className="flex space-x-2 items-center mt-4">

@@ -2,7 +2,7 @@ import RealEstateHeroBanner from './RealEstateHeroBanner';
 
 const slides = [
   {
-    image: '/public/images/young-woman-in-hoodie.svg',
+    image: '/images/young-woman-in-hoodie.svg',
     content: (
       <>
         <h1 className="text-xl lg:text-3xl font-bold">
@@ -16,7 +16,7 @@ const slides = [
     ),
   },
   {
-    image: '/public/images/young-woman-in-hoodie.svg',
+    image: '/images/young-woman-in-hoodie.svg',
     content: (
       <>
         <h1 className="text-xl lg:text-3xl font-bold">Slide Two</h1>

@@ -13,14 +13,14 @@ export const categories = [
   {
     title: 'Confectionery',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/confectionery_sst.svg',
+    image: '/images/confectionery_sst.svg',
     link: '/shop/food-drink',
     width: '250px',
   },
   {
     title: 'Beverages',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/beverages.svg',
+    image: '/images/beverages.svg',
     link: '/shop/lifestyle',
   },
 ];

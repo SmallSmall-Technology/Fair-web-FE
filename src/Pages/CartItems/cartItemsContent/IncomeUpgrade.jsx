@@ -24,7 +24,7 @@ export const IncomeUpgrade = () => {
         <div className="flex items-start mb-6 space-x-1">
           <span className="w-5 h-5">
             <img
-              src="/public/images/alert.svg"
+              src="/images/alert.svg"
               alt="alert icon"
               className="w-full h-full"
             />

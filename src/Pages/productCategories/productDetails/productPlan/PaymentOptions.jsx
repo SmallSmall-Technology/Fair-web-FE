@@ -1,26 +1,36 @@
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  Suspense,
+  lazy,
+  startTransition,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { YellowButton } from '../../../../utils/Button';
-import React, { useEffect, useRef, useState } from 'react';
 import { FullPayment } from './FullPaymentPlan/FullPayment';
 import { DailyPayment } from './DailyPaymentPlan/DailyPayment';
 import { WeeklyPayment } from './WeeklyPaymentPlan/WeeklyPayment';
 import { formatCurrency } from '../../../../utils/FormatCurrency';
-import { MonthlyPayment } from './MonthlyPaymentPlan/MonthlyPayment';
 import { handleAddToCart } from '../../../../features/cart/AddToCart';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   getSelectedPaymentPlan,
   setSelectedPaymentPlan,
 } from '../../../../features/cart/cartSlice';
+
+const MonthlyPayment = lazy(
+  () => import('./MonthlyPaymentPlan/MonthlyPayment')
+);
 
 export const PaymentOptions = React.memo(({ product }) => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const dispatch = useDispatch();
   const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
-
   const paymentMethodRef = useRef(null);
 
   if (!product) return <div>Product not found</div>;
+
   const updateScrollButtons = () => {
     const el = paymentMethodRef.current;
     if (!el) return;
@@ -34,6 +44,12 @@ export const PaymentOptions = React.memo(({ product }) => {
     el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   };
 
+  const handlePlanChange = (type) => {
+    startTransition(() => {
+      dispatch(setSelectedPaymentPlan(type));
+    });
+  };
+
   useEffect(() => {
     const el = paymentMethodRef.current;
     if (!el) return;
@@ -42,39 +58,39 @@ export const PaymentOptions = React.memo(({ product }) => {
     return () => el.removeEventListener('scroll', updateScrollButtons);
   }, []);
 
+  const renderSelectedPayment = () => {
+    const props = {
+      product,
+      handleScroll,
+      canScrollRight,
+      canScrollLeft,
+      paymentMethodRef,
+    };
+
+    switch (selectedPaymentPlan) {
+      case 'daily':
+        return <DailyPayment {...props} />;
+      case 'weekly':
+        return <WeeklyPayment {...props} />;
+      case 'monthly':
+        return (
+          <Suspense fallback={<div>Loading monthly plan...</div>}>
+            <MonthlyPayment {...props} />
+          </Suspense>
+        );
+      case 'upfront':
+        return <FullPayment product={product} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <div className="block lg:hidden">
-        {selectedPaymentPlan === 'daily' && (
-          <DailyPayment
-            product={product}
-            handleScroll={handleScroll}
-            canScrollRight={canScrollRight}
-            canScrollLeft={canScrollLeft}
-            paymentMethodRef={paymentMethodRef}
-          />
-        )}
-        {selectedPaymentPlan === 'weekly' && (
-          <WeeklyPayment
-            product={product}
-            handleScroll={handleScroll}
-            canScrollRight={canScrollRight}
-            canScrollLeft={canScrollLeft}
-            paymentMethodRef={paymentMethodRef}
-          />
-        )}
-        {selectedPaymentPlan === 'monthly' && (
-          <MonthlyPayment
-            product={product}
-            handleScroll={handleScroll}
-            canScrollRight={canScrollRight}
-            canScrollLeft={canScrollLeft}
-            paymentMethodRef={paymentMethodRef}
-          />
-        )}
-        {selectedPaymentPlan === 'upfront' && <FullPayment product={product} />}
+        {renderSelectedPayment()}
         {selectedPaymentPlan && (
-          <div className=" lg:mx-0 lg:w-[80%] mt-4 mx-5">
+          <div className="lg:mx-0 lg:w-[80%] mt-4 mx-5">
             <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
               Add to cart
             </YellowButton>
@@ -85,45 +101,35 @@ export const PaymentOptions = React.memo(({ product }) => {
       <div className="py-4 w-full lg:w-[80%] px-5 lg:px-0">
         <div className="grid lg:grid-cols-2 gap-4">
           {product.paymentOptions.map((option, index) => {
-            let price = '';
-            let unit = '';
-            let tag = '';
+            const isSelected = selectedPaymentPlan === option.type;
+            const price =
+              option.dailyPayment ||
+              option.weeklyPayment ||
+              option.monthlyPayment ||
+              option.amount;
+            const unit =
+              option.type === 'daily'
+                ? 'per day'
+                : option.type === 'weekly'
+                  ? 'per week'
+                  : option.type === 'monthly'
+                    ? 'per month'
+                    : 'one time';
+            const tag = option.type === 'monthly' ? 'Popular' : '';
 
-            switch (option.type) {
-              case 'daily':
-                price = option.dailyPayment;
-                unit = 'per day';
-                tag = '';
-                break;
-              case 'weekly':
-                price = option.weeklyPayment;
-                unit = 'per week';
-                tag = '';
-                break;
-              case 'monthly':
-                price = option.monthlyPayment;
-                unit = 'per month';
-                tag = 'Popular';
-                break;
-              case 'upfront':
-                price = option.amount;
-                unit = 'one time';
-                tag = '';
-
-                break;
-              default:
-                price = '';
-            }
             return (
               <label
                 key={`${option.type}-${index}`}
                 htmlFor={option.type}
-                className={`relative flex items-start gap-3 border rounded-md p-4 cursor-pointer transition 
-          ${selectedPaymentPlan === option.type ? 'bg-yellow-50 border-yellow-500 ring-1 ring-yellow-400' : 'hover:border-gray-400'}`}
+                className={`relative flex items-start gap-3 border rounded-md p-4 cursor-pointer transition ${
+                  isSelected
+                    ? 'bg-yellow-50 border-yellow-500 ring-1 ring-yellow-400'
+                    : 'hover:border-gray-400'
+                }`}
               >
                 <div className="pt-1">
-                  <div className="h-2 w-2 rounded-full border border-1 border-black flex items-center justify-center">
-                    {selectedPaymentPlan === option.type && (
+                  <div className="h-2 w-2 rounded-full border border-black flex items-center justify-center">
+                    {isSelected && (
                       <div className="h-2 w-2 bg-black rounded-full"></div>
                     )}
                   </div>
@@ -134,8 +140,8 @@ export const PaymentOptions = React.memo(({ product }) => {
                   type="radio"
                   name="payment"
                   value={option.type}
-                  checked={selectedPaymentPlan === option.type}
-                  onChange={() => dispatch(setSelectedPaymentPlan(option.type))}
+                  checked={isSelected}
+                  onChange={() => handlePlanChange(option.type)}
                   className="sr-only"
                 />
 
@@ -146,6 +152,7 @@ export const PaymentOptions = React.memo(({ product }) => {
                     <span className="text-xs">{unit}</span>
                   </span>
                 </div>
+
                 {tag && (
                   <span className="absolute bottom-[68px] right-4 bg-yellow-400 text-xs text-black px-1 rounded">
                     {tag}
@@ -156,37 +163,11 @@ export const PaymentOptions = React.memo(({ product }) => {
           })}
         </div>
       </div>
+
       <div className="hidden lg:block">
-        {selectedPaymentPlan === 'daily' && (
-          <DailyPayment
-            product={product}
-            handleScroll={handleScroll}
-            canScrollRight={canScrollRight}
-            canScrollLeft={canScrollLeft}
-            paymentMethodRef={paymentMethodRef}
-          />
-        )}
-        {selectedPaymentPlan === 'weekly' && (
-          <WeeklyPayment
-            product={product}
-            handleScroll={handleScroll}
-            canScrollRight={canScrollRight}
-            canScrollLeft={canScrollLeft}
-            paymentMethodRef={paymentMethodRef}
-          />
-        )}
-        {selectedPaymentPlan === 'monthly' && (
-          <MonthlyPayment
-            product={product}
-            handleScroll={handleScroll}
-            canScrollRight={canScrollRight}
-            canScrollLeft={canScrollLeft}
-            paymentMethodRef={paymentMethodRef}
-          />
-        )}
-        {selectedPaymentPlan === 'upfront' && <FullPayment product={product} />}
+        {renderSelectedPayment()}
         {selectedPaymentPlan && (
-          <div className=" lg:mx-0 lg:w-[80%] mt-4 mx-5">
+          <div className="lg:mx-0 lg:w-[80%] mt-4 mx-5">
             <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
               Add to cart
             </YellowButton>

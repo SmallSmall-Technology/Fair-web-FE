@@ -1,19 +1,40 @@
 import { Button } from './Button';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Image as ImageIcon } from 'lucide-react';
-import { Share2, Star } from 'lucide-react';
+import { Image as ImageIcon, Share2, Star } from 'lucide-react';
 import { formatCurrency } from './FormatCurrency';
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState, useCallback } from 'react';
 import { AddToCart } from '../features/cart/AddToCart';
 import { AddFavourite } from '../features/favourite/AddFavourite';
 import { handleShareProduct } from '../features/product/ShareProduct';
 import { addItemToRecentlyViewed } from '../features/product/recentlyViewedSlice';
+import { Link, useNavigate } from 'react-router-dom';
+import { startTransition } from 'react';
+
+const TransitionLink = ({ to, children, className, ...props }) => {
+  const navigate = useNavigate();
+
+  const handleClick = useCallback(
+    (e) => {
+      e.preventDefault();
+      startTransition(() => {
+        navigate(to);
+      });
+    },
+    [navigate, to]
+  );
+
+  return (
+    <Link to={to} onClick={handleClick} className={className} {...props}>
+      {children}
+    </Link>
+  );
+};
 
 const ProductCard = ({ product }) => {
   const [imgError, setImgError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
+
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
@@ -39,7 +60,6 @@ const ProductCard = ({ product }) => {
 
   const cardStyles = {
     base: 'w-fit rounded-2xl transition-all duration-300 ease-in-out hover:drop-shadow-[0_4px_6px_rgba(0,0,0,0.25)] pb-2',
-
     transform: { transform: 'scale(1)', transformOrigin: 'center' },
   };
 
@@ -82,6 +102,10 @@ const ProductCard = ({ product }) => {
     </article>
   );
 
+  const categoryName = category
+    ? category.charAt(0).toLowerCase() + category.slice(1)
+    : '';
+
   const Content = () => (
     <article
       className={cardStyles.base}
@@ -89,45 +113,41 @@ const ProductCard = ({ product }) => {
       role="article"
       aria-label={`Product: ${name}`}
       style={cardStyles.transform}
-      // onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.01)')}
-      // onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
       onClick={handleAddToRecentlyViewed}
     >
-      <Link to={`/${id}/${slug}`} className="block">
-        <div className="relative bg-[#F2F2F2] w-[146px] h-[146p] md:w-[218px] md:h-[218px] rounded-2xl cursor-pointer flex justify-center items-center">
+      <TransitionLink to={`/${categoryName}/${id}/${slug}`} className="block">
+        <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl cursor-pointer flex justify-center items-center">
           <div className="absolute top-3 flex justify-between w-full px-3">
             {discountPrice && (
-              <p className="bg-white p-1">
-                <span className="font-medium text-xs">
-                  <p>35% downpayment</p>
-                </span>
+              <p className="bg-white p-1 font-medium text-[10px] lg:text-xs">
+                <span>35% downpayment</span>
               </p>
             )}
           </div>
-          <div className="flex justify-center items-center mx-aut w-[78p] h-[78p] lg:w-[111px] lg:h-[111px]">
+          <div className="flex justify-center items-center mx-auto w-[78px] h-[78px] lg:w-[111px] lg:h-[111px] mt-3">
             {!imgError ? (
               <img
                 src={image}
                 alt={name}
                 loading="lazy"
                 onError={() => setImgError(true)}
-                className="h-[100%] w-full object-cover "
+                className="h-[100%] w-full object-cover"
               />
             ) : (
               <ImageIcon className="h-fit w-full mt-10 object-contain" />
             )}
           </div>
         </div>
-      </Link>
-      <div className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-">
-        <Link
-          to={`/${id}/${slug}`}
+      </TransitionLink>
+      <div className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2">
+        <TransitionLink
+          to={`/${id}`}
           className="hover:underline focus:underline focus:outline-none"
         >
-          <p className="text-xs lg:text-sm font-normal  leading-[16.94px] min-h-12 cursor-pointer overflow-hidden lg:overflow-visible line-clamp-2 lg:line-clamp-none">
+          <p className="text-xs lg:text-sm font-normal leading-[16.94px] min-h-12 cursor-pointer overflow-hidden lg:overflow-visible line-clamp-2 lg:line-clamp-none">
             {name}
           </p>
-        </Link>
+        </TransitionLink>
         <div className="flex items-center lg:space-x-1">
           <Star fill="black" size={14} aria-hidden="true" />
           <p className="text-sm">
@@ -145,12 +165,10 @@ const ProductCard = ({ product }) => {
           )}
         </div>
         <div className="flex items-center justify-between lg:flex-col lg:items-start lg:space-y-3">
-          <div className="lg:w-[90%] flex justify-between items-center space-x-1 ">
+          <div className="lg:w-[90%] flex justify-between items-center space-x-1">
             <AddToCart product={product} />
-
             <div className="flex gap-4">
               <AddFavourite product={product} />
-
               <Button
                 className="rounded-full bg-white p-2 shadow-lg border border-gray-200 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
                 onClick={(e) => {
@@ -164,10 +182,6 @@ const ProductCard = ({ product }) => {
             </div>
           </div>
         </div>
-        {/* <div className="bg-[#FFDE11] flex items-center space-x-2 px-2 pr-6 rounded-[20px] w-fit">
-          <AddToCart />
-          <p>Add to cart</p>
-        </div> */}
       </div>
     </article>
   );
