@@ -68,7 +68,6 @@ const CartItemsContentSection = React.memo(() => {
       </div>
       {cart.length > 0 && (
         <>
-          {/* <hr className="lg:hidden my-6" /> */}
           <div className="lg:hidden mx-4">
             {subtTotal > 1000000 && (
               <IncomeUpgrade onUpgrade={() => setIsUpgraded(true)} />

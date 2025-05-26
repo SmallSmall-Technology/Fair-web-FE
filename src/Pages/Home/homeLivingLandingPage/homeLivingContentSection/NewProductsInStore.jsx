@@ -3,13 +3,15 @@ import { Button } from '../../../../utils/Button';
 import { useQuery } from '@tanstack/react-query';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from '../../../../utils/ProductCard';
-import { fetchAllProducts } from '../../../../services/api';
+import { products } from '../../../../utils/data';
+// import { fetchAllProducts } from '../../../../services/api';
+// import { products } from '../../utils/data';
 
 const NewProductsInStore = ({ onScrollProduct, item_width, containerRef }) => {
-  const { data, error, isLoading } = useQuery({
-    queryKey: ['products'],
-    queryFn: fetchAllProducts,
-  });
+  // const { data, error, isLoading } = useQuery({
+  //   queryKey: ['products'],
+  //   queryFn: fetchAllProducts,
+  // });
   return (
     <>
       <div className="flex justify-between mt-12 ">
@@ -48,7 +50,7 @@ const NewProductsInStore = ({ onScrollProduct, item_width, containerRef }) => {
             className="grid grid-flow-col space-x-4 w-full overflow-x-scroll scrollbar-hide scroll-smooth "
             ref={containerRef}
           >
-            {data?.map((product) => (
+            {products?.map((product) => (
               <div className="" key={product.id}>
                 <ProductCard product={product} />
               </div>

@@ -30,11 +30,8 @@ export const addItem = createAsyncThunk(
       const selectedPaymentPlan = state.cart.selectedPaymentPlan;
       const exists = state.cart.cart.find(
         (item) => item.productId === product.id
-        // ||
-        // item.selectedPaymentPlan === product.selectedPaymentPlan
-        // || item.productId === product.productId
       );
-      // console.log(exists);
+
       if (exists) {
         toast.dismiss();
         toast.error('Item already in cart', {
@@ -44,7 +41,6 @@ export const addItem = createAsyncThunk(
           closeButton: false,
         });
         return rejectWithValue();
-        // return rejectWithValue('Item already in cart');
       }
 
       const paymentMap = {};
@@ -148,12 +144,8 @@ export const increaseItemQuantity = createAsyncThunk(
   async (id, { getState, rejectWithValue }) => {
     try {
       const state = getState();
-      // console.log('Cart state before update:', state.cart.cart);
-      // const checkResponse = await axios.get(`${API_URL}/cart/${id}`);
-      // console.log('Server item check:', checkResponse.data);
-      // console.log('Item ID:', id);
+
       const item = state.cart.cart.find((item) => item.id === id);
-      // console.log(item);
       if (!item) throw new Error('Item not found');
       const updatedItem = {
         ...item,
@@ -230,7 +222,7 @@ const initialState = {
   cart: [],
   status: 'idle',
   error: null,
-  selectedPaymentPlan: 'upfront',
+  selectedPaymentPlan: '',
 };
 
 const cartSlice = createSlice({
@@ -243,51 +235,49 @@ const cartSlice = createSlice({
     setItemPaymentPlan: (state, action) => {
       const { id, plan, paymentOptions } = action.payload;
       const item = state.cart.find((item) => item.id === id);
-      if (item) {
-        item.paymentPlan = plan;
+      if (!item) return;
 
-        const paymentMap = {};
-        paymentOptions.forEach((option) => {
-          if (option.type) {
-            paymentMap[option.type] = option;
-          }
-        });
+      if (item.paymentPlan === plan) return;
 
-        const option = paymentMap[plan] || paymentMap.upfront;
-        if (!option) return;
+      item.paymentPlan = plan;
 
-        item.paymentPlanDetails = {
-          type: plan,
-          amount: option.amount || item.price,
-          months: option.months || 0,
-          monthlyPayment: option.monthlyPayment || 0,
-          weeks: option.weeks || 0,
-          weeklyPayment: option.weeklyPayment || 0,
-          days: option.days || 0,
-          dailyPayment: option.dailyPayment || 0,
-          totalPrice: option.totalPrice || item.price,
-          upfrontPayment: option.upfrontPayment || 0,
-        };
-
-        let price = 0;
-        if (plan === 'upfront') {
-          price = option.amount || item.price;
-        } else if (plan === 'monthly') {
-          price = option.monthlyPayment || 0;
-        } else if (plan === 'weekly') {
-          price = option.weeklyPayment || 0;
-        } else if (plan === 'daily') {
-          price = option.dailyPayment || 0;
+      const paymentMap = {};
+      for (const option of paymentOptions) {
+        if (option.type) {
+          paymentMap[option.type] = option;
         }
-
-        item.price = price;
-        item.totalPrice = price * (item.quantity || 1);
-        item.id = `cart-${item.productId}-${plan}-${Date.now()}`;
-        item.interest = option.interest || 0;
-        delete item.paymentOptions;
       }
+
+      const option = paymentMap[plan] || paymentMap.upfront;
+      if (!option) return;
+
+      item.paymentPlanDetails = {
+        type: plan,
+        amount: option.amount ?? item.price,
+        months: option.months ?? 0,
+        monthlyPayment: option.monthlyPayment ?? 0,
+        weeks: option.weeks ?? 0,
+        weeklyPayment: option.weeklyPayment ?? 0,
+        days: option.days ?? 0,
+        dailyPayment: option.dailyPayment ?? 0,
+        totalPrice: option.totalPrice ?? item.price,
+        upfrontPayment: option.upfrontPayment ?? 0,
+      };
+
+      let price = 0;
+      if (plan === 'upfront') price = option.amount ?? item.price;
+      else if (plan === 'monthly') price = option.monthlyPayment ?? 0;
+      else if (plan === 'weekly') price = option.weeklyPayment ?? 0;
+      else if (plan === 'daily') price = option.dailyPayment ?? 0;
+
+      item.price = price;
+      item.totalPrice = price * (item.quantity || 1);
+      item.interest = option.interest ?? 0;
+
+      delete item.paymentOptions;
     },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchCart.fulfilled, (state, action) => {
