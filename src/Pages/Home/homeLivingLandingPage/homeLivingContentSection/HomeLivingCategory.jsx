@@ -16,33 +16,33 @@ export const categories = [
   {
     title: 'Furniture',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/chair_sst.svg',
+    image: '/images/chair_sst.svg',
     link: '/home-living-furniture',
     width: '250px',
   },
   {
     title: 'Kitchen & Dining',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/kitchen_sst.svg',
+    image: '/images/kitchen_sst.svg',
     link: '/home-living-kitchen-dining',
     width: '332px',
   },
   {
     title: 'Home Improvement',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/home_improvement_sst.svg',
+    image: '/images/home_improvement_sst.svg',
     link: '/home-living-home-improvement',
   },
   {
     title: 'Bed & Bath',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/bed_sst.svg',
+    image: '/images/bed_sst.svg',
     link: '/home-living-bed-bath',
   },
   {
     title: 'Garden & Outdoor',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/garden_sst.svg',
+    image: '/images/garden_sst.svg',
     link: '/home-living-garden-outdoor',
   },
 ];

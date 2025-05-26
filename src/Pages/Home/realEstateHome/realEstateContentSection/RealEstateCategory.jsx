@@ -13,14 +13,14 @@ export const categories = [
   {
     title: 'BuySmallsmall',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/buysofa.svg',
+    image: '/images/buysofa.svg',
     link: '/shop/food-drink',
     width: '250px',
   },
   {
     title: 'Staysmallsmall',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/beverages.svg',
+    image: '/images/beverages.svg',
     link: '/shop/lifestyle',
   },
 ];

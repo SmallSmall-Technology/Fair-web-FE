@@ -52,14 +52,14 @@ const GetApp = () => {
         <div className="">
           <div className="hidden lg:block lg:h-[276px]">
             <img
-              src="/public/images/iphone-14-pro.svg"
+              src="/images/iphone-14-pro.svg"
               alt="An image showing a phone and the payment plan"
               className="w-full object- h-full "
             />
           </div>
           <div className="block lg:hidden lg:h-[276px]">
             <img
-              src="/public/images/iphone-14-pro.svg"
+              src="/images/iphone-14-pro.svg"
               alt="An image showing a phone and the payment plan"
               className="w-full object-cover"
               loading="lazy"

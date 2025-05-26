@@ -26,7 +26,7 @@ export const categories = [
     title: 'Lifestyle & Consumer goods',
     desc: 'Beauty, Fashion, Household Essentials',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/smallsmall-lifestyle.svg',
+    image: '/images/smallsmall-lifestyle.svg',
     link: '/lifestyle',
   },
   {
@@ -34,7 +34,7 @@ export const categories = [
     desc: 'Rent, Buy, Short-let, Commercials',
     color: 'bg-[#FFDE11]',
     image:
-      '/public/images/vecteezy_cozy-living-room-setup-featuring-a-light-sofa-with_55925717 1.svg',
+      '/images/vecteezy_cozy-living-room-setup-featuring-a-light-sofa-with_55925717 1.svg',
     link: '/real-estate',
   },
 ];

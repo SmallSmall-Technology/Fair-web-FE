@@ -12,12 +12,12 @@ import { getSelectedPaymentPlan } from '../../../features/cart/cartSlice';
 import { DailyPayment } from './productPlan/DailyPaymentPlan/DailyPayment';
 import { handleShareProduct } from '../../../features/product/ShareProduct';
 import { WeeklyPayment } from './productPlan/WeeklyPaymentPlan/WeeklyPayment';
-import { MonthlyPayment } from './productPlan/MonthlyPaymentPlan/MonthlyPayment';
+import MonthlyPayment from './productPlan/MonthlyPaymentPlan/MonthlyPayment';
 
-export const SingleProductDetails = React.memo(({ product }) => {
+export const SingleProductDetails = React.memo(({ product, category }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
-
+  // const [selectedPaymentPlan, setSelectedPaymentPlan] = useState('');
   const navigate = useNavigate();
 
   const productImages = [
@@ -28,7 +28,6 @@ export const SingleProductDetails = React.memo(({ product }) => {
     product?.image || '',
   ];
 
-  const category = product?.category || '';
   const shippingDate = '20 Jan, 2025';
 
   if (!product || !product.image) return <div>Product not found</div>;
@@ -158,7 +157,6 @@ export const SingleProductDetails = React.memo(({ product }) => {
           product={product}
           shippingDate={shippingDate}
           category={category}
-          // selectPlan={selectedPaymentPlan}
         />
       </div>
       <section className="mb-24 mx-5 xl:mx-0">

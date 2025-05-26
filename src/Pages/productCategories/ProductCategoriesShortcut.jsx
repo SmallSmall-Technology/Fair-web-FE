@@ -30,14 +30,14 @@ export const departments = [
   {
     name: 'Electronics',
     subcategories: [
-      { name: 'Phones', link: '/electronics-phones' },
-      { name: 'Computers', link: '/electronics-computers' },
-      { name: 'TV', link: '/electronics-tv' },
-      { name: 'Home Audio & Theater', link: '/electronics-audio-theater' },
-      { name: 'Video Games', link: '/electronics-video-games' },
-      { name: 'Gadgets', link: '/electronics-gadgets' },
-      { name: 'House Appliances', link: '/electronics-house-appliances' },
-      { name: 'Accessories', link: '/electronics-accessories' },
+      { name: 'Phones', link: '/electronics/phones' },
+      { name: 'Computers', link: '/electronics/computers' },
+      { name: 'TV', link: '/electronics/tv' },
+      { name: 'Home Audio & Theater', link: '/electronics/audio-theater' },
+      { name: 'Video Games', link: '/electronics/video-games' },
+      { name: 'Gadgets', link: '/electronics/gadgets' },
+      { name: 'House Appliances', link: '/electronics/house-appliances' },
+      { name: 'Accessories', link: '/electronics/accessories' },
     ],
   },
   {
@@ -94,11 +94,8 @@ export const departments = [
 
 const SingleProductCategory = ({ product }) => {
   return (
-    <li className="flex flex-col items-center hover:cursor-pointer hover:shadow-[0px_4px_0px_rgba(0,0,0,0.2)] hover:scale-105 hover:text-blue-600 transition-all duration-300 ease-in-out focus-within:scale-105 focus-within:text-blue-600">
-      <NavLink
-        to={product.link}
-        className="focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
-      >
+    <li className="flex flex-col items-center hover:cursor-pointer hover:shadow-[0px_4px_0px_rgba(0,0,0,0.2)] hover:scale-105 hover:text-blue-600 transition-all duration-300 ease-in-out focus-within:scale-105 focus-within:underline">
+      <NavLink to={product.link} className="focus:underline">
         <p className="text-sm font-medium text-nowrap">{product.name}</p>
       </NavLink>
     </li>
@@ -164,10 +161,10 @@ export const ProductCategoriesShortcut = ({ categories }) => {
         <div className="relative">
           <p
             ref={buttonRef}
-            className="flex space-x-1 p-2 rounded-[20px] font-medium text-xs border px-5 items-center hover:bg-gray-100 transition-colors duration-200"
+            className="flex space-x-1 p-2 rounded-[20px] font-medium text-xs border border-black px-5 items-center hover:bg-gray-100 transition-colors duration-200"
           >
             <img
-              src="/public/images/category-alt.svg"
+              src="/images/category-alt.svg"
               alt="category icon"
               width={15}
             />
@@ -199,7 +196,7 @@ export const ProductCategoriesShortcut = ({ categories }) => {
                           ${dept.name === selectedDepartment?.name ? 'font-semibold bg-[#FFF8CF]' : ''} 
                           ${dept.name === 'Sales & Offers' ? 'text-[#DB1C5E]' : 'text-gray-800'} 
                           hover:bg-[#FFF8CF] hover:scale-101 hover:shadow-sm 
-                          focus:outline-none focus:bg-[#FFF8CF] focus:scale-101 focus:shadow-sm`}
+                          focus: outline-none focus:bg-[#FFF8CF] focus:scale-101 focus:shadow-sm`}
                         tabIndex={0}
                         onKeyDown={(e) =>
                           e.key === 'Enter' && handleDepartmentClick(dept)
@@ -218,17 +215,13 @@ export const ProductCategoriesShortcut = ({ categories }) => {
                       </h3>
                       <hr className="border-black my-2" />
                       <ul className="mt-2 space-y-2">
-                        {/* {selectedDepartment.subcategories.map((sub, index) => ( */}
                         {selectedDepartment.subcategories.map((sub, index) => (
                           <li key={index}>
                             <Link
                               to={sub.link}
-                              className="cursor-pointer rounded px-2 py-1 text-gray-700 hover:bg-yellow-100 hover:scale-105 hover:shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:bg-yellow-100 focus:scale-105 focus:shadow-sm"
+                              className="cursor-pointer rounded px-2 py-1 text-gray-700 hover:bg-yellow-100 hover:scale-105 hover:shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:bg-yellow-100 focus:scale-105 focus:shadow-sm focus:underline"
                               tabIndex={0}
-                              onKeyDown={(e) =>
-                                e.key === 'Enter' &&
-                                console.log(`Selected ${sub.name}`)
-                              }
+                              onKeyDown={(e) => e.key === 'Enter'}
                             >
                               {sub.name}
                             </Link>
@@ -242,14 +235,11 @@ export const ProductCategoriesShortcut = ({ categories }) => {
           )}
         </div>
         <ul className="flex space-x-6 overflow-x-auto">
-          {/* console.log(departments[0].subcategories[0].name); */}
-
-          {/* {departments[0].subcategories.map((product, index) => ( */}
           {categories.map((product, index) => (
             <SingleProductCategory product={product} key={index} />
           ))}
         </ul>
-        <Link className="hidden lg:flex font-medium text-[#DB1C5E] text-sm hover:text-[#FF4A8A] hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-400 rounded">
+        <Link className="hidden lg:flex font-medium text-[#DB1C5E] text-sm hover:text-[#FF4A8A] hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-400 rounded text-nowrap">
           Sales & Offers
         </Link>
       </div>

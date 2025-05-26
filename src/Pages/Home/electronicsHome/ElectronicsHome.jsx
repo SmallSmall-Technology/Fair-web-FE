@@ -7,14 +7,14 @@ import NewProductsInStore from '../homeLivingLandingPage/homeLivingContentSectio
 
 const ElectronicsHome = () => {
   const categories = [
-    { name: 'Phones', link: '/electronics-phones' },
-    { name: 'Computers', link: '/electronics-computers' },
-    { name: 'TV', link: '/electronics-tv' },
-    { name: 'Home Audio & Theater', link: '/electronics-audio-theater' },
-    { name: 'Video Games', link: '/electronics-video-games' },
-    { name: 'Gadgets', link: '/electronics-gadgets' },
-    { name: 'House Appliances', link: '/electronics-house-appliances' },
-    { name: 'Accessories', link: '/electronics-accessories' },
+    { name: 'Phones', link: '/electronics/phones' },
+    { name: 'Computers', link: '/electronics/computers' },
+    { name: 'TV', link: '/electronics/tv' },
+    { name: 'Home Audio & Theater', link: '/electronics/audio-theater' },
+    { name: 'Video Games', link: '/electronics/video-games' },
+    { name: 'Gadgets', link: '/electronics/gadgets' },
+    { name: 'House Appliances', link: '/electronics/house-appliances' },
+    { name: 'Accessories', link: '/electronics/accessories' },
   ];
   return (
     <>
