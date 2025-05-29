@@ -7,7 +7,6 @@ export const CartItemMonthlyPayment = React.memo(({ product }) => {
     product.paymentPlanDetails?.type === 'monthly'
       ? product.paymentPlanDetails
       : null;
-
   const paymentMonthly = [
     {
       amount: installmentOption.monthlyPayment,

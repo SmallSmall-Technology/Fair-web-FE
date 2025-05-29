@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOngoingOrders } from '../../../features/order/orderSlice';
+import { getCompletedOrders } from '../../../features/order/orderSlice';
 import { getUserFullName, logout } from '../../../features/auth/authSlice';
 
 export const LoggedInUserDropdown = ({
@@ -13,7 +13,7 @@ export const LoggedInUserDropdown = ({
   const menuRef = useRef(null);
   const [isMounted, setIsMounted] = useState(false);
   const userFullName = useSelector(getUserFullName);
-  const ongoingOrders = useSelector(getOngoingOrders);
+  const completedOrders = useSelector(getCompletedOrders);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -62,11 +62,19 @@ export const LoggedInUserDropdown = ({
         </div>
         <hr />
         <div className="px-3 my-1 grid gap-2 py-2 text-xs pb-4">
-          <Link className="text-black no-underline">My Account settings</Link>
-          <Link className="flex justify-between w-full items-center text-black no-underline">
+          <Link
+            to="/user-dashboard/account-profile"
+            className="text-black no-underline"
+          >
+            My Account settings
+          </Link>
+          <Link
+            to="/user-dashboard/shopping-overview/purchases"
+            className="flex justify-between w-full items-center text-black no-underline"
+          >
             <span>Purchases</span>
             <span className="bg-[#FFDE11] px-3 text-[10px]">
-              {ongoingOrders.length}
+              {completedOrders.length}
             </span>
           </Link>
         </div>

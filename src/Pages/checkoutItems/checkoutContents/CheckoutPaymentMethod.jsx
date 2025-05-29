@@ -54,7 +54,6 @@ export const CheckoutPaymentMethod = () => {
     }
 
     try {
-      // Fetch full product details
       const enrichedCartItems = await Promise.all(
         cartItems.map(async (item) => {
           const { data: product } = await axios.get(
@@ -125,9 +124,12 @@ export const CheckoutPaymentMethod = () => {
         closeButton: false,
       });
     }
+    // console.log(values.picked);
   };
 
-  const currentPlan = cartItems.find((item) => item.paymentPlan === 'monthly');
+  const currentPlan = cartItems.find(
+    (item) => item.paymentPlan === 'monthly' || 'weekly' || 'daily'
+  );
 
   return (
     <div>

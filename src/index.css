@@ -36,13 +36,14 @@
   }
 }
 
-.checkout-item:last-child hr:last-child {
-  background-color: black;
-  display: none;
+.checkout-item:last-child {
+  /* background-color: black; */
+  /* display: none; */
 }
 
-.recentlyviewed-item:last-child hr:last-child {
-  display: none;
+.recentlyviewed-item hr:nth-child() {
+  /* display: none; */
+  border: 3px solid red;
 }
 
 .product-image {

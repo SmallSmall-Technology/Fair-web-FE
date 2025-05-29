@@ -22,7 +22,6 @@ const PurchaseCancelled = ({ orders }) => {
 
 export default PurchaseCancelled;
 
-// Reuse the same PurchasedItem component
 const PurchasedItem = ({ item }) => {
   return (
     <article>

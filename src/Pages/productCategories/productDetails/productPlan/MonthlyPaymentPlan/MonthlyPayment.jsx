@@ -65,8 +65,6 @@ const MonthlyPayment = React.memo(
       [installmentOption, paymentDates]
     );
 
-    // console.log('MonthlyPayment rendered due to prop change');
-
     return (
       <>
         <p className="font-medium mb-3 mt-4 mx-5 lg:mx-0">Monthly plan</p>

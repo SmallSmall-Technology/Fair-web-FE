@@ -49,7 +49,7 @@ export const addItem = createAsyncThunk(
           paymentMap[option.type] = option;
         }
       });
-      console.log(paymentMap);
+      // console.log(paymentMap);
 
       const selectedOption =
         paymentMap[selectedPaymentPlan] || paymentMap.upfront;
@@ -70,7 +70,8 @@ export const addItem = createAsyncThunk(
       }
 
       const cartItem = {
-        id: `cart-${product.id}-${selectedPaymentPlan}-${Date.now()}`,
+        // id: `cart-${product.id}-${selectedPaymentPlan}-${Date.now()}`,
+        id: product.id,
         image: product.image,
         name: product.name,
         userId: 'user123',
@@ -94,7 +95,6 @@ export const addItem = createAsyncThunk(
         deliveryDate: product.deliveryDate || 'Jan, 20 2025',
         interest: selectedOption.interest || 0,
       };
-
       const response = await axios.post(`${API_URL}/cart`, cartItem);
 
       const sanitizedResponse = {

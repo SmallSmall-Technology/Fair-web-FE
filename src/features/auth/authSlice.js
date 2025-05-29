@@ -89,7 +89,6 @@ const authSlice = createSlice({
         localStorage.setItem('authToken', action.payload.token);
       })
       .addCase(login.rejected, (state, action) => {
-        // console.log('Login rejected:', action.payload);
         state.loading = false;
         state.error = action.payload;
       })
@@ -104,7 +103,6 @@ const authSlice = createSlice({
         state.token = action.payload.token;
       })
       .addCase(restoreSession.rejected, (state, action) => {
-        // console.log('Restore session rejected:', action.payload);
         state.loading = false;
         state.error = action.payload;
         state.isAuthenticated = false;

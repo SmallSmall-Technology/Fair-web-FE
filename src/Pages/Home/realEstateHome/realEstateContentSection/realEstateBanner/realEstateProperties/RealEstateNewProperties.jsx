@@ -5,7 +5,7 @@ import { Button } from '../../../../../../utils/Button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { fetchAllProducts } from '../../../../../../services/api';
 
-const properties = [
+export const properties = [
   {
     name: '2 bedroom at Cardinal Heritage Estate VGC',
     images: [

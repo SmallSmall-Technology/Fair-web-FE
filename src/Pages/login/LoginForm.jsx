@@ -1,10 +1,10 @@
 import { toast } from 'react-toastify';
+import { Eye, EyeOff } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { Button } from '../../utils/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { login, clearError } from '../../features/auth/authSlice';
-import { Button } from '../../utils/Button';
-import { Eye, EyeOff } from 'lucide-react';
 
 function LoginForm() {
   const dispatch = useDispatch();

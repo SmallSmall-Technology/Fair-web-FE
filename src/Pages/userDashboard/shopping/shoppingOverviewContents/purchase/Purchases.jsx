@@ -9,7 +9,7 @@ import {
   getCompletedOrders,
   getCancelledOrders,
 } from '/src/features/order/orderSlice.js';
-import PurchaseItemsOngoing from './purchaseContentSection/PurchaseItemsOngoing';
+import PurchaseItemsOngoing from './purchaseContentSection/purchasedItemsOngoing/PurchaseItemsOngoing';
 
 const Purchases = () => {
   const [activeTab, setActiveTab] = useState('ongoing');

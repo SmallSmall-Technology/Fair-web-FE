@@ -12,9 +12,7 @@ function SignUpForm() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = (data) => {
-    // console.log(data);
-  };
+  const onSubmit = (data) => {};
 
   return (
     <form className="my-3" onSubmit={handleSubmit(onSubmit)}>

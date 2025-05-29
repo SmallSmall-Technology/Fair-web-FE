@@ -13,14 +13,14 @@ export const CartItem = ({ item, onTogglePlan }) => {
     switch (paymentPlan) {
       case 'upfront':
         return formatCurrency(
-          (paymentPlanDetails?.amount || price) * currentQuantity
+          paymentPlanDetails?.amount * currentQuantity || price
         );
       case 'monthly':
-        return `${formatCurrency(paymentPlanDetails?.monthlyPayment || 0)}`;
+        return `${formatCurrency(paymentPlanDetails?.monthlyPayment * currentQuantity || 0)}`;
       case 'weekly':
-        return `${formatCurrency(paymentPlanDetails?.weeklyPayment || 0)} `;
+        return `${formatCurrency(paymentPlanDetails?.weeklyPayment * currentQuantity || 0)} `;
       case 'daily':
-        return `${formatCurrency(paymentPlanDetails?.dailyPayment || 0)} `;
+        return `${formatCurrency(paymentPlanDetails?.dailyPayment * currentQuantity || 0)} `;
       default:
         return formatCurrency(price * currentQuantity);
     }
