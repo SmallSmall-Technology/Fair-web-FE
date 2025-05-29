@@ -5,7 +5,6 @@ import { getCompletedOrders } from '../../../../../../features/order/orderSlice'
 
 const PurchaseCompleted = () => {
   const completedOrders = useSelector(getCompletedOrders);
-
   return (
     <section>
       {completedOrders.length < 1 ? (
@@ -27,7 +26,7 @@ const PurchaseCompleted = () => {
 
 export default PurchaseCompleted;
 
-const PurchasedItem = ({ item }) => {
+export const PurchasedItem = ({ item }) => {
   const products = item.items;
   return (
     <article>

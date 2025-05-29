@@ -1,12 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { HeartHandshake } from 'lucide-react';
 import { useIsInView } from '../../../hooks/useIsInView';
 import { PaymentOptions } from './productPlan/PaymentOptions';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import CommentBar from '../../../features/reviewsRating/CommentBar';
-import { SingleProductStickyHeader } from '../../../ui/components/header/SingleProductStickyHeader';
 import { getSelectedPaymentPlan } from '../../../features/cart/cartSlice';
-import { useSelector } from 'react-redux';
+import { SingleProductStickyHeader } from '../../../ui/components/header/SingleProductStickyHeader';
 
 export const item_width = 70;
 

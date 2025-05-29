@@ -144,8 +144,9 @@ const ProductCard = ({ product }) => {
           to={`/${id}`}
           className="hover:underline focus:underline focus:outline-none"
         >
-          <p className="text-xs lg:text-sm font-normal leading-[16.94px] min-h-12 cursor-pointer overflow-hidden lg:overflow-visible line-clamp-2 lg:line-clamp-none">
-            {name}
+          {/* <p className="text-xs lg:text-sm font-normal leading-[16.94px] min-h-12 cursor-pointer overflow-hidden lg:overflow-visible line-clamp-2 lg:line-clamp-none"> */}
+          <p className="text-xs lg:text-sm font-normal min-h-10">
+            {name.length > 50 ? name.slice(0, 30) + '...' : name}
           </p>
         </TransitionLink>
         <div className="flex items-center lg:space-x-1">
@@ -167,7 +168,7 @@ const ProductCard = ({ product }) => {
         <div className="flex items-center justify-between lg:flex-col lg:items-start lg:space-y-3">
           <div className="lg:w-[90%] flex justify-between items-center space-x-1">
             <AddToCart product={product} />
-            <div className="flex gap-4">
+            <div className="flex gap-1">
               <AddFavourite product={product} />
               <Button
                 className="rounded-full bg-white p-2 shadow-lg border border-gray-200 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-black focus:border-black"

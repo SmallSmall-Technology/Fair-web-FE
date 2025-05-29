@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
-import { CartItemMonthlyPayment } from '../../productCategories/productDetails/productPlan/MonthlyPaymentPlan/CartItemMonthlyPayment';
+import CartItemFulllPayment from '../../productCategories/productDetails/productPlan/FullPaymentPlan/CartItemFullPayment';
 import { CartItemDailyPayment } from '../../productCategories/productDetails/productPlan/DailyPaymentPlan/CartItemDailyPayment';
 import { CartItemWeeklyPayment } from '../../productCategories/productDetails/productPlan/WeeklyPaymentPlan/CartItemWeeklyPayment';
-import CartItemFulllPayment from '../../productCategories/productDetails/productPlan/FullPaymentPlan/CartItemFullPayment';
+import { CartItemMonthlyPayment } from '../../productCategories/productDetails/productPlan/MonthlyPaymentPlan/CartItemMonthlyPayment';
 
 export const PaymentPlan = ({ item }) => {
   const paymentMethodRef = useRef(null);

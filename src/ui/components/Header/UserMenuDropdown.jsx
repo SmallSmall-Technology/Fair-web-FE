@@ -46,10 +46,22 @@ const UserMenuDropdown = ({ setUserMenuIsOpen, userMenuIsOpen }) => {
           >
             <ul className="flex flex-col space-y-3 p-6 pt-2 h-full w-full">
               {[
-                { label: 'My account', href: '/user-dashboard' },
-                { label: 'Shopping overview', href: '' },
-                { label: 'Notifications', href: '#' },
-                { label: 'Account profile', href: '#' },
+                {
+                  label: 'My account',
+                  href: '/user-dashboard/account-profile',
+                },
+                {
+                  label: 'Shopping overview',
+                  href: '/user-dashboard/shopping-overview/summary',
+                },
+                {
+                  label: 'Notifications',
+                  href: '/user-dashboard/notifications',
+                },
+                {
+                  label: 'Account profile',
+                  href: '/user-dashboard/account-profile',
+                },
               ].map((item, index) => (
                 <li
                   key={index}

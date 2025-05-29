@@ -7,7 +7,6 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000';
 
-// Fetch orders from json-server
 export const fetchOrders = createAsyncThunk('order/fetchOrders', async () => {
   const response = await axios.get(`${API_URL}/orders`);
   return response.data;
@@ -17,9 +16,12 @@ export const createOrder = createAsyncThunk(
   'order/createOrder',
   async ({ cartItems, initialPayment }, { rejectWithValue }) => {
     try {
-      const totalAmount = cartItems.reduce(
-        (sum, item) => sum + item.price * item.quantity,
-        0
+      // const totalAmount = cartItems.reduce(
+      //   (sum, item) => sum + item.price * item.quantity,
+      //   0
+      // );
+      const totalAmount = cartItems.map(
+        (item) => +item.paymentPlanDetails.amount * item.quantity
       );
       const newOrder = {
         id: `ORD${Date.now()}`,
@@ -30,8 +32,9 @@ export const createOrder = createAsyncThunk(
           soldBy: item.soldBy,
           price: item.price,
           quantity: item.quantity,
+          totalAmount,
         })),
-        totalAmount,
+        // totalAmount,
         paidAmount: parseFloat(initialPayment),
         remainingAmount: totalAmount - parseFloat(initialPayment),
         status: 'ongoing',
@@ -151,9 +154,11 @@ const selectOrders = (state) => state.order.orders;
 export const getOngoingOrders = createSelector([selectOrders], (orders) =>
   (orders || []).filter((order) => order.status === 'ongoing')
 );
-
 export const getCompletedOrders = createSelector([selectOrders], (orders) =>
-  (orders || []).filter((order) => order.status === 'completed')
+  (orders || []).filter(
+    (order) =>
+      order.status === 'completed' && order.paidAmount === order.totalAmount
+  )
 );
 
 export const getCancelledOrders = createSelector([selectOrders], (orders) =>

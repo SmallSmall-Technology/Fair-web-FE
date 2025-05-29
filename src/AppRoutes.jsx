@@ -140,6 +140,10 @@ const AppRoutes = () => (
               </Suspense>
             }
           >
+            {/* { label: 'My account', href: '/user-dashboard/account' },
+                { label: 'Shopping overview', href: '/user-dashboard/shopping-overview' },
+                { label: 'Notifications', href: '/user-dashboard/notifications' },
+                { label: 'Account profile', href: '/user-dashboard/account-profile' }, */}
             <Route
               path="summary"
               element={

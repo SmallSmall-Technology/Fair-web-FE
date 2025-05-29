@@ -1,8 +1,8 @@
-import { addItem } from './cartSlice';
-import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { startTransition, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem, setSelectedPaymentPlan } from './cartSlice';
+import { toast } from 'react-toastify';
 
 export const handleAddToCart = (dispatch, product, navigate) => {
   if (!product) return;
@@ -20,7 +20,6 @@ export const handleAddToCart = (dispatch, product, navigate) => {
     slug,
     paymentOptions = [],
   } = product;
-  console.log(product);
   const paymentMap = {};
   paymentOptions.forEach((option) => {
     if (option.type) {
@@ -71,40 +70,38 @@ export const handleAddToCart = (dispatch, product, navigate) => {
   };
 
   dispatch(addItem(newItem));
-
-  // console.log(newItem);
 };
 
-export const AddToCart = ({ product }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+// export const AddToCart = ({ product }) => {
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
 
-  const handleAddToCart = () => {
-    if (!product) return;
+//   const handleAddToCart = () => {
+//     if (!product) return;
 
-    dispatch(addItem(product))
-      .unwrap()
-      .catch((error) => {});
-  };
+//     dispatch(addItem(product))
+//       .unwrap()
+//       .catch((error) => {});
+//   };
 
-  return (
-    <button
-      className="group bg-[#FFDE11] flex items-center rounded-[20px] px-2 py-2 overflow-hidden transition-all duration-300 mb-"
-      onClick={() => startTransition(() => handleAddToCart())}
-    >
-      <div className="flex items-center transition-all duration-300 max-w-[22px] group-hover:max-w-[120px]">
-        <img
-          src="/images/shopping-bag-add.svg"
-          alt="Add to shopping cart"
-          className="w-[18px] lg:w-5 shrink-0"
-        />
-        <span className="ml-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          Add to cart
-        </span>
-      </div>
-    </button>
-  );
-};
+//   return (
+//     <button
+//       className="group bg-[#FFDE11] flex items-center rounded-[20px] px-2 py-2 overflow-hidden transition-all duration-300 mb-"
+//       onClick={() => startTransition(() => handleAddToCart())}
+//     >
+//       <div className="flex items-center transition-all duration-300 max-w-[22px] group-hover:max-w-[120px]">
+//         <img
+//           src="/images/shopping-bag-add.svg"
+//           alt="Add to shopping cart"
+//           className="w-[18px] lg:w-5 shrink-0"
+//         />
+//         <span className="ml-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+//           Add to cart
+//         </span>
+//       </div>
+//     </button>
+//   );
+// };
 // toast
 //   .success
 //   <div className="flex items-center space-x-2">
@@ -123,3 +120,44 @@ export const AddToCart = ({ product }) => {
 //     closeButton: false,
 //   }
 //   ();
+
+export const AddToCart = ({ product }) => {
+  const dispatch = useDispatch();
+  const selectedPaymentPlan = useSelector(
+    (state) => state.cart.selectedPaymentPlan
+  );
+
+  const handleAddToCart = () => {
+    if (!product) return;
+
+    if (!selectedPaymentPlan) {
+      dispatch(setSelectedPaymentPlan('upfront'));
+    }
+
+    startTransition(() => {
+      dispatch(addItem(product))
+        .unwrap()
+        .catch((error) => {
+          console.error('Failed to add to cart:', error);
+        });
+    });
+  };
+
+  return (
+    <button
+      className="group bg-[#FFDE11] flex items-center rounded-[20px] px-2 py-2 overflow-hidden transition-all duration-300 mb-"
+      onClick={handleAddToCart}
+    >
+      <div className="flex items-center transition-all duration-300 max-w-[22px] group-hover:max-w-[120px]">
+        <img
+          src="/images/shopping-bag-add.svg"
+          alt="Add to shopping cart"
+          className="w-[18px] lg:w-5 shrink-0"
+        />
+        <span className="ml-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          Add to cart
+        </span>
+      </div>
+    </button>
+  );
+};
