@@ -8,7 +8,7 @@ const GetApp = () => {
           <h1 className="items-center lg:items-start text-[23px] font-semibold pt-8 lg:pt-0">
             Get the app
           </h1>{' '}
-          <p className="max-w-[289px] lg:min-w-[468px] mx-auto lg:mx-0 mb-1">
+          <p className="max-w-[289px] lg:min-w-[468p] mx-auto lg:mx-0 mb-1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore e
           </p>
