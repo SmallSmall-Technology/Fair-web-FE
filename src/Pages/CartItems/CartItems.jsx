@@ -1,8 +1,17 @@
-import { useParams } from "react-router";
+import { CartFooter } from './CartFooter';
+import Header from '../../ui/components/header/Header';
+import CartItemsContentSection from './cartItemsContent/CartItemsContentSection';
 
 const CartItems = () => {
-  const { id, slug } = useParams();
-  return <p>CartItems{id}</p>;
+  return (
+    <>
+      <Header />
+      <CartItemsContentSection />
+      <div className="lg:mx-[60px] pb-10 mt-40">
+        <CartFooter />
+      </div>
+    </>
+  );
 };
 
 export default CartItems;

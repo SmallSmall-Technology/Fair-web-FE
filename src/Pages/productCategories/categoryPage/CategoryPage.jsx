@@ -1,18 +1,17 @@
-import ProductList from "./ProductList";
-import { useParams } from "react-router";
-import { ArrowUpDown, ChevronRight } from "lucide-react";
-import { products } from "../../../utils/data";
-import { useEffect, useMemo, useState } from "react";
-import CategoryFilterForm from "../filterForms/CategoryFilterForm";
-import { ProductCategoriesShortcut } from "../ProductCategoriesShortcut";
-import { MiniProductCategories } from "../../../ui/components/hero/MiniProductCategories";
+import ProductList from './ProductList';
+import { useParams } from 'react-router-dom';
+import { products } from '../../../utils/data';
+import { useEffect, useMemo, useState } from 'react';
+import { ArrowUpDown, ChevronRight } from 'lucide-react';
+import CategoryFilterForm from '../filterForms/CategoryFilterForm';
+import { ProductCategoriesShortcut } from '../ProductCategoriesShortcut';
+// import { MiniProductCategories } from '../../home/hero/MiniProductCategories';
 
 const CategoryPage = () => {
   const { categoryName } = useParams();
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [sortedGroupedProducts, setSortedGroupedProducts] = useState({});
 
-  // Filter products by category
   const categoryProducts = useMemo(
     () =>
       filteredProducts.filter(
@@ -58,7 +57,6 @@ const CategoryPage = () => {
       }, {});
 
     setSortedGroupedProducts(sorted);
-    console.log(sortedGroupedProducts);
   };
 
   // Determine which grouped products to use
@@ -69,17 +67,17 @@ const CategoryPage = () => {
 
   // Focus on results section for screen readers
   useEffect(() => {
-    const resultsSection = document.getElementById("results");
+    const resultsSection = document.getElementById('results');
     if (resultsSection) resultsSection.focus();
   }, [filteredProducts]);
 
   return (
-    <main className="mx-6 lg:mx-[76px]">
+    <main className="mx-6 lg:mx-[60px]">
       <div className="hidden md:flex">
         <ProductCategoriesShortcut />
       </div>
       <div className="flex md:hidden overflow-x-auto scrollbar-hide">
-        <MiniProductCategories />
+        {/* <MiniProductCategories /> */}
       </div>
       <section className="lg:mx-16">
         <div className="flex space-x-2 items-center mt-4">
@@ -93,8 +91,8 @@ const CategoryPage = () => {
           <header className="mt-8 mb-5 flex items-baseline space-x-2">
             <h1 className="font-bold text-2xl capitalize">{categoryName}</h1>
             <p className="text-xs text-[#6B6B6B]">
-              ({categoryProducts.length}){" "}
-              {categoryProducts.length === 1 ? "result" : "results"}
+              ({categoryProducts.length}){' '}
+              {categoryProducts.length === 1 ? 'result' : 'results'}
             </p>
           </header>
           <div
