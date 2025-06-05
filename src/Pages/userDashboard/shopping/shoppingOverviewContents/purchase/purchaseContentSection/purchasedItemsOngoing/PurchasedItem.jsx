@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import { ChevronRight } from 'lucide-react';
 import { CircularProgress } from './CircularProgress';
+import { ChevronRight } from 'lucide-react';
 import { formatCurrency } from '../../../../../../../utils/FormatCurrency';
 import SingleOngoingPurchaseProgress from './SingleOngoingPurchaseProgress/SingleOngoingPurchaseProgress';
 
