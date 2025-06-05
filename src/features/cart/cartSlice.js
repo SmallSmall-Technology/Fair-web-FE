@@ -96,7 +96,7 @@ export const addItem = createAsyncThunk(
         interest: selectedOption.interest || 0,
       };
       const response = await axios.post(`${API_URL}/cart`, cartItem);
-
+      console.log(cartItem);
       const sanitizedResponse = {
         id: response.data.id,
         image: response.data.image,

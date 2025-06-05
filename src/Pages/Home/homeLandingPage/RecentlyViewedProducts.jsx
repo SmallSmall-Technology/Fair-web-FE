@@ -15,7 +15,7 @@ const RecentlyViewedProducts = () => {
         </div>
       )}
       {recentlyViewed.length !== 0 && (
-        <div className="grid gap-3 md:flex lg:space-x-2">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 xl:flex flex-wrap lg:space-x-2">
           {recentlyViewed.map((product, index) => (
             <ProductCard product={product} key={index} />
           ))}

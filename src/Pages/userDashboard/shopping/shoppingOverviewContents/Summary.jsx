@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
 import WalletBalance from './Wallet';
-import { RecentlyViewedSummary } from './RecentlyViewed';
 import { useSelector } from 'react-redux';
+import { RecentlyViewedSummary } from './recentlyViewed/RecentlyViewedSummary';
 
 import {
   getCancelledOrders,
@@ -61,7 +60,7 @@ const Summary = () => {
         </div>
       </article>
 
-      {!ongoingOrders ? (
+      {ongoingOrders ? (
         <div className="grid grid-cols-1  justify-between gap-4">
           <div className="lg:flex gap-2 w-full">
             <ActiveDirectDebit />

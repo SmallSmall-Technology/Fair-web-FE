@@ -52,7 +52,7 @@ const Purchases = () => {
   };
 
   return (
-    <div className="lg:mx-[60px] py-8">
+    <div className="lg:mx-[30px] xl:mx-[60px] py-8">
       <section>
         <div className="flex justify-between items-center mb-4">
           <h1 className="font-semibold text-2xl">Purchases</h1>
@@ -97,7 +97,7 @@ const Purchases = () => {
         ) : (
           <>
             <div className="flex justify-between items-center">
-              <div className="flex justify-between w-full lg:justify-start lg:space-x-3">
+              <div className="flex justify-between md:justify-start md:space-x-4 w-full lg:justify-start lg:space-x-3">
                 <button
                   className={`p-2 rounded-[30px] text-sm lg:text-base border ${
                     activeTab === 'ongoing'

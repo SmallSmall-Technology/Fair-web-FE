@@ -43,16 +43,16 @@ export const ShoppingOverview = lazy(
   () =>
     import('./pages/userDashboard/shopping/shoppingOverview/ShoppingOverview')
 );
-export const Summary = lazy(
-  () =>
-    import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
-);
-export const Purchases = lazy(
-  () =>
-    import(
-      './pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases'
-    )
-);
+// export const Summary = lazy(
+//   () =>
+//     import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
+// );
+// export const Purchases = lazy(
+//   () =>
+//     import(
+//       './pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases'
+//     )
+// );
 export const Wallet = lazy(
   () => import('./pages/userDashboard/shopping/shoppingOverviewContents/Wallet')
 );
@@ -69,7 +69,7 @@ export const Favorites = lazy(
 export const RecentlyViewed = lazy(
   () =>
     import(
-      './pages/userDashboard/shopping/shoppingOverviewContents/RecentlyViewed'
+      './pages/userDashboard/shopping/shoppingOverviewContents/recentlyViewed/RecentlyViewed'
     )
 );
 export const Notifications = lazy(

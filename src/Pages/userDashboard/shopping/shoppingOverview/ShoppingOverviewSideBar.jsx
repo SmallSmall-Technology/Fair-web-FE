@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 const ShoppingOverviewSideBar = () => {
   return (
-    <ul className="flex items-center lg:items-start pt-2 space-x-3 mb-4 border-b-2 w-full pb-4 lg:border-none lg:pb-0 overflow-x-auto lg:overflow-x-clip lg:flex-col lg:space-y-4 lg:space-x-0">
+    <ul className="lg:hidden xl:block flex items-center lg:items-start pt-2 space-x-3 mb-4 border-b-2 w-full pb-4 lg:border-none lg:pb-0 overflow-x-auto lg:overflow-x-clip lg:flex-col lg:space-y-4 lg:space-x-0">
       {/* <li className="border-b-2 border-black pb-[15px] lg:border-none lg:pb-0"> */}
       <li>
         <NavLink

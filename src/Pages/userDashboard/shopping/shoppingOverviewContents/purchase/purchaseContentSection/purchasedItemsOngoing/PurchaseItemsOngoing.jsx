@@ -2,9 +2,20 @@ import { useSelector } from 'react-redux';
 import { getOngoingOrders } from '../../../../../../../features/order/orderSlice';
 import { PurchasedItem } from './PurchasedItem';
 import { Pagination } from '../../../../../../productCategories/Pagination';
+import { useState } from 'react';
 
 const PurchaseItemsOngoing = () => {
   const ongoingOrders = useSelector(getOngoingOrders);
+  const [expandedIndex, setExpandedIndex] = useState(null);
+  // const orderItems = item.items || [];
+
+  const toggleExpand = (index) => {
+    if (expandedIndex === index) {
+      setExpandedIndex(null);
+    } else {
+      setExpandedIndex(index);
+    }
+  };
 
   return (
     <section>
@@ -16,7 +27,12 @@ const PurchaseItemsOngoing = () => {
         <div>
           {ongoingOrders.map((item, index) => (
             <div key={item.id || index}>
-              <PurchasedItem item={item} />
+              <PurchasedItem
+                item={item}
+                // onToggleExpand={toggleExpand}
+                // expandedIndex={expandedIndex}
+                // setExpandedIndex={setExpandedIndex}
+              />
             </div>
           ))}
           <div className="flex justify-center md:justify-end mt-10">

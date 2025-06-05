@@ -127,8 +127,8 @@ export const CheckoutPaymentMethod = () => {
     // console.log(values.picked);
   };
 
-  const currentPlan = cartItems.find(
-    (item) => item.paymentPlan === 'monthly' || 'weekly' || 'daily'
+  const currentPlan = cartItems.find((item) =>
+    ['monthly', 'weekly', 'daily'].includes(item.paymentPlan)
   );
 
   return (

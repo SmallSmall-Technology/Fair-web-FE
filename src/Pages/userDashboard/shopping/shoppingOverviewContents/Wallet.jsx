@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { getOngoingOrders } from '../../../../features/order/orderSlice';
 
 const Wallet = () => {
   return (
@@ -12,9 +14,12 @@ const Wallet = () => {
 export default Wallet;
 
 const WalletBalance = () => {
+  const ongoingOrders = useSelector(getOngoingOrders);
   return (
     <section>
-      <h1 className="font-semibold text-2xl mb-4"> Wallet balance</h1>
+      <h1 className="lg:hidden font-semibold text-2xl mb-4"> Wallet balance</h1>
+      <h1 className="hidden md:block font-semibold text-2xl mb-4"> Wallet </h1>
+
       <article className="border rounded-[10px] py-6 pb- px-6 w-full bg-[#FFDE11] grid gap-4">
         <div className="grid gap-2">
           <p>Available balance</p>
@@ -28,18 +33,20 @@ const WalletBalance = () => {
             </Link>
           </p>
         </div>
-        <div className="grid gap-2">
-          <p>Credit balance</p>
-          <p className="flex items-center space-x-2 font-semibold text-3xl">
-            N0.0{' '}
-            <Link
-              to="/user-dashboard/shopping-overview/wallet"
-              aria-label="see more"
-            >
-              <ChevronRight size={24} className="cursor-pointer" />
-            </Link>
-          </p>
-        </div>
+        {ongoingOrders && (
+          <div className="grid gap-2">
+            <p>Credit balance</p>
+            <p className="flex items-center space-x-2 font-semibold text-3xl">
+              N0.0{' '}
+              <Link
+                to="/user-dashboard/shopping-overview/wallet"
+                aria-label="see more"
+              >
+                <ChevronRight size={24} className="cursor-pointer" />
+              </Link>
+            </p>
+          </div>
+        )}
       </article>
     </section>
   );

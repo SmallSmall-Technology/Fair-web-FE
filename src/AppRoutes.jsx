@@ -23,8 +23,8 @@ import {
   // SubCategoryPage,
   UserDashboard,
   ShoppingOverview,
-  Summary,
-  Purchases,
+  // Summary,
+  // Purchases,
   Wallet,
   DirectDebit,
   Favorites,
@@ -40,6 +40,13 @@ import CheckoutPaymentSkeleton from './ui/components/Skeletons/CheckoutPaymentSk
 import DashboardSummarySkeleton from './ui/components/Skeletons/DashboardSummarySkeleton';
 import LandingPageSkeleton from './ui/components/Skeletons/LnadingPageSkeleton';
 import SubCategoryPage from './pages/productCategories/SubCategoryPage';
+
+import Summary from './pages/userDashboard/shopping/shoppingOverviewContents/Summary';
+import Purchases from './pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases';
+// export const Summary = lazy(
+//   () =>
+//     import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
+// );
 
 const LazyRoute = ({ element }) => (
   <Suspense fallback={<ProductDetailsSkeleton showAside showRecommendations />}>
@@ -147,17 +154,17 @@ const AppRoutes = () => (
             <Route
               path="summary"
               element={
-                <Suspense fallback={<DashboardSummarySkeleton />}>
-                  <Summary />
-                </Suspense>
+                // <Suspense fallback={<DashboardSummarySkeleton />}>
+                <Summary />
+                // {/* </Suspense> */}
               }
             />
             <Route
               path="purchases"
               element={
-                <Suspense fallback={<DashboardSummarySkeleton />}>
-                  <Purchases />
-                </Suspense>
+                // <Suspense fallback={<DashboardSummarySkeleton />}>
+                <Purchases />
+                // {/* </Suspense> */}
               }
             />
             <Route

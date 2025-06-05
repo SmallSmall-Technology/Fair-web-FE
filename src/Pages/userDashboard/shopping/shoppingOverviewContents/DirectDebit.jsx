@@ -27,9 +27,7 @@ export const ActiveDirectDebit = () => {
         <Link
           to="/user-dashboard/shopping-overview/purchased"
           className="underline font-medium text-[#737376] text-sm"
-        >
-          {/* {ongoingOrders < 1 ? '' : 'See all'} */}
-        </Link>
+        ></Link>
       </div>
 
       <section className="grid grid-cols-1 gap-4 border w-full rounded-[10px] p-2">
@@ -55,10 +53,10 @@ const SingleActiveDirectDebit = ({ item }) => {
           <Link>
             <div className="flex lg:items-center py-3 px- justify-between text-balance">
               <div className="flex lg:items-center md:space-x-3 gap-1">
-                <div className="h-[60px] w-[60px]">
+                <div className="h-[60px] w-[60px] border rounded-xl flex justify-center items-center">
                   <img
                     src={product?.image || '/placeholder-image.jpg'}
-                    className="h-full w-full rounded-lg object-cover"
+                    className="h-[44px] w-[44px] rounded-lg object-cover"
                     alt={product?.name}
                   />
                 </div>
