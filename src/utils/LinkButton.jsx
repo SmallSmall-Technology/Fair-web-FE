@@ -1,17 +1,10 @@
-import { Link } from "react-router";
-import { styled } from "styled-components";
-
-const StyledLink = styled(Link)`
-  border-radius: 20px;
-  // background: #ffde11;
-  font-size: 14px;
-`;
+import { Link } from 'react-router-dom';
 
 function LinkButton({ children, link, className }) {
   return (
-    <StyledLink to={link} className={className}>
+    <Link to={link} className={`w-full inline-block text-sm ${className}`}>
       {children}
-    </StyledLink>
+    </Link>
   );
 }
 

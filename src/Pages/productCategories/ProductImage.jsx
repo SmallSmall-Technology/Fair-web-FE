@@ -1,4 +1,3 @@
-// Reusable ProductImage Component
 export const ProductImage = ({ image, alt, className }) => {
   return (
     <li
