@@ -1,14 +1,14 @@
-import { useState, memo } from 'react';
 import { Search } from 'lucide-react';
+import { useState, memo } from 'react';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import PurchaseCompleted from './purchaseContentSection/PurchaseCompleted';
-import PurchaseCancelled from './purchaseContentSection/PurchaseCancelled';
 import {
   getOngoingOrders,
   getCompletedOrders,
   getCancelledOrders,
 } from '/src/features/order/orderSlice.js';
+import PurchaseCancelled from './purchaseContentSection/purchaseItemCancelled/PurchaseCancelled';
+import PurchaseCompleted from './purchaseContentSection/purchasedItemCompleted/PurchaseCompleted';
 import PurchaseItemsOngoing from './purchaseContentSection/purchasedItemsOngoing/PurchaseItemsOngoing';
 
 const Purchases = () => {
@@ -52,10 +52,10 @@ const Purchases = () => {
   };
 
   return (
-    <div className="lg:mx-[30px] xl:mx-[60px] py-8">
+    <div className="lg:mx-[30p] xl:mx-[60p] py-8 md:py-0">
       <section>
         <div className="flex justify-between items-center mb-4">
-          <h1 className="font-semibold text-2xl">Purchases</h1>
+          <h1 className="font-semibold text-2xl mb-4">Purchases</h1>
           <div className="flex lg:hidden">
             <form
               onSubmit={handleSubmitMobile((data) =>
@@ -139,19 +139,48 @@ const Purchases = () => {
                     handleSearchQuery(data, resetDesktop)
                   )}
                 >
+                  {activeTab === 'completed' && (
+                    <p className="w-full flex justify-end items-center">
+                      <span className="text-[#96959F] text-sm mr-1">
+                        Completed{' '}
+                      </span>
+                      {completedOrders.length}
+                    </p>
+                  )}
+
+                  {activeTab === 'ongoing' && (
+                    <p className="w-full flex justify-end items-center">
+                      <span className="text-[#96959F] text-sm mr-1">
+                        Ongoing{' '}
+                      </span>
+                      {onGoingOrders.length}
+                    </p>
+                  )}
+
+                  {activeTab === 'cancelled' && (
+                    <p className="w-full flex justify-end items-center">
+                      <span className="text-[#96959F] text-sm mr-1">
+                        Cancelled{' '}
+                      </span>
+                      {cancelledOrders.length}
+                    </p>
+                  )}
                   <div className="flex space-x-1">
-                    <input
-                      type="text"
-                      {...registerDesktop('search')}
-                      placeholder="Search by order ID"
-                      className="rounded-md p-2 border text-sm"
-                    />
-                    <button
-                      type="submit"
-                      className="flex items-center border-[#737376] p-2 bg-[#FFDE11] rounded"
-                    >
-                      <Search size={15} /> Search
-                    </button>
+                    <div className="flex space-x-1">
+                      <input
+                        type="text"
+                        {...registerDesktop('search')}
+                        placeholder="Search by order ID"
+                        className="rounded-md p-2 border text-sm"
+                      />
+
+                      <button
+                        type="submit"
+                        className="flex items-center border-[#737376] p-2 bg-[#FFDE11] rounded"
+                      >
+                        <Search size={15} /> Search
+                      </button>
+                    </div>
                   </div>
                 </form>
               </div>

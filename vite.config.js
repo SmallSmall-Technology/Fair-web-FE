@@ -4,14 +4,14 @@ import viteCompression from 'vite-plugin-compression';
 import fs from 'fs';
 
 export default defineConfig({
-  server: {
-    https: {
-      key: fs.readFileSync('./localhost-key.pem'),
-      cert: fs.readFileSync('./localhost.pem'),
-    },
-    host: 'localhost',
-    port: 5174,
-  },
+  // server: {
+  //   https: {
+  //     key: fs.readFileSync('./localhost-key.pem'),
+  //     cert: fs.readFileSync('./localhost.pem'),
+  //   },
+  //   host: 'localhost',
+  //   port: 5174,
+  // },
   plugins: [
     react(),
     viteCompression({ algorithm: 'gzip' }),
