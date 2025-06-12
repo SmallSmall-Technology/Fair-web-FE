@@ -2938,33 +2938,87 @@
       "status": "completed",
       "createdAt": "2025-06-05T10:44:16.395Z",
       "orderDate": "Jun 05, 2025"
+    },
+    {
+      "id": "ORD1749563138887",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "totalPrice": 207000,
+          "quantity": 1,
+          "totalAmount": 207000,
+          "paidAmount": 207000,
+          "remainingAmount": 0,
+          "id": "1",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 207000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "207000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        }
+      ],
+      "paidAmount": 207000,
+      "totalAmount": 207000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-06-10T13:45:38.887Z",
+      "orderDate": "Jun 10, 2025"
+    },
+    {
+      "id": "ORD1749563218233",
+      "items": [
+        {
+          "paymentPlan": "monthly",
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 150000,
+          "totalPrice": 150000,
+          "quantity": 1,
+          "totalAmount": 500000,
+          "paidAmount": 150000,
+          "remainingAmount": 350000,
+          "id": "2",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "monthly",
+            "amount": "500000",
+            "months": 6,
+            "monthlyPayment": 150000,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": 500000,
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "ongoing"
+        }
+      ],
+      "paidAmount": 150000,
+      "totalAmount": 500000,
+      "remainingAmount": 350000,
+      "status": "ongoing",
+      "createdAt": "2025-06-10T13:46:58.233Z",
+      "orderDate": "Jun 10, 2025"
     }
   ],
-  "cart": [
-    {
-      "id": "5",
-      "image": "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "Xiaomi Mi 12",
-      "userId": "user123",
-      "productId": "5",
-      "quantity": 7,
-      "price": 200000,
-      "totalPrice": 1400000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 200000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": "200000",
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    }
-  ]
+  "cart": []
 }

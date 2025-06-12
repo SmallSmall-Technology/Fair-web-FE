@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
-import { getRecentlyViewed } from '../../../../../features/product/recentlyViewedSlice';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { SingleRecentlyViewed } from './SingleRecentlyViewed';
+import { getRecentlyViewed } from '../../../../../features/product/recentlyViewedSlice';
 
 export const RecentlyViewedSummary = () => {
   const recentlyViewed = useSelector(getRecentlyViewed);
@@ -16,12 +16,14 @@ export const RecentlyViewedSummary = () => {
           {recentlyViewed < 1 ? '' : 'See all'}
         </Link>
       </div>
-      <section className="grid grid-cols-1 gap-4 border w-full rounded-[10px] p-2">
+      <section className="grid grid-cols-1 gap-4 border w-full rounded-[10px]">
         {recentlyViewed.length === 0 ? (
-          <p className="text-center text-gray-500">No recently viewed items</p>
+          <p className=" text-[#A6A6A6] bg-[#F6F6F6] p-4 rounded-[10px]">
+            No recently viewed items
+          </p>
         ) : (
           recentlyViewed.slice(0, 2).map((item, index) => (
-            <ul key={index} className="recently-viewed">
+            <ul key={index} className="recently-viewed p-2">
               <SingleRecentlyViewed item={item} key={item.id} />
             </ul>
           ))

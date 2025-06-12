@@ -18,14 +18,14 @@ export const RecentlyPurchased = () => {
         </Link>
       </div>
 
-      <section className="grid grid-cols-1 gap-4 border w-full rounded-[10px] p-2">
+      <section className="grid grid-cols-1 gap-4 border w-full rounded-[10px]">
         {recentlyPurchased.length === 0 ? (
-          <p className="text-center text-gray-500">
+          <p className=" text-[#A6A6A6] bg-[#F6F6F6] p-4 rounded-[10px]">
             No recently purchased item
           </p>
         ) : (
           recentlyPurchased.slice(0, 2).map((item, index) => (
-            <ul key={index}>
+            <ul key={index} className="p-2">
               <SingleRecentlyPurchased items={item} key={item.id} />
             </ul>
           ))

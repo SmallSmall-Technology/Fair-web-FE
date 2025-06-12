@@ -7,8 +7,9 @@ import {
   getCompletedOrders,
   getOngoingOrders,
 } from '../../../../features/order/orderSlice';
-import { ActiveDirectDebit } from './DirectDebit';
 import { RecentlyPurchased } from './purchase/RecentlyPurchased';
+import { ActiveDirectDebit } from './DirectDebit/ActiveDirectDebit';
+import { CreditScoreCard } from '../shoppingOverview/CreditScoreCard';
 
 const Summary = () => {
   const ongoingOrders = useSelector(getOngoingOrders);
@@ -82,6 +83,9 @@ const Summary = () => {
           </div>
         </div>
       )}
+      <div className="lg:hidden">
+        <CreditScoreCard />
+      </div>
     </section>
   );
 };

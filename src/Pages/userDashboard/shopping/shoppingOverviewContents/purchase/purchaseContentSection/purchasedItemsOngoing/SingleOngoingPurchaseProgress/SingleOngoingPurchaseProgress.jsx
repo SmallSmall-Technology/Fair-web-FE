@@ -1,10 +1,10 @@
+import React from 'react';
 import { ChevronRight } from 'lucide-react';
+import { PaymentProgress } from './PaymentProgress';
 import { CircularProgress } from '../CircularProgress';
+import { DeliveryProgress } from './DeliveryProgress';
 import { progressData } from '../../../../../../userDashboardData';
 import { formatCurrency } from '../../../../../../../../utils/FormatCurrency';
-import { PaymentProgress } from './PaymentProgress';
-import { DeliveryProgress } from './DeliveryProgress';
-import React from 'react';
 
 const SingleOngoingPurchaseProgress = React.memo(
   ({ product, toggleExpand, index }) => {
@@ -65,7 +65,7 @@ const SingleOngoingPurchaseProgress = React.memo(
                   <span>Installment duration</span>
                   <br />
                   <span className="text-base font-medium">
-                    {product.paymentPlanDetails.months} months
+                    {product.paymentPlanDetails?.months} months
                   </span>
                 </div>
               )}

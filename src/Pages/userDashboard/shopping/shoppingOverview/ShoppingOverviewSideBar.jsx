@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { CreditScoreCard } from './CreditScoreCard';
 
 const ShoppingOverviewSideBar = () => {
   return (
@@ -75,6 +76,9 @@ const ShoppingOverviewSideBar = () => {
         >
           Recently viewed
         </NavLink>
+      </li>
+      <li className="pt-4 hidden lg:block">
+        <CreditScoreCard />
       </li>
     </ul>
   );
