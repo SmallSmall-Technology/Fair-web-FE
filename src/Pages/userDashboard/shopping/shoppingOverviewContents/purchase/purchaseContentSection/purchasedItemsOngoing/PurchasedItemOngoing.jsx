@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react';
 import { formatCurrency } from '../../../../../../../utils/FormatCurrency';
 import SingleOngoingPurchaseProgress from './SingleOngoingPurchaseProgress/SingleOngoingPurchaseProgress';
 
-export const PurchasedItem = React.memo(({ item }) => {
+export const PurchasedItemOngoing = React.memo(({ item }) => {
   const [expandedIndex, setExpandedIndex] = useState(null);
   const orderItems = item.items || [];
 
@@ -25,9 +25,9 @@ export const PurchasedItem = React.memo(({ item }) => {
                 <div className="flex gap-2">
                   <div className="min-w-[51px] max-w-[51px] h-[51px] lg:h-24 lg:min-w-24 lg:max-w-24">
                     <img
-                      src={orderItem.image || '/placeholder-image.jpg'}
+                      src={orderItem.image}
                       className="h-full w-full rounded-lg object-cover border bg-[#FAFAFA] border-[#E8EBEA] p-1"
-                      alt={orderItem.name || 'Product image'}
+                      alt={`${orderItem.name.slice(0, 30) + '...'}`}
                     />
                   </div>
                   <p className="mb-4 font-medium lg:hidden ">
