@@ -4,7 +4,7 @@ import { categories } from './PopularCategories';
 export const Lifestyle = () => {
   return (
     <div
-      className={`${categories[0].color} ${categories[0]?.width}  p-4 rounded-xl  lg:grid items-start justify-between  pt-8 w-full`}
+      className={`${categories[0].color} ${categories[0]?.width}  p-4 lg:rounded-xl  lg:grid items-start justify-between  pt-8 w-full px-11 lg:px-4`}
     >
       <div className="mb-4 lg:mb-0 lg:pl-2">
         <p className="lg:text-lg text-[#222224]">{categories[2].desc}</p>

@@ -4,7 +4,7 @@ import { categories } from './PopularCategories';
 export const RealEstate = () => {
   return (
     <div
-      className={`${categories[3].color} ${categories[3]?.width} pb-0 rounded-xl  flex flex-col-reverse lg:flex lg:flex-row place-items-start justify-between p-4 pt-8 lg:pt-0 lg:px-14  w-full`}
+      className={`${categories[3].color} ${categories[3]?.width} pb-0 lg:rounded-xl  flex flex-col-reverse lg:flex lg:flex-row place-items-start justify-between p-4 pt-8 lg:pt-0 lg:px-14 px-11 w-full`}
     >
       <div
         className={` ${categories[3]?.width}  ${categories[3]?.height} mb-4 lg:mb-0 mx-auto lg:mx-0`}
