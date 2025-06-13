@@ -77,7 +77,7 @@ const ShoppingOverviewSideBar = () => {
           Recently viewed
         </NavLink>
       </li>
-      <li className="pt-4 hidden lg:block">
+      <li className="pt-4 hidden lg:block px-1">
         <CreditScoreCard />
       </li>
     </ul>

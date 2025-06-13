@@ -22,7 +22,9 @@ const ElectronicsHome = () => {
       <div className="mx-5">
         <ElectronicsHomeHeroBanner />
         <HeroTextSection />
-        <ElectronicsCategory />
+      </div>
+      <ElectronicsCategory />
+      <div className="mx-5">
         <NewProductsInStore />
         <TodaysDeal />
       </div>

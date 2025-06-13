@@ -61,9 +61,9 @@ export const categories = [
 
 export const ElectronicsCategory = () => {
   return (
-    <section className=" py-8">
-      <h3 className="text-3xl font-semibold">Electronics</h3>
-      <p className="mb-4">Shop by category</p>
+    <section className=" py-8 md:mx-5">
+      <h3 className="text-3xl font-semibold mx-5">Electronics</h3>
+      <p className="mb-4 mx-5">Shop by category</p>
 
       <div className="hidden md:grid grid-cols-2 gap-4 lg:hidden">
         <Phones />
@@ -76,17 +76,17 @@ export const ElectronicsCategory = () => {
         <VideoGames />
       </div>
 
-      <div className="w-full md:hidden lg:flex gap-4 ">
+      <div className="w-full md:hidden lg:flex grid gap-8 lg:gap-4 mb-8 lg:mb-4">
         <Phones />
         <Computers />
         <TV />
       </div>
-      <div className="w-full md:hidden lg:flex gap-4 ">
+      <div className="w-full md:hidden lg:flex lg:gap-4 grid gap-8 mb-8 lg:mb-4">
         <HomeAppliances />
         <HomeAudioTheater />
         <Gadgets />
       </div>
-      <div className="w-full md:hidden lg:flex gap-4 ">
+      <div className="w-full md:hidden lg:flex lg:gap-4 grid gap-8">
         <VideoGames />
         <Accessories />
       </div>

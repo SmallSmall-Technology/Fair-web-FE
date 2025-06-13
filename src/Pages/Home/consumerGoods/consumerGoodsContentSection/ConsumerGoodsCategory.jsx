@@ -68,9 +68,11 @@ export const categories = [
 
 export const ConsumerGoodsCategory = () => {
   return (
-    <section className=" py-8">
-      <h3 className="text-3xl font-semibold">Lifestyle & Consumer goods</h3>
-      <p className="mb-4">Shop by category</p>
+    <section className=" py-8 lg:mx-5">
+      <h3 className="text-3xl font-semibold mx-5">
+        Lifestyle & Consumer goods
+      </h3>
+      <p className="mb-4 mx-5">Shop by category</p>
 
       <div className="hidden md:grid grid-cols-2 gap-4 lg:hidden">
         <PersonalCare />
@@ -84,17 +86,17 @@ export const ConsumerGoodsCategory = () => {
         <Books />
       </div>
 
-      <div className="w-full md:hidden lg:flex gap-4 ">
+      <div className="w-full md:hidden lg:flex grid gap-8 lg:gap-4 mb-8 lg:mb-4">
         <PersonalCare />
         <Beauty />
         <Fashion />
       </div>
-      <div className="w-full md:hidden lg:flex gap-4 ">
+      <div className="w-full md:hidden lg:flex lg:gap-4 grid gap-8 mb-8 lg:mb-4">
         <Health />
         <BabyMotherCare />
         <Household />
       </div>
-      <div className="w-full md:hidden lg:flex gap-4 ">
+      <div className="w-full md:hidden lg:flex lg:gap-4 grid gap-8">
         <Toys />
         <Entertainment />
         <Books />
