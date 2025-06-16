@@ -1,4 +1,4 @@
-import WalletBalance from './Wallet';
+import WalletBalance from './CreditWallet';
 import { useSelector } from 'react-redux';
 import { RecentlyViewedSummary } from './recentlyViewed/RecentlyViewedSummary';
 

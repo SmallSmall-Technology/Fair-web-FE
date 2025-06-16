@@ -25,7 +25,7 @@ import {
   ShoppingOverview,
   // Summary,
   // Purchases,
-  Wallet,
+  CreditWallet,
   DirectDebit,
   Favorites,
   RecentlyViewed,
@@ -168,10 +168,10 @@ const AppRoutes = () => (
               }
             />
             <Route
-              path="wallet"
+              path="credit-wallet"
               element={
                 <Suspense fallback={<DashboardSummarySkeleton />}>
-                  <Wallet />
+                  <CreditWallet />
                 </Suspense>
               }
             />

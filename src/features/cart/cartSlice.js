@@ -72,6 +72,7 @@ export const addItem = createAsyncThunk(
       const cartItem = {
         // id: `cart-${product.id}-${selectedPaymentPlan}-${Date.now()}`,
         id: product.id,
+        category: product.category,
         image: product.image,
         name: product.name,
         userId: 'user123',

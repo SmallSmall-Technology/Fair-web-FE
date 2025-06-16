@@ -11,7 +11,7 @@ const SingleOngoingPurchaseProgress = React.memo(
     const payments = progressData.payments;
     const deliveries = progressData.deliveries;
     return (
-      <div className="max-w-4xl mx-auto bg-white md:shadow-lg rounded-lg md:p-6 space-y-6 text-gray-800 md:border">
+      <div className="max-w-4x mx-auto bg-white md:shadow-lg rounded-lg md:p-6 space-y-6 text-gray-800 md:border">
         <div className="flex items-start gap-6">
           <div className="bg-[#FAFAFA] h-[104px] w-[104px] border border-[#E8EBEA] rounded-[7px] flex justify-center items-center">
             <img
