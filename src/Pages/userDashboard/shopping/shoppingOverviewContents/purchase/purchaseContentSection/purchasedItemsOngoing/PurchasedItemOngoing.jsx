@@ -40,26 +40,48 @@ export const PurchasedItemOngoing = React.memo(({ item }) => {
                   </p>
 
                   <div className="flex justify-between space-x-5  ">
-                    <div className="flex space-x-6">
-                      <div>
-                        <p className="text-[11px] text-[#222224]">Order ID</p>
-                        <p className="text-[12px] text-[#222224]">
-                          <strong>{item?.i || 'I7xAA6b'}</strong>
-                        </p>
+                    <div>
+                      <div className="flex space-x-6">
+                        <div>
+                          <p className="text-[11px] text-[#222224]">Order ID</p>
+                          <p className="text-[12px] font-medium text-[#222224]">
+                            <span>{item?.i || 'I7xAA6b'}</span>
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-[11px]  text-[#222224]">
+                            Order Date
+                          </p>
+                          <p className="text-[12px] font-medium text-[#222224]">
+                            <span>{item.orderDate || '20 Jan, 2025'}</span>
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-[11px] text-[#222224]">Sold By</p>
+                          <p className="text-[12px] font-medium text-[#222224]">
+                            <span>{orderItem.soldBy || 'Fair'}</span>
+                          </p>
+                        </div>
                       </div>
                       <div>
-                        <p className="text-[11px] text-[#222224]">Order Date</p>
-                        <p className="text-[12px] text-[#222224]">
-                          <strong>{item.orderDate || '20 Jan, 2025'}</strong>
+                        <hr className="my-2" />
+                        <p className="text-[11px]">
+                          Interest free credit to unlock
                         </p>
-                      </div>
-                      <div>
-                        <p className="text-[11px] text-[#222224]">Sold By</p>
-                        <p className="text-[12px] text-[#222224]">
-                          <strong>{orderItem.soldBy || 'Fair'}</strong>
-                        </p>
+                        <div className="flex space-x-3 items-center">
+                          <p className="text-[#E3185C] font-semibold text-sm">
+                            N20,000.00
+                          </p>
+                          <a
+                            href="#"
+                            className="text-[11px] text-[#222224] underline"
+                          >
+                            Read our t&c
+                          </a>
+                        </div>
                       </div>
                     </div>
+
                     <hr />
                     <div className="h-ful w-ful rounded-lg object-cover border bg-[#FAFAFA] border-[#E8EBEA] py-1 px-3">
                       <div className="flex space-x-3">
@@ -77,7 +99,9 @@ export const PurchasedItemOngoing = React.memo(({ item }) => {
                           </p>
                           <div className="text-[12px] text-[#222224] flex items-center space-x-1">
                             <p>
-                              {formatCurrency(orderItem.price)} paid of{' '}
+                              <span>
+                                {formatCurrency(orderItem.price)} paid of{' '}
+                              </span>
                               {formatCurrency(Number(orderItem.totalAmount))}
                             </p>
                             <img src="/images/time-half-past.svg" alt="clock" />
@@ -100,19 +124,19 @@ export const PurchasedItemOngoing = React.memo(({ item }) => {
                     <div>
                       <p className="text-[11px] text-[#222224]">Order ID</p>
                       <p className="text-[12px] text-[#222224]">
-                        <strong>{item?.i || 'I7xAA6b'}</strong>
+                        <span>{item?.i || 'I7xAA6b'}</span>
                       </p>
                     </div>
                     <div>
                       <p className="text-[11px] text-[#222224]">Order Date</p>
-                      <p className="text-[12px] text-[#222224]">
-                        <strong>{item.orderDate || '20 Jan, 2025'}</strong>
+                      <p className="text-[12px] font-medium text-[#222224]">
+                        <span>{item.orderDate || '20 Jan, 2025'}</span>
                       </p>
                     </div>
                     <div>
                       <p className="text-[11px] text-[#222224]">Sold By</p>
-                      <p className="text-[12px] text-[#222224]">
-                        <strong>{orderItem.soldBy || 'Fair'}</strong>
+                      <p className="text-[12px] font-medium text-[#222224]">
+                        <span>{orderItem.soldBy || 'Fair'}</span>
                       </p>
                     </div>
                     <div className="flex flex-col items-end lg:hidden">
@@ -127,7 +151,7 @@ export const PurchasedItemOngoing = React.memo(({ item }) => {
                         <p className="text-[11px] text-[#222224]">
                           Next due payment
                         </p>
-                        <p className="text-[12px] text-[#222224]">
+                        <p className="text-[12px] font-medium text-[#222224]">
                           Jan 24, 2025
                         </p>
                       </div>
@@ -135,7 +159,7 @@ export const PurchasedItemOngoing = React.memo(({ item }) => {
                         <p className="text-[11px] text-[#222224]">
                           Payment status
                         </p>
-                        <p className="text-[12px] text-[#222224] flex items-start space-x-1">
+                        <p className="text-[12px] font-medium text-[#222224] flex items-start space-x-1">
                           <span>{formatCurrency(orderItem.price)}</span>
                           <span>paid of</span>
                           <span>
