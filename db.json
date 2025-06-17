@@ -1333,5 +1333,31 @@
     }
   ],
   "orders": [],
-  "cart": []
+  "cart": [
+    {
+      "id": "1",
+      "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+      "userId": "user123",
+      "productId": "1",
+      "quantity": 2,
+      "price": 69000,
+      "totalPrice": 138000,
+      "paymentPlan": "monthly",
+      "paymentPlanDetails": {
+        "type": "monthly",
+        "amount": 207000,
+        "months": 6,
+        "monthlyPayment": 69000,
+        "weeks": 0,
+        "weeklyPayment": 0,
+        "days": 0,
+        "dailyPayment": 0,
+        "totalPrice": 207000,
+        "upfrontPayment": 0
+      },
+      "deliveryDate": "Jan, 20 2025",
+      "interest": 0
+    }
+  ]
 }

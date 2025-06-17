@@ -14,7 +14,7 @@ const PurchaseCompleted = () => {
         <div>
           {completedOrders.map((item, index) => (
             <div key={item.id || index}>
-              <SingleCompletedPurchasedItem item={item} />
+              <SingleCompletedPurchasedItem item={item} key={index} />
             </div>
           ))}
         </div>

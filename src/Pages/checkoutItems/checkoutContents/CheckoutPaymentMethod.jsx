@@ -124,7 +124,6 @@ export const CheckoutPaymentMethod = () => {
         closeButton: false,
       });
     }
-    // console.log(values.picked);
   };
 
   const currentPlan = cartItems.find((item) =>
