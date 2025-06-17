@@ -126,6 +126,23 @@ export const AddToCart = ({ product }) => {
   const selectedPaymentPlan = useSelector(
     (state) => state.cart.selectedPaymentPlan
   );
+  const navigate = useNavigate();
+
+  // const handleAddToCart = () => {
+  //   if (!product) return;
+
+  //   if (!selectedPaymentPlan) {
+  //     dispatch(setSelectedPaymentPlan('upfront'));
+  //   }
+
+  //   startTransition(() => {
+  //     dispatch(addItem(product))
+  //       .unwrap()
+  //       .catch((error) => {
+  //         console.error('Failed to add to cart:', error);
+  //       });
+  //   });
+  // };
 
   const handleAddToCart = () => {
     if (!product) return;
@@ -134,13 +151,41 @@ export const AddToCart = ({ product }) => {
       dispatch(setSelectedPaymentPlan('upfront'));
     }
 
-    startTransition(() => {
-      dispatch(addItem(product))
-        .unwrap()
-        .catch((error) => {
-          console.error('Failed to add to cart:', error);
-        });
-    });
+    try {
+      startTransition(() => {
+        dispatch(addItem(product));
+        toast.success(
+          <div className="flex items-center space-x-2 justify-between">
+            <div className="flex space-x-1 items-center">
+              <span className="font-light text-base">Item added to cart</span>
+              <img src="/images/blackcheckcircle.svg" alt="icon" />
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-black">|</span>
+              <button
+                onClick={() => navigate('/cart-items')}
+                className="underline text-base font-medium"
+              >
+                View cart
+              </button>
+            </div>
+          </div>,
+          {
+            icon: false,
+            type: 'success',
+            className:
+              'bg-[#FFDE11] text-black text-sm px-2 py-1 rounded-md min-h-0',
+            bodyClassName: 'm-0 p-0',
+            closeButton: false,
+          }
+        );
+      });
+
+      return true;
+    } catch (error) {
+      console.error('Add to cart failed:', error);
+      return false;
+    }
   };
 
   return (
