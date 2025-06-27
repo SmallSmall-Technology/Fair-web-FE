@@ -12,15 +12,19 @@ const Home = () => {
   return (
     <div>
       <LandingHeader />
-      <main className="pt-8 mx-5">
-        <HomeHeroBanner />
-        <IntroSection />
-        <FeaturesBar />
+      <main>
+        <div className="pt-8 mx-5">
+          <HomeHeroBanner />
+          <IntroSection />
+          <FeaturesBar />
+        </div>
         <PopularCategories />
-        <CreditSection />
-        <RecentlyViewedProducts />
-        {/* <PhoneNumberForm /> */}
-        <GetApp />
+        <div className="pt-8 mx-5">
+          <CreditSection />
+          <RecentlyViewedProducts />
+          {/* <PhoneNumberForm /> */}
+          <GetApp />
+        </div>
       </main>
     </div>
   );

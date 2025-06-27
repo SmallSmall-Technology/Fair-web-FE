@@ -1,10 +1,9 @@
-import Header from '../../../ui/components/header/Header';
-import { ProductCategoriesShortcut } from '../../productCategories/ProductCategoriesShortcut';
 import { HeroTextSection } from '../HeroTextSection';
-import NewProductsInStore from '../homeLivingLandingPage/homeLivingContentSection/NewProductsInStore';
-import TodaysDeal from '../homeLivingLandingPage/homeLivingContentSection/TodaysDeal';
 import { FoodAndDrinkBanner } from './foodAndDrinkContentSection/FoodAndDrinkBanner';
+import TodaysDeal from '../homeLivingLandingPage/homeLivingContentSection/TodaysDeal';
 import { FoodAndDrinkCategory } from './foodAndDrinkContentSection/FoodAndDrinkCategory';
+import { ProductCategoriesShortcut } from '../../productCategories/ProductCategoriesShortcut';
+import NewProductsInStore from '../homeLivingLandingPage/homeLivingContentSection/NewProductsInStore';
 
 const FoodAndDrinkHome = () => {
   const categories = [
@@ -18,7 +17,9 @@ const FoodAndDrinkHome = () => {
       <div className="mx-5">
         <FoodAndDrinkBanner />
         <HeroTextSection />
-        <FoodAndDrinkCategory />
+      </div>
+      <FoodAndDrinkCategory />
+      <div className="mx-5">
         <NewProductsInStore />
         <TodaysDeal />
       </div>

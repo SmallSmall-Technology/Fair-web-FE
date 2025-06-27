@@ -5,7 +5,7 @@ import { getUserIsAuthenticated } from '../../features/auth/authSlice';
 export const HeroTextSection = () => {
   const isAuthenticated = useSelector(getUserIsAuthenticated);
   return (
-    <div className="font-medium text-[23px] mt-5 mb-8 g grid gap-3 lg:flex lg:space-x-3 items-center">
+    <div className="font-medium text-[23px] mt-5 mb-8 g grid gap-3 lg:flex lg:space-x-3 items-center lg:mx-4">
       <p>Shop and pay in instalments for everything you need.</p>
       {!isAuthenticated && (
         <div className="flex space-x-3">

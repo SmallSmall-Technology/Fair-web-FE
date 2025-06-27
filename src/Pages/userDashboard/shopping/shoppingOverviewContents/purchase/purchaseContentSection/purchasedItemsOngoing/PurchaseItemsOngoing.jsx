@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux';
-import { getOngoingOrders } from '../../../../../../../features/order/orderSlice';
-import { PurchasedItem } from './PurchasedItem';
-import { Pagination } from '../../../../../../productCategories/Pagination';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { PurchasedItemOngoing } from './PurchasedItemOngoing';
+import { Pagination } from '../../../../../../productCategories/Pagination';
+import { getOngoingOrders } from '../../../../../../../features/order/orderSlice';
 
 const PurchaseItemsOngoing = () => {
   const ongoingOrders = useSelector(getOngoingOrders);
@@ -27,7 +27,7 @@ const PurchaseItemsOngoing = () => {
         <div>
           {ongoingOrders.map((item, index) => (
             <div key={item.id || index}>
-              <PurchasedItem
+              <PurchasedItemOngoing
                 item={item}
                 // onToggleExpand={toggleExpand}
                 // expandedIndex={expandedIndex}

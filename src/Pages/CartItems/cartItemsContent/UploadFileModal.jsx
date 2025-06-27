@@ -1,7 +1,7 @@
 import Modal from 'react-modal';
 import { X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 export const BVNUpload = ({ onUpgrade, closeModal, modalIsOpen }) => {
   const navigate = useNavigate();
