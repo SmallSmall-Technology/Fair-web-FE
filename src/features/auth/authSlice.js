@@ -4,27 +4,32 @@ import {
   createSelector,
 } from '@reduxjs/toolkit';
 const selectAuth = (state) => state.auth;
+import { login as loginAPI } from '../../api/authAPI';
+import httpClient from '../../api/http-clients';
 
 const initialState = {
   user: null,
   isAuthenticated: false,
   loading: false,
   error: null,
-  token: null,
 };
 
 export const login = createAsyncThunk(
   'auth/login',
   async ({ email, password }, { rejectWithValue }) => {
-    await new Promise((res) => setTimeout(res, 1000));
+    try {
+      const data = await loginAPI({ email, password });
 
-    if (email === 'admin@smallsmall.com' && password === 'admin') {
+      localStorage.setItem('authToken', data.token);
+
       return {
-        user: { email, username: 'Sade', fullName: 'Sade Brown' },
-        token: 'fake-jwt-token',
+        user: data.user,
+        token: data.token,
       };
-    } else {
-      return rejectWithValue('Invalid credentials');
+    } catch (error) {
+      const message =
+        error.response?.data?.message || 'Invalid email or password';
+      return rejectWithValue(message);
     }
   }
 );
@@ -33,29 +38,14 @@ export const restoreSession = createAsyncThunk(
   'auth/restoreSession',
   async (_, { rejectWithValue }) => {
     const token = localStorage.getItem('authToken');
-    if (!token) {
-      return rejectWithValue('No token found');
-    }
+    if (!token) return rejectWithValue('No token found');
+
     try {
-      return await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          if (token === 'fake-jwt-token') {
-            resolve({
-              user: {
-                email: 'admin@smallsmall.com',
-                username: 'Sade',
-                fullName: 'Sade Brown',
-              },
-              token,
-            });
-          } else {
-            reject(new Error('Invalid token'));
-          }
-        }, 500);
-      });
+      const response = await httpClient.get('/users/get-user');
+      return { user: response.data.user };
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      localStorage.removeItem('authToken');
-      return rejectWithValue(error.message || 'Invalid token');
+      return rejectWithValue('Session expired or invalid');
     }
   }
 );
@@ -120,14 +110,13 @@ export default authSlice.reducer;
 
 export const getUserName = createSelector(
   [selectAuth],
-  (auth) => auth.user?.username
+  (auth) => auth.user?.firstName
 );
 // export const getUserFullName = (state) => state.auth.user?.fullName;
 // export const getUserIsAuthenticated = (state) => state.auth.isAuthenticated;
 
-export const getUserFullName = createSelector(
-  [selectAuth],
-  (auth) => auth.user?.fullName
+export const getUserFullName = createSelector([selectAuth], (auth) =>
+  `${auth.user?.firstName || ''} ${auth.user?.lastName || ''}`.trim()
 );
 
 export const getUserIsAuthenticated = createSelector(

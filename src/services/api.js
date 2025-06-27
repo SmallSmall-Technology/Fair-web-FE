@@ -1,4 +1,4 @@
-import httpClient from '../api';
+// import httpClient from '../api';
 
 export const fetchAllProducts = async () => {
   const response = await httpClient.get('/products');

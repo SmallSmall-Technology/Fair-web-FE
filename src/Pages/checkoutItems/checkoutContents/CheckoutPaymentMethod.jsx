@@ -17,7 +17,7 @@ import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3002';
 
 export const CheckoutPaymentMethod = () => {
   const dispatch = useDispatch();

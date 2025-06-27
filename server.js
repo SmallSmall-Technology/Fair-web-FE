@@ -8,7 +8,7 @@ server.use(middlewares);
 server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
   if (req.method === 'POST' && req.path === '/cart') {
-    res.json(req.body); // Return exactly what was sent
+    res.json(req.body);
   } else if (req.method === 'GET' && req.path.startsWith('/cart')) {
     const cartItems = router.db
       .get('cart')
@@ -34,6 +34,6 @@ server.use((req, res, next) => {
 });
 
 server.use(router);
-server.listen(3000, () => {
+server.listen(3003, () => {
   console.log('JSON Server is running');
 });
