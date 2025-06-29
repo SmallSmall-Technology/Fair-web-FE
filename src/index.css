@@ -5,6 +5,7 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
+  font-display: swap;
 }
 
 * {
@@ -118,4 +119,8 @@
 .outline-image {
   outline: 1px solid black;
   outline-offset: 3px;
+}
+
+.sticky-header {
+  will-change: transform;
 }

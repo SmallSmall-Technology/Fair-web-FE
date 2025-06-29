@@ -8,15 +8,22 @@ import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 
 export const CartItem = ({ item, onTogglePlan }) => {
   const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
-  const installmentPlan = item.paymentOptions.find(
-    (option) => option.type === 'installments'
-  );
-
   const getDisplayedPrice = () => {
-    if (item.paymentPlan === 'upfront') {
-      return formatCurrency(item.price * currentQuantity);
+    const { paymentPlan, paymentPlanDetails, price } = item;
+    switch (paymentPlan) {
+      case 'upfront':
+        return formatCurrency(
+          (paymentPlanDetails?.amount || price) * currentQuantity
+        );
+      case 'monthly':
+        return `${formatCurrency(paymentPlanDetails?.monthlyPayment || 0)}`;
+      case 'weekly':
+        return `${formatCurrency(paymentPlanDetails?.weeklyPayment || 0)} `;
+      case 'daily':
+        return `${formatCurrency(paymentPlanDetails?.dailyPayment || 0)} `;
+      default:
+        return formatCurrency(price * currentQuantity);
     }
-    return formatCurrency(installmentPlan.upfrontPayment * currentQuantity);
   };
 
   return (
@@ -39,18 +46,17 @@ export const CartItem = ({ item, onTogglePlan }) => {
             <button
               type="submit"
               onClick={() => onTogglePlan(item.id)}
-              className=" group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[#FFDE11] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black hover:underline"
+              className="group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[#FFDE11] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black hover:underline"
             >
-              <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11] "></span>
-
+              <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11]"></span>
               <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-xs">
                 Change Plan
               </span>
             </button>
           </div>
           <div className="grid md:grid-flow-col items-center justify-between 2xl:px-10">
-            <div className="flex items-start gap-4 ">
-              <div className="product-image ">
+            <div className="flex items-start gap-4">
+              <div className="product-image">
                 <img
                   src={item.image}
                   alt={item.name}
@@ -81,7 +87,7 @@ export const CartItem = ({ item, onTogglePlan }) => {
                 </p>
                 <p className="text-xs">Interest-free credit</p>
                 <p className="text-[#DB1C5E] mb-4">
-                  {formatCurrency(item?.interest || 20000)}
+                  {formatCurrency(item?.interest || 0)}
                 </p>
               </div>
 
@@ -99,7 +105,6 @@ export const CartItem = ({ item, onTogglePlan }) => {
               <p className="text-sm font-normal">
                 Shipping: Arrives by{' '}
                 <span className="font-medium">
-                  {' '}
                   {item?.deliveryDate || 'Jan, 20 2025'}
                 </span>
               </p>
@@ -116,19 +121,19 @@ export const CartItem = ({ item, onTogglePlan }) => {
         </div>
 
         <PaymentPlan item={item} togglePlan={onTogglePlan} />
-        <div className="flex justify-between mt-4 md:hidden ">
+
+        <div className="flex justify-between mt-4 md:hidden">
           <p className="text-xs font-semibold">
             Shipping: Arrives by
             <br />
             <span className="font-medium">
-              {' '}
               {item?.deliveryDate || 'Jan, 20 2025'}
             </span>
           </p>
 
           <div className="flex space-x-2 items-center mb-2">
             <SaveItemForLater />
-            <DeleteItem id={item.productId} />
+            <DeleteItem id={item.id} />
           </div>
         </div>
       </div>

@@ -102,6 +102,51 @@ export const productCategories = [
   },
 ];
 
+export const singleProductCategories = [
+  {
+    id: 105,
+    productName: 'Phones',
+    link: `/category/${'electronics'}`,
+  },
+
+  {
+    id: 530,
+    productName: 'Computers',
+    link: `/category/${'electronics'}`,
+  },
+  {
+    id: 201,
+    productName: 'TV',
+    link: `/category/${'electronics'}`,
+  },
+
+  {
+    id: 630,
+    productName: 'Home Audio & Theater',
+    link: `/category/${'electronics'}`,
+  },
+  {
+    id: 730,
+    productName: 'Video Games',
+    link: `/category/${'electronics'}`,
+  },
+  {
+    id: 82,
+    productName: 'Gadgets',
+    link: `/category/${'electronics'}`,
+  },
+  {
+    id: 90,
+    productName: 'Home Appliances',
+    link: `/category${'/electronics'}`,
+  },
+  {
+    id: 100,
+    productName: 'Accessories',
+    link: `/category/${'toys'}`,
+  },
+];
+
 export const productAds = [
   {
     id: 1,
@@ -157,13 +202,31 @@ export const products = [
     noOfProductSold: '20',
     slug: 'samsung-galaxy-note-10-plus',
     paymentOptions: [
-      { type: 'upfront', amount: 207000 },
       {
-        type: 'installments',
-        months: 3,
-        upfrontPayment: 62100,
-        monthlyPayment: 48300,
+        type: 'daily',
+        label: 'Daily',
+        days: 30,
+        dailyPayment: 6900,
         totalPrice: 207000,
+      },
+      {
+        type: 'weekly',
+        label: 'Weekly',
+        weeks: 6,
+        weeklyPayment: 34500,
+        totalPrice: 207000,
+      },
+      {
+        type: 'monthly',
+        label: 'Monthly',
+        months: 3,
+        monthlyPayment: 69000,
+        totalPrice: 207000,
+      },
+      {
+        type: 'upfront',
+        label: 'Pay in full',
+        amount: 207000,
       },
     ],
   },
@@ -180,12 +243,31 @@ export const products = [
     noOfProductSold: '50',
     slug: 'iphone-14-pro-max',
     paymentOptions: [
-      { type: 'upfront', amount: 500000 },
       {
-        type: 'installments',
-        months: 3,
-        upfrontPayment: 150000,
-        monthlyPayment: 116666.67,
+        type: 'daily',
+        label: 'Daily',
+        days: 30,
+        dailyPayment: 1369.86,
+        totalPrice: 500000,
+      },
+      {
+        type: 'weekly',
+        label: 'Weekly',
+        weeks: 4,
+        weeklyPayment: 9615.38,
+        totalPrice: 500000,
+      },
+      {
+        type: 'monthly',
+        label: 'Monthly',
+        months: 6,
+        monthlyPayment: 150000,
+        totalPrice: 500000,
+      },
+      {
+        type: 'upfront',
+        label: 'Pay in full',
+        amount: 500000,
         totalPrice: 500000,
       },
     ],
@@ -206,7 +288,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 300000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 90000,
         monthlyPayment: 70000,
@@ -230,7 +312,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 280000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 84000,
         monthlyPayment: 65333.33,
@@ -254,7 +336,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 200000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 60000,
         monthlyPayment: 46666.67,
@@ -278,7 +360,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 400000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 120000,
         monthlyPayment: 93333.33,
@@ -302,7 +384,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 150000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 45000,
         monthlyPayment: 35000,
@@ -326,7 +408,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 180000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 54000,
         monthlyPayment: 42000,
@@ -350,7 +432,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 220000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 66000,
         monthlyPayment: 51333.33,
@@ -374,7 +456,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 120000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 36000,
         monthlyPayment: 28000,
@@ -398,7 +480,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 300000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 90000,
         monthlyPayment: 70000,
@@ -422,7 +504,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 500000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 150000,
         monthlyPayment: 116666.67,
@@ -446,7 +528,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 750000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 225000,
         monthlyPayment: 175000,
@@ -470,7 +552,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 280000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 84000,
         monthlyPayment: 65333.33,
@@ -494,7 +576,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 350000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 105000,
         monthlyPayment: 81666.67,
@@ -518,7 +600,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 450000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 135000,
         monthlyPayment: 105000,
@@ -542,7 +624,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 600000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 180000,
         monthlyPayment: 140000,
@@ -566,7 +648,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 320000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 96000,
         monthlyPayment: 74666.67,
@@ -590,7 +672,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 280000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 84000,
         monthlyPayment: 65333.33,
@@ -614,7 +696,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 310000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 93000,
         monthlyPayment: 72333.33,
@@ -638,7 +720,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 400000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 120000,
         monthlyPayment: 93333.33,
@@ -662,7 +744,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 500000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 150000,
         monthlyPayment: 116666.67,
@@ -686,7 +768,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 150000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 45000,
         monthlyPayment: 35000,
@@ -710,7 +792,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 1500000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 450000,
         monthlyPayment: 350000,
@@ -734,7 +816,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 700000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 210000,
         monthlyPayment: 163333.33,
@@ -758,7 +840,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 180000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 54000,
         monthlyPayment: 42000,
@@ -782,7 +864,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 900000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 270000,
         monthlyPayment: 210000,
@@ -806,7 +888,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 300000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 90000,
         monthlyPayment: 70000,
@@ -830,7 +912,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 80000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 24000,
         monthlyPayment: 18666.67,
@@ -854,7 +936,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 2000000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 600000,
         monthlyPayment: 466666.67,
@@ -878,7 +960,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 400000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 120000,
         monthlyPayment: 93333.33,
@@ -902,7 +984,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 120000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 36000,
         monthlyPayment: 28000,
@@ -926,7 +1008,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 150000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 45000,
         monthlyPayment: 35000,
@@ -950,7 +1032,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 85000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 25500,
         monthlyPayment: 19833.33,
@@ -974,7 +1056,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 25000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 7500,
         monthlyPayment: 5833.33,
@@ -998,7 +1080,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 45000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 13500,
         monthlyPayment: 10500,
@@ -1022,7 +1104,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 65000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 19500,
         monthlyPayment: 15166.67,
@@ -1046,7 +1128,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 210000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 63000,
         monthlyPayment: 49000,
@@ -1070,7 +1152,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 20000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 6000,
         monthlyPayment: 4666.67,
@@ -1094,7 +1176,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 350000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 105000,
         monthlyPayment: 81666.67,
@@ -1118,7 +1200,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 8000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 2400,
         monthlyPayment: 1866.67,
@@ -1142,7 +1224,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 12000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 3600,
         monthlyPayment: 2800,
@@ -1166,7 +1248,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 3500 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 1050,
         monthlyPayment: 816.67,
@@ -1190,7 +1272,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 6000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 1800,
         monthlyPayment: 1400,
@@ -1214,7 +1296,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 2800 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 840,
         monthlyPayment: 653.33,
@@ -1238,7 +1320,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 3200 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 960,
         monthlyPayment: 746.67,
@@ -1262,7 +1344,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 15000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 4500,
         monthlyPayment: 3500,
@@ -1286,7 +1368,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 25000 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 7500,
         monthlyPayment: 5833.33,
@@ -1310,7 +1392,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 2500 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 750,
         monthlyPayment: 583.33,
@@ -1334,7 +1416,7 @@ export const products = [
     paymentOptions: [
       { type: 'upfront', amount: 2500 },
       {
-        type: 'installments',
+        type: 'monthly',
         months: 3,
         upfrontPayment: 750,
         monthlyPayment: 583.33,

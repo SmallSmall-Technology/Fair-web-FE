@@ -14,14 +14,13 @@ const ProductCard = ({ product }) => {
   const [imgError, setImgError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
   const handleAddToRecentlyViewed = () => {
-    dispatch(addItemToRecentlyViewed(product.id));
+    dispatch(addItemToRecentlyViewed(product));
   };
 
   const {
@@ -39,7 +38,8 @@ const ProductCard = ({ product }) => {
   } = product;
 
   const cardStyles = {
-    base: 'w-fit rounded-2xl transition-all duration-300 ease-in-out hover:shadow-lg hover:pb-[1px]',
+    base: 'w-fit rounded-2xl transition-all duration-300 ease-in-out hover:drop-shadow-[0_4px_6px_rgba(0,0,0,0.25)] pb-2',
+
     transform: { transform: 'scale(1)', transformOrigin: 'center' },
   };
 
@@ -50,8 +50,6 @@ const ProductCard = ({ product }) => {
       role="article"
       aria-label={`Loading product`}
       style={cardStyles.transform}
-      onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.01)')}
-      onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
     >
       <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl">
         <div className="absolute top-2 flex justify-between w-full px-2">
@@ -91,41 +89,29 @@ const ProductCard = ({ product }) => {
       role="article"
       aria-label={`Product: ${name}`}
       style={cardStyles.transform}
-      onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.01)')}
-      onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+      // onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.01)')}
+      // onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
       onClick={handleAddToRecentlyViewed}
     >
       <Link to={`/${id}/${slug}`} className="block">
-        <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl cursor-pointer">
-          {/* <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] lg:w-[218px] lg:h-[218px] rounded-2xl cursor-pointer"> */}
-          <div className="absolute top-2 flex justify-between w-full px-2">
-            <Button
-              className="rounded-full bg-white p-2 hover:shadow-lg transition-all duration-300 ease-in-out focus:border-2 focus:border-black focus:outline-none focus:ring-2 focus:ring-black"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleShareProduct();
-              }}
-            >
-              <span className="sr-only">Share this product</span>
-              <Share2 className="fill-black" size="15px" />
-            </Button>
-
+        <div className="relative bg-[#F2F2F2] w-[146px] h-[146p] md:w-[218px] md:h-[218px] rounded-2xl cursor-pointer flex justify-center items-center">
+          <div className="absolute top-3 flex justify-between w-full px-3">
             {discountPrice && (
-              <p className="bg-[#FFF8CF] w-[51px] flex justify-center items-center rounded-[20px]">
+              <p className="bg-white p-1">
                 <span className="font-medium text-xs">
-                  {Math.round(((price - discountPrice) / price) * 100)}%
+                  <p>35% downpayment</p>
                 </span>
               </p>
             )}
           </div>
-          <div className="flex justify-center items-center mx-auto w-[80px] h-[99px] md:w-[136px] md:h-[169px] lg:w-[159px] lg:h-[159px]">
+          <div className="flex justify-center items-center mx-aut w-[78p] h-[78p] lg:w-[111px] lg:h-[111px]">
             {!imgError ? (
               <img
                 src={image}
                 alt={name}
                 loading="lazy"
                 onError={() => setImgError(true)}
-                className="h-fit w-full mt-10 object-contain"
+                className="h-[100%] w-full object-cover "
               />
             ) : (
               <ImageIcon className="h-fit w-full mt-10 object-contain" />
@@ -133,18 +119,21 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
       </Link>
-      <div className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2">
+      <div className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-">
         <Link
           to={`/${id}/${slug}`}
           className="hover:underline focus:underline focus:outline-none"
         >
-          {/* <p className="text-sm leading-[16.94px] min-h-12 cursor-pointer">
-            {name}
-          </p> */}
-          <p className="text-sm font-normal leading-[16.94px] min-h-12 cursor-pointer overflow-hidden lg:overflow-visible line-clamp-2 lg:line-clamp-none">
+          <p className="text-xs lg:text-sm font-normal  leading-[16.94px] min-h-12 cursor-pointer overflow-hidden lg:overflow-visible line-clamp-2 lg:line-clamp-none">
             {name}
           </p>
         </Link>
+        <div className="flex items-center lg:space-x-1">
+          <Star fill="black" size={14} aria-hidden="true" />
+          <p className="text-sm">
+            {ratings} ({noOfProductSold})
+          </p>
+        </div>
         <div className="flex flex-col lg:flex-row lg:space-x-2 lg:items-center space-y-1">
           <p className="font-semibold text-base">{formatCurrency(price)}</p>
           {discountPrice ? (
@@ -156,17 +145,29 @@ const ProductCard = ({ product }) => {
           )}
         </div>
         <div className="flex items-center justify-between lg:flex-col lg:items-start lg:space-y-3">
-          <div className="flex items-center lg:space-x-1">
-            <Star fill="black" size={14} aria-hidden="true" />
-            <p className="text-sm">
-              {ratings} ({noOfProductSold})
-            </p>
-          </div>
-          <div className="w-1/2 flex flex-row-reverse lg:flex-row items-center space-x-1 lg:space-x-6 ">
+          <div className="lg:w-[90%] flex justify-between items-center space-x-1 ">
             <AddToCart product={product} />
-            <AddFavourite product={product} />
+
+            <div className="flex gap-4">
+              <AddFavourite product={product} />
+
+              <Button
+                className="rounded-full bg-white p-2 shadow-lg border border-gray-200 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleShareProduct();
+                }}
+              >
+                <span className="sr-only">Share this product</span>
+                <Share2 className="text-black" size="15px" />
+              </Button>
+            </div>
           </div>
         </div>
+        {/* <div className="bg-[#FFDE11] flex items-center space-x-2 px-2 pr-6 rounded-[20px] w-fit">
+          <AddToCart />
+          <p>Add to cart</p>
+        </div> */}
       </div>
     </article>
   );

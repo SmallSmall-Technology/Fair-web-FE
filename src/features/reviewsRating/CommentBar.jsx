@@ -2,8 +2,8 @@ import React, { useState, memo } from 'react';
 import { useForm } from 'react-hook-form';
 import { TotalRatings } from './TotalRatings';
 import { CircleArrowUp } from 'lucide-react';
-import { UsersReviews } from '../../Pages/productCategories/productDetails/UsersReviews';
-import { UsersReviewsModal } from '../../Pages/productCategories/productDetails/UsersReviewsModal';
+import { UsersReviews } from '../../pages/productCategories/productDetails/UserReview/UsersReviews';
+import { UsersReviewsModal } from '../../pages/productCategories/productDetails/UserReview/UsersReviewsModal';
 
 const CommentBar = () => {
   const [reviews, setReviews] = useState([]);
@@ -46,6 +46,7 @@ const CommentBar = () => {
           <button
             type="submit"
             className="absolute right-3 top-1/2 transform -translate-y-1/2"
+            aria-label="Submit"
           >
             <CircleArrowUp size={30} fill="#A6A6A6" color="white" />
           </button>

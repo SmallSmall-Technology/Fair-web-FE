@@ -6,10 +6,8 @@ const Footer = lazy(() => import('../footer/Footer'));
 const Layout = () => {
   return (
     <>
-      <header>
-        <Header />
-      </header>
-      <main className="pt-44 lg:pt-28">
+      <Header />
+      <main className="pt-36 lg:pt-28">
         <Outlet />
       </main>
       <Suspense>

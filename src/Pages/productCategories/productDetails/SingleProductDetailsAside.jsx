@@ -1,101 +1,41 @@
-import { useDispatch } from 'react-redux';
-import React, { useEffect, useRef, useState } from 'react';
-import { Button, YellowButton } from '../../../utils/Button';
+import React from 'react';
+import { HeartHandshake } from 'lucide-react';
+import { useIsInView } from '../../../hooks/useIsInView';
+import { PaymentOptions } from './productPlan/PaymentOptions';
 import { formatCurrency } from '../../../utils/FormatCurrency';
-import { handleAddToCart } from '../../../features/cart/AddToCart';
 import CommentBar from '../../../features/reviewsRating/CommentBar';
-import { ChevronsLeft, ChevronsRight, HeartHandshake } from 'lucide-react';
+import { SingleProductStickyHeader } from '../../../ui/components/header/SingleProductStickyHeader';
 
-const item_width = 70;
+export const item_width = 70;
+
+export const getPaymentDates = (startDate, months) => {
+  const dates = [];
+  const currentDate = new Date(startDate);
+  for (let i = 1; i <= months; i++) {
+    const nextDate = new Date(currentDate);
+    nextDate.setDate(currentDate.getDate() + 30 * i);
+    dates.push(
+      nextDate.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      })
+    );
+  }
+  return dates;
+};
 
 export const SingleProductDetailsAside = React.memo(
-  ({ product, shippingDate, category, isLoading }) => {
-    const dispatch = useDispatch();
-    const [canScrollLeft, setCanScrollLeft] = useState(false);
-    const [canScrollRight, setCanScrollRight] = useState(true);
-    const paymentMethodRef = useRef(null);
-
-    if (!product) return <div>Product not found</div>;
-
-    const updateScrollButtons = () => {
-      const el = paymentMethodRef.current;
-      if (!el) return;
-      setCanScrollLeft(el.scrollLeft > 0);
-      setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
-    };
-
-    const handleScroll = (scrollAmount) => {
-      const el = paymentMethodRef.current;
-      if (!el) return;
-      el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    };
-
-    useEffect(() => {
-      const el = paymentMethodRef.current;
-      if (!el) return;
-      el.addEventListener('scroll', updateScrollButtons);
-      updateScrollButtons();
-      return () => el.removeEventListener('scroll', updateScrollButtons);
-    }, []);
-
-    const getPaymentDates = (startDate, months) => {
-      const dates = [];
-      const currentDate = new Date(startDate);
-      for (let i = 1; i <= months; i++) {
-        const nextDate = new Date(currentDate);
-        nextDate.setDate(currentDate.getDate() + 30 * i);
-        dates.push(
-          nextDate.toLocaleDateString('en-GB', {
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric',
-          })
-        );
-      }
-      return dates;
-    };
-
-    const installmentOption = product.paymentOptions?.[1] || {};
-    const fullPaymentOption = product.paymentOptions?.[0] || {};
-
-    const paymentsInstallment = [
-      {
-        amount: installmentOption.upfrontPayment,
-        label: 'Pay now today',
-        icon: '/images/quater-circle.svg',
-      },
-      {
-        amount: installmentOption.monthlyPayment,
-        label: '2nd Payment',
-        date: getPaymentDates(new Date(), 3)[0],
-        icon: '/images/half-circle.svg',
-      },
-      {
-        amount: installmentOption.monthlyPayment,
-        label: '3rd Payment',
-        date: getPaymentDates(new Date(), 3)[1],
-        icon: '/images/one-third-circle.svg',
-      },
-      {
-        amount: installmentOption.monthlyPayment,
-        label: 'Final Payment',
-        date: getPaymentDates(new Date(), 3)[2],
-        icon: '/images/full-circle.svg',
-      },
-    ];
-
-    const paymentsInFull = [
-      {
-        amount: fullPaymentOption.amount,
-        label: 'Pay in full today',
-        date: new Date(),
-        icon: '/images/full-circle.svg',
-      },
-    ];
+  ({ product, shippingDate, category }) => {
+    const [targetRef, isInView] = useIsInView();
+    // const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
 
     return (
       <aside className="w-full xl:w-[45%]">
-        <h1 className="text-xl lg:text-2xl font-bold mx-5 lg:mx-0">
+        <h1
+          ref={targetRef}
+          className="text-xl lg:text-2xl font-bold mx-5 lg:mx-0"
+        >
           {product.name}
         </h1>
         <hr className="my-2 hidden lg:block" />
@@ -139,97 +79,17 @@ export const SingleProductDetailsAside = React.memo(
           </p>
         </div>
         <hr className="my-4 hidden lg:block" />
-        <p className="font-medium mb-4 mx-4 ">Choose how you want to pay</p>
-        <p className="hidden lg:block text-xs mb-3">Pay in instalments</p>
+        <p className="hidden lg:block font-medium mb-3 mx-5 lg:mx-0">
+          Select how you want to pay
+        </p>
+        <p className="lg:hidden font-medium mb-3 mx-5 lg:mx-0">
+          Choose how you want to pay
+        </p>
 
-        <article className="bg-[#F2F2F2] rounded-[10px] py-5 flex flex-col justify-center lg:justify-start mx-5 lg:mx-0 relative">
-          {canScrollRight && (
-            <Button
-              onClick={() => handleScroll(item_width)}
-              className="absolute right-2 top-5 -translate-y-1/2 z-10 lg:hidden"
-            >
-              <ChevronsRight />
-            </Button>
-          )}
-          {canScrollLeft && (
-            <Button
-              onClick={() => handleScroll(-item_width)}
-              className="absolute left-2 top-5 -translate-y-1/2 z-10 lg:hidden"
-            >
-              <ChevronsLeft />
-            </Button>
-          )}
-
-          <div className="grid lg:flex gap-4 lg:justify-between items-start px-10 w-full mt-4">
-            <div
-              ref={paymentMethodRef}
-              className="flex space-x-9 lg:space-x-3 w-full overflow-x-auto scrollbar-hide "
-            >
-              {paymentsInstallment.map((payment, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-center min-w-24 lg:min-w-fit"
-                >
-                  <div className="h-7 w-7">
-                    <img
-                      src={payment.icon}
-                      alt={payment.label}
-                      className="h-full w-full"
-                    />
-                  </div>
-                  <p className="text-xs font-medium mt-1">
-                    {formatCurrency(payment?.amount)}
-                  </p>
-                  <span className="text-[11px] text-center ">
-                    {payment.label}
-                  </span>
-                  {payment.date && (
-                    <span className="text-[11px] text-center mt-1">
-                      {payment.date}
-                    </span>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className=" lg:mx-0 lg:min-w-fit">
-              <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
-                Add to cart
-              </YellowButton>
-            </div>
-          </div>
-        </article>
-        <div className="flex items-center">
-          <hr className="flex-grow my-4 mx-5 lg:mx-0" />
-          <span className="mx-4">or</span>
-          <hr className="flex-grow my-4 mx-5 lg:mx-0" />
+        <div>
+          <PaymentOptions product={product} />
         </div>
 
-        <p className="text-xs mb-3 mx-5 lg:mx-0">Pay in full</p>
-
-        <article className="bg-[#F2F2F2] rounded-[10px] py-5 flex justify-start mb-6 mx-5 lg:mx-0">
-          <div className="flex flex-col lg:flex-row gap-2 justify-between items-center px-10 w-full">
-            <div className="flex gap-2 items-start mr-auto">
-              <div className="h-7 w-7">
-                <img
-                  src={paymentsInFull[0].icon}
-                  alt="Full payment icon"
-                  className="h-full w-full"
-                />
-              </div>
-              <div className="grid">
-                <p className="font-medium">
-                  {formatCurrency(paymentsInFull[0].amount)}
-                </p>
-                <span className="text-[11px]">{paymentsInFull[0].label}</span>
-              </div>
-            </div>
-            <div className="mx-5 lg:mx-0 lg:w-fit w-full">
-              <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
-                Add to cart
-              </YellowButton>
-            </div>
-          </div>
-        </article>
         <div className="mt-10 lg:hidden">
           <div className="border-y-4 rounded-2xl"></div>
           <div className="grid grid-flow-col lg:hidden mt-4 mx-5">
@@ -316,9 +176,10 @@ export const SingleProductDetailsAside = React.memo(
             </div>
           </div>
         </section>
+        <div className="hidden lg:block">
+          {!isInView && <SingleProductStickyHeader product={product} />}
+        </div>
       </aside>
     );
   }
 );
-
-export default SingleProductDetailsAside;

@@ -1,27 +1,57 @@
-import { useDispatch, useSelector } from 'react-redux';
-import React, { useEffect, Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
-
+import { useDispatch, useSelector } from 'react-redux';
 import ScrollToTop from './utils/ScrollToTop';
 import ProtectedRoute from './ProtectedRoute';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { restoreSession } from './features/auth/authSlice';
 
+const LazyRoute = ({ element }) => (
+  <Suspense
+    fallback={
+      <ProductDetailsSkeleton showAside={true} showRecommendations={true} />
+    }
+  >
+    {element}
+  </Suspense>
+);
+
+const LazyHome = ({ element }) => (
+  <Suspense fallback={<LandingPageSkeleton />}>{element}</Suspense>
+);
+
 // Eagerly load layout and essential UI wrappers
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import SignUp from './pages/signUp/SignUp';
 import Layout from './ui/components/layout/Layout';
-import UserDashboardLayout from './ui/components/Layout/UserDashboardLayout';
-import ProductDetailsSkeleton from './ui/components/Skeletons/ProductDetailsSkeleton';
-import CheckoutItemsSkeleton from './ui/components/Skeletons/CheckoutItemsSkeleton';
-import CheckoutPaymentSkeleton from './ui/components/Skeletons/CheckoutPaymentSkeleton';
 import CartItemsSkeleton from './ui/components/Skeletons/CartItemsSkeleton';
+import UserDashboardLayout from './ui/components/Layout/UserDashboardLayout';
+import VerificationSent from './pages/cartItems/cartItemsContent/VerificationSent';
+import CheckoutItemsSkeleton from './ui/components/Skeletons/CheckoutItemsSkeleton';
+import ProductDetailsSkeleton from './ui/components/Skeletons/ProductDetailsSkeleton';
+import CheckoutPaymentSkeleton from './ui/components/Skeletons/CheckoutPaymentSkeleton';
 import DashboardSummarySkeleton from './ui/components/Skeletons/DashboardSummarySkeleton';
+import LandingPageSkeleton from './ui/components/Skeletons/LnadingPageSkeleton';
 
-// Lazy-loaded pages
+const RealEstateHome = lazy(
+  () => import('./pages/home/realEstateHome/RealEstateHome')
+);
+
+const ConsumerGoodsHome = lazy(
+  () => import('./pages/home/consumerGoods/ConsumerGoodsHome')
+);
+const HomeLivingHome = lazy(
+  () => import('./pages/home/homeLivingLandingPage/HomeLivingHome')
+);
+const ElectronicsHome = lazy(
+  () => import('./pages/home/electronicsHome/ElectronicsHome')
+);
+const FoodAndDrinkHome = lazy(
+  () => import('./pages/home/foodAndDrink/FoodAndDrinkHome')
+);
 const CartItems = lazy(() => import('./pages/cartItems/CartItems'));
 const CheckoutItems = lazy(() => import('./pages/checkoutItems/CheckoutItems'));
 const CheckoutPaymentSuccess = lazy(
@@ -82,17 +112,17 @@ const AccountProfile = lazy(
 );
 
 const App = () => {
-  const dispatch = useDispatch();
-  const { loading, isAuthenticated } = useSelector((state) => state.auth);
+  // const dispatch = useDispatch();
+  // const { loading, isAuthenticated } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    const runRestore = async () => {
-      if (!isAuthenticated && !loading) {
-        await dispatch(restoreSession()).unwrap();
-      }
-    };
-    runRestore();
-  }, [dispatch, isAuthenticated]);
+  // useEffect(() => {
+  //   const runRestore = async () => {
+  //     if (!isAuthenticated && !loading) {
+  //       await dispatch(restoreSession()).unwrap();
+  //     }
+  //   };
+  //   runRestore();
+  // }, [dispatch, isAuthenticated]);
 
   return (
     <>
@@ -114,66 +144,40 @@ const App = () => {
           <Route path="" element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route
+              path="home-living"
+              element={<LazyHome element={<HomeLivingHome />} />}
+            />
+            <Route
+              path="electronics"
+              element={<LazyHome element={<ElectronicsHome />} />}
+            />
+            <Route
+              path="real-estate"
+              element={<LazyHome element={<RealEstateHome />} />}
+            />
+            <Route
+              path="food-drink"
+              element={<LazyHome element={<FoodAndDrinkHome />} />}
+            />
+            <Route
+              path="lifestyle"
+              element={<LazyHome element={<ConsumerGoodsHome />} />}
+            />
+            <Route
               path="category/:categoryName"
-              element={
-                <Suspense
-                  fallback={
-                    <ProductDetailsSkeleton
-                      showAside={true}
-                      showRecommendations={true}
-                    />
-                  }
-                >
-                  <CategoryPage />
-                </Suspense>
-              }
+              element={<LazyHome element={<CategoryPage />} />}
             />
             <Route
               path="category/:categoryName/:subcategory"
-              element={
-                <Suspense
-                  fallback={
-                    <ProductDetailsSkeleton
-                      showAside={true}
-                      showRecommendations={true}
-                    />
-                  }
-                >
-                  <SubCategoryPage />
-                </Suspense>
-              }
+              element={<LazyRoute element={<SubCategoryPage />} />}
             />
-
             <Route
               path="category/:categoryName/:subcategory/:id/:slug"
-              element={
-                <Suspense
-                  fallback={
-                    <ProductDetailsSkeleton
-                      showAside={true}
-                      showRecommendations={true}
-                    />
-                  }
-                >
-                  <SingleProductPage />
-                </Suspense>
-              }
+              element={<LazyRoute element={<SingleProductPage />} />}
             />
-
             <Route
               path=":id/:slug"
-              element={
-                <Suspense
-                  fallback={
-                    <ProductDetailsSkeleton
-                      showAside={true}
-                      showRecommendations={true}
-                    />
-                  }
-                >
-                  <SingleProductPage />
-                </Suspense>
-              }
+              element={<LazyRoute element={<SingleProductPage />} />}
             />
           </Route>
           <Route
@@ -193,6 +197,10 @@ const App = () => {
                   <CheckoutItems />
                 </Suspense>
               }
+            />
+            <Route
+              path="verification-document-sent"
+              element={<VerificationSent />}
             />
             <Route
               path="cart-items/checkout/payment-success"

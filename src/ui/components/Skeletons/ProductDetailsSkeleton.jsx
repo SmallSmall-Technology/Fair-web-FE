@@ -6,23 +6,22 @@ const ProductDetailsSkeleton = ({ imageCount = 4 }) => (
   <>
     <Header />
     <div className="hidden xl:flex justify-end space-x-2 mb-3 mx-10 pt-10">
-      <p className="flex items-center text-sm text-[#222224] cursor-pointer">
+      <div className="flex items-center text-sm text-[#222224] cursor-pointer">
         <SkeletonBox width="80px" height="16px" />
         <span className="pl-1">
           <SkeletonBox width="24px" height="24px" />
         </span>
-      </p>
-      <p className="flex items-center text-sm text-[#222224] cursor-pointer">
+      </div>
+      <div className="flex items-center text-sm text-[#222224] cursor-pointer">
         <SkeletonBox width="40px" height="16px" />
         <span className="pl-1">
           <SkeletonBox width="16px" height="16px" />
         </span>
-      </p>
+      </div>
     </div>
 
     <div className="flex justify-between items-center  mx-10">
       <main className="w-full lg:w-full xl:w-[52%] mx-5 md:mx-0">
-        {/* Placeholder for image gallery and carousel */}
         <div className="flex justify-between items-center md:items-start gap-5 md:mb-20">
           <aside className="w-[100px] hidden md:grid">
             <ul className="hidden md:grid grid-cols-1 gap-2">
@@ -41,7 +40,6 @@ const ProductDetailsSkeleton = ({ imageCount = 4 }) => (
               <SkeletonBox width="100%" height="100%" className="rounded" />
             </div>
 
-            {/* Mobile image carousel skeleton */}
             <section className="relative flex justify-center mb-8 md:hidden">
               <div className="flex w-full md:hidden overflow-hidden h-[363px]">
                 {Array.from({ length: imageCount }).map((_, index) => (
@@ -67,7 +65,6 @@ const ProductDetailsSkeleton = ({ imageCount = 4 }) => (
           </main>
         </div>
 
-        {/* Placeholder for customer ratings section */}
         <section className="hidden xl:grid mt-8">
           <SkeletonBox width="200px" height="24px" className="mb-4" />
           <SkeletonBox width="100%" height="60px" />
