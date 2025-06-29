@@ -5,9 +5,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCompletedOrders } from '../../../features/order/orderSlice';
 import { getUserFullName, logout } from '../../../features/auth/authSlice';
+import React from 'react';
 
 export const LoggedInUserDropdown = ({
+  // eslint-disable-next-line react/prop-types
   loggedInUserDropdown,
+  // eslint-disable-next-line react/prop-types
   setLoggedInUserDropdown,
 }) => {
   const menuRef = useRef(null);

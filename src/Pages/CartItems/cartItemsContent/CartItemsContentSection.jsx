@@ -30,7 +30,7 @@ const CartItemsContentSection = React.memo(() => {
   const fetchPaymentOptions = async (productId) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/products/${productId}`
+        `http://localhost:3002/products/${productId}`
       );
       return response.data.paymentOptions || [];
     } catch (error) {

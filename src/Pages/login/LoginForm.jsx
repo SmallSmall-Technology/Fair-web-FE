@@ -3,26 +3,28 @@ import { Eye, EyeOff } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Button } from '../../utils/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { login, clearError } from '../../features/auth/authSlice';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import React from 'react';
 
-function LoginForm() {
+const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const { isAuthenticated, loading, error } = useSelector(
     (state) => state.auth
   );
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
       const from = location.state?.from?.pathname || '/';
-
       toast.dismiss();
       toast.success('Login successful!', {
         autoClose: 3000,
@@ -43,11 +45,12 @@ function LoginForm() {
 
   const handleChange = (e) => {
     if (error) dispatch(clearError());
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!formData.email || !formData.password) {
       toast.dismiss();
       toast.error('Please fill in all fields', {
@@ -59,17 +62,21 @@ function LoginForm() {
       });
       return;
     }
+
     try {
       await dispatch(login(formData)).unwrap();
     } catch (err) {
       toast.dismiss();
-      toast.error('Error logging in. Please try again.', {
-        autoClose: 3000,
-        className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
-        bodyClassName: 'm-0 p-0',
-        closeButton: false,
-      });
+      toast.error(
+        err?.response?.data?.message || 'Error logging in. Please try again.',
+        {
+          autoClose: 3000,
+          className:
+            'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          bodyClassName: 'm-0 p-0',
+          closeButton: false,
+        }
+      );
     }
   };
 
@@ -86,8 +93,8 @@ function LoginForm() {
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
           disabled={loading}
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
         />
       </div>
 
@@ -103,8 +110,8 @@ function LoginForm() {
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
             disabled={loading}
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
           />
           <button
             type="button"
@@ -125,15 +132,15 @@ function LoginForm() {
       >
         {loading ? 'Logging in...' : 'Log in'}
       </Button>
-      <p className="font-semibold flex justify-center">Forgot Password?</p>
 
-      {/* <p className="mt-3 text-sm text-gray-500">
-        For testing, use: <br />
-        Email: admin@smallsmall.com <br />
-        Password: admin
-      </p> */}
+      <Link
+        to="/forgot-password"
+        className="font-semibold flex justify-center mt-2"
+      >
+        Forgot Password?
+      </Link>
     </form>
   );
-}
+};
 
 export default LoginForm;
