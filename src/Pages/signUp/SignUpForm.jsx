@@ -2,17 +2,57 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '../../utils/Button';
+import { useMutation } from '@tanstack/react-query';
+import { signUp } from '../../api/authAPI';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function SignUpForm() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const [showPassword, setShowPassword] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
 
-  const onSubmit = (data) => {};
+  const { mutate: signUpUser, isLoading } = useMutation({
+    mutationFn: signUp,
+    onSuccess: () => {
+      toast.success('Account created successfully! Please log in.', {
+        autoClose: 3000,
+        className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+        closeButton: false,
+      });
+      navigate('/login');
+    },
+    onError: (error) => {
+      const errorMessage =
+        error?.response?.data?.message || 'Something went wrong';
+      const errors = error?.response?.data?.errors;
+
+      if (errors) {
+        setFormErrors(errors);
+      } else {
+        toast.error(errorMessage, {
+          autoClose: 3000,
+          className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+        });
+      }
+    },
+  });
+  // console.log(formErrors);
+
+  const onSubmit = (data) => {
+    const formattedData = {
+      ...data,
+      phoneNumber: data.phoneNumber.replace(/^0/, '+234'),
+    };
+
+    signUpUser(formattedData);
+  };
 
   return (
     <form className="my-3" onSubmit={handleSubmit(onSubmit)}>
@@ -40,22 +80,25 @@ function SignUpForm() {
         {errors.email && (
           <span className="text-red-500 text-sm">{errors.email.message}</span>
         )}
+        {formErrors?.email?.length > 0 && (
+          <span className="text-red-500 text-sm">{formErrors.email[0]}</span>
+        )}
       </div>
 
       <div className="mb-3">
         <label
-          htmlFor="phone"
+          htmlFor="phoneNumber"
           className="block text-sm font-medium text-gray-700"
         >
           Phone number
         </label>
         <input
           type="text"
-          id="phone"
+          id="phoneNumber"
           placeholder="Phone number"
           className={`mt-1 block w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 
-                      ${errors.phone ? 'border-red-500' : 'border-gray-300'} focus:ring-yellow-500`}
-          {...register('phone', {
+                      ${errors.phoneNumber ? 'border-red-500' : 'border-gray-300'} focus:ring-yellow-500`}
+          {...register('phoneNumber', {
             required: 'Phone number is required',
             pattern: {
               value: /^[0-9]+$/,
@@ -63,8 +106,16 @@ function SignUpForm() {
             },
           })}
         />
-        {errors.phone && (
-          <span className="text-red-500 text-sm">{errors.phone.message}</span>
+        {errors.phoneNumber && (
+          <span className="text-red-500 text-sm">
+            {errors.phoneNumber.message}
+          </span>
+        )}
+
+        {formErrors?.phoneNumber?.length > 0 && (
+          <span className="text-red-500 text-sm">
+            {formErrors.phoneNumber[0]}
+          </span>
         )}
       </div>
 
@@ -117,10 +168,11 @@ function SignUpForm() {
       </div>
 
       <Button
+        disabled={isLoading}
         type="submit"
         className="w-full mt-4 py-3 px-6 text-lg font-medium text-black bg-[#FFDE11] rounded-full border-2 border-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
       >
-        Create account
+        {isLoading ? 'Creating account...' : 'Create account'}
       </Button>
     </form>
   );

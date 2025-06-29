@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
-const API_URL = 'http://localhost:3000';
-// const navigate = useNavigate();
+const API_URL = 'http://localhost:3002';
+
 export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
   const response = await axios.get(`${API_URL}/cart?userId=user123`);
   return response.data.map((item) => ({
