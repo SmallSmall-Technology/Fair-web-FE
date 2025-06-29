@@ -18,13 +18,18 @@ const Login = () => {
         </div>
 
         <div className="flex-1 py-6 px-5 flex flex-col items-start lg:w-2/3 lg:pl-36">
-          <div className="w-full">
-            <div className="mb-10 lg:mb-5 text-center w-full flex lg:justify-end lg:pr-8">
-              <img
-                src="/images/fair-logo.svg"
-                alt="Fair Logo"
-                className="mx-auto md:mx-0"
-              />
+          <div className="w-full ">
+            <div className=" flex justify-center mb-10 lg:mb-5 text-center w-full  lg:justify-end lg:pr-8">
+              <Link to="/" aria-label="Fair Home">
+                <img
+                  src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
+                  alt="Fair Logo"
+                  width={120}
+                  height={40}
+                  loading="eager"
+                  decoding="defer"
+                />
+              </Link>
             </div>
 
             <div className="mb-8 text-center">

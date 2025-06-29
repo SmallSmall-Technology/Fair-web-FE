@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { CreditScoreCard } from './CreditScoreCard';
 
 const ShoppingOverviewSideBar = () => {
   return (
@@ -42,14 +43,14 @@ const ShoppingOverviewSideBar = () => {
       </li>
       <li>
         <NavLink
-          to="/user-dashboard/shopping-overview/wallet"
+          to="/user-dashboard/shopping-overview/credit-wallet"
           className={({ isActive }) =>
             isActive
               ? 'font-semibold bg-[#F6F6F6] rounded-[20px] px-6 lg:pr-[105px] py-2 '
               : 'font-semibold px-6'
           }
         >
-          Wallet
+          Credit
         </NavLink>
       </li>{' '}
       <li>
@@ -75,6 +76,9 @@ const ShoppingOverviewSideBar = () => {
         >
           Recently viewed
         </NavLink>
+      </li>
+      <li className="pt-4 hidden lg:block px-1">
+        <CreditScoreCard />
       </li>
     </ul>
   );

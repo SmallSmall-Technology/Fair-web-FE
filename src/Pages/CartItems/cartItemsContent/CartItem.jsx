@@ -5,6 +5,9 @@ import { formatCurrency } from '../../../utils/FormatCurrency';
 import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
 import { SaveItemForLater } from '../../../features/cart/SaveItemForLater';
 import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { SunDim } from 'lucide-react';
 
 export const CartItem = ({ item, onTogglePlan }) => {
   const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
@@ -81,14 +84,30 @@ export const CartItem = ({ item, onTogglePlan }) => {
             </div>
 
             <div className="hidden md:grid">
-              <div className="flex flex-col items-end">
-                <p className="text-xl font-semibold mb-6">
-                  {getDisplayedPrice()}
-                </p>
-                <p className="text-xs">Interest-free credit</p>
-                <p className="text-[#DB1C5E] mb-4">
-                  {formatCurrency(item?.interest || 0)}
-                </p>
+              <div className="flex">
+                <div className="flex flex-col items-end">
+                  <p className="text-xl font-semibold mb-6">
+                    {getDisplayedPrice()}
+                  </p>
+                  <p className="text-[11px] font-normal max-w-[317px] mb-1">
+                    COMPLETE YOUR INSTALMENT WITHOUT DEFAULT YOU ARE ELIGIBLE TO
+                    UNLOCK INTEREST FREE CREDIT OF:
+                  </p>
+                  <div className="flex gap-2 items-center mb-4">
+                    <Link
+                      to=""
+                      className="text-sm font-normal flex items-center space-x-1"
+                    >
+                      <span>
+                        <SunDim fill="black" />
+                      </span>
+                      How to use interest free credit
+                    </Link>
+                    <p className="text-[#DB1C5E]">
+                      {formatCurrency(item?.interest || 0)}
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div className="flex space-x-2 items-center mb-2 justify-end">
@@ -102,7 +121,7 @@ export const CartItem = ({ item, onTogglePlan }) => {
                 <DeleteItem id={item.id} />
               </div>
 
-              <p className="text-sm font-normal">
+              <p className="text-sm font-normal flex justify-end">
                 Shipping: Arrives by{' '}
                 <span className="font-medium">
                   {item?.deliveryDate || 'Jan, 20 2025'}

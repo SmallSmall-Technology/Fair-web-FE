@@ -25,7 +25,7 @@ import {
   ShoppingOverview,
   // Summary,
   // Purchases,
-  Wallet,
+  CreditWallet,
   DirectDebit,
   Favorites,
   RecentlyViewed,
@@ -43,17 +43,20 @@ import SubCategoryPage from './pages/productCategories/SubCategoryPage';
 
 import Summary from './pages/userDashboard/shopping/shoppingOverviewContents/Summary';
 import Purchases from './pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases';
+import ForgotPassword from './Pages/forgotPassword/ForgotPassword';
+import ResetPassword from './Pages/resetPassword/ResetPassword';
 // export const Summary = lazy(
 //   () =>
 //     import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
 // );
-
+// eslint-disable-next-line react/prop-types
 const LazyRoute = ({ element }) => (
   <Suspense fallback={<ProductDetailsSkeleton showAside showRecommendations />}>
     {element}
   </Suspense>
 );
 
+// eslint-disable-next-line react/prop-types
 const LazyHome = ({ element }) => (
   <Suspense fallback={<LandingPageSkeleton />}>{element}</Suspense>
 );
@@ -127,6 +130,9 @@ const AppRoutes = () => (
 
     <Route path="/sign-up" element={<SignUp />} />
     <Route path="/login" element={<Login />} />
+    <Route path="/forgot-password" element={<ForgotPassword />} />
+    <Route path="/reset-password" element={<ResetPassword />} />
+
     <Route path="*" element={<PageNotFound />} />
 
     <Route element={<ProtectedRoute />}>
@@ -168,10 +174,10 @@ const AppRoutes = () => (
               }
             />
             <Route
-              path="wallet"
+              path="credit-wallet"
               element={
                 <Suspense fallback={<DashboardSummarySkeleton />}>
-                  <Wallet />
+                  <CreditWallet />
                 </Suspense>
               }
             />

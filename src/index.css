@@ -36,16 +36,6 @@
   }
 }
 
-.checkout-item:last-child {
-  /* background-color: black; */
-  /* display: none; */
-}
-
-.recentlyviewed-item hr:nth-child() {
-  /* display: none; */
-  border: 3px solid red;
-}
-
 .product-image {
   min-width: 69px;
   max-width: 69px;

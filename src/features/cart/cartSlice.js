@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// import { useNavigate } from 'react-router-dom';
 
 const API_URL = 'http://localhost:3002';
 
@@ -72,6 +73,7 @@ export const addItem = createAsyncThunk(
       const cartItem = {
         // id: `cart-${product.id}-${selectedPaymentPlan}-${Date.now()}`,
         id: product.id,
+        category: product.category,
         image: product.image,
         name: product.name,
         userId: 'user123',
@@ -96,7 +98,7 @@ export const addItem = createAsyncThunk(
         interest: selectedOption.interest || 0,
       };
       const response = await axios.post(`${API_URL}/cart`, cartItem);
-      console.log(cartItem);
+      // console.log(cartItem);
       const sanitizedResponse = {
         id: response.data.id,
         image: response.data.image,
@@ -112,13 +114,32 @@ export const addItem = createAsyncThunk(
         interest: response.data.interest,
       };
 
-      toast.dismiss();
-      toast.success('Item added to cart', {
-        className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
-        bodyClassName: 'm-0 p-0',
-        closeButton: false,
-      });
+      // toast.dismiss();
+      // toast.success('Item added to cart', {
+      //   className:
+      //     'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+      //   bodyClassName: 'm-0 p-0',
+      //   closeButton: false,
+      // });
+      // toast(
+      //   <div className="flex items-center space-x-2">
+      //     <span>Item added to cart</span>
+      //     <span className="text-black">|</span>
+      //     <button
+      //       onClick={() => navigate('/cart-items')}
+      //       className="underline text-sm"
+      //     >
+      //       View cart
+      //     </button>
+      //   </div>,
+      //   {
+      //     type: 'success',
+      //     className:
+      //       'bg-[#FFDE11] text-black text-sm px-2 py-1 rounded-md min-h-0',
+      //     bodyClassName: 'm-0 p-0',
+      //     closeButton: false,
+      //   }
+      // );
 
       return sanitizedResponse;
     } catch (error) {

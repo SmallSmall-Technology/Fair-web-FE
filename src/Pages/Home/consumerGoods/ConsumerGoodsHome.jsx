@@ -23,7 +23,10 @@ const ConsumerGoodsHome = () => {
       <div className="mx-5">
         <ConsumerGoodsHeroBanner />
         <HeroTextSection />
-        <ConsumerGoodsCategory />
+      </div>
+
+      <ConsumerGoodsCategory />
+      <div className="mx-5">
         <NewProductsInStore />
         <TodaysDeal />
       </div>

@@ -21,7 +21,9 @@ const HomeLivingHome = () => {
       <div className="mx-5">
         <HomeLivingHeroBanner />
         <HeroTextSection />
-        <HomeLivingCategory />
+      </div>
+      <HomeLivingCategory />
+      <div className="mx-5">
         <NewProductsInStore />
         <TodaysDeal />
       </div>

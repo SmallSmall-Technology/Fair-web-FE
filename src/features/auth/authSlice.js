@@ -8,6 +8,7 @@ import { login as loginAPI } from '../../api/authAPI';
 import httpClient from '../../api/http-clients';
 
 const initialState = {
+  userId: null,
   user: null,
   isAuthenticated: false,
   loading: false,
@@ -64,6 +65,9 @@ const authSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
+    setUserId: (state, action) => {
+      state.userId = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -103,7 +107,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout, clearError } = authSlice.actions;
+export const { logout, clearError, setUserId } = authSlice.actions;
 export default authSlice.reducer;
 
 // export const getUserName = (state) => state.auth.user?.username;

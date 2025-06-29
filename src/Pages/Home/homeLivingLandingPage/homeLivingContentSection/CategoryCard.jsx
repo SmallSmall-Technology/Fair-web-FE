@@ -15,7 +15,7 @@ export const CategoryCard = ({
 
   return (
     <div
-      className={`${category.color || ''} ${cardHeight} ${cardWidth} ${padding} ${margin} rounded-xl flex flex-col justify-between pb-4`}
+      className={`${category.color || ''} ${cardHeight} ${cardWidth} ${padding} ${margin} lg:rounded-xl flex flex-col justify-between pb-4 px-11 lg:px-4`}
     >
       <div className={`mb-4 lg:mb-0 flex justify-center lg:justify-star`}>
         <img

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '../../utils/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, clearError } from '../../features/auth/authSlice';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import React from 'react';
 
 const LoginForm = () => {
@@ -133,7 +133,12 @@ const LoginForm = () => {
         {loading ? 'Logging in...' : 'Log in'}
       </Button>
 
-      <p className="font-semibold flex justify-center mt-2">Forgot Password?</p>
+      <Link
+        to="/forgot-password"
+        className="font-semibold flex justify-center mt-2"
+      >
+        Forgot Password?
+      </Link>
     </form>
   );
 };

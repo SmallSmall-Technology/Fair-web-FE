@@ -36,3 +36,29 @@ export const progressData = {
     { label: 'Item Status', status: 'pending', text: 'Item received' },
   ],
 };
+
+export const completedPurchaseProgressData = {
+  payments: [
+    {
+      label: 'Downpayment',
+      date: 'Feb 12, 2025',
+      amount: 320000,
+      status: 'done',
+      activePayment: 'Downpayment',
+    },
+    {
+      label: 'Next payment',
+      date: 'Next Payment: Feb 12, 2025',
+      amount: 220000,
+      status: 'done',
+      activePayment: 'Second Payment',
+    },
+    {
+      label: 'Final payment',
+      date: 'Final payment: Mar 12, 2025',
+      amount: 220000,
+      status: 'done',
+      activePayment: 'Third Payment',
+    },
+  ],
+};
