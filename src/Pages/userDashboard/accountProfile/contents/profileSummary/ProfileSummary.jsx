@@ -13,6 +13,7 @@ export default function ProfileSummary() {
     },
   });
 
+  // eslint-disable-next-line no-unused-vars
   const [isVerified, setIsVerified] = useState(false);
   const [editingAddress, setEditingAddress] = useState(false);
   const [address, setAddress] = useState(
