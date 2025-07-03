@@ -81,7 +81,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form className="my-3 space-y-4 max-w-md" onSubmit={handleSubmit}>
+    <form className="my-3 space-y-4 max-w-md mx-auto" onSubmit={handleSubmit}>
       <div className="space-y-2">
         <label htmlFor="email" className="text-sm font-medium sr-only">
           Email address

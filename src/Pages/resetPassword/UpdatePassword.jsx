@@ -13,9 +13,7 @@ const UpdatePassword = ({ email, disabled }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userId = useSelector((state) => state.auth.userId);
-  console.log(userId);
-  //   const email = location.state?.email;
-  // const userId = location.state?.userId;
+
   const { loading, error } = useSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({
@@ -93,14 +91,13 @@ const UpdatePassword = ({ email, disabled }) => {
 
   return (
     <form
-      // disabled={disabled}
       className={`my-3 space-y-4 w-full mx-auto${disabled != true && 'text-[#DEDEDE]'}`}
       onSubmit={handleSubmit}
     >
-      <h2 className="text-xl font-semibold text-center">New Password</h2>
+      {/* <h2 className="text-xl font-semibold text-center">New Password</h2> */}
 
       <div className="space-y-2">
-        <label htmlFor="password" className="sr-only">
+        <label htmlFor="password" className="font-semibold text-xl">
           New Password
         </label>
         <div className="relative">
@@ -108,12 +105,16 @@ const UpdatePassword = ({ email, disabled }) => {
             type={passwordVisible.password ? 'text' : 'password'}
             id="password"
             name="password"
-            placeholder="New Password"
+            // placeholder="      New Password"
             value={formData.password}
             onChange={handleChange}
-            // disabled={loading}
             disabled={disabled}
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
+            className="pl-10 w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
+          />
+          <img
+            src="/images/key.svg"
+            alt="icon"
+            className="absolute top-3 left-3"
           />
           <button
             disabled={disabled}
@@ -126,25 +127,28 @@ const UpdatePassword = ({ email, disabled }) => {
             }
             className="absolute top-3 right-3 text-gray-500 hover:text-[#FFDE11]"
           >
-            {passwordVisible.password ? <EyeOff /> : <Eye />}
+            {passwordVisible.password ? <Eye /> : <EyeOff />}
           </button>
         </div>
       </div>
 
-      {/* Confirm Password */}
-      <div className="space-y-2">
-        <label htmlFor="passwordAgain" className="sr-only">
+      <div className="space-y-2 pb-5">
+        <label htmlFor="passwordAgain" className="font-semibold text-xl">
           Confirm Password
         </label>
         <div className="relative">
+          <img
+            src="/images/key.svg"
+            alt="icon"
+            className="absolute top-3 left-3"
+          />
           <input
             type={passwordVisible.passwordAgain ? 'text' : 'password'}
             id="passwordAgain"
             name="passwordAgain"
-            placeholder="Confirm Password"
+            // placeholder="      Confirm Password"
             value={formData.passwordAgain}
             onChange={handleChange}
-            // disabled={loading}
             disabled={disabled}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
           />
@@ -158,26 +162,42 @@ const UpdatePassword = ({ email, disabled }) => {
             }
             className="absolute top-3 right-3 text-gray-500 hover:text-[#FFDE11]"
           >
-            {passwordVisible.passwordAgain ? <EyeOff /> : <Eye />}
+            {passwordVisible.passwordAgain ? <Eye /> : <EyeOff />}
           </button>
         </div>
       </div>
 
-      {/* Submit Button */}
-      <Button
-        type="submit"
-        className={`w-full ${disabled == true ? 'bg-[#DEDEDE] text-white' : 'bg-[#FFDE11] text-black'}  rounded-full py-3 text-lg font-medium hover:bg-gray-100 hover:text-black disabled:opacity-50`}
-        // disabled={disabled}
-      >
-        {loading ? 'Resetting...' : 'Reset Password'}
-      </Button>
+      <div className="flex items-center justify-between space-x-5">
+        <Link
+          to="/login"
+          className="block text-center mt-2 w-[102px] bg-[#222224] text-white font-bold rounded-full py-3 transition duration-200 hover:bg-[#333] focus:outline-none focus:ring-2 focus:ring-[#FFDE11] focus:ring-offset-2"
+        >
+          Cancel
+        </Link>
 
-      <Link
-        to="/login"
-        className="block text-center text-sm font-semibold mt-2"
-      >
-        Cancel
-      </Link>
+        <div className="w-[172px]">
+          <Button
+            type="submit"
+            className={`
+        w-full
+        py-3
+        text-normal
+        font-bold
+        rounded-full
+        transition duration-200
+        ${
+          disabled
+            ? 'bg-[#DEDEDE] text-white cursor-not-allowed'
+            : 'bg-[#FFDE11] text-black hover:bg-yellow-300'
+        }
+        focus:outline-none focus:ring-2 focus:ring-[#222224] focus:ring-offset-2
+      `}
+            disabled={disabled}
+          >
+            {loading ? 'Resetting...' : 'Reset Password'}
+          </Button>
+        </div>
+      </div>
     </form>
   );
 };
