@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import ShoppingOverviewSideBar from './ShoppingOverviewSideBar';
+import React from 'react';
 
 const ShoppingOverview = () => {
   return (

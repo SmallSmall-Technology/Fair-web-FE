@@ -30,7 +30,7 @@ import {
   Favorites,
   RecentlyViewed,
   Notifications,
-  AccountProfile,
+  // AccountProfile,
 } from './lazyImports';
 
 import CartItemsSkeleton from './ui/components/Skeletons/CartItemsSkeleton';
@@ -45,6 +45,12 @@ import Summary from './pages/userDashboard/shopping/shoppingOverviewContents/Sum
 import Purchases from './pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases';
 import ForgotPassword from './Pages/forgotPassword/ForgotPassword';
 import ResetPassword from './Pages/resetPassword/ResetPassword';
+import ProfileSummary from './Pages/userDashboard/accountProfile/contents/profileSummary/ProfileSummary';
+import AccountVerification from './Pages/userDashboard/accountProfile/contents/accountVerification/AccountVerification';
+import DeliveryAddress from './Pages/userDashboard/accountProfile/contents/deliveryAddress/DeliveryAddress';
+import Feedback from './Pages/userDashboard/accountProfile/contents/feedback/Feedback';
+import ResolutionCentre from './Pages/userDashboard/accountProfile/contents/resolutionCentre/ResolutionCentre';
+import UserAccountProfile from './Pages/userDashboard/accountProfile/UserAccountProfile';
 // export const Summary = lazy(
 //   () =>
 //     import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
@@ -214,15 +220,69 @@ const AppRoutes = () => (
               </Suspense>
             }
           />
+
+          {/* //Account Profile Dashboard */}
           <Route
             path="account-profile"
             element={
               <Suspense fallback={<DashboardSummarySkeleton />}>
-                <AccountProfile />
+                <UserAccountProfile />
               </Suspense>
             }
-          />
-
+          >
+            {/* { label: 'My account', href: '/user-dashboard/account' },
+                { label: 'Shopping overview', href: '/user-dashboard/shopping-overview' },
+                { label: 'Notifications', href: '/user-dashboard/notifications' },
+                { label: 'Account profile', href: '/user-dashboard/account-profile' }, */}
+            <Route
+              path="profile-summary"
+              element={
+                // <Suspense fallback={<DashboardSummarySkeleton />}>
+                <ProfileSummary />
+                // {/* </Suspense> */}
+              }
+            />
+            <Route
+              path="account-verification"
+              element={
+                // <Suspense fallback={<DashboardSummarySkeleton />}>
+                <AccountVerification />
+                // {/* </Suspense> */}
+              }
+            />
+            <Route
+              path="delivery-address"
+              element={
+                <Suspense fallback={<DashboardSummarySkeleton />}>
+                  <DeliveryAddress />
+                </Suspense>
+              }
+            />
+            <Route
+              path="feedback"
+              element={
+                <Suspense fallback={<DashboardSummarySkeleton />}>
+                  <Feedback />
+                </Suspense>
+              }
+            />
+            <Route
+              path="resolution-centre"
+              element={
+                <Suspense fallback={<DashboardSummarySkeleton />}>
+                  <ResolutionCentre />
+                </Suspense>
+              }
+            />
+            <Route
+              path="recently-viewed"
+              element={
+                <Suspense fallback={<DashboardSummarySkeleton />}>
+                  <RecentlyViewed />
+                </Suspense>
+              }
+            />
+          </Route>
           <Route
             path=":id/slug"
             element={
