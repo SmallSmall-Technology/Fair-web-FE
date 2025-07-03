@@ -94,7 +94,7 @@ const UpdatePassword = ({ email, disabled }) => {
       className={`my-3 space-y-4 w-full mx-auto${disabled != true && 'text-[#DEDEDE]'}`}
       onSubmit={handleSubmit}
     >
-      <h2 className="text-xl font-semibold text-center">New Password</h2>
+      {/* <h2 className="text-xl font-semibold text-center">New Password</h2> */}
 
       <div className="space-y-2">
         <label htmlFor="password" className="font-semibold text-xl">
