@@ -1334,323 +1334,61 @@
   ],
   "orders": [
     {
-      "id": "ORD1745056371351",
+      "id": "ORD1748257707684",
       "items": [
-        {
-          "productId": "1",
-          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
         {
           "productId": "2",
           "name": "iPhone 14 Pro Max",
           "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
           "soldBy": "Apple",
-          "price": 500000,
+          "price": 9615.38,
           "quantity": 1
-        }
-      ],
-      "totalAmount": 707000,
-      "paidAmount": 582800,
-      "remainingAmount": 124200,
-      "status": "ongoing",
-      "createdAt": "2025-04-19T09:52:51.351Z",
-      "orderDate": "Apr 19, 2025"
-    },
-    {
-      "id": "ORD1745059610909",
-      "items": [
+        },
         {
           "productId": "1",
           "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
           "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
           "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
-        {
-          "productId": "2",
-          "name": "iPhone 14 Pro Max",
-          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Apple",
-          "price": 500000,
+          "price": 34500,
           "quantity": 1
         }
       ],
-      "totalAmount": 707000,
-      "paidAmount": 707000,
+      "totalAmount": 44115.38,
+      "paidAmount": 44115.38,
       "remainingAmount": 0,
-      "status": "completed",
-      "createdAt": "2025-04-19T10:46:50.909Z",
-      "orderDate": "Apr 19, 2025"
+      "status": "ongoing",
+      "createdAt": "2025-05-26T11:08:27.684Z",
+      "orderDate": "May 26, 2025"
     },
     {
-      "id": "ORD1745063653596",
+      "id": "ORD1748258665536",
       "items": [
-        {
-          "productId": "1",
-          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
         {
           "productId": "2",
           "name": "iPhone 14 Pro Max",
           "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
           "soldBy": "Apple",
-          "price": 500000,
+          "price": 9615.38,
+          "quantity": 1
+        },
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 34500,
           "quantity": 1
         }
       ],
-      "totalAmount": 707000,
-      "paidAmount": 707000,
+      "totalAmount": 44115.38,
+      "paidAmount": 44115.38,
       "remainingAmount": 0,
-      "status": "completed",
-      "createdAt": "2025-04-19T11:54:13.596Z",
-      "orderDate": "Apr 19, 2025"
-    },
-    {
-      "id": "ORD1745063691513",
-      "items": [
-        {
-          "productId": "1",
-          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
-        {
-          "productId": "2",
-          "name": "iPhone 14 Pro Max",
-          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Apple",
-          "price": 500000,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 707000,
-      "paidAmount": 282800,
-      "remainingAmount": 424200,
       "status": "ongoing",
-      "createdAt": "2025-04-19T11:54:51.513Z",
-      "orderDate": "Apr 19, 2025"
+      "createdAt": "2025-05-26T11:24:25.536Z",
+      "orderDate": "May 26, 2025"
     },
     {
-      "id": "ORD1745064606074",
-      "items": [
-        {
-          "productId": "1",
-          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
-        {
-          "productId": "2",
-          "name": "iPhone 14 Pro Max",
-          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Apple",
-          "price": 500000,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 707000,
-      "paidAmount": 282800,
-      "remainingAmount": 424200,
-      "status": "ongoing",
-      "createdAt": "2025-04-19T12:10:06.074Z",
-      "orderDate": "Apr 19, 2025"
-    },
-    {
-      "id": "ORD1745065012110",
-      "items": [
-        {
-          "productId": "1",
-          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
-        {
-          "productId": "2",
-          "name": "iPhone 14 Pro Max",
-          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Apple",
-          "price": 500000,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 707000,
-      "paidAmount": 282800,
-      "remainingAmount": 424200,
-      "status": "ongoing",
-      "createdAt": "2025-04-19T12:16:52.110Z",
-      "orderDate": "Apr 19, 2025"
-    },
-    {
-      "id": "ORD1745065202868",
-      "items": [
-        {
-          "productId": "1",
-          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
-        {
-          "productId": "2",
-          "name": "iPhone 14 Pro Max",
-          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Apple",
-          "price": 500000,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 707000,
-      "paidAmount": 282800,
-      "remainingAmount": 424200,
-      "status": "ongoing",
-      "createdAt": "2025-04-19T12:20:02.868Z",
-      "orderDate": "Apr 19, 2025"
-    },
-    {
-      "id": "ORD1745070140672",
-      "items": [
-        {
-          "productId": "1",
-          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
-        {
-          "productId": "2",
-          "name": "iPhone 14 Pro Max",
-          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Apple",
-          "price": 500000,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 707000,
-      "paidAmount": 282800,
-      "remainingAmount": 424200,
-      "status": "ongoing",
-      "createdAt": "2025-04-19T13:42:20.672Z",
-      "orderDate": "Apr 19, 2025"
-    },
-    {
-      "id": "ORD1745070329062",
-      "items": [
-        {
-          "productId": "1",
-          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
-        {
-          "productId": "2",
-          "name": "iPhone 14 Pro Max",
-          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Apple",
-          "price": 500000,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 707000,
-      "paidAmount": 282800,
-      "remainingAmount": 424200,
-      "status": "ongoing",
-      "createdAt": "2025-04-19T13:45:29.062Z",
-      "orderDate": "Apr 19, 2025"
-    },
-    {
-      "id": "ORD1745070466177",
-      "items": [
-        {
-          "productId": "1",
-          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
-        {
-          "productId": "2",
-          "name": "iPhone 14 Pro Max",
-          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Apple",
-          "price": 500000,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 707000,
-      "paidAmount": 707000,
-      "remainingAmount": 0,
-      "status": "completed",
-      "createdAt": "2025-04-19T13:47:46.177Z",
-      "orderDate": "Apr 19, 2025"
-    },
-    {
-      "id": "ORD1745075028014",
-      "items": [
-        {
-          "productId": "1",
-          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Samsung",
-          "price": 207000,
-          "quantity": 1
-        },
-        {
-          "productId": "2",
-          "name": "iPhone 14 Pro Max",
-          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "Apple",
-          "price": 500000,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 707000,
-      "paidAmount": 282800,
-      "remainingAmount": 424200,
-      "status": "ongoing",
-      "createdAt": "2025-04-19T15:03:48.014Z",
-      "orderDate": "Apr 19, 2025"
-    },
-    {
-      "id": "ORD1745075133494",
-      "items": [
-        {
-          "productId": "4",
-          "name": "OnePlus 10 Pro",
-          "image": "https://images.pexels.com/photos/47261/pexels-photo-47261.jpeg?auto=compress&cs=tinysrgb&w=500",
-          "soldBy": "OnePlus",
-          "price": 280000,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 280000,
-      "paidAmount": 280000,
-      "remainingAmount": 0,
-      "status": "completed",
-      "createdAt": "2025-04-19T15:05:33.494Z",
-      "orderDate": "Apr 19, 2025"
-    },
-    {
-      "id": "ORD1745443384798",
+      "id": "ORD1748357943428",
       "items": [
         {
           "productId": "1",
@@ -1662,115 +1400,1599 @@
         }
       ],
       "totalAmount": 207000,
-      "paidAmount": 82800,
-      "remainingAmount": 124200,
+      "paidAmount": 207000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-05-27T14:59:03.428Z",
+      "orderDate": "May 27, 2025"
+    },
+    {
+      "id": "ORD1748383628117",
+      "items": [
+        {
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 1369.86,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 1369.86,
+      "paidAmount": 1369.86,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-05-27T22:07:08.117Z",
+      "orderDate": "May 27, 2025"
+    },
+    {
+      "id": "ORD1748385119322",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "quantity": 1
+        },
+        {
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 150000,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 357000,
+      "paidAmount": 357000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-05-27T22:31:59.322Z",
+      "orderDate": "May 27, 2025"
+    },
+    {
+      "id": "ORD1748414138592",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 207000,
+      "paidAmount": 207000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-05-28T06:35:38.592Z",
+      "orderDate": "May 28, 2025"
+    },
+    {
+      "id": "ORD1748414381548",
+      "items": [
+        {
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 150000,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 500000,
+      "paidAmount": 150000,
+      "remainingAmount": 350000,
       "status": "ongoing",
-      "createdAt": "2025-04-23T21:23:04.798Z",
-      "orderDate": "Apr 23, 2025"
+      "createdAt": "2025-05-28T06:39:41.548Z",
+      "orderDate": "May 28, 2025"
+    },
+    {
+      "id": "ORD1748416566741",
+      "items": [
+        {
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 150000,
+          "quantity": 1
+        },
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 569000,
+      "paidAmount": 357000,
+      "remainingAmount": 212000,
+      "status": "ongoing",
+      "createdAt": "2025-05-28T07:16:06.741Z",
+      "orderDate": "May 28, 2025"
+    },
+    {
+      "id": "ORD1748432681974",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 69000,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 207000,
+      "paidAmount": 69000,
+      "remainingAmount": 138000,
+      "status": "ongoing",
+      "createdAt": "2025-05-28T11:44:41.974Z",
+      "orderDate": "May 28, 2025"
+    },
+    {
+      "id": "ORD1748433323833",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 69000,
+          "totalAmount": 207000,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 207000,
+      "paidAmount": 69000,
+      "remainingAmount": 138000,
+      "status": "ongoing",
+      "createdAt": "2025-05-28T11:55:23.833Z",
+      "orderDate": "May 28, 2025"
+    },
+    {
+      "id": "ORD1748438163322",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "totalAmount": 534500,
+          "quantity": 1
+        },
+        {
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 9615.38,
+          "totalAmount": 534500,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 534500,
+      "paidAmount": 216615.38,
+      "remainingAmount": 317884.62,
+      "status": "ongoing",
+      "createdAt": "2025-05-28T13:16:03.322Z",
+      "orderDate": "May 28, 2025"
+    },
+    {
+      "id": "ORD1748509533752",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 207000,
+      "paidAmount": 207000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-05-29T09:05:33.752Z",
+      "orderDate": "May 29, 2025"
+    },
+    {
+      "id": "ORD1748509648450",
+      "items": [
+        {
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 150000,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 150000,
+      "paidAmount": 150000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-05-29T09:07:28.450Z",
+      "orderDate": "May 29, 2025"
+    },
+    {
+      "id": "ORD1748510603578",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "quantity": 1
+        },
+        {
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 150000,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 357000,
+      "paidAmount": 357000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-05-29T09:23:23.578Z",
+      "orderDate": "May 29, 2025"
+    },
+    {
+      "id": "ORD1748513768813",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 34500,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 34500,
+      "paidAmount": 34500,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-05-29T10:16:08.813Z",
+      "orderDate": "May 29, 2025"
+    },
+    {
+      "id": "ORD1748515069177",
+      "items": [
+        {
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 9615.38,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": [
+        500000
+      ],
+      "paidAmount": 9615.38,
+      "remainingAmount": 490384.62,
+      "status": "ongoing",
+      "createdAt": "2025-05-29T10:37:49.177Z",
+      "orderDate": "May 29, 2025"
+    },
+    {
+      "id": "ORD1748515516823",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "quantity": 1,
+          "totalAmount": [
+            207000
+          ]
+        }
+      ],
+      "paidAmount": 207000,
+      "remainingAmount": null,
+      "status": "ongoing",
+      "createdAt": "2025-05-29T10:45:16.823Z",
+      "orderDate": "May 29, 2025"
+    },
+    {
+      "id": "ORD1748520683924",
+      "items": [
+        {
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 150000,
+          "quantity": 1,
+          "totalAmount": [
+            500000
+          ]
+        }
+      ],
+      "paidAmount": 150000,
+      "remainingAmount": null,
+      "status": "ongoing",
+      "createdAt": "2025-05-29T12:11:23.924Z",
+      "orderDate": "May 29, 2025"
+    },
+    {
+      "id": "ORD1748520739723",
+      "items": [
+        {
+          "productId": "3",
+          "name": "Google Pixel 7 Pro",
+          "image": "https://images.pexels.com/photos/163100/pexels-photo-163100.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Google",
+          "price": 300000,
+          "quantity": 1,
+          "totalAmount": [
+            300000,
+            280000
+          ]
+        },
+        {
+          "productId": "4",
+          "name": "OnePlus 10 Pro",
+          "image": "https://images.pexels.com/photos/47261/pexels-photo-47261.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "OnePlus",
+          "price": 280000,
+          "quantity": 1,
+          "totalAmount": [
+            300000,
+            280000
+          ]
+        }
+      ],
+      "paidAmount": 580000,
+      "remainingAmount": null,
+      "status": "ongoing",
+      "createdAt": "2025-05-29T12:12:19.724Z",
+      "orderDate": "May 29, 2025"
+    },
+    {
+      "id": "ORD1748729065462",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "quantity": 1,
+          "totalAmount": [
+            207000,
+            500000
+          ]
+        },
+        {
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 150000,
+          "quantity": 1,
+          "totalAmount": [
+            207000,
+            500000
+          ]
+        }
+      ],
+      "paidAmount": 357000,
+      "remainingAmount": null,
+      "status": "ongoing",
+      "createdAt": "2025-05-31T22:04:25.462Z",
+      "orderDate": "May 31, 2025"
+    },
+    {
+      "id": "ORD1748743241305",
+      "items": [
+        {
+          "productId": "3",
+          "name": "Google Pixel 7 Pro",
+          "image": "https://images.pexels.com/photos/163100/pexels-photo-163100.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Google",
+          "price": 300000,
+          "quantity": 1,
+          "totalAmount": [
+            300000
+          ]
+        }
+      ],
+      "paidAmount": 300000,
+      "remainingAmount": null,
+      "status": "ongoing",
+      "createdAt": "2025-06-01T02:00:41.305Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748747279435",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "quantity": 1,
+          "totalAmount": [
+            207000
+          ]
+        }
+      ],
+      "paidAmount": 207000,
+      "remainingAmount": null,
+      "status": "ongoing",
+      "createdAt": "2025-06-01T03:07:59.435Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748780505497",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "quantity": 1,
+          "totalAmount": [
+            207000
+          ]
+        }
+      ],
+      "paidAmount": 207000,
+      "remainingAmount": null,
+      "status": "ongoing",
+      "createdAt": "2025-06-01T12:21:45.497Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748786096766",
+      "items": [
+        {
+          "paymentPlan": "monthly",
+          "productId": "3",
+          "name": "Google Pixel 7 Pro",
+          "image": "https://images.pexels.com/photos/163100/pexels-photo-163100.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Google",
+          "price": 70000,
+          "totalPrice": 140000,
+          "quantity": 2,
+          "totalAmount": 300000,
+          "id": "3",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "monthly",
+            "amount": 300000,
+            "months": 3,
+            "monthlyPayment": 70000,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": 300000,
+            "upfrontPayment": 90000
+          },
+          "deliveryDate": "Jan, 20 2025"
+        }
+      ],
+      "paidAmount": 140000,
+      "status": "ongoing",
+      "createdAt": "2025-06-01T13:54:56.766Z",
+      "orderDate": "Jun 01, 2025",
+      "remainingAmount": null
+    },
+    {
+      "id": "ORD1748786772298",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "totalPrice": 207000,
+          "quantity": 1,
+          "totalAmount": 207000,
+          "id": "1",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 207000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "207000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025"
+        },
+        {
+          "paymentPlan": "monthly",
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 150000,
+          "totalPrice": 300000,
+          "quantity": 2,
+          "totalAmount": 500000,
+          "id": "2",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "monthly",
+            "amount": 500000,
+            "months": 6,
+            "monthlyPayment": 150000,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": 500000,
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025"
+        }
+      ],
+      "paidAmount": 507000,
+      "status": "ongoing",
+      "createdAt": "2025-06-01T14:06:12.298Z",
+      "orderDate": "Jun 01, 2025",
+      "remainingAmount": null
+    },
+    {
+      "id": "ORD1748788112505",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "4",
+          "name": "OnePlus 10 Pro",
+          "image": "https://images.pexels.com/photos/47261/pexels-photo-47261.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "OnePlus",
+          "price": 280000,
+          "totalPrice": 280000,
+          "quantity": 1,
+          "totalAmount": 280000,
+          "id": "4",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 280000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "280000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025"
+        }
+      ],
+      "paidAmount": 280000,
+      "status": "ongoing",
+      "createdAt": "2025-06-01T14:28:32.505Z",
+      "orderDate": "Jun 01, 2025",
+      "remainingAmount": null
+    },
+    {
+      "id": "ORD1748788198640",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "5",
+          "name": "Xiaomi Mi 12",
+          "image": "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Xiaomi",
+          "price": 200000,
+          "totalPrice": 200000,
+          "quantity": 1,
+          "totalAmount": 200000,
+          "id": "5",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 200000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "200000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025"
+        }
+      ],
+      "paidAmount": 200000,
+      "status": "ongoing",
+      "createdAt": "2025-06-01T14:29:58.640Z",
+      "orderDate": "Jun 01, 2025",
+      "remainingAmount": null
+    },
+    {
+      "id": "ORD1748788560320",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "11",
+          "name": "Samsung 55-inch 4K Smart TV",
+          "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 300000,
+          "totalPrice": 300000,
+          "quantity": 1,
+          "totalAmount": 300000,
+          "id": "11",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 300000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "300000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "ongoing"
+        }
+      ],
+      "paidAmount": 300000,
+      "createdAt": "2025-06-01T14:36:00.320Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748788749883",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "11",
+          "name": "Samsung 55-inch 4K Smart TV",
+          "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 300000,
+          "totalPrice": 300000,
+          "quantity": 1,
+          "totalAmount": 300000,
+          "id": "11",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 300000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "300000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "ongoing"
+        }
+      ],
+      "paidAmount": 300000,
+      "createdAt": "2025-06-01T14:39:09.883Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748789295058",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "11",
+          "name": "Samsung 55-inch 4K Smart TV",
+          "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 300000,
+          "totalPrice": 300000,
+          "quantity": 1,
+          "totalAmount": 300000,
+          "id": "11",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 300000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "300000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "ongoing"
+        }
+      ],
+      "paidAmount": 300000,
+      "createdAt": "2025-06-01T14:48:15.058Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748789386797",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "11",
+          "name": "Samsung 55-inch 4K Smart TV",
+          "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 300000,
+          "totalPrice": 300000,
+          "quantity": 1,
+          "totalAmount": 300000,
+          "id": "11",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 300000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "300000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "ongoing"
+        }
+      ],
+      "paidAmount": 300000,
+      "createdAt": "2025-06-01T14:49:46.797Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748789553127",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "11",
+          "name": "Samsung 55-inch 4K Smart TV",
+          "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 300000,
+          "totalPrice": 300000,
+          "quantity": 1,
+          "totalAmount": 300000,
+          "id": "11",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 300000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "300000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "ongoing"
+        }
+      ],
+      "paidAmount": 300000,
+      "createdAt": "2025-06-01T14:52:33.127Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748789599508",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "11",
+          "name": "Samsung 55-inch 4K Smart TV",
+          "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 300000,
+          "totalPrice": 300000,
+          "quantity": 1,
+          "totalAmount": 300000,
+          "id": "11",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 300000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "300000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "ongoing"
+        }
+      ],
+      "paidAmount": 300000,
+      "status": "ongoing",
+      "createdAt": "2025-06-01T14:53:19.508Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748790437672",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "11",
+          "name": "Samsung 55-inch 4K Smart TV",
+          "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 300000,
+          "totalPrice": 300000,
+          "quantity": 1,
+          "totalAmount": 300000,
+          "paidAmount": 300000,
+          "remainingAmount": 0,
+          "id": "11",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 300000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "300000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        }
+      ],
+      "totalAmount": 300000,
+      "paidAmount": 300000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-06-01T15:07:17.672Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748793383111",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "11",
+          "name": "Samsung 55-inch 4K Smart TV",
+          "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 300000,
+          "totalPrice": 300000,
+          "quantity": 1,
+          "totalAmount": 300000,
+          "paidAmount": 300000,
+          "remainingAmount": 0,
+          "id": "11",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 300000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "300000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        }
+      ],
+      "totalAmount": 300000,
+      "paidAmount": 300000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-06-01T15:56:23.111Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748794602426",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "11",
+          "name": "Samsung 55-inch 4K Smart TV",
+          "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 300000,
+          "totalPrice": 300000,
+          "quantity": 1,
+          "totalAmount": 300000,
+          "paidAmount": 300000,
+          "remainingAmount": 0,
+          "id": "11",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 300000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "300000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        }
+      ],
+      "totalAmount": 300000,
+      "paidAmount": 300000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-06-01T16:16:42.426Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748794710060",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "11",
+          "name": "Samsung 55-inch 4K Smart TV",
+          "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 300000,
+          "totalPrice": 300000,
+          "quantity": 1,
+          "totalAmount": 300000,
+          "id": "11",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 300000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "300000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": ""
+        }
+      ],
+      "paidAmount": 300000,
+      "status": "",
+      "createdAt": "2025-06-01T16:18:30.060Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748795019512",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "11",
+          "name": "Samsung 55-inch 4K Smart TV",
+          "image": "https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 300000,
+          "totalPrice": 300000,
+          "quantity": 1,
+          "totalAmount": 300000,
+          "paidAmount": 300000,
+          "remainingAmount": 0,
+          "id": "11",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 300000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "300000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        }
+      ],
+      "paidAmount": 300000,
+      "totalAmount": 300000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-06-01T16:23:39.512Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748795352912",
+      "items": [
+        {
+          "paymentPlan": "monthly",
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 69000,
+          "totalPrice": 69000,
+          "quantity": 1,
+          "totalAmount": 207000,
+          "paidAmount": 569000,
+          "remainingAmount": -362000,
+          "id": "1",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "monthly",
+            "amount": 207000,
+            "months": 6,
+            "monthlyPayment": 69000,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": 207000,
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "ongoing"
+        },
+        {
+          "paymentPlan": "upfront",
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 500000,
+          "totalPrice": 500000,
+          "quantity": 1,
+          "totalAmount": 500000,
+          "paidAmount": 500000,
+          "remainingAmount": 0,
+          "id": "2",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 500000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": 500000,
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        }
+      ],
+      "paidAmount": 1069000,
+      "totalAmount": 707000,
+      "remainingAmount": -362000,
+      "status": "ongoing",
+      "createdAt": "2025-06-01T16:29:12.912Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748795418608",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "4",
+          "name": "OnePlus 10 Pro",
+          "image": "https://images.pexels.com/photos/47261/pexels-photo-47261.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "OnePlus",
+          "price": 280000,
+          "totalPrice": 280000,
+          "quantity": 1,
+          "totalAmount": 280000,
+          "paidAmount": 280000,
+          "remainingAmount": 0,
+          "id": "4",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 280000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "280000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        }
+      ],
+      "paidAmount": 280000,
+      "totalAmount": 280000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-06-01T16:30:18.608Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748795998231",
+      "items": [
+        {
+          "paymentPlan": "monthly",
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 69000,
+          "totalPrice": 69000,
+          "quantity": 1,
+          "totalAmount": 207000,
+          "paidAmount": 569000,
+          "remainingAmount": -362000,
+          "id": "1",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "monthly",
+            "amount": 207000,
+            "months": 6,
+            "monthlyPayment": 69000,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": 207000,
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "ongoing"
+        },
+        {
+          "paymentPlan": "upfront",
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 500000,
+          "totalPrice": 500000,
+          "quantity": 1,
+          "totalAmount": 500000,
+          "paidAmount": 500000,
+          "remainingAmount": 0,
+          "id": "2",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 500000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": 500000,
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        }
+      ],
+      "paidAmount": 1069000,
+      "totalAmount": 707000,
+      "remainingAmount": -362000,
+      "status": "ongoing",
+      "createdAt": "2025-06-01T16:39:58.231Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748796244377",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "4",
+          "name": "OnePlus 10 Pro",
+          "image": "https://images.pexels.com/photos/47261/pexels-photo-47261.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "OnePlus",
+          "price": 280000,
+          "totalPrice": 280000,
+          "quantity": 1,
+          "totalAmount": 280000,
+          "paidAmount": 280000,
+          "remainingAmount": 0,
+          "id": "4",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 280000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "280000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        },
+        {
+          "paymentPlan": "monthly",
+          "productId": "5",
+          "name": "Xiaomi Mi 12",
+          "image": "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Xiaomi",
+          "price": 46666.67,
+          "totalPrice": 46666.67,
+          "quantity": 1,
+          "totalAmount": 200000,
+          "paidAmount": 326666.67,
+          "remainingAmount": -126666.66999999998,
+          "id": "5",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "monthly",
+            "amount": 200000,
+            "months": 3,
+            "monthlyPayment": 46666.67,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": 200000,
+            "upfrontPayment": 60000
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "ongoing"
+        }
+      ],
+      "paidAmount": 606666.67,
+      "totalAmount": 480000,
+      "remainingAmount": -126666.67,
+      "status": "ongoing",
+      "createdAt": "2025-06-01T16:44:04.377Z",
+      "orderDate": "Jun 01, 2025"
+    },
+    {
+      "id": "ORD1748851956688",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "6",
+          "name": "Samsung Galaxy S22 Ultra",
+          "image": "https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 400000,
+          "totalPrice": 400000,
+          "quantity": 1,
+          "totalAmount": 400000,
+          "paidAmount": 400000,
+          "remainingAmount": 0,
+          "id": "6",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 400000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "400000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        }
+      ],
+      "paidAmount": 400000,
+      "totalAmount": 400000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-06-02T08:12:36.688Z",
+      "orderDate": "Jun 02, 2025"
+    },
+    {
+      "id": "ORD1748855192698",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "1",
+          "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+          "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 207000,
+          "totalPrice": 207000,
+          "quantity": 1,
+          "totalAmount": 207000,
+          "paidAmount": 207000,
+          "remainingAmount": 0,
+          "id": "1",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 207000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "207000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        },
+        {
+          "paymentPlan": "upfront",
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 500000,
+          "totalPrice": 500000,
+          "quantity": 1,
+          "totalAmount": 500000,
+          "paidAmount": 500000,
+          "remainingAmount": 0,
+          "id": "2",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 500000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": 500000,
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        }
+      ],
+      "paidAmount": 707000,
+      "totalAmount": 707000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-06-02T09:06:32.698Z",
+      "orderDate": "Jun 02, 2025"
+    },
+    {
+      "id": "ORD1748855272760",
+      "items": [
+        {
+          "paymentPlan": "monthly",
+          "productId": "4",
+          "name": "OnePlus 10 Pro",
+          "image": "https://images.pexels.com/photos/47261/pexels-photo-47261.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "OnePlus",
+          "price": 65333.33,
+          "totalPrice": 65333.33,
+          "quantity": 1,
+          "totalAmount": 280000,
+          "paidAmount": 74948.71,
+          "remainingAmount": 205051.28999999998,
+          "id": "4",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "monthly",
+            "amount": 280000,
+            "months": 3,
+            "monthlyPayment": 65333.33,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": 280000,
+            "upfrontPayment": 84000
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "ongoing"
+        },
+        {
+          "paymentPlan": "weekly",
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 9615.38,
+          "totalPrice": 9615.38,
+          "quantity": 1,
+          "totalAmount": 500000,
+          "paidAmount": 74948.71,
+          "remainingAmount": 425051.29,
+          "id": "2",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "weekly",
+            "amount": 500000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 4,
+            "weeklyPayment": 9615.38,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": 500000,
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "ongoing"
+        }
+      ],
+      "paidAmount": 149897.42,
+      "totalAmount": 780000,
+      "remainingAmount": 630102.58,
+      "status": "ongoing",
+      "createdAt": "2025-06-02T09:07:52.760Z",
+      "orderDate": "Jun 02, 2025"
+    },
+    {
+      "id": "ORD1749120256395",
+      "items": [
+        {
+          "paymentPlan": "upfront",
+          "productId": "2",
+          "name": "iPhone 14 Pro Max",
+          "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Apple",
+          "price": 500000,
+          "totalPrice": 500000,
+          "quantity": 1,
+          "totalAmount": 500000,
+          "paidAmount": 500000,
+          "remainingAmount": 0,
+          "id": "2",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 500000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": 500000,
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        },
+        {
+          "paymentPlan": "upfront",
+          "productId": "4",
+          "name": "OnePlus 10 Pro",
+          "image": "https://images.pexels.com/photos/47261/pexels-photo-47261.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "OnePlus",
+          "price": 280000,
+          "totalPrice": 280000,
+          "quantity": 1,
+          "totalAmount": 280000,
+          "paidAmount": 280000,
+          "remainingAmount": 0,
+          "id": "4",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 280000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "280000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        },
+        {
+          "paymentPlan": "upfront",
+          "productId": "6",
+          "name": "Samsung Galaxy S22 Ultra",
+          "image": "https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=500",
+          "soldBy": "Samsung",
+          "price": 400000,
+          "totalPrice": 400000,
+          "quantity": 1,
+          "totalAmount": 400000,
+          "paidAmount": 400000,
+          "remainingAmount": 0,
+          "id": "6",
+          "userId": "user123",
+          "paymentPlanDetails": {
+            "type": "upfront",
+            "amount": 400000,
+            "months": 0,
+            "monthlyPayment": 0,
+            "weeks": 0,
+            "weeklyPayment": 0,
+            "days": 0,
+            "dailyPayment": 0,
+            "totalPrice": "400000",
+            "upfrontPayment": 0
+          },
+          "deliveryDate": "Jan, 20 2025",
+          "status": "completed"
+        }
+      ],
+      "paidAmount": 1180000,
+      "totalAmount": 1180000,
+      "remainingAmount": 0,
+      "status": "completed",
+      "createdAt": "2025-06-05T10:44:16.395Z",
+      "orderDate": "Jun 05, 2025"
     }
   ],
   "cart": [
     {
-      "id": "cart-1-upfront-1746709265160",
-      "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+      "id": "5",
+      "image": "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "name": "Xiaomi Mi 12",
       "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000,
+      "productId": "5",
+      "quantity": 7,
+      "price": 200000,
+      "totalPrice": 1400000,
       "paymentPlan": "upfront",
       "paymentPlanDetails": {
         "type": "upfront",
-        "amount": 207000,
+        "amount": 200000,
         "months": 0,
         "monthlyPayment": 0,
         "weeks": 0,
         "weeklyPayment": 0,
         "days": 0,
         "dailyPayment": 0,
-        "totalPrice": "207000",
+        "totalPrice": "200000",
         "upfrontPayment": 0
       },
       "deliveryDate": "Jan, 20 2025",
       "interest": 0
     },
     {
-      "id": "cart-2-upfront-1746712156931",
-      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 2,
-      "price": 500000,
-      "totalPrice": 1000000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 500000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-undefined-upfront-1746712458832",
-      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 500000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-2-weekly-1746712869783",
-      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 3,
-      "price": 9615.38,
-      "totalPrice": 28846.14,
-      "paymentPlan": "weekly",
-      "paymentPlanDetails": {
-        "type": "weekly",
-        "amount": "500000",
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 4,
-        "weeklyPayment": 9615.38,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-2-upfront-1746713880036",
+      "id": "2",
+      "category": "Electronics",
       "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
       "name": "iPhone 14 Pro Max",
       "userId": "user123",
@@ -1789,381 +3011,6 @@
         "days": 0,
         "dailyPayment": 0,
         "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-2-monthly-1746713994826",
-      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 150000,
-      "totalPrice": 150000,
-      "paymentPlan": "monthly",
-      "paymentPlanDetails": {
-        "type": "monthly",
-        "amount": "500000",
-        "months": 6,
-        "monthlyPayment": 150000,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-2-upfront-1746715321326",
-      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 500000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-2-upfront-1746715388213",
-      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 500000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-2-upfront-1746715436619",
-      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 500000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-2-upfront-1746715456912",
-      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 500000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-2-upfront-1746740277466",
-      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 500000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-1-upfront-1746740341118",
-      "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 207000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": "207000",
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-1-upfront-1746740461502",
-      "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 207000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": "207000",
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-1-upfront-1746740566641",
-      "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 207000,
-      "totalPrice": 207000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 207000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": "207000",
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-2-upfront-1746740571037",
-      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 500000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-3-upfront-1746740590818",
-      "image": "https://images.pexels.com/photos/163100/pexels-photo-163100.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "Google Pixel 7 Pro",
-      "userId": "user123",
-      "productId": "3",
-      "quantity": 1,
-      "price": 300000,
-      "totalPrice": 300000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 300000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": "300000",
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-1-monthly-1746740722496",
-      "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 1,
-      "price": 69000,
-      "totalPrice": 69000,
-      "paymentPlan": "monthly",
-      "paymentPlanDetails": {
-        "type": "monthly",
-        "amount": "207000",
-        "months": 3,
-        "monthlyPayment": 69000,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 207000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-1-upfront-1746812254704",
-      "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
-      "userId": "user123",
-      "productId": "1",
-      "quantity": 3,
-      "price": 207000,
-      "totalPrice": 621000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 207000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": "207000",
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-2-upfront-1746812256083",
-      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 500000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "cart-17-upfront-1747402919103",
-      "image": "https://images.pexels.com/photos/3769747/pexels-photo-3769747.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "Sharp 70-inch Aquos TV",
-      "userId": "user123",
-      "productId": "17",
-      "quantity": 1,
-      "price": 600000,
-      "totalPrice": 600000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 600000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": "600000",
         "upfrontPayment": 0
       },
       "deliveryDate": "Jan, 20 2025",

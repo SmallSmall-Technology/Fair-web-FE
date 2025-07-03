@@ -5,9 +5,8 @@ import {
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3002';
 
-// Fetch orders from json-server
 export const fetchOrders = createAsyncThunk('order/fetchOrders', async () => {
   const response = await axios.get(`${API_URL}/orders`);
   return response.data;
@@ -16,25 +15,61 @@ export const fetchOrders = createAsyncThunk('order/fetchOrders', async () => {
 export const createOrder = createAsyncThunk(
   'order/createOrder',
   async ({ cartItems, initialPayment }, { rejectWithValue }) => {
+    console.log(cartItems);
+
     try {
-      const totalAmount = cartItems.reduce(
-        (sum, item) => sum + item.price * item.quantity,
-        0
-      );
-      const newOrder = {
-        id: `ORD${Date.now()}`,
-        items: cartItems.map((item) => ({
+      // Calculate paid amounts and assign statuses per item
+      const itemsWithDetails = cartItems.map((item) => {
+        console.log(item);
+        const itemPaidAmount =
+          item.paymentPlan === 'upfront'
+            ? +item.paymentPlanDetails.amount * item.quantity
+            : +initialPayment * item.quantity;
+        const itemTotalAmount = +item.paymentPlanDetails.amount * item.quantity;
+        return {
+          paymentPlan: item.paymentPlan,
           productId: item.productId,
           name: item.name,
           image: item.image,
           soldBy: item.soldBy,
-          price: item.price,
+          price: +item.price,
+          totalPrice: +item.totalPrice,
           quantity: item.quantity,
-        })),
-        totalAmount,
-        paidAmount: parseFloat(initialPayment),
-        remainingAmount: totalAmount - parseFloat(initialPayment),
-        status: 'ongoing',
+          totalAmount: itemTotalAmount,
+          paidAmount: itemPaidAmount,
+          remainingAmount: itemTotalAmount - itemPaidAmount,
+          id: item.id,
+          userId: 'user123',
+          paymentPlanDetails: item.paymentPlanDetails,
+          deliveryDate: item.deliveryDate || 'Jan 20, 2025',
+          status: item.paymentPlan === 'upfront' ? 'completed' : 'ongoing',
+          category: item.category,
+        };
+      });
+
+      const orderPaidAmount = itemsWithDetails.reduce(
+        (sum, item) => sum + item.paidAmount,
+        0
+      );
+      const orderTotalAmount = itemsWithDetails.reduce(
+        (sum, item) => sum + item.totalAmount,
+        0
+      );
+      const orderRemainingAmount = orderTotalAmount - orderPaidAmount;
+
+      const orderStatus = itemsWithDetails.every(
+        (item) => item.status === 'completed'
+      )
+        ? 'completed'
+        : 'ongoing';
+
+      const newOrder = {
+        id: `ORD${Date.now()}`,
+        items: itemsWithDetails,
+        paidAmount: parseFloat(orderPaidAmount.toFixed(2)),
+        totalAmount: parseFloat(orderTotalAmount.toFixed(2)),
+        remainingAmount: parseFloat(orderRemainingAmount.toFixed(2)),
+        status: orderStatus,
         createdAt: new Date().toISOString(),
         orderDate: new Date().toLocaleDateString('en-US', {
           day: '2-digit',
@@ -42,43 +77,72 @@ export const createOrder = createAsyncThunk(
           year: 'numeric',
         }),
       };
+
       const response = await axios.post(`${API_URL}/orders`, newOrder);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      console.error('Error creating order:', error);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
 
 export const makePayment = createAsyncThunk(
   'order/makePayment',
-  async ({ orderId, amount }, { rejectWithValue }) => {
+  async ({ orderId, itemId, amount }, { rejectWithValue }) => {
     try {
       const orderResponse = await axios.get(`${API_URL}/orders/${orderId}`);
       const order = orderResponse.data;
 
-      if (order && order.status === 'ongoing') {
-        const updatedOrder = {
-          ...order,
-          paidAmount: order.paidAmount + parseFloat(amount + amount * 7.5),
-          remainingAmount:
-            order.totalAmount - (order.paidAmount + parseFloat(amount)),
-          status:
-            order.totalAmount - (order.paidAmount + parseFloat(amount)) <= 0
-              ? 'completed'
-              : 'ongoing',
-        };
-        if (updatedOrder.remainingAmount <= 0) {
-          updatedOrder.remainingAmount = 0;
-        }
-        const response = await axios.put(
-          `${API_URL}/orders/${orderId}`,
-          updatedOrder
-        );
-        return response.data;
+      if (!order) {
+        throw new Error('Order not found');
       }
-      throw new Error('Order not found or not ongoing');
+
+      const updatedItems = order.items.map((item) => {
+        if (item.id === itemId && item.status === 'ongoing') {
+          const newPaidAmount = item.paidAmount + parseFloat(amount);
+          const newRemainingAmount = item.totalAmount - newPaidAmount;
+          return {
+            ...item,
+            paidAmount: parseFloat(newPaidAmount.toFixed(2)),
+            remainingAmount: parseFloat(
+              Math.max(newRemainingAmount, 0).toFixed(2)
+            ),
+            status: newRemainingAmount <= 0 ? 'completed' : 'ongoing',
+          };
+        }
+        return item;
+      });
+
+      const orderPaidAmount = updatedItems.reduce(
+        (sum, item) => sum + item.paidAmount,
+        0
+      );
+      const orderRemainingAmount = updatedItems.reduce(
+        (sum, item) => sum + item.remainingAmount,
+        0
+      );
+      const orderStatus = updatedItems.every(
+        (item) => item.status === 'completed'
+      )
+        ? 'completed'
+        : 'ongoing';
+
+      const updatedOrder = {
+        ...order,
+        items: updatedItems,
+        paidAmount: parseFloat(orderPaidAmount.toFixed(2)),
+        remainingAmount: parseFloat(orderRemainingAmount.toFixed(2)),
+        status: orderStatus,
+      };
+
+      const response = await axios.put(
+        `${API_URL}/orders/${orderId}`,
+        updatedOrder
+      );
+      return response.data;
     } catch (error) {
+      console.error('Error making payment:', error);
       return rejectWithValue(error.message);
     }
   }
@@ -111,7 +175,6 @@ const initialState = {
   status: 'idle',
   error: null,
 };
-
 const orderSlice = createSlice({
   name: 'order',
   initialState,
@@ -145,15 +208,19 @@ const orderSlice = createSlice({
 
 export default orderSlice.reducer;
 
-// Memoized Selectors
 const selectOrders = (state) => state.order.orders;
 
 export const getOngoingOrders = createSelector([selectOrders], (orders) =>
-  (orders || []).filter((order) => order.status === 'ongoing')
+  (orders || []).filter(
+    (order) => order.status === 'ongoing' && order.paidAmount !== order.price
+  )
 );
 
 export const getCompletedOrders = createSelector([selectOrders], (orders) =>
-  (orders || []).filter((order) => order.status === 'completed')
+  (orders || []).filter(
+    (order) =>
+      order.status === 'completed' && order.paidAmount === order.totalAmount
+  )
 );
 
 export const getCancelledOrders = createSelector([selectOrders], (orders) =>

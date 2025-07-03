@@ -1,29 +1,4 @@
-const PurchaseCancelled = ({ orders }) => {
-  const cancelledOrders = orders || [];
-
-  return (
-    <section>
-      {cancelledOrders.length < 1 ? (
-        <p className="w-full py-20 rounded-md bg-[#F6F6F6] text-center text-gray-500">
-          No cancelled orders were found
-        </p>
-      ) : (
-        <div>
-          {cancelledOrders.map((item, index) => (
-            <div key={item.id || index}>
-              <PurchasedItem item={item} />
-            </div>
-          ))}
-        </div>
-      )}
-    </section>
-  );
-};
-
-export default PurchaseCancelled;
-
-// Reuse the same PurchasedItem component
-const PurchasedItem = ({ item }) => {
+export const PurchasedItemCancelled = ({ item }) => {
   return (
     <article>
       <div className="flex items-center py-3 px-2 justify-between text-balance">
@@ -31,7 +6,7 @@ const PurchasedItem = ({ item }) => {
           <img
             src={item.image || '/placeholder-image.jpg'}
             className="h-full w-full rounded-lg object-cover"
-            alt={item.name || 'Product image'}
+            alt={`${item.name.slice(0, 20) + '...'}`}
           />
         </div>
         <div className="flex-1 ml-4">

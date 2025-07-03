@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { BVNUpload } from './UploadFileModal';
 import { YellowButton } from '../../../utils/Button';
-import { UploadFileModal } from './UploadFileModal';
 
 export const IncomeUpgrade = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -13,7 +13,6 @@ export const IncomeUpgrade = () => {
     setModalIsOpen(true);
   };
 
-  // const afterOpenModal = () => {};
   const closeModal = () => {
     setModalIsOpen(false);
   };
@@ -24,7 +23,7 @@ export const IncomeUpgrade = () => {
         <div className="flex items-start mb-6 space-x-1">
           <span className="w-5 h-5">
             <img
-              src="/public/images/alert.svg"
+              src="/images/alert.svg"
               alt="alert icon"
               className="w-full h-full"
             />
@@ -39,7 +38,7 @@ export const IncomeUpgrade = () => {
           <YellowButton onClick={openModal}>Upgrade now</YellowButton>
 
           <div className="w-52">
-            <UploadFileModal
+            <BVNUpload
               onUpgrade={handleUpgrade}
               closeModal={closeModal}
               modalIsOpen={modalIsOpen}

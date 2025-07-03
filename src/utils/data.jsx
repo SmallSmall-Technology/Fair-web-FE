@@ -192,7 +192,7 @@ export const products = [
     name: 'Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple',
     brand: 'Samsung',
     category: 'Electronics',
-    subcategory: 'Mobile Phones',
+    subcategory: 'Phones',
     image:
       'https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500',
     price: '207000',
@@ -235,7 +235,7 @@ export const products = [
     name: 'iPhone 14 Pro Max',
     brand: 'Apple',
     category: 'Electronics',
-    subcategory: 'Mobile Phones',
+    subcategory: 'Phones',
     image:
       'https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500',
     price: '500000',
@@ -277,7 +277,7 @@ export const products = [
     name: 'Google Pixel 7 Pro',
     brand: 'Google',
     category: 'Electronics',
-    subcategory: 'Mobile Phones',
+    subcategory: 'Phones',
     image:
       'https://images.pexels.com/photos/163100/pexels-photo-163100.jpeg?auto=compress&cs=tinysrgb&w=500',
     price: '300000',
@@ -301,7 +301,7 @@ export const products = [
     name: 'OnePlus 10 Pro',
     brand: 'OnePlus',
     category: 'Electronics',
-    subcategory: 'Mobile Phones',
+    subcategory: 'Phones',
     image:
       'https://images.pexels.com/photos/47261/pexels-photo-47261.jpeg?auto=compress&cs=tinysrgb&w=500',
     price: '280000',
@@ -325,7 +325,7 @@ export const products = [
     name: 'Xiaomi Mi 12',
     brand: 'Xiaomi',
     category: 'Electronics',
-    subcategory: 'Mobile Phones',
+    subcategory: 'Phones',
     image:
       'https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=500',
     price: '200000',
@@ -349,7 +349,7 @@ export const products = [
     name: 'Samsung Galaxy S22 Ultra',
     brand: 'Samsung',
     category: 'Electronics',
-    subcategory: 'Mobile Phones',
+    subcategory: 'Phones',
     image:
       'https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=500',
     price: '400000',
@@ -373,7 +373,7 @@ export const products = [
     name: 'iPhone SE (2022)',
     brand: 'Apple',
     category: 'Electronics',
-    subcategory: 'Mobile Phones',
+    subcategory: 'Phones',
     image:
       'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=500',
     price: '150000',
@@ -397,7 +397,7 @@ export const products = [
     name: 'Google Pixel 6a',
     brand: 'Google',
     category: 'Electronics',
-    subcategory: 'Mobile Phones',
+    subcategory: 'Phones',
     image:
       'https://images.pexels.com/photos/821652/pexels-photo-821652.jpeg?auto=compress&cs=tinysrgb&w=500',
     price: '180000',
@@ -421,7 +421,7 @@ export const products = [
     name: 'OnePlus Nord 2',
     brand: 'OnePlus',
     category: 'Electronics',
-    subcategory: 'Mobile Phones',
+    subcategory: 'Phones',
     image:
       'https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=500',
     price: '220000',
@@ -445,7 +445,7 @@ export const products = [
     name: 'Xiaomi Redmi Note 11',
     brand: 'Xiaomi',
     category: 'Electronics',
-    subcategory: 'Mobile Phones',
+    subcategory: 'Phones',
     image:
       'https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&w=500',
     price: '120000',
@@ -469,7 +469,7 @@ export const products = [
     name: 'Samsung 55-inch 4K Smart TV',
     brand: 'Samsung',
     category: 'Electronics',
-    subcategory: 'TV & Video',
+    subcategory: 'TV',
     image:
       'https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg?auto=compress&cs=tinysrgb&w=500',
     price: '300000',

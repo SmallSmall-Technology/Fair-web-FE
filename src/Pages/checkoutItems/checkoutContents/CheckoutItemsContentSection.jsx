@@ -97,7 +97,6 @@ export const CheckoutItemsContentSection = () => {
           </div>
         ) : (
           <>
-            {/* <p>Delivery Form</p> */}
             <CheckoutDeliveryAddressForm
               deliveryAddress={deliveryAddress}
               handleEditedDeliveryAddress={handleEditedDeliveryAddress}

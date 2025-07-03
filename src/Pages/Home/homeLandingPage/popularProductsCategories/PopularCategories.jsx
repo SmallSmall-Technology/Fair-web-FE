@@ -26,7 +26,7 @@ export const categories = [
     title: 'Lifestyle & Consumer goods',
     desc: 'Beauty, Fashion, Household Essentials',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/smallsmall-lifestyle.svg',
+    image: '/images/smallsmall-lifestyle.svg',
     link: '/lifestyle',
   },
   {
@@ -34,16 +34,18 @@ export const categories = [
     desc: 'Rent, Buy, Short-let, Commercials',
     color: 'bg-[#FFDE11]',
     image:
-      '/public/images/vecteezy_cozy-living-room-setup-featuring-a-light-sofa-with_55925717 1.svg',
+      '/images/vecteezy_cozy-living-room-setup-featuring-a-light-sofa-with_55925717 1.svg',
     link: '/real-estate',
   },
 ];
 
 export default function PopularCategories() {
   return (
-    <section className="px-4 py-8 lg:mx-10">
-      <h3 className="text-lg font-semibold mb-4">Explore popular categories</h3>
-      <div className="grid lg:grid-cols-[58%_40%] space-y-4 lg:space-y-0 lg:space-x-4 mb-4">
+    <section className="px- py-8 lg:mx-10">
+      <h3 className="text-lg font-semibold mb-4 px-8 lg:px-5">
+        Explore popular categories
+      </h3>
+      <div className="grid lg:grid-cols-[58%_40%] space-y-8 lg:space-y-0 lg:space-x-4 mb-8 lg:mb-4">
         <Electronics />
         <Food />
       </div>
@@ -51,7 +53,7 @@ export default function PopularCategories() {
         <Lifestyle />
         <RealEstate />
       </div>
-      <div className="grid lg:hidden lg:grid-cols-[40%_60%] space-y-4 lg:space-y-0 lg:space-x-4">
+      <div className="grid lg:hidden lg:grid-cols-[40%_60%] space-y-8 lg:space-y-0 lg:space-x-4">
         <RealEstate />
         <Lifestyle />
       </div>

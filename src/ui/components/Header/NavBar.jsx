@@ -9,7 +9,7 @@ import {
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import CartDropdownItems from './CartDropdownItems';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { YellowButton } from '../../../utils/Button';
 import { LoggedInUserDropdown } from './LoggedInUserDropdown';
 import { formatCurrency } from '../../../utils/FormatCurrency';
@@ -36,7 +36,7 @@ export const NavBar = () => {
   return (
     <nav aria-label="Main navigation">
       <ul className="flex items-center space-x-6">
-        <li className="flex items-center space-x-1 font-medium text-[#333]">
+        <li className="lg:hidden xl:flex items-center space-x-1 font-medium text-[#333]">
           <a
             href="/download"
             aria-label="Download our mobile app"
@@ -99,7 +99,7 @@ export const NavBar = () => {
         <li aria-hidden="true">
           <hr className="mx-2 h-[22px] w-[1.5px] bg-[#DEDEDE]" />
         </li>
-        <li>
+        <li className="lg:hidden xl:flex">
           <button
             className="bg-[#F6F6F6] px-4 py-2 rounded-full font-medium flex items-center space-x-1 hover:bg-gray-200 active:bg-gray-300 focus:ring-2 focus:ring-[#FFDE11] transition-all motion-safe:duration-200 hover:scale-105 active:scale-95"
             aria-label="Purchase a gift card"
@@ -161,10 +161,19 @@ export const NavBar = () => {
 };
 
 export const Subtotal = () => {
+  const [isUpgraded, setIsUpgraded] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const subTotal = useSelector(getTotalCartPrice);
+
   const handleCheckout = () => {
-    navigate('cart-items/checkout');
+    navigate('/cart-items/checkout');
+  };
+
+  const handleCheckoutItems = () => {
+    if (location.pathname !== '/cart-items') {
+      navigate('cart-items');
+    }
   };
 
   return (
@@ -174,7 +183,21 @@ export const Subtotal = () => {
         <p>{formatCurrency(subTotal)}</p>
       </div>
       <div className="w-[90%] mx-auto">
-        <YellowButton onClick={handleCheckout}>Check Out</YellowButton>
+        {subTotal >= 500000 ? (
+          <YellowButton onClick={handleCheckoutItems}>Check Out</YellowButton>
+        ) : (
+          <button
+            type="submit"
+            onClick={handleCheckout}
+            className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[#FFDE11]  border-2  w-full mx-auto  md:px-12 py-2 text-lg font-medium  hover:bg-gray-50   ${subTotal >= 500000 && !isUpgraded ? 'bg-[#E5E5E5] text-[#CDCBCC]' : 'bg-yellow-300 text-black'}`}
+          >
+            <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11]"></span>
+
+            <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-base">
+              Check Out
+            </span>
+          </button>
+        )}
       </div>
     </article>
   );

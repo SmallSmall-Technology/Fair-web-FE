@@ -13,25 +13,25 @@ export const categories = [
   {
     title: 'Confectionery',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/confectionery_sst.svg',
+    image: '/images/confectionery_sst.svg',
     link: '/shop/food-drink',
     width: '250px',
   },
   {
     title: 'Beverages',
     color: 'bg-[#F5F5F7]',
-    image: '/public/images/beverages.svg',
+    image: '/images/beverages.svg',
     link: '/shop/lifestyle',
   },
 ];
 
 export const FoodAndDrinkCategory = () => {
   return (
-    <section className=" pt-8">
-      <h3 className="text-3xl font-semibold">Food & Drink</h3>
-      <p className="mb-4">Shop by category</p>
+    <section className="lg:mx-5 pt-8">
+      <h3 className="text-3xl font-semibold mx-5">Food & Drink</h3>
+      <p className="mb-4 mx-5">Shop by category</p>
 
-      <div className="w-full  lg:flex lg:space-x-4 mb-4">
+      <div className="w-full lg:flex lg:space-x-4 mb-4 grid gap-8 lg:gap-4 ">
         <Grocery />
         <Confectionery />
         <Beverages />

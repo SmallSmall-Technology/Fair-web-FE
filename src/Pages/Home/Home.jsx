@@ -12,17 +12,71 @@ const Home = () => {
   return (
     <div>
       <LandingHeader />
-      <main className="pt-8 mx-5">
-        <HomeHeroBanner />
-        <IntroSection />
-        <FeaturesBar />
+      <main>
+        <div className="pt-8 mx-5">
+          <HomeHeroBanner />
+          <IntroSection />
+          <FeaturesBar />
+        </div>
         <PopularCategories />
-        <CreditSection />
-        <RecentlyViewedProducts />
-        <GetApp />
+        <div className="pt-8 mx-5">
+          <CreditSection />
+          <RecentlyViewedProducts />
+          {/* <PhoneNumberForm /> */}
+          <GetApp />
+        </div>
       </main>
     </div>
   );
 };
 
 export default React.memo(Home);
+
+// import { useState } from 'react';
+// import { useMutation } from '@tanstack/react-query';
+// import { postPhoneNumber } from '../../services/api';
+
+// export const PhoneNumberForm = () => {
+//   const [phoneNumber, setPhoneNumber] = useState('');
+
+//   // const {
+//   //   mutate,
+//   //   data,
+//   //   error,
+//   //   isPending: isLoading,
+//   // } = useMutation({
+//   //   mutationFn: postPhoneNumber,
+//   // });
+
+//   const { mutate, data, error, isPending } = useMutation({
+//     mutationFn: postPhoneNumber,
+//     onSuccess: (data) => {
+//       console.log('Phone number validated:', data);
+//     },
+//     onError: (err) => {
+//       console.error('Error validating phone number:', err.message);
+//     },
+//   });
+
+//   const handleSendNumber = (e) => {
+//     e.preventDefault();
+//     mutate(phoneNumber);
+//     setPhoneNumber('');
+//   };
+
+//   return (
+//     <form onSubmit={handleSendNumber}>
+//       <label htmlFor="number">phoneNumber</label>
+//       <input
+//         type="number"
+//         id="number"
+//         className="border"
+//         value={phoneNumber}
+//         onChange={(e) => setPhoneNumber(e.target.value)}
+//       />
+//       <button type="submit" className="border bg-slate-500 rounded-md">
+//         Submit
+//       </button>
+//     </form>
+//   );
+// };

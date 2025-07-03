@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Button } from '../../../../../utils/Button';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 import { getPaymentDates, item_width } from '../../SingleProductDetailsAside';
 
-export const MonthlyPayment = React.memo(
+const MonthlyPaymentItem = React.memo(({ payment }) => (
+  <div className="flex flex-col items-center min-w-24 lg:min-w-fit">
+    <div className="w-7 h-7">
+      <img
+        loading="lazy"
+        src={payment.icon}
+        alt={`${payment.label} payment icon`}
+        className="h-full w-full"
+      />
+    </div>
+    <p className="text-xs font-medium mt-1">{formatCurrency(payment.amount)}</p>
+    <span className="text-[11px] text-center">{payment.label}</span>
+    {payment.date && (
+      <span className="text-[11px] text-center mt-1">{payment.date}</span>
+    )}
+  </div>
+));
+
+const MonthlyPayment = React.memo(
   ({
     product,
     handleScroll,
@@ -13,34 +31,40 @@ export const MonthlyPayment = React.memo(
     paymentMethodRef,
   }) => {
     const installmentOption = product?.paymentOptions?.find(
-      (product) => product.label === 'Monthly'
+      (opt) => opt.label === 'Monthly'
     );
 
-    const paymentMonthly = [
-      {
-        amount: installmentOption?.monthlyPayment,
-        label: 'Pay now today',
-        icon: '/images/quater-circle.svg',
-      },
-      {
-        amount: installmentOption?.monthlyPayment,
-        label: '2nd Payment',
-        date: getPaymentDates(new Date(), 3)[0],
-        icon: '/images/half-circle.svg',
-      },
-      {
-        amount: installmentOption?.monthlyPayment,
-        label: '3rd Payment',
-        date: getPaymentDates(new Date(), 3)[1],
-        icon: '/images/one-third-circle.svg',
-      },
-      {
-        amount: installmentOption?.monthlyPayment,
-        label: 'Final Payment',
-        date: getPaymentDates(new Date(), 3)[2],
-        icon: '/images/full-circle.svg',
-      },
-    ];
+    const paymentDates = useMemo(() => getPaymentDates(new Date(), 3), []);
+
+    const paymentMonthly = useMemo(
+      () => [
+        {
+          amount: installmentOption?.monthlyPayment,
+          label: 'Pay now today',
+          icon: '/images/quater-circle.svg',
+        },
+        {
+          amount: installmentOption?.monthlyPayment,
+          label: '2nd Payment',
+          date: paymentDates[0],
+          icon: '/images/half-circle.svg',
+        },
+        {
+          amount: installmentOption?.monthlyPayment,
+          label: '3rd Payment',
+          date: paymentDates[1],
+          icon: '/images/one-third-circle.svg',
+        },
+        {
+          amount: installmentOption?.monthlyPayment,
+          label: 'Final Payment',
+          date: paymentDates[2],
+          icon: '/images/full-circle.svg',
+        },
+      ],
+      [installmentOption, paymentDates]
+    );
+
     return (
       <>
         <p className="font-medium mb-3 mt-4 mx-5 lg:mx-0">Monthly plan</p>
@@ -68,29 +92,7 @@ export const MonthlyPayment = React.memo(
               className="flex space-x-9 lg:space-x-3 w-full overflow-x-auto scrollbar-hide"
             >
               {paymentMonthly.map((payment, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-center min-w-24 lg:min-w-fi"
-                >
-                  <div className="h- w-7">
-                    <img
-                      src={payment.icon}
-                      alt={`${payment.label} payment icon`}
-                      className="h-full w-full"
-                    />
-                  </div>
-                  <p className="text-xs font-medium mt-1">
-                    {formatCurrency(payment.amount)}
-                  </p>
-                  <span className="text-[11px] text-center">
-                    {payment.label}
-                  </span>
-                  {payment.date && (
-                    <span className="text-[11px] text-center mt-1">
-                      {payment.date}
-                    </span>
-                  )}
-                </div>
+                <MonthlyPaymentItem key={index} payment={payment} />
               ))}
             </div>
           </div>
@@ -99,3 +101,5 @@ export const MonthlyPayment = React.memo(
     );
   }
 );
+
+export default MonthlyPayment;

@@ -1,9 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { HeartHandshake } from 'lucide-react';
 import { useIsInView } from '../../../hooks/useIsInView';
 import { PaymentOptions } from './productPlan/PaymentOptions';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import CommentBar from '../../../features/reviewsRating/CommentBar';
+import { getSelectedPaymentPlan } from '../../../features/cart/cartSlice';
 import { SingleProductStickyHeader } from '../../../ui/components/header/SingleProductStickyHeader';
 
 export const item_width = 70;
@@ -28,7 +30,7 @@ export const getPaymentDates = (startDate, months) => {
 export const SingleProductDetailsAside = React.memo(
   ({ product, shippingDate, category }) => {
     const [targetRef, isInView] = useIsInView();
-    // const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
+    const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
 
     return (
       <aside className="w-full xl:w-[45%]">
@@ -106,7 +108,7 @@ export const SingleProductDetailsAside = React.memo(
                 </span>
               </p>
               <p>{product.brand}</p>
-              <p>{category}</p>
+              <p>{category.name}</p>
             </div>
           </div>
         </div>
@@ -177,7 +179,12 @@ export const SingleProductDetailsAside = React.memo(
           </div>
         </section>
         <div className="hidden lg:block">
-          {!isInView && <SingleProductStickyHeader product={product} />}
+          {!isInView && (
+            <SingleProductStickyHeader
+              product={product}
+              selectedPaymentPlan={selectedPaymentPlan}
+            />
+          )}
         </div>
       </aside>
     );

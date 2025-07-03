@@ -17,7 +17,7 @@ import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3002';
 
 export const CheckoutPaymentMethod = () => {
   const dispatch = useDispatch();
@@ -54,7 +54,6 @@ export const CheckoutPaymentMethod = () => {
     }
 
     try {
-      // Fetch full product details
       const enrichedCartItems = await Promise.all(
         cartItems.map(async (item) => {
           const { data: product } = await axios.get(
@@ -127,7 +126,9 @@ export const CheckoutPaymentMethod = () => {
     }
   };
 
-  const currentPlan = cartItems.find((item) => item.paymentPlan === 'monthly');
+  const currentPlan = cartItems.find((item) =>
+    ['monthly', 'weekly', 'daily'].includes(item.paymentPlan)
+  );
 
   return (
     <div>

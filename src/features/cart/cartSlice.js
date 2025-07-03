@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// import { useNavigate } from 'react-router-dom';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3002';
 
 export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
   const response = await axios.get(`${API_URL}/cart?userId=user123`);
@@ -30,11 +31,8 @@ export const addItem = createAsyncThunk(
       const selectedPaymentPlan = state.cart.selectedPaymentPlan;
       const exists = state.cart.cart.find(
         (item) => item.productId === product.id
-        // ||
-        // item.selectedPaymentPlan === product.selectedPaymentPlan
-        // || item.productId === product.productId
       );
-      // console.log(exists);
+
       if (exists) {
         toast.dismiss();
         toast.error('Item already in cart', {
@@ -44,7 +42,6 @@ export const addItem = createAsyncThunk(
           closeButton: false,
         });
         return rejectWithValue();
-        // return rejectWithValue('Item already in cart');
       }
 
       const paymentMap = {};
@@ -53,7 +50,7 @@ export const addItem = createAsyncThunk(
           paymentMap[option.type] = option;
         }
       });
-      console.log(paymentMap);
+      // console.log(paymentMap);
 
       const selectedOption =
         paymentMap[selectedPaymentPlan] || paymentMap.upfront;
@@ -74,7 +71,9 @@ export const addItem = createAsyncThunk(
       }
 
       const cartItem = {
-        id: `cart-${product.id}-${selectedPaymentPlan}-${Date.now()}`,
+        // id: `cart-${product.id}-${selectedPaymentPlan}-${Date.now()}`,
+        id: product.id,
+        category: product.category,
         image: product.image,
         name: product.name,
         userId: 'user123',
@@ -98,9 +97,8 @@ export const addItem = createAsyncThunk(
         deliveryDate: product.deliveryDate || 'Jan, 20 2025',
         interest: selectedOption.interest || 0,
       };
-
       const response = await axios.post(`${API_URL}/cart`, cartItem);
-
+      // console.log(cartItem);
       const sanitizedResponse = {
         id: response.data.id,
         image: response.data.image,
@@ -116,13 +114,32 @@ export const addItem = createAsyncThunk(
         interest: response.data.interest,
       };
 
-      toast.dismiss();
-      toast.success('Item added to cart', {
-        className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
-        bodyClassName: 'm-0 p-0',
-        closeButton: false,
-      });
+      // toast.dismiss();
+      // toast.success('Item added to cart', {
+      //   className:
+      //     'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+      //   bodyClassName: 'm-0 p-0',
+      //   closeButton: false,
+      // });
+      // toast(
+      //   <div className="flex items-center space-x-2">
+      //     <span>Item added to cart</span>
+      //     <span className="text-black">|</span>
+      //     <button
+      //       onClick={() => navigate('/cart-items')}
+      //       className="underline text-sm"
+      //     >
+      //       View cart
+      //     </button>
+      //   </div>,
+      //   {
+      //     type: 'success',
+      //     className:
+      //       'bg-[#FFDE11] text-black text-sm px-2 py-1 rounded-md min-h-0',
+      //     bodyClassName: 'm-0 p-0',
+      //     closeButton: false,
+      //   }
+      // );
 
       return sanitizedResponse;
     } catch (error) {
@@ -148,12 +165,8 @@ export const increaseItemQuantity = createAsyncThunk(
   async (id, { getState, rejectWithValue }) => {
     try {
       const state = getState();
-      // console.log('Cart state before update:', state.cart.cart);
-      // const checkResponse = await axios.get(`${API_URL}/cart/${id}`);
-      // console.log('Server item check:', checkResponse.data);
-      // console.log('Item ID:', id);
+
       const item = state.cart.cart.find((item) => item.id === id);
-      // console.log(item);
       if (!item) throw new Error('Item not found');
       const updatedItem = {
         ...item,
@@ -230,7 +243,7 @@ const initialState = {
   cart: [],
   status: 'idle',
   error: null,
-  selectedPaymentPlan: 'upfront',
+  selectedPaymentPlan: '',
 };
 
 const cartSlice = createSlice({
@@ -243,51 +256,49 @@ const cartSlice = createSlice({
     setItemPaymentPlan: (state, action) => {
       const { id, plan, paymentOptions } = action.payload;
       const item = state.cart.find((item) => item.id === id);
-      if (item) {
-        item.paymentPlan = plan;
+      if (!item) return;
 
-        const paymentMap = {};
-        paymentOptions.forEach((option) => {
-          if (option.type) {
-            paymentMap[option.type] = option;
-          }
-        });
+      if (item.paymentPlan === plan) return;
 
-        const option = paymentMap[plan] || paymentMap.upfront;
-        if (!option) return;
+      item.paymentPlan = plan;
 
-        item.paymentPlanDetails = {
-          type: plan,
-          amount: option.amount || item.price,
-          months: option.months || 0,
-          monthlyPayment: option.monthlyPayment || 0,
-          weeks: option.weeks || 0,
-          weeklyPayment: option.weeklyPayment || 0,
-          days: option.days || 0,
-          dailyPayment: option.dailyPayment || 0,
-          totalPrice: option.totalPrice || item.price,
-          upfrontPayment: option.upfrontPayment || 0,
-        };
-
-        let price = 0;
-        if (plan === 'upfront') {
-          price = option.amount || item.price;
-        } else if (plan === 'monthly') {
-          price = option.monthlyPayment || 0;
-        } else if (plan === 'weekly') {
-          price = option.weeklyPayment || 0;
-        } else if (plan === 'daily') {
-          price = option.dailyPayment || 0;
+      const paymentMap = {};
+      for (const option of paymentOptions) {
+        if (option.type) {
+          paymentMap[option.type] = option;
         }
-
-        item.price = price;
-        item.totalPrice = price * (item.quantity || 1);
-        item.id = `cart-${item.productId}-${plan}-${Date.now()}`;
-        item.interest = option.interest || 0;
-        delete item.paymentOptions;
       }
+
+      const option = paymentMap[plan] || paymentMap.upfront;
+      if (!option) return;
+
+      item.paymentPlanDetails = {
+        type: plan,
+        amount: option.amount ?? item.price,
+        months: option.months ?? 0,
+        monthlyPayment: option.monthlyPayment ?? 0,
+        weeks: option.weeks ?? 0,
+        weeklyPayment: option.weeklyPayment ?? 0,
+        days: option.days ?? 0,
+        dailyPayment: option.dailyPayment ?? 0,
+        totalPrice: option.totalPrice ?? item.price,
+        upfrontPayment: option.upfrontPayment ?? 0,
+      };
+
+      let price = 0;
+      if (plan === 'upfront') price = option.amount ?? item.price;
+      else if (plan === 'monthly') price = option.monthlyPayment ?? 0;
+      else if (plan === 'weekly') price = option.weeklyPayment ?? 0;
+      else if (plan === 'daily') price = option.dailyPayment ?? 0;
+
+      item.price = price;
+      item.totalPrice = price * (item.quantity || 1);
+      item.interest = option.interest ?? 0;
+
+      delete item.paymentOptions;
     },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchCart.fulfilled, (state, action) => {

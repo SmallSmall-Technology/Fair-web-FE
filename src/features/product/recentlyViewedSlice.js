@@ -20,7 +20,6 @@ const recentlyViewedSlice = createSlice({
       );
 
       state.recentlyViewed = updatedItems;
-      console.log(updatedItems);
 
       // localStorage.setItem("recentlyViewed", JSON.stringify(updatedItems));
     },

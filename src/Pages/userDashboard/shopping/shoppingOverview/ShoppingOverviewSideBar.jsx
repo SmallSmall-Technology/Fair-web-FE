@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom';
+import { CreditScoreCard } from './CreditScoreCard';
 
 const ShoppingOverviewSideBar = () => {
   return (
-    <ul className="flex items-center lg:items-start pt-2 space-x-3 mb-4 border-b-2 w-full pb-4 lg:border-none lg:pb-0 overflow-x-auto lg:overflow-x-clip lg:flex-col lg:space-y-4 lg:space-x-0">
+    <ul className="lg:hidden xl:block flex items-center lg:items-start pt-2 space-x-3 mb-4 border-b-2 w-full pb-4 lg:border-none lg:pb-0 overflow-x-auto lg:overflow-x-clip lg:flex-col lg:space-y-4 lg:space-x-0">
       {/* <li className="border-b-2 border-black pb-[15px] lg:border-none lg:pb-0"> */}
       <li>
         <NavLink
@@ -42,14 +43,14 @@ const ShoppingOverviewSideBar = () => {
       </li>
       <li>
         <NavLink
-          to="/user-dashboard/shopping-overview/wallet"
+          to="/user-dashboard/shopping-overview/credit-wallet"
           className={({ isActive }) =>
             isActive
               ? 'font-semibold bg-[#F6F6F6] rounded-[20px] px-6 lg:pr-[105px] py-2 '
               : 'font-semibold px-6'
           }
         >
-          Wallet
+          Credit
         </NavLink>
       </li>{' '}
       <li>
@@ -75,6 +76,9 @@ const ShoppingOverviewSideBar = () => {
         >
           Recently viewed
         </NavLink>
+      </li>
+      <li className="pt-4 hidden lg:block px-1">
+        <CreditScoreCard />
       </li>
     </ul>
   );
