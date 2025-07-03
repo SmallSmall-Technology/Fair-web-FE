@@ -43,14 +43,14 @@ import SubCategoryPage from './pages/productCategories/SubCategoryPage';
 
 import Summary from './pages/userDashboard/shopping/shoppingOverviewContents/Summary';
 import Purchases from './pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases';
-import ForgotPassword from './Pages/forgotPassword/ForgotPassword';
-import ResetPassword from './Pages/resetPassword/ResetPassword';
-import ProfileSummary from './Pages/userDashboard/accountProfile/contents/profileSummary/ProfileSummary';
-import AccountVerification from './Pages/userDashboard/accountProfile/contents/accountVerification/AccountVerification';
-import DeliveryAddress from './Pages/userDashboard/accountProfile/contents/deliveryAddress/DeliveryAddress';
-import Feedback from './Pages/userDashboard/accountProfile/contents/feedback/Feedback';
-import ResolutionCentre from './Pages/userDashboard/accountProfile/contents/resolutionCentre/ResolutionCentre';
-import UserAccountProfile from './Pages/userDashboard/accountProfile/UserAccountProfile';
+import ForgotPassword from './pages/forgotPassword/ForgotPassword';
+import ResetPassword from './pages/resetPassword/ResetPassword';
+import ProfileSummary from './pages/userDashboard/accountProfile/contents/profileSummary/ProfileSummary';
+import AccountVerification from './pages/userDashboard/accountProfile/contents/accountVerification/AccountVerification';
+import DeliveryAddress from './pages/userDashboard/accountProfile/contents/deliveryAddress/DeliveryAddress';
+import Feedback from './pages/userDashboard/accountProfile/contents/feedback/Feedback';
+import ResolutionCentre from './pages/userDashboard/accountProfile/contents/resolutionCentre/ResolutionCentre';
+import UserAccountProfile from './pages/userDashboard/accountProfile/UserAccountProfile';
 // export const Summary = lazy(
 //   () =>
 //     import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
