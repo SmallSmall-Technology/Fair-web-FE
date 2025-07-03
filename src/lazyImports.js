@@ -79,6 +79,3 @@ export const RecentlyViewed = lazy(
 export const Notifications = lazy(
   () => import('./pages/userDashboard/notifications/Notifications')
 );
-export const AccountProfile = lazy(
-  () => import('./pages/userDashboard/accountProfile/AccountProfile')
-);
