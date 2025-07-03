@@ -21,6 +21,8 @@ const slides = [
   },
 ];
 
-export const HomeLivingHeroBanner = () => {
+const HomeLivingHeroBanner = () => {
   return <HeroBanner slides={slides} autoSlideInterval={3000} height={220} />;
 };
+
+export default HomeLivingHeroBanner;
