@@ -1,10 +1,9 @@
-import Header from '../../../ui/components/header/Header';
 import { HeroTextSection } from '../HeroTextSection';
 import { ProductCategoriesShortcut } from '../../productCategories/ProductCategoriesShortcut';
 import { HomeLivingCategory } from './homeLivingContentSection/HomeLivingCategory';
 import NewProductsInStore from './homeLivingContentSection/NewProductsInStore';
 import TodaysDeal from './homeLivingContentSection/TodaysDeal';
-import { HomeLivingHeroBanner } from './homeLivingContentSection/homeLivingHeroBanner';
+import HomeLivingHeroBanner from './homeLivingContentSection/homeLivingCategory/HomeLivingHeroBanner';
 
 const HomeLivingHome = () => {
   const categories = [
