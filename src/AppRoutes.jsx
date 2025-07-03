@@ -5,7 +5,7 @@ import Home from './pages/home/Home';
 import SignUp from './pages/signUp/SignUp';
 import Login from './pages/login/Login';
 import ProtectedRoute from './ProtectedRoute';
-import UserDashboardLayout from './ui/components/Layout/UserDashboardLayout';
+import UserDashboardLayout from './ui/components/layout/UserDashboardLayout';
 import VerificationSent from './pages/cartItems/cartItemsContent/VerificationSent';
 
 import {
@@ -33,12 +33,12 @@ import {
   // AccountProfile,
 } from './lazyImports';
 
-import CartItemsSkeleton from './ui/components/Skeletons/CartItemsSkeleton';
-import CheckoutItemsSkeleton from './ui/components/Skeletons/CheckoutItemsSkeleton';
-import ProductDetailsSkeleton from './ui/components/Skeletons/ProductDetailsSkeleton';
-import CheckoutPaymentSkeleton from './ui/components/Skeletons/CheckoutPaymentSkeleton';
-import DashboardSummarySkeleton from './ui/components/Skeletons/DashboardSummarySkeleton';
-import LandingPageSkeleton from './ui/components/Skeletons/LnadingPageSkeleton';
+import CartItemsSkeleton from './ui/components/skeletons/CartItemsSkeleton';
+import CheckoutItemsSkeleton from './ui/components/skeletons/CheckoutItemsSkeleton';
+import ProductDetailsSkeleton from './ui/components/skeletons/ProductDetailsSkeleton';
+import CheckoutPaymentSkeleton from './ui/components/skeletons/CheckoutPaymentSkeleton';
+import DashboardSummarySkeleton from './ui/components/skeletons/DashboardSummarySkeleton';
+import LandingPageSkeleton from './ui/components/skeletons/LnadingPageSkeleton';
 import SubCategoryPage from './pages/productCategories/SubCategoryPage';
 
 import Summary from './pages/userDashboard/shopping/shoppingOverviewContents/Summary';
