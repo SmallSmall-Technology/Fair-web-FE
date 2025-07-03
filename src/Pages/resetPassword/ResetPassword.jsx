@@ -8,8 +8,6 @@ const ResetPassword = () => {
   const email = location.state?.email;
   const [verified, setVerified] = useState(null);
 
-  //   console.log(email);
-
   return (
     <>
       <div className="">
@@ -34,10 +32,12 @@ const ResetPassword = () => {
             <span className="text-black">{email?.email}</span> to reset your
             password.
           </p>
-          <VerifyOtp verified={verified} setVerified={setVerified} />
+          <VerifyOtp
+            verified={verified}
+            setVerified={setVerified}
+            email={email?.email}
+          />
           <hr />
-          {/* {verified !== null && <UpdatePassword disabled={verified !== true} />} */}
-          {/* {<UpdatePassword disabled={verified !== true} />} */}
           <UpdatePassword
             email={email?.email}
             verified={verified}

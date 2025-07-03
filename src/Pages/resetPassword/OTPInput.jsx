@@ -1,15 +1,21 @@
 /* eslint-disable react/prop-types */
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { passwordResetOTPVerification } from '../../api/authAPI';
 import { toast } from 'react-toastify';
-import { useEffect, useState } from 'react';
 import { Check, X } from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
 import { setUserId } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
+import { useSendOTP } from '../../hooks/useSendOTP';
 
-const OtpInput = ({ control, name = 'otp', length = 4, onAutoSubmit }) => {
+const OtpInput = ({
+  control,
+  name = 'otp',
+  length = 4,
+  onAutoSubmit,
+  verified,
+}) => {
   const inputRefs = useRef([]);
 
   return (
@@ -36,13 +42,12 @@ const OtpInput = ({ control, name = 'otp', length = 4, onAutoSubmit }) => {
             inputRefs.current[index + 1]?.focus();
           }
 
-          // Auto-submit when all digits are filled
           if (
             newOtp.length === length &&
             !newOtp.includes('') &&
             onAutoSubmit
           ) {
-            setTimeout(() => onAutoSubmit(), 150); // Delay to allow state update
+            setTimeout(() => onAutoSubmit(), 150);
           }
         };
 
@@ -66,6 +71,7 @@ const OtpInput = ({ control, name = 'otp', length = 4, onAutoSubmit }) => {
                   onChange={(e) => handleChange(e, i)}
                   onKeyDown={(e) => handleKeyDown(e, i)}
                   ref={(el) => (inputRefs.current[i] = el)}
+                  disabled={verified}
                 />
               ))}
             </div>
@@ -81,18 +87,24 @@ const OtpInput = ({ control, name = 'otp', length = 4, onAutoSubmit }) => {
   );
 };
 
-export default function VerifyOtp({ verified, setVerified }) {
+export default function VerifyOtp({ verified, setVerified, email }) {
   const { control, handleSubmit } = useForm();
-
-  const [timeLeft, setTimeLeft] = useState(300);
   const dispatch = useDispatch();
+
+  const [timeLeft, setTimeLeft] = useState(50);
+
+  // ✅ Resend OTP mutation with timer reset
+  const { mutate: resendOTP } = useSendOTP(() => {
+    toast.success('OTP resent');
+    setTimeLeft(50);
+  });
+
+  // ✅ OTP verification mutation
   const otpMutation = useMutation({
     mutationFn: passwordResetOTPVerification,
-
     onSuccess: (response) => {
       const userId = response.data.userID;
       dispatch(setUserId(userId));
-      console.log('User ID:', userId);
 
       toast.success('OTP verified successfully', {
         autoClose: 3000,
@@ -149,17 +161,28 @@ export default function VerifyOtp({ verified, setVerified }) {
         name="otp"
         length={4}
         onAutoSubmit={() => handleSubmit(onSubmit)()}
+        verified={verified}
       />
 
-      {timeLeft > '00.00' ? (
-        <div className="text-sm text-gray-600 text-center">
-          OTP expires in:{' '}
-          <span className="font-semibold">{formatTime(timeLeft)}</span>
-        </div>
-      ) : (
-        <div className="text-sm text-gray-600 text-center">
-          OTP expired
-          <button className="font-semibold ml-2">Resend OTP</button>
+      {!verified && (
+        <div>
+          {timeLeft > 0 ? (
+            <div className="text-sm text-gray-600 text-center">
+              OTP expires in:{' '}
+              <span className="font-semibold">{formatTime(timeLeft)}</span>
+            </div>
+          ) : (
+            <div className="text-sm text-gray-600 text-center">
+              OTP expired
+              <button
+                type="button"
+                className="font-semibold ml-2 text-blue-600 hover:underline"
+                onClick={() => resendOTP({ email })}
+              >
+                Resend OTP
+              </button>
+            </div>
+          )}
         </div>
       )}
 
@@ -173,8 +196,11 @@ export default function VerifyOtp({ verified, setVerified }) {
           Check code again <X color="#bd4545" />
         </p>
       )}
-
-      {!verified && o && <button type="submit">Verify</button>}
+      {!verified && (
+        <button type="submit" className="bg-black text-white py-2 rounded-md">
+          Verify
+        </button>
+      )}
     </form>
   );
 }

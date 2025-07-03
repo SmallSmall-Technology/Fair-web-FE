@@ -5,8 +5,8 @@ import React from 'react';
 const Login = () => {
   return (
     <>
-      <div className="flex flex-col md:flex-row min-h-screen">
-        <div className="hidden md:block bg-[#FFDE11] w-full md:w-1/3 p-8 lg:flex flex-col py-8">
+      <div className="flex flex-col md:flex-row min-h-screen ">
+        <div className="hidden bg-[#FFDE11] w-full md:w-1/3 p-8 lg:flex flex-col py-8">
           <div className="space-y-4">
             <p className=" text-4xl font-normal">Your needs can’t wait</p>
             <p className=" text-5xl font-normal">Meet them on</p>
@@ -17,7 +17,7 @@ const Login = () => {
           </div>
         </div>
 
-        <div className="flex-1 py-6 px-5 flex flex-col items-start lg:w-2/3 lg:pl-36">
+        <div className="flex-1 py-6 px-5 flex flex-col items-center mx-auto lg:w-2/3 lg:pl-36">
           <div className="w-full ">
             <div className=" flex justify-center mb-10 lg:mb-5 text-center w-full  lg:justify-end lg:pr-8">
               <Link to="/" aria-label="Fair Home">
@@ -33,10 +33,10 @@ const Login = () => {
             </div>
 
             <div className="mb-8 text-center">
-              <h1 className="text-3xl font-semibold mb-3 lg:text-start">
+              <h1 className="text-3xl font-semibold mb-3 lg:text-start xl:text-center">
                 Login
               </h1>
-              <p className="text-sm text-gray-500 hidden lg:flex">
+              <p className="text-sm text-gray-500 hidden lg:flex xl:mx-auto xl:justify-center">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit
               </p>
               <p className="text-sm text-gray-500 md:hidden">
@@ -49,7 +49,7 @@ const Login = () => {
 
             <LoginForm />
 
-            <div className="text-center mt-4 max-w-md">
+            <div className="text-center mt-4 max-w-md mx-auto">
               <p className="text-xs text-gray-600">
                 By clicking login, you agree to our
               </p>
@@ -65,7 +65,7 @@ const Login = () => {
             </div>
 
             <div className="hidden lg:block">
-              <div className="my-4 max-w-md">
+              <div className="my-4 max-w-md xl:mx-auto ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="100%"
@@ -77,7 +77,7 @@ const Login = () => {
                 </svg>
               </div>
 
-              <div className="text-center grid gap-5 max-w-md">
+              <div className="text-center grid gap-5 max-w-md xl:mx-auto">
                 <p className="text-sm">New to Fair?</p>
                 <Link
                   to="/sign-up"
