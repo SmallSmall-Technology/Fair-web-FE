@@ -66,7 +66,7 @@ export const LoggedInUserDropdown = ({
         <hr />
         <div className="px-3 my-1 grid gap-2 py-2 text-xs pb-4">
           <Link
-            to="/user-dashboard/account-profile"
+            to="/user-dashboard/account-profile/profile-summary"
             className="text-black no-underline"
           >
             My Account settings
