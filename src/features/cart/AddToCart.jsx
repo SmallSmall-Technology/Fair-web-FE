@@ -155,7 +155,7 @@ export const AddToCart = ({ product }) => {
       startTransition(() => {
         dispatch(addItem(product));
         toast.success(
-          <div className="flex items-center space-x-2 justify-between">
+          <div className="flex items-center space-x-2 justify-between h-[42px]">
             <div className="flex space-x-1 items-center">
               <span className="font-light text-base">Item added to cart</span>
               <img src="/images/blackcheckcircle.svg" alt="icon" />

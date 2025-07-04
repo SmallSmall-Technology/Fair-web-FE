@@ -5,7 +5,7 @@ import Home from './pages/home/Home';
 import SignUp from './pages/signUp/SignUp';
 import Login from './pages/login/Login';
 import ProtectedRoute from './ProtectedRoute';
-import UserDashboardLayout from './ui/components/Layout/UserDashboardLayout';
+import UserDashboardLayout from './ui/components/layout/UserDashboardLayout';
 import VerificationSent from './pages/cartItems/cartItemsContent/VerificationSent';
 
 import {
@@ -33,24 +33,24 @@ import {
   // AccountProfile,
 } from './lazyImports';
 
-import CartItemsSkeleton from './ui/components/Skeletons/CartItemsSkeleton';
-import CheckoutItemsSkeleton from './ui/components/Skeletons/CheckoutItemsSkeleton';
-import ProductDetailsSkeleton from './ui/components/Skeletons/ProductDetailsSkeleton';
-import CheckoutPaymentSkeleton from './ui/components/Skeletons/CheckoutPaymentSkeleton';
-import DashboardSummarySkeleton from './ui/components/Skeletons/DashboardSummarySkeleton';
-import LandingPageSkeleton from './ui/components/Skeletons/LnadingPageSkeleton';
+import CartItemsSkeleton from './ui/components/skeletons/CartItemsSkeleton';
+import CheckoutItemsSkeleton from './ui/components/skeletons/CheckoutItemsSkeleton';
+import ProductDetailsSkeleton from './ui/components/skeletons/ProductDetailsSkeleton';
+import CheckoutPaymentSkeleton from './ui/components/skeletons/CheckoutPaymentSkeleton';
+import DashboardSummarySkeleton from './ui/components/skeletons/DashboardSummarySkeleton';
+import LandingPageSkeleton from './ui/components/skeletons/LnadingPageSkeleton';
 import SubCategoryPage from './pages/productCategories/SubCategoryPage';
 
 import Summary from './pages/userDashboard/shopping/shoppingOverviewContents/Summary';
 import Purchases from './pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases';
-import ForgotPassword from './Pages/forgotPassword/ForgotPassword';
-import ResetPassword from './Pages/resetPassword/ResetPassword';
-import ProfileSummary from './Pages/userDashboard/accountProfile/contents/profileSummary/ProfileSummary';
-import AccountVerification from './Pages/userDashboard/accountProfile/contents/accountVerification/AccountVerification';
-import DeliveryAddress from './Pages/userDashboard/accountProfile/contents/deliveryAddress/DeliveryAddress';
-import Feedback from './Pages/userDashboard/accountProfile/contents/feedback/Feedback';
-import ResolutionCentre from './Pages/userDashboard/accountProfile/contents/resolutionCentre/ResolutionCentre';
-import UserAccountProfile from './Pages/userDashboard/accountProfile/UserAccountProfile';
+import ForgotPassword from './pages/forgotPassword/ForgotPassword';
+import ResetPassword from './pages/resetPassword/ResetPassword';
+import ProfileSummary from './pages/userDashboard/accountProfile/contents/profileSummary/ProfileSummary';
+import AccountVerification from './pages/userDashboard/accountProfile/contents/accountVerification/AccountVerification';
+import DeliveryAddress from './pages/userDashboard/accountProfile/contents/deliveryAddress/DeliveryAddress';
+import Feedback from './pages/userDashboard/accountProfile/contents/feedback/Feedback';
+import ResolutionCentre from './pages/userDashboard/accountProfile/contents/resolutionCentre/ResolutionCentre';
+import UserAccountProfile from './pages/userDashboard/accountProfile/UserAccountProfile';
 // export const Summary = lazy(
 //   () =>
 //     import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
