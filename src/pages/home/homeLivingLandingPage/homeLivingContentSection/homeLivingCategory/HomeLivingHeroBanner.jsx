@@ -1,4 +1,4 @@
-import HeroBanner from '../../HeroBanner';
+import HeroBanner from '../../../HeroBanner';
 
 const slides = [
   {
