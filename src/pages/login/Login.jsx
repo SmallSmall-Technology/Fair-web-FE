@@ -1,6 +1,7 @@
 import LoginForm from './LoginForm';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import Logo from '../../ui/components/Logo';
 
 const Login = () => {
   return (
@@ -20,16 +21,7 @@ const Login = () => {
         <div className="flex-1 py-6 px-5 flex flex-col items-center mx-auto lg:w-2/3 lg:pl-36">
           <div className="w-full ">
             <div className=" flex justify-center mb-10 lg:mb-5 text-center w-full  lg:justify-end lg:pr-8">
-              <Link to="/" aria-label="Fair Home">
-                <img
-                  src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
-                  alt="Fair Logo"
-                  width={120}
-                  height={40}
-                  loading="eager"
-                  decoding="defer"
-                />
-              </Link>
+              <Logo />
             </div>
 
             <div className="mb-8 text-center">

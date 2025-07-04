@@ -3,6 +3,7 @@ import { NavBar } from './NavBar';
 import { Link } from 'react-router-dom';
 import SearchQuery from './SearchQuery';
 import { MobileNavBar } from './MobileNavBar';
+import Logo from '../Logo';
 // import LandingHeader from '../../../pages/home/homeLandingPage/LandingHeader';
 
 const Header = () => {
@@ -13,22 +14,7 @@ const Header = () => {
       aria-label="Main site navigation"
     >
       <div className="hidden lg:flex justify-between items-center w-full px-4 sm:px-6 lg:px-10 max-w-full mx-auto">
-        <Link
-          to="/"
-          aria-label="Fair Home"
-          // className="transition-transform focus:scale-105 focus:outline-none"
-        >
-          <img
-            src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
-            alt="Fair Logo"
-            width={120}
-            height={40}
-            loading="eager"
-            decoding="defer"
-            // className="motion-safe:transition-transform"
-          />
-        </Link>
-
+        <Logo />
         <SearchQuery />
         <NavBar />
       </div>
@@ -36,7 +22,7 @@ const Header = () => {
       {/* Mobile view header */}
       <div className="grid gap-4 lg:hidden w-full px-4 sm:px-6 ">
         <div className="flex justify-between items-center">
-          <Link
+          {/* <Link
             to="/"
             aria-label="Fair Home"
             className="transition-transform hover:scale-105 focus:scale-105 focus:outline-none"
@@ -49,7 +35,8 @@ const Header = () => {
               loading="eager"
               className="motion-safe:transition-transform"
             />
-          </Link>
+          </Link> */}
+          <Logo className="motion-safe:transition-transform" />
           <MobileNavBar />
         </div>
         <SearchQuery />

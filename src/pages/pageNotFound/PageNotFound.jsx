@@ -12,25 +12,12 @@ import { useNavigate } from 'react-router-dom';
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from '../../ui/components/Logo';
 
 function PageNotFound() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-blue-100 px-4 text-center">
-      <Link
-        to="/"
-        aria-label="Fair Home"
-        // className="transition-transform focus:scale-105 focus:outline-none"
-      >
-        <img
-          src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
-          alt="Fair Logo"
-          width={170}
-          height={40}
-          loading="eager"
-          decoding="defer"
-          // className="motion-safe:transition-transform"
-        />
-      </Link>
+      <Logo width={200} height={40} />
       <h1 className="text-[120px] font-extrabold text-blue-500 drop-shadow-lg">
         404
       </h1>
