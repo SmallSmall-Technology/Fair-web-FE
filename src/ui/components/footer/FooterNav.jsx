@@ -18,12 +18,7 @@ function FooterNav({ menuFooter }) {
             <ul>
               {section.links.map((item) => (
                 <li key={item.name} className="mb-4">
-                  <Link
-                    to={item.link}
-                    aria-label={`${item.name} - ${section.title}`}
-                  >
-                    {item.name}
-                  </Link>
+                  <Link to={item.link}>{item.name}</Link>
                 </li>
               ))}
             </ul>
