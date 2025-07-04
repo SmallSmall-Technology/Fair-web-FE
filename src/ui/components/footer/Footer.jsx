@@ -5,6 +5,7 @@ import FooterNav from './FooterNav';
 import { menuFooter } from '../../../utils/data';
 import React from 'react';
 import { Copyright } from 'lucide-react';
+import Logo from '../Logo';
 
 const Footer = () => {
   return (
@@ -13,7 +14,8 @@ const Footer = () => {
         {/* footer logo */}
         <div className=" mb-10 ">
           <div className="footer-logo mb-8">
-            <img src="/images/smallsmall-logo.svg" alt="fair logo" />
+            {/* <img src="/images/smallsmall-logo.svg" alt="fair logo" /> */}
+            <Logo />
             <p className="mt-4">Shop today, pay later</p>
           </div>
           {/* <div>
