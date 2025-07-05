@@ -1,10 +1,28 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { YellowButton } from '../../../../../utils/Button';
+import { getUser, updateUser } from '../../../../../api/userAPI';
+import React from 'react';
 
 export default function ProfileSummary() {
-  const { register, handleSubmit } = useForm({
+  const queryClient = useQueryClient();
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['users'],
+    queryFn: getUser,
+    enabled: !!localStorage.getItem('authToken'),
+    onError: (err) => {
+      if (err.response?.status === 401 || err.response?.status === 404) {
+        console.error('Error fetching user:', err.response?.status);
+        window.location.href = '/login';
+      }
+    },
+  });
+
+  // console.log('User data:', data.data);
+
+  const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -13,20 +31,49 @@ export default function ProfileSummary() {
     },
   });
 
-  // eslint-disable-next-line no-unused-vars
+  // State for delivery address
   const [isVerified, setIsVerified] = useState(false);
   const [editingAddress, setEditingAddress] = useState(false);
-  const [address, setAddress] = useState(
-    '1b Akinyemi Ave, Elf busstop, Lekki, Lagos'
-  );
+  const [address, setAddress] = useState('');
 
-  const onSubmit = (data) => {
-    console.log('Form data:', data);
-    alert('Profile saved successfully');
+  // Update form and address when data is fetched
+  useEffect(() => {
+    if (data) {
+      reset({
+        firstName: data?.data.firstName || '',
+        lastName: data?.data.lastName || '',
+        email: data?.data.email || '',
+        phoneNumber: data?.data.phoneNumber || '',
+      });
+      setAddress(
+        data?.data.latest_address ||
+          '1b Akinyemi Ave, Elf busstop, Lekki, Lagos'
+      );
+    }
+  }, [data, reset]);
+
+  // Mutation for updating user profile
+  const mutation = useMutation({
+    mutationFn: updateUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users'] });
+      alert('Profile updated successfully');
+    },
+    onError: (err) => {
+      console.error('Error updating profile:', err);
+      alert(`Failed to update profile: ${err.message}`);
+    },
+  });
+
+  const onSubmit = (formData) => {
+    mutation.mutate({ ...formData, address });
   };
 
+  if (isLoading) return <div>Loading profile...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   return (
-    <div className="px-2 lg:px-6 ">
+    <div className="px-2 lg:px-6">
       <h2 className="text-[23px] font-semibold mb-6">Profile</h2>
 
       <hr />
@@ -35,7 +82,6 @@ export default function ProfileSummary() {
         <div className="border border-gray-200 rounded p-4 lg:w-[30%] text-sm">
           <div className="flex justify-between">
             <p className="font-semibold">Your membership</p>
-
             {!isVerified && (
               <a href="/account-verification" className="underline text-xs">
                 Verify account
@@ -50,14 +96,14 @@ export default function ProfileSummary() {
         </div>
 
         {!isVerified && (
-          <div className="text-center text-sm ">
+          <div className="text-center text-sm">
             <button
               className="bg-[#FFDE11] text-black font-semibold px-6 py-2 rounded"
               onClick={() => (window.location.href = '/account-verification')}
             >
               Upgrade to Tier 2
             </button>
-            <p className="mt-1 text-xs ">
+            <p className="mt-1 text-xs">
               Unlock Tier 2 to enjoy exclusive access to items valued at N500k
               and above.
             </p>
@@ -88,7 +134,6 @@ export default function ProfileSummary() {
                 className="border p-2 rounded w-full font-medium"
               />
             </label>
-
             <label htmlFor="lastName" className="lg:w-1/2">
               <input
                 type="text"
@@ -104,7 +149,6 @@ export default function ProfileSummary() {
         <div className="my-4">
           <div className="grid lg:grid-cols-[40%_55%] gap-4 my-4 items-center">
             <p className="font-semibold text-sm">Email</p>
-
             <label htmlFor="email" className="lg:w-1/2">
               <input
                 id="email"
@@ -119,12 +163,12 @@ export default function ProfileSummary() {
 
           <div className="grid lg:grid-cols-[40%_55%] gap-4 my-4 items-center">
             <p className="font-semibold text-sm">Phone</p>
-            <label htmlFor="phone" className="lg:w-1/2">
+            <label htmlFor="phoneNumber" className="lg:w-1/2">
               <input
-                id="phone"
+                id="phoneNumber"
                 type="text"
                 placeholder="Phone number"
-                {...register('phone')}
+                {...register('phoneNumber')}
                 className="border p-2 rounded w-full text-gray-400 font-medium"
               />
             </label>
@@ -134,7 +178,6 @@ export default function ProfileSummary() {
         <hr />
         <div className="grid lg:grid-cols-[40%_30%] gap-4 my-4 items-center">
           <p className="font-semibold text-sm">Delivery address</p>
-
           {!editingAddress ? (
             <div className="flex justify-between items-start space-x-14">
               <p>{address}</p>
@@ -165,7 +208,9 @@ export default function ProfileSummary() {
         </div>
         <hr />
         <div className="lg:w-[176px] ml-auto">
-          <YellowButton>Save</YellowButton>
+          <YellowButton disabled={mutation.isLoading}>
+            {mutation.isLoading ? 'Saving...' : 'Save'}
+          </YellowButton>
         </div>
       </form>
     </div>

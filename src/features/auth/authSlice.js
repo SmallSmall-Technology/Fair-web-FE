@@ -20,12 +20,14 @@ export const login = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const data = await loginAPI({ email, password });
+      const token = data.data.token;
+      const user = data.data;
 
-      localStorage.setItem('authToken', data.token);
+      localStorage.setItem('authToken', token);
 
       return {
-        user: data.user,
-        token: data.token,
+        user,
+        token,
       };
     } catch (error) {
       const message =
@@ -94,7 +96,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.isAuthenticated = true;
         state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.token = localStorage.getItem('authToken');
       })
       .addCase(restoreSession.rejected, (state, action) => {
         state.loading = false;
