@@ -5,29 +5,31 @@ import FooterNav from './FooterNav';
 import { menuFooter } from '../../../utils/data';
 import React from 'react';
 import { Copyright } from 'lucide-react';
+import Logo from '../Logo';
 
 const Footer = () => {
   return (
-    <div className=" p-6  md:p-12 bg-[#222224] text-white">
+    <div className=" p-6  md:p-12 bg-[#f5f5f5] ">
       <div className=" md:flex justify-stretch mb-20 ">
         {/* footer logo */}
         <div className=" mb-10 ">
           <div className="footer-logo mb-8">
-            <img src="/images/fair-logo-white.svg" alt="fair logo" />
+            {/* <img src="/images/smallsmall-logo.svg" alt="fair logo" /> */}
+            <Logo />
             <p className="mt-4">Shop today, pay later</p>
           </div>
-          <div>
+          {/* <div>
             <LinkButton link="#" className="bg-[#FFDE11;] px-4 py-3 text-black">
               Join or login
             </LinkButton>
-          </div>
+          </div> */}
         </div>
         {/* footer navigation */}
         <div className="flex grow justify-around">
           <FooterNav menuFooter={menuFooter} />
         </div>
         {/* footer social link */}
-        <div className=" self-end mb-8">
+        <div className="mb-8">
           {/* social media */}
           <div className="mb-10">
             <p className="mb-4">Find us on</p>
@@ -54,14 +56,14 @@ const Footer = () => {
           </div>
           {/* fair apps */}
           <div className="">
-            <p className="mb-4">Get the app</p>
+            <p className="mb-4">Backed by</p>
             <div className=" flex ">
-              <Link className="mr-2">
+              {/* <Link className="mr-2">
                 <img src="/images/play-store.svg" alt="play store logo" />
               </Link>
               <Link>
                 <img src="/images/app-store.svg" alt="app store logo" />
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
@@ -73,8 +75,7 @@ const Footer = () => {
             <Copyright />
           </span>
           <p className="pt-1">
-            <span className="mr-4 ">Fair by Smallsmall Technology 2025</span>{' '}
-            <span>fairapp.ng</span>
+            <span className="mr-4 ">Smallsmall Technology 2025</span>
           </p>
         </div>
       </div>
