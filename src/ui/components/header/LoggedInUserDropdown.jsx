@@ -62,7 +62,9 @@ export const LoggedInUserDropdown = ({
       <div className="bg-white h-full grid py-2 shadow-lg rounded-[10px]">
         <div className="flex items-center space-x-2 px-3 py-3">
           <img src="/images/user.svg" alt="User avatar" />
-          <p className="flex text-xs text-balance mb-0">{userFullName}</p>
+          <p className="flex text-xs text-balance mb-0">
+            {userFullName || 'Guest'}
+          </p>
         </div>
         <hr />
         <div className="px-3 my-1 grid gap-2 py-2 text-xs pb-4">
