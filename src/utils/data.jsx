@@ -1483,10 +1483,10 @@ export const popularProductsSort = [
 
 export const menuFooter = [
   {
-    title: 'Fair',
+    title: 'Smallsmall',
     links: [
       { name: 'About us', link: '/about-us' },
-      { name: 'Privacy policy', link: '/privacy-policy' },
+      // { name: 'Privacy policy', link: '/privacy-policy' },
       { name: 'Feedback', link: '/feedback' },
       { name: 'Press', link: '/press' },
       { name: 'Legal', link: '/legal' },
@@ -1522,6 +1522,7 @@ export const menuFooter = [
       { name: 'Buyer protection', link: '/buyer-protection' },
       { name: 'Seller protection', link: '/seller-protection' },
       { name: 'Refunds and returns', link: '/refunds-returns' },
+      { name: 'Renting terms&conditions', link: '/renting-terms-conditions' },
     ],
   },
 ];

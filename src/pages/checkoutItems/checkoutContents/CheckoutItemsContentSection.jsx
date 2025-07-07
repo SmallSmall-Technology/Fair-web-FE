@@ -11,6 +11,7 @@ import CheckoutDeliveryAddressForm from '../checkoutAddress/CheckoutDeliveryAddr
 import {
   editDeliveryAddress,
   saveDeliveryAddress,
+  selectLatestDeliveryAddress,
 } from '../../../features/user/userSlice.js';
 import { makePayment } from '../../../features/order/orderSlice.js';
 
@@ -35,9 +36,7 @@ export const CheckoutItemsContentSection = () => {
     setShowCheckoutDeliveryAddressForm(false);
   };
 
-  const deliveryAddress = useSelector(
-    (state) => state.user.user.deliveryAddress
-  );
+  const deliveryAddress = useSelector(selectLatestDeliveryAddress);
 
   const handleOpenCheckoutDeliveryAddressForm = () => {
     setShowCheckoutDeliveryAddressForm((show) => !show);

@@ -81,7 +81,10 @@ const LoginForm = () => {
   };
 
   return (
-    <form className="my-3 space-y-4 max-w-md mx-auto" onSubmit={handleSubmit}>
+    <form
+      className="my-3 space-y-4 w-[100%] lg:max-w-md mx-auto"
+      onSubmit={handleSubmit}
+    >
       <div className="space-y-2">
         <label htmlFor="email" className="text-sm font-medium sr-only">
           Email address
@@ -127,10 +130,17 @@ const LoginForm = () => {
 
       <Button
         type="submit"
-        className="w-full bg-[#FFDE11] text-black rounded-full py-3 text-lg font-medium hover:bg-gray-100 hover:text-black disabled:opacity-50"
+        className="w-full bg-[#FFDE11] text-black rounded-full py-3 text-lg font-medium  hover:text-black disabled:opacity-50"
         disabled={loading}
       >
-        {loading ? 'Logging in...' : 'Log in'}
+        {loading ? (
+          <>
+            <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
+            <span className="sr-only">Logging in...</span>
+          </>
+        ) : (
+          'Log in'
+        )}
       </Button>
 
       <Link

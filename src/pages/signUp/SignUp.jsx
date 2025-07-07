@@ -2,6 +2,7 @@ import SignUpForm from './SignUpForm';
 import { Link } from 'react-router-dom';
 import LinkButton from '../../utils/LinkButton';
 import React from 'react';
+import Logo from '../../ui/components/Logo';
 
 function SignUp() {
   return (
@@ -17,16 +18,11 @@ function SignUp() {
       </div>
 
       <div className="flex-1 p-5 py-12 lg:w-2/3">
-        <div className="flex justify-between items-center mb-10 lg:justify-end lg:pr-8">
-          <div className="h-[50px] w-[100px]">
-            <img
-              src="/images/fair-logo.svg"
-              alt="Fair Logo"
-              width="100%"
-              height="100%"
-            />
+        <div className="flex justify-between items-center mb-10 lg:justify-end lg:pr-8 ">
+          <div className="h-[50px]">
+            <Logo />
           </div>
-          <div className="md:hidden">
+          <div className="md:hidden mt-[-12px]">
             <Link to="/login" className="text-dark">
               Log in
             </Link>
