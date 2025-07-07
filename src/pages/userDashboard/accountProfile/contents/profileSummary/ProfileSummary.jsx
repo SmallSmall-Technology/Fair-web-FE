@@ -17,6 +17,7 @@ export default function ProfileSummary() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const latestDeliveryAddress = useSelector(selectLatestDeliveryAddress);
+
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ['users', localStorage.getItem('authToken')],
     queryFn: getUser,
