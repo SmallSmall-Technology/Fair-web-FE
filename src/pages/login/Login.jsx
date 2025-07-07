@@ -18,7 +18,7 @@ const Login = () => {
           </div>
         </div>
 
-        <div className="flex-1 py-6 px-5 flex flex-col items-center mx-auto lg:w-2/3 lg:pl-36">
+        <div className="flex-1 py-6 px-5 flex flex-col items-center w-[90%] mx-auto lg:w-2/3 lg:pl-36">
           <div className="w-full ">
             <div className=" flex justify-center mb-10 lg:mb-5 text-center w-full  lg:justify-end lg:pr-8">
               <Logo />
