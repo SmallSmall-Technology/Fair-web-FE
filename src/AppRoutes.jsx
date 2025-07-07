@@ -92,15 +92,15 @@ const AppRoutes = () => {
         <Route
           path="real-estate"
           element={
-            <Suspense fallback={<RealEstateHome />}>
-              <ElectronicsHome />
+            <Suspense fallback={<LandingPageSkeleton />}>
+              <RealEstateHome />
             </Suspense>
           }
         />
         <Route
           path="food-drink"
           element={
-            <Suspense fallback={<RealEstateHome />}>
+            <Suspense fallback={<LandingPageSkeleton />}>
               <FoodAndDrinkHome />
             </Suspense>
           }
@@ -108,7 +108,7 @@ const AppRoutes = () => {
         <Route
           path="lifestyle"
           element={
-            <Suspense fallback={<RealEstateHome />}>
+            <Suspense fallback={<LandingPageSkeleton />}>
               <ConsumerGoodsHome />
             </Suspense>
           }
