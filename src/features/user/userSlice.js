@@ -2,34 +2,65 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   user: {
-    name: '',
-    deliveryAddress: [],
+    id: null,
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    latest_address: null,
+    isTier2: null,
+    userCategory: null,
+    lastLogin: null,
+    createdAt: null,
+    updatedAt: null,
   },
+  status: 'idle',
+  error: null,
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    updateName(state, action) {
-      state.user.name = action.payload;
+    setUser: (state, action) => {
+      state.user = { ...state.user, ...action.payload };
+      state.status = 'succeeded';
+      state.error = null;
     },
-    saveDeliveryAddress(state, action) {
-      state.user.deliveryAddress.push(action.payload);
+    updateLatestDeliveryAddress: (state, action) => {
+      state.user.latest_address = action.payload;
+      state.status = 'succeeded';
+      state.error = null;
     },
-    editDeliveryAddress(state, action) {
-      if (state.user.deliveryAddress.length > 0) {
-        state.user.deliveryAddress[0] = action.payload;
-      } else {
-        state.user.deliveryAddress.push(action.payload);
-      }
+    setError: (state, action) => {
+      state.status = 'failed';
+      state.error = action.payload;
+    },
+    clearUser: (state) => {
+      state.user = initialState.user;
+      state.status = 'idle';
+      state.error = null;
     },
   },
 });
 
-export const { updateName, saveDeliveryAddress, editDeliveryAddress } =
+export const { setUser, updateLatestDeliveryAddress, setError, clearUser } =
   userSlice.actions;
-
 export default userSlice.reducer;
 
-export const getDeliveryAddress = (state) => state.user.user.deliveryAddress;
+export const selectLatestDeliveryAddress = (state) => {
+  const user = state.user.user;
+  return user?.latest_address?.streetAddress && user?.latest_address?.state
+    ? `${user.latest_address.streetAddress}, ${user.latest_address.state}`
+    : 'No delivery address';
+};
+
+export const getUserFullName = (state) => {
+  const user = state.user.user;
+  return `${user.firstName} ${user.lastName}`.trim() || 'Guest';
+};
+
+export const getUserFirstName = (state) => {
+  const user = state.user.user;
+  return user.firstName || 'Guest';
+};

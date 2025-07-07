@@ -15,12 +15,11 @@ import { LoggedInUserDropdown } from './LoggedInUserDropdown';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import { ChevronDown, ChevronUp, Heart, ShoppingCart } from 'lucide-react';
 import { getTotalFavouritesQuantity } from '../../../features/favourite/favouriteSlice';
-
+import { getUserFirstName } from '../../../features/user/userSlice';
 export const NavBar = () => {
-  const user = useSelector(getUserName);
   const [isOpen, setIsOpen] = useState(false);
   const [loggedInUserDropdown, setLoggedInUserDropdown] = useState(false);
-
+  const userFullName = useSelector(getUserFirstName);
   const isAuthenticated = useSelector(getUserIsAuthenticated);
   const totalProductsInCart = useSelector(getTotalCartQuantity);
   const totalFavouritesProduct = useSelector(getTotalFavouritesQuantity);
@@ -81,7 +80,7 @@ export const NavBar = () => {
               onClick={handleUserAuthDropdown}
             >
               <span className="text-[#737376]">Hi,</span>
-              <span>{user}!</span>
+              <span>{userFullName}!</span>
               {loggedInUserDropdown ? (
                 <ChevronUp size={20} />
               ) : (

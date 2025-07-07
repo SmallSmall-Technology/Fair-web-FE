@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCompletedOrders } from '../../../features/order/orderSlice';
-import { getUserFullName, logout } from '../../../features/auth/authSlice';
+import { logout } from '../../../features/auth/authSlice';
 import React from 'react';
+import { getUserFullName } from '../../../features/user/userSlice';
 
 export const LoggedInUserDropdown = ({
   // eslint-disable-next-line react/prop-types

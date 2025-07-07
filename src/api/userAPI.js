@@ -1,7 +1,7 @@
 import httpClient from './http-clients';
 
 export const updateUser = async (data) => {
-  const response = await httpClient.put('user/update-user-profile', data);
+  const response = await httpClient.patch('user/update-user-profile', data);
   return response.data;
 };
 

@@ -18,11 +18,11 @@ function SignUp() {
       </div>
 
       <div className="flex-1 p-5 py-12 lg:w-2/3">
-        <div className="flex justify-between items-center mb-10 lg:justify-end lg:pr-8">
+        <div className="flex justify-between items-center mb-10 lg:justify-end lg:pr-8 ">
           <div className="h-[50px]">
             <Logo />
           </div>
-          <div className="md:hidden">
+          <div className="md:hidden mt-[-12px]">
             <Link to="/login" className="text-dark">
               Log in
             </Link>

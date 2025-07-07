@@ -5,13 +5,14 @@ import { ChevronRight } from 'lucide-react';
 import { PaymentHistory } from './PaymentHistory';
 import { formatCurrency } from '../../../../../../../utils/FormatCurrency';
 import { completedPurchaseProgressData } from '../../../../../userDashboardData';
-import { getDeliveryAddress } from '../../../../../../../features/user/userSlice';
+import { selectLatestDeliveryAddress } from '../../../../../../../features/user/userSlice';
 
 const SingleCompletedPurchaseItemProgress = React.memo(
   ({ product, onToggleExpand, index, item }) => {
     console.log(product);
     const payments = completedPurchaseProgressData.payments;
-    const deliveryAddress = useSelector(getDeliveryAddress);
+    const deliveryAddress = useSelector(selectLatestDeliveryAddress);
+
     return (
       <>
         <div className="max-w-4x mx-auto bg-white  rounded-lg md:p-6 space-y-6 text-gray-800 md:border">

@@ -4,81 +4,101 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { YellowButton } from '../../../../../utils/Button';
 import { getUser, updateUser } from '../../../../../api/userAPI';
 import React from 'react';
+import { toast } from 'react-toastify';
+import { AddressModal } from './AddressModal';
+import {
+  setUser,
+  selectLatestDeliveryAddress,
+} from '../../../../../features/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function ProfileSummary() {
   const queryClient = useQueryClient();
-
-  const { data, error, isLoading } = useQuery({
-    queryKey: ['users'],
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  const latestDeliveryAddress = useSelector(selectLatestDeliveryAddress);
+  const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ['users', localStorage.getItem('authToken')],
     queryFn: getUser,
     enabled: !!localStorage.getItem('authToken'),
+    onSuccess: (data) => {
+      if (data?.data) {
+        dispatch(setUser(data.data));
+      }
+    },
     onError: (err) => {
       if (err.response?.status === 401 || err.response?.status === 404) {
-        console.error('Error fetching user:', err.response?.status);
         window.location.href = '/login';
       }
     },
   });
 
-  // console.log('User data:', data.data);
-
+  // console.log(user);
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       firstName: '',
       lastName: '',
       email: '',
-      phone: '',
+      phoneNumber: '',
     },
   });
 
-  // State for delivery address
-  const [isVerified, setIsVerified] = useState(false);
-  const [editingAddress, setEditingAddress] = useState(false);
-  const [address, setAddress] = useState('');
+  const [isVerified] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  // Update form and address when data is fetched
   useEffect(() => {
-    if (data) {
+    if (user) {
       reset({
-        firstName: data?.data.firstName || '',
-        lastName: data?.data.lastName || '',
-        email: data?.data.email || '',
-        phoneNumber: data?.data.phoneNumber || '',
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        email: user.email || '',
+        phoneNumber: user.phoneNumber || '',
       });
-      setAddress(
-        data?.data.latest_address ||
-          '1b Akinyemi Ave, Elf busstop, Lekki, Lagos'
-      );
     }
-  }, [data, reset]);
+  }, [user, reset]);
 
-  // Mutation for updating user profile
   const mutation = useMutation({
     mutationFn: updateUser,
-    onSuccess: () => {
+    onSuccess: (response) => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
-      alert('Profile updated successfully');
+      refetch();
+      dispatch(setUser(response.data?.user || response.data));
+      toast.success('Profile updated successfully', {
+        autoClose: 3000,
+        className:
+          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+        bodyClassName: 'm-0 p-0',
+        closeButton: false,
+      });
     },
     onError: (err) => {
-      console.error('Error updating profile:', err);
-      alert(`Failed to update profile: ${err.message}`);
+      toast.error(`Failed to update profile: ${err.message}`, {
+        autoClose: 3000,
+        className:
+          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+        bodyClassName: 'm-0 p-0',
+        closeButton: false,
+      });
     },
   });
 
   const onSubmit = (formData) => {
-    mutation.mutate({ ...formData, address });
+    const payload = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phoneNumber: formData.phoneNumber,
+    };
+    mutation.mutate(payload);
   };
 
-  if (isLoading) return <div>Loading profile...</div>;
+  // if (isLoading) return <div>Loading profile...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="px-2 lg:px-6">
       <h2 className="text-[23px] font-semibold mb-6">Profile</h2>
-
       <hr />
       <div className="grid gap-3 lg:flex justify-between items-start my-4">
-        {/* Tier 1 */}
         <div className="border border-gray-200 rounded p-4 lg:w-[30%] text-sm">
           <div className="flex justify-between">
             <p className="font-semibold">Your membership</p>
@@ -120,7 +140,6 @@ export default function ProfileSummary() {
         </div>
       </div>
       <hr className="my-2 w-[90%]" />
-
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 lg:w-[90%]">
         <div className="grid lg:grid-cols-[40%_1fr] gap-4 my-4 items-center">
           <p className="font-semibold text-sm">First name & Last name</p>
@@ -136,6 +155,7 @@ export default function ProfileSummary() {
             </label>
             <label htmlFor="lastName" className="lg:w-1/2">
               <input
+                id="lastName"
                 type="text"
                 placeholder="Last name"
                 {...register('lastName')}
@@ -176,43 +196,39 @@ export default function ProfileSummary() {
         </div>
 
         <hr />
-        <div className="grid lg:grid-cols-[40%_30%] gap-4 my-4 items-center">
-          <p className="font-semibold text-sm">Delivery address</p>
-          {!editingAddress ? (
-            <div className="flex justify-between items-start space-x-14">
-              <p>{address}</p>
-              <button
-                type="button"
-                className="text-black text-sm underline"
-                onClick={() => setEditingAddress(true)}
-              >
-                Edit
-              </button>
-            </div>
-          ) : (
-            <div className="flex gap-2">
-              <input
-                className="border p-2 rounded w-full"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-              <button
-                type="button"
-                className="text-sm bg-gray-200 rounded px-3"
-                onClick={() => setEditingAddress(false)}
-              >
-                Done
-              </button>
-            </div>
-          )}
-        </div>
-        <hr />
         <div className="lg:w-[176px] ml-auto">
           <YellowButton disabled={mutation.isLoading}>
-            {mutation.isLoading ? 'Saving...' : 'Save'}
+            {mutation.isLoading ? (
+              <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
+            ) : (
+              'Save'
+            )}
           </YellowButton>
         </div>
       </form>
+      {/* This cannot be rendered inside the form because its a form element that
+      needs to be separate */}
+      <div className="grid lg:grid-cols-[40%_30%] gap-4 my-4 items-center">
+        <p className="font-semibold text-sm">Delivery address</p>
+        {!showModal ? (
+          <div className="flex justify-between items-start space-x-14">
+            <p>{latestDeliveryAddress}</p>
+            <button
+              type="button"
+              className="text-black text-sm underline"
+              onClick={() => setShowModal(true)}
+            >
+              Edit
+            </button>
+          </div>
+        ) : (
+          <AddressModal
+            currentAddress={data?.latest_address}
+            onClose={() => setShowModal(false)}
+            refetch={refetch}
+          />
+        )}
+      </div>
     </div>
   );
 }

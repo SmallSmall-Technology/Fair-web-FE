@@ -12,7 +12,7 @@ import {
   createOrder,
   makePayment,
 } from '../../../features/order/orderSlice.js';
-import { getDeliveryAddress } from '../../../features/user/userSlice.js';
+import { selectLatestDeliveryAddress } from '../../../features/user/userSlice.js';
 import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -24,7 +24,7 @@ export const CheckoutPaymentMethod = () => {
   const navigate = useNavigate();
   const totalCartPrice = useSelector(getTotalCartPrice);
   const cartItems = useSelector((state) => state.cart.cart);
-  const onDeliveryAddress = useSelector(getDeliveryAddress);
+  const onDeliveryAddress = useSelector(selectLatestDeliveryAddress);
 
   const {
     register,
