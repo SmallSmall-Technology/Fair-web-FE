@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function LandingHeader() {
   return (
-    <header className="overflow-x-auto">
+    <div className="overflow-x-auto flex justify-center">
       <nav className="flex gap-4 px-4 py-2 whitespace-nowrap text-sm w-fit">
         <NavLink
           to="/home-living"
@@ -78,6 +78,6 @@ export default function LandingHeader() {
           Sales & Offers
         </NavLink>
       </nav>
-    </header>
+    </div>
   );
 }
