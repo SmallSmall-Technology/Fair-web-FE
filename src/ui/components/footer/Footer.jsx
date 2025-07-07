@@ -6,10 +6,12 @@ import { menuFooter } from '../../../utils/data';
 import React from 'react';
 import { Copyright } from 'lucide-react';
 import Logo from '../Logo';
+import FooterContactInfo from './FooterContactInfo';
 
 const Footer = () => {
   return (
     <div className=" p-6  md:p-12 bg-[#f5f5f5] ">
+      <FooterContactInfo />
       <div className=" md:flex justify-stretch mb-20 ">
         {/* footer logo */}
         <div className=" mb-10 ">
