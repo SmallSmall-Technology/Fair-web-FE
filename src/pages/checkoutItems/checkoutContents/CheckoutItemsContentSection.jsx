@@ -9,11 +9,11 @@ import { CheckoutDeliveryAddressButton } from '../../../utils/Button.jsx';
 import { CheckoutPaymentMethod } from '../checkoutContents/CheckoutPaymentMethod.jsx';
 import CheckoutDeliveryAddressForm from '../checkoutAddress/CheckoutDeliveryAddressForm.jsx';
 import {
-  editDeliveryAddress,
-  saveDeliveryAddress,
+  updateLatestDeliveryAddress,
   selectLatestDeliveryAddress,
 } from '../../../features/user/userSlice.js';
 import { makePayment } from '../../../features/order/orderSlice.js';
+import React from 'react';
 
 export const CheckoutItemsContentSection = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -24,14 +24,14 @@ export const CheckoutItemsContentSection = () => {
   const navigate = useNavigate();
 
   const handleSubmitDeliveryAddress = (values, { resetForm }) => {
-    dispatch(saveDeliveryAddress(values));
+    dispatch(updateLatestDeliveryAddress(values));
     setIsSubmitted(true);
     resetForm();
     setShowCheckoutDeliveryAddressForm(false);
   };
 
   const handleEditedDeliveryAddress = (values, { resetForm }) => {
-    dispatch(editDeliveryAddress(values));
+    dispatch(updateLatestDeliveryAddress(values));
     resetForm();
     setShowCheckoutDeliveryAddressForm(false);
   };

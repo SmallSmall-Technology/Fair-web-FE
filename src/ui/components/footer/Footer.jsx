@@ -6,11 +6,13 @@ import { menuFooter } from '../../../utils/data';
 import React from 'react';
 import { Copyright } from 'lucide-react';
 import Logo from '../Logo';
+import FooterContactInfo from './FooterTop';
 
 const Footer = () => {
   return (
     <div className=" p-6  md:p-12 bg-[#f5f5f5] ">
-      <div className=" md:flex justify-stretch mb-20 ">
+      <FooterContactInfo />
+      <div className=" md:flex justify-stretch mb-20 border-t pt-7">
         {/* footer logo */}
         <div className=" mb-10 ">
           <div className="footer-logo mb-8">
@@ -57,13 +59,10 @@ const Footer = () => {
           {/* fair apps */}
           <div className="">
             <p className="mb-4">Backed by</p>
-            <div className=" flex ">
-              {/* <Link className="mr-2">
-                <img src="/images/play-store.svg" alt="play store logo" />
-              </Link>
-              <Link>
-                <img src="/images/app-store.svg" alt="app store logo" />
-              </Link> */}
+            <div className="flex gap-2">
+              <img src="/images/techstars-logo.svg" alt="" />
+              <img src="/images/oyester-logo.svg" alt="" />
+              <img src="/images/resilience-logo.svg" alt="" />
             </div>
           </div>
         </div>
