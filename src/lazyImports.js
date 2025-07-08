@@ -43,16 +43,7 @@ export const ShoppingOverview = lazy(
   () =>
     import('./pages/userDashboard/shopping/shoppingOverview/ShoppingOverview')
 );
-// export const Summary = lazy(
-//   () =>
-//     import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
-// );
-// export const Purchases = lazy(
-//   () =>
-//     import(
-//       './pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases'
-//     )
-// );
+
 export const CreditWallet = lazy(
   () =>
     import(

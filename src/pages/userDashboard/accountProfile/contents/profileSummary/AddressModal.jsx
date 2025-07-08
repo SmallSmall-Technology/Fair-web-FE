@@ -104,7 +104,6 @@ export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
         payload.latest_address.id = currentAddress.id;
       }
 
-      // console.log('Submitting payload:', JSON.stringify(payload, null, 2));
       await mutation.mutateAsync(payload);
       dispatch(updateLatestDeliveryAddress(payload.latest_address));
       // console.log('Address updated successfully');
@@ -114,7 +113,6 @@ export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
         bodyClassName: 'm-0 p-0',
       });
     } catch (error) {
-      // console.error('Submission error:', error.message, error.response?.data);
       toast.error(
         error.response?.data?.message ||
           error.message ||
