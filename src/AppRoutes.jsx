@@ -39,7 +39,7 @@ import CheckoutItemsSkeleton from './ui/components/skeletons/CheckoutItemsSkelet
 import ProductDetailsSkeleton from './ui/components/skeletons/ProductDetailsSkeleton';
 import CheckoutPaymentSkeleton from './ui/components/skeletons/CheckoutPaymentSkeleton';
 import DashboardSummarySkeleton from './ui/components/skeletons/DashboardSummarySkeleton';
-import LandingPageSkeleton from './ui/components/skeletons/LnadingPageSkeleton';
+import LandingPageSkeleton from './ui/components/Skeletons/LandingPageSkeleton';
 import SubCategoryPage from './pages/productCategories/SubCategoryPage';
 
 import Summary from './pages/userDashboard/shopping/shoppingOverviewContents/Summary';
