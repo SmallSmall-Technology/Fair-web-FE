@@ -1681,9 +1681,7 @@
           "quantity": 1
         }
       ],
-      "totalAmount": [
-        500000
-      ],
+      "totalAmount": [500000],
       "paidAmount": 9615.38,
       "remainingAmount": 490384.62,
       "status": "ongoing",
@@ -1700,9 +1698,7 @@
           "soldBy": "Samsung",
           "price": 207000,
           "quantity": 1,
-          "totalAmount": [
-            207000
-          ]
+          "totalAmount": [207000]
         }
       ],
       "paidAmount": 207000,
@@ -1721,9 +1717,7 @@
           "soldBy": "Apple",
           "price": 150000,
           "quantity": 1,
-          "totalAmount": [
-            500000
-          ]
+          "totalAmount": [500000]
         }
       ],
       "paidAmount": 150000,
@@ -1742,10 +1736,7 @@
           "soldBy": "Google",
           "price": 300000,
           "quantity": 1,
-          "totalAmount": [
-            300000,
-            280000
-          ]
+          "totalAmount": [300000, 280000]
         },
         {
           "productId": "4",
@@ -1754,10 +1745,7 @@
           "soldBy": "OnePlus",
           "price": 280000,
           "quantity": 1,
-          "totalAmount": [
-            300000,
-            280000
-          ]
+          "totalAmount": [300000, 280000]
         }
       ],
       "paidAmount": 580000,
@@ -1776,10 +1764,7 @@
           "soldBy": "Samsung",
           "price": 207000,
           "quantity": 1,
-          "totalAmount": [
-            207000,
-            500000
-          ]
+          "totalAmount": [207000, 500000]
         },
         {
           "productId": "2",
@@ -1788,10 +1773,7 @@
           "soldBy": "Apple",
           "price": 150000,
           "quantity": 1,
-          "totalAmount": [
-            207000,
-            500000
-          ]
+          "totalAmount": [207000, 500000]
         }
       ],
       "paidAmount": 357000,
@@ -1810,9 +1792,7 @@
           "soldBy": "Google",
           "price": 300000,
           "quantity": 1,
-          "totalAmount": [
-            300000
-          ]
+          "totalAmount": [300000]
         }
       ],
       "paidAmount": 300000,
@@ -1831,9 +1811,7 @@
           "soldBy": "Samsung",
           "price": 207000,
           "quantity": 1,
-          "totalAmount": [
-            207000
-          ]
+          "totalAmount": [207000]
         }
       ],
       "paidAmount": 207000,
@@ -1852,9 +1830,7 @@
           "soldBy": "Samsung",
           "price": 207000,
           "quantity": 1,
-          "totalAmount": [
-            207000
-          ]
+          "totalAmount": [207000]
         }
       ],
       "paidAmount": 207000,
@@ -2964,57 +2940,5 @@
       "orderDate": "Jun 05, 2025"
     }
   ],
-  "cart": [
-    {
-      "id": "5",
-      "image": "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "Xiaomi Mi 12",
-      "userId": "user123",
-      "productId": "5",
-      "quantity": 7,
-      "price": 200000,
-      "totalPrice": 1400000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 200000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": "200000",
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    },
-    {
-      "id": "2",
-      "category": "Electronics",
-      "image": "https://images.pexels.com/photos/1275229/pexels-photo-1275229.jpeg?auto=compress&cs=tinysrgb&w=500",
-      "name": "iPhone 14 Pro Max",
-      "userId": "user123",
-      "productId": "2",
-      "quantity": 1,
-      "price": 500000,
-      "totalPrice": 500000,
-      "paymentPlan": "upfront",
-      "paymentPlanDetails": {
-        "type": "upfront",
-        "amount": 500000,
-        "months": 0,
-        "monthlyPayment": 0,
-        "weeks": 0,
-        "weeklyPayment": 0,
-        "days": 0,
-        "dailyPayment": 0,
-        "totalPrice": 500000,
-        "upfrontPayment": 0
-      },
-      "deliveryDate": "Jan, 20 2025",
-      "interest": 0
-    }
-  ]
+  "cart": []
 }

@@ -34,7 +34,7 @@ export default function ProfileSummary() {
     },
   });
 
-  // console.log(user);
+  console.log(user);
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       firstName: '',
