@@ -5,6 +5,7 @@ import {
 import { useSelector } from 'react-redux';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import { IncomeUpgrade } from './IncomeUpgrade';
+import { Link } from 'react-router-dom';
 
 export const CartSummary = ({
   onHandleCheckout,
@@ -41,7 +42,26 @@ export const CartSummary = ({
             <p className="text-right">{formatCurrency(shippingFee)}</p>
           </div>
         </div>
-        <hr className="mt-8 mb-2" />
+        {/* { */}
+        <div>
+          <hr className="mt-8 mb-2" />
+          <div className="flex justify-between items-center">
+            <p className="font-semibold">Consolidated cart</p>
+            <Link to="" className="text-[11px] underline">
+              What is a consolidated cart?
+            </Link>
+          </div>
+          <article className="bg-[#FAFAFA] rounded-[12px] my-4 p-4">
+            <p>Hello</p>
+            <p>Hello</p>
+            <p>Hello</p>
+            <p>Hello</p>
+            <p>Hello</p>
+          </article>
+          <hr className="mt-8 mb-2" />
+        </div>
+        {/* } */}
+
         <div className="flex justify-between mb-8">
           <div className="flex justify-between gap-2 lg:hidden font-medium lg:text-xl w-full">
             <div className="flex gap-1">

@@ -1,16 +1,13 @@
-// import httpClient from '../api';
+import axios from 'axios';
 
 export const fetchAllProducts = async () => {
-  const response = await httpClient.get('/products');
+  const response = await axios.get('http://localhost:8000/products');
+  // console.log(response.data);
   return response.data;
 };
 
-export const fetchAllOrders = async () => {
-  const response = await httpClient.get('/orders');
-  return response.data;
-};
-
-export const postPhoneNumber = async (phone) => {
-  const response = await httpClient.post('validate-phone', { phone });
+export const pushToCart = async () => {
+  const response = await axios.get('http://localhost:8000/cart');
+  // console.log(response.data);
   return response.data;
 };

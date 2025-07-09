@@ -18,7 +18,7 @@ export default function ProfileSummary() {
   const { user } = useSelector((state) => state.user);
   const latestDeliveryAddress = useSelector(selectLatestDeliveryAddress);
 
-  const { data, error, isLoading, refetch } = useQuery({
+  const { data, error, refetch } = useQuery({
     queryKey: ['users', localStorage.getItem('authToken')],
     queryFn: getUser,
     enabled: !!localStorage.getItem('authToken'),
@@ -34,7 +34,7 @@ export default function ProfileSummary() {
     },
   });
 
-  console.log(user);
+  // console.log(user);
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       firstName: '',

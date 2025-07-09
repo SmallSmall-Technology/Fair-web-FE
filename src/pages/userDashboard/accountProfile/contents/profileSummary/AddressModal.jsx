@@ -9,6 +9,14 @@ import {
   setUser,
 } from '../../../../../features/user/userSlice';
 
+export const states = [
+  'Lagos state',
+  'Abuja state',
+  'Oyo state',
+  'Kaduna state',
+  'Rivers state',
+];
+
 export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
@@ -29,18 +37,9 @@ export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
     },
   });
 
-  const states = [
-    'Lagos state',
-    'Abuja state',
-    'Oyo state',
-    'Kaduna state',
-    'Rivers state',
-  ];
-
   const mutation = useMutation({
     mutationFn: updateUser,
     onSuccess: (response) => {
-      // console.log('Mutation successful:', JSON.stringify(response, null, 2));
       queryClient.invalidateQueries({ queryKey: ['users'] });
       refetch();
       const updatedAddress =
@@ -58,7 +57,6 @@ export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
       onClose();
     },
     onError: (error) => {
-      // console.error('Mutation error:', error.message, error.response?.data);
       toast.error(
         error.response?.data?.message ||
           error.message ||
@@ -80,16 +78,11 @@ export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
       keepDirty: false,
       keepTouched: false,
     });
-    // console.log(
-    //   'Resetting form with currentAddress:',
-    //   JSON.stringify(currentAddress, null, 2)
-    // );
   }, [currentAddress?.streetAddress, currentAddress?.state, reset]);
 
   const onSubmit = async (data, event) => {
     event.preventDefault();
     event.stopPropagation();
-    // console.log('Form submitted with data:', JSON.stringify(data, null, 2));
     try {
       const payload = {
         latest_address: {
@@ -106,7 +99,6 @@ export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
 
       await mutation.mutateAsync(payload);
       dispatch(updateLatestDeliveryAddress(payload.latest_address));
-      // console.log('Address updated successfully');
       toast.success('Address updated successfully', {
         className:
           'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
@@ -132,7 +124,6 @@ export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
       aria-labelledby="address-modal-title"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
-          // console.log('Backdrop clicked');
           onClose();
         }
       }}
@@ -142,7 +133,6 @@ export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
           <button
             type="button"
             onClick={() => {
-              // console.log('Closing modal');
               onClose();
             }}
             className="absolute right-4 top-4 text-xl font-bold"
@@ -154,7 +144,6 @@ export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
           <h2 id="address-modal-title" className="font-medium text-sm mb-2">
             Current delivery address
           </h2>
-          {/* <p>{latestDeliveryAddress}</p> */}
           <p className="text-sm">
             {user?.latest_address?.streetAddress || 'No deliver address'}
             {user?.latest_address?.state && `, ${user?.latest_address?.state}`}
@@ -168,7 +157,6 @@ export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
 
           <form
             onSubmit={(e) => {
-              // console.log('AddressModal form submitted');
               e.preventDefault();
               e.stopPropagation();
               handleSubmit(onSubmit)(e);
@@ -234,7 +222,6 @@ export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
               <button
                 type="button"
                 onClick={() => {
-                  // console.log('Cancel clicked');
                   onClose();
                 }}
                 className="text-sm underline"
