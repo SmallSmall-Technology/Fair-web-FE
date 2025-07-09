@@ -7,6 +7,7 @@ import {
   getCart,
   getTotalCartQuantity,
 } from '../../../features/cart/cartSlice';
+import { Link } from 'react-router-dom';
 
 const CartDropdownItems = ({ isOpen, setIsOpen }) => {
   const CartItems = useSelector(getCart);
@@ -53,17 +54,21 @@ const CartDropdownItems = ({ isOpen, setIsOpen }) => {
 
       <div
         ref={menuRef}
-        className={`fixed w-[320px] md:w-[420px] h-fit right-0 bg-white z-50 pb-52 top-[75px] transform transition-all duration-300 ease-in-out shadow-lg ${
-          isOpen ? 'translate-y-0 opacity-100' : 'translate-y-[-5%] opacity-0'
+        className={`shadow-2xl fixed w-full md:w-[420px] h-fit right-0 bg-white z-50 pb-52 top-[130px] md:top-[77px] transform transition-all duration-300 ease-in-out ${
+          isOpen ? 'translate-y-0 opacity-100' : 'translate-y-[-5%] opacity- 0'
         }`}
       >
         <div className="flex justify-between items-center px-5 mb-5">
-          <p className="min-w-fit pt-4">Cart Summary</p>
+          <p className="hidden md:flex min-w-fit pt-4 font-medium">
+            Cart Summary
+          </p>
+          <p className="min-w-fit pt-4 font-medium md:hidden">Shopping Cart</p>
+
           <button
             className="w-full flex justify-end pt-4"
             onClick={() => setIsOpen(false)}
           >
-            <X className="w-5 h-5" />
+            <X className="hidden md:flex w-5 h-5" />
           </button>
         </div>
 
@@ -76,9 +81,32 @@ const CartDropdownItems = ({ isOpen, setIsOpen }) => {
               your cart.
             </p>
           ) : (
-            <p className="text-[#16161A] flex justify-center items-center">
-              Your cart is currently empty.
-            </p>
+            <div className="flex flex-col justify-between md:h-screen">
+              <p className="hidden text-[#16161A] md:flex items-center font-semibold">
+                Your cart is empty.
+              </p>
+
+              <div className="md:hidden flex flex-col justify-center h-full text-center mt-6">
+                <p className="text-[#16161A] flex items-center font-semibold justify-center mb-3">
+                  Your shopping cart is empty
+                </p>
+                <Link to="/" className="underline mb-1">
+                  Shop
+                </Link>
+                <Link to="/home-living" className="underline mb-1">
+                  {' '}
+                  Home & Living
+                </Link>
+                <Link to="/lifestyle" className="underline mb-1">
+                  {' '}
+                  Lifestyle & Consumer goods
+                </Link>
+                <Link to="/electronics" className="underline">
+                  {' '}
+                  Electronics
+                </Link>
+              </div>
+            </div>
           )}
 
           <ul className="overflow-y-auto h-[50svh] mt-4">

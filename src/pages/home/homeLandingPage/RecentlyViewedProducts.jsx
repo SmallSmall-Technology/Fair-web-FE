@@ -5,7 +5,7 @@ import { getRecentlyViewed } from '../../../features/product/recentlyViewedSlice
 const RecentlyViewedProducts = () => {
   const recentlyViewed = useSelector(getRecentlyViewed);
   return (
-    <section className="px-4 py-8 lg:mx-10 my-10">
+    <section className="md:px-4 py-8 lg:mx-10 my-10">
       {recentlyViewed.length !== 0 && (
         <div className="flex justify-between mb-4">
           <p className="font-semibold">Your recently viewed Items</p>

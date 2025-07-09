@@ -1,5 +1,5 @@
-import { CategoryCard } from '../../homeLivingLandingPage/homeLivingContentSection/CategoryCard';
 import { categories } from './ElectronicCategory';
+import { CategoryCard } from '../../homeLivingLandingPage/homeLivingContentSection/CategoryCard';
 
 export const Phones = () => {
   return (

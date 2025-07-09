@@ -1,11 +1,11 @@
-import { Accessories } from './Accessories';
-import { Computers } from './Computers';
+import { TV } from './TV';
+import { Phones } from './Phones';
 import { Gadgets } from './Gadgets';
+import { Computers } from './Computers';
+import { VideoGames } from './VideoGames';
+import { Accessories } from './Accessories';
 import { HomeAppliances } from './HomeAppliances';
 import { HomeAudioTheater } from './HomeAudioTheater';
-import { Phones } from './Phones';
-import { TV } from './TV';
-import { VideoGames } from './VideoGames';
 
 export const categories = [
   {

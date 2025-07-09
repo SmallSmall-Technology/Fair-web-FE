@@ -158,7 +158,7 @@ export const ProductCategoriesShortcut = ({ categories }) => {
   return (
     <section className="relative px-5">
       <div className="flex justify-start gap-5 items-center lg:pb-4">
-        <div className="relative">
+        <div className="relative hidden md:block">
           <p
             ref={buttonRef}
             className="flex space-x-1 p-2 rounded-[20px] font-medium text-xs border border-black px-5 items-center hover:bg-gray-100 transition-colors duration-200"

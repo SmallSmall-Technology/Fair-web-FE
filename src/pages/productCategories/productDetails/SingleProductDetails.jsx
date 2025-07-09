@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { ProductImage } from '../ProductImage';
 import { products } from '../../../utils/data';
 import ProductCard from '../../../utils/ProductCard';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import CommentBar from '../../../features/reviewsRating/CommentBar';
 import { AddFavourite } from '../../../features/favourite/AddFavourite';
 import { SingleProductDetailsAside } from './SingleProductDetailsAside';
@@ -13,11 +14,14 @@ import { DailyPayment } from './productPlan/DailyPaymentPlan/DailyPayment';
 import { handleShareProduct } from '../../../features/product/ShareProduct';
 import { WeeklyPayment } from './productPlan/WeeklyPaymentPlan/WeeklyPayment';
 import MonthlyPayment from './productPlan/MonthlyPaymentPlan/MonthlyPayment';
+import { HeartHandshake } from 'lucide-react';
 
-export const SingleProductDetails = React.memo(({ product, category }) => {
+export const SingleProductDetails = React.memo(function SingleProductDetails({
+  product,
+  category,
+}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
-  // const [selectedPaymentPlan, setSelectedPaymentPlan] = useState('');
   const navigate = useNavigate();
 
   const productImages = [
@@ -52,10 +56,11 @@ export const SingleProductDetails = React.memo(({ product, category }) => {
         </button>
       </div>
       <div className="flex flex-wrap w-full justify-between gap-2 lg:px-4">
-        <main className="w-full lg:w-full xl:w-[52%] mx-5 md:mx-0">
-          <div className="flex justify-between items-center md:items-start gap-5 md:mb-20">
-            <aside className="w-[100px] hidden md:grid">
-              <ul className="hidden md:grid grid-cols-1 gap-2">
+        <main className="w-full lg:w-full xl:w-[52%] mx-5 lg:mx-0">
+          {/* <div className="flex justify-between items-center md:items-start gap-5 md:mb-20"> */}
+          <div className="flex justify-between items-center lg:items-start gap-5 lg:mb-20">
+            <aside className="w-[80px] hidden lg:grid">
+              <ul className="hidden lg:grid grid-cols-1 gap-2">
                 {productImages.map((image, index) => (
                   <ProductImage
                     key={index}
@@ -66,8 +71,8 @@ export const SingleProductDetails = React.memo(({ product, category }) => {
                 ))}
               </ul>
             </aside>
-            <main className="flex-1">
-              <div className="hidden md:bg-[#F2F2F2] rounded-2xl w-full h-[363px] md:h-[589px] xl:w-[589px] md:flex justify-center items-center">
+            <main className="flex-1 ">
+              <div className="hidden md:bg-[#F2F2F2]  rounded-2xl w-full h-[363px] md:h-[589px] xl:w-[589p] md:flex justify-center items-center">
                 <img
                   src={product.image}
                   alt={product.slug}
@@ -159,9 +164,31 @@ export const SingleProductDetails = React.memo(({ product, category }) => {
           category={category}
         />
       </div>
+
+      <section className="md:hidden">
+        <div className="w-full h-[6px] bg-[#E5E5E5]"></div>
+
+        <div className="flex items-start space-x-2 my-5 mx-4">
+          <HeartHandshake size={24} />
+          <div>
+            <p className="font-medium text-[13px] mb-3">
+              Fair purchase protection
+            </p>
+            <p className="text-xs max-w-80">
+              Shop confidently on Fair knowing if something goes wrong with an
+              order, we've got your back for all eligible purchases.
+              <Link to="" className="font-medium underline ml-1">
+                See purchase terms
+              </Link>
+            </p>
+          </div>
+        </div>
+        <div className="w-full h-[6px] bg-[#E5E5E5]"></div>
+      </section>
+
       <section className="mb-24 mx-5 xl:mx-0">
         <div className="mt-8 flex justify-between items-center mb-6">
-          <p className="text-xl font-semibold">You may also like</p>
+          <p className="text-normal font-semibold">You may also like</p>
           <NavLink to="/related-products" className="underline">
             See more
           </NavLink>
@@ -207,5 +234,15 @@ export const SingleProductDetails = React.memo(({ product, category }) => {
     </>
   );
 });
+SingleProductDetails.displayName = 'SingleProductDetails';
+
+SingleProductDetails.propTypes = {
+  product: PropTypes.shape({
+    image: PropTypes.string,
+    slug: PropTypes.string,
+    category: PropTypes.string,
+  }).isRequired,
+  category: PropTypes.string.isRequired,
+};
 
 export default SingleProductDetails;

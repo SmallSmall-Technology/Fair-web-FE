@@ -1,6 +1,6 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Pagination } from './Pagination';
-import { products } from '../../utils/data';
+// import { products } from '../../utils/data';
 import ProductCard from '../../utils/ProductCard';
 import { ArrowUpDown, ChevronRight } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -9,23 +9,25 @@ import {
   ProductCategoriesShortcut,
   departments,
 } from './ProductCategoriesShortcut';
-// import { useQuery } from '@tanstack/react-query';
-// import { fetchAllProducts } from '../../services/api.js';
+import { useQuery } from '@tanstack/react-query';
+import { fetchAllProducts } from '../../services/api.js';
 import Header from '../../ui/components/header/Header';
 
 const SubCategoryPage = () => {
   const navigate = useNavigate();
   const { categoryName, subcategory } = useParams();
-  // const { allData, error, isLoading } = useQuery({
-  //   queryKey: ['products'],
-  //   queryFn: fetchAllProducts,
-  // });
+
+  const { data: products } = useQuery({
+    queryKey: ['products'],
+    queryFn: fetchAllProducts,
+  });
+
+  // console.log(products);
 
   const data = products.filter(
     (product) =>
       product?.subcategory?.toLowerCase() === subcategory?.toLowerCase()
   );
-
   // const [sortedGroupedProducts, setSortedGroupedProducts] = useState(data);
 
   // const handleSortProducts = () => {
@@ -107,9 +109,9 @@ const SubCategoryPage = () => {
             </div>
           </div>
           <hr className="mb-6" />{' '}
-          {data.length > 0 ? (
+          {products.length > 0 ? (
             <section className="flex justify-between flex-wrap">
-              {data.map((product) => (
+              {products.map((product) => (
                 <div key={product.id} className="mb-6">
                   <ProductCard product={product} />
                 </div>
