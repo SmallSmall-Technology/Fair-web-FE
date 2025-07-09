@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const UserMenuDropdown = ({ setUserMenuIsOpen, userMenuIsOpen }) => {
   const menuRef = useRef(null);
@@ -47,8 +47,8 @@ const UserMenuDropdown = ({ setUserMenuIsOpen, userMenuIsOpen }) => {
             <ul className="flex flex-col space-y-3 p-6 pt-2 h-full w-full">
               {[
                 {
-                  label: 'My account',
-                  href: '/user-dashboard/account-profile',
+                  label: 'My shopping hub',
+                  // href: '/user-dashboard/account-profile',
                 },
                 {
                   label: 'Shopping overview',
@@ -60,16 +60,18 @@ const UserMenuDropdown = ({ setUserMenuIsOpen, userMenuIsOpen }) => {
                 },
                 {
                   label: 'Account profile',
-                  href: '/user-dashboard/account-profile',
+                  href: '/user-dashboard/account-profile/profile-summary',
                 },
               ].map((item, index) => (
                 <li
                   key={index}
-                  className="text-base font-semibold cursor-pointer transition-colors duration-200 hover:text-black hover:underline focus:outline-none focus:text-black"
+                  className={`text-base ${
+                    !item.href ? 'font-normal' : 'font-semibold'
+                  } cursor-pointer transition-colors duration-200 hover:text-black hover:underline focus:outline-none focus:text-black`}
                   onClick={() => setUserMenuIsOpen(false)}
                 >
-                  <a href={item.href} aria-label={item.label}>
-                    {item.label}
+                  <a href={item?.href || '#'} aria-label={item?.label}>
+                    {item?.label}
                   </a>
                 </li>
               ))}

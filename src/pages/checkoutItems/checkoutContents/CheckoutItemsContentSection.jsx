@@ -8,35 +8,18 @@ import { CheckoutPaymentSummary } from './CheckoutPaymentSummary.jsx';
 import { CheckoutDeliveryAddressButton } from '../../../utils/Button.jsx';
 import { CheckoutPaymentMethod } from '../checkoutContents/CheckoutPaymentMethod.jsx';
 import CheckoutDeliveryAddressForm from '../checkoutAddress/CheckoutDeliveryAddressForm.jsx';
-import {
-  updateLatestDeliveryAddress,
-  selectLatestDeliveryAddress,
-} from '../../../features/user/userSlice.js';
+import { selectLatestDeliveryAddress } from '../../../features/user/userSlice.js';
 import { makePayment } from '../../../features/order/orderSlice.js';
 import React from 'react';
 
 export const CheckoutItemsContentSection = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const deliveryAddress = useSelector(selectLatestDeliveryAddress);
+  console.log('Delivery Address:', deliveryAddress);
 
   const [showCheckoutDeliveryAddressForm, setShowCheckoutDeliveryAddressForm] =
     useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const handleSubmitDeliveryAddress = (values, { resetForm }) => {
-    dispatch(updateLatestDeliveryAddress(values));
-    setIsSubmitted(true);
-    resetForm();
-    setShowCheckoutDeliveryAddressForm(false);
-  };
-
-  const handleEditedDeliveryAddress = (values, { resetForm }) => {
-    dispatch(updateLatestDeliveryAddress(values));
-    resetForm();
-    setShowCheckoutDeliveryAddressForm(false);
-  };
-
-  const deliveryAddress = useSelector(selectLatestDeliveryAddress);
 
   const handleOpenCheckoutDeliveryAddressForm = () => {
     setShowCheckoutDeliveryAddressForm((show) => !show);
@@ -67,12 +50,12 @@ export const CheckoutItemsContentSection = () => {
             <h2 className="mt-7 mb-3 font-medium text-[21px] hidden lg:block">
               Delivery address
             </h2>
-            {deliveryAddress.map((address, index) => (
-              <div key={index}>
+            <p>{deliveryAddress}</p>
+            {
+              <div>
                 <article className="mb-6">
                   <p className="font-semibold text-[#96959F]">
-                    {address.address}, <br />
-                    {address.state}
+                    <deliveryAddress />
                   </p>
                 </article>
                 {!showCheckoutDeliveryAddressForm ? (
@@ -83,26 +66,20 @@ export const CheckoutItemsContentSection = () => {
                   </CheckoutDeliveryAddressButton>
                 ) : (
                   <CheckoutDeliveryAddressForm
-                    deliveryAddress={deliveryAddress}
-                    handleEditedDeliveryAddress={handleEditedDeliveryAddress}
                     handleOpenCheckoutDeliveryAddressForm={
                       handleOpenCheckoutDeliveryAddressForm
                     }
-                    handleSubmitDeliveryAddress={handleSubmitDeliveryAddress}
                   />
                 )}
               </div>
-            ))}
+            }
           </div>
         ) : (
           <>
             <CheckoutDeliveryAddressForm
-              deliveryAddress={deliveryAddress}
-              handleEditedDeliveryAddress={handleEditedDeliveryAddress}
               handleOpenCheckoutDeliveryAddressForm={
                 handleOpenCheckoutDeliveryAddressForm
               }
-              handleSubmitDeliveryAddress={handleSubmitDeliveryAddress}
             />
           </>
         )}

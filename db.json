@@ -1681,7 +1681,9 @@
           "quantity": 1
         }
       ],
-      "totalAmount": [500000],
+      "totalAmount": [
+        500000
+      ],
       "paidAmount": 9615.38,
       "remainingAmount": 490384.62,
       "status": "ongoing",
@@ -1698,7 +1700,9 @@
           "soldBy": "Samsung",
           "price": 207000,
           "quantity": 1,
-          "totalAmount": [207000]
+          "totalAmount": [
+            207000
+          ]
         }
       ],
       "paidAmount": 207000,
@@ -1717,7 +1721,9 @@
           "soldBy": "Apple",
           "price": 150000,
           "quantity": 1,
-          "totalAmount": [500000]
+          "totalAmount": [
+            500000
+          ]
         }
       ],
       "paidAmount": 150000,
@@ -1736,7 +1742,10 @@
           "soldBy": "Google",
           "price": 300000,
           "quantity": 1,
-          "totalAmount": [300000, 280000]
+          "totalAmount": [
+            300000,
+            280000
+          ]
         },
         {
           "productId": "4",
@@ -1745,7 +1754,10 @@
           "soldBy": "OnePlus",
           "price": 280000,
           "quantity": 1,
-          "totalAmount": [300000, 280000]
+          "totalAmount": [
+            300000,
+            280000
+          ]
         }
       ],
       "paidAmount": 580000,
@@ -1764,7 +1776,10 @@
           "soldBy": "Samsung",
           "price": 207000,
           "quantity": 1,
-          "totalAmount": [207000, 500000]
+          "totalAmount": [
+            207000,
+            500000
+          ]
         },
         {
           "productId": "2",
@@ -1773,7 +1788,10 @@
           "soldBy": "Apple",
           "price": 150000,
           "quantity": 1,
-          "totalAmount": [207000, 500000]
+          "totalAmount": [
+            207000,
+            500000
+          ]
         }
       ],
       "paidAmount": 357000,
@@ -1792,7 +1810,9 @@
           "soldBy": "Google",
           "price": 300000,
           "quantity": 1,
-          "totalAmount": [300000]
+          "totalAmount": [
+            300000
+          ]
         }
       ],
       "paidAmount": 300000,
@@ -1811,7 +1831,9 @@
           "soldBy": "Samsung",
           "price": 207000,
           "quantity": 1,
-          "totalAmount": [207000]
+          "totalAmount": [
+            207000
+          ]
         }
       ],
       "paidAmount": 207000,
@@ -1830,7 +1852,9 @@
           "soldBy": "Samsung",
           "price": 207000,
           "quantity": 1,
-          "totalAmount": [207000]
+          "totalAmount": [
+            207000
+          ]
         }
       ],
       "paidAmount": 207000,
@@ -2940,5 +2964,32 @@
       "orderDate": "Jun 05, 2025"
     }
   ],
-  "cart": []
+  "cart": [
+    {
+      "id": "1",
+      "category": "Electronics",
+      "image": "https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?auto=compress&cs=tinysrgb&w=500",
+      "name": "Samsung Galaxy Note 10 Plus 256gb/12gb Single Sim - Purple",
+      "userId": "user123",
+      "productId": "1",
+      "quantity": 1,
+      "price": 34500,
+      "totalPrice": 34500,
+      "paymentPlan": "weekly",
+      "paymentPlanDetails": {
+        "type": "weekly",
+        "amount": "207000",
+        "months": 0,
+        "monthlyPayment": 0,
+        "weeks": 6,
+        "weeklyPayment": 34500,
+        "days": 0,
+        "dailyPayment": 0,
+        "totalPrice": 207000,
+        "upfrontPayment": 0
+      },
+      "deliveryDate": "Jan, 20 2025",
+      "interest": 0
+    }
+  ]
 }

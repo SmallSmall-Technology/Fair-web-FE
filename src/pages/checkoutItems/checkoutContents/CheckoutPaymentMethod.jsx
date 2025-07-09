@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { YellowButton } from '../../../utils/Button.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
+import React from 'react';
 import {
   getTotalCartPrice,
   clearCart,
@@ -16,6 +16,7 @@ import { selectLatestDeliveryAddress } from '../../../features/user/userSlice.js
 import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 
 const API_URL = 'http://localhost:8002';
 
@@ -71,9 +72,9 @@ export const CheckoutPaymentMethod = () => {
       if (values.picked === 'interest-free-credit') {
         const initialPayment = totalCartPrice;
 
-        const order = await dispatch(
-          createOrder({ cartItems: enrichedCartItems, initialPayment })
-        ).unwrap();
+        // const order = await dispatch(
+        //   createOrder({ cartItems: enrichedCartItems, initialPayment })
+        // ).unwrap();
 
         toast.info(
           `Payment plan started with ₦${initialPayment.toFixed(2)} initial payment!`,
@@ -115,6 +116,7 @@ export const CheckoutPaymentMethod = () => {
       }
 
       reset();
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       toast.dismiss();
       toast.error('Payment failed. Please try again.', {
@@ -200,7 +202,7 @@ export const CheckoutPaymentMethod = () => {
                   <img src="/images/MonoLogo.svg" alt="Mono Logo" />
                 </label>
               </div>
-              <hr className="hidden lg:block" />
+              {/* <hr className="hidden lg:block" />
               <div className="lg:px-4 py-1 lg:py-2">
                 <label htmlFor="interest-free-credit" className="text-sm">
                   <input
@@ -215,7 +217,7 @@ export const CheckoutPaymentMethod = () => {
                     (Balance: {formatCurrency(0)})
                   </span>
                 </label>
-              </div>
+              </div> */}
             </>
           )}
         </div>
@@ -226,11 +228,21 @@ export const CheckoutPaymentMethod = () => {
           </div>
         )}
 
-        <div className="hidden lg:block">
-          <YellowButton type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Processing...' : 'Pay now'}
-          </YellowButton>
-        </div>
+        {!currentPlan && (
+          <div className="hidden lg:block">
+            <YellowButton type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Processing...' : 'Pay now'}
+            </YellowButton>
+          </div>
+        )}
+
+        {currentPlan && (
+          <div className="hidden lg:block">
+            <YellowButton type="submit" disabled={isSubmitting}>
+              Set up direct debit
+            </YellowButton>
+          </div>
+        )}
       </form>
     </div>
   );

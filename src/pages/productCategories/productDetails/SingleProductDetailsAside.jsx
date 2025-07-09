@@ -81,11 +81,8 @@ export const SingleProductDetailsAside = React.memo(
           </p>
         </div>
         <hr className="my-4 hidden lg:block" />
-        <p className="hidden lg:block font-medium mb-3 mx-5 lg:mx-0">
+        <p className="font-medium mb-3 mx-5 lg:mx-0">
           Select how you want to pay
-        </p>
-        <p className="lg:hidden font-medium mb-3 mx-5 lg:mx-0">
-          Choose how you want to pay
         </p>
 
         <div>

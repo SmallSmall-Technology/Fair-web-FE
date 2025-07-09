@@ -1,115 +1,156 @@
-import { memo, useRef } from 'react';
-import { states } from '../../../utils/data';
-import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { addressSchema } from '../../../utils/Validation';
-import { CheckoutDeliveryAddressButton } from '../../../utils/Button';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { states } from '../../userDashboard/accountProfile/contents/profileSummary/AddressModal';
+import {
+  setUser,
+  updateLatestDeliveryAddress,
+} from '../../../features/user/userSlice';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUser } from '../../../api/userAPI';
 
 const CheckoutDeliveryAddressForm = ({
-  deliveryAddress,
-  handleEditedDeliveryAddress,
-  handleSubmitDeliveryAddress,
-  isSubmitted,
+  // eslint-disable-next-line react/prop-types
+  handleOpenCheckoutDeliveryAddressForm,
 }) => {
-  const inputRef = useRef(null);
-
   const {
-    control,
+    register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting, isValid },
   } = useForm({
-    defaultValues: { state: '', address: '' },
-    resolver: zodResolver(addressSchema),
+    defaultValues: { state: '', streetAddress: '' },
+  });
+  const { user } = useSelector((state) => state.user);
+  const firstName = user.firstName || '';
+  const lastName = user.lastName || '';
+  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: updateUser,
+    onSuccess: (response) => {
+      queryClient.invalidateQueries({ queryKey: ['users'] });
+      // refetch();
+      const updatedAddress =
+        response.data?.user?.latest_address || response.data?.latest_address;
+      if (updatedAddress) {
+        dispatch(updateLatestDeliveryAddress(updatedAddress));
+      }
+      if (response.data?.user) {
+        dispatch(setUser(response.data.user));
+      }
+      toast.success('Address updated successfully', {
+        position: 'top-right',
+        autoClose: 3000,
+      });
+      // onClose();
+    },
+    onError: (error) => {
+      toast.error(
+        error.response?.data?.message ||
+          error.message ||
+          'Failed to update address',
+        {
+          position: 'top-right',
+          autoClose: 3000,
+        }
+      );
+    },
   });
 
-  const onSubmit = (values, e) => {
-    const action = {
-      resetForm: () => e.target.reset(),
-    };
-    if (deliveryAddress.length > 0) {
-      handleEditedDeliveryAddress(values, action);
-    } else {
-      handleSubmitDeliveryAddress(values, action);
+  const onSubmit = async (data, event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    try {
+      const payload = {
+        latest_address: {
+          streetAddress: data.streetAddress.trim(),
+          state: data.state,
+        },
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+      };
+      await mutation.mutateAsync(payload);
+      dispatch(updateLatestDeliveryAddress(payload.latest_address));
+      toast.success('Address updated successfully', {
+        className:
+          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+        bodyClassName: 'm-0 p-0',
+      });
+      handleOpenCheckoutDeliveryAddressForm();
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ||
+          error.message ||
+          'Failed to update address',
+        {
+          autoClose: 3000,
+        }
+      );
     }
   };
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
-      <h1 className="font-medium text-[21px] mb-3 hidden lg:block">
-        Delivery Form
-      </h1>
-      <h1 className="font-medium text-[21px] mb-3 lg:hidden">Shipping Form</h1>
+    <form action="submit" onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-3">
+        <label htmlFor="state"></label>
+        <select
+          id="state"
+          {...register('state', { required: 'State is required' })}
+          className={`border rounded-[5px] w-full p-2 text-sm ${
+            errors.state ? 'border-red-500' : ''
+          }`}
+          disabled={isSubmitting}
+        >
+          <option value="">Choose state</option>
+          {states.map((state) => (
+            <option key={state} value={state}>
+              {state}
+            </option>
+          ))}
+        </select>
+        {errors.state && (
+          <p className="text-xs text-red-500 mt-1">{errors.state.message}</p>
+        )}
+      </div>
 
       <div>
-        <label htmlFor="state" className="sr-only">
-          Select state
-        </label>
-        <Controller
-          name="state"
-          control={control}
-          render={({ field }) => (
-            <select
-              {...field}
-              id="state"
-              ref={(e) => {
-                inputRef.current = e;
-                field.ref(e);
-              }}
-              className="border border-[#DEDEDE] rounded-[5px] px-3 py-2 font-medium w-full"
-            >
-              <option value="" disabled>
-                {window.innerWidth >= 1024 ? 'State' : 'Choose State'}
-              </option>
-              {states.map((state, index) => (
-                <option value={state.name} key={index}>
-                  {state.name}
-                </option>
-              ))}
-            </select>
-          )}
+        <label htmlFor="streetAddress"></label>
+        <textarea
+          id="streetAddress"
+          placeholder="Street address"
+          className={`border rounded-[5px] w-full p-2 text-sm ${
+            errors.streetAddress ? 'border-red-500' : ''
+          }`}
+          rows={3}
+          {...register('streetAddress', {
+            required: 'Street address is required',
+          })}
+          disabled={isSubmitting}
         />
-        {errors.state && (
-          <div className="text-red-600 mb-2 text-xs">
-            {errors.state.message}
-          </div>
+        {errors.streetAddress && (
+          <p className="text-xs text-red-500 mt-1">
+            {errors.streetAddress.message}
+          </p>
         )}
       </div>
 
-      <div className="my-4">
-        <label htmlFor="address" className="sr-only">
-          Enter address
-        </label>
-        <Controller
-          name="address"
-          control={control}
-          render={({ field }) => (
-            <textarea
-              {...field}
-              id="address"
-              placeholder={
-                window.innerWidth >= 1024
-                  ? 'Street address'
-                  : 'Enter delivery address'
-              }
-              className="border border-[#DEDEDE] rounded-[5px] px-3 py-2 font-medium w-full"
-            />
-          )}
-        />
-        {errors.address && (
-          <div className="text-red-600 mb-2 text-xs">
-            {errors.address.message}
-          </div>
-        )}
+      <div className="flex justify-between gap-4 mt-4">
+        <div className="w-[187px]">
+          <button
+            type="submit"
+            disabled={isSubmitting || !isValid}
+            className="w-full bg-[#FFDE11] text-sm font-medium py-2 px-6 rounded-[5px] hover:bg-[#ffdf11e3] transition disabled:opacity-50"
+          >
+            {isSubmitting ? (
+              <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
+            ) : (
+              'Save delivery address'
+            )}
+          </button>
+        </div>
       </div>
-
-      <CheckoutDeliveryAddressButton
-        type="submit"
-        className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg w-[30%]"
-      >
-        {isSubmitted ? 'Edit delivery address' : 'Save delivery address'}
-      </CheckoutDeliveryAddressButton>
     </form>
   );
 };
 
-export default memo(CheckoutDeliveryAddressForm);
+export default CheckoutDeliveryAddressForm;
