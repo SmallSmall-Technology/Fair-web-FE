@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { YellowButton } from '../../../utils/Button.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
@@ -128,7 +128,7 @@ export const CheckoutPaymentMethod = () => {
     }
   };
 
-  const currentPlan = cartItems.find((item) =>
+  const InstallmentPayment = cartItems.find((item) =>
     ['monthly', 'weekly', 'daily'].includes(item.paymentPlan)
   );
 
@@ -148,7 +148,7 @@ export const CheckoutPaymentMethod = () => {
             Payment Options
           </span>
 
-          {!currentPlan ? (
+          {!InstallmentPayment ? (
             <>
               <div className="lg:px-4 py-1 lg:py-2">
                 <label htmlFor="debit-card" className="text-sm">
@@ -193,6 +193,7 @@ export const CheckoutPaymentMethod = () => {
                       {...register('picked')}
                       value="direct debit"
                       className="px-4 py-10 mr-2"
+                      defaultChecked
                     />
                     Direct debit
                     <span className="text-xs rounded-[2px] bg-[#FFDE11] py-1 px-2">
@@ -228,22 +229,31 @@ export const CheckoutPaymentMethod = () => {
           </div>
         )}
 
-        {!currentPlan && (
+        {!InstallmentPayment && (
           <div className="hidden lg:block">
             <YellowButton type="submit" disabled={isSubmitting}>
               {isSubmitting ? 'Processing...' : 'Pay now'}
             </YellowButton>
           </div>
         )}
-
-        {currentPlan && (
-          <div className="hidden lg:block">
-            <YellowButton type="submit" disabled={isSubmitting}>
-              Set up direct debit
-            </YellowButton>
-          </div>
-        )}
       </form>
+      {InstallmentPayment && (
+        <section className=" grid gap-14">
+          <Link to="" className=" font-normal text-sm underline">
+            What is direct debit?
+          </Link>
+
+          <div className="hidden lg:block ">
+            <Link
+              to="direct-debit-setup-1"
+              // disabled={isSubmitting}
+              className="group relative font-semibold text-base flex items-center justify-center overflow-hidden rounded-[20px] bg-[#FFDE11] border-2 w-full mx-auto md:px-12 py-2 hover:bg-gray-50 hover:border-[#FFDE11] hover:text-black"
+            >
+              Set up direct debit
+            </Link>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

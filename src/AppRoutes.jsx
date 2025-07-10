@@ -1,4 +1,4 @@
-import React, { Suspense, Fragment } from 'react';
+import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './ui/components/layout/Layout';
 import Home from './pages/home/Home';
@@ -52,21 +52,21 @@ import DeliveryAddress from './pages/userDashboard/accountProfile/contents/deliv
 import Feedback from './pages/userDashboard/accountProfile/contents/feedback/Feedback';
 import ResolutionCentre from './pages/userDashboard/accountProfile/contents/resolutionCentre/ResolutionCentre';
 import UserAccountProfile from './pages/userDashboard/accountProfile/UserAccountProfile';
+import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/DirectDebitSetUp1';
+import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 // export const Summary = lazy(
 //   () =>
 //     import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
 // );
-// eslint-disable-next-line react/prop-types
-const LazyRoute = ({ element }) => (
-  <Suspense fallback={<ProductDetailsSkeleton showAside showRecommendations />}>
-    {element}
-  </Suspense>
-);
+// const LazyRoute = ({ element }) => (
+//   <Suspense fallback={<ProductDetailsSkeleton showAside showRecommendations />}>
+//     {element}
+//   </Suspense>
+// );
 
-// eslint-disable-next-line react/prop-types
-const LazyHome = ({ element }) => (
-  <Suspense fallback={<LandingPageSkeleton />}>{element}</Suspense>
-);
+// const LazyHome = ({ element }) => (
+//   <Suspense fallback={<LandingPageSkeleton />}>{element}</Suspense>
+// );
 
 const AppRoutes = () => {
   return (
@@ -156,6 +156,17 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
+
+        <Route
+          path="cart-items/checkout/direct-debit-setup-1"
+          element={<DirectDebitSetUp1 />}
+        />
+
+        <Route
+          path="cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2"
+          element={<DirectDebitSetUp2 />}
+        />
+
         <Route
           path="verification-document-sent"
           element={<VerificationSent />}
