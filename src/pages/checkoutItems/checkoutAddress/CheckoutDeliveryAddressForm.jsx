@@ -39,22 +39,6 @@ const CheckoutDeliveryAddressForm = ({
       if (response.data?.user) {
         dispatch(setUser(response.data.user));
       }
-      toast.success('Address updated successfully', {
-        position: 'top-right',
-        autoClose: 3000,
-      });
-      // onClose();
-    },
-    onError: (error) => {
-      toast.error(
-        error.response?.data?.message ||
-          error.message ||
-          'Failed to update address',
-        {
-          position: 'top-right',
-          autoClose: 3000,
-        }
-      );
     },
   });
 
