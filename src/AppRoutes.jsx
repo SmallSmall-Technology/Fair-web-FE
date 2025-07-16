@@ -147,39 +147,36 @@ const AppRoutes = () => {
         }
       />
 
-      <Route element={<ProtectedRoute />}>
-        <Route
-          path="cart-items/checkout"
-          element={
-            <Suspense fallback={<CheckoutItemsSkeleton />}>
-              <CheckoutItems />
-            </Suspense>
-          }
-        />
+      {/* <Route element={<ProtectedRoute />}> */}
+      <Route
+        path="cart-items/checkout"
+        element={
+          <Suspense fallback={<CheckoutItemsSkeleton />}>
+            <CheckoutItems />
+          </Suspense>
+        }
+      />
 
-        <Route
-          path="cart-items/checkout/direct-debit-setup-1"
-          element={<DirectDebitSetUp1 />}
-        />
+      <Route
+        path="cart-items/checkout/direct-debit-setup-1"
+        element={<DirectDebitSetUp1 />}
+      />
 
-        <Route
-          path="cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2"
-          element={<DirectDebitSetUp2 />}
-        />
+      <Route
+        path="cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2"
+        element={<DirectDebitSetUp2 />}
+      />
 
-        <Route
-          path="verification-document-sent"
-          element={<VerificationSent />}
-        />
-        <Route
-          path="cart-items/checkout/payment-success"
-          element={
-            <Suspense fallback={<CheckoutPaymentSkeleton />}>
-              <CheckoutPaymentSuccess />
-            </Suspense>
-          }
-        />
-      </Route>
+      <Route path="verification-document-sent" element={<VerificationSent />} />
+      <Route
+        path="cart-items/checkout/payment-success"
+        element={
+          <Suspense fallback={<CheckoutPaymentSkeleton />}>
+            <CheckoutPaymentSuccess />
+          </Suspense>
+        }
+      />
+      {/* </Route> */}
 
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/login" element={<Login />} />

@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 
 export const DirectDebitSetUp1 = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between md:bg-[#DEDED] px-4 pt-8 md:pt-14">
-      <header className="w-[362px] md-w-[400px] lg:max-w-[570px] text-center flex justify-center md:justify-between items-center">
+    <div className="min-h-screen flex flex-col items-center justify-between md:bg-[#DEDED] px-4 pt-8 md:pt-14 bg-[#FAFAFA]">
+      <header className="w-[362px] md-w-[400px] lg:max-w-[448px] text-center flex justify-center md:justify-between items-center">
         <Link to="/">
           <img
             src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
             alt="Fair Logo"
             // width={120}
-            // height={40}
+            height="11px"
             loading="eager"
             className="motion-safe:transition-transform"
           />
