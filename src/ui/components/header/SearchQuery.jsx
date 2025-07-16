@@ -32,10 +32,10 @@ const SearchQuery = () => {
           <input
             type="text"
             id="search"
+            aria-label="Search for products"
             {...register('search')}
             placeholder="Search for anything"
             className="rounded-md px-2 py-[10px] border text-sm w-full focus:ring-2 focus:ring-[#FFDE11] focus:border-transparent transition-all hover:border-[#FFDE11] motion-safe:duration-200 bg-[#ECEDF1]"
-            aria-describedby="search-button"
           />
           <button
             type="submit"

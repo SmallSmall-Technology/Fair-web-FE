@@ -35,6 +35,7 @@ export default function ProfileSummary() {
   });
 
   // console.log(user);
+  // console.log(localStorage.getItem('authToken'));
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       firstName: '',

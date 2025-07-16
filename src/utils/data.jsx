@@ -1517,7 +1517,10 @@ export const menuFooter = [
     title: 'Support',
     links: [
       { name: 'Contact us', link: '/contact-us' },
-      { name: 'Help center', link: '/help-center' },
+      {
+        name: 'Help center',
+        link: 'https://help.smallsmall.com/smallsmall/directories',
+      },
       { name: 'Market place guidelines', link: '/marketplace-guidelines' },
       { name: 'Buyer protection', link: '/buyer-protection' },
       { name: 'Seller protection', link: '/seller-protection' },
@@ -1565,4 +1568,31 @@ export const states = [
   { name: 'Yobe' },
   { name: 'Zamfara' },
   { name: 'Federal Capital Territory (FCT)' },
+];
+
+export const termsSections = [
+  'Agreement to Terms',
+  'Who we are and what we do',
+  'Usage Guidelines',
+  'User Conduct Policy',
+  'Privacy and Data Protection',
+  'Pricing Policy',
+  'Down Payment Policy',
+  'General payment terms (Buyer)',
+  'Payment Processing',
+  'Placing an Order (Buyer)',
+  'Delivery Terms (Buyer)',
+  'Change of Mind After Purchase (Buyer)',
+  'Account Closure (Buyer and Vendor)',
+  'Warranties on Purchased Items (Buyer)',
+  'Liability for Products and Services (Buyer)',
+  'Indemnification by Buyers',
+  'Modification of Terms',
+  'Identity Verification and Debt Profile Check',
+  'Item Returns and Defective Products',
+  'Vendor Warranty Obligation',
+  'Late Payments and Asset Recovery',
+  'Loyalty and Discount Coupons',
+  'Dispute Resolution',
+  'Contact and Feedback',
 ];

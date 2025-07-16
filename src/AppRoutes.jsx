@@ -52,6 +52,7 @@ import DeliveryAddress from './pages/userDashboard/accountProfile/contents/deliv
 import Feedback from './pages/userDashboard/accountProfile/contents/feedback/Feedback';
 import ResolutionCentre from './pages/userDashboard/accountProfile/contents/resolutionCentre/ResolutionCentre';
 import UserAccountProfile from './pages/userDashboard/accountProfile/UserAccountProfile';
+import TermsOfUse from './pages/termsOfUse/TermsOfUse';
 // export const Summary = lazy(
 //   () =>
 //     import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
@@ -128,6 +129,15 @@ const AppRoutes = () => {
               }
             >
               <SingleProductPage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="terms-of-use"
+          element={
+            <Suspense fallback={<LandingPageSkeleton />}>
+              <TermsOfUse />
             </Suspense>
           }
         />
