@@ -106,7 +106,7 @@ const Footer = () => {
           <Link to="" className="mr-4 pt-1">
             Smallsmall.com
           </Link>
-          <Link to="" className="mr-4 pt-1">
+          <Link to="/terms-of-use" className="mr-4 pt-1">
             Terms of use
           </Link>
           <Link to="" className="mr-4 pt-1">

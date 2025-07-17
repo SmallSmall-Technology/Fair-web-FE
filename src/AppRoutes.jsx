@@ -82,6 +82,7 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
+
         <Route
           path="electronics"
           element={
@@ -90,6 +91,7 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
+
         <Route
           path="real-estate"
           element={
@@ -98,6 +100,7 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
+
         <Route
           path="food-drink"
           element={
@@ -106,6 +109,7 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
+
         <Route
           path="lifestyle"
           element={
@@ -146,6 +150,9 @@ const AppRoutes = () => {
         path="/:categoryName/:subcategory"
         element={<LazyRoute element={<SubCategoryPage />} />}
       /> */}
+
+        <Route path="electronics/*" element={<PageNotFound />} />
+        <Route path="*" element={<PageNotFound />} />
       </Route>
 
       <Route
@@ -257,6 +264,7 @@ const AppRoutes = () => {
                   </Suspense>
                 }
               />
+              <Route path="*" element={<PageNotFound />} />
             </Route>
             <Route
               path="notifications"
@@ -328,6 +336,7 @@ const AppRoutes = () => {
                   </Suspense>
                 }
               />
+              <Route path="*" element={<PageNotFound />} />
             </Route>
             <Route
               path=":id/slug"
@@ -337,6 +346,7 @@ const AppRoutes = () => {
                 </Suspense>
               }
             />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
         </Route>
       </Route>

@@ -6,7 +6,7 @@ function SideNav() {
       <div className="py-3 border-b-[1px] ">
         <h2>Browse policies</h2>
       </div>
-      <nav>
+      <nav aria-label="Sidebar navigation">
         <ul>
           <li className="my-4 text-[#1668E3] hover:underline ">
             <Link to={'#'}>Privacy Policy</Link>

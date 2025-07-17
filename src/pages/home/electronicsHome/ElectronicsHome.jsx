@@ -4,6 +4,7 @@ import TodaysDeal from '../homeLivingLandingPage/homeLivingContentSection/Todays
 import { ProductCategoriesShortcut } from '../../productCategories/ProductCategoriesShortcut';
 import { ElectronicsHomeHeroBanner } from './electronicContentSection/ElectronicsHomeHeroBanner';
 import NewProductsInStore from '../homeLivingLandingPage/homeLivingContentSection/NewProductsInStore';
+// import { Outlet } from 'react-router-dom';
 
 const ElectronicsHome = () => {
   const categories = [
@@ -28,6 +29,7 @@ const ElectronicsHome = () => {
         <NewProductsInStore />
         <TodaysDeal />
       </div>
+      {/* <Outlet /> */}
     </>
   );
 };
