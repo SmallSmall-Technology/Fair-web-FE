@@ -1,7 +1,7 @@
 import { Button } from '../../../../utils/Button';
 const RentOut = () => {
   return (
-    <article className="bg-[#FFDE11] w-[90%] lg:w-[60%] mx-auto pt-6 pb-32 px-6 rounded-[10px] my-20">
+    <article className="bg-[var(--yellow-primary)] w-[90%] lg:w-[60%] mx-auto pt-6 pb-32 px-6 rounded-[10px] my-20">
       <h2 className="font-semibold text-2xl lg:text-4xl mb-4">
         Need to rent out your <br className="hidden lg:flex" /> property with no
         stress?

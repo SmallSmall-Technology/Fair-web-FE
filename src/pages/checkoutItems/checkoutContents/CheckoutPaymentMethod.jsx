@@ -47,7 +47,7 @@ export const CheckoutPaymentMethod = () => {
       toast.dismiss();
       toast.error('Please input your delivery address', {
         className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
@@ -80,7 +80,7 @@ export const CheckoutPaymentMethod = () => {
           `Payment plan started with ₦${initialPayment.toFixed(2)} initial payment!`,
           {
             className:
-              'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+              'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
             bodyClassName: 'm-0 p-0',
             closeButton: false,
           }
@@ -105,7 +105,7 @@ export const CheckoutPaymentMethod = () => {
             `Payment of ₦${totalCartPrice} successful via ${values.picked}!`,
             {
               className:
-                'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+                'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
               bodyClassName: 'm-0 p-0',
               closeButton: false,
             }
@@ -121,7 +121,7 @@ export const CheckoutPaymentMethod = () => {
       toast.dismiss();
       toast.error('Payment failed. Please try again.', {
         className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
@@ -196,7 +196,7 @@ export const CheckoutPaymentMethod = () => {
                       defaultChecked
                     />
                     Direct debit
-                    <span className="text-xs rounded-[2px] bg-[#FFDE11] py-1 px-2">
+                    <span className="text-xs rounded-[2px] bg-[var(--yellow-primary)] py-1 px-2">
                       Recommended
                     </span>
                   </div>
@@ -238,7 +238,7 @@ export const CheckoutPaymentMethod = () => {
         )}
       </form>
       {InstallmentPayment && (
-        <section className=" grid gap-14">
+        <section className=" grid gap-14 px-8">
           <Link to="" className=" font-normal text-sm underline">
             What is direct debit?
           </Link>
@@ -247,7 +247,7 @@ export const CheckoutPaymentMethod = () => {
             <Link
               to="direct-debit-setup-1"
               // disabled={isSubmitting}
-              className="group relative font-semibold text-base flex items-center justify-center overflow-hidden rounded-[20px] bg-[#FFDE11] border-2 w-full mx-auto md:px-12 py-2 hover:bg-gray-50 hover:border-[#FFDE11] hover:text-black"
+              className="bg-(var-yellow-primary) group relative font-semibold text-base flex items-center justify-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 hover:bg-gray-50 hover:border-bg-[var(--yellow-primary)]  hover:text-black"
             >
               Set up direct debit
             </Link>

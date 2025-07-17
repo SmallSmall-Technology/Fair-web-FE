@@ -53,7 +53,8 @@ const UpdatePassword = ({ email, disabled }) => {
     if (!userId || !email || !password || !passwordAgain) {
       toast.error('Please fill in all fields', {
         autoClose: 3000,
-        className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+        className:
+          'bg-[var(--yellow-primary)] text-black text-sm px-2 py-2 rounded-md',
         closeButton: false,
       });
       return;
@@ -62,7 +63,8 @@ const UpdatePassword = ({ email, disabled }) => {
     if (password !== passwordAgain) {
       toast.error('Passwords do not match', {
         autoClose: 3000,
-        className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+        className:
+          'bg-[var(--yellow-primary)] text-black text-sm px-2 py-2 rounded-md',
         closeButton: false,
       });
       return;
@@ -73,7 +75,8 @@ const UpdatePassword = ({ email, disabled }) => {
 
       toast.success('Password reset successful. Please login.', {
         autoClose: 3000,
-        className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+        className:
+          'bg-[var(--yellow-primary)] text-black text-sm px-2 py-2 rounded-md',
         closeButton: false,
       });
 
@@ -83,7 +86,8 @@ const UpdatePassword = ({ email, disabled }) => {
 
       toast.error(err?.response?.data?.message || 'Error resetting password.', {
         autoClose: 3000,
-        className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+        className:
+          'bg-[var(--yellow-primary)] text-black text-sm px-2 py-2 rounded-md',
         closeButton: false,
       });
     }
@@ -109,7 +113,7 @@ const UpdatePassword = ({ email, disabled }) => {
             value={formData.password}
             onChange={handleChange}
             disabled={disabled}
-            className="pl-10 w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
+            className="pl-10 w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-bg-[var(--yellow-primary)]  disabled:opacity-50"
           />
           <img
             src="/images/key.svg"
@@ -125,7 +129,7 @@ const UpdatePassword = ({ email, disabled }) => {
                 password: !prev.password,
               }))
             }
-            className="absolute top-3 right-3 text-gray-500 hover:text-[#FFDE11]"
+            className="absolute top-3 right-3 text-gray-500 hover:text-bg-[var(--yellow-primary)] "
           >
             {passwordVisible.password ? <Eye /> : <EyeOff />}
           </button>
@@ -150,7 +154,7 @@ const UpdatePassword = ({ email, disabled }) => {
             value={formData.passwordAgain}
             onChange={handleChange}
             disabled={disabled}
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-bg-[var(--yellow-primary)]  disabled:opacity-50"
           />
           <button
             type="button"
@@ -160,7 +164,7 @@ const UpdatePassword = ({ email, disabled }) => {
                 passwordAgain: !prev.passwordAgain,
               }))
             }
-            className="absolute top-3 right-3 text-gray-500 hover:text-[#FFDE11]"
+            className="absolute top-3 right-3 text-gray-500 hover:text-bg-[var(--yellow-primary)] "
           >
             {passwordVisible.passwordAgain ? <Eye /> : <EyeOff />}
           </button>
@@ -170,7 +174,7 @@ const UpdatePassword = ({ email, disabled }) => {
       <div className="flex items-center justify-between space-x-5">
         <Link
           to="/login"
-          className="block text-center mt-2 w-[102px] bg-[#222224] text-white font-bold rounded-full py-3 transition duration-200 hover:bg-[#333] focus:outline-none focus:ring-2 focus:ring-[#FFDE11] focus:ring-offset-2"
+          className="block text-center mt-2 w-[102px] bg-[#222224] text-white font-bold rounded-full py-3 transition duration-200 hover:bg-[#333] focus:outline-none focus:ring-2 focus:ring-bg-[var(--yellow-primary)]  focus:ring-offset-2"
         >
           Cancel
         </Link>
@@ -188,7 +192,7 @@ const UpdatePassword = ({ email, disabled }) => {
         ${
           disabled
             ? 'bg-[#DEDEDE] text-white cursor-not-allowed'
-            : 'bg-[#FFDE11] text-black hover:bg-yellow-300'
+            : 'bg-[var(--yellow-primary)] text-black hover:bg-yellow-300'
         }
         focus:outline-none focus:ring-2 focus:ring-[#222224] focus:ring-offset-2
       `}

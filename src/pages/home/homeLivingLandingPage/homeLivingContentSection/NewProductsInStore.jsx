@@ -28,7 +28,7 @@ const NewProductsInStore = ({ onScrollProduct, item_width, containerRef }) => {
       </div>
 
       <div className="grid grid-flow-col lg:space-x-4 md:space-x-10 mb-8 ">
-        <div className="hidden px-1 md:px-4 bg-[#FFDE11] w-[129px] h-[146px] md:w-[195px] md:h-[218px] rounded-[4px] lg:flex flex-col justify-end pb-4">
+        <div className="hidden px-1 md:px-4 bg-[var(--yellow-primary)] w-[129px] h-[146px] md:w-[195px] md:h-[218px] rounded-[4px] lg:flex flex-col justify-end pb-4">
           <div className="grid grid-cols-1 space-y-1 pl-3">
             <span className="text-lg md:text-2xl font-semibold">
               New in store

@@ -32,7 +32,7 @@ export const categories = [
   {
     title: 'Real estate',
     desc: 'Rent, Buy, Short-let, Commercials',
-    color: 'bg-[#FFDE11]',
+    color: 'var(--yellow)',
     image:
       '/images/vecteezy_cozy-living-room-setup-featuring-a-light-sofa-with_55925717 1.svg',
     link: '/real-estate',

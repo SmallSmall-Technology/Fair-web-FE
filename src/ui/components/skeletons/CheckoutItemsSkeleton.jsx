@@ -1,4 +1,4 @@
-import { CartHeader } from '../../../pages/checkoutItems/CartHeader';
+import { CartHeader } from '../../../pages/cartItems/CartHeader';
 
 const CheckoutItemsSkeleton = () => {
   return (

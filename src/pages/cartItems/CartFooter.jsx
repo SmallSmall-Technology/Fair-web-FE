@@ -32,15 +32,15 @@ export const CartFooter = () => {
           <span>
             <Copyright size={14} />
           </span>
-          Fair by Smallsmall Technology 2025
+          Smallsmall Technology 2025
         </li>
         <li className="text-xs">
           <a
-            href="https://fairapp.ng"
+            href="https://smallsmall.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            fairapp.ng
+            smallsmall.com
           </a>
         </li>
         <li className="text-xs">
@@ -63,7 +63,7 @@ export const CartFooter = () => {
           <span>
             <Copyright size={14} />
           </span>
-          Fair by Smallsmall Technology 2025
+          Smallsmall Technology 2025
         </li>
         <li className="text-xs">
           <a
@@ -71,7 +71,7 @@ export const CartFooter = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            fairapp.ng
+            smallsmall.com
           </a>
         </li>
       </ul>

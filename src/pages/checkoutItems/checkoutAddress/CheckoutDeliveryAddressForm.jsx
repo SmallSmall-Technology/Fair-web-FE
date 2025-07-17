@@ -58,7 +58,7 @@ const CheckoutDeliveryAddressForm = ({
       dispatch(updateLatestDeliveryAddress(payload.latest_address));
       toast.success('Address updated successfully', {
         className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
       });
       handleOpenCheckoutDeliveryAddressForm();
@@ -123,7 +123,7 @@ const CheckoutDeliveryAddressForm = ({
           <button
             type="submit"
             disabled={isSubmitting || !isValid}
-            className="w-full bg-[#FFDE11] text-sm font-medium py-2 px-6 rounded-[5px] hover:bg-[#ffdf11e3] transition disabled:opacity-50"
+            className="w-full bg-[var(--yellow-primary)] text-sm font-medium py-2 px-6 rounded-[5px] hover:bg-[#ffdf11e3] transition disabled:opacity-50"
           >
             {isSubmitting ? (
               <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
