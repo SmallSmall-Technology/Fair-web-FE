@@ -78,9 +78,9 @@ const CartItemsContentSection = React.memo(() => {
             <button
               type="submit"
               onClick={handleCheckout}
-              className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[#FFDE11] border-2 w-full mx-auto md:px-12 py-2 text-lg font-medium hover:bg-gray-50 ${subtTotal >= 500000 && !isUpgraded ? 'bg-[#E5E5E5] text-[#CDCBCC]' : 'bg-yellow-300 text-black'}`}
+              className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 text-lg font-medium hover:bg-gray-50 ${subtTotal >= 500000 && !isUpgraded ? 'bg-[#E5E5E5] text-[#CDCBCC]' : 'bg-yellow-300 text-black'}`}
             >
-              <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11]"></span>
+              <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-bg-[var(--yellow-primary)] "></span>
               <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-base">
                 Go to Checkout
               </span>

@@ -34,14 +34,14 @@ const SearchQuery = () => {
             id="search"
             {...register('search')}
             placeholder="Search for anything"
-            className="rounded-md px-2 py-[10px] border text-sm w-full focus:ring-2 focus:ring-[#FFDE11] focus:border-transparent transition-all hover:border-[#FFDE11] motion-safe:duration-200 bg-[#ECEDF1]"
+            className="rounded-md px-2 py-[10px] border text-sm w-full focus:ring-2 focus:ring-bg-[var(--yellow-primary)]  focus:border-transparent transition-all hover:border-bg-[var(--yellow-primary)]  motion-safe:duration-200 bg-[#ECEDF1]"
             aria-describedby="search-button"
           />
           <button
             type="submit"
             id="search-button"
             aria-label="Submit search"
-            className="absolute right-1 flex items-center py-2 px-2 bg-[#FFDE11] rounded-[10px] border-[#737376] hover:bg-[#FFD700] active:bg-[#FFC107] focus:ring-2 focus:ring-[#FFDE11] transition-all motion-safe:duration-200 hover:scale-105 active:scale-95"
+            className="absolute right-1 flex items-center py-2 px-2 bg-[var(--yellow-primary)] rounded-[10px] border-[#737376] hover:bg-[#FFD700] active:bg-[#FFC107] focus:ring-2 focus:ring-bg-[var(--yellow-primary)]  transition-all motion-safe:duration-200 hover:scale-105 active:scale-95"
           >
             <Search size={12} aria-hidden="true" />
           </button>

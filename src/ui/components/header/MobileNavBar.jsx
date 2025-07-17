@@ -31,7 +31,8 @@ export const MobileNavBar = () => {
   const handleLogOutUser = () => {
     dispatch(logout());
     toast.success('Logged Out Successfully', {
-      className: 'bg-[#FFDE11] text-black text-sm rounded-md min-h-0',
+      className:
+        'bg-[var(--yellow-primary)] text-black text-sm rounded-md min-h-0',
     });
     setHamburgerIsOpen(false);
   };

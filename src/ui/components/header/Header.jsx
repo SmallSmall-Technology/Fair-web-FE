@@ -29,7 +29,7 @@ const Header = () => {
           >
             <img
               src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
-              alt="Fair Logo"
+              alt="Smallsmall Logo"
               width={120}
               height={40}
               loading="eager"

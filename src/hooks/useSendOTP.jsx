@@ -8,7 +8,8 @@ export const useSendOTP = (onSuccessCallback) =>
     onSuccess: (_, email) => {
       toast.success(`OTP sent to ${email.email}`, {
         autoClose: 3000,
-        className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+        className:
+          'bg-[var(--yellow-primary)] text-black text-sm px-2 py-2 rounded-md',
         closeButton: false,
       });
       if (onSuccessCallback) onSuccessCallback(email);
@@ -17,7 +18,8 @@ export const useSendOTP = (onSuccessCallback) =>
       const msg = error?.response?.data?.message || 'Failed to send OTP';
       toast.error(msg, {
         autoClose: 3000,
-        className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+        className:
+          'bg-[var(--yellow-primary)] text-black text-sm px-2 py-2 rounded-md',
         closeButton: false,
       });
     },

@@ -19,19 +19,13 @@ import {
   CartItems,
   CheckoutItems,
   CheckoutPaymentSuccess,
-  // PageNotFound,
-  // CategoryPage,
-  // SubCategoryPage,
   UserDashboard,
   ShoppingOverview,
-  // Summary,
-  // Purchases,
   CreditWallet,
   DirectDebit,
   Favorites,
   RecentlyViewed,
   Notifications,
-  // AccountProfile,
 } from './lazyImports';
 
 import CartItemsSkeleton from './ui/components/skeletons/CartItemsSkeleton';
@@ -54,19 +48,7 @@ import ResolutionCentre from './pages/userDashboard/accountProfile/contents/reso
 import UserAccountProfile from './pages/userDashboard/accountProfile/UserAccountProfile';
 import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/DirectDebitSetUp1';
 import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
-// export const Summary = lazy(
-//   () =>
-//     import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
-// );
-// const LazyRoute = ({ element }) => (
-//   <Suspense fallback={<ProductDetailsSkeleton showAside showRecommendations />}>
-//     {element}
-//   </Suspense>
-// );
-
-// const LazyHome = ({ element }) => (
-//   <Suspense fallback={<LandingPageSkeleton />}>{element}</Suspense>
-// );
+import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetUpPaymentSuccess';
 
 const AppRoutes = () => {
   return (
@@ -131,11 +113,6 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
-
-        {/* <Route
-        path="/:categoryName/:subcategory"
-        element={<LazyRoute element={<SubCategoryPage />} />}
-      /> */}
       </Route>
 
       <Route
@@ -147,36 +124,44 @@ const AppRoutes = () => {
         }
       />
 
-      {/* <Route element={<ProtectedRoute />}> */}
-      <Route
-        path="cart-items/checkout"
-        element={
-          <Suspense fallback={<CheckoutItemsSkeleton />}>
-            <CheckoutItems />
-          </Suspense>
-        }
-      />
+      <Route element={<ProtectedRoute />}>
+        <Route
+          path="cart-items/checkout"
+          element={
+            <Suspense fallback={<CheckoutItemsSkeleton />}>
+              <CheckoutItems />
+            </Suspense>
+          }
+        />
 
-      <Route
-        path="cart-items/checkout/direct-debit-setup-1"
-        element={<DirectDebitSetUp1 />}
-      />
+        <Route
+          path="cart-items/checkout/direct-debit-setup-1"
+          element={<DirectDebitSetUp1 />}
+        />
 
-      <Route
-        path="cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2"
-        element={<DirectDebitSetUp2 />}
-      />
+        <Route
+          path="cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2"
+          element={<DirectDebitSetUp2 />}
+        />
 
-      <Route path="verification-document-sent" element={<VerificationSent />} />
-      <Route
-        path="cart-items/checkout/payment-success"
-        element={
-          <Suspense fallback={<CheckoutPaymentSkeleton />}>
-            <CheckoutPaymentSuccess />
-          </Suspense>
-        }
-      />
-      {/* </Route> */}
+        <Route
+          path="cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2/mono-setup-payment-success"
+          element={<MonoSetupPaymentSuccess />}
+        />
+
+        <Route
+          path="verification-document-sent"
+          element={<VerificationSent />}
+        />
+        <Route
+          path="cart-items/checkout/payment-success"
+          element={
+            <Suspense fallback={<CheckoutPaymentSkeleton />}>
+              <CheckoutPaymentSuccess />
+            </Suspense>
+          }
+        />
+      </Route>
 
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
@@ -203,26 +188,8 @@ const AppRoutes = () => {
                 </Suspense>
               }
             >
-              {/* { label: 'My account', href: '/user-dashboard/account' },
-                { label: 'Shopping overview', href: '/user-dashboard/shopping-overview' },
-                { label: 'Notifications', href: '/user-dashboard/notifications' },
-                { label: 'Account profile', href: '/user-dashboard/account-profile' }, */}
-              <Route
-                path="summary"
-                element={
-                  // <Suspense fallback={<DashboardSummarySkeleton />}>
-                  <Summary />
-                  // {/* </Suspense> */}
-                }
-              />
-              <Route
-                path="purchases"
-                element={
-                  // <Suspense fallback={<DashboardSummarySkeleton />}>
-                  <Purchases />
-                  // {/* </Suspense> */}
-                }
-              />
+              <Route path="summary" element={<Summary />} />
+              <Route path="purchases" element={<Purchases />} />
               <Route
                 path="credit-wallet"
                 element={
@@ -274,25 +241,10 @@ const AppRoutes = () => {
                 </Suspense>
               }
             >
-              {/* { label: 'My account', href: '/user-dashboard/account' },
-                { label: 'Shopping overview', href: '/user-dashboard/shopping-overview' },
-                { label: 'Notifications', href: '/user-dashboard/notifications' },
-                { label: 'Account profile', href: '/user-dashboard/account-profile' }, */}
-              <Route
-                path="profile-summary"
-                element={
-                  // <Suspense fallback={<DashboardSummarySkeleton />}>
-                  <ProfileSummary />
-                  // {/* </Suspense> */}
-                }
-              />
+              <Route path="profile-summary" element={<ProfileSummary />} />
               <Route
                 path="account-verification"
-                element={
-                  // <Suspense fallback={<DashboardSummarySkeleton />}>
-                  <AccountVerification />
-                  // {/* </Suspense> */}
-                }
+                element={<AccountVerification />}
               />
               <Route
                 path="delivery-address"

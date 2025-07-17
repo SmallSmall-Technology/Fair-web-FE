@@ -2,16 +2,19 @@ import React from 'react';
 import { X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { DirectDebitBankSetupForm } from './DirectDebitBankSetupForm';
+import { DirectDebitBankSetupFormAuthorizeConsent } from './DirectDebitBankSetupFormAuthorizeConsent';
 
 export const DirectDebitSetUp2 = () => {
+  const [authorized, setAuthorized] = React.useState(false);
+  console.log(authorized);
   return (
     <>
-      <header className="border-b-2 text-center flex justify-center md:justify-between items-center w-full lg:px-16 py-5">
-        <Link to="/">
+      <header className=" border-b-2 text-center flex justify-between items-center w-full px-4 lg:px-32 py-5">
+        <Link to="/" className="w-[128] lg:w-[149px]">
           <img
             src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
             alt="Smallsmall Logo"
-            className="w-[149px] md:w-[200px]"
+            className="w-full"
           />
         </Link>
         <Link
@@ -24,7 +27,14 @@ export const DirectDebitSetUp2 = () => {
       </header>
 
       <section className="bg-[#FAFAFA]">
-        <DirectDebitBankSetupForm />
+        {authorized === false ? (
+          <DirectDebitBankSetupForm
+            onAuthorized={authorized}
+            setAuthorized={setAuthorized}
+          />
+        ) : (
+          <DirectDebitBankSetupFormAuthorizeConsent />
+        )}
       </section>
     </>
   );

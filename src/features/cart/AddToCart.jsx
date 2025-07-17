@@ -109,7 +109,7 @@ export const AddToCart = ({ product }) => {
             icon: false,
             type: 'success',
             className:
-              'bg-[#FFDE11] text-black text-sm px-2 py-1 rounded-md min-h-0',
+              'bg-[var(--yellow-primary)] text-black text-sm px-2 py-1 rounded-md min-h-0',
             bodyClassName: 'm-0 p-0',
             closeButton: false,
           }
@@ -125,7 +125,7 @@ export const AddToCart = ({ product }) => {
 
   return (
     <button
-      className="group bg-[#FFDE11] flex items-center rounded-[20px] px-2 py-2 overflow-hidden transition-all duration-300 mb-"
+      className="group bg-[var(--yellow-primary)] flex items-center rounded-[20px] px-2 py-2 overflow-hidden transition-all duration-300 mb-"
       onClick={handleAddToCart}
     >
       <div className="flex items-center transition-all duration-300 max-w-[22px] group-hover:max-w-[120px]">

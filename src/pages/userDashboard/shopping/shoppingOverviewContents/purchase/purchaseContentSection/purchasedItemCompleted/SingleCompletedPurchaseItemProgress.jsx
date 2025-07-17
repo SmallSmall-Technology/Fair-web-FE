@@ -148,7 +148,7 @@ const SingleCompletedPurchaseItemProgress = React.memo(
                 <p className="">Please leave a review for this item</p>
                 <Link
                   // to={`/${categoryName}/${id}/${slug}`}
-                  className="text-xs font-semibold bg-[#FFDE11] p-2 flex justify-center rounded-[6px]"
+                  className="text-xs font-semibold bg-[var(--yellow-primary)] p-2 flex justify-center rounded-[6px]"
                 >
                   Leave a review
                 </Link>
@@ -252,7 +252,7 @@ const SingleCompletedPurchaseItemProgress = React.memo(
                 <p className="">Please leave a review for this item</p>
                 <Link
                   to=""
-                  className="text-xs font-semibold bg-[#FFDE11] p-2 flex justify-center rounded-[6px]"
+                  className="text-xs font-semibold bg-[var(--yellow-primary)] p-2 flex justify-center rounded-[6px]"
                 >
                   Leave a review
                 </Link>
@@ -307,7 +307,7 @@ const SingleCompletedPurchaseItemProgress = React.memo(
           </p>
           <Link
             to=""
-            className="text-xs font-semibold bg-[#FFDE11] p-2 flex justify-center rounded-[40px]"
+            className="text-xs font-semibold bg-[var(--yellow-primary)] p-2 flex justify-center rounded-[40px]"
           >
             Leave a review
           </Link>

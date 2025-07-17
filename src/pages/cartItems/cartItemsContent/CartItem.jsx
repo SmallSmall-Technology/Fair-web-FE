@@ -49,9 +49,9 @@ export const CartItem = ({ item, onTogglePlan }) => {
             <button
               type="submit"
               onClick={() => onTogglePlan(item.id)}
-              className="group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[#FFDE11] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black hover:underline"
+              className="group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[var(--yellow-primary)] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black hover:underline"
             >
-              <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11]"></span>
+              <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-bg-[var(--yellow-primary)] "></span>
               <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-xs">
                 Change Plan
               </span>

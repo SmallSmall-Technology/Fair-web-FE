@@ -1,6 +1,5 @@
 import { Dot } from 'lucide-react';
 import { useSelector } from 'react-redux';
-import { CancelPurchase } from '../CartHeader.jsx';
 import { YellowButton } from '../../../utils/Button.jsx';
 import { CartCoupon } from '../../../features/cart/CartCoupon.jsx';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
@@ -10,6 +9,7 @@ import {
 } from '../../../features/cart/cartSlice.js';
 import { CartFooter } from '../../cartItems/CartFooter.jsx';
 import { Link } from 'react-router-dom';
+import { CancelPurchase } from '../../cartItems/CartHeader.jsx';
 
 export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const cart = useSelector((state) => state.cart.cart);
@@ -69,7 +69,7 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
               ) : (
                 <Link
                   to="direct-debit-setup-1"
-                  className="group relative font-semibold text-base flex items-center justify-center overflow-hidden rounded-[20px] bg-[#FFDE11] border-2 w-full mx-auto md:px-12 py-2 hover:bg-gray-50 hover:border-[#FFDE11] hover:text-black"
+                  className="bg-bg-[var(--yellow-primary)] font-semibold text-base flex items-center justify-center overflow-hidden rounded-[20px] border-2 w-full mx-auto md:px-12 py-2 hover:bg-gray-50 hover:border-bg-[var(--yellow-primary)]  hover:text-black"
                 >
                   Set up direct debit
                 </Link>

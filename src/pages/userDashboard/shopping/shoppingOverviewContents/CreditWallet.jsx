@@ -24,7 +24,7 @@ const CreditWalletBalance = () => {
         CreditWallet
       </h1>
 
-      <article className="border rounded-[10px] py-6 pb- px-6 w-full bg-[#FFDE11] grid gap-4">
+      <article className="border rounded-[10px] py-6 pb- px-6 w-full bg-[var(--yellow-primary)] grid gap-4">
         <div className="grid gap-2">
           <p>Available balance</p>
           <p className="flex items-center space-x-2 font-semibold text-3xl">

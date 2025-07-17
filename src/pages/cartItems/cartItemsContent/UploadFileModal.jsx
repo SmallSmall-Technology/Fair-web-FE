@@ -111,7 +111,7 @@ export const BVNUpload = ({ onUpgrade, closeModal, modalIsOpen }) => {
 
             <div>
               <button
-                className="bg-[#FFDE11] rounded-[5px] px-4 py-2"
+                className="bg-[var(--yellow-primary)] rounded-[5px] px-4 py-2"
                 type="submit"
               >
                 Verify

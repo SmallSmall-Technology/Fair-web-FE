@@ -1,18 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PaymentFooter } from './PaymentFooter';
 
 export const DirectDebitSetUp1 = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-between md:bg-[#DEDED] px-4 pt-8 md:pt-14 bg-[#FAFAFA]">
-      <header className="w-[362px] md-w-[400px] lg:max-w-[448px] text-center flex justify-center md:justify-between items-center">
-        <Link to="/">
+      <header className="w-full lg:max-w-[448px] text-center flex justify-center md:justify-between items-center">
+        <Link to="/" className="w-[149px]">
           <img
             src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
-            alt="Fair Logo"
-            // width={120}
-            height="11px"
+            alt="Smallsmall Logo"
             loading="eager"
-            className="motion-safe:transition-transform"
+            className="motion-safe:transition-transform w-full"
           />
         </Link>
         <Link
@@ -22,7 +21,7 @@ export const DirectDebitSetUp1 = () => {
           Cancel
         </Link>
       </header>
-      <body>
+      <main>
         <div className="max-w-md mx-auto mt-10 rounded-xl border p-6 text-center shadow-sm bg-white">
           <h2 className="text-[23px] font-bold mb-1">
             Set up direct debit for your order
@@ -49,7 +48,7 @@ export const DirectDebitSetUp1 = () => {
 
           <Link
             to="direct-debit-setup-2"
-            className="bg-[#FFDE11] hover:bg-yellow-500 text-black font-medium py-2 px-6 rounded-md w-[331px] transition-colors duration-200"
+            className="bg-[var(--yellow-primary)] hover:bg-yellow-500 text-black font-medium py-2 px-6 rounded-md w-[331px] transition-colors duration-200"
           >
             Continue
           </Link>
@@ -60,53 +59,15 @@ export const DirectDebitSetUp1 = () => {
             </a>
           </div>
         </div>
-      </body>
+      </main>
       <Link
         to="/cart-items/checkout"
         className="bg-[#222224] text-white px-6 py-4 rounded-full text-xs font-medium md:hidden mt-4 hover:"
       >
         Cancel
       </Link>
-      <footer className="hidden lg:flex mt-8 mb-8 text-xs text-[#222224] w-full justify-center">
-        <p>
-          © Smallsmall Technology 2025 &nbsp; | &nbsp;{' '}
-          <a href="https://smallsmall.com" className="underline">
-            smallsmall.com
-          </a>{' '}
-          &nbsp; | &nbsp;
-          <a href="#" className="underline">
-            Terms of use
-          </a>{' '}
-          &nbsp; | &nbsp;
-          <a href="#" className="underline">
-            Refunds and returns
-          </a>
-        </p>
-      </footer>
-      <footer className="lg:hidden mt-8 mb-8 text-xs text-[#222224] w-full grid ">
-        <div className="flex gap-3 mb-2">
-          <a href="#" className="underline">
-            Refunds and returns
-          </a>
-          <a href="#" className="underline">
-            Contact us
-          </a>
-          <a href="#" className="underline">
-            Buying policy
-          </a>
-        </div>
-        <hr className="my-3" />
-        <div className="flex gap-5 mb-4">
-          <a href="#">Privacy policy</a>
-          <a href="#">Terms of use</a>
-        </div>
-        <div className="flex justify-between">
-          <p>© Smallsmall Technology 2025</p>
-          <a href="https://smallsmall.com" className="underline">
-            Smallsmall.com
-          </a>
-        </div>
-      </footer>
+
+      <PaymentFooter />
     </div>
   );
 };

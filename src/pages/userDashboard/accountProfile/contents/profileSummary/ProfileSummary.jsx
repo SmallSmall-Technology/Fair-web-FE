@@ -68,7 +68,7 @@ export default function ProfileSummary() {
       toast.success('Profile updated successfully', {
         autoClose: 3000,
         className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
@@ -77,7 +77,7 @@ export default function ProfileSummary() {
       toast.error(`Failed to update profile: ${err.message}`, {
         autoClose: 3000,
         className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
@@ -120,7 +120,7 @@ export default function ProfileSummary() {
         {!isVerified && (
           <div className="text-center text-sm">
             <button
-              className="bg-[#FFDE11] text-black font-semibold px-6 py-2 rounded"
+              className="bg-[var(--yellow-primary)] text-black font-semibold px-6 py-2 rounded"
               onClick={() => (window.location.href = '/account-verification')}
             >
               Upgrade to Tier 2
