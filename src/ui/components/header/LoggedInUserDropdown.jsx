@@ -42,7 +42,8 @@ export const LoggedInUserDropdown = ({
   const handleLogOutUser = () => {
     dispatch(logout());
     toast.success('Logged Out Successfully', {
-      className: 'bg-[#FFDE11] text-black text-sm rounded-md min-h-0',
+      className:
+        'bg-[var(--yellow-primary)] text-black text-sm rounded-md min-h-0',
     });
     setLoggedInUserDropdown(false);
   };
@@ -79,7 +80,7 @@ export const LoggedInUserDropdown = ({
             className="flex justify-between w-full items-center text-black no-underline"
           >
             <span>Purchases</span>
-            <span className="bg-[#FFDE11] px-3 text-[10px]">
+            <span className="bg-[var(--yellow-primary)] px-3 text-[10px]">
               {completedOrders.length}
             </span>
           </Link>

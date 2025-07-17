@@ -43,7 +43,7 @@ export const SingleProductStickyHeader = React.memo(
     return (
       <>
         <div
-          className="lg:pl-40 mx-auto w-full fixed top-0 left-0 right-0 bg-white z-30 py-5 flex justify-between items-center border-b-[3px] border-[#FFDE11] pb-2 transition-all motion-safe:duration-200 lg:px-20 px-5"
+          className="lg:pl-40 mx-auto w-full fixed top-0 left-0 right-0 bg-white z-30 py-5 flex justify-between items-center border-b-[3px] border-bg-[var(--yellow-primary)]  pb-2 transition-all motion-safe:duration-200 lg:px-20 px-5"
           role="banner"
           aria-label="Main site navigation"
         >

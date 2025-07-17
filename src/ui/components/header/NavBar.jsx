@@ -100,7 +100,7 @@ export const NavBar = () => {
         </li>
         <li className="lg:hidden xl:flex">
           <button
-            className="bg-[#F6F6F6] px-4 py-2 rounded-full font-medium flex items-center space-x-1 hover:bg-gray-200 active:bg-gray-300 focus:ring-2 focus:ring-[#FFDE11] transition-all motion-safe:duration-200 hover:scale-105 active:scale-95"
+            className="bg-[#F6F6F6] px-4 py-2 rounded-full font-medium flex items-center space-x-1 hover:bg-gray-200 active:bg-gray-300 focus:ring-2 focus:ring-bg-[var(--yellow-primary)]  transition-all motion-safe:duration-200 hover:scale-105 active:scale-95"
             aria-label="Purchase a gift card"
           >
             <img
@@ -146,7 +146,7 @@ export const NavBar = () => {
         <li>
           <button
             type="button"
-            className="group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[#FFDE11] border-2 border-[#FFDE11] px-4 py-2 text-lg font-medium text-black hover:bg-gray-50 hover:text-black transition-all motion-safe:duration-200 hover:scale-105 active:scale-95"
+            className="group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 border-bg-[var(--yellow-primary)]  px-4 py-2 text-lg font-medium text-black hover:bg-gray-50 hover:text-black transition-all motion-safe:duration-200 hover:scale-105 active:scale-95"
           >
             <span className="absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all duration-400 ease-in-out group-hover:top-0 group-hover:h-full"></span>
             <span className="relative transform duration-700 group-hover:-translate-x-1 font-medium text-base">
@@ -188,9 +188,9 @@ export const Subtotal = () => {
           <button
             type="submit"
             onClick={handleCheckout}
-            className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[#FFDE11]  border-2  w-full mx-auto  md:px-12 py-2 text-lg font-medium  hover:bg-gray-50   ${subTotal >= 500000 && !isUpgraded ? 'bg-[#E5E5E5] text-[#CDCBCC]' : 'bg-yellow-300 text-black'}`}
+            className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)]  border-2  w-full mx-auto  md:px-12 py-2 text-lg font-medium  hover:bg-gray-50   ${subTotal >= 500000 && !isUpgraded ? 'bg-[#E5E5E5] text-[#CDCBCC]' : 'bg-yellow-300 text-black'}`}
           >
-            <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-[#FFDE11]"></span>
+            <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-bg-[var(--yellow-primary)] "></span>
 
             <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-base">
               Check Out

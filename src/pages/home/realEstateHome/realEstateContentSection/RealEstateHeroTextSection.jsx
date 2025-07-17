@@ -10,7 +10,7 @@ export const RealEstateHeroTextSection = () => {
       {!isAuthenticated && (
         <div className="flex space-x-3">
           <Button
-            className="bg-[#FFDE11] rounded-[20px] border px-3 py-1 text-black font-normal 
+            className="bg-[var(--yellow-primary)] rounded-[20px] border px-3 py-1 text-black font-normal 
                hover:bg-white hover:border-[#222224] focus-visible:outline focus-visible:outline-2 
                focus-visible:outline-offset-2 focus-visible:outline-yellow-500 
                transition"
@@ -20,7 +20,7 @@ export const RealEstateHeroTextSection = () => {
 
           <Button
             className="border border-[#222224] rounded-[20px] px-3 py-1 text-black font-normal 
-               hover:bg-[#FFDE11] hover:border-white
+               hover:bg-[var(--yellow-primary)] hover:border-white
                focus-visible:outline focus-visible:outline-2 
                focus-visible:outline-offset-2 focus-visible:outline-[#222224] 
                transition"

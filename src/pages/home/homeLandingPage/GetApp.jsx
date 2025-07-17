@@ -2,7 +2,7 @@ import { Button } from '../../../utils/Button';
 
 const GetApp = () => {
   return (
-    <section className="grid grid-cols-1 lg:mx-[257px] mb-28 bg-[#FFDE11] rounded-[10px] mx-4 ">
+    <section className="grid grid-cols-1 lg:mx-[257px] mb-28 bg-[var(--yellow-primary)] rounded-[10px] mx-4 ">
       <div className="grid grid-cols-1 gap-14 lg:gap-6 lg:flex items-center justify-between px-10 lg:pt-4">
         <div className="grid gap-4 lg:gap-3  text-center lg:text-start">
           <h1 className="items-center lg:items-start text-[23px] font-semibold pt-8 lg:pt-0">

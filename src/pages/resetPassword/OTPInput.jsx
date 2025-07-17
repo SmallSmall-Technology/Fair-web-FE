@@ -108,7 +108,8 @@ export default function VerifyOtp({ verified, setVerified, email }) {
 
       toast.success('OTP verified successfully', {
         autoClose: 3000,
-        className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+        className:
+          'bg-[var(--yellow-primary)] text-black text-sm px-2 py-2 rounded-md',
         closeButton: false,
       });
 
@@ -117,7 +118,8 @@ export default function VerifyOtp({ verified, setVerified, email }) {
     onError: (error) => {
       toast.error(error?.response?.data?.message || 'Verification failed', {
         autoClose: 3000,
-        className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+        className:
+          'bg-[var(--yellow-primary)] text-black text-sm px-2 py-2 rounded-md',
         closeButton: false,
       });
       setVerified(false);
@@ -128,7 +130,8 @@ export default function VerifyOtp({ verified, setVerified, email }) {
     if (timeLeft <= 0) {
       toast.error('OTP has expired. Please request a new one.', {
         autoClose: 3000,
-        className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+        className:
+          'bg-[var(--yellow-primary)] text-black text-sm px-2 py-2 rounded-md',
         closeButton: false,
       });
       return;
