@@ -8,7 +8,7 @@ import {
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUser } from '../../../api/userAPI';
+import { updateUser } from '../../../api/user-api';
 
 const CheckoutDeliveryAddressForm = ({
   // eslint-disable-next-line react/prop-types

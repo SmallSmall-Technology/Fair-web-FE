@@ -96,13 +96,10 @@ const AppRoutes = () => {
           }
         />
 
-        <Route
-          path=":categoryName/:subcategory"
-          element={<SubCategoryPage />}
-        />
+        <Route path=":category/:sub_category" element={<SubCategoryPage />} />
 
         <Route
-          path=":categoryName/:id/:slug"
+          path=":category/:sub_category/:productID/:slug"
           element={
             <Suspense
               fallback={

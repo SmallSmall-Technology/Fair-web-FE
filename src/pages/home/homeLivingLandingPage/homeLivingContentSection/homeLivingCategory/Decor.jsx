@@ -1,6 +1,8 @@
 import { CategoryCard } from '../CategoryCard';
-import { categories } from '../HomeLivingCategory';
+import { shopByHomeLivingCategories } from '../HomeLivingCategory';
 
 export const Decor = () => {
-  return <CategoryCard category={categories[0]} width="lg:w-[30%]" />;
+  return (
+    <CategoryCard category={shopByHomeLivingCategories[0]} width="lg:w-[30%]" />
+  );
 };

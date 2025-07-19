@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { YellowButton } from '../../../../../utils/Button';
-import { getUser, updateUser } from '../../../../../api/userAPI';
+import { getUser, updateUser } from '../../../../../api/user-api';
 import React from 'react';
 import { toast } from 'react-toastify';
 import { AddressModal } from './AddressModal';

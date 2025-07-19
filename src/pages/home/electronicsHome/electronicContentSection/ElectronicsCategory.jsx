@@ -7,7 +7,7 @@ import { Accessories } from './Accessories';
 import { HomeAppliances } from './HomeAppliances';
 import { HomeAudioTheater } from './HomeAudioTheater';
 
-export const categories = [
+export const shopByElectronicsCategories = [
   {
     title: 'Phones',
     color: 'bg-[#922A8E]',
