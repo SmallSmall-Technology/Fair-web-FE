@@ -4,19 +4,22 @@ import { ConsumerGoodsCategory } from './consumerGoodsContentSection/ConsumerGoo
 import { ProductCategoriesShortcut } from '../../productCategories/ProductCategoriesShortcut';
 import { ConsumerGoodsHeroBanner } from './consumerGoodsContentSection/ConsumerGoodsHeroBanner';
 import NewProductsInStore from '../homeLivingLandingPage/homeLivingContentSection/NewProductsInStore';
+import { useCategories } from '../../../hooks/useCategories';
 
 const ConsumerGoodsHome = () => {
-  const categories = [
-    { name: 'Personal Care', link: '/lifestyle-personal-care' },
-    { name: 'Beauty', link: '/lifestyle-beauty' },
-    { name: 'Fashion', link: '/lifestyle-fashion' },
-    { name: 'Health & Wellness', link: '/lifestyle-health-wellness' },
-    { name: 'Baby & Mother care', link: '/lifestyle-baby-mother' },
-    { name: 'Household Essentials', link: '/lifestyle-household-essentials' },
-    { name: 'Toys', link: '/lifestyle-toys' },
-    { name: 'Entertainment', link: '/lifestyle-entertainment' },
-    { name: 'Books', link: '/lifestyle-books' },
-  ];
+  // const categories = [
+  //   { name: 'Personal Care', link: '/lifestyle-personal-care' },
+  //   { name: 'Beauty', link: '/lifestyle-beauty' },
+  //   { name: 'Fashion', link: '/lifestyle-fashion' },
+  //   { name: 'Health & Wellness', link: '/lifestyle/health-wellness' },
+  //   { name: 'Baby & Mother care', link: '/lifestyle-baby-mother' },
+  //   { name: 'Household Essentials', link: '/lifestyle-household-essentials' },
+  //   { name: 'Toys', link: '/lifestyle-toys' },
+  //   { name: 'Entertainment', link: '/lifestyle-entertainment' },
+  //   { name: 'Books', link: '/lifestyle-books' },
+  // ];
+
+  const { categories } = useCategories();
   return (
     <>
       <ProductCategoriesShortcut categories={categories} />

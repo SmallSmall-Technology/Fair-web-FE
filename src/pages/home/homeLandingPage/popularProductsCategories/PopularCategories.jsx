@@ -1,7 +1,9 @@
+// import { useQuery } from '@tanstack/react-query';
 import { Electronics } from './Electronics';
 import { Food } from './Food';
 import { Lifestyle } from './Lifestyle';
 import { RealEstate } from './RealEstate';
+// import { fetchProductsByCategoryAndSubcategory } from '../../../../api/product-api';
 
 export const categories = [
   {
@@ -32,7 +34,7 @@ export const categories = [
   {
     title: 'Real estate',
     desc: 'Rent, Buy, Short-let, Commercials',
-    color: 'var(--yellow)',
+    color: 'bg-[#FFDE11]',
     image:
       '/images/vecteezy_cozy-living-room-setup-featuring-a-light-sofa-with_55925717 1.svg',
     link: '/real-estate',

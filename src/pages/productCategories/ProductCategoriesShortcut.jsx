@@ -1,102 +1,22 @@
-import { Link, NavLink } from 'react-router-dom';
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
 import { useState, useEffect, useRef } from 'react';
+import { Link, NavLink, useParams } from 'react-router-dom';
 
-export const departments = [
-  {
-    name: 'Home & Living',
-    subcategories: [
-      { name: 'Decor', link: '/home-living-decor' },
-      { name: 'Furniture', link: '/home-living-furniture' },
-      { name: 'Kitchen & Dining', link: '/home-living-kitchen-dining' },
-      { name: 'Bed & Bath', link: '/home-living-bed-bath' },
-      { name: 'Garden & Outdoor', link: '/home-living-garden-outdoor' },
-      { name: 'Home Improvement', link: '/home-living-home-improvement' },
-    ],
-  },
-  {
-    name: 'Lifestyle & Consumer goods',
-    subcategories: [
-      { name: 'Personal Care', link: '/lifestyle-personal-care' },
-      { name: 'Beauty', link: '/lifestyle-beauty' },
-      { name: 'Fashion', link: '/lifestyle-fashion' },
-      { name: 'Health & Wellness', link: '/lifestyle-health-wellness' },
-      { name: 'Baby & Mother care', link: '/lifestyle-baby-mother' },
-      { name: 'Household Essentials', link: '/lifestyle-household-essentials' },
-      { name: 'Toys', link: '/lifestyle-toys' },
-      { name: 'Entertainment', link: '/lifestyle-entertainment' },
-      { name: 'Books', link: '/lifestyle-books' },
-    ],
-  },
-  {
-    name: 'Electronics',
-    subcategories: [
-      { name: 'Phones', link: '/electronics/phones' },
-      { name: 'Computers', link: '/electronics/computers' },
-      { name: 'TV', link: '/electronics/tv' },
-      { name: 'Home Audio & Theater', link: '/electronics/audio-theater' },
-      { name: 'Video Games', link: '/electronics/video-games' },
-      { name: 'Gadgets', link: '/electronics/gadgets' },
-      { name: 'House Appliances', link: '/electronics/house-appliances' },
-      { name: 'Accessories', link: '/electronics/accessories' },
-    ],
-  },
-  {
-    name: 'Food & Drink',
-    subcategories: [
-      { name: 'Groceries', link: '/food-drink-groceries' },
-      { name: 'Confectioneries', link: '/food-drink-confectioneries' },
-      { name: 'Beverages', link: '/food-drink-beverages' },
-    ],
-  },
-  {
-    name: 'Real estate',
-    subcategories: [
-      { name: 'RentSmallsmall', link: '/real-estate-rentsmallsmall' },
-      { name: 'StaySmallsmall', link: '/real-estate-staysmallsmall' },
-      { name: 'BuySmallsmall', link: '/real-estate-buysmallsmall' },
-    ],
-  },
-  {
-    name: 'Education & Training',
-    subcategories: [
-      { name: 'Online Courses', link: '/education-online-courses' },
-      { name: 'Books', link: '/education-books' },
-      { name: 'Tutorials', link: '/education-tutorials' },
-      { name: 'Certifications', link: '/education-certifications' },
-      { name: 'Workshops', link: '/education-workshops' },
-      { name: 'Educational Toys', link: '/education-educational-toys' },
-    ],
-  },
-  {
-    name: 'Automotive',
-    subcategories: [
-      { name: 'Cars', link: '/automotive-cars' },
-      { name: 'Motorcycles', link: '/automotive-motorcycles' },
-      { name: 'Parts & Accessories', link: '/automotive-parts-accessories' },
-      { name: 'Tires', link: '/automotive-tires' },
-      { name: 'Car Care', link: '/automotive-car-care' },
-      { name: 'Tools & Equipment', link: '/automotive-tools-equipment' },
-    ],
-  },
-  {
-    name: 'Sales & Offers',
-    link: '/sales-offers',
-    subcategories: [
-      { name: 'Discounts', link: '/sales-offers-discounts' },
-      { name: 'Clearance', link: '/sales-offers-clearance' },
-      { name: 'Promotions', link: '/sales-offers-promotions' },
-      { name: 'Bundle Deals', link: '/sales-offers-bundle-deals' },
-      { name: 'Seasonal Sales', link: '/sales-offers-seasonal-sales' },
-      { name: 'Gift Cards', link: '/sales-offers-gift-cards' },
-    ],
-  },
-];
+const SingleProductCategory = ({ subcategory }) => {
+  const { category } = useParams();
 
-const SingleProductCategory = ({ product }) => {
   return (
-    <li className="flex flex-col items-center hover:cursor-pointer hover:shadow-[0px_4px_0px_rgba(0,0,0,0.2)] hover:scale-105 hover:text-blue-600 transition-all duration-300 ease-in-out focus-within:scale-105 focus-within:underline">
-      <NavLink to={product.link} className="focus:underline">
-        <p className="text-sm font-medium text-nowrap">{product.name}</p>
+    <li className="flex flex-col items-center hover:cursor-pointer transition-all duration-300 ease-in-out">
+      <NavLink
+        to={`/${category}/${subcategory?.slug}`}
+        className={({ isActive }) =>
+          `text-sm font-medium text-nowrap px-2 py-1 transition-transform duration-300 ${
+            isActive ? 'border-b border-black scale-105' : ''
+          }`
+        }
+      >
+        {subcategory.name || 'No Name'}
       </NavLink>
     </li>
   );
@@ -107,11 +27,27 @@ export const ProductCategoriesShortcut = ({ categories }) => {
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
+  const { category } = useParams();
+
+  // const fewCategories = [
+  //   'electronics',
+  //   'lifestyle',
+  //   'food-drink',
+  //   'real-estate',
+  // ];
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
     if (isDropdownOpen) setSelectedDepartment(null);
   };
+
+  // const { data } = useQuery({
+  //   queryKey: ['categories'],
+  //   queryFn: () => getAllCategories(),
+  // });
+  // const categories = Array.isArray(data?.data?.categories)
+  //   ? data.data.categories
+  //   : [];
 
   const handleDepartmentClick = (department) => {
     setSelectedDepartment(department);
@@ -142,6 +78,10 @@ export const ProductCategoriesShortcut = ({ categories }) => {
     };
   }, [isDropdownOpen]);
 
+  const handleClose = () => {
+    setIsDropdownOpen(false);
+  };
+
   const overlayStyle =
     buttonRef.current && isDropdownOpen
       ? {
@@ -156,7 +96,7 @@ export const ProductCategoriesShortcut = ({ categories }) => {
       : {};
 
   return (
-    <section className="relative px-5">
+    <section className="relative px-5 ">
       <div className="flex justify-start gap-5 items-center lg:pb-4">
         <div className="relative hidden md:block">
           <p
@@ -188,21 +128,21 @@ export const ProductCategoriesShortcut = ({ categories }) => {
                   </h3>
                   <hr className="my-2 mx-4" />
                   <ul className="mt-2 space-y-2">
-                    {departments.map((dept) => (
+                    {categories.map((cat) => (
                       <li
-                        key={dept.name}
-                        onClick={() => handleDepartmentClick(dept)}
+                        key={cat.name}
+                        onClick={() => handleDepartmentClick(cat)}
                         className={`cursor-pointer py-1 transition-all duration-200 ease-in-out 
-                          ${dept.name === selectedDepartment?.name ? 'font-semibold bg-[#FFF8CF]' : ''} 
-                          ${dept.name === 'Sales & Offers' ? 'text-[#DB1C5E]' : 'text-gray-800'} 
+                          ${cat.name === selectedDepartment?.name ? 'font-semibold bg-[#FFF8CF]' : ''} 
+                          ${cat.name === 'Sales & Offers' ? 'text-[#DB1C5E]' : 'text-gray-800'} 
                           hover:bg-[#FFF8CF] hover:scale-101 hover:shadow-sm 
                           focus: outline-none focus:bg-[#FFF8CF] focus:scale-101 focus:shadow-sm`}
                         tabIndex={0}
                         onKeyDown={(e) =>
-                          e.key === 'Enter' && handleDepartmentClick(dept)
+                          e.key === 'Enter' && handleDepartmentClick(cat)
                         }
                       >
-                        <span className="px-4">{dept.name}</span>
+                        <span className="px-4">{cat.name}</span>
                       </li>
                     ))}
                   </ul>
@@ -218,10 +158,11 @@ export const ProductCategoriesShortcut = ({ categories }) => {
                         {selectedDepartment.subcategories.map((sub, index) => (
                           <li key={index}>
                             <Link
-                              to={sub.link}
+                              to={`/${selectedDepartment.slug}/${sub.slug}`}
                               className="cursor-pointer rounded px-2 py-1 text-gray-700 hover:bg-yellow-100 hover:scale-105 hover:shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:bg-yellow-100 focus:scale-105 focus:shadow-sm focus:underline"
                               tabIndex={0}
                               onKeyDown={(e) => e.key === 'Enter'}
+                              onClick={handleClose}
                             >
                               {sub.name}
                             </Link>
@@ -234,10 +175,26 @@ export const ProductCategoriesShortcut = ({ categories }) => {
             </>
           )}
         </div>
-        <ul className="flex space-x-6 overflow-x-auto">
-          {categories.map((product, index) => (
-            <SingleProductCategory product={product} key={index} />
-          ))}
+        <ul className="flex space-x-4 z-10">
+          {category &&
+            categories
+              ?.find((cat) => cat.name.toLowerCase() === category.toLowerCase())
+              ?.subcategories?.map((sub, index) => (
+                <SingleProductCategory subcategory={sub} key={index} />
+              ))}
+          {/* {categories
+            .filter((category) =>
+              fewCategories.includes(category?.slug?.toLowerCase())
+            )
+            .flatMap(
+              (matchedCategory) =>
+                matchedCategory.subcategories?.map((sub, index) => (
+                  <SingleProductCategory
+                    subcategory={sub}
+                    key={sub.slug || index}
+                  />
+                )) || []
+            )} */}
         </ul>
         <Link className="hidden lg:flex font-medium text-[#DB1C5E] text-sm hover:text-[#FF4A8A] hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-400 rounded text-nowrap">
           Sales & Offers

@@ -1,69 +1,65 @@
-// import { useState } from 'react';
+import React from 'react';
 import { Pagination } from './Pagination';
-// import { products } from '../../utils/data';
+import { useQuery } from '@tanstack/react-query';
 import ProductCard from '../../utils/ProductCard';
+import Header from '../../ui/components/header/Header';
 import { ArrowUpDown, ChevronRight } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
+import PageNotFound from '../pageNotFound/PageNotFound.jsx';
 import SubCategoryFilterForm from './filterForms/SubCategoryFilterForm';
+import { ProductCategoriesShortcut } from './ProductCategoriesShortcut';
 import {
-  ProductCategoriesShortcut,
-  departments,
-} from './ProductCategoriesShortcut';
-import { useQuery } from '@tanstack/react-query';
-import { fetchAllProducts } from '../../services/api.js';
-import Header from '../../ui/components/header/Header';
+  fetchProductsByCategoryAndSubcategory,
+  getAllCategories,
+} from '../../api/product-api.js';
+import ProductCardSkeleton from '../../ui/components/skeletons/ProductCardSkeleton.jsx';
 
 const SubCategoryPage = () => {
   const navigate = useNavigate();
-  const { categoryName, subcategory } = useParams();
+  const { category, sub_category } = useParams();
 
-  const { data: products } = useQuery({
-    queryKey: ['products'],
-    queryFn: fetchAllProducts,
+  // Fetch products by category and subcategory
+  // This will be used to display products under the selected subcategory
+  const { data, isFetching } = useQuery({
+    queryKey: ['products-by-category', category, sub_category],
+    queryFn: () =>
+      fetchProductsByCategoryAndSubcategory(category, sub_category),
   });
 
-  // console.log(products);
+  const products = data?.data?.products || [];
 
-  const data = products.filter(
-    (product) =>
-      product?.subcategory?.toLowerCase() === subcategory?.toLowerCase()
-  );
-  // const [sortedGroupedProducts, setSortedGroupedProducts] = useState(data);
+  // Fetch all categories for the shortcut
+  // This is used to validate the subcategory and display the shortcut
+  const { data: allCategories } = useQuery({
+    queryKey: ['categories'],
+    queryFn: getAllCategories,
+  });
 
-  // const handleSortProducts = () => {
-  //   const sorted = products
-  //     .slice()
-  //     .sort((a, b) => a.name.localeCompare(b.name))
-  //     .reduce((acc, product) => {
-  //       const key = product.name;
-  //       acc[key] = acc[key] || [];
-  //       acc[key].push(product);
-  //       return acc;
-  //     }, {});
-  //   setSortedGroupedProducts(sorted);
-  // };
+  const categories = Array.isArray(allCategories?.data?.categories)
+    ? allCategories.data.categories
+    : [];
+  const isValidSubcategory = categories?.some((cat) => {
+    return (
+      cat.slug.toLowerCase() === category?.toLowerCase() &&
+      cat.subcategories?.some(
+        (sub) => sub.slug.toLowerCase() === sub_category?.toLowerCase()
+      )
+    );
+  });
 
-  const getCategory = departments.find(
-    (department) =>
-      department.name.toLowerCase() === categoryName?.toLowerCase()
-  );
-  const categories = getCategory.subcategories;
-
-  // const productsToDisplay =
-  //   Object.keys(sortedGroupedProducts).length > 0
-  //     ? Object.values(sortedGroupedProducts).flat()
-  //     : data;
+  if (!isValidSubcategory) {
+    return <PageNotFound />;
+  }
 
   return (
     <>
       <Header />
       <main className=" lg:mx-[60px] mb-20">
-        <div className="flex px-0 overflow-x-a">
+        <div className="flex px-0 ">
           <ProductCategoriesShortcut categories={categories} />
         </div>
-        {/* <div className="flex md:hidden overflow-x-auto scrollbar-hide"></div> */}
 
-        <section className="px-5 lg:mx-6">
+        <section className="px-5 lg:mx-0">
           <div className="flex space-x-1 items-center mt-4">
             <p className="text-[#222224] text-sm" onClick={() => navigate(-2)}>
               Smallsmall
@@ -73,18 +69,19 @@ const SubCategoryPage = () => {
               className="text-[#222224] text-sm cursor-pointer"
               onClick={() => navigate(-1)}
             >
-              {categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
+              {category.charAt(0).toUpperCase() + category.slice(1)}
             </p>
             <ChevronRight size={11} className="text-[#6B6B6B]" />
             <p className="text-[#6B6B6B] text-sm">
-              {subcategory.charAt(0).toUpperCase() + subcategory.slice(1)}
+              {sub_category.charAt(0).toUpperCase() + sub_category.slice(1)}
             </p>
           </div>
           <div className="flex justify-between items-baseline">
             <header className="mt-8 mb-5 flex items-baseline space-x-2">
-              <h1 className="font-bold text-2xl capitalize">{subcategory}</h1>
-              <p className="text-xs text-[#6B6B6B]">
-                ({data.length}) {data.length === 1 ? 'result' : 'results'}
+              <h1 className="font-bold text-2xl capitalize">{sub_category}</h1>
+              <p className="text-xs text-[#6B6B6B] flex items-center space-x-1">
+                <span>({products?.length})</span>
+                <span>{products?.length === 1 ? 'item' : 'items'}</span>
               </p>
             </header>
             <div
@@ -109,17 +106,25 @@ const SubCategoryPage = () => {
             </div>
           </div>
           <hr className="mb-6" />{' '}
-          {products.length > 0 ? (
-            <section className="flex justify-between flex-wrap">
-              {products.map((product) => (
-                <div key={product.id} className="mb-6">
-                  <ProductCard product={product} />
-                </div>
-              ))}
+          {products?.length > 0 && (
+            <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+              {isFetching
+                ? Array.from({ length: 10 }).map((_, index) => (
+                    <ProductCardSkeleton key={index} />
+                  ))
+                : products.map((product) => (
+                    <div key={product.id} className="mb-6">
+                      <ProductCard product={product} />
+                    </div>
+                  ))}
             </section>
-          ) : (
-            <p>No product found under this subcategory</p>
           )}
+          {!products?.length && !isFetching && (
+            <p className="text-center text-gray-500 mt-10">
+              No products found in this subcategory.
+            </p>
+          )}
+          <p>No product found under this subcategory</p>
           <div className="flex justify-center md:justify-start">
             <Pagination />
           </div>

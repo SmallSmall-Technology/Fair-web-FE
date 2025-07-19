@@ -5,12 +5,10 @@ import { FoodAndDrinkCategory } from './foodAndDrinkContentSection/FoodAndDrinkC
 import { ProductCategoriesShortcut } from '../../productCategories/ProductCategoriesShortcut';
 import NewProductsInStore from '../homeLivingLandingPage/homeLivingContentSection/NewProductsInStore';
 
+import { useCategories } from '../../../hooks/useCategories';
+
 const FoodAndDrinkHome = () => {
-  const categories = [
-    { name: 'Groceries', link: '/food-drink-groceries' },
-    { name: 'Confectioneries', link: '/food-drink-confectioneries' },
-    { name: 'Beverages', link: '/food-drink-beverages' },
-  ];
+  const { categories } = useCategories();
   return (
     <>
       <ProductCategoriesShortcut categories={categories} />

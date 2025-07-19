@@ -53,7 +53,7 @@ export const LoggedInUserDropdown = ({
   return (
     <div
       ref={menuRef}
-      className={`absolute inset-0 bg-white h-full z-50 top-2 shadow-md rounded-[10px] transform transition-all duration-300 ease-out ${
+      className={`absolute inset-0 bg-white h-ful z-50 top-2 shadow-md rounded-[10px] transform transition-all duration-300 ease-out ${
         loggedInUserDropdown
           ? 'translate-y-0 opacity-100'
           : '-translate-y-4 opacity-0'

@@ -1,14 +1,17 @@
+/* eslint-disable react/prop-types */
 import { Button } from './Button';
 import { useDispatch } from 'react-redux';
 import { Image as ImageIcon, Share2, Star } from 'lucide-react';
 import { formatCurrency } from './FormatCurrency';
-import React, { memo, useEffect, useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { AddToCart } from '../features/cart/AddToCart';
 import { AddFavourite } from '../features/favourite/AddFavourite';
 import { handleShareProduct } from '../features/product/ShareProduct';
 import { addItemToRecentlyViewed } from '../features/product/recentlyViewedSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { startTransition } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { fetchSingleProduct } from '../api/product-api';
 
 const TransitionLink = ({ to, children, className, ...props }) => {
   const navigate = useNavigate();
@@ -30,33 +33,34 @@ const TransitionLink = ({ to, children, className, ...props }) => {
   );
 };
 
-const ProductCard = ({ product }) => {
-  const [imgError, setImgError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+const ProductCard = ({ product, isLoading }) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
+  // console.log('Product Card:', product);
   const handleAddToRecentlyViewed = () => {
     dispatch(addItemToRecentlyViewed(product));
   };
 
   const {
-    id,
-    name,
-    brand,
-    category,
-    subcategory,
-    image,
-    price,
-    discountPrice,
-    ratings,
-    noOfProductSold,
+    productID,
+    productName,
+    coverImage,
+    fairAppPrice,
     slug,
-  } = product;
+    minimumDownPaymentPercentage,
+  } = product || {};
+
+  const { data, isError } = useQuery({
+    queryKey: ['product-card', productID],
+    queryFn: () => fetchSingleProduct(productID),
+    enabled: !!productID,
+    refetchOnWindowFocus: false,
+  });
+
+  // console.log('Single Product Data:', data);
+  const category = data?.produtCategory.parent_category?.slug;
+  // console.log('Product category:', category);
+  const sub_category = data?.produtCategory?.name;
+  // console.log('Product category:', sub_category);
 
   const cardStyles = {
     base: 'w-fit rounded-2xl transition-all duration-300 ease-in-out hover:drop-shadow-[0_4px_6px_rgba(0,0,0,0.25)] pb-2',
@@ -74,9 +78,7 @@ const ProductCard = ({ product }) => {
       <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl">
         <div className="absolute top-2 flex justify-between w-full px-2">
           <div className="rounded-full bg-gray-200 w-8 h-8 animate-pulse" />
-          {discountPrice && (
-            <div className="bg-gray-200 w-[51px] h-6 rounded-[20px] animate-pulse" />
-          )}
+          <div className="bg-gray-200 w-[51px] h-6 rounded-[20px] animate-pulse" />
         </div>
         <div className="flex justify-center items-center mx-auto w-[80px] h-[99px] md:w-[136px] md:h-[169px]">
           <div className="w-full h-3/4 bg-gray-200 rounded animate-pulse mt-10" />
@@ -86,9 +88,7 @@ const ProductCard = ({ product }) => {
         <div className="h-12 bg-gray-200 rounded animate-pulse" />
         <div className="flex flex-col space-y-2">
           <div className="h-5 w-1/2 bg-gray-200 rounded animate-pulse" />
-          {discountPrice && (
-            <div className="h-4 w-1/3 bg-gray-200 rounded animate-pulse" />
-          )}
+          <div className="h-4 w-1/3 bg-gray-200 rounded animate-pulse" />
         </div>
         <div className="flex items-center space-x-1">
           <div className="w-3 h-3 bg-gray-200 rounded-full animate-pulse" />
@@ -102,35 +102,31 @@ const ProductCard = ({ product }) => {
     </article>
   );
 
-  const categoryName = category
-    ? category.charAt(0).toLowerCase() + category.slice(1)
-    : '';
-
   const Content = () => (
     <article
       className={cardStyles.base}
       tabIndex={0}
       role="article"
-      aria-label={`Product: ${name}`}
+      aria-label={`Product: ${productName}`}
       style={cardStyles.transform}
       onClick={handleAddToRecentlyViewed}
     >
-      <TransitionLink to={`/${categoryName}/${id}/${slug}`} className="block">
+      <TransitionLink
+        to={`/${category}/${sub_category}/${productID}/${slug}`}
+        className="block"
+      >
         <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl cursor-pointer flex justify-center items-center">
           <div className="absolute top-3 flex justify-between w-full px-3">
-            {discountPrice && (
-              <p className="bg-white p-1 font-medium text-[10px] lg:text-xs">
-                <span>35% downpayment</span>
-              </p>
-            )}
+            <p className="bg-white p-1 font-medium text-[10px] lg:text-xs">
+              <span>{minimumDownPaymentPercentage}% downpayment</span>
+            </p>
           </div>
           <div className="flex justify-center items-center mx-auto w-[78px] h-[78px] lg:w-[111px] lg:h-[111px] mt-3">
-            {!imgError ? (
+            {!isLoading ? (
               <img
-                src={image}
-                alt={name}
+                src={coverImage}
+                alt={productName}
                 loading="lazy"
-                onError={() => setImgError(true)}
                 className="h-[100%] w-full object-cover"
               />
             ) : (
@@ -141,29 +137,31 @@ const ProductCard = ({ product }) => {
       </TransitionLink>
       <div className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2">
         <TransitionLink
-          to={`/${id}`}
+          to={`/${productID}`}
           className="hover:underline focus:underline focus:outline-none"
         >
           {/* <p className="text-xs lg:text-sm font-normal leading-[16.94px] min-h-12 cursor-pointer overflow-hidden lg:overflow-visible line-clamp-2 lg:line-clamp-none"> */}
           <p className="text-xs lg:text-sm font-normal min-h-10">
-            {name.length > 50 ? name.slice(0, 30) + '...' : name}
+            {productName?.length > 50
+              ? productName.slice(0, 30) + '...'
+              : productName}
           </p>
         </TransitionLink>
         <div className="flex items-center lg:space-x-1">
           <Star fill="black" size={14} aria-hidden="true" />
-          <p className="text-sm">
-            {ratings} ({noOfProductSold})
-          </p>
+          <p className="text-sm">{/* {ratings} ({noOfProductSold}) */}</p>
         </div>
         <div className="flex flex-col lg:flex-row lg:space-x-2 lg:items-center space-y-1">
-          <p className="font-semibold text-base">{formatCurrency(price)}</p>
-          {discountPrice ? (
+          <p className="font-semibold text-base">
+            {formatCurrency(fairAppPrice)}
+          </p>
+          {/* {discountPrice ? (
             <p className="text-sm line-through text-[#827db1]">
               {formatCurrency(discountPrice)}
             </p>
           ) : (
             <p className="opacity-0 text-sm line-through">null</p>
-          )}
+          )} */}
         </div>
         <div className="flex items-center justify-between lg:flex-col lg:items-start lg:space-y-3">
           <div className="lg:w-[90%] flex justify-between items-center space-x-1">

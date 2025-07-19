@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { updateUser } from '../../../../../api/userAPI';
+import { updateUser } from '../../../../../api/user-api';
 import {
   updateLatestDeliveryAddress,
   setUser,

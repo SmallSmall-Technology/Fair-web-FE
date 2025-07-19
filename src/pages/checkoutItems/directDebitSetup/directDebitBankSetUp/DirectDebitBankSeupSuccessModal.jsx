@@ -9,6 +9,8 @@ export const DirectDebitBankSeupSuccessModal = ({
 }) => {
   if (!isOpen) return null;
 
+  const order = true;
+
   return (
     <div className="fixed inset-0 bg-black/30 z-50">
       <div className="absolute top-20 md:right-4">
@@ -27,30 +29,55 @@ export const DirectDebitBankSeupSuccessModal = ({
             </button>
           </div>
 
-          <div className="mt-4 px-6">
-            <p className="font-semibold text-base mb-2 flex items-center">
-              Order Confirmed!{' '}
-              <span className="ml-1">
-                <img
-                  src="/images/check 1.svg"
-                  alt="Check Icon"
-                  className="w-4 h-4"
-                />
-              </span>
-            </p>
-            <p className="text-sm mb-4 leading-5">
-              We’re pleased to inform you that your direct debit has been
-              successfully approved. Your order has now been placed and is being
-              processed. A confirmation email with all the details of your order
-              has been sent to your registered email address.
-            </p>
-            <p className="text-sm leading-5">
-              You can also view your confirmed order at any time by visiting the{' '}
-              <span className="font-semibold">Purchase Menu</span> on your
-              dashboard and check under{' '}
-              <span className="font-semibold">Ongoing</span>.
-            </p>
-          </div>
+          {order ? (
+            <div className="mt-4 px-6">
+              <p className="font-semibold text-base mb-2 flex items-center">
+                Order Confirmed!{' '}
+                <span className="ml-1">
+                  <img
+                    src="/images/check 1.svg"
+                    alt="Check Icon"
+                    className="w-4 h-4"
+                  />
+                </span>
+              </p>
+              <p className="text-sm mb-4 leading-5">
+                We’re pleased to inform you that your direct debit has been
+                successfully approved. Your order has now been placed and is
+                being processed. A confirmation email with all the details of
+                your order has been sent to your registered email address.
+              </p>
+              <p className="text-sm leading-5">
+                You can also view your confirmed order at any time by visiting
+                the <span className="font-semibold">Purchase Menu</span> on your
+                dashboard and check under{' '}
+                <span className="font-semibold">Ongoing</span>.
+              </p>
+            </div>
+          ) : (
+            <div className="mt-4 px-6">
+              <p className="font-semibold text-base mb-2 flex items-center">
+                Order Pending Approval!{' '}
+                <span className="ml-1">
+                  <img
+                    src="/images/check 1.svg"
+                    alt="Check Icon"
+                    className="w-4 h-4"
+                  />
+                </span>
+              </p>
+              <p className="text-sm mb-4 leading-5">
+                We regret to inform you that your recent direct debit approval
+                was unsuccessful. As a result, your order has not been processed
+                at this time.
+              </p>
+              <p className="text-sm leading-5">
+                Please contact support at
+                <span className="font-semibold">support@smallsmall.com </span>
+                for more information
+              </p>
+            </div>
+          )}
 
           <button
             onClick={onGotoPurchases}
