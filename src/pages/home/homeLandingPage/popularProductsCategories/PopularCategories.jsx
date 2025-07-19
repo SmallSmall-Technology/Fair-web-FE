@@ -3,9 +3,8 @@ import { Electronics } from './Electronics';
 import { Food } from './Food';
 import { Lifestyle } from './Lifestyle';
 import { RealEstate } from './RealEstate';
-// import { fetchProductsByCategoryAndSubcategory } from '../../../../api/product-api';
 
-export const categories = [
+export const shopByPopularCategories = [
   {
     title: 'Electronics',
     desc: 'TV, Cell phone, Laptops',

@@ -35,8 +35,8 @@ export const LoggedInUserDropdown = ({
         setLoggedInUserDropdown(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
   }, []);
 
   const handleLogOutUser = () => {
@@ -53,14 +53,14 @@ export const LoggedInUserDropdown = ({
   return (
     <div
       ref={menuRef}
-      className={`absolute inset-0 bg-white h-ful z-50 top-2 shadow-md rounded-[10px] transform transition-all duration-300 ease-out ${
+      className={`absolute top] w-56 h-[184px] rounded-[10px] inset-0 !bg-white  z-50 top-10 shadow-md transform transition-all duration-300 ease-out ${
         loggedInUserDropdown
           ? 'translate-y-0 opacity-100'
           : '-translate-y-4 opacity-0'
       }`}
       onClick={(e) => e.stopPropagation()}
     >
-      <div className="bg-white h-full grid py-2 shadow-lg rounded-[10px]">
+      <div className="bg-white h-full grid py-2 shadow-lg rounded-[10px] >">
         <div className="flex items-center space-x-2 px-3 py-3">
           <img src="/images/user.svg" alt="User avatar" />
           <p className="flex text-xs text-balance mb-0">

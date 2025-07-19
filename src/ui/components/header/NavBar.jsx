@@ -4,7 +4,7 @@ import {
 } from '../../../features/cart/cartSlice';
 import {
   getUserIsAuthenticated,
-  getUserName,
+  // getUserName,
 } from '../../../features/auth/authSlice';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -28,7 +28,8 @@ export const NavBar = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleUserAuthDropdown = () => {
+  const handleUserAuthDropdown = (e) => {
+    e.stopPropagation();
     setLoggedInUserDropdown((prev) => !prev);
   };
 
@@ -74,9 +75,10 @@ export const NavBar = () => {
             </li>
           </>
         ) : (
-          <div>
+          <div className="relative">
             <li
               className="font-medium flex items-center space-x-1 cursor-pointer"
+              role="button"
               onClick={handleUserAuthDropdown}
             >
               <span className="text-[#737376]">Hi,</span>
@@ -87,12 +89,12 @@ export const NavBar = () => {
                 <ChevronDown size={20} />
               )}
             </li>
-            <div className="absolute right top-[4.02rem] w-56 h-[184px] rounded-[10px]">
+            {loggedInUserDropdown && (
               <LoggedInUserDropdown
                 loggedInUserDropdown={loggedInUserDropdown}
                 setLoggedInUserDropdown={setLoggedInUserDropdown}
               />
-            </div>
+            )}
           </div>
         )}
         <li aria-hidden="true">
