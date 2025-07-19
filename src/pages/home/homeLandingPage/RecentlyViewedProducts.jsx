@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import ProductCard from '../../../utils/ProductCard';
 import { getRecentlyViewed } from '../../../features/product/recentlyViewedSlice';
+import { Link } from 'react-router-dom';
 
 const RecentlyViewedProducts = () => {
   const recentlyViewed = useSelector(getRecentlyViewed);
@@ -9,9 +10,12 @@ const RecentlyViewedProducts = () => {
       {recentlyViewed.length !== 0 && (
         <div className="flex justify-between mb-4">
           <p className="font-semibold">Your recently viewed Items</p>
-          <a href="" className="underline">
+          <Link
+            to="/user-dashboard/shopping-overview/recently-viewed"
+            className="underline"
+          >
             View all
-          </a>
+          </Link>
         </div>
       )}
       {recentlyViewed.length !== 0 && (

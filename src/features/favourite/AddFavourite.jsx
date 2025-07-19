@@ -13,37 +13,25 @@ export const AddFavourite = ({ product = {} }) => {
   }
 
   const {
-    id,
-    name,
-    brand,
-    category,
-    subcategory,
-    image,
-    price,
-    discountPrice,
-    ratings,
-    noOfProductSold,
+    productID,
+    productName,
+    coverImage,
+    fairAppPrice,
     slug,
+    minimumDownPaymentPercentage,
   } = product;
 
   const handleAddToFavourite = () => {
     const newItem = {
-      id,
-      name,
-      brand,
-      category,
-      subcategory,
-      image,
-      price,
-      discountPrice,
-      ratings,
-      noOfProductSold,
+      productID,
+      productName,
+      coverImage,
+      fairAppPrice,
       slug,
-      quantity: 1,
-      totalPrice: price * 1,
+      minimumDownPaymentPercentage,
     };
 
-    const isFavourite = favourite.some((item) => item.id === id);
+    const isFavourite = favourite.some((item) => item.productID === productID);
     if (isFavourite) {
       dispatch(removeItemFromFavourite(newItem));
     } else {
@@ -55,7 +43,7 @@ export const AddFavourite = ({ product = {} }) => {
     <Button
       onClick={handleAddToFavourite}
       aria-label={
-        favourite.some((item) => item.id === id)
+        favourite.some((item) => item.productID === productID)
           ? 'Remove from favourite'
           : 'Add to favourite'
       }
@@ -65,11 +53,15 @@ export const AddFavourite = ({ product = {} }) => {
       <Heart
         size={18}
         cursor="pointer"
-        fill={favourite.some((item) => item.id === id) ? 'red' : 'white'}
+        fill={
+          favourite.some((item) => item.productID === productID)
+            ? 'red'
+            : 'white'
+        }
         aria-hidden="true"
       />
       <span className="sr-only">
-        {favourite.some((item) => item.id === id)
+        {favourite.some((item) => item.productID === productID)
           ? 'Remove from favourite'
           : 'Add to favourite'}
       </span>

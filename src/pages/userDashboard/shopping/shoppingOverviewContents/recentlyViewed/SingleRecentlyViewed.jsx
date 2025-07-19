@@ -12,18 +12,18 @@ export const SingleRecentlyViewed = ({ item }) => {
               <img
                 src={item?.image || '/placeholder-image.jpg'}
                 className="h-[44px] w-[44px] rounded-lg object-cover"
-                alt={item?.name}
+                alt={item?.productName}
               />
             </div>
             <div>
               <p className="mb-3 font-medium">
-                {item.name.length > 30
-                  ? item.name.slice(0, 30) + '...'
-                  : item?.name || 'Unnamed Product'}
+                {item.productName.length > 30
+                  ? item.productName.slice(0, 30) + '...'
+                  : item?.productName || 'Unnamed Product'}
               </p>
               <p className="">
-                {item.price
-                  ? `${formatCurrency(item.price)}`
+                {item.fairAppPrice
+                  ? `${formatCurrency(item.fairAppPrice)}`
                   : 'Price not available'}
               </p>
             </div>

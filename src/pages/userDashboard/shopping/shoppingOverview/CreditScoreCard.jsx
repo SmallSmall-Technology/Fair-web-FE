@@ -3,7 +3,7 @@ export const CreditScoreCard = ({ score = 200, maxScore = 750 }) => {
   const percentage = (clampedScore / maxScore) * 100;
 
   return (
-    <div className="w-full lg:w-[214px] p-6 bg-white rounded-2xl shadow-credit-card ">
+    <div className="w-full lg:w-[190px] px-6 py-3 bg-white rounded-2xl shadow-credit-card ">
       <div className="text-[43px] font-semibold text-black">{clampedScore}</div>
       <div className="text-sm font-normal  mb-4">Credit score</div>
 

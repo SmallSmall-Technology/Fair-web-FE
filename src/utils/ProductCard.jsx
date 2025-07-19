@@ -56,11 +56,8 @@ const ProductCard = ({ product, isLoading }) => {
     refetchOnWindowFocus: false,
   });
 
-  // console.log('Single Product Data:', data);
   const category = data?.produtCategory.parent_category?.slug;
-  // console.log('Product category:', category);
   const sub_category = data?.produtCategory?.name;
-  // console.log('Product category:', sub_category);
 
   const cardStyles = {
     base: 'w-fit rounded-2xl transition-all duration-300 ease-in-out hover:drop-shadow-[0_4px_6px_rgba(0,0,0,0.25)] pb-2',
