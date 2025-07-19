@@ -5,45 +5,45 @@ import { Kitchen } from './homeLivingCategory/Kitchen';
 import { Furniture } from './homeLivingCategory/Furniture';
 import { Decor } from './homeLivingCategory/Decor';
 
-export const categories = [
+export const shopByHomeLivingCategories = [
   {
     title: 'Decor',
     color: 'bg-[#171649]',
     image: '/images/decor_sst.svg',
-    link: '/home-living-decor',
+    link: '/home-living/decor',
     text: 'text-white',
   },
   {
     title: 'Furniture',
     color: 'bg-[#F5F5F7]',
     image: '/images/chair_sst.svg',
-    link: '/home-living-furniture',
+    link: '/home-living/furniture',
     width: '250px',
   },
   {
     title: 'Kitchen & Dining',
     color: 'bg-[#F5F5F7]',
     image: '/images/kitchen_sst.svg',
-    link: '/home-living-kitchen-dining',
+    link: '/home-living/kitchen-dining',
     width: '332px',
   },
   {
     title: 'Home Improvement',
     color: 'bg-[#F5F5F7]',
     image: '/images/home_improvement_sst.svg',
-    link: '/home-living-home-improvement',
+    link: '/home-living/home-improvement',
   },
   {
     title: 'Bed & Bath',
     color: 'bg-[#F5F5F7]',
     image: '/images/bed_sst.svg',
-    link: '/home-living-bed-bath',
+    link: '/home-living/bed-bath',
   },
   {
     title: 'Garden & Outdoor',
     color: 'bg-[#F5F5F7]',
     image: '/images/garden_sst.svg',
-    link: '/home-living-garden-outdoor',
+    link: '/home-living/garden-outdoor',
   },
 ];
 

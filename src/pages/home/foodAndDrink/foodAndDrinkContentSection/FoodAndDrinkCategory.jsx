@@ -2,26 +2,26 @@ import { Grocery } from './Grocery';
 import { Beverages } from './Beverages';
 import { Confectionery } from './Confectionery';
 
-export const categories = [
+export const shopByFoodAndDrinksCategories = [
   {
     title: 'Grocery',
     color: 'bg-[#3DB54AF9]',
     image: '/images/grocery_sst.svg',
-    link: '/shop/electronics',
+    link: '/food-drink/grocery',
     text: 'text-white',
   },
   {
     title: 'Confectionery',
     color: 'bg-[#F5F5F7]',
     image: '/images/confectionery_sst.svg',
-    link: '/shop/food-drink',
+    link: '/food-drink/confectionery',
     width: '250px',
   },
   {
     title: 'Beverages',
     color: 'bg-[#F5F5F7]',
     image: '/images/beverages.svg',
-    link: '/shop/lifestyle',
+    link: '/food-drink/beverages',
   },
 ];
 

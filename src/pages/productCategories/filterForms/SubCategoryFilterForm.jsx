@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import { CircleX } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { memo, useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 const SubCategoryFilterForm = ({
   categoryProducts,
@@ -8,11 +9,14 @@ const SubCategoryFilterForm = ({
   products,
 }) => {
   const getUniqueOptions = (products, key) => {
-    return [...new Set(products.map((product) => product[key]))];
+    if (!Array.isArray(products)) return [];
+    return [...new Set(products.map((product) => product?.[key]))];
   };
 
+  // console.log(getUniqueOptions);
+
   const uniqueSizes = useMemo(
-    () => getUniqueOptions(categoryProducts || products, 'Size'),
+    () => getUniqueOptions(categoryProducts || products, 'productWeight'),
     [categoryProducts, products]
   );
   const uniqueBrands = useMemo(
@@ -25,7 +29,12 @@ const SubCategoryFilterForm = ({
   );
 
   const { register, handleSubmit, watch, reset } = useForm({
-    defaultValues: { size: '', brand: '', price: '', sales: '' },
+    defaultValues: {
+      productWeight: '',
+      brand: '',
+      fairAppPrice: '',
+      sales: '',
+    },
   });
 
   const values = watch();
@@ -48,15 +57,15 @@ const SubCategoryFilterForm = ({
           </label>
           <select
             id="size"
-            {...register('size')}
+            {...register('productWeight')}
             className="w-full rounded-2xl border-2 bg-[#F7F7F7] text-xs p-2 px-3"
           >
             <option value="" disabled>
               Size
             </option>
-            {uniqueSizes.map((size, index) => (
-              <option key={index} value={size}>
-                {size || 'Size'}
+            {uniqueSizes?.map((productWeight, index) => (
+              <option key={index} value={productWeight}>
+                {productWeight || 'Size'}
               </option>
             ))}
           </select>
@@ -74,7 +83,7 @@ const SubCategoryFilterForm = ({
             <option value="" disabled>
               Brand
             </option>
-            {uniqueBrands.map((brand, index) => (
+            {uniqueBrands?.map((brand, index) => (
               <option key={index} value={brand}>
                 {brand}
               </option>
@@ -88,7 +97,7 @@ const SubCategoryFilterForm = ({
           </label>
           <select
             id="price"
-            {...register('price')}
+            {...register('fairAppPrice')}
             className="w-full rounded-2xl border-2 bg-[#F7F7F7] text-xs p-2 px-3"
           >
             <option value="" disabled>
@@ -113,7 +122,7 @@ const SubCategoryFilterForm = ({
             <option value="" disabled>
               Sales
             </option>
-            {uniqueSales.map((sales, index) => (
+            {uniqueSales?.map((sales, index) => (
               <option key={index} value={sales}>
                 {sales || 'Sales'}
               </option>
