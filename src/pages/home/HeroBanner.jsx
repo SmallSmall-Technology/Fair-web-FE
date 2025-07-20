@@ -22,18 +22,21 @@ export default function HeroBanner({
 
         <div className="absolute bottom-4 right-4 flex gap-2 z-20">
           <button
+            aria-label="previous"
             onClick={prevSlide}
             className="w-8 h-[22px] bg-white rounded-[10px] flex items-center justify-center"
           >
             <ChevronLeft size={10} />
           </button>
           <button
+            aria-label="next"
             onClick={nextSlide}
             className="w-8 h-[22px] bg-white rounded-[10px] flex items-center justify-center"
           >
             <ChevronRight size={10} />
           </button>
           <button
+            aria-label="play or pause"
             onClick={togglePause}
             className="w-8 h-[22px] bg-white rounded-[10px] flex items-center justify-center"
           >

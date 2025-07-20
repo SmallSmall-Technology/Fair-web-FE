@@ -37,22 +37,22 @@ const Footer = () => {
             <p className="mb-4">Find us on</p>
             <div className="flex">
               <Link to="" className="mr-4">
-                <img src="/images/Facebook.svg" alt="" />
+                <img src="/images/Facebook.svg" alt="Small small facebook" />
               </Link>
               <Link to="" className="mr-4">
-                <img src="/images/Instagram.svg" alt="" />
+                <img src="/images/Instagram.svg" alt="Small small Instagram" />
               </Link>
               <Link to="" className="mr-4">
-                <img src="/images/x-logo.svg" alt="" />
+                <img src="/images/x-logo.svg" alt="Small small Twitter" />
               </Link>
               <Link to="" className="mr-4">
-                <img src="/images/LinkedIn.svg" alt="" />
+                <img src="/images/LinkedIn.svg" alt="Small small Linkedin" />
               </Link>
               <Link to="" className="mr-4">
-                <img src="/images/YouTube.svg" alt="" />
+                <img src="/images/YouTube.svg" alt="Small small YouTube" />
               </Link>
               <Link to="" className="mr-4">
-                <img src="/images/Whatsapp.svg" alt="" />
+                <img src="/images/Whatsapp.svg" alt="Small small Whatsapp" />
               </Link>
             </div>
           </div>
@@ -106,7 +106,7 @@ const Footer = () => {
           <Link to="" className="mr-4 pt-1">
             Smallsmall.com
           </Link>
-          <Link to="" className="mr-4 pt-1">
+          <Link to="/terms-of-use" className="mr-4 pt-1">
             Terms of use
           </Link>
           <Link to="" className="mr-4 pt-1">

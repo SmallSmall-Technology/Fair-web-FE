@@ -46,6 +46,7 @@ import DeliveryAddress from './pages/userDashboard/accountProfile/contents/deliv
 import Feedback from './pages/userDashboard/accountProfile/contents/feedback/Feedback';
 import ResolutionCentre from './pages/userDashboard/accountProfile/contents/resolutionCentre/ResolutionCentre';
 import UserAccountProfile from './pages/userDashboard/accountProfile/UserAccountProfile';
+import TermsOfUse from './pages/termsOfUse/TermsOfUse';
 import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/DirectDebitSetUp1';
 import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetUpPaymentSuccess';
@@ -63,6 +64,7 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
+
         <Route
           path="electronics"
           element={
@@ -71,6 +73,7 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
+
         <Route
           path="real-estate"
           element={
@@ -79,6 +82,7 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
+
         <Route
           path="food-drink"
           element={
@@ -87,6 +91,7 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
+
         <Route
           path="lifestyle"
           element={
@@ -110,6 +115,23 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
+
+        <Route
+          path="terms-of-use"
+          element={
+            <Suspense fallback={<LandingPageSkeleton />}>
+              <TermsOfUse />
+            </Suspense>
+          }
+        />
+
+        {/* <Route
+        path="/:categoryName/:subcategory"
+        element={<LazyRoute element={<SubCategoryPage />} />}
+      /> */}
+
+        <Route path="electronics/*" element={<PageNotFound />} />
+        <Route path="*" element={<PageNotFound />} />
       </Route>
 
       <Route
@@ -219,6 +241,7 @@ const AppRoutes = () => {
                   </Suspense>
                 }
               />
+              <Route path="*" element={<PageNotFound />} />
             </Route>
             <Route
               path="notifications"
@@ -275,6 +298,7 @@ const AppRoutes = () => {
                   </Suspense>
                 }
               />
+              <Route path="*" element={<PageNotFound />} />
             </Route>
             <Route
               path=":id/slug"
@@ -284,6 +308,7 @@ const AppRoutes = () => {
                 </Suspense>
               }
             />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
         </Route>
       </Route>
