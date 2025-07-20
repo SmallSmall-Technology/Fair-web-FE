@@ -7,7 +7,7 @@ const VerificationSent = () => {
       <div className="max-w-[490px] w-full text-center">
         <img
           src="/images/fair-logo.svg"
-          alt="Fair logo"
+          alt="Smallsmall Logo"
           className="mb-8 mt-11"
         />
 

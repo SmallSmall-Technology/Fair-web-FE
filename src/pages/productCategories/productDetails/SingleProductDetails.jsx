@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
@@ -15,26 +16,39 @@ import { handleShareProduct } from '../../../features/product/ShareProduct';
 import { WeeklyPayment } from './productPlan/WeeklyPaymentPlan/WeeklyPayment';
 import MonthlyPayment from './productPlan/MonthlyPaymentPlan/MonthlyPayment';
 import { HeartHandshake } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { fetchProductsByCategoryAndSubcategory } from '../../../api/product-api';
 
 export const SingleProductDetails = React.memo(function SingleProductDetails({
   product,
   category,
+  subcategory,
+  getCategory,
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
   const navigate = useNavigate();
+  console.log('SingleProductDetails product:', product);
+  console.log('Fetching with:', category, subcategory);
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['relatedProducts', category, subcategory],
+    queryFn: () => fetchProductsByCategoryAndSubcategory(category, subcategory),
+  });
+  console.log('Related Products:', data);
+  const relatedProducts = data;
 
   const productImages = [
-    product?.image || '',
-    product?.image || '',
-    product?.image || '',
-    product?.image || '',
-    product?.image || '',
+    product?.coverImage || '',
+    product?.coverImage || '',
+    product?.coverImage || '',
+    product?.coverImage || '',
+    product?.coverImage || '',
   ];
 
   const shippingDate = '20 Jan, 2025';
 
-  if (!product || !product.image) return <div>Product not found</div>;
+  if (!product) return <div>Product not found</div>;
 
   const SingleProductDetails = () => (
     <>
@@ -61,20 +75,20 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
           <div className="flex justify-between items-center lg:items-start gap-5 lg:mb-20">
             <aside className="w-[80px] hidden lg:grid">
               <ul className="hidden lg:grid grid-cols-1 gap-2">
-                {productImages.map((image, index) => (
-                  <ProductImage
-                    key={index}
-                    image={image}
-                    alt={`${product.slug}-thumbnail-${index}`}
-                    className="w-[94px] h-[94px]"
-                  />
-                ))}
+                {/* {productImages.map((image, index) => ( */}
+                <ProductImage
+                  key={product.productID}
+                  image={product.coverImage}
+                  // alt={`${product.slug}-thumbnail-${productID}`}
+                  className="w-[94px] h-[94px]"
+                />
+                {/* ))} */}
               </ul>
             </aside>
             <main className="flex-1 ">
               <div className="hidden md:bg-[#F2F2F2]  rounded-2xl w-full h-[363px] md:h-[589px] xl:w-[589p] md:flex justify-center items-center">
                 <img
-                  src={product.image}
+                  src={product.coverImage}
                   alt={product.slug}
                   className="w-full xl:w-[487px] xl:h-[487px] object-cover"
                 />
@@ -86,7 +100,7 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
                   role="group"
                   aria-roledescription="carousel"
                 >
-                  {productImages.map((image, index) => (
+                  {/* {productImages.map((image, index) => (
                     <img
                       key={index}
                       src={image}
@@ -95,10 +109,10 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
                       }`}
                       alt={`Product image ${index + 1}`}
                     />
-                  ))}
+                  ))} */}
                 </div>
                 <div className="absolute bottom-2 flex justify-center space-x-4 bg-[#323232] w-fit p-1 rounded-xl">
-                  {productImages.map((_, index) => (
+                  {/* {productImages?.map((_, index) => (
                     <button
                       key={index}
                       className={`w-2 h-2 rounded-full transition-all ${
@@ -113,7 +127,7 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
                       }}
                       aria-label={`Go to image ${index + 1}`}
                     ></button>
-                  ))}
+                  ))} */}
                 </div>
                 <div className="absolute bottom-0 right-0 md:hidden w-fit shadow-[2px_4px_7px_1px_rgba(0,0,0,0.2)] ml-auto p-2 flex items-center rounded-[10px]">
                   <AddFavourite product={product} />
@@ -127,7 +141,7 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
             </p>
             <CommentBar />
           </section>
-          <div className="hidden lg:block">
+          {/* <div className="hidden lg:block">
             {selectedPaymentPlan === 'daily' && (
               <>
                 <WeeklyPayment product={product} />
@@ -156,13 +170,13 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
                 <MonthlyPayment product={product} />
               </>
             )}
-          </div>
+          </div> */}
         </main>
-        <SingleProductDetailsAside
+        {/* <SingleProductDetailsAside
           product={product}
           shippingDate={shippingDate}
           category={category}
-        />
+        /> */}
       </div>
 
       <section className="md:hidden">
@@ -195,10 +209,14 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
         </div>
 
         <div className="grid grid-flow-col space-x-4 w-full overflow-x-scroll scrollbar-hide scroll-smooth">
-          {products
+          {relatedProducts
             .filter((prod) => prod.category === category)
-            .map((prod, id) => (
-              <ProductCard product={prod} key={id} />
+            .map((prod, productID) => (
+              <ProductCard
+                product={prod}
+                key={productID}
+                isLoading={isLoading}
+              />
             ))}
         </div>
       </section>

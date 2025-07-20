@@ -7,6 +7,10 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-display: swap;
+  --yellow-primary: #ffde11;
+  --btn-hover-bg-primary: #facc15;
+  --btn-bg-secondary: #e5e7eb;
+  --btn-hover-bg-secondary: #d1d5db;
 }
 
 * {

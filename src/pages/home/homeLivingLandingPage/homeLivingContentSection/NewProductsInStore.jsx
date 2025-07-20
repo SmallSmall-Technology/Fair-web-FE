@@ -3,15 +3,19 @@ import { Button } from '../../../../utils/Button';
 import { useQuery } from '@tanstack/react-query';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from '../../../../utils/ProductCard';
-import { products } from '../../../../utils/data';
-import { fetchAllProducts } from '../../../../services/api';
-// import { products } from '../../utils/data';
+// import { products } from '../../../../utils/data';
+import React from 'react';
+import { fetchAllNewProducts } from '../../../../api/product-api';
 
 const NewProductsInStore = ({ onScrollProduct, item_width, containerRef }) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ['products'],
-    queryFn: fetchAllProducts,
+    queryFn: fetchAllNewProducts,
   });
+
+  const products = data?.data?.products || [];
+  // console.log('Products:', products);
+
   return (
     <>
       <div className="flex justify-between mt-12 ">
@@ -28,7 +32,7 @@ const NewProductsInStore = ({ onScrollProduct, item_width, containerRef }) => {
       </div>
 
       <div className="grid grid-flow-col lg:space-x-4 md:space-x-10 mb-8 ">
-        <div className="hidden px-1 md:px-4 bg-[#FFDE11] w-[129px] h-[146px] md:w-[195px] md:h-[218px] rounded-[4px] lg:flex flex-col justify-end pb-4">
+        <div className="hidden px-1 md:px-4 bg-[var(--yellow-primary)] w-[129px] h-[146px] md:w-[195px] md:h-[218px] rounded-[4px] lg:flex flex-col justify-end pb-4">
           <div className="grid grid-cols-1 space-y-1 pl-3">
             <span className="text-lg md:text-2xl font-semibold">
               New in store
@@ -51,8 +55,8 @@ const NewProductsInStore = ({ onScrollProduct, item_width, containerRef }) => {
             ref={containerRef}
           >
             {products?.map((product) => (
-              <div className="" key={product.id}>
-                <ProductCard product={product} />
+              <div className="" key={product?.productID}>
+                <ProductCard product={product} isLoading={isLoading} />
               </div>
             ))}
           </div>

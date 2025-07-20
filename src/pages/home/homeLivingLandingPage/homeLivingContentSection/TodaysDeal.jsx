@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from '../../../../utils/ProductCard';
 import { fetchAllProducts } from '../../../../services/api';
+import { products } from '../../../../utils/data';
 
 const TodaysDeal = ({ onScrollProduct, item_width, containerRef }) => {
   const { data, error, isLoading } = useQuery({
@@ -31,7 +32,7 @@ const TodaysDeal = ({ onScrollProduct, item_width, containerRef }) => {
             className="grid grid-flow-col space-x-4 w-full overflow-x-auto scrollbar-hide scroll-smooth"
             ref={containerRef}
           >
-            {data?.map((product) => (
+            {products?.map((product) => (
               <div className="" key={product.id}>
                 <ProductCard product={product} />
               </div>

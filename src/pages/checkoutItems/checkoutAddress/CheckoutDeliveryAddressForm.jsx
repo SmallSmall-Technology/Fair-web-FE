@@ -8,7 +8,7 @@ import {
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUser } from '../../../api/userAPI';
+import { updateUser } from '../../../api/user-api';
 
 const CheckoutDeliveryAddressForm = ({
   // eslint-disable-next-line react/prop-types
@@ -39,22 +39,6 @@ const CheckoutDeliveryAddressForm = ({
       if (response.data?.user) {
         dispatch(setUser(response.data.user));
       }
-      toast.success('Address updated successfully', {
-        position: 'top-right',
-        autoClose: 3000,
-      });
-      // onClose();
-    },
-    onError: (error) => {
-      toast.error(
-        error.response?.data?.message ||
-          error.message ||
-          'Failed to update address',
-        {
-          position: 'top-right',
-          autoClose: 3000,
-        }
-      );
     },
   });
 
@@ -74,7 +58,7 @@ const CheckoutDeliveryAddressForm = ({
       dispatch(updateLatestDeliveryAddress(payload.latest_address));
       toast.success('Address updated successfully', {
         className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
       });
       handleOpenCheckoutDeliveryAddressForm();
@@ -139,7 +123,7 @@ const CheckoutDeliveryAddressForm = ({
           <button
             type="submit"
             disabled={isSubmitting || !isValid}
-            className="w-full bg-[#FFDE11] text-sm font-medium py-2 px-6 rounded-[5px] hover:bg-[#ffdf11e3] transition disabled:opacity-50"
+            className="w-full bg-[var(--yellow-primary)] text-sm font-medium py-2 px-6 rounded-[5px] hover:bg-[#ffdf11e3] transition disabled:opacity-50"
           >
             {isSubmitting ? (
               <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />

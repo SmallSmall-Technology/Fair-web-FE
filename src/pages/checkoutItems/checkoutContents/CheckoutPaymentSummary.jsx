@@ -1,6 +1,5 @@
 import { Dot } from 'lucide-react';
 import { useSelector } from 'react-redux';
-import { CancelPurchase } from '../CartHeader.jsx';
 import { YellowButton } from '../../../utils/Button.jsx';
 import { CartCoupon } from '../../../features/cart/CartCoupon.jsx';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
@@ -9,6 +8,8 @@ import {
   getTotalCartQuantity,
 } from '../../../features/cart/cartSlice.js';
 import { CartFooter } from '../../cartItems/CartFooter.jsx';
+import { Link } from 'react-router-dom';
+import { CancelPurchase } from '../../cartItems/CartHeader.jsx';
 
 export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const cart = useSelector((state) => state.cart.cart);
@@ -18,7 +19,10 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const shippingFee = +1200;
   const subtTotal = totalCartPrice;
   const total = totalCartPrice + VAT + shippingFee;
-
+  const cartItems = useSelector((state) => state.cart.cart);
+  const InstallmentPayment = cartItems.find((item) =>
+    ['monthly', 'weekly', 'daily'].includes(item.paymentPlan)
+  );
   return (
     <>
       <div className=" rounded-[10px] lg:bg-[#F2F2F2] lg:py-6 px-8 h-fit">
@@ -56,10 +60,21 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
               <p>Total</p>
               <p>{formatCurrency(total)}</p>
             </div>
+
             <div className="lg:hidden flex flex-col justify-center gap-5">
-              <YellowButton onClick={onSubmitPaymentMethod}>
-                Pay now
-              </YellowButton>
+              {!InstallmentPayment ? (
+                <YellowButton onClick={onSubmitPaymentMethod}>
+                  Pay now
+                </YellowButton>
+              ) : (
+                <Link
+                  to="direct-debit-setup-1"
+                  className="bg-bg-[var(--yellow-primary)] font-semibold text-base flex items-center justify-center overflow-hidden rounded-[20px] border-2 w-full mx-auto md:px-12 py-2 hover:bg-gray-50 hover:border-bg-[var(--yellow-primary)]  hover:text-black"
+                >
+                  Set up direct debit
+                </Link>
+              )}
+
               <div className="mx-auto">
                 <CancelPurchase />
               </div>

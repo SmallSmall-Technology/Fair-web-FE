@@ -16,7 +16,7 @@ const Footer = () => {
         {/* footer logo */}
         <div className=" mb-10 ">
           <div className="footer-logo mb-8">
-            {/* <img src="/images/smallsmall-logo.svg" alt="fair logo" /> */}
+            {/* <img src="/images/smallsmall-logo.svg" alt="Smallsmall Logo" /> */}
             <Logo />
             <p className="mt-4">Shop today, pay later</p>
           </div>

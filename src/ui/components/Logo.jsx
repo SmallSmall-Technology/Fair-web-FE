@@ -10,7 +10,7 @@ function Logo({ width = 120, height = 40, className = '' }) {
     >
       <img
         src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
-        alt="Fair Logo"
+        alt="Smallsmall Logo"
         width={width}
         height={height}
         loading="eager"

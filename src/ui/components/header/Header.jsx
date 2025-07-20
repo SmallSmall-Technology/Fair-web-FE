@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavBar } from './NavBar';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import SearchQuery from './SearchQuery';
 import { MobileNavBar } from './MobileNavBar';
 import Logo from '../Logo';
-// import LandingHeader from '../../../pages/home/homeLandingPage/LandingHeader';
 
 const Header = () => {
   return (
@@ -29,7 +28,7 @@ const Header = () => {
           >
             <img
               src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
-              alt="Fair Logo"
+              alt="Smallsmall Logo"
               width={120}
               height={40}
               loading="eager"
@@ -40,7 +39,6 @@ const Header = () => {
           <MobileNavBar />
         </div>
         <SearchQuery />
-        {/* <LandingHeader /> */}
       </div>
     </header>
   );

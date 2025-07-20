@@ -37,7 +37,7 @@ export const addItem = createAsyncThunk(
         toast.dismiss();
         toast.error('Item already in cart', {
           className:
-            'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+            'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
           bodyClassName: 'm-0 p-0',
           closeButton: false,
         });
@@ -117,7 +117,7 @@ export const addItem = createAsyncThunk(
       // toast.dismiss();
       // toast.success('Item added to cart', {
       //   className:
-      //     'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+      //     'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
       //   bodyClassName: 'm-0 p-0',
       //   closeButton: false,
       // });
@@ -135,7 +135,7 @@ export const addItem = createAsyncThunk(
       //   {
       //     type: 'success',
       //     className:
-      //       'bg-[#FFDE11] text-black text-sm px-2 py-1 rounded-md min-h-0',
+      //       'bg-[var(--yellow-primary)] text-black text-sm px-2 py-1 rounded-md min-h-0',
       //     bodyClassName: 'm-0 p-0',
       //     closeButton: false,
       //   }
@@ -315,7 +315,7 @@ const cartSlice = createSlice({
         state.error = action.payload;
         toast.error(action.payload, {
           className:
-            'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+            'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
           bodyClassName: 'm-0 p-0',
           closeButton: false,
         });

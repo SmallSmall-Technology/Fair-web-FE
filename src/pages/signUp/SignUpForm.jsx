@@ -23,7 +23,8 @@ function SignUpForm() {
     onSuccess: () => {
       toast.success('Account created successfully! Please log in.', {
         autoClose: 3000,
-        className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+        className:
+          'bg-[var(--yellow-primary)] text-black text-sm px-2 py-2 rounded-md',
         closeButton: false,
       });
       navigate('/login');
@@ -38,7 +39,8 @@ function SignUpForm() {
       } else {
         toast.error(errorMessage, {
           autoClose: 3000,
-          className: 'bg-[#FFDE11] text-black text-sm px-2 py-2 rounded-md',
+          className:
+            'bg-[var(--yellow-primary)] text-black text-sm px-2 py-2 rounded-md',
         });
       }
     },
@@ -170,7 +172,7 @@ function SignUpForm() {
       <Button
         disabled={isLoading}
         type="submit"
-        className="w-full mt-4 py-3 px-6 text-lg font-medium text-black bg-[#FFDE11] rounded-full border-2 border-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
+        className="w-full mt-4 py-3 px-6 text-lg font-medium text-black bg-[var(--yellow-primary)] rounded-full border-2 border-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
       >
         {isLoading ? 'Creating account...' : 'Create account'}
       </Button>

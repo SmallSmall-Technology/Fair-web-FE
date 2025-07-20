@@ -1,21 +1,18 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { startTransition } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckoutItem } from './CheckoutItem.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { CartFooter } from '../../cartItems/CartFooter.jsx';
+import { makePayment } from '../../../features/order/orderSlice.js';
 import { CheckoutPaymentSummary } from './CheckoutPaymentSummary.jsx';
 import { CheckoutDeliveryAddressButton } from '../../../utils/Button.jsx';
+import { selectLatestDeliveryAddress } from '../../../features/user/userSlice.js';
 import { CheckoutPaymentMethod } from '../checkoutContents/CheckoutPaymentMethod.jsx';
 import CheckoutDeliveryAddressForm from '../checkoutAddress/CheckoutDeliveryAddressForm.jsx';
-import { selectLatestDeliveryAddress } from '../../../features/user/userSlice.js';
-import { makePayment } from '../../../features/order/orderSlice.js';
-import React from 'react';
 
 export const CheckoutItemsContentSection = () => {
   const deliveryAddress = useSelector(selectLatestDeliveryAddress);
-  console.log('Delivery Address:', deliveryAddress);
-
   const [showCheckoutDeliveryAddressForm, setShowCheckoutDeliveryAddressForm] =
     useState(false);
   const dispatch = useDispatch();
@@ -34,6 +31,15 @@ export const CheckoutItemsContentSection = () => {
     }
   };
 
+  // const handleDirectCreditPayment = (values) => {
+  //   if (values) {
+  //     dispatch(makePayment());
+  //     startTransition(() => {
+  //       navigate('/cart-items/checkout/payment-success');
+  //     });
+  //   }
+  // };
+
   return (
     <section className="grid lg:grid-cols-[60%_40%] lg:px-[76p]">
       <main className="w-full pt-8  lg:block lg:px-8">
@@ -50,7 +56,7 @@ export const CheckoutItemsContentSection = () => {
             <h2 className="mt-7 mb-3 font-medium text-[21px] hidden lg:block">
               Delivery address
             </h2>
-            <p>{deliveryAddress}</p>
+            <p className="font-semibold text-base">{deliveryAddress}</p>
             {
               <div>
                 <article className="mb-6">

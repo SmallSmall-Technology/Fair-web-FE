@@ -7,7 +7,7 @@ const Login = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row min-h-screen ">
-        <div className="hidden bg-[#FFDE11] w-full md:w-1/3 p-8 lg:flex flex-col py-8">
+        <div className="hidden bg-[var(--yellow-primary)] w-full md:w-1/3 p-8 lg:flex flex-col py-8">
           <div className="space-y-4">
             <p className=" text-4xl font-normal">Your needs can’t wait</p>
             <p className=" text-5xl font-normal">Meet them on</p>
@@ -73,7 +73,7 @@ const Login = () => {
                 <p className="text-sm">New to Fair?</p>
                 <Link
                   to="/sign-up"
-                  className="bg-[#FFF8CF] rounded-full border-[#FFDE11] w-full px-8 py-3 text-lg font-medium text-black hover:bg-[#FFDE11] hover:text-black"
+                  className="bg-[#FFF8CF] rounded-full border-bg-[var(--yellow-primary)]  w-full px-8 py-3 text-lg font-medium text-black hover:bg-[var(--yellow-primary)] hover:text-black"
                 >
                   Create account
                 </Link>

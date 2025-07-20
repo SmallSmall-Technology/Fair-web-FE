@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { YellowButton } from '../../../utils/Button.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
@@ -47,7 +47,7 @@ export const CheckoutPaymentMethod = () => {
       toast.dismiss();
       toast.error('Please input your delivery address', {
         className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
@@ -80,7 +80,7 @@ export const CheckoutPaymentMethod = () => {
           `Payment plan started with ₦${initialPayment.toFixed(2)} initial payment!`,
           {
             className:
-              'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+              'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
             bodyClassName: 'm-0 p-0',
             closeButton: false,
           }
@@ -105,7 +105,7 @@ export const CheckoutPaymentMethod = () => {
             `Payment of ₦${totalCartPrice} successful via ${values.picked}!`,
             {
               className:
-                'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+                'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
               bodyClassName: 'm-0 p-0',
               closeButton: false,
             }
@@ -121,14 +121,14 @@ export const CheckoutPaymentMethod = () => {
       toast.dismiss();
       toast.error('Payment failed. Please try again.', {
         className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
     }
   };
 
-  const currentPlan = cartItems.find((item) =>
+  const InstallmentPayment = cartItems.find((item) =>
     ['monthly', 'weekly', 'daily'].includes(item.paymentPlan)
   );
 
@@ -148,7 +148,7 @@ export const CheckoutPaymentMethod = () => {
             Payment Options
           </span>
 
-          {!currentPlan ? (
+          {!InstallmentPayment ? (
             <>
               <div className="lg:px-4 py-1 lg:py-2">
                 <label htmlFor="debit-card" className="text-sm">
@@ -193,9 +193,10 @@ export const CheckoutPaymentMethod = () => {
                       {...register('picked')}
                       value="direct debit"
                       className="px-4 py-10 mr-2"
+                      defaultChecked
                     />
                     Direct debit
-                    <span className="text-xs rounded-[2px] bg-[#FFDE11] py-1 px-2">
+                    <span className="text-xs rounded-[2px] bg-[var(--yellow-primary)] py-1 px-2">
                       Recommended
                     </span>
                   </div>
@@ -228,22 +229,31 @@ export const CheckoutPaymentMethod = () => {
           </div>
         )}
 
-        {!currentPlan && (
+        {!InstallmentPayment && (
           <div className="hidden lg:block">
             <YellowButton type="submit" disabled={isSubmitting}>
               {isSubmitting ? 'Processing...' : 'Pay now'}
             </YellowButton>
           </div>
         )}
-
-        {currentPlan && (
-          <div className="hidden lg:block">
-            <YellowButton type="submit" disabled={isSubmitting}>
-              Set up direct debit
-            </YellowButton>
-          </div>
-        )}
       </form>
+      {InstallmentPayment && (
+        <section className=" grid gap-14 px-8">
+          <Link to="" className=" font-normal text-sm underline">
+            What is direct debit?
+          </Link>
+
+          <div className="hidden lg:block ">
+            <Link
+              to="direct-debit-setup-1"
+              // disabled={isSubmitting}
+              className="bg-(var-yellow-primary) group relative font-semibold text-base flex items-center justify-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 hover:bg-gray-50 hover:border-bg-[var(--yellow-primary)]  hover:text-black"
+            >
+              Set up direct debit
+            </Link>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

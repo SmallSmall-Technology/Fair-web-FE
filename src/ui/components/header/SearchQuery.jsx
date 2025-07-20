@@ -41,7 +41,7 @@ const SearchQuery = () => {
             type="submit"
             id="search-button"
             aria-label="Submit search"
-            className="absolute right-1 flex items-center py-2 px-2 bg-[#FFDE11] rounded-[10px] border-[#737376] hover:bg-[#FFD700] active:bg-[#FFC107] focus:ring-2 focus:ring-[#FFDE11] transition-all motion-safe:duration-200 hover:scale-105 active:scale-95"
+            className="absolute right-1 flex items-center py-2 px-2 bg-[var(--yellow-primary)] rounded-[10px] border-[#737376] hover:bg-[#FFD700] active:bg-[#FFC107] focus:ring-2 focus:ring-bg-[var(--yellow-primary)]  transition-all motion-safe:duration-200 hover:scale-105 active:scale-95"
           >
             <Search size={12} aria-hidden="true" />
           </button>

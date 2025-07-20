@@ -29,7 +29,7 @@ const LoginForm = () => {
       toast.success('Login successful!', {
         autoClose: 3000,
         className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
@@ -56,7 +56,7 @@ const LoginForm = () => {
       toast.error('Please fill in all fields', {
         autoClose: 3000,
         className:
-          'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
         closeButton: false,
       });
@@ -72,7 +72,7 @@ const LoginForm = () => {
         {
           autoClose: 3000,
           className:
-            'bg-[#FFDE11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+            'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
           bodyClassName: 'm-0 p-0',
           closeButton: false,
         }
@@ -97,7 +97,7 @@ const LoginForm = () => {
           value={formData.email}
           onChange={handleChange}
           disabled={loading}
-          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-bg-[var(--yellow-primary)]  disabled:opacity-50"
         />
       </div>
 
@@ -114,12 +114,12 @@ const LoginForm = () => {
             value={formData.password}
             onChange={handleChange}
             disabled={loading}
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFDE11] disabled:opacity-50"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-bg-[var(--yellow-primary)]  disabled:opacity-50"
           />
           <button
             type="button"
             onClick={() => setPasswordVisible(!passwordVisible)}
-            className="absolute top-3 right-3 text-gray-500 hover:text-[#FFDE11]"
+            className="absolute top-3 right-3 text-gray-500 hover:text-bg-[var(--yellow-primary)] "
           >
             {passwordVisible ? <EyeOff /> : <Eye />}
           </button>
@@ -130,7 +130,7 @@ const LoginForm = () => {
 
       <Button
         type="submit"
-        className="w-full bg-[#FFDE11] text-black rounded-full py-3 text-lg font-medium  hover:text-black disabled:opacity-50"
+        className="w-full bg-[var(--yellow-primary)] text-black rounded-full py-3 text-lg font-medium  hover:text-black disabled:opacity-50"
         disabled={loading}
       >
         {loading ? (

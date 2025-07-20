@@ -1,4 +1,4 @@
-import React, { Suspense, Fragment } from 'react';
+import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './ui/components/layout/Layout';
 import Home from './pages/home/Home';
@@ -19,19 +19,13 @@ import {
   CartItems,
   CheckoutItems,
   CheckoutPaymentSuccess,
-  // PageNotFound,
-  // CategoryPage,
-  // SubCategoryPage,
   UserDashboard,
   ShoppingOverview,
-  // Summary,
-  // Purchases,
   CreditWallet,
   DirectDebit,
   Favorites,
   RecentlyViewed,
   Notifications,
-  // AccountProfile,
 } from './lazyImports';
 
 import CartItemsSkeleton from './ui/components/skeletons/CartItemsSkeleton';
@@ -53,21 +47,9 @@ import Feedback from './pages/userDashboard/accountProfile/contents/feedback/Fee
 import ResolutionCentre from './pages/userDashboard/accountProfile/contents/resolutionCentre/ResolutionCentre';
 import UserAccountProfile from './pages/userDashboard/accountProfile/UserAccountProfile';
 import TermsOfUse from './pages/termsOfUse/TermsOfUse';
-// export const Summary = lazy(
-//   () =>
-//     import('./pages/userDashboard/shopping/shoppingOverviewContents/Summary')
-// );
-// eslint-disable-next-line react/prop-types
-const LazyRoute = ({ element }) => (
-  <Suspense fallback={<ProductDetailsSkeleton showAside showRecommendations />}>
-    {element}
-  </Suspense>
-);
-
-// eslint-disable-next-line react/prop-types
-const LazyHome = ({ element }) => (
-  <Suspense fallback={<LandingPageSkeleton />}>{element}</Suspense>
-);
+import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/DirectDebitSetUp1';
+import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
+import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetUpPaymentSuccess';
 
 const AppRoutes = () => {
   return (
@@ -119,13 +101,10 @@ const AppRoutes = () => {
           }
         />
 
-        <Route
-          path=":categoryName/:subcategory"
-          element={<SubCategoryPage />}
-        />
+        <Route path=":category/:sub_category" element={<SubCategoryPage />} />
 
         <Route
-          path=":categoryName/:id/:slug"
+          path=":category/:sub_category/:productID/:slug"
           element={
             <Suspense
               fallback={
@@ -173,6 +152,22 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
+
+        <Route
+          path="cart-items/checkout/direct-debit-setup-1"
+          element={<DirectDebitSetUp1 />}
+        />
+
+        <Route
+          path="cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2"
+          element={<DirectDebitSetUp2 />}
+        />
+
+        <Route
+          path="cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2/mono-setup-payment-success"
+          element={<MonoSetupPaymentSuccess />}
+        />
+
         <Route
           path="verification-document-sent"
           element={<VerificationSent />}
@@ -212,26 +207,8 @@ const AppRoutes = () => {
                 </Suspense>
               }
             >
-              {/* { label: 'My account', href: '/user-dashboard/account' },
-                { label: 'Shopping overview', href: '/user-dashboard/shopping-overview' },
-                { label: 'Notifications', href: '/user-dashboard/notifications' },
-                { label: 'Account profile', href: '/user-dashboard/account-profile' }, */}
-              <Route
-                path="summary"
-                element={
-                  // <Suspense fallback={<DashboardSummarySkeleton />}>
-                  <Summary />
-                  // {/* </Suspense> */}
-                }
-              />
-              <Route
-                path="purchases"
-                element={
-                  // <Suspense fallback={<DashboardSummarySkeleton />}>
-                  <Purchases />
-                  // {/* </Suspense> */}
-                }
-              />
+              <Route path="summary" element={<Summary />} />
+              <Route path="purchases" element={<Purchases />} />
               <Route
                 path="credit-wallet"
                 element={
@@ -284,25 +261,10 @@ const AppRoutes = () => {
                 </Suspense>
               }
             >
-              {/* { label: 'My account', href: '/user-dashboard/account' },
-                { label: 'Shopping overview', href: '/user-dashboard/shopping-overview' },
-                { label: 'Notifications', href: '/user-dashboard/notifications' },
-                { label: 'Account profile', href: '/user-dashboard/account-profile' }, */}
-              <Route
-                path="profile-summary"
-                element={
-                  // <Suspense fallback={<DashboardSummarySkeleton />}>
-                  <ProfileSummary />
-                  // {/* </Suspense> */}
-                }
-              />
+              <Route path="profile-summary" element={<ProfileSummary />} />
               <Route
                 path="account-verification"
-                element={
-                  // <Suspense fallback={<DashboardSummarySkeleton />}>
-                  <AccountVerification />
-                  // {/* </Suspense> */}
-                }
+                element={<AccountVerification />}
               />
               <Route
                 path="delivery-address"

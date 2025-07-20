@@ -72,7 +72,7 @@ const Purchases = () => {
                   />
                   <button
                     type="submit"
-                    className="absolute right-1 flex items-center text-xs py-1 px-2 bg-[#FFDE11] rounded border-[#737376]"
+                    className="absolute right-1 flex items-center text-xs py-1 px-2 bg-[var(--yellow-primary)] rounded border-[#737376]"
                   >
                     <Search size={12} /> Search
                   </button>
@@ -80,7 +80,7 @@ const Purchases = () => {
               ) : (
                 <button
                   type="button"
-                  className="flex items-center border-[#737376] p-2 bg-[#FFDE11] rounded"
+                  className="flex items-center border-[#737376] p-2 bg-[var(--yellow-primary)] rounded"
                   onClick={() => setFormIsActive(true)}
                 >
                   <Search size={15} /> Search
@@ -176,7 +176,7 @@ const Purchases = () => {
 
                       <button
                         type="submit"
-                        className="flex items-center border-[#737376] p-2 bg-[#FFDE11] rounded"
+                        className="flex items-center border-[#737376] p-2 bg-[var(--yellow-primary)] rounded"
                       >
                         <Search size={15} /> Search
                       </button>

@@ -3,7 +3,7 @@ export const CheckoutPaymentSuccessHeader = () => {
     <div className="w-full lg:w-[510px] mb-8 lg:mb-4">
       <img
         src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
-        alt="Fair Logo"
+        alt="Smallsmall Logo"
         width={120}
         height={40}
         loading="eager"
