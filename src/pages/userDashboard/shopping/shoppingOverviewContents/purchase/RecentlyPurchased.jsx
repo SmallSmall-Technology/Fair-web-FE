@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { ChevronRight } from 'lucide-react';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 import { getCompletedOrders } from '../../../../../features/order/orderSlice';
@@ -20,14 +20,17 @@ export const RecentlyPurchased = () => {
 
       <section className="grid grid-cols-1 gap-4 border w-full rounded-[10px]">
         {recentlyPurchased.length === 0 ? (
-          <p className=" text-[#A6A6A6] bg-[#F6F6F6] p-4 rounded-[10px]">
+          <p className="text-[#A6A6A6] bg-[#F6F6F6] p-4 py-6 rounded-[10px]">
             No recently purchased item
           </p>
         ) : (
           recentlyPurchased.slice(0, 2).map((item, index) => (
-            <ul key={index} className="p-2">
-              <SingleRecentlyPurchased items={item} key={item.id} />
-            </ul>
+            <div key={item.productID}>
+              <ul className="recently-viewed p-2">
+                <SingleRecentlyPurchased items={item} key={item.productID} />
+              </ul>
+              {index === 0 && <hr className="border-t border-gray-200 mx-2" />}
+            </div>
           ))
         )}
       </section>
@@ -80,7 +83,6 @@ const SingleRecentlyPurchased = ({ items }) => {
               </div>
             </div>
           </Link>
-          {/* <hr /> */}
         </div>
       ))}
       <div className="bg-red-500 w-full summary-line"></div>

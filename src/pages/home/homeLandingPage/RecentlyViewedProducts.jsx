@@ -9,10 +9,10 @@ const RecentlyViewedProducts = () => {
     <section className="md:px-4 py-8 lg:mx-10 my-10">
       {recentlyViewed.length !== 0 && (
         <div className="flex justify-between mb-4">
-          <p className="font-semibold">Your recently viewed Items</p>
+          <p className="font-calsans font-normal">Your recently viewed Items</p>
           <Link
             to="/user-dashboard/shopping-overview/recently-viewed"
-            className="underline"
+            className="underline font-inter"
           >
             View all
           </Link>
