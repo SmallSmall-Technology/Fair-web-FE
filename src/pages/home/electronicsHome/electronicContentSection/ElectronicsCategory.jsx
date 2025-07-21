@@ -37,7 +37,7 @@ export const shopByElectronicsCategories = [
     title: 'Home Audio & Theater',
     color: 'bg-[#F5F5F7]',
     image: '/images/audio_sst.svg',
-    link: '/electronics/audio-theater',
+    link: '/electronics/home-audio-theater',
   },
   {
     title: 'Gadgets',

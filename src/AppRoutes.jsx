@@ -130,7 +130,9 @@ const AppRoutes = () => {
         element={<LazyRoute element={<SubCategoryPage />} />}
       /> */}
 
-        <Route path="electronics/*" element={<PageNotFound />} />
+        {/* <Route path="electronics/*" element={<PageNotFound />} /> */}
+        <Route path="electronics/" element={<PageNotFound />} />
+
         <Route path="*" element={<PageNotFound />} />
       </Route>
 

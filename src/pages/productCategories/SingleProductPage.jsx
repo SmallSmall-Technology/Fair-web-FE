@@ -1,10 +1,11 @@
 import { ChevronRight } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  ProductCategoriesShortcut,
-  departments,
-} from './ProductCategoriesShortcut';
+// import {
+//   ProductCategoriesShortcut,
+//   departments,
+// } from './ProductCategoriesShortcut';
 // import { SingleProductStickyHeader } from '../../ui/components/header/SingleProductStickyHeader';
+import { ProductCategoriesShortcut } from './ProductCategoriesShortcut';
 import { SingleProductDetails } from './productDetails/SingleProductDetails';
 import { useQuery } from '@tanstack/react-query';
 import { useIsInView } from '../../hooks/useIsInView';
@@ -30,12 +31,13 @@ const SingleProductPage = () => {
   //   (department) => department.name.toLowerCase() === category?.toLowerCase()
   // );
   // const categories = getCategory.subcategories;
+  // const categories = true;
 
   return (
     <>
       <main className="px-6 lg:px-10 mb-5 lg:block w-full">
         <div className="" ref={targetRef}>
-          {/* <ProductCategoriesShortcut categories={categories} /> */}
+          <ProductCategoriesShortcut categories={categories} />
         </div>
         <div className="flex md:hidden overflow-x-auto scrollbar-hide"></div>
         <div className="flex lg:hidden">

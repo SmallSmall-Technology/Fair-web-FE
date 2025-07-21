@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
+import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useParams } from 'react-router-dom';
+import { getAllCategories } from '../../api/product-api';
 
 const SingleProductCategory = ({ subcategory }) => {
   const { category } = useParams();
@@ -22,32 +24,25 @@ const SingleProductCategory = ({ subcategory }) => {
   );
 };
 
-export const ProductCategoriesShortcut = ({ categories }) => {
+export const ProductCategoriesShortcut = ({ categorie }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
   const { category } = useParams();
 
-  // const fewCategories = [
-  //   'electronics',
-  //   'lifestyle',
-  //   'food-drink',
-  //   'real-estate',
-  // ];
-
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
     if (isDropdownOpen) setSelectedDepartment(null);
   };
 
-  // const { data } = useQuery({
-  //   queryKey: ['categories'],
-  //   queryFn: () => getAllCategories(),
-  // });
-  // const categories = Array.isArray(data?.data?.categories)
-  //   ? data.data.categories
-  //   : [];
+  const { data } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => getAllCategories(),
+  });
+  const categories = Array.isArray(data?.data?.categories)
+    ? data.data.categories
+    : [];
 
   const handleDepartmentClick = (department) => {
     setSelectedDepartment(department);
