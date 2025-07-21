@@ -8,7 +8,7 @@ import CreditSection from './homeLandingPage/CreditSection';
 import { HomeHeroBanner } from './homeLandingPage/HomeHeroBanner';
 import RecentlyViewedProducts from './homeLandingPage/RecentlyViewedProducts';
 import PopularCategories from './homeLandingPage/popularProductsCategories/PopularCategories';
-import { DirectDebitBankSeupSuccessModal } from '../checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitBankSeupSuccessModal';
+import { DirectDebitBankSetupSuccessModal } from '../checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitBankSetupSuccessModal';
 
 const Home = () => {
   const location = useLocation();
@@ -25,7 +25,7 @@ const Home = () => {
   return (
     <div>
       <LandingHeader />
-      <DirectDebitBankSeupSuccessModal
+      <DirectDebitBankSetupSuccessModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onGotoPurchases={() => {
