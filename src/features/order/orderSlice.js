@@ -15,12 +15,12 @@ export const fetchOrders = createAsyncThunk('order/fetchOrders', async () => {
 export const createOrder = createAsyncThunk(
   'order/createOrder',
   async ({ cartItems, initialPayment }, { rejectWithValue }) => {
-    console.log(cartItems);
+    // console.log(cartItems);
 
     try {
       // Calculate paid amounts and assign statuses per item
       const itemsWithDetails = cartItems.map((item) => {
-        console.log(item);
+        // console.log(item);
         const itemPaidAmount =
           item.paymentPlan === 'upfront'
             ? +item.paymentPlanDetails.amount * item.quantity

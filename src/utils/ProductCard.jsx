@@ -35,7 +35,6 @@ const TransitionLink = ({ to, children, className, ...props }) => {
 
 const ProductCard = ({ product, isLoading }) => {
   const dispatch = useDispatch();
-  // console.log('Product Card:', product);
   const handleAddToRecentlyViewed = () => {
     dispatch(addItemToRecentlyViewed(product));
   };
@@ -47,20 +46,18 @@ const ProductCard = ({ product, isLoading }) => {
     fairAppPrice,
     slug,
     minimumDownPaymentPercentage,
+    average_rating,
   } = product || {};
 
-  const { data, isError } = useQuery({
+  const { data } = useQuery({
     queryKey: ['product-card', productID],
     queryFn: () => fetchSingleProduct(productID),
     enabled: !!productID,
     refetchOnWindowFocus: false,
   });
 
-  // console.log('Single Product Data:', data);
   const category = data?.produtCategory.parent_category?.slug;
-  // console.log('Product category:', category);
   const sub_category = data?.produtCategory?.name;
-  // console.log('Product category:', sub_category);
 
   const cardStyles = {
     base: 'w-fit rounded-2xl transition-all duration-300 ease-in-out hover:drop-shadow-[0_4px_6px_rgba(0,0,0,0.25)] pb-2',
@@ -117,8 +114,10 @@ const ProductCard = ({ product, isLoading }) => {
       >
         <div className="relative bg-[#F2F2F2] w-[146px] h-[146px] md:w-[218px] md:h-[218px] rounded-2xl cursor-pointer flex justify-center items-center">
           <div className="absolute top-3 flex justify-between w-full px-3">
-            <p className="bg-white p-1 font-medium text-[10px] lg:text-xs">
-              <span>{minimumDownPaymentPercentage}% downpayment</span>
+            <p className="bg-white p-1 font-outfit font-normal text-[10px] lg:text-xs">
+              <span className="font-outfit font-normal">
+                {minimumDownPaymentPercentage}% downpayment
+              </span>
             </p>
           </div>
           <div className="flex justify-center items-center mx-auto w-[78px] h-[78px] lg:w-[111px] lg:h-[111px] mt-3">
@@ -141,7 +140,7 @@ const ProductCard = ({ product, isLoading }) => {
           className="hover:underline focus:underline focus:outline-none"
         >
           {/* <p className="text-xs lg:text-sm font-normal leading-[16.94px] min-h-12 cursor-pointer overflow-hidden lg:overflow-visible line-clamp-2 lg:line-clamp-none"> */}
-          <p className="text-xs lg:text-sm font-normal min-h-10">
+          <p className="font-inter text-xs lg:text-sm font-normal min-h-10 pb-0">
             {productName?.length > 50
               ? productName.slice(0, 30) + '...'
               : productName}
@@ -149,10 +148,10 @@ const ProductCard = ({ product, isLoading }) => {
         </TransitionLink>
         <div className="flex items-center lg:space-x-1">
           <Star fill="black" size={14} aria-hidden="true" />
-          <p className="text-sm">{/* {ratings} ({noOfProductSold}) */}</p>
+          <p className="text-sm"> {average_rating / 5 || '2/5'} </p>
         </div>
         <div className="flex flex-col lg:flex-row lg:space-x-2 lg:items-center space-y-1">
-          <p className="font-semibold text-base">
+          <p className="font-inter font-semibold text-base">
             {formatCurrency(fairAppPrice)}
           </p>
           {/* {discountPrice ? (

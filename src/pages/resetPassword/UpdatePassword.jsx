@@ -49,7 +49,7 @@ const UpdatePassword = ({ email, disabled }) => {
     e.preventDefault();
 
     const { userId, email, password, passwordAgain } = formData;
-    console.log(formData);
+    // console.log(formData);
     if (!userId || !email || !password || !passwordAgain) {
       toast.error('Please fill in all fields', {
         autoClose: 3000,
@@ -82,7 +82,7 @@ const UpdatePassword = ({ email, disabled }) => {
 
       navigate('/login');
     } catch (err) {
-      console.log(err);
+      // console.log(err);
 
       toast.error(err?.response?.data?.message || 'Error resetting password.', {
         autoClose: 3000,

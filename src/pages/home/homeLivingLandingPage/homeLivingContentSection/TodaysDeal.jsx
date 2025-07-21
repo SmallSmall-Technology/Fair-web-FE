@@ -14,11 +14,11 @@ const TodaysDeal = ({ onScrollProduct, item_width, containerRef }) => {
   return (
     <>
       <div className="flex justify-between mt-12 mb-4">
-        <h2 className="font-bold text-2xl">Today's Deal</h2>
+        <h2 className="font-calsans font-normal text-2xl">Today's Deal</h2>
 
         <NavLink
           to={'new-products-in-store'}
-          className="underline"
+          className="underline font-inter"
           aria-label="View all Today's deal"
         >
           View all

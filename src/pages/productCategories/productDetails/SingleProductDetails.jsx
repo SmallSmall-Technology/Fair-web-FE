@@ -28,14 +28,14 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
   const [currentIndex, setCurrentIndex] = useState(0);
   const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
   const navigate = useNavigate();
-  console.log('SingleProductDetails product:', product);
-  console.log('Fetching with:', category, subcategory);
+  // console.log('SingleProductDetails product:', product);
+  // console.log('Fetching with:', category, subcategory);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['relatedProducts', category, subcategory],
     queryFn: () => fetchProductsByCategoryAndSubcategory(category, subcategory),
   });
-  console.log('Related Products:', data);
+  // console.log('Related Products:', data);
   const relatedProducts = data;
 
   const productImages = [

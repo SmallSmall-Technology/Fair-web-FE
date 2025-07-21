@@ -21,10 +21,10 @@ const CreditWalletBalance = () => {
         CreditWallet balance
       </h1>
       <h1 className="hidden md:block font-semibold text-2xl mb-4">
-        CreditWallet
+        Credit Wallet
       </h1>
 
-      <article className="border rounded-[10px] py-6 pb- px-6 w-full bg-[var(--yellow-primary)] grid gap-4">
+      <article className="border rounded-[10px] py-8 px-6 w-full bg-[var(--yellow-primary)] grid gap-4">
         <div className="grid gap-2">
           <p>Available balance</p>
           <p className="flex items-center space-x-2 font-semibold text-3xl">
