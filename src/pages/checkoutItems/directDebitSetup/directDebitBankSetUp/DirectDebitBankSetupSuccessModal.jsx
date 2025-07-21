@@ -2,7 +2,7 @@
 import { X } from 'lucide-react';
 import React from 'react';
 
-export const DirectDebitBankSeupSuccessModal = ({
+export const DirectDebitBankSetupSuccessModal = ({
   onClose,
   onGotoPurchases,
   isOpen,

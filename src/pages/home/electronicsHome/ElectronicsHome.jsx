@@ -36,6 +36,7 @@ const ElectronicsHome = () => {
         <NewProductsInStore />
         <TodaysDeal />
       </div>
+      {/* <Outlet /> */}
     </>
   );
 };
