@@ -1,11 +1,27 @@
 import { Link } from 'react-router-dom';
 import { termsSections } from '../../utils/termsData';
+import { styled } from 'styled-components';
+
+const Heading = styled.h1`
+  color: #222224;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
+
+const StyledLink = styled.a`
+  color: #222224;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+`;
 
 function MainContent() {
   return (
     <div className="ml-7 w-[75%]">
       <div className="py-3 ">
-        <h1>Terms of use</h1>
+        <Heading>Terms of use</Heading>
       </div>
 
       <p className="my-4">Last Updated: July 7th, 2025</p>
@@ -14,9 +30,12 @@ function MainContent() {
           {termsSections.map((term, i) => (
             <li key={i}>
               <span>{i + 1}.</span>
-              <a className="mx-2 text-blue-600 underline" href={`#${term.id}`}>
+              <StyledLink
+                className="mx-2 text-blue-600 underline"
+                href={`#${term.id}`}
+              >
                 {term.title}
-              </a>
+              </StyledLink>
             </li>
           ))}
         </ol>
