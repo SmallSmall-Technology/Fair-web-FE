@@ -82,7 +82,7 @@ const LoginForm = () => {
 
   return (
     <form
-      className="my-3 space-y-4 w-[100%] lg:max-w-md mx-auto"
+      className="my-3 space-y-4 w-[100%] md:max-w-sm lg:max-w-md lg:flex flex-col justify-start "
       onSubmit={handleSubmit}
     >
       <div className="space-y-2">
