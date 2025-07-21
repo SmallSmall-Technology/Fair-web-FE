@@ -49,7 +49,7 @@ import UserAccountProfile from './pages/userDashboard/accountProfile/UserAccount
 import TermsOfUse from './pages/termsOfUse/TermsOfUse';
 import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/DirectDebitSetUp1';
 import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
-import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetUpPaymentSuccess';
+import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetupPaymentSuccess';
 
 const AppRoutes = () => {
   return (
