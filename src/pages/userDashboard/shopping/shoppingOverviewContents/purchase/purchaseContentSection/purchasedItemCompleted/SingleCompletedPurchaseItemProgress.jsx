@@ -9,7 +9,7 @@ import { selectLatestDeliveryAddress } from '../../../../../../../features/user/
 
 const SingleCompletedPurchaseItemProgress = React.memo(
   ({ product, onToggleExpand, index, item }) => {
-    console.log(product);
+    // console.log(product);
     const payments = completedPurchaseProgressData.payments;
     const deliveryAddress = useSelector(selectLatestDeliveryAddress);
 

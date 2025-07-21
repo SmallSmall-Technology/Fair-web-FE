@@ -31,8 +31,8 @@ export const DirectDebitBankSetupForm = ({ setAuthorized }) => {
     // console.log('Form Data:', data);
     // 🔐 Trigger authorization API here
     setAuthorized(true);
-    console.log('Bank selected:', selectedBank);
-    console.log('Account number:', accountNumber);
+    // console.log('Bank selected:', selectedBank);
+    // console.log('Account number:', accountNumber);
   };
 
   return (
