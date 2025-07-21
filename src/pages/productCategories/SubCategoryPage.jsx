@@ -78,7 +78,9 @@ const SubCategoryPage = () => {
           </div>
           <div className="flex justify-between items-baseline">
             <header className="mt-8 mb-5 flex items-baseline space-x-2">
-              <h1 className="font-bold text-2xl capitalize">{sub_category}</h1>
+              <h1 className="font-bold text-2xl capitalize">
+                {sub_category.split('-').join(' ')}
+              </h1>
               <p className="text-xs text-[#6B6B6B] flex items-center space-x-1">
                 <span>({products?.length})</span>
                 <span>{products?.length === 1 ? 'item' : 'items'}</span>
