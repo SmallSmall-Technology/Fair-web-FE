@@ -9,7 +9,7 @@ import { ProductCategoriesShortcut } from './ProductCategoriesShortcut';
 import { SingleProductDetails } from './productDetails/SingleProductDetails';
 import { useQuery } from '@tanstack/react-query';
 import { useIsInView } from '../../hooks/useIsInView';
-import React from 'react';
+ ';
 import { fetchSingleProduct } from '../../api/product-api';
 
 const SingleProductPage = () => {

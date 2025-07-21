@@ -3,7 +3,7 @@ import { Button } from '../../../utils/Button';
 import LinkButton from '../../../utils/LinkButton';
 import FooterNav from './FooterNav';
 import { menuFooter } from '../../../utils/data';
-import React from 'react';
+ ';
 import { Copyright } from 'lucide-react';
 import Logo from '../Logo';
 import FooterContactInfo from './FooterTop';

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useNavigate, Link } from 'react-router-dom';
 import { YellowButton } from '../../../utils/Button.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import React from 'react';
+
 import {
   getTotalCartPrice,
   clearCart,

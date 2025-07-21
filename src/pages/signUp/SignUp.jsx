@@ -1,7 +1,6 @@
 import SignUpForm from './SignUpForm';
 import { Link } from 'react-router-dom';
 import LinkButton from '../../utils/LinkButton';
-import React from 'react';
 import Logo from '../../ui/components/Logo';
 
 function SignUp() {

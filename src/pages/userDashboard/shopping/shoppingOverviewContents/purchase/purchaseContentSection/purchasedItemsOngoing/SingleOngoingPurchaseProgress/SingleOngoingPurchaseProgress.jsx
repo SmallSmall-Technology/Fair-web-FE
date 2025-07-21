@@ -1,4 +1,4 @@
-import React from 'react';
+ ';
 import { ChevronRight } from 'lucide-react';
 import { PaymentProgress } from './PaymentProgress';
 import { CircularProgress } from '../CircularProgress';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Pagination } from './Pagination';
 import { useQuery } from '@tanstack/react-query';
 import ProductCard from '../../utils/ProductCard';
