@@ -1,4 +1,3 @@
-import React from 'react';
 import { Pagination } from './Pagination';
 import { useQuery } from '@tanstack/react-query';
 import ProductCard from '../../utils/ProductCard';
@@ -7,16 +6,17 @@ import { ArrowUpDown, ChevronRight } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import PageNotFound from '../pageNotFound/PageNotFound.jsx';
 import SubCategoryFilterForm from './filterForms/SubCategoryFilterForm';
-import { ProductCategoriesShortcut } from './ProductCategoriesShortcut';
 import {
   fetchProductsByCategoryAndSubcategory,
   getAllCategories,
 } from '../../api/product-api.js';
 import ProductCardSkeleton from '../../ui/components/skeletons/ProductCardSkeleton.jsx';
+import { ProductCategoriesShortcut } from './productCategoriesShortcut/ProductCategoriesShortcut.jsx';
 
 const SubCategoryPage = () => {
   const navigate = useNavigate();
   const { category, sub_category } = useParams();
+  console.log(sub_category);
 
   // Fetch products by category and subcategory
   // This will be used to display products under the selected subcategory
@@ -24,6 +24,8 @@ const SubCategoryPage = () => {
     queryKey: ['products-by-category', category, sub_category],
     queryFn: () =>
       fetchProductsByCategoryAndSubcategory(category, sub_category),
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 60 * 24,
   });
 
   const products = data?.data?.products || [];
@@ -33,11 +35,16 @@ const SubCategoryPage = () => {
   const { data: allCategories } = useQuery({
     queryKey: ['categories'],
     queryFn: getAllCategories,
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 60 * 24,
   });
 
   const categories = Array.isArray(allCategories?.data?.categories)
     ? allCategories.data.categories
     : [];
+
+  // console.log(categories);
+
   const isValidSubcategory = categories?.some((cat) => {
     return (
       cat.slug.toLowerCase() === category?.toLowerCase() &&
@@ -61,7 +68,10 @@ const SubCategoryPage = () => {
 
         <section className="px-5 lg:mx-0">
           <div className="flex space-x-1 items-center mt-4">
-            <p className="text-[#222224] text-sm" onClick={() => navigate(-2)}>
+            <p
+              className="text-[#222224] text-sm cursor-pointer"
+              onClick={() => navigate('/')}
+            >
               Smallsmall
             </p>
             <ChevronRight size={11} className="text-[#6B6B6B]" />
@@ -78,7 +88,9 @@ const SubCategoryPage = () => {
           </div>
           <div className="flex justify-between items-baseline">
             <header className="mt-8 mb-5 flex items-baseline space-x-2">
-              <h1 className="font-bold text-2xl capitalize">{sub_category}</h1>
+              <h1 className="font-bold text-2xl capitalize">
+                {sub_category.split('-').join(' ')}
+              </h1>
               <p className="text-xs text-[#6B6B6B] flex items-center space-x-1">
                 <span>({products?.length})</span>
                 <span>{products?.length === 1 ? 'item' : 'items'}</span>
@@ -120,11 +132,10 @@ const SubCategoryPage = () => {
             </section>
           )}
           {!products?.length && !isFetching && (
-            <p className="text-center text-gray-500 mt-10">
+            <p className="text-center text-white font-outfit rounded-lg mt-10 bg-gray-400 w-full py-20 flex justify-center items-center">
               No products found in this subcategory.
             </p>
           )}
-          <p>No product found under this subcategory</p>
           <div className="flex justify-center md:justify-start">
             <Pagination />
           </div>

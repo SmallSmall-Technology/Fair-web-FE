@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './ui/components/layout/Layout';
 import Home from './pages/home/Home';
@@ -93,7 +93,7 @@ const AppRoutes = () => {
         />
 
         <Route
-          path="lifestyle"
+          path="lifestyle-consumer-goods"
           element={
             <Suspense fallback={<LandingPageSkeleton />}>
               <ConsumerGoodsHome />
@@ -130,7 +130,7 @@ const AppRoutes = () => {
         element={<LazyRoute element={<SubCategoryPage />} />}
       /> */}
 
-        <Route path="electronics/*" element={<PageNotFound />} />
+        <Route path=":category/*" element={<PageNotFound />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
 

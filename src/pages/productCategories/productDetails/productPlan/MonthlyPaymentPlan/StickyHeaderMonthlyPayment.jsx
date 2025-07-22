@@ -1,4 +1,3 @@
-import React from 'react';
 import { getPaymentDates } from '../../SingleProductDetailsAside';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 

@@ -2,16 +2,14 @@ import { HeroTextSection } from '../HeroTextSection';
 import { FoodAndDrinkBanner } from './foodAndDrinkContentSection/FoodAndDrinkBanner';
 import TodaysDeal from '../homeLivingLandingPage/homeLivingContentSection/TodaysDeal';
 import { FoodAndDrinkCategory } from './foodAndDrinkContentSection/FoodAndDrinkCategory';
-import { ProductCategoriesShortcut } from '../../productCategories/ProductCategoriesShortcut';
 import NewProductsInStore from '../homeLivingLandingPage/homeLivingContentSection/NewProductsInStore';
 
-import { useCategories } from '../../../hooks/useCategories';
+import { ProductCategoriesShortcut } from '../../productCategories/productCategoriesShortcut/ProductCategoriesShortcut';
 
 const FoodAndDrinkHome = () => {
-  const { categories } = useCategories();
   return (
     <>
-      <ProductCategoriesShortcut categories={categories} />
+      <ProductCategoriesShortcut />
       <div className="mx-5">
         <FoodAndDrinkBanner />
         <HeroTextSection />

@@ -24,7 +24,7 @@ const SearchQuery = () => {
 
   return (
     <div className="flex w-full lg:w-1/3">
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full font-inter">
         <label htmlFor="search" className="sr-only">
           Search for products
         </label>

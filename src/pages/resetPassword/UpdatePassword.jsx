@@ -5,7 +5,6 @@ import { Button } from '../../utils/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearError } from '../../features/auth/authSlice';
 import { useNavigate, Link } from 'react-router-dom';
-import React from 'react';
 import { passwordReset } from '../../api/authAPI';
 
 // eslint-disable-next-line react/prop-types

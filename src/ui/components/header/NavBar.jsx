@@ -2,10 +2,7 @@ import {
   getTotalCartPrice,
   getTotalCartQuantity,
 } from '../../../features/cart/cartSlice';
-import {
-  getUserIsAuthenticated,
-  // getUserName,
-} from '../../../features/auth/authSlice';
+import { getUserIsAuthenticated } from '../../../features/auth/authSlice';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import CartDropdownItems from './CartDropdownItems';
@@ -34,7 +31,7 @@ export const NavBar = () => {
   };
 
   return (
-    <nav aria-label="Main navigation">
+    <nav aria-label="Main navigation" className="font-inter font-medium">
       <ul className="flex items-center space-x-6">
         <li className="lg:hidden xl:flex items-center space-x-1 font-medium text-[#333]">
           <a
@@ -148,10 +145,10 @@ export const NavBar = () => {
         <li>
           <button
             type="button"
-            className="group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 border-bg-[var(--yellow-primary)]  px-4 py-2 text-lg font-medium text-black hover:bg-gray-50 hover:text-black transition-all motion-safe:duration-200 hover:scale-105 active:scale-95"
+            className="group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)]  border-bg-[var(--yellow-primary)]  px-6 py-2 text-lg font-medium text-black hover:bg-gray-50 hover:text-black transition-all motion-safe:duration-200 hover:scale-105 active:scale-95"
           >
             <span className="absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all duration-400 ease-in-out group-hover:top-0 group-hover:h-full"></span>
-            <span className="relative transform duration-700 group-hover:-translate-x-1 font-medium text-base">
+            <span className="font-inter relative transform duration-700 group-hover:-translate-x-1 font-medium text-base">
               Sell
             </span>
           </button>

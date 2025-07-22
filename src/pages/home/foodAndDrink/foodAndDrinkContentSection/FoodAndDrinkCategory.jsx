@@ -29,7 +29,7 @@ export const FoodAndDrinkCategory = () => {
   return (
     <section className="lg:mx-5 pt-8">
       <h3 className="text-3xl font-semibold mx-5">Food & Drink</h3>
-      <p className="mb-4 mx-5">Shop by category</p>
+      <p className="mb-4 mx-5 font-outfit">Shop by category</p>
 
       <div className="w-full lg:flex lg:space-x-4 mb-4 grid gap-8 lg:gap-4 ">
         <Grocery />
