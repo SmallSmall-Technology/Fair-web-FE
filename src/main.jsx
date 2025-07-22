@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom/client';
 import { PersistGate } from 'redux-persist/integration/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React from 'react';
 
 const queryClient = new QueryClient();
 

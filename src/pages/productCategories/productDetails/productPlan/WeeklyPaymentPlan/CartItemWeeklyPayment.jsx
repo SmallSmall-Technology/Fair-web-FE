@@ -1,4 +1,4 @@
- ';
+import React from 'react';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 
 export const CartItemWeeklyPayment = React.memo(({ product }) => {

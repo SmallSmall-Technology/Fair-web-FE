@@ -1,10 +1,10 @@
- ';
 import { ChevronRight } from 'lucide-react';
 import { PaymentProgress } from './PaymentProgress';
 import { CircularProgress } from '../CircularProgress';
 import { DeliveryProgress } from './DeliveryProgress';
 import { progressData } from '../../../../../../userDashboardData';
 import { formatCurrency } from '../../../../../../../../utils/FormatCurrency';
+import React from 'react';
 
 const SingleOngoingPurchaseProgress = React.memo(
   ({ product, toggleExpand, index }) => {

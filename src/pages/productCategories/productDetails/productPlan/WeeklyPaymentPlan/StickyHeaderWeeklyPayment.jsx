@@ -1,4 +1,3 @@
- ';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 
 export const StickyHeaderWeeklyPayment = ({ product }) => {

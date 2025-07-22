@@ -1,31 +1,14 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { HeroTextSection } from '../HeroTextSection';
+import { ElectronicsCategory } from './electronicContentSection/ElectronicsCategory';
 import TodaysDeal from '../homeLivingLandingPage/homeLivingContentSection/TodaysDeal';
-import { ProductCategoriesShortcut } from '../../productCategories/ProductCategoriesShortcut';
 import { ElectronicsHomeHeroBanner } from './electronicContentSection/ElectronicsHomeHeroBanner';
 import NewProductsInStore from '../homeLivingLandingPage/homeLivingContentSection/NewProductsInStore';
-import { useQuery } from '@tanstack/react-query';
-import { getAllCategories } from '../../../api/product-api';
-import { ElectronicsCategory } from './electronicContentSection/ElectronicsCategory';
-import { useParams } from 'react-router-dom';
-import { useCategories } from '../../../hooks/useCategories';
+import { ProductCategoriesShortcut } from '../../productCategories/productCategoriesShortcut/ProductCategoriesShortcut';
 
 const ElectronicsHome = () => {
-  // const electronicsSubcategories = [
-  //   { name: 'Phones', link: '/electronics/phones' },
-  //   { name: 'Computers', link: '/electronics/computers' },
-  //   { name: 'TV', link: '/electronics/tv' },
-  //   { name: 'Home Audio & Theater', link: '/electronics/audio-theater' },
-  //   { name: 'Video Games', link: '/electronics/video-games' },
-  //   { name: 'Gadgets', link: '/electronics/gadgets' },
-  //   { name: 'House Appliances', link: '/electronics/house-appliances' },
-  //   { name: 'Accessories', link: '/electronics/accessories' },
-  // ];
-
-  const { categories } = useCategories();
   return (
     <>
-      <ProductCategoriesShortcut categories={categories} />
+      <ProductCategoriesShortcut />
 
       <div className="mx-5">
         <ElectronicsHomeHeroBanner />
@@ -36,7 +19,6 @@ const ElectronicsHome = () => {
         <NewProductsInStore />
         <TodaysDeal />
       </div>
-      {/* <Outlet /> */}
     </>
   );
 };

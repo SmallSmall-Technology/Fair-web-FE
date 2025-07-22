@@ -12,7 +12,6 @@ import { useEffect, useRef, useState } from 'react';
 import CartDropdownItems from './CartDropdownItems';
 import UserMenuDropdown from './UserMenuDropdown';
 import Shop from './Shop';
- ';
 
 export const MobileNavBar = () => {
   const menuRef = useRef(null);

@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCompletedOrders } from '../../../features/order/orderSlice';
 import { logout } from '../../../features/auth/authSlice';
- ';
 import { getUserFullName } from '../../../features/user/userSlice';
 
 export const LoggedInUserDropdown = ({

@@ -51,7 +51,7 @@ export const HomeLivingCategory = () => {
   return (
     <section className="lg:mx-5 py-8">
       <h3 className="text-3xl font-semibold px-5">Home & Living</h3>
-      <p className="mb-4 px-5">Shop by category</p>
+      <p className="mb-4 mx-5 font-outfit">Shop by category</p>
       <div className="hidden md:grid grid-cols-2 gap-6 lg:hidden">
         <Decor />
         <Furniture />

@@ -1,4 +1,3 @@
- ';
 import { getPaymentDates } from '../../SingleProductDetailsAside';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 

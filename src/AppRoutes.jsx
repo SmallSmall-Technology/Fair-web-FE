@@ -93,7 +93,7 @@ const AppRoutes = () => {
         />
 
         <Route
-          path="lifestyle"
+          path="lifestyle-consumer-goods"
           element={
             <Suspense fallback={<LandingPageSkeleton />}>
               <ConsumerGoodsHome />

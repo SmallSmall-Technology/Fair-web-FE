@@ -72,7 +72,7 @@ export const ConsumerGoodsCategory = () => {
       <h3 className="text-3xl font-semibold mx-5">
         Lifestyle & Consumer goods
       </h3>
-      <p className="mb-4 mx-5">Shop by category</p>
+      <p className="mb-4 mx-5 font-outfit">Shop by category</p>
 
       <div className="hidden md:grid grid-cols-2 gap-4 lg:hidden">
         <PersonalCare />

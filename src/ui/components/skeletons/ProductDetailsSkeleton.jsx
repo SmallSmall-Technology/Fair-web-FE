@@ -1,4 +1,3 @@
- ';
 import SkeletonBox from './SkeletonBox';
 import Header from '../header/Header';
 

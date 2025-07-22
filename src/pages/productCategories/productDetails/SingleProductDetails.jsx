@@ -34,6 +34,8 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
   const { data, isLoading, isError } = useQuery({
     queryKey: ['relatedProducts', category, subcategory],
     queryFn: () => fetchProductsByCategoryAndSubcategory(category, subcategory),
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 60 * 24,
   });
   // console.log('Related Products:', data);
   const relatedProducts = data;

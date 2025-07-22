@@ -5,6 +5,8 @@ export const useCategories = () => {
   const { data: allCategories, ...rest } = useQuery({
     queryKey: ['categories'],
     queryFn: getAllCategories,
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 60 * 24,
   });
 
   const categories = Array.isArray(allCategories?.data?.categories)

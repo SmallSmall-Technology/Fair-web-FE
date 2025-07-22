@@ -1,15 +1,11 @@
 import { ChevronRight } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
-// import {
-//   ProductCategoriesShortcut,
-//   departments,
-// } from './ProductCategoriesShortcut';
+
 // import { SingleProductStickyHeader } from '../../ui/components/header/SingleProductStickyHeader';
 import { ProductCategoriesShortcut } from './ProductCategoriesShortcut';
 import { SingleProductDetails } from './productDetails/SingleProductDetails';
 import { useQuery } from '@tanstack/react-query';
 import { useIsInView } from '../../hooks/useIsInView';
- ';
 import { fetchSingleProduct } from '../../api/product-api';
 
 const SingleProductPage = () => {
@@ -23,15 +19,9 @@ const SingleProductPage = () => {
     queryFn: () => fetchSingleProduct(productID),
     enabled: !!productID,
     refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 60 * 24,
   });
-
-  // console.log('Product Data:', product);
-
-  // const getCategory = departments.find(
-  //   (department) => department.name.toLowerCase() === category?.toLowerCase()
-  // );
-  // const categories = getCategory.subcategories;
-  // const categories = true;
 
   return (
     <>

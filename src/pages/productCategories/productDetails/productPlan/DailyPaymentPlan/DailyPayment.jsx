@@ -1,4 +1,4 @@
- ';
+import React from 'react';
 import { Button } from '../../../../../utils/Button';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { item_width } from '../../SingleProductDetailsAside';
