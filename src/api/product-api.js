@@ -33,3 +33,17 @@ export const getAllCategories = async () => {
   const response = await httpClient.get('products/categories');
   return response.data;
 };
+
+export const getCategorySubcategories = async (category) => {
+  const response = await httpClient.get(
+    `products/single-categories/${category}`
+  );
+  return response.data;
+};
+
+export const toggleProductToFavourite = async (productId) => {
+  const response = await httpClient.post('products/toggle-favorite', {
+    productId,
+  });
+  return response.data;
+};

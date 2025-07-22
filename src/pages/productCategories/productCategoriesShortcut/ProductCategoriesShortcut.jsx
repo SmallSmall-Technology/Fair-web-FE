@@ -1,53 +1,50 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/react-in-jsx-scope */
+import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect, useRef } from 'react';
-import { Link, NavLink, useParams } from 'react-router-dom';
+import {
+  getAllCategories,
+  getCategorySubcategories,
+} from '../../../api/product-api';
+import { SingleCategorySubcategories } from './SingleCategorySubcategories';
 
-const SingleProductCategory = ({ subcategory }) => {
-  const { category } = useParams();
-
-  return (
-    <li className="flex flex-col items-center hover:cursor-pointer transition-all duration-300 ease-in-out">
-      <NavLink
-        to={`/${category}/${subcategory?.slug}`}
-        className={({ isActive }) =>
-          `text-sm font-medium text-nowrap px-2 py-1 transition-transform duration-300 ${
-            isActive ? 'border-b border-black scale-105' : ''
-          }`
-        }
-      >
-        {subcategory.name || 'No Name'}
-      </NavLink>
-    </li>
-  );
-};
-
-export const ProductCategoriesShortcut = ({ categories }) => {
+export const ProductCategoriesShortcut = ({}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
+  const [category, setCategory] = useState('');
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
-  const { category } = useParams();
 
-  // const fewCategories = [
-  //   'electronics',
-  //   'lifestyle',
-  //   'food-drink',
-  //   'real-estate',
-  // ];
+  useEffect(() => {
+    const path = window.location.pathname;
+    const segments = path.split('/').filter(Boolean);
+    setCategory(segments[0]);
+  }, []);
+
+  const { data: categoryData, isLoading: isLoadingSubcategories } = useQuery({
+    queryKey: ['subcategories', category],
+    queryFn: () => getCategorySubcategories(category),
+    enabled: !!category,
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 60,
+    cacheTime: 1000 * 60 * 60 * 24,
+    retry: false,
+  });
+  const subcategoryData = categoryData?.data?.subcategories || [];
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
     if (isDropdownOpen) setSelectedDepartment(null);
   };
 
-  // const { data } = useQuery({
-  //   queryKey: ['categories'],
-  //   queryFn: () => getAllCategories(),
-  // });
-  // const categories = Array.isArray(data?.data?.categories)
-  //   ? data.data.categories
-  //   : [];
+  const { data } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => getAllCategories(),
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 60 * 24,
+  });
+  const categories = Array.isArray(data?.data?.categories)
+    ? data.data.categories
+    : [];
 
   const handleDepartmentClick = (department) => {
     setSelectedDepartment(department);
@@ -112,7 +109,7 @@ export const ProductCategoriesShortcut = ({ categories }) => {
               onClick={toggleDropdown}
               className="appearance-none bg-transparent outline-none cursor-pointer focus:ring-2 focus:ring-blue-400 rounded"
             >
-              <p>Department</p>
+              <p className="font-outfit font-semibold">Department</p>
             </button>
           </p>
           {isDropdownOpen && (
@@ -120,10 +117,10 @@ export const ProductCategoriesShortcut = ({ categories }) => {
               <div style={overlayStyle} onClick={toggleDropdown} />
               <div
                 ref={dropdownRef}
-                className="absolute top-full left-0 mt-2 bg-white rounded-b-[10px] shadow-lg z-30 flex"
+                className="absolute top-full left-0  bg-white rounded-b-[10px] shadow-lg z-30 flex"
               >
                 <div className="py-2 w-64">
-                  <h3 className="font-semibold text-sm px-4">
+                  <h3 className="font-outfit font-semibold text-sm px-4">
                     All Departments
                   </h3>
                   <hr className="my-2 mx-4" />
@@ -132,7 +129,7 @@ export const ProductCategoriesShortcut = ({ categories }) => {
                       <li
                         key={cat.name}
                         onClick={() => handleDepartmentClick(cat)}
-                        className={`cursor-pointer py-1 transition-all duration-200 ease-in-out 
+                        className={`font-outfit cursor-pointer py-1 transition-all duration-200 ease-in-out 
                           ${cat.name === selectedDepartment?.name ? 'font-semibold bg-[#FFF8CF]' : ''} 
                           ${cat.name === 'Sales & Offers' ? 'text-[#DB1C5E]' : 'text-gray-800'} 
                           hover:bg-[#FFF8CF] hover:scale-101 hover:shadow-sm 
@@ -149,17 +146,18 @@ export const ProductCategoriesShortcut = ({ categories }) => {
                 </div>
                 {selectedDepartment &&
                   selectedDepartment.subcategories.length > 0 && (
-                    <div className="p-4 bg-[#FFF8CF] w-64 rounded-b-[10px]">
-                      <h3 className="font-semibold text-sm">
+                    <div className="py-2 w-64 bg-[#FFF8CF] rounded-b-[10px]">
+                      <h3 className="font-outfit font-semibold text-sm px-4">
                         {selectedDepartment.name}
                       </h3>
-                      <hr className="border-black my-2" />
-                      <ul className="mt-2 space-y-2">
+                      <hr className="border-black my-2 mx-2" />
+
+                      <ul className="mt-3 space-y-4 mx-2 ">
                         {selectedDepartment.subcategories.map((sub, index) => (
                           <li key={index}>
                             <Link
                               to={`/${selectedDepartment.slug}/${sub.slug}`}
-                              className="cursor-pointer rounded px-2 py-1 text-gray-700 hover:bg-yellow-100 hover:scale-105 hover:shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:bg-yellow-100 focus:scale-105 focus:shadow-sm focus:underline"
+                              className="font-outfit cursor-pointer  px-2 py-1 text-gray-700 hover:bg-yellow-100 hover:scale-105 hover:shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:bg-yellow-100 focus:scale-105 focus:shadow-sm focus:underline"
                               tabIndex={0}
                               onKeyDown={(e) => e.key === 'Enter'}
                               onClick={handleClose}
@@ -175,26 +173,12 @@ export const ProductCategoriesShortcut = ({ categories }) => {
             </>
           )}
         </div>
-        <ul className="flex space-x-4 z-10">
-          {category &&
-            categories
-              ?.find((cat) => cat.name.toLowerCase() === category.toLowerCase())
-              ?.subcategories?.map((sub, index) => (
-                <SingleProductCategory subcategory={sub} key={index} />
-              ))}
-          {/* {categories
-            .filter((category) =>
-              fewCategories.includes(category?.slug?.toLowerCase())
-            )
-            .flatMap(
-              (matchedCategory) =>
-                matchedCategory.subcategories?.map((sub, index) => (
-                  <SingleProductCategory
-                    subcategory={sub}
-                    key={sub.slug || index}
-                  />
-                )) || []
-            )} */}
+        <ul className="flex space-x-4">
+          <SingleCategorySubcategories
+            subcategory={subcategoryData}
+            category={category}
+            isLoadingSubcategories={isLoadingSubcategories}
+          />
         </ul>
         <Link className="hidden lg:flex font-medium text-[#DB1C5E] text-sm hover:text-[#FF4A8A] hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-400 rounded text-nowrap">
           Sales & Offers

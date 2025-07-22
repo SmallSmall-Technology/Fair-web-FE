@@ -47,6 +47,7 @@ const ProductCard = ({ product, isLoading }) => {
     slug,
     minimumDownPaymentPercentage,
     average_rating,
+    total_review_count,
   } = product || {};
 
   const { data } = useQuery({
@@ -54,6 +55,8 @@ const ProductCard = ({ product, isLoading }) => {
     queryFn: () => fetchSingleProduct(productID),
     enabled: !!productID,
     refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 60 * 24,
   });
 
   const category = data?.produtCategory.parent_category?.slug;
@@ -148,7 +151,11 @@ const ProductCard = ({ product, isLoading }) => {
         </TransitionLink>
         <div className="flex items-center lg:space-x-1">
           <Star fill="black" size={14} aria-hidden="true" />
-          <p className="text-sm"> {average_rating / 5 || '2/5'} </p>
+          <p className="font-inter text-sm">
+            {' '}
+            {average_rating || '4.5'}
+            <span className="ml-1">({total_review_count || '5'})</span>{' '}
+          </p>
         </div>
         <div className="flex flex-col lg:flex-row lg:space-x-2 lg:items-center space-y-1">
           <p className="font-inter font-semibold text-base">

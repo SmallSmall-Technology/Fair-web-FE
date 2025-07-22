@@ -1,4 +1,3 @@
-import React from 'react';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 
 export const FullPayment = ({ product }) => {

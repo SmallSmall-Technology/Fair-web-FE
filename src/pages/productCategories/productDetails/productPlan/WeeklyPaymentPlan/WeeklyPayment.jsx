@@ -1,8 +1,8 @@
-import React from 'react';
 import { Button } from '../../../../../utils/Button';
 import { item_width } from '../../SingleProductDetailsAside';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
+import React from 'react';
 
 export const WeeklyPayment = React.memo(
   ({

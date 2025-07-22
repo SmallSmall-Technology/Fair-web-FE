@@ -1,7 +1,4 @@
-// import { Link } from 'react-router-dom';
-// import { Trash2 } from 'lucide-react';
 import { useSelector } from 'react-redux';
-import React from 'react';
 import { getFavourites } from '../../../../features/favourite/favouriteSlice';
 import ProductCard from '../../../../utils/ProductCard';
 

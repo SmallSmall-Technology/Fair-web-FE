@@ -9,6 +9,8 @@ const TodaysDeal = ({ onScrollProduct, item_width, containerRef }) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ['products'],
     queryFn: fetchAllProducts,
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 60 * 24,
   });
   return (
     <>

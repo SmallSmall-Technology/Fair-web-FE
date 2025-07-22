@@ -5,7 +5,6 @@ import { formatCurrency } from '../../../utils/FormatCurrency';
 import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
 import { SaveItemForLater } from '../../../features/cart/SaveItemForLater';
 import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { SunDim } from 'lucide-react';
 
