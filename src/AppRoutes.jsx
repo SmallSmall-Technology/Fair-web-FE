@@ -47,6 +47,7 @@ import Feedback from './pages/userDashboard/accountProfile/contents/feedback/Fee
 import ResolutionCentre from './pages/userDashboard/accountProfile/contents/resolutionCentre/ResolutionCentre';
 import UserAccountProfile from './pages/userDashboard/accountProfile/UserAccountProfile';
 import TermsOfUse from './pages/termsOfUse/TermsOfUse';
+import HowItWorks from './pages/howItWorks/HowItWorks';
 import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/DirectDebitSetUp1';
 import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetupPaymentSuccess';
@@ -121,6 +122,15 @@ const AppRoutes = () => {
           element={
             <Suspense fallback={<LandingPageSkeleton />}>
               <TermsOfUse />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="how-it-works"
+          element={
+            <Suspense fallback={<LandingPageSkeleton />}>
+              <HowItWorks />
             </Suspense>
           }
         />
