@@ -27,12 +27,11 @@ export const TotalRatings = ({ maxRating = 5, reviews }) => {
   );
 };
 
-export const StarRating = ({ maxRating = 5 }) => {
-  const [rating, setRating] = useState(0);
-
+export const StarRating = ({ maxRating = 5, rating, setRating }) => {
   const handleRating = (rating) => {
     setRating(rating);
   };
+  const numericRating = Number(rating);
   return (
     <div
       className="flex items-center"
@@ -47,9 +46,9 @@ export const StarRating = ({ maxRating = 5 }) => {
           index={i + 1}
         />
       ))}
-      <span className="ml-2">{rating.toFixed(1)}</span>
+      <span className="ml-2">{numericRating?.toFixed(1)}</span>
       <span className="sr-only">
-        {rating.toFixed(1)} rate out of {maxRating}
+        Number {numericRating?.toFixed(1)} rate out of {maxRating}
       </span>
     </div>
   );
@@ -65,7 +64,7 @@ const Star = ({ onRate, full, index }) => {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
-          fill="#000"
+          fill="#FCE340"
           width={18}
         >
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />

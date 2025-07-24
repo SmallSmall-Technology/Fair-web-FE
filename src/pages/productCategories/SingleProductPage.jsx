@@ -2,7 +2,8 @@ import { ChevronRight } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // import { SingleProductStickyHeader } from '../../ui/components/header/SingleProductStickyHeader';
-import { ProductCategoriesShortcut } from './ProductCategoriesShortcut';
+import { ProductCategoriesShortcut } from './productCategoriesShortcut/ProductCategoriesShortcut.jsx';
+
 import { SingleProductDetails } from './productDetails/SingleProductDetails';
 import { useQuery } from '@tanstack/react-query';
 import { useIsInView } from '../../hooks/useIsInView';
@@ -27,23 +28,23 @@ const SingleProductPage = () => {
     <>
       <main className="px-6 lg:px-10 mb-5 lg:block w-full">
         <div className="" ref={targetRef}>
-          <ProductCategoriesShortcut categories={categories} />
+          <ProductCategoriesShortcut />
         </div>
         <div className="flex md:hidden overflow-x-auto scrollbar-hide"></div>
         <div className="flex lg:hidden">
           {/* {!isInView && <SingleProductStickyHeader product={product} />} */}
         </div>
         <section className="hidden lg:flex lg:px-6">
-          <div className="flex space-x-1 items-center mt-4">
-            <p className="text-[#222224] text-sm">Smallsmall</p>
+          <div className="font-inter text-sm flex space-x-1 items-center mt-4">
+            <p className="text-[#222224] ">Smallsmall</p>
             <ChevronRight size={11} className="text-[#6B6B6B]" />
-            <p className="text-[#222224] text-sm cursor-pointer">
+            <p className="text-[#222224]  cursor-pointer">
               {category &&
                 category?.charAt(0).toUpperCase() + category?.slice(1)}
             </p>
             <ChevronRight size={11} className="text-[#6B6B6B]" />
             <p
-              className="text-[#222224] text-sm cursor-pointer"
+              className="text-[#222224]  cursor-pointer"
               onClick={() => navigate(-1)}
             >
               {sub_category &&
@@ -51,18 +52,17 @@ const SingleProductPage = () => {
             </p>
             <ChevronRight size={11} className="text-[#6B6B6B]" />
 
-            <p className="text-[#6B6B6B] text-sm">{product?.productName}</p>
+            <p className="text-[#6B6B6B] ">{product?.productName}</p>
           </div>
         </section>
-        <p>{product?.productName}</p>
+        {/* <p>{product?.productName}</p> */}
       </main>
       <section className="mt-8 lg:mx-[40px] mb-12">
-        {/* <SingleProductDetails
+        <SingleProductDetails
           product={product}
-          // getCategory={getCategory}
           category={category}
           subcategory={sub_category}
-        /> */}
+        />
       </section>
     </>
   );

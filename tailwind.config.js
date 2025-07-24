@@ -7,6 +7,7 @@ export default {
         inter: ['Inter', 'sans-serif'],
         outfit: ['Outfit', 'sans-serif'],
         calsans: ['"Cal Sans"', 'sans-serif'],
+        dmsans: ['"DM Sans"', 'sans-serif'],
       },
       boxShadow2: {
         custom: '0px 4px 4px 0px rgba(0, 0, 0, 0.1)',
