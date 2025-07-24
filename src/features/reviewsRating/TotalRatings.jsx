@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Star } from './Star';
 
-export const TotalRatings = ({ maxRating = 5, reviews }) => {
-  const totalReviews = reviews.length;
+export const TotalRatings = ({ maxRating = 5, product }) => {
+  const totalReviews = product.totalReviews;
   const [totalRatings, setTotalRatings] = useState(totalReviews);
+  // console.log(product);
 
   const handleTotalRatings = () => {
     let rate = setTotalRatings((prevRating) => prevRating + rating);

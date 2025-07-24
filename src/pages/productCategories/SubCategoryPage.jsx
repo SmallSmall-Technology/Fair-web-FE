@@ -67,9 +67,9 @@ const SubCategoryPage = () => {
         </div>
 
         <section className="px-5 lg:mx-0">
-          <div className="flex space-x-1 items-center mt-4">
+          <div className="font-inter flex space-x-1 items-center mt-4">
             <p
-              className="text-[#222224] text-sm cursor-pointer"
+              className=" text-[#222224] text-sm cursor-pointer"
               onClick={() => navigate('/')}
             >
               Smallsmall
@@ -88,10 +88,10 @@ const SubCategoryPage = () => {
           </div>
           <div className="flex justify-between items-baseline">
             <header className="mt-8 mb-5 flex items-baseline space-x-2">
-              <h1 className="font-bold text-2xl capitalize">
+              <h1 className="text-[25px] capitalize">
                 {sub_category.split('-').join(' ')}
               </h1>
-              <p className="text-xs text-[#6B6B6B] flex items-center space-x-1">
+              <p className="font-inter text-xs text-[#6B6B6B] flex items-center space-x-1">
                 <span>({products?.length})</span>
                 <span>{products?.length === 1 ? 'item' : 'items'}</span>
               </p>
@@ -118,17 +118,20 @@ const SubCategoryPage = () => {
             </div>
           </div>
           <hr className="mb-6" />{' '}
+          {isFetching && (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+              {Array.from({ length: 10 }).map((_, index) => (
+                <ProductCardSkeleton key={index} />
+              ))}
+            </div>
+          )}
           {products?.length > 0 && (
             <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {isFetching
-                ? Array.from({ length: 10 }).map((_, index) => (
-                    <ProductCardSkeleton key={index} />
-                  ))
-                : products.map((product) => (
-                    <div key={product.id} className="mb-6">
-                      <ProductCard product={product} />
-                    </div>
-                  ))}
+              {products.map((product) => (
+                <div key={product.id} className="mb-6">
+                  <ProductCard product={product} />
+                </div>
+              ))}
             </section>
           )}
           {!products?.length && !isFetching && (

@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { ProductImage } from '../ProductImage';
-import { products } from '../../../utils/data';
 import ProductCard from '../../../utils/ProductCard';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import CommentBar from '../../../features/reviewsRating/CommentBar';
@@ -23,13 +22,10 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
   product,
   category,
   subcategory,
-  getCategory,
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
   const navigate = useNavigate();
-  // console.log('SingleProductDetails product:', product);
-  // console.log('Fetching with:', category, subcategory);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['relatedProducts', category, subcategory],
@@ -37,16 +33,8 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
     staleTime: 1000 * 60 * 5,
     cacheTime: 1000 * 60 * 60 * 24,
   });
-  // console.log('Related Products:', data);
   const relatedProducts = data;
-
-  const productImages = [
-    product?.coverImage || '',
-    product?.coverImage || '',
-    product?.coverImage || '',
-    product?.coverImage || '',
-    product?.coverImage || '',
-  ];
+  // console.log(relatedProducts);
 
   const shippingDate = '20 Jan, 2025';
 
@@ -72,27 +60,36 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
         </button>
       </div>
       <div className="flex flex-wrap w-full justify-between gap-2 lg:px-4">
-        <main className="w-full lg:w-full xl:w-[52%] mx-5 lg:mx-0">
-          {/* <div className="flex justify-between items-center md:items-start gap-5 md:mb-20"> */}
+        <main className="w-1/2 grid gap-4 mx-5 lg:mx-0">
           <div className="flex justify-between items-center lg:items-start gap-5 lg:mb-20">
             <aside className="w-[80px] hidden lg:grid">
-              <ul className="hidden lg:grid grid-cols-1 gap-2">
-                {/* {productImages.map((image, index) => ( */}
-                <ProductImage
-                  key={product.productID}
-                  image={product.coverImage}
-                  // alt={`${product.slug}-thumbnail-${productID}`}
-                  className="w-[94px] h-[94px]"
-                />
-                {/* ))} */}
-              </ul>
+              <div className="grid gap-4">
+                {product?.productGallery &&
+                  product?.productGallery
+                    .replace(/^\[|\]$/g, '')
+                    .split(',')
+                    .map((url, i) => (
+                      <div
+                        key={i}
+                        className="w-[94px] h-[94px] flex flex-col gap-4 justify-center items-center rounded-2xl bg-[#F2F2F2]"
+                      >
+                        <ProductImage>
+                          <img
+                            src={url.trim()}
+                            alt={`Product Image ${i}`}
+                            className="w-[77px] h-[77px] object-cover rounded flex justify-center items-center mx-auto"
+                          />
+                        </ProductImage>
+                      </div>
+                    ))}
+              </div>
             </aside>
             <main className="flex-1 ">
-              <div className="hidden md:bg-[#F2F2F2]  rounded-2xl w-full h-[363px] md:h-[589px] xl:w-[589p] md:flex justify-center items-center">
+              <div className="hidden md:bg-[#F2F2F2]  rounded-2xl w-full h-[363px] lg:h-[589px] lg:w-[589px] md:flex justify-center items-center">
                 <img
                   src={product.coverImage}
                   alt={product.slug}
-                  className="w-full xl:w-[487px] xl:h-[487px] object-cover"
+                  className="w-full lg:w-[487px] lg:h-[487px] object-cover"
                 />
               </div>
               <section className="relative flex justify-center mb-8 md:hidden">
@@ -101,36 +98,8 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
                   aria-live="polite"
                   role="group"
                   aria-roledescription="carousel"
-                >
-                  {/* {productImages.map((image, index) => (
-                    <img
-                      key={index}
-                      src={image}
-                      className={`absolute h-full w-full transition-opacity duration-700 ease-in-out ${
-                        index === currentIndex ? 'opacity-100' : 'opacity-0'
-                      }`}
-                      alt={`Product image ${index + 1}`}
-                    />
-                  ))} */}
-                </div>
-                <div className="absolute bottom-2 flex justify-center space-x-4 bg-[#323232] w-fit p-1 rounded-xl">
-                  {/* {productImages?.map((_, index) => (
-                    <button
-                      key={index}
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        index === currentIndex
-                          ? 'bg-[#FFFFFF] scale-125'
-                          : 'bg-[#A3A3A2]'
-                      }`}
-                      onClick={() => setCurrentIndex(index)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ')
-                          setCurrentIndex(index);
-                      }}
-                      aria-label={`Go to image ${index + 1}`}
-                    ></button>
-                  ))} */}
-                </div>
+                ></div>
+                <div className="absolute bottom-2 flex justify-center space-x-4 bg-[#323232] w-fit p-1 rounded-xl"></div>
                 <div className="absolute bottom-0 right-0 md:hidden w-fit shadow-[2px_4px_7px_1px_rgba(0,0,0,0.2)] ml-auto p-2 flex items-center rounded-[10px]">
                   <AddFavourite product={product} />
                 </div>
@@ -138,10 +107,10 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
             </main>
           </div>
           <section className="hidden xl:grid mt-8">
-            <p className="font-semibold text-xl mb-4">
+            <p className="font-inter font-semibold text-lg mb-4">
               Customer ratings and review
             </p>
-            <CommentBar />
+            <CommentBar product={product} />
           </section>
           {/* <div className="hidden lg:block">
             {selectedPaymentPlan === 'daily' && (
@@ -181,7 +150,7 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
         /> */}
       </div>
 
-      <section className="md:hidden">
+      {/* <section className="md:hidden">
         <div className="w-full h-[6px] bg-[#E5E5E5]"></div>
 
         <div className="flex items-start space-x-2 my-5 mx-4">
@@ -200,9 +169,9 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
           </div>
         </div>
         <div className="w-full h-[6px] bg-[#E5E5E5]"></div>
-      </section>
+      </section> */}
 
-      <section className="mb-24 mx-5 xl:mx-0">
+      {/* <section className="mb-24 mx-5 xl:mx-0">
         <div className="mt-8 flex justify-between items-center mb-6">
           <p className="text-normal font-semibold">You may also like</p>
           <NavLink to="/related-products" className="underline">
@@ -221,8 +190,8 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
               />
             ))}
         </div>
-      </section>
-      <section className="hidden xl:block">
+      </section> */}
+      {/* <section className="hidden xl:block">
         <h2 className="font-semibold text-2xl">Explore related searches</h2>
         <p className="text-[13px] mt-4 mb-20">Fridge 200 litre</p>
         <div className="flex justify-between">
@@ -244,7 +213,7 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
             Return to top
           </button>
         </div>
-      </section>
+      </section> */}
     </>
   );
 
