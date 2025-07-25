@@ -1,28 +1,57 @@
 import { useQuery } from '@tanstack/react-query';
 import { StarRating } from './StarRating';
-import { getProductReviews } from '../../../../api/product-api';
+import { fetchReviewsForProduct } from '../../../../api/product-api';
 import { useParams } from 'react-router-dom';
 
-export const UsersReviews = ({ productId }) => {
-  // console.log('Product ID:', productId);
+export const UsersReviews = () => {
+  const { productID } = useParams();
   const { data, isLoading } = useQuery({
     queryKey: ['review'],
-    queryFn: () => getProductReviews(productId),
+    queryFn: () => fetchReviewsForProduct(productID),
   });
 
   const productReviews = data?.data?.reviews;
-  // console.log(productReviews);
 
   return (
     <ul className="grid grid-cols-1">
-      {productReviews?.map((review, index) => (
-        <UserReview key={index} review={review} />
-      ))}
+      {isLoading && <UserReviewSkeleton />}
+      {!isLoading && productReviews?.length < 1 && (
+        <li className="text-center text-gray-500">No reviews yet.</li>
+      )}
+      {productReviews?.length > 0 &&
+        productReviews?.map((review, index) => (
+          <UserReview key={index} review={review} productID={productID} />
+        ))}
     </ul>
   );
 };
 
-export const UserReview = ({ review, handleRating }) => {
+export const UserReviewSkeleton = () => {
+  return (
+    <li className="grid grid-cols-1 animate-pulse">
+      <div className="flex space-x-1">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="w-4 h-4 bg-gray-300 rounded" />
+        ))}
+      </div>
+
+      <div className="mt-2 h-4 bg-gray-300 rounded w-3/4"></div>
+      <div className="mt-1 h-4 bg-gray-200 rounded w-2/3"></div>
+
+      <div className="flex space-x-2 mt-4">
+        <div className="w-24 h-3 bg-gray-300 rounded" />
+        <div className="w-16 h-3 bg-gray-200 rounded" />
+      </div>
+
+      <hr className="my-4" />
+    </li>
+  );
+};
+
+export const UserReview = ({ review, handleRating, productID }) => {
+  if (review.productID !== productID) {
+    return null;
+  }
   return (
     <>
       <li className="grid grid-cols-1">
@@ -33,10 +62,8 @@ export const UserReview = ({ review, handleRating }) => {
         <div className="flex space-x-3 mt-4">
           <p className="font-inter text-xs">
             {review?.name || 'Anonymous'},
-            <span className="ml-1">{new Date().toLocaleDateString()}</span>
+            <span className="ml-1">{review.updatedAt}</span>
           </p>
-          {/* <p className="font-inter text-xs">
-          </p> */}
         </div>
         <hr className="my-4" />
       </li>

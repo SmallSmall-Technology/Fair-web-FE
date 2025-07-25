@@ -1,18 +1,14 @@
 import { useState, memo } from 'react';
-import { useForm } from 'react-hook-form';
 import { TotalRatings } from './TotalRatings';
 import { CircleArrowUp } from 'lucide-react';
 import { UsersReviews } from '../../pages/productCategories/productDetails/UserReview/UsersReviews';
 import ReviewModal from '../../pages/productCategories/productDetails/UserReview/ReviewModal';
-import { useParams } from 'react-router-dom';
 
 const CommentBar = ({ product }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [productId, setProductId] = useState(product.productID);
   const [reviews, setReviews] = useState([]);
-
-  const { productID } = useParams();
-  // console.log('Comment', productID);
+  const [review, setReview] = useState('');
 
   const handleModalOpen = () => {
     setProductId(product?.productID);
@@ -29,6 +25,8 @@ const CommentBar = ({ product }) => {
 
           <input
             type="text"
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
             placeholder="Add your comment"
             className="border rounded-[20px] pl-6 py-2 font-medium text-black w-full"
           />
@@ -43,17 +41,17 @@ const CommentBar = ({ product }) => {
       </section>
 
       <section className="grid grid-cols-1 gap-6">
-        <div className="mb-8">
+        <div className="mb-8 flex items-center space-x-2">
           <p className="font-inter font-semibold">Reviews</p>
-          <TotalRatings product={product} />
+          <TotalRatings product={product} reviews={reviews} />
         </div>
-        <UsersReviews reviews={reviews} productId={productId} />
+        <UsersReviews />
       </section>
       {isOpen === true && (
         <ReviewModal
-          productId={productId}
-          isOpen={isOpen}
           onClose={() => setIsOpen(false)}
+          review={review}
+          setReview={setReview}
         />
       )}
     </>
