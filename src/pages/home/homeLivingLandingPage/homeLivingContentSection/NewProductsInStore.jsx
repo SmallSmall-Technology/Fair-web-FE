@@ -3,14 +3,14 @@ import { Button } from '../../../../utils/Button';
 import { useQuery } from '@tanstack/react-query';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from '../../../../utils/ProductCard';
-// import { products } from '../../../../utils/data';
-import React from 'react';
 import { fetchAllNewProducts } from '../../../../api/product-api';
 
 const NewProductsInStore = ({ onScrollProduct, item_width, containerRef }) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ['products'],
     queryFn: fetchAllNewProducts,
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 60 * 24,
   });
 
   const products = data?.data?.products || [];

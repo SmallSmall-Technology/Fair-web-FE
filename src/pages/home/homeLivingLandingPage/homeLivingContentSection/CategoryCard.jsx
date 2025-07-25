@@ -12,12 +12,13 @@ export const CategoryCard = ({
 
   const cardWidth = width || category.width || 'lg:w-[30%]';
   const cardHeight = height || category.height;
+  // const cardHeight = 'h-[300px]';
 
   return (
     <div
       className={`${category.color || ''} ${cardHeight} ${cardWidth} ${padding} ${margin} lg:rounded-xl flex flex-col justify-between pb-4 px-11 lg:px-4`}
     >
-      <div className={`mb-4 lg:mb-0 flex justify-center lg:justify-star`}>
+      <div className={`mb-4 lg:mb-0 flex justify-center `}>
         <img
           src={category.image}
           alt={category.title}

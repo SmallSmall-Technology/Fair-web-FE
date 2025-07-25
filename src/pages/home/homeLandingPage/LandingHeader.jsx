@@ -1,83 +1,44 @@
 import { NavLink } from 'react-router-dom';
+import { useCategories } from '../../../hooks/useCategories';
 
-export default function LandingHeader() {
+const LandingHeader = () => {
+  const { categories, isLoading } = useCategories();
+
+  const sortedCategories = categories?.slice().sort((a, b) => a.id - b.id);
+
   return (
     <div className="overflow-x-auto flex justify-center">
-      <nav className="flex gap-4 px-4 py-2 whitespace-nowrap text-sm w-fit">
-        <NavLink
-          to="/home-living"
-          className={({ isActive }) =>
-            isActive ? 'text-red-700 font-semibold' : 'hover:text-red-500'
-          }
-        >
-          Home & Living
-        </NavLink>
+      <nav className="font-calsans flex gap-4 px-4 py-2 whitespace-nowrap text-sm w-fit">
+        {isLoading
+          ? Array.from({ length: 6 }).map((_, index) => (
+              <div
+                key={index}
+                className="h-5 w-20 bg-gray-200 rounded animate-pulse"
+              />
+            ))
+          : sortedCategories?.map((cat) => (
+              <NavLink
+                key={cat.id}
+                to={`/${cat.slug}`}
+                className={({ isActive }) => {
+                  const baseClasses = 'hover:text-red-500';
+                  const activeClasses = isActive
+                    ? 'font-semibold underline'
+                    : '';
+                  const salesClass =
+                    cat.slug.toLowerCase() === 'sales-offers'
+                      ? 'text-[#DB1C5E]'
+                      : '';
 
-        <NavLink
-          to="/lifestyle"
-          className={({ isActive }) =>
-            isActive ? 'text-red-700 font-semibold' : 'hover:text-red-500'
-          }
-        >
-          Lifestyle & Consumer Goods
-        </NavLink>
-
-        <NavLink
-          to="/electronics"
-          className={({ isActive }) =>
-            isActive ? 'text-red-700 font-semibold' : 'hover:text-red-500'
-          }
-        >
-          Electronics
-        </NavLink>
-
-        <NavLink
-          to="/food-drink"
-          className={({ isActive }) =>
-            isActive ? 'text-red-700 font-semibold' : 'hover:text-red-500'
-          }
-        >
-          Food & Drink
-        </NavLink>
-
-        <NavLink
-          to="/real-estate"
-          className={({ isActive }) =>
-            isActive ? 'text-red-700 font-semibold' : 'hover:text-red-500'
-          }
-        >
-          Real Estate
-        </NavLink>
-
-        <NavLink
-          to="/education-training"
-          className={({ isActive }) =>
-            isActive ? 'text-red-700 font-semibold' : 'hover:text-red-500'
-          }
-        >
-          Education & Training
-        </NavLink>
-
-        <NavLink
-          to="/automotive"
-          className={({ isActive }) =>
-            isActive ? 'text-red-700 font-semibold' : 'hover:text-red-500'
-          }
-        >
-          Automotive
-        </NavLink>
-
-        <NavLink
-          to="/sales-offers"
-          className={({ isActive }) =>
-            isActive
-              ? 'text-red-700 font-semibold underline'
-              : 'hover:text-red-500'
-          }
-        >
-          Sales & Offers
-        </NavLink>
+                  return `${baseClasses} ${activeClasses} ${salesClass}`;
+                }}
+              >
+                {cat.name}
+              </NavLink>
+            ))}
       </nav>
     </div>
   );
-}
+};
+
+export default LandingHeader;

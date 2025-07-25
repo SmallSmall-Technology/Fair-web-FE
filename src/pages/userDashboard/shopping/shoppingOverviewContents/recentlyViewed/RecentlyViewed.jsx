@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import React from 'react';
 import { getRecentlyViewed } from '../../../../../features/product/recentlyViewedSlice';
 import ProductCard from '../../../../../utils/ProductCard';
 

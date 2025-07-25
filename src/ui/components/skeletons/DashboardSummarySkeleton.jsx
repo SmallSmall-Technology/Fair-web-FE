@@ -1,5 +1,3 @@
-import React from 'react';
-
 const DashboardSummarySkeleton = () => {
   return (
     <section className="grid grid-cols-1 gap-6 animate-pulse">

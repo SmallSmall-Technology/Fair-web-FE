@@ -1,4 +1,3 @@
-import React from 'react';
 import SkeletonBox from './SkeletonBox';
 import Header from '../header/Header';
 

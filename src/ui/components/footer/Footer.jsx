@@ -3,10 +3,10 @@ import { Button } from '../../../utils/Button';
 import LinkButton from '../../../utils/LinkButton';
 import FooterNav from './FooterNav';
 import { menuFooter } from '../../../utils/data';
-import React from 'react';
 import { Copyright } from 'lucide-react';
 import Logo from '../Logo';
 import FooterContactInfo from './FooterTop';
+import React from 'react';
 
 const Footer = () => {
   return (
@@ -16,15 +16,9 @@ const Footer = () => {
         {/* footer logo */}
         <div className=" mb-10 ">
           <div className="footer-logo mb-8">
-            {/* <img src="/images/smallsmall-logo.svg" alt="Smallsmall Logo" /> */}
             <Logo />
             <p className="mt-4">Shop today, pay later</p>
           </div>
-          {/* <div>
-            <LinkButton link="#" className="bg-[#FFDE11;] px-4 py-3 text-black">
-              Join or login
-            </LinkButton>
-          </div> */}
         </div>
         {/* footer navigation */}
         <div className="flex grow justify-around">

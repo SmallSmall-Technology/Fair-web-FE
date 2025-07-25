@@ -1,6 +1,6 @@
 import LoginForm from './LoginForm';
 import { Link } from 'react-router-dom';
-import React from 'react';
+
 import Logo from '../../ui/components/Logo';
 
 const Login = () => {
