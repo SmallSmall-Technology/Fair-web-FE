@@ -3,14 +3,12 @@ import { StarRating } from './StarRating';
 import { fetchReviewsForProduct } from '../../../../api/product-api';
 import { useParams } from 'react-router-dom';
 
-export const UsersReviews = ({ reviews }) => {
+export const UsersReviews = () => {
   const { productID } = useParams();
   const { data, isLoading } = useQuery({
     queryKey: ['review'],
     queryFn: () => fetchReviewsForProduct(productID),
   });
-
-  console.log('Review:', reviews);
 
   const productReviews = data?.data?.reviews;
 
@@ -51,7 +49,6 @@ export const UserReviewSkeleton = () => {
 };
 
 export const UserReview = ({ review, handleRating, productID }) => {
-  console.log(review);
   if (review.productID !== productID) {
     return null;
   }

@@ -26,9 +26,7 @@ const ReviewModal = ({ onClose, review, setReview }) => {
 
     mutationFn: (data) => addReviewforProduct(data),
 
-    onMutate: (variables) => {
-      console.log('Submitting review:', variables);
-    },
+    onMutate: (variables) => {},
 
     onSuccess: (review) => {
       toast.success('Review submitted successfully', {
@@ -62,7 +60,6 @@ const ReviewModal = ({ onClose, review, setReview }) => {
     e.preventDefault();
     const reviewData = { ...data, productID };
     mutation.mutate(reviewData);
-    console.log('Submitted data:', reviewData);
   };
 
   return (

@@ -33,8 +33,7 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
     staleTime: 1000 * 60 * 5,
     cacheTime: 1000 * 60 * 60 * 24,
   });
-  const relatedProducts = data;
-  // console.log(relatedProducts);
+  const relatedProducts = data?.data?.products;
 
   const shippingDate = '20 Jan, 2025';
 
@@ -59,8 +58,8 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
           </span>
         </button>
       </div>
-      <div className="flex flex-wrap w-full justify-between gap-2 lg:px-4">
-        <main className="w-1/2 grid gap-4 mx-5 lg:mx-0">
+      <div className="grid grid-cols-1 lg:grid-cols-[50%_45%] space-x-10 flex-wrap w-full justify-between gap-2 lg:px-4">
+        <main className="grid gap-4 mx-5 lg:mx-0">
           <div className="flex justify-between items-center lg:items-start gap-5 lg:mb-20">
             <aside className="w-[80px] hidden lg:grid">
               <div className="grid gap-4">
@@ -84,7 +83,7 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
                     ))}
               </div>
             </aside>
-            <main className="flex-1 ">
+            <section className="flex-1 ">
               <div className="hidden md:bg-[#F2F2F2]  rounded-2xl w-full h-[363px] lg:h-[589px] lg:w-[589px] md:flex justify-center items-center">
                 <img
                   src={product.coverImage}
@@ -104,7 +103,7 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
                   <AddFavourite product={product} />
                 </div>
               </section>
-            </main>
+            </section>
           </div>
           <section className="hidden xl:grid mt-8">
             <p className="font-inter font-semibold text-lg mb-4">
@@ -143,14 +142,14 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
             )}
           </div> */}
         </main>
-        {/* <SingleProductDetailsAside
+        <SingleProductDetailsAside
           product={product}
           shippingDate={shippingDate}
           category={category}
-        /> */}
+        />
       </div>
 
-      {/* <section className="md:hidden">
+      <section className="md:hidden">
         <div className="w-full h-[6px] bg-[#E5E5E5]"></div>
 
         <div className="flex items-start space-x-2 my-5 mx-4">
@@ -169,29 +168,23 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
           </div>
         </div>
         <div className="w-full h-[6px] bg-[#E5E5E5]"></div>
-      </section> */}
+      </section>
 
-      {/* <section className="mb-24 mx-5 xl:mx-0">
+      <section className="mb-24 mx-5 xl:mx-0">
         <div className="mt-8 flex justify-between items-center mb-6">
           <p className="text-normal font-semibold">You may also like</p>
-          <NavLink to="/related-products" className="underline">
+          <NavLink to={`/${category}/${subcategory}`} className="underline">
             See more
           </NavLink>
         </div>
 
         <div className="grid grid-flow-col space-x-4 w-full overflow-x-scroll scrollbar-hide scroll-smooth">
-          {relatedProducts
-            .filter((prod) => prod.category === category)
-            .map((prod, productID) => (
-              <ProductCard
-                product={prod}
-                key={productID}
-                isLoading={isLoading}
-              />
-            ))}
+          {relatedProducts?.map((prod, productID) => (
+            <ProductCard product={prod} key={productID} isLoading={isLoading} />
+          ))}
         </div>
-      </section> */}
-      {/* <section className="hidden xl:block">
+      </section>
+      <section className="hidden xl:block">
         <h2 className="font-semibold text-2xl">Explore related searches</h2>
         <p className="text-[13px] mt-4 mb-20">Fridge 200 litre</p>
         <div className="flex justify-between">
@@ -213,7 +206,7 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
             Return to top
           </button>
         </div>
-      </section> */}
+      </section>
     </>
   );
 

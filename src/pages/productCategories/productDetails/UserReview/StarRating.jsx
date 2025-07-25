@@ -65,7 +65,8 @@ const Star = ({ onRate, full, index }) => {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
-          fill="#FCE340"
+          // fill="#FCE340"
+          fill="#000"
           width={30}
           height={29}
         >
@@ -76,8 +77,8 @@ const Star = ({ onRate, full, index }) => {
           xmlns="http://www.w3.org/2000/svg"
           fill="#E5E5E5"
           width={30}
-          viewBox="0 0 24 24"
           height={29}
+          viewBox="0 0 24 24"
         >
           <path
             strokeLinecap="round"

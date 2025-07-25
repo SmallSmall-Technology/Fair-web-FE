@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { Star } from './Star';
+import { useState } from 'react';
 
 export const TotalRatings = ({ maxRating = 5, product, reviews }) => {
   const totalReviews = product.totalReviews || reviews.length || 0;

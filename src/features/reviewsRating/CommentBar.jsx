@@ -45,17 +45,10 @@ const CommentBar = ({ product }) => {
           <p className="font-inter font-semibold">Reviews</p>
           <TotalRatings product={product} reviews={reviews} />
         </div>
-        <UsersReviews
-          reviews={reviews}
-          setReviews={setReviews}
-          productId={productId}
-          review={review}
-        />
+        <UsersReviews />
       </section>
       {isOpen === true && (
         <ReviewModal
-          productId={productId}
-          isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           review={review}
           setReview={setReview}
