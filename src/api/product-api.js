@@ -53,7 +53,7 @@ export const addReviewforProduct = async (data) => {
   return response.data;
 };
 
-export const getProductReviews = async (productId) => {
+export const fetchReviewsForProduct = async (productId) => {
   const response = await httpClient.get(
     `products/get-product-reviews/${productId}`
   );
