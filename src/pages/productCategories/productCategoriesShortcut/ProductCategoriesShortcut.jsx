@@ -131,7 +131,7 @@ export const ProductCategoriesShortcut = ({}) => {
                         onClick={() => handleDepartmentClick(cat)}
                         className={`font-outfit cursor-pointer py-1 transition-all duration-200 ease-in-out 
                           ${cat.name === selectedDepartment?.name ? 'font-semibold bg-[#FFF8CF]' : ''} 
-                          ${cat.name === 'Sales & Offers' ? 'text-[#DB1C5E]' : 'text-gray-800'} 
+                          ${cat.name === 'Sales & Offers' ? 'text-[#DB1C5E] font-calsans' : 'text-gray-800'} 
                           hover:bg-[#FFF8CF] hover:scale-101 hover:shadow-sm 
                           focus: outline-none focus:bg-[#FFF8CF] focus:scale-101 focus:shadow-sm`}
                         tabIndex={0}

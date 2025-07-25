@@ -134,8 +134,8 @@ const LoginForm = () => {
       >
         {loading ? (
           <>
+            <span className="font-inter mr-1">Logging in...</span>
             <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
-            <span className="sr-only">Logging in...</span>
           </>
         ) : (
           'Log in'

@@ -41,9 +41,21 @@ export const getCategorySubcategories = async (category) => {
   return response.data;
 };
 
-export const toggleProductToFavourite = async (productId) => {
-  const response = await httpClient.post('products/toggle-favorite', {
-    productId,
-  });
+// export const toggleProductToFavourite = async (productId) => {
+//   const response = await httpClient.post('products/toggle-favorite', {
+//     productId,
+//   });
+//   return response.data;
+// };
+
+export const addReviewforProduct = async (data) => {
+  const response = await httpClient.post('products/add-product-review', data);
+  return response.data;
+};
+
+export const fetchReviewsForProduct = async (productId) => {
+  const response = await httpClient.get(
+    `products/get-product-reviews/${productId}`
+  );
   return response.data;
 };

@@ -1,21 +1,14 @@
 import { Star } from './Star';
-import { useState } from 'react';
 
-export const StarRating = ({ maxRating = 5 }) => {
-  const [rating, setRating] = useState(0);
-
-  const handleRating = (rating) => {
-    setRating(rating);
-  };
-
+export const StarRating = ({ rating, onHandleRating }) => {
   return (
     <div className="flex">
-      {Array.from({ length: maxRating }, (_, i) => {
+      {Array.from({ length: 5 }, (_, i) => {
         return (
           <Star
             key={i}
             full={rating >= i + 1}
-            onRate={() => handleRating(i + 1)}
+            onRate={() => onHandleRating(i + 1)}
           />
         );
       })}

@@ -31,14 +31,11 @@ export const SingleProductDetailsAside = React.memo(
   ({ product, shippingDate, category }) => {
     const [targetRef, isInView] = useIsInView();
     const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
-
+    // console.log(product);
     return (
-      <aside className="w-full xl:w-[45%]">
-        <h1
-          ref={targetRef}
-          className="text-xl lg:text-2xl font-bold mx-5 lg:mx-0"
-        >
-          {product.name}
+      <aside className="w-full">
+        <h1 ref={targetRef} className="text-xl lg:text-[22px] mx-5 lg:mx-0">
+          {product?.productName}
         </h1>
         <hr className="my-2 hidden lg:block" />
         <div className="mt-4 lg:mt-0 mx-5 lg:mx-0">
@@ -48,8 +45,11 @@ export const SingleProductDetailsAside = React.memo(
                 src="/images/sold-by-fair.svg"
                 alt="An icon representing files"
               />
-              <p className="text-sm">
-                Sold by <span className="font-semibold">Fair</span>
+              <p className="font-inter text-sm">
+                Sold by{' '}
+                <span className="font-semibold">
+                  {product?.vendorBrandName}
+                </span>
               </p>
             </div>
             <button className="flex items-center text-sm text-[#222224] lg:hidden bg-[#323232] rounded-[10px] px-3">
@@ -59,11 +59,12 @@ export const SingleProductDetailsAside = React.memo(
               </span>
             </button>
           </div>
-          <p className="text-xs mt-3 hidden lg:block">
-            Brand <span className="font-medium">{product.brand}</span>
+          <p className="font-inter text-xs mt-3 hidden lg:block">
+            Brand{' '}
+            <span className="font-medium">{product?.brand || 'Hisense'}</span>
           </p>
-          <p className="text-[27px] font-semibold lg:mt-3 mb-6">
-            {formatCurrency(product.price)}
+          <p className="font-intertext-[27px] font-semibold lg:mt-3 mb-6">
+            {formatCurrency(product.fairAppPrice)}
           </p>
           <p className="flex items-center space-x-2">
             <img
@@ -71,11 +72,11 @@ export const SingleProductDetailsAside = React.memo(
               alt="An icon for a phone making transaction"
               width={24}
             />
-            <span className="font-medium text-sm">
+            <span className="font-inter font-medium text-sm">
               Downpayment Instant Delivery
             </span>
           </p>
-          <p className="text-xs mt-2 mb-6 lg:mb-0">
+          <p className="font-inter text-xs mt-2 mb-6 lg:mb-0">
             Pay downpayment & receive item, spread remaining payment over 3
             interest free payment.
           </p>
@@ -85,9 +86,7 @@ export const SingleProductDetailsAside = React.memo(
           Select how you want to pay
         </p>
 
-        <div>
-          <PaymentOptions product={product} />
-        </div>
+        <div>{/* <PaymentOptions product={product} /> */}</div>
 
         <div className="mt-10 lg:hidden">
           <div className="border-y-4 rounded-2xl"></div>
@@ -105,16 +104,16 @@ export const SingleProductDetailsAside = React.memo(
                 </span>
               </p>
               <p>{product.brand}</p>
-              <p>{category.name}</p>
+              <p>{category}</p>
             </div>
           </div>
         </div>
         <hr className="mt-6 mb-3 mx-5 lg:mx-0" />
-        <section className="lg:overflow-y-auto lg:h-96">
+        <section className="font-inter lg:overflow-y-auto lg:h-96">
           <div className="mb-16 mx-5 lg:mx-0">
             <h2 className="mb-4 text-lg font-medium">Item description</h2>
             <p>
-              {product.description ||
+              {product?.description ||
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'}
             </p>
           </div>
@@ -122,7 +121,7 @@ export const SingleProductDetailsAside = React.memo(
           <div className="mb-16 mx-5 lg:mx-0">
             <h2 className="mb-4 text-lg font-medium">About Item</h2>
             <p>
-              {product.about ||
+              {product?.aboutProduct ||
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'}
             </p>
           </div>
@@ -131,7 +130,7 @@ export const SingleProductDetailsAside = React.memo(
             <p className="font-semibold text-lg mb-4">
               Customer ratings and review
             </p>
-            <CommentBar />
+            <CommentBar product={product} />
           </section>
           <div className="hidden lg:grid mb-16">
             <h2 className="mb-4 text-lg font-medium">
@@ -146,7 +145,7 @@ export const SingleProductDetailsAside = React.memo(
                 />
                 Estimated delivery date{' '}
                 <span className="font-medium">
-                  {product.deliverydate || new Date().toLocaleDateString()}
+                  {product?.deliverydate || new Date().toLocaleDateString()}
                 </span>
               </li>
               <li className="flex space-x-2">
@@ -176,12 +175,12 @@ export const SingleProductDetailsAside = React.memo(
           </div>
         </section>
         <div className="hidden lg:block">
-          {!isInView && (
+          {/* {!isInView && (
             <SingleProductStickyHeader
               product={product}
               selectedPaymentPlan={selectedPaymentPlan}
             />
-          )}
+          )} */}
         </div>
       </aside>
     );
