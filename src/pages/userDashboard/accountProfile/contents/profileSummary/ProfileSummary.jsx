@@ -177,7 +177,7 @@ export default function ProfileSummary() {
                 placeholder="Email"
                 {...register('email')}
                 className="border p-2 rounded w-full font-medium"
-                disabled
+                // disabled
               />
             </label>
           </div>

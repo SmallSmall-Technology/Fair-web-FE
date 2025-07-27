@@ -54,6 +54,8 @@ const SubCategoryPage = () => {
     );
   });
 
+  // console.log(categories);
+
   if (!isValidSubcategory) {
     return <PageNotFound />;
   }
