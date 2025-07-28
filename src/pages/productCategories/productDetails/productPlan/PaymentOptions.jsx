@@ -100,7 +100,7 @@ export const PaymentOptions = React.memo(({ product }) => {
 
       <div className="py-4 w-full lg:w-[80%] px-5 lg:px-0">
         <div className="grid lg:grid-cols-2 gap-4">
-          {product.paymentOptions.map((option, index) => {
+          {product.paymentPlan.map((option, index) => {
             const isSelected = selectedPaymentPlan === option.type;
             const price =
               option.dailyPayment ||

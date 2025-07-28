@@ -41,12 +41,17 @@ export const getCategorySubcategories = async (category) => {
   return response.data;
 };
 
-// export const toggleProductToFavourite = async (productId) => {
-//   const response = await httpClient.post('products/toggle-favorite', {
-//     productId,
-//   });
-//   return response.data;
-// };
+export const toggleProductToFavourite = async (productId) => {
+  const response = await httpClient.post('products/toggle-favorite', {
+    productId,
+  });
+  return response.data;
+};
+
+export const fetchFavouriteProducts = async () => {
+  const response = await httpClient.get('/products/get-favourite-products');
+  return response.data.data;
+};
 
 export const addReviewforProduct = async (data) => {
   const response = await httpClient.post('products/add-product-review', data);
