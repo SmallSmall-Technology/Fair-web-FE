@@ -5,7 +5,7 @@ import viteCompression from 'vite-plugin-compression';
 export default defineConfig({
   server: {
     host: 'localhost',
-    port: 3000,
+    port: 5174,
     historyApiFallback: true,
   },
   plugins: [

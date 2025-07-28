@@ -86,7 +86,10 @@ export const SingleProductDetailsAside = React.memo(
           Select how you want to pay
         </p>
 
-        <div>{/* <PaymentOptions product={product} /> */}</div>
+        <div>
+          {' '}
+          <PaymentOptions product={product} />{' '}
+        </div>
 
         <div className="mt-10 lg:hidden">
           <div className="border-y-4 rounded-2xl"></div>
