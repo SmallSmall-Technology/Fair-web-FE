@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "start": "react-scripts start",
-    "mock": "json-server --watch db.json --port 3000",
     "dev": "vite",
     "test": "jest",
     "format": "prettier --write .",

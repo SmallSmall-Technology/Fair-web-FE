@@ -16,7 +16,6 @@ import { ProductCategoriesShortcut } from './productCategoriesShortcut/ProductCa
 const SubCategoryPage = () => {
   const navigate = useNavigate();
   const { category, sub_category } = useParams();
-  console.log(sub_category);
 
   // Fetch products by category and subcategory
   // This will be used to display products under the selected subcategory

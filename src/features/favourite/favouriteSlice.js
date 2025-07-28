@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// Load from localStorage if it exists
+const savedFavourites = localStorage.getItem('favourite');
 const initialState = {
-  favourite: [],
+  favourite: savedFavourites ? JSON.parse(savedFavourites) : [],
 };
 
 const favouriteSlice = createSlice({
@@ -9,8 +11,13 @@ const favouriteSlice = createSlice({
   initialState,
   reducers: {
     addItemToFavourite(state, action) {
-      state.favourite.push(action.payload);
-      localStorage.setItem('favourite', JSON.stringify(state.favourite));
+      const exists = state.favourite.some(
+        (item) => item.productID === action.payload.productID
+      );
+      if (!exists) {
+        state.favourite.push(action.payload);
+        localStorage.setItem('favourite', JSON.stringify(state.favourite));
+      }
     },
     removeItemFromFavourite(state, action) {
       state.favourite = state.favourite.filter(
@@ -20,17 +27,21 @@ const favouriteSlice = createSlice({
     },
     clearFavourite(state) {
       state.favourite = [];
+      localStorage.removeItem('favourite');
     },
   },
 });
 
 export const { addItemToFavourite, removeItemFromFavourite, clearFavourite } =
   favouriteSlice.actions;
+
 export default favouriteSlice.reducer;
 
+// Selectors
 export const getFavourites = (state) => state.favourite.favourite;
 
 export const getTotalFavouritesQuantity = (state) =>
   (state.favourite.favourite || []).reduce((total, item) => {
-    return item && item.quantity ? total + item.quantity : total;
+    const quantity = typeof item.quantity === 'number' ? item.quantity : 1;
+    return total + quantity;
   }, 0);
