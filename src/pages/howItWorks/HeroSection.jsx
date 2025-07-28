@@ -55,13 +55,9 @@ function HeroSection() {
         </div>
         <div className="w-full md:w-3/5 flex justify-end ">
           <div className="relative">
-            <img
-              src="/public/images/woman-bag.svg"
-              alt=""
-              className="relative"
-            />
+            <img src="/images/woman-bag.svg" alt="" className="relative" />
             <StyledImage
-              src="/public/images/different-products.svg"
+              src="/images/different-products.svg"
               alt=""
               style={isMobile ? { width: '50%', top: '107px', left: '0' } : {}}
             />

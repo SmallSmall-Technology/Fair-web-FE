@@ -3,20 +3,20 @@ import { Minus, Plus } from 'lucide-react';
 
 const faqData = [
   {
-    title: 'What is Smallsmall?',
+    title: 'Lorem ipsum dolupiditate aperiam ratione expedita! Enim, veniam?',
     content:
       'Smallsmall is a platform that provides flexible rent payment options.',
   },
   {
-    title: 'How it works',
+    title: 'Lorem ipsum dolupiditate aperiam ratione expedita! Enim, veniam?',
     content: 'You choose a property, subscribe, and pay monthly with ease.',
   },
   {
-    title: 'Get started',
+    title: 'Lorem ipsum dolupiditate aperiam ratione expedita! Enim, veniam?',
     content: 'Sign up, complete your profile, and start browsing properties.',
   },
   {
-    title: 'FAQs',
+    title: 'Lorem ipsum dolupiditate aperiam ratione expedita! Enim, veniam?',
     content: 'See more answers to common questions about Smallsmall.',
   },
 ];
@@ -30,7 +30,7 @@ function Accordion({ children }) {
 
   return (
     <>
-      <div className="md:w-[60%] w-full  mx-auto bg-white rounded-lg divide-y p-6">
+      <div className="md:w-[60%] w-full  mx-auto bg-white rounded-lg divide-y p-6 mb-40">
         {children}
         {faqData.map((item, index) => (
           <AccordionItem

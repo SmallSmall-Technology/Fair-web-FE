@@ -4,6 +4,9 @@ import HorizontalScrollBar from './HorizontalScrollBar';
 import ScrollableCards from './ScrollableCards';
 import ContentSection from './ContentSection';
 import Accordion from './Accordion';
+import GetStarted from './GetStarted';
+import { useMediaQuery } from 'react-responsive';
+import PaymentAccordion from './paymentAccordion/PaymentAccordion';
 
 const items = [
   { name: 'What is Smallsmall?', link: '/what-is-smallsmall' },
@@ -36,6 +39,8 @@ const benefitsData = [
 ];
 
 function HowItWorks() {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
   return (
     <>
       <HeroSection />
@@ -52,16 +57,21 @@ function HowItWorks() {
         description="Smallsmall makes it easy to own what you love without straining your budget. Simply choose your favorite item, select a flexible payment plan, and enjoy it right away while paying over time."
       />
 
+      <PaymentAccordion />
+
       <ContentSection
         title="Get Started with SmallSmall"
         description="Own what you love, your way. Sign up in minutes and start shopping with flexible payment options tailored to your budget."
       />
+      <GetStarted />
+
       <Accordion>
-        <div className="flex justify-between my-10 align-bottom ">
+        <div className="flex justify-between my-10 align-bottom items-baseline ">
           <h2 className="text-[35px]">
             Still have more questions about Smallsmall?
           </h2>
-          <Link to="/" className="text-sm">
+
+          <Link to="/" className="text-sm hidden md:block">
             See all FAQ
           </Link>
         </div>

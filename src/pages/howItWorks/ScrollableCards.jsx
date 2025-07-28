@@ -2,12 +2,12 @@ import React from 'react';
 
 const ScrollableCards = ({ cards }) => {
   return (
-    <div className="overflow-x-auto md:overflow-x-visible py-4 md:pb-32">
+    <div className="overflow-x-auto md:overflow-x-visible py-4 md:pb-32 my-14">
       <div className="flex space-x-4 px-4 md:justify-center min-w-full">
         {cards.map((card, index) => (
           <div
             key={index}
-            className="w-64 bg-[#FFDE11] px-6 py-10 rounded-lg shadow-sm flex-shrink-0"
+            className=" w-64  md:min-w-[311px] md:min-h-[279px] bg-[#FFDE11] px-6 py-10 rounded-lg shadow-sm flex-shrink-0"
           >
             <h3 className="font-bold text-lg mb-20">{card.title}</h3>
             <p className="text-sm leading-relaxed">{card.description}</p>
