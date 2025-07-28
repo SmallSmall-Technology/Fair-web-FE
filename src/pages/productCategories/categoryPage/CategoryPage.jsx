@@ -4,7 +4,7 @@ import { products } from '../../../utils/data';
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowUpDown, ChevronRight } from 'lucide-react';
 import CategoryFilterForm from '../filterForms/CategoryFilterForm';
-import { ProductCategoriesShortcut } from '../ProductCategoriesShortcut';
+import { ProductCategoriesShortcut } from '../productCategoriesShortcut/ProductCategoriesShortcut';
 // import { MiniProductCategories } from '../../home/hero/MiniProductCategories';
 
 const CategoryPage = () => {
