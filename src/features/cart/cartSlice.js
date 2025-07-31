@@ -1,12 +1,18 @@
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import { useNavigate } from 'react-router-dom';
+import httpClient from '../../api/http-clients';
 
-const API_URL = 'http://localhost:8000';
+// 🔹 Get userID dynamically from Redux state
+const getUserId = (getState) => getState().auth.user?.userID || null;
+console.log(getUserId);
+/* -------------------- THUNKS (Async Actions) -------------------- */
 
+/**
+ * Fetch all cart items for a user
+ */
 export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
-  const response = await axios.get(`${API_URL}/cart?userId=user123`);
+  const response = await httpClient.get(`/cart?userId=${getUserId}`);
+  // Normalize response data for consistent shape in the store
   return response.data.map((item) => ({
     id: item.id,
     image: item.image,
@@ -23,178 +29,124 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
   }));
 });
 
+/**
+ * Add a new product to the cart
+ * - Checks if the item exists
+ * - Calculates price based on selected payment plan
+ * - Posts the item to the backend
+ */
 export const addItem = createAsyncThunk(
   'cart/addItem',
   async (product, { getState, rejectWithValue }) => {
     try {
       const state = getState();
-      const selectedPaymentPlan = state.cart.selectedPaymentPlan;
+      const userID = getUserId(getState);
+      if (!userID) throw new Error('User not authenticated');
+
+      const selectedPaymentPlan = state.cart.selectedPaymentPlan || 'full';
+
+      // Prevent duplicate
       const exists = state.cart.cart.find(
         (item) => item.productId === product.id
       );
-
       if (exists) {
-        toast.dismiss();
-        toast.error('Item already in cart', {
-          className:
-            'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-          bodyClassName: 'm-0 p-0',
-          closeButton: false,
-        });
-        return rejectWithValue();
+        toast.error('Item already in cart');
+        return rejectWithValue('Item already in cart');
       }
 
+      // Build paymentMap
       const paymentMap = {};
-      product.paymentOptions.forEach((option) => {
-        if (option.type) {
-          paymentMap[option.type] = option;
-        }
+      product.paymentOptions.forEach((opt) => {
+        if (opt.type) paymentMap[opt.type] = opt;
       });
-      // console.log(paymentMap);
 
       const selectedOption = paymentMap[selectedPaymentPlan] || paymentMap.full;
-      if (!selectedOption) {
-        throw new Error(`${selectedPaymentPlan} payment option not available`);
-      }
+      if (!selectedOption) throw new Error('Payment option not available');
 
+      // Compute price
       const quantity = 1;
-      let price;
-      if (selectedPaymentPlan === 'daily') {
-        price = selectedOption.dailyPayment || product.price;
-      } else if (selectedPaymentPlan === 'weekly') {
-        price = selectedOption.weeklyPayment || product.price;
-      } else if (selectedPaymentPlan === 'monthly') {
-        price = selectedOption.monthlyPayment || product.price;
-      } else {
-        price = selectedOption.amount || product.price;
-      }
+      const price =
+        selectedOption.dailyPayment ||
+        selectedOption.weeklyPayment ||
+        selectedOption.monthlyPayment ||
+        selectedOption.amount ||
+        product.price;
 
       const cartItem = {
-        // id: `cart-${product.id}-${selectedPaymentPlan}-${Date.now()}`,
         id: product.id,
         category: product.category,
-        image: product.image,
-        name: product.name,
-        userId: 'user123',
-        productId: product.id,
+        image: product.coverImage,
+        name: product.productName,
+        userId: getUserId,
+        productId: product.productID,
         quantity,
         price: Number(price),
         totalPrice: Number(price) * quantity,
         paymentPlan: selectedPaymentPlan,
-        paymentPlanDetails: {
-          type: selectedPaymentPlan,
-          amount: selectedOption.amount || product.price,
-          months: selectedOption.months || 0,
-          monthlyPayment: selectedOption.monthlyPayment || 0,
-          weeks: selectedOption.weeks || 0,
-          weeklyPayment: selectedOption.weeklyPayment || 0,
-          days: selectedOption.days || 0,
-          dailyPayment: selectedOption.dailyPayment || 0,
-          totalPrice: selectedOption.totalPrice || product.price,
-          fullPayment: selectedOption.fullPayment || 0,
-        },
+        paymentPlanDetails: selectedOption,
         deliveryDate: product.deliveryDate || 'Jan, 20 2025',
         interest: selectedOption.interest || 0,
       };
-      const response = await axios.post(`${API_URL}/cart`, cartItem);
-      // console.log(cartItem);
-      const sanitizedResponse = {
-        id: response.data.id,
-        image: response.data.image,
-        name: response.data.name,
-        userId: response.data.userId,
-        productId: response.data.productId,
-        quantity: response.data.quantity,
-        price: response.data.price,
-        totalPrice: response.data.totalPrice,
-        paymentPlan: response.data.paymentPlan,
-        paymentPlanDetails: response.data.paymentPlanDetails,
-        deliveryDate: response.data.deliveryDate,
-        interest: response.data.interest,
-      };
 
-      // toast.dismiss();
-      // toast.success('Item added to cart', {
-      //   className:
-      //     'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-      //   bodyClassName: 'm-0 p-0',
-      //   closeButton: false,
-      // });
-      // toast(
-      //   <div className="flex items-center space-x-2">
-      //     <span>Item added to cart</span>
-      //     <span className="text-black">|</span>
-      //     <button
-      //       onClick={() => navigate('/cart-items')}
-      //       className="underline text-sm"
-      //     >
-      //       View cart
-      //     </button>
-      //   </div>,
-      //   {
-      //     type: 'success',
-      //     className:
-      //       'bg-[var(--yellow-primary)] text-black text-sm px-2 py-1 rounded-md min-h-0',
-      //     bodyClassName: 'm-0 p-0',
-      //     closeButton: false,
-      //   }
-      // );
-
-      return sanitizedResponse;
+      const response = await httpClient.post(
+        '/orders/create-mono-order-mandate',
+        cartItem
+      );
+      console.log(response.data);
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
 
+/**
+ * Remove a cart item by ID
+ */
 export const removeItem = createAsyncThunk(
   'cart/removeItem',
   async (id, { rejectWithValue }) => {
     try {
-      await axios.delete(`${API_URL}/cart/${id}`);
+      await httpClient.delete(`/orders/create-mono-order-mandate/${id}`);
       return id;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
 
+/**
+ * Increase item quantity by 1
+ */
 export const increaseItemQuantity = createAsyncThunk(
   'cart/increaseItemQuantity',
   async (id, { getState, rejectWithValue }) => {
     try {
       const state = getState();
-
       const item = state.cart.cart.find((item) => item.id === id);
       if (!item) throw new Error('Item not found');
+
       const updatedItem = {
         ...item,
         quantity: item.quantity + 1,
         totalPrice: (item.quantity + 1) * item.price,
       };
-      const response = await axios.put(`${API_URL}/cart/${id}`, updatedItem);
 
-      return {
-        id: response.data.id,
-        // id: `cart-${product.id}-${getSelectedPaymentPlan}-${Date.now()}`,
-        image: response.data.image,
-        name: response.data.name,
-        userId: response.data.userId,
-        productId: response.data.productId,
-        quantity: response.data.quantity,
-        price: response.data.price,
-        totalPrice: response.data.totalPrice,
-        paymentPlan: response.data.paymentPlan,
-        paymentPlanDetails: response.data.paymentPlanDetails,
-        deliveryDate: response.data.deliveryDate,
-        interest: response.data.interest,
-      };
+      const response = await httpClient.post(
+        `/orders/create-mono-order-mandate/${id}`,
+        updatedItem
+      );
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
 
+/**
+ * Decrease item quantity by 1
+ * - Prevents quantity from going below 1
+ */
 export const decreaseItemQuantity = createAsyncThunk(
   'cart/decreaseItemQuantity',
   async (id, { getState, rejectWithValue }) => {
@@ -203,74 +155,85 @@ export const decreaseItemQuantity = createAsyncThunk(
       const item = state.cart.cart.find((item) => item.id === id);
       if (!item || item.quantity <= 1)
         throw new Error('Cannot decrease quantity below 1');
+
       const updatedItem = {
         ...item,
         quantity: item.quantity - 1,
         totalPrice: (item.quantity - 1) * item.price,
       };
-      const response = await axios.put(`${API_URL}/cart/${id}`, updatedItem);
-      return {
-        id: response.data.id,
-        image: response.data.image,
-        name: response.data.name,
-        userId: response.data.userId,
-        productId: response.data.productId,
-        quantity: response.data.quantity,
-        price: response.data.price,
-        totalPrice: response.data.totalPrice,
-        paymentPlan: response.data.paymentPlan,
-        paymentPlanDetails: response.data.paymentPlanDetails,
-        deliveryDate: response.data.deliveryDate,
-        interest: response.data.interest,
-      };
+
+      const response = await httpClient.post(
+        `/orders/create-mono-order-mandate/${id}`,
+        updatedItem
+      );
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
 
-export const clearCart = createAsyncThunk('cart/clearCart', async () => {
-  const response = await axios.get(`${API_URL}/cart?userId=user123`);
-  const cartItems = response.data;
-  await Promise.all(
-    cartItems.map((item) => axios.delete(`${API_URL}/cart/${item.id}`))
-  );
-  return [];
-});
+/**
+ * Clear all cart items for the user
+ */
+export const clearCart = createAsyncThunk(
+  'orders/create-mono-order-mandate/clearCart',
+  async () => {
+    const response = await httpClient.get(
+      `/orders/create-mono-order-mandate?userId=${getUserId}`
+    );
+    const cartItems = response.data;
+
+    // Delete all items concurrently
+    await Promise.all(
+      cartItems.map((item) =>
+        httpClient.delete(`/orders/create-mono-order-mandate/${item.id}`)
+      )
+    );
+    return [];
+  }
+);
+
+/* -------------------- SLICE -------------------- */
 
 const initialState = {
-  cart: [],
-  status: 'idle',
-  error: null,
-  selectedPaymentPlan: '',
+  cart: [], // Array of cart items
+  status: 'idle', // idle | loading | succeeded | failed
+  error: null, // For error messages
+  selectedPaymentPlan: 'full', // Default plan
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    /**
+     * Set the current selected payment plan for adding items
+     */
     setSelectedPaymentPlan: (state, action) => {
       state.selectedPaymentPlan = action.payload;
     },
+
+    /**
+     * Update a specific item's payment plan and recalculate totals
+     */
     setItemPaymentPlan: (state, action) => {
       const { id, plan, paymentOptions } = action.payload;
       const item = state.cart.find((item) => item.id === id);
-      if (!item) return;
-
-      if (item.paymentPlan === plan) return;
+      if (!item || item.paymentPlan === plan) return;
 
       item.paymentPlan = plan;
 
+      // Build payment plan lookup
       const paymentMap = {};
       for (const option of paymentOptions) {
-        if (option.type) {
-          paymentMap[option.type] = option;
-        }
+        if (option.type) paymentMap[option.type] = option;
       }
 
       const option = paymentMap[plan] || paymentMap.full;
       if (!option) return;
 
+      // Update payment plan details and recalculate price
       item.paymentPlanDetails = {
         type: plan,
         amount: option.amount ?? item.price,
@@ -298,12 +261,15 @@ const cartSlice = createSlice({
     },
   },
 
+  /* -------------------- Extra Reducers for Async Thunks -------------------- */
   extraReducers: (builder) => {
     builder
+      // Fetch Cart
       .addCase(fetchCart.fulfilled, (state, action) => {
         state.cart = action.payload;
         state.status = 'succeeded';
       })
+      // Add Item
       .addCase(addItem.fulfilled, (state, action) => {
         state.status = 'succeeded';
         if (action.payload && action.payload.quantity) {
@@ -312,28 +278,32 @@ const cartSlice = createSlice({
       })
       .addCase(addItem.rejected, (state, action) => {
         state.error = action.payload;
-        toast.error(action.payload, {
+        toast.error(action.payload || 'Failed to add item', {
           className:
             'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
           bodyClassName: 'm-0 p-0',
           closeButton: false,
         });
       })
+      // Remove Item
       .addCase(removeItem.fulfilled, (state, action) => {
         state.cart = state.cart.filter((item) => item.id !== action.payload);
       })
+      // Increase Quantity
       .addCase(increaseItemQuantity.fulfilled, (state, action) => {
         const index = state.cart.findIndex(
           (item) => item.id === action.payload.id
         );
         if (index !== -1) state.cart[index] = action.payload;
       })
+      // Decrease Quantity
       .addCase(decreaseItemQuantity.fulfilled, (state, action) => {
         const index = state.cart.findIndex(
           (item) => item.id === action.payload.id
         );
         if (index !== -1) state.cart[index] = action.payload;
       })
+      // Clear Cart
       .addCase(clearCart.fulfilled, (state) => {
         state.cart = [];
       });
@@ -341,18 +311,19 @@ const cartSlice = createSlice({
 });
 
 export default cartSlice.reducer;
+
+/* -------------------- SELECTORS -------------------- */
 export const getCart = (state) => state.cart.cart;
 export const getTotalCartQuantity = (state) =>
-  (state.cart.cart || []).reduce((total, item) => {
-    return item && item.quantity ? total + item.quantity : total;
-  }, 0);
-
+  (state.cart.cart || []).reduce(
+    (total, item) => total + (item.quantity || 0),
+    0
+  );
 export const getTotalCartPrice = (state) =>
   state.cart.cart.reduce((sum, item) => sum + (item.totalPrice || 0), 0);
-
 export const getCurrentQuantityById = (id) => (state) =>
   state.cart.cart.find((item) => item.productId === id)?.quantity ?? 0;
-
 export const getSelectedPaymentPlan = (state) => state.cart.selectedPaymentPlan;
 
+/* -------------------- ACTIONS -------------------- */
 export const { setSelectedPaymentPlan, setItemPaymentPlan } = cartSlice.actions;
