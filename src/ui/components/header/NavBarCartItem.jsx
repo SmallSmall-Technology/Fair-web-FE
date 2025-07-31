@@ -10,7 +10,7 @@ export const NavBarCartItem = ({ item }) => {
   const getDisplayedPrice = () => {
     const { paymentPlan, paymentPlanDetails, price } = item;
     switch (paymentPlan) {
-      case 'upfront':
+      case 'full':
         return formatCurrency(
           (paymentPlanDetails?.amount || price) * currentQuantity
         );

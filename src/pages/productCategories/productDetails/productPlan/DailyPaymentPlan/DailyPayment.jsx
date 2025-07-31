@@ -3,6 +3,7 @@ import { Button } from '../../../../../utils/Button';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { item_width } from '../../SingleProductDetailsAside';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
+import { usePaymentOptions } from '../../../../../hooks/usePaymentOptions';
 
 export const DailyPayment = React.memo(
   ({
@@ -20,7 +21,9 @@ export const DailyPayment = React.memo(
       });
     }
 
-    const installmentOption = product.paymentOptions?.find(
+    const paymentOptions = usePaymentOptions(product);
+
+    const installmentOption = paymentOptions?.find(
       (paymentOption) => paymentOption.label === 'Daily'
     );
 
@@ -39,7 +42,8 @@ export const DailyPayment = React.memo(
         ];
         const paymentNumber = index + 1;
         return {
-          amount: installmentOption.dailyPayment,
+          amount: installmentOption.installmentAmount,
+          downpayment: installmentOption.downPayment,
           label: index === 0 ? 'Pay now today' : `Payment ${paymentNumber}`,
           date: getDailyPaymentDates(new Date(), installmentOption.days)[index],
           icon: icons[index % icons.length],
@@ -49,7 +53,9 @@ export const DailyPayment = React.memo(
 
     return (
       <>
-        <p className="font-medium mb-3 mt-4 mx-5 lg:mx-0">Daily plan</p>
+        <p className="font-inter font-medium mb-3 mt-4 mx-5 lg:mx-0">
+          Daily plan
+        </p>
         <article className="bg-[#F2F2F2] rounded-[10px] py-5 flex flex-col justify-center lg:justify-start mx-5 lg:mx-0 relative lg:w-[80%]">
           {canScrollRight && (
             <Button
@@ -87,7 +93,9 @@ export const DailyPayment = React.memo(
                     />
                   </div>
                   <p className="text-xs font-medium mt-1">
-                    {formatCurrency(payment.amount)}
+                    {index === 0
+                      ? formatCurrency(payment.downpayment)
+                      : formatCurrency(payment.amount)}
                   </p>
                   <span className="text-[11px] text-center">
                     {payment.label}

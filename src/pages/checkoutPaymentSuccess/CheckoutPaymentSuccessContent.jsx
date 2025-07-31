@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export const CheckoutPaymentSuccessContent = () => {
   const cartItems = useSelector((state) => state.cart.cart);
 
-  const currentPlan = cartItems.find((item) => item.paymentPlan === 'upfront');
+  const currentPlan = cartItems.find((item) => item.paymentPlan === 'full');
   const orderNumber = 'I7xAA6b';
 
   const total = useSelector(getTotalCartPrice);

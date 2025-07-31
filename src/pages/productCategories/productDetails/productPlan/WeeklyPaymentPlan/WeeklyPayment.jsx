@@ -3,6 +3,7 @@ import { item_width } from '../../SingleProductDetailsAside';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 import React from 'react';
+import { usePaymentOptions } from '../../../../../hooks/usePaymentOptions';
 
 export const WeeklyPayment = React.memo(
   ({
@@ -20,7 +21,9 @@ export const WeeklyPayment = React.memo(
       });
     }
 
-    const installmentOption = product.paymentOptions.find(
+    const paymentOptions = usePaymentOptions(product);
+
+    const installmentOption = paymentOptions.find(
       (paymentOption) => paymentOption.label === 'Weekly'
     );
 
@@ -34,7 +37,8 @@ export const WeeklyPayment = React.memo(
           ];
           const paymentNumber = index + 1;
           return {
-            amount: installmentOption.weeklyPayment,
+            amount: installmentOption.installmentAmount,
+            downpayment: installmentOption.downPayment,
             label: index === 0 ? 'Pay now today' : `Payment ${paymentNumber}`,
             date: getWeeklyPaymentDates(new Date(), installmentOption.weeks)[
               index
@@ -83,8 +87,11 @@ export const WeeklyPayment = React.memo(
                     />
                   </div>
                   <p className="text-xs font-medium mt-1">
-                    {formatCurrency(payment.amount)}
+                    {index === 0
+                      ? formatCurrency(payment.downpayment)
+                      : formatCurrency(payment.amount)}
                   </p>
+
                   <span className="text-[11px] text-center">
                     {payment.label}
                   </span>

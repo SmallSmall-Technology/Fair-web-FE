@@ -13,7 +13,7 @@ export const CartItem = ({ item, onTogglePlan }) => {
   const getDisplayedPrice = () => {
     const { paymentPlan, paymentPlanDetails, price } = item;
     switch (paymentPlan) {
-      case 'upfront':
+      case 'full':
         return formatCurrency(
           paymentPlanDetails?.amount * currentQuantity || price
         );

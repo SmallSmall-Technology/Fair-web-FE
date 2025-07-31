@@ -22,7 +22,7 @@ export const createOrder = createAsyncThunk(
       const itemsWithDetails = cartItems.map((item) => {
         // console.log(item);
         const itemPaidAmount =
-          item.paymentPlan === 'upfront'
+          item.paymentPlan === 'full'
             ? +item.paymentPlanDetails.amount * item.quantity
             : +initialPayment * item.quantity;
         const itemTotalAmount = +item.paymentPlanDetails.amount * item.quantity;
@@ -42,7 +42,7 @@ export const createOrder = createAsyncThunk(
           userId: 'user123',
           paymentPlanDetails: item.paymentPlanDetails,
           deliveryDate: item.deliveryDate || 'Jan 20, 2025',
-          status: item.paymentPlan === 'upfront' ? 'completed' : 'ongoing',
+          status: item.paymentPlan === 'full' ? 'completed' : 'ongoing',
           category: item.category,
         };
       });

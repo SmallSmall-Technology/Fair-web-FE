@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { HeartHandshake } from 'lucide-react';
 import { useIsInView } from '../../../hooks/useIsInView';
@@ -6,7 +7,6 @@ import { formatCurrency } from '../../../utils/FormatCurrency';
 import CommentBar from '../../../features/reviewsRating/CommentBar';
 import { getSelectedPaymentPlan } from '../../../features/cart/cartSlice';
 import { SingleProductStickyHeader } from '../../../ui/components/header/SingleProductStickyHeader';
-import React from 'react';
 
 export const item_width = 70;
 
@@ -31,7 +31,7 @@ export const SingleProductDetailsAside = React.memo(
   ({ product, shippingDate, category }) => {
     const [targetRef, isInView] = useIsInView();
     const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
-    // console.log(product);
+
     return (
       <aside className="w-full">
         <h1 ref={targetRef} className="text-xl lg:text-[22px] mx-5 lg:mx-0">
@@ -63,9 +63,23 @@ export const SingleProductDetailsAside = React.memo(
             Brand{' '}
             <span className="font-medium">{product?.brand || 'Hisense'}</span>
           </p>
-          <p className="font-intertext-[27px] font-semibold lg:mt-3 mb-6">
-            {formatCurrency(product.fairAppPrice)}
-          </p>
+          <div className="mb-6">
+            <div className="lg:mt-3 flex items-center space-x-1">
+              <p className="font-inter text-[27px] text-[#DB1C5E] font-semibold  ">
+                {formatCurrency(product.fairAppPrice)}
+              </p>
+              {product?.discountPrice && (
+                <p className="text-[#96959F] line-through">
+                  {formatCurrency(product?.discountPrice || 0)}
+                </p>
+              )}
+            </div>
+            {product?.discountPercentage && (
+              <div className=" font-outfit font-medium bg-[#FFDE11] p-1 px-1.5 w-fit">
+                <span>{product?.discountPercentage || 0} % off</span>
+              </div>
+            )}
+          </div>
           <p className="flex items-center space-x-2">
             <img
               src="/images/digital-payment.svg"
@@ -88,7 +102,7 @@ export const SingleProductDetailsAside = React.memo(
 
         <div>
           {' '}
-          <PaymentOptions product={product} />{' '}
+          <PaymentOptions product={product} />
         </div>
 
         <div className="mt-10 lg:hidden">
@@ -178,12 +192,12 @@ export const SingleProductDetailsAside = React.memo(
           </div>
         </section>
         <div className="hidden lg:block">
-          {/* {!isInView && (
+          {!isInView && (
             <SingleProductStickyHeader
               product={product}
               selectedPaymentPlan={selectedPaymentPlan}
             />
-          )} */}
+          )}
         </div>
       </aside>
     );

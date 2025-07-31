@@ -13,7 +13,7 @@ import { getSelectedPaymentPlan } from '../../../features/cart/cartSlice';
 import { DailyPayment } from './productPlan/DailyPaymentPlan/DailyPayment';
 import { handleShareProduct } from '../../../features/product/ShareProduct';
 import { WeeklyPayment } from './productPlan/WeeklyPaymentPlan/WeeklyPayment';
-import MonthlyPayment from './productPlan/MonthlyPaymentPlan/MonthlyPayment';
+import { MonthlyPayment } from './productPlan/MonthlyPaymentPlan/MonthlyPayment';
 import { HeartHandshake } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProductsByCategoryAndSubcategory } from '../../../api/product-api';
@@ -111,7 +111,7 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
             </p>
             <CommentBar product={product} />
           </section>
-          {/* <div className="hidden lg:block">
+          <div className="hidden lg:block">
             {selectedPaymentPlan === 'daily' && (
               <>
                 <WeeklyPayment product={product} />
@@ -133,14 +133,14 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
                 <FullPayment product={product} />
               </>
             )}
-            {selectedPaymentPlan === 'upfront' && (
+            {selectedPaymentPlan === 'full' && (
               <>
                 <DailyPayment product={product} />
                 <WeeklyPayment product={product} />
                 <MonthlyPayment product={product} />
               </>
             )}
-          </div> */}
+          </div>
         </main>
         <SingleProductDetailsAside
           product={product}
@@ -170,9 +170,9 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
         <div className="w-full h-[6px] bg-[#E5E5E5]"></div>
       </section>
 
-      <section className="mb-24 mx-5 xl:mx-0">
-        <div className="mt-8 flex justify-between items-center mb-6">
-          <p className="text-normal font-semibold">You may also like</p>
+      <section className="mt-14 font-inter mb-24 mx-5 xl:mx-0">
+        <div className=" flex justify-between items-center mb-6">
+          <p className="text-2xl font-semibold">You may also like</p>
           <NavLink to={`/${category}/${subcategory}`} className="underline">
             See more
           </NavLink>

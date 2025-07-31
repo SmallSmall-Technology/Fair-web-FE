@@ -5,7 +5,12 @@ import { ChevronRight } from 'lucide-react';
 export const StickyHeaderDailyPayment = ({ product }) => {
   const [showAll, setShowAll] = useState(false);
 
-  const installmentOption = product.paymentOptions?.find(
+  const paymentOptions =
+    typeof product.paymentOptionsBreakdown === 'string'
+      ? JSON.parse(product.paymentOptionsBreakdown || '[]')
+      : product.paymentOptionsBreakdown || [];
+
+  const installmentOption = paymentOptions?.find(
     (option) => option.label === 'Daily'
   );
 
@@ -45,7 +50,8 @@ export const StickyHeaderDailyPayment = ({ product }) => {
     const dates = getDailyPaymentDates(new Date(), installmentOption.days);
 
     return Array.from({ length: installmentOption.days }, (_, index) => ({
-      amount: installmentOption.dailyPayment,
+      amount: installmentOption.installmentAmount,
+      downpayment: installmentOption.downPayment,
       label: index === 0 ? 'Pay now today' : `Payment ${index + 1}`,
       date: dates[index],
       icon: icons[index % icons.length],
@@ -53,10 +59,6 @@ export const StickyHeaderDailyPayment = ({ product }) => {
   }, [installmentOption]);
 
   const visiblePayments = showAll ? paymentDaily : paymentDaily.slice(0, 5);
-
-  // if (!product?.paymentOptions) {
-  //   return <SkeletonDailyPayment />;
-  // }
 
   return (
     <article className="flex sticky-header">
@@ -75,7 +77,9 @@ export const StickyHeaderDailyPayment = ({ product }) => {
             </div>
             <div className="flex flex-col items-start">
               <p className="text-xs font-medium mt-1">
-                {formatCurrency(payment.amount)}
+                {index === 0
+                  ? formatCurrency(payment.downpayment)
+                  : formatCurrency(payment.amount)}
               </p>
               <span className="text-[11px] text-center">{payment.label}</span>
             </div>

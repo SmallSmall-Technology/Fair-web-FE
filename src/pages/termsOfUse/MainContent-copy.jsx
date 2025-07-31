@@ -150,7 +150,7 @@ function MainContent() {
             <li>Enforcement</li>
             <ul className="list-disc pl-6">
               <li>
-                Vendors may not collect more than 60% upfront. Violators risk
+                Vendors may not collect more than 60% full. Violators risk
                 account penalties.
               </li>
             </ul>

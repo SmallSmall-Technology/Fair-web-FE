@@ -164,8 +164,8 @@ export const termsSections = [
         </p>
         <ul className="list-disc ml-6">
           <li>
-            Vendors may not collect more than 60% upfront. Violators risk
-            account penalties.
+            Vendors may not collect more than 60% full. Violators risk account
+            penalties.
           </li>
         </ul>
 
@@ -188,7 +188,7 @@ export const termsSections = [
       <>
         <p>Buyers may complete transactions through:</p>
         <ul className="list-disc ml-6">
-          <li>Upfront Payments using debit/credit card, or bank transfer.</li>
+          <li>full Payments using debit/credit card, or bank transfer.</li>
           <li>
             Installment Plans, which include:
             <ul className="list-disc ml-6">
@@ -211,7 +211,7 @@ export const termsSections = [
     content: (
       <>
         <p>
-          For all upfront and direct debit payments, SmallSmall partners with
+          For all full and direct debit payments, SmallSmall partners with
           Paystack and Mono. By making purchases on our platform, you authorize
           us to process payments through these secure third-party providers. You
           may also be required to consent to the terms and privacy policies of
@@ -228,7 +228,7 @@ export const termsSections = [
         <p>To order:</p>
         <ol className="list-decimal ml-6">
           <li>Select your desired product.</li>
-          <li>Choose a buying plan (upfront, monthly, weekly, or daily).</li>
+          <li>Choose a buying plan (full, monthly, weekly, or daily).</li>
           <li>Add to cart and proceed to checkout.</li>
           <li>Input delivery details and confirm order.</li>
           <li>
@@ -238,7 +238,7 @@ export const termsSections = [
         </ol>
         <p className="mt-2">
           <strong>Note:</strong> Orders are processed only after confirmation of
-          upfront successful payment or first installment downpayment.
+          full successful payment or first installment downpayment.
         </p>
       </>
     ),
@@ -439,7 +439,7 @@ export const termsSections = [
           <li>
             This process is mandatory for all buyers using instalment payment
             options, and may also be required for certain high-value
-            transactions paid upfront.
+            transactions paid full.
           </li>
           <li>
             The information collected will be used solely for risk assessment
