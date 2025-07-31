@@ -52,8 +52,7 @@ export const addItem = createAsyncThunk(
       });
       // console.log(paymentMap);
 
-      const selectedOption =
-        paymentMap[selectedPaymentPlan] || paymentMap.upfront;
+      const selectedOption = paymentMap[selectedPaymentPlan] || paymentMap.full;
       if (!selectedOption) {
         throw new Error(`${selectedPaymentPlan} payment option not available`);
       }
@@ -92,7 +91,7 @@ export const addItem = createAsyncThunk(
           days: selectedOption.days || 0,
           dailyPayment: selectedOption.dailyPayment || 0,
           totalPrice: selectedOption.totalPrice || product.price,
-          upfrontPayment: selectedOption.upfrontPayment || 0,
+          fullPayment: selectedOption.fullPayment || 0,
         },
         deliveryDate: product.deliveryDate || 'Jan, 20 2025',
         interest: selectedOption.interest || 0,
@@ -269,7 +268,7 @@ const cartSlice = createSlice({
         }
       }
 
-      const option = paymentMap[plan] || paymentMap.upfront;
+      const option = paymentMap[plan] || paymentMap.full;
       if (!option) return;
 
       item.paymentPlanDetails = {
@@ -282,11 +281,11 @@ const cartSlice = createSlice({
         days: option.days ?? 0,
         dailyPayment: option.dailyPayment ?? 0,
         totalPrice: option.totalPrice ?? item.price,
-        upfrontPayment: option.upfrontPayment ?? 0,
+        fullPayment: option.fullPayment ?? 0,
       };
 
       let price = 0;
-      if (plan === 'upfront') price = option.amount ?? item.price;
+      if (plan === 'full') price = option.amount ?? item.price;
       else if (plan === 'monthly') price = option.monthlyPayment ?? 0;
       else if (plan === 'weekly') price = option.weeklyPayment ?? 0;
       else if (plan === 'daily') price = option.dailyPayment ?? 0;

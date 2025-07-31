@@ -136,7 +136,7 @@ const CartItemsContentSection = React.memo(() => {
               }
               className="w-full p-2 border rounded mb-4"
             >
-              <option value="upfront">Full Payment</option>
+              <option value="full">Full Payment</option>
               <option value="monthly">Monthly Installments</option>
               <option value="weekly">Weekly Installments</option>
               <option value="daily">Daily Installments</option>

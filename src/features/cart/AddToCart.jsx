@@ -5,6 +5,7 @@ import { addItem, setSelectedPaymentPlan } from './cartSlice';
 import { toast } from 'react-toastify';
 
 export const handleAddToCart = (dispatch, product) => {
+  console.log(product);
   if (!product) return;
   const {
     id,
@@ -44,9 +45,9 @@ export const handleAddToCart = (dispatch, product) => {
     totalPrice: price * 1,
     paymentOptions: [
       {
-        type: 'upfront',
-        amount: paymentMap.upfront?.amount || 0,
-        totalPrice: paymentMap.upfront?.totalPrice || price,
+        type: 'full',
+        amount: paymentMap.full?.amount || 0,
+        totalPrice: paymentMap.full?.totalPrice || price,
       },
       {
         type: 'monthly',
@@ -83,7 +84,7 @@ export const AddToCart = ({ product }) => {
     if (!product) return;
 
     if (!selectedPaymentPlan) {
-      dispatch(setSelectedPaymentPlan('upfront'));
+      dispatch(setSelectedPaymentPlan('full'));
     }
 
     try {

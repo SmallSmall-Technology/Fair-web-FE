@@ -224,7 +224,7 @@ export const products = [
         totalPrice: 207000,
       },
       {
-        type: 'upfront',
+        type: 'full',
         label: 'Pay in full',
         amount: 207000,
       },
@@ -265,7 +265,7 @@ export const products = [
         totalPrice: 500000,
       },
       {
-        type: 'upfront',
+        type: 'full',
         label: 'Pay in full',
         amount: 500000,
         totalPrice: 500000,
@@ -286,11 +286,11 @@ export const products = [
     noOfProductSold: '30',
     slug: 'google-pixel-7-pro',
     paymentOptions: [
-      { type: 'upfront', amount: 300000 },
+      { type: 'full', amount: 300000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 90000,
+        fullPayment: 90000,
         monthlyPayment: 70000,
         totalPrice: 300000,
       },
@@ -310,11 +310,11 @@ export const products = [
     noOfProductSold: '25',
     slug: 'oneplus-10-pro',
     paymentOptions: [
-      { type: 'upfront', amount: 280000 },
+      { type: 'full', amount: 280000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 84000,
+        fullPayment: 84000,
         monthlyPayment: 65333.33,
         totalPrice: 280000,
       },
@@ -334,11 +334,11 @@ export const products = [
     noOfProductSold: '22',
     slug: 'xiaomi-mi-12',
     paymentOptions: [
-      { type: 'upfront', amount: 200000 },
+      { type: 'full', amount: 200000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 60000,
+        fullPayment: 60000,
         monthlyPayment: 46666.67,
         totalPrice: 200000,
       },
@@ -358,11 +358,11 @@ export const products = [
     noOfProductSold: '40',
     slug: 'samsung-galaxy-s22-ultra',
     paymentOptions: [
-      { type: 'upfront', amount: 400000 },
+      { type: 'full', amount: 400000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 120000,
+        fullPayment: 120000,
         monthlyPayment: 93333.33,
         totalPrice: 400000,
       },
@@ -382,11 +382,11 @@ export const products = [
     noOfProductSold: '18',
     slug: 'iphone-se-2022',
     paymentOptions: [
-      { type: 'upfront', amount: 150000 },
+      { type: 'full', amount: 150000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 45000,
+        fullPayment: 45000,
         monthlyPayment: 35000,
         totalPrice: 150000,
       },
@@ -406,11 +406,11 @@ export const products = [
     noOfProductSold: '28',
     slug: 'google-pixel-6a',
     paymentOptions: [
-      { type: 'upfront', amount: 180000 },
+      { type: 'full', amount: 180000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 54000,
+        fullPayment: 54000,
         monthlyPayment: 42000,
         totalPrice: 180000,
       },
@@ -430,11 +430,11 @@ export const products = [
     noOfProductSold: '35',
     slug: 'oneplus-nord-2',
     paymentOptions: [
-      { type: 'upfront', amount: 220000 },
+      { type: 'full', amount: 220000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 66000,
+        fullPayment: 66000,
         monthlyPayment: 51333.33,
         totalPrice: 220000,
       },
@@ -454,11 +454,11 @@ export const products = [
     noOfProductSold: '20',
     slug: 'xiaomi-redmi-note-11',
     paymentOptions: [
-      { type: 'upfront', amount: 120000 },
+      { type: 'full', amount: 120000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 36000,
+        fullPayment: 36000,
         monthlyPayment: 28000,
         totalPrice: 120000,
       },
@@ -478,11 +478,11 @@ export const products = [
     noOfProductSold: '15',
     slug: 'samsung-55-inch-4k-smart-tv',
     paymentOptions: [
-      { type: 'upfront', amount: 300000 },
+      { type: 'full', amount: 300000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 90000,
+        fullPayment: 90000,
         monthlyPayment: 70000,
         totalPrice: 300000,
       },
@@ -502,11 +502,11 @@ export const products = [
     noOfProductSold: '20',
     slug: 'lg-65-inch-oled-evo-tv',
     paymentOptions: [
-      { type: 'upfront', amount: 500000 },
+      { type: 'full', amount: 500000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 150000,
+        fullPayment: 150000,
         monthlyPayment: 116666.67,
         totalPrice: 500000,
       },
@@ -526,11 +526,11 @@ export const products = [
     noOfProductSold: '10',
     slug: 'sony-bravia-xr-77-inch-oled-tv',
     paymentOptions: [
-      { type: 'upfront', amount: 750000 },
+      { type: 'full', amount: 750000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 225000,
+        fullPayment: 225000,
         monthlyPayment: 175000,
         totalPrice: 750000,
       },
@@ -550,11 +550,11 @@ export const products = [
     noOfProductSold: '30',
     slug: 'tcl-50-inch-qled-tv',
     paymentOptions: [
-      { type: 'upfront', amount: 280000 },
+      { type: 'full', amount: 280000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 84000,
+        fullPayment: 84000,
         monthlyPayment: 65333.33,
         totalPrice: 280000,
       },
@@ -574,11 +574,11 @@ export const products = [
     noOfProductSold: '25',
     slug: 'hisense-58-inch-uled-tv',
     paymentOptions: [
-      { type: 'upfront', amount: 350000 },
+      { type: 'full', amount: 350000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 105000,
+        fullPayment: 105000,
         monthlyPayment: 81666.67,
         totalPrice: 350000,
       },
@@ -598,11 +598,11 @@ export const products = [
     noOfProductSold: '18',
     slug: 'panasonic-65-inch-4k-led-tv',
     paymentOptions: [
-      { type: 'upfront', amount: 450000 },
+      { type: 'full', amount: 450000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 135000,
+        fullPayment: 135000,
         monthlyPayment: 105000,
         totalPrice: 450000,
       },
@@ -622,11 +622,11 @@ export const products = [
     noOfProductSold: '12',
     slug: 'sharp-70-inch-aquos-tv',
     paymentOptions: [
-      { type: 'upfront', amount: 600000 },
+      { type: 'full', amount: 600000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 180000,
+        fullPayment: 180000,
         monthlyPayment: 140000,
         totalPrice: 600000,
       },
@@ -646,11 +646,11 @@ export const products = [
     noOfProductSold: '22',
     slug: 'vizio-55-inch-m-series-tv',
     paymentOptions: [
-      { type: 'upfront', amount: 320000 },
+      { type: 'full', amount: 320000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 96000,
+        fullPayment: 96000,
         monthlyPayment: 74666.67,
         totalPrice: 320000,
       },
@@ -670,11 +670,11 @@ export const products = [
     noOfProductSold: '14',
     slug: 'philips-50-inch-ambilight-tv',
     paymentOptions: [
-      { type: 'upfront', amount: 280000 },
+      { type: 'full', amount: 280000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 84000,
+        fullPayment: 84000,
         monthlyPayment: 65333.33,
         totalPrice: 280000,
       },
@@ -694,11 +694,11 @@ export const products = [
     noOfProductSold: '19',
     slug: 'toshiba-55-inch-fire-tv',
     paymentOptions: [
-      { type: 'upfront', amount: 310000 },
+      { type: 'full', amount: 310000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 93000,
+        fullPayment: 93000,
         monthlyPayment: 72333.33,
         totalPrice: 310000,
       },
@@ -718,11 +718,11 @@ export const products = [
     noOfProductSold: '12',
     slug: 'lg-double-door-refrigerator',
     paymentOptions: [
-      { type: 'upfront', amount: 400000 },
+      { type: 'full', amount: 400000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 120000,
+        fullPayment: 120000,
         monthlyPayment: 93333.33,
         totalPrice: 400000,
       },
@@ -742,11 +742,11 @@ export const products = [
     noOfProductSold: '20',
     slug: 'samsung-smart-tv-55-inch',
     paymentOptions: [
-      { type: 'upfront', amount: 500000 },
+      { type: 'full', amount: 500000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 150000,
+        fullPayment: 150000,
         monthlyPayment: 116666.67,
         totalPrice: 500000,
       },
@@ -766,11 +766,11 @@ export const products = [
     noOfProductSold: '8',
     slug: 'sony-home-theater-system',
     paymentOptions: [
-      { type: 'upfront', amount: 150000 },
+      { type: 'full', amount: 150000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 45000,
+        fullPayment: 45000,
         monthlyPayment: 35000,
         totalPrice: 150000,
       },
@@ -790,11 +790,11 @@ export const products = [
     noOfProductSold: '30',
     slug: 'apple-macbook-pro-16-inch',
     paymentOptions: [
-      { type: 'upfront', amount: 1500000 },
+      { type: 'full', amount: 1500000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 450000,
+        fullPayment: 450000,
         monthlyPayment: 350000,
         totalPrice: 1500000,
       },
@@ -814,11 +814,11 @@ export const products = [
     noOfProductSold: '15',
     slug: 'hp-envy-x360-laptop',
     paymentOptions: [
-      { type: 'upfront', amount: 700000 },
+      { type: 'full', amount: 700000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 210000,
+        fullPayment: 210000,
         monthlyPayment: 163333.33,
         totalPrice: 700000,
       },
@@ -838,11 +838,11 @@ export const products = [
     noOfProductSold: '22',
     slug: 'bose-noise-cancelling-headphones',
     paymentOptions: [
-      { type: 'upfront', amount: 180000 },
+      { type: 'full', amount: 180000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 54000,
+        fullPayment: 54000,
         monthlyPayment: 42000,
         totalPrice: 180000,
       },
@@ -862,11 +862,11 @@ export const products = [
     noOfProductSold: '10',
     slug: 'canon-eos-r6-camera',
     paymentOptions: [
-      { type: 'upfront', amount: 900000 },
+      { type: 'full', amount: 900000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 270000,
+        fullPayment: 270000,
         monthlyPayment: 210000,
         totalPrice: 900000,
       },
@@ -886,11 +886,11 @@ export const products = [
     noOfProductSold: '18',
     slug: 'dell-ultrasharp-monitor',
     paymentOptions: [
-      { type: 'upfront', amount: 300000 },
+      { type: 'full', amount: 300000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 90000,
+        fullPayment: 90000,
         monthlyPayment: 70000,
         totalPrice: 300000,
       },
@@ -910,11 +910,11 @@ export const products = [
     noOfProductSold: '40',
     slug: 'nike-air-max-sneakers',
     paymentOptions: [
-      { type: 'upfront', amount: 80000 },
+      { type: 'full', amount: 80000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 24000,
+        fullPayment: 24000,
         monthlyPayment: 18666.67,
         totalPrice: 80000,
       },
@@ -934,11 +934,11 @@ export const products = [
     noOfProductSold: '5',
     slug: 'rolex-submariner-watch',
     paymentOptions: [
-      { type: 'upfront', amount: 2000000 },
+      { type: 'full', amount: 2000000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 600000,
+        fullPayment: 600000,
         monthlyPayment: 466666.67,
         totalPrice: 2000000,
       },
@@ -958,11 +958,11 @@ export const products = [
     noOfProductSold: '12',
     slug: 'lg-double-door-refrigerator',
     paymentOptions: [
-      { type: 'upfront', amount: 400000 },
+      { type: 'full', amount: 400000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 120000,
+        fullPayment: 120000,
         monthlyPayment: 93333.33,
         totalPrice: 400000,
       },
@@ -982,11 +982,11 @@ export const products = [
     noOfProductSold: '25',
     slug: 'samsung-microwave-oven',
     paymentOptions: [
-      { type: 'upfront', amount: 120000 },
+      { type: 'full', amount: 120000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 36000,
+        fullPayment: 36000,
         monthlyPayment: 28000,
         totalPrice: 120000,
       },
@@ -1006,11 +1006,11 @@ export const products = [
     noOfProductSold: '18',
     slug: 'panasonic-4-burner-gas-cooker',
     paymentOptions: [
-      { type: 'upfront', amount: 150000 },
+      { type: 'full', amount: 150000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 45000,
+        fullPayment: 45000,
         monthlyPayment: 35000,
         totalPrice: 150000,
       },
@@ -1030,11 +1030,11 @@ export const products = [
     noOfProductSold: '30',
     slug: 'philips-air-fryer',
     paymentOptions: [
-      { type: 'upfront', amount: 85000 },
+      { type: 'full', amount: 85000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 25500,
+        fullPayment: 25500,
         monthlyPayment: 19833.33,
         totalPrice: 85000,
       },
@@ -1054,11 +1054,11 @@ export const products = [
     noOfProductSold: '40',
     slug: 'bosch-electric-kettle',
     paymentOptions: [
-      { type: 'upfront', amount: 25000 },
+      { type: 'full', amount: 25000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 7500,
+        fullPayment: 7500,
         monthlyPayment: 5833.33,
         totalPrice: 25000,
       },
@@ -1078,11 +1078,11 @@ export const products = [
     noOfProductSold: '22',
     slug: 'nutribullet-blender',
     paymentOptions: [
-      { type: 'upfront', amount: 45000 },
+      { type: 'full', amount: 45000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 13500,
+        fullPayment: 13500,
         monthlyPayment: 10500,
         totalPrice: 45000,
       },
@@ -1102,11 +1102,11 @@ export const products = [
     noOfProductSold: '15',
     slug: 'kenwood-food-processor',
     paymentOptions: [
-      { type: 'upfront', amount: 65000 },
+      { type: 'full', amount: 65000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 19500,
+        fullPayment: 19500,
         monthlyPayment: 15166.67,
         totalPrice: 65000,
       },
@@ -1126,11 +1126,11 @@ export const products = [
     noOfProductSold: '10',
     slug: 'hisense-chest-freezer',
     paymentOptions: [
-      { type: 'upfront', amount: 210000 },
+      { type: 'full', amount: 210000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 63000,
+        fullPayment: 63000,
         monthlyPayment: 49000,
         totalPrice: 210000,
       },
@@ -1150,11 +1150,11 @@ export const products = [
     noOfProductSold: '35',
     slug: 'prestige-toaster',
     paymentOptions: [
-      { type: 'upfront', amount: 20000 },
+      { type: 'full', amount: 20000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 6000,
+        fullPayment: 6000,
         monthlyPayment: 4666.67,
         totalPrice: 20000,
       },
@@ -1174,11 +1174,11 @@ export const products = [
     noOfProductSold: '8',
     slug: 'lg-dishwasher',
     paymentOptions: [
-      { type: 'upfront', amount: 350000 },
+      { type: 'full', amount: 350000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 105000,
+        fullPayment: 105000,
         monthlyPayment: 81666.67,
         totalPrice: 350000,
       },
@@ -1198,11 +1198,11 @@ export const products = [
     noOfProductSold: '120',
     slug: 'maybelline-fit-me-foundation',
     paymentOptions: [
-      { type: 'upfront', amount: 8000 },
+      { type: 'full', amount: 8000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 2400,
+        fullPayment: 2400,
         monthlyPayment: 1866.67,
         totalPrice: 8000,
       },
@@ -1222,11 +1222,11 @@ export const products = [
     noOfProductSold: '150',
     slug: 'mac-matte-lipstick',
     paymentOptions: [
-      { type: 'upfront', amount: 12000 },
+      { type: 'full', amount: 12000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 3600,
+        fullPayment: 3600,
         monthlyPayment: 2800,
         totalPrice: 12000,
       },
@@ -1246,11 +1246,11 @@ export const products = [
     noOfProductSold: '200',
     slug: 'nivea-body-lotion',
     paymentOptions: [
-      { type: 'upfront', amount: 3500 },
+      { type: 'full', amount: 3500 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 1050,
+        fullPayment: 1050,
         monthlyPayment: 816.67,
         totalPrice: 3500,
       },
@@ -1270,11 +1270,11 @@ export const products = [
     noOfProductSold: '180',
     slug: 'cerave-foaming-facial-cleanser',
     paymentOptions: [
-      { type: 'upfront', amount: 6000 },
+      { type: 'full', amount: 6000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 1800,
+        fullPayment: 1800,
         monthlyPayment: 1400,
         totalPrice: 6000,
       },
@@ -1294,11 +1294,11 @@ export const products = [
     noOfProductSold: '250',
     slug: 'loreal-paris-shampoo',
     paymentOptions: [
-      { type: 'upfront', amount: 2800 },
+      { type: 'full', amount: 2800 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 840,
+        fullPayment: 840,
         monthlyPayment: 653.33,
         totalPrice: 2800,
       },
@@ -1318,11 +1318,11 @@ export const products = [
     noOfProductSold: '230',
     slug: 'tresemme-conditioner',
     paymentOptions: [
-      { type: 'upfront', amount: 3200 },
+      { type: 'full', amount: 3200 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 960,
+        fullPayment: 960,
         monthlyPayment: 746.67,
         totalPrice: 3200,
       },
@@ -1342,11 +1342,11 @@ export const products = [
     noOfProductSold: '95',
     slug: 'zara-women-summer-dress',
     paymentOptions: [
-      { type: 'upfront', amount: 15000 },
+      { type: 'full', amount: 15000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 4500,
+        fullPayment: 4500,
         monthlyPayment: 3500,
         totalPrice: 15000,
       },
@@ -1366,11 +1366,11 @@ export const products = [
     noOfProductSold: '130',
     slug: 'nike-mens-running-shoes',
     paymentOptions: [
-      { type: 'upfront', amount: 25000 },
+      { type: 'full', amount: 25000 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 7500,
+        fullPayment: 7500,
         monthlyPayment: 5833.33,
         totalPrice: 25000,
       },
@@ -1390,11 +1390,11 @@ export const products = [
     noOfProductSold: '15',
     slug: 'rolex-gold-watch',
     paymentOptions: [
-      { type: 'upfront', amount: 2500 },
+      { type: 'full', amount: 2500 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 750,
+        fullPayment: 750,
         monthlyPayment: 583.33,
         totalPrice: 2500,
       },
@@ -1414,11 +1414,11 @@ export const products = [
     noOfProductSold: '15',
     slug: 'ray-ban-aviator-sunglasses',
     paymentOptions: [
-      { type: 'upfront', amount: 2500 },
+      { type: 'full', amount: 2500 },
       {
         type: 'monthly',
         months: 3,
-        upfrontPayment: 750,
+        fullPayment: 750,
         monthlyPayment: 583.33,
         totalPrice: 2500,
       },
@@ -1569,51 +1569,3 @@ export const states = [
   { name: 'Zamfara' },
   { name: 'Federal Capital Territory (FCT)' },
 ];
-
-// export const termsSections = [
-//   { title: 'Agreement to Terms', id: 'agreement-to-terms' },
-//   { title: 'Who we are and what we do', id: 'who-we-are-and-what-we-do' },
-//   { title: 'Usage Guidelines', id: 'usage-guidelines' },
-//   { title: 'User Conduct Policy', id: 'user-conduct-policy' },
-//   { title: 'Privacy and Data Protection', id: 'privacy-and-data-protection' },
-//   { title: 'Pricing Policy', id: 'pricing-policy' },
-//   { title: 'Down Payment Policy', id: 'down-payment-policy' },
-//   { title: 'General payment terms (Buyer)', id: 'general-payment-terms-buyer' },
-//   { title: 'Payment Processing', id: 'payment-processing' },
-//   { title: 'Placing an Order (Buyer)', id: 'placing-an-order-buyer' },
-//   { title: 'Delivery Terms (Buyer)', id: 'delivery-terms-buyer' },
-//   {
-//     title: 'Change of Mind After Purchase (Buyer)',
-//     id: 'change-of-mind-after-purchase-buyer',
-//   },
-//   {
-//     title: 'Account Closure (Buyer and Vendor)',
-//     id: 'account-closure-buyer-and-vendor',
-//   },
-//   {
-//     title: 'Warranties on Purchased Items (Buyer)',
-//     id: 'warranties-on-purchased-items-buyer',
-//   },
-//   {
-//     title: 'Liability for Products and Services (Buyer)',
-//     id: 'liability-for-products-and-services-buyer',
-//   },
-//   { title: 'Indemnification by Buyers', id: 'indemnification-by-buyers' },
-//   { title: 'Modification of Terms', id: 'modification-of-terms' },
-//   {
-//     title: 'Identity Verification and Debt Profile Check',
-//     id: 'identity-verification-and-debt-profile-check',
-//   },
-//   {
-//     title: 'Item Returns and Defective Products',
-//     id: 'item-returns-and-defective-products',
-//   },
-//   { title: 'Vendor Warranty Obligation', id: 'vendor-warranty-obligation' },
-//   {
-//     title: 'Late Payments and Asset Recovery',
-//     id: 'late-payments-and-asset-recovery',
-//   },
-//   { title: 'Loyalty and Discount Coupons', id: 'loyalty-and-discount-coupons' },
-//   { title: 'Dispute Resolution', id: 'dispute-resolution' },
-//   { title: 'Contact and Feedback', id: 'contact-and-feedback' },
-// ];

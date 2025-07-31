@@ -3,7 +3,7 @@ import { formatCurrency } from '../../../../../utils/FormatCurrency';
 export const FullPayment = ({ product }) => {
   const paymentsInFull = [
     {
-      amount: product.amount,
+      amount: product.fairAppPrice,
       label: 'Pay in full today',
       date: new Date(),
       icon: '/images/full-circle.svg',
@@ -11,7 +11,9 @@ export const FullPayment = ({ product }) => {
   ];
   return (
     <>
-      <p className="font-medium mb-3 mt-4 mx-5 lg:mx-0">Pay in full</p>
+      <p className="font-inter font-medium mb-3 mt-4 mx-5 lg:mx-0">
+        Pay in full
+      </p>
 
       {paymentsInFull.map((payment, index) => (
         <article
@@ -28,7 +30,9 @@ export const FullPayment = ({ product }) => {
                 />
               </div>
               <div className="grid">
-                <p className="font-medium">{formatCurrency(product.price)}</p>
+                <p className="font-medium">
+                  {formatCurrency(product.fairAppPrice)}
+                </p>
                 <span className="text-[11px]">{payment.label}</span>
               </div>
             </div>

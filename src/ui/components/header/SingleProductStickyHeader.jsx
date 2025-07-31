@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { formatCurrency } from '../../../utils/FormatCurrency';
+import { usePaymentOptions } from '../../../hooks/usePaymentOptions';
 import { getSelectedPaymentPlan } from '../../../features/cart/cartSlice';
 import { StickyHeaderFullPayment } from '../../../pages/productCategories/productDetails/productPlan/FullPaymentPlan/StickyHeaderFullPayment';
 import { StickyHeaderDailyPayment } from '../../../pages/productCategories/productDetails/productPlan/DailyPaymentPlan/StickyHeaderDailyPayment';
@@ -18,24 +19,25 @@ export const SingleProductStickyHeader = React.memo(
       return () => clearTimeout(timeout);
     }, [setSelectedPaymentPlan]);
 
+    const paymentOptions = usePaymentOptions(product);
     const paymentMethodsAvailable = [
       {
-        amount: product.paymentOptions[0]?.dailyPayment,
+        amount: paymentOptions[0]?.dailyPayment,
         label: 'Daily',
         icon: '/images/quater-circle.svg',
       },
       {
-        amount: product.paymentOptions[1]?.weeklyPayment,
+        amount: paymentOptions[1]?.weeklyPayment,
         label: 'Weekly',
         icon: '/images/half-circle.svg',
       },
       {
-        amount: product.paymentOptions[2]?.monthlyPayment,
+        amount: paymentOptions[2]?.monthlyPayment,
         label: 'Monthly',
         icon: '/images/one-third-circle.svg',
       },
       {
-        amount: product?.price,
+        amount: product?.fairPrice,
         label: 'Pay in full',
         icon: '/images/full-circle.svg',
       },
@@ -50,12 +52,12 @@ export const SingleProductStickyHeader = React.memo(
           <div className="flex items-center space-x-3">
             <div className="w-[55px] h-[55px]">
               <img
-                src={product.image}
-                alt={product.name}
+                src={product.coverImage}
+                alt={product.productName}
                 className="w-full h-full object-contain"
               />
             </div>
-            <p className="font-semibold">{product.name}</p>
+            <p className="font-semibold">{product.productName}</p>
           </div>
 
           <div className="hidden md:flex items-center max-w-[40%] overflow-x-scroll relative transition-all duration-500">
@@ -97,7 +99,7 @@ export const SingleProductStickyHeader = React.memo(
               {selectedPaymentPlan === 'monthly' && (
                 <StickyHeaderMonthlyPayment product={product} />
               )}
-              {selectedPaymentPlan === 'upfront' && (
+              {selectedPaymentPlan === 'full' && (
                 <StickyHeaderFullPayment product={product} />
               )}
             </div>
