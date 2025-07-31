@@ -4,15 +4,14 @@ import { formatCurrency } from '../../../../../utils/FormatCurrency';
 export const StickyHeaderFullPayment = React.memo(({ product }) => {
   const paymentsInFull = [
     {
-      amount: product.amount,
+      amount: product.fairPrice,
       label: 'Pay in full now today',
       date: new Date(),
       icon: '/images/full-circle.svg',
     },
   ];
-
   return (
-    <article className="flex">
+    <article className="flex font-inter">
       <div className="flex space-x-5 w-full">
         {paymentsInFull.map((payment, index) => (
           <div key={index} className="flex items-center space-x-2 min-w-fit">
@@ -25,7 +24,7 @@ export const StickyHeaderFullPayment = React.memo(({ product }) => {
             </div>
             <div className="flex flex-col items-start">
               <p className="text-xs font-medium mt-1">
-                {formatCurrency(product.price)}
+                {formatCurrency(product.fairAppPrice)}
               </p>
               <span className="text-[11px] text-center min-w-fit bg-bl">
                 {payment.label}

@@ -1,11 +1,3 @@
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  Suspense,
-  lazy,
-  startTransition,
-} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { YellowButton } from '../../../../utils/Button';
 import { FullPayment } from './FullPaymentPlan/FullPayment';
@@ -13,14 +5,13 @@ import { DailyPayment } from './DailyPaymentPlan/DailyPayment';
 import { WeeklyPayment } from './WeeklyPaymentPlan/WeeklyPayment';
 import { formatCurrency } from '../../../../utils/FormatCurrency';
 import { handleAddToCart } from '../../../../features/cart/AddToCart';
+import { MonthlyPayment } from './MonthlyPaymentPlan/MonthlyPayment.jsx';
+import React, { useEffect, useRef, useState, startTransition } from 'react';
 import {
   getSelectedPaymentPlan,
   setSelectedPaymentPlan,
 } from '../../../../features/cart/cartSlice';
-
-const MonthlyPayment = lazy(
-  () => import('./MonthlyPaymentPlan/MonthlyPayment')
-);
+import { usePaymentOptions } from '../../../../hooks/usePaymentOptions';
 
 export const PaymentOptions = React.memo(({ product }) => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -28,6 +19,9 @@ export const PaymentOptions = React.memo(({ product }) => {
   const dispatch = useDispatch();
   const selectedPaymentPlan = useSelector(getSelectedPaymentPlan);
   const paymentMethodRef = useRef(null);
+
+  // // ✅ Parse payment options
+  const paymentOptions = usePaymentOptions(product);
 
   if (!product) return <div>Product not found</div>;
 
@@ -73,12 +67,8 @@ export const PaymentOptions = React.memo(({ product }) => {
       case 'weekly':
         return <WeeklyPayment {...props} />;
       case 'monthly':
-        return (
-          <Suspense fallback={<div>Loading monthly plan...</div>}>
-            <MonthlyPayment {...props} />
-          </Suspense>
-        );
-      case 'upfront':
+        return <MonthlyPayment {...props} />;
+      case 'full':
         return <FullPayment product={product} />;
       default:
         return null;
@@ -87,7 +77,8 @@ export const PaymentOptions = React.memo(({ product }) => {
 
   return (
     <>
-      <div className="block lg:hidden">
+      {/* Mobile */}
+      <div className="block lg:hidden font-inter">
         {renderSelectedPayment()}
         {selectedPaymentPlan && (
           <div className="lg:mx-0 lg:w-[80%] mt-4 mx-5">
@@ -98,15 +89,12 @@ export const PaymentOptions = React.memo(({ product }) => {
         )}
       </div>
 
-      <div className="py-4 w-full lg:w-[80%] px-5 lg:px-0">
+      {/* Payment Options Grid */}
+      <div className="py-4 w-full lg:w-[80%] px-5 lg:px-0 font-inter">
         <div className="grid lg:grid-cols-2 gap-4">
-          {product.paymentPlan.map((option, index) => {
+          {paymentOptions.map((option, index) => {
             const isSelected = selectedPaymentPlan === option.type;
-            const price =
-              option.dailyPayment ||
-              option.weeklyPayment ||
-              option.monthlyPayment ||
-              option.amount;
+            const price = option.installmentAmount || option.amount || 0;
             const unit =
               option.type === 'daily'
                 ? 'per day'
@@ -164,7 +152,8 @@ export const PaymentOptions = React.memo(({ product }) => {
         </div>
       </div>
 
-      <div className="hidden lg:block">
+      {/* Desktop */}
+      <div className="hidden lg:block font-inter">
         {renderSelectedPayment()}
         {selectedPaymentPlan && (
           <div className="lg:mx-0 lg:w-[80%] mt-4 mx-5">

@@ -1,3 +1,4 @@
+import { usePaymentOptions } from '../../../../../hooks/usePaymentOptions';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 
 export const StickyHeaderWeeklyPayment = ({ product }) => {
@@ -8,8 +9,9 @@ export const StickyHeaderWeeklyPayment = ({ product }) => {
       return date.toISOString().split('T')[0];
     });
   }
+  const paymentOptions = usePaymentOptions(product);
 
-  const installmentOption = product.paymentOptions.find(
+  const installmentOption = paymentOptions.find(
     (paymentOption) => paymentOption.label === 'Weekly'
   );
 
@@ -23,7 +25,8 @@ export const StickyHeaderWeeklyPayment = ({ product }) => {
         ];
         const paymentNumber = index + 1;
         return {
-          amount: installmentOption.weeklyPayment,
+          amount: installmentOption.installmentAmount,
+          downpayment: installmentOption.downPayment,
           label: index === 0 ? 'Pay now today' : `Payment ${paymentNumber}`,
           date: getWeeklyPaymentDates(new Date(), installmentOption.weeks)[
             index
@@ -46,7 +49,11 @@ export const StickyHeaderWeeklyPayment = ({ product }) => {
             </div>
             <div className="flex flex-col items-start">
               <p className="text-xs font-medium mt-1">
-                {formatCurrency(payment.amount)}
+                <p className="text-xs font-medium mt-1">
+                  {index === 0
+                    ? formatCurrency(payment.downpayment)
+                    : formatCurrency(payment.amount)}
+                </p>
               </p>
               <span className="text-[11px] text-center min-w-fit bg-bl">
                 {payment.label}

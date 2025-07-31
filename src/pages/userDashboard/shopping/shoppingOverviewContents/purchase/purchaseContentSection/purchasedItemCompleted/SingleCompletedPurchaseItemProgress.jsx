@@ -104,7 +104,7 @@ const SingleCompletedPurchaseItemProgress = React.memo(
               </div>
 
               <div>
-                {product.paymentPlan !== 'upfront' ? (
+                {product.paymentPlan !== 'full' ? (
                   <div className="text-[11px]">
                     <span>Installment duration</span>
                     <br />
@@ -189,7 +189,7 @@ const SingleCompletedPurchaseItemProgress = React.memo(
               </div>
 
               <div>
-                {product.paymentPlan !== 'upfront' ? (
+                {product.paymentPlan !== 'full' ? (
                   <div className="text-[11px]">
                     <span>Installment duration</span>
                     <br />

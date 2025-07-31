@@ -37,9 +37,9 @@ export const PaymentPlan = ({ item }) => {
   return (
     <section className="lg:mx-4 overflow-x-auto">
       <div
-        className={`flex ${currentPlan !== 'upfront' ? 'justify-center' : 'justify-start px-4'} py-2 border md:border-0 rounded-[10px] 2xl:px-10`}
+        className={`flex ${currentPlan !== 'full' ? 'justify-center' : 'justify-start px-4'} py-2 border md:border-0 rounded-[10px] 2xl:px-10`}
       >
-        {currentPlan === 'upfront' && <CartItemFulllPayment product={item} />}
+        {currentPlan === 'full' && <CartItemFulllPayment product={item} />}
         {currentPlan === 'monthly' && <CartItemMonthlyPayment product={item} />}
         {currentPlan === 'weekly' && <CartItemWeeklyPayment product={item} />}
         {currentPlan === 'daily' && <CartItemDailyPayment product={item} />}

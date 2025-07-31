@@ -54,9 +54,6 @@ const ProductCard = ({ product, isLoading }) => {
     queryKey: ['product-card', productID],
     queryFn: () => fetchSingleProduct(productID),
     enabled: !!productID,
-    refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 60 * 24,
   });
 
   const category = data?.produtCategory.parent_category?.slug;
