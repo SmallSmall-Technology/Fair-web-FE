@@ -1,16 +1,35 @@
-import { useDispatch } from 'react-redux';
 import { Button } from '../../utils/Button';
-import { decreaseItemQuantity, increaseItemQuantity } from './cartSlice';
+import { updateCartItem } from './cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const UpdateItemQuantity = ({ id, currentQuantity }) => {
+export const UpdateItemQuantity = ({ productID, currentQuantity }) => {
   const dispatch = useDispatch();
+
+  // Get session from Redux or localStorage
+  const cartSessionID =
+    useSelector((state) => state.cart.sessionID) ||
+    localStorage.getItem('cartSessionID');
+
+  const handleUpdate = (newQuantity) => {
+    if (!productID || !cartSessionID) return;
+
+    // Don't allow quantity below 1
+    const safeQuantity = Math.max(newQuantity, 1);
+
+    dispatch(
+      updateCartItem({
+        productID,
+        cartSessionID,
+        quantity: safeQuantity,
+      })
+    );
+  };
+
   return (
-    <>
-      <div className="flex items-center space-x-2 lg:space-x-1">
-        <Button onClick={() => dispatch(decreaseItemQuantity(id))}>-</Button>
-        <p className="bg-[#ECEDF1] px-4 py-2 rounded-xl">{currentQuantity}</p>
-        <Button onClick={() => dispatch(increaseItemQuantity(id))}>+</Button>
-      </div>
-    </>
+    <div className="flex items-center space-x-2 lg:space-x-1">
+      <Button onClick={() => handleUpdate(currentQuantity - 1)}>-</Button>
+      <p className="bg-[#ECEDF1] px-4 py-2 rounded-xl">{currentQuantity}</p>
+      <Button onClick={() => handleUpdate(currentQuantity + 1)}>+</Button>
+    </div>
   );
 };

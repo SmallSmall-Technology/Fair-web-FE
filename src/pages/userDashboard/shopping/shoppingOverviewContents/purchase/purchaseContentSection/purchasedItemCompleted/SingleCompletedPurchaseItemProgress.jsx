@@ -9,7 +9,6 @@ import React from 'react';
 
 const SingleCompletedPurchaseItemProgress = React.memo(
   ({ product, onToggleExpand, index, item }) => {
-    // console.log(product);
     const payments = completedPurchaseProgressData.payments;
     const deliveryAddress = useSelector(selectLatestDeliveryAddress);
 

@@ -8,7 +8,6 @@ import { toggleProductToFavourite } from '../../api/product-api';
 export const AddFavourite = ({ product }) => {
   const dispatch = useDispatch();
   const favourite = useSelector((state) => state.favourite.favourite);
-  // console.log('favourite', favourite);
 
   const mutation = useMutation({
     mutationFn: () => toggleProductToFavourite(product.productID),
