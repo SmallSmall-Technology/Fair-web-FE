@@ -23,8 +23,6 @@ const SubCategoryPage = () => {
     queryKey: ['products-by-category', category, sub_category],
     queryFn: () =>
       fetchProductsByCategoryAndSubcategory(category, sub_category),
-    staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 60 * 24,
   });
 
   const products = data?.data?.products || [];
@@ -34,8 +32,6 @@ const SubCategoryPage = () => {
   const { data: allCategories } = useQuery({
     queryKey: ['categories'],
     queryFn: getAllCategories,
-    staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 60 * 24,
   });
 
   // Check if the subcategory is valid
