@@ -5,7 +5,13 @@ import { formatCurrency } from '../../../utils/FormatCurrency';
 import { DeleteItemFromCart } from '../../../features/cart/DeleteItem';
 
 export const NavBarCartItem = ({ item }) => {
-  const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
+  const currentQuantity = useSelector(getCurrentQuantityById(item.productID));
+  // const dispatch = useDispatch();
+  //   useEffect(() => {
+  //     dispatch(fetchCart());
+  //   }, [dispatch]);
+
+  //   const { cart: cartItems, loading } = useSelector((state) => state.cart);
 
   const getDisplayedPrice = () => {
     const { paymentPlan, paymentPlanDetails, price } = item;
@@ -48,12 +54,12 @@ export const NavBarCartItem = ({ item }) => {
                 <div>
                   <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
                     <UpdateItemQuantity
-                      id={item.id}
+                      productID={item.productID}
                       currentQuantity={currentQuantity}
                     />
                   </div>
                 </div>
-                <DeleteItemFromCart id={item.id} />
+                <DeleteItemFromCart productID={item.productID} />
               </div>
               <p className="text-[#222224]">{getDisplayedPrice()}</p>
             </div>

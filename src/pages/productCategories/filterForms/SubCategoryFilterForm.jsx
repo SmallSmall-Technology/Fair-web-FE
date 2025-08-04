@@ -13,8 +13,6 @@ const SubCategoryFilterForm = ({
     return [...new Set(products.map((product) => product?.[key]))];
   };
 
-  // console.log(getUniqueOptions);
-
   const uniqueSizes = useMemo(
     () => getUniqueOptions(categoryProducts || products, 'productWeight'),
     [categoryProducts, products]

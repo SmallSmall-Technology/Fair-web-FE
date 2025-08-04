@@ -1,7 +1,7 @@
 import { CategoryCard } from '../../homeLivingLandingPage/homeLivingContentSection/CategoryCard';
 import { categories } from './RealEstateCategory';
 
-export const RentSmallsmall = () => {
+export const RentSmallSmallCard = () => {
   return (
     <CategoryCard
       category={categories[0]}

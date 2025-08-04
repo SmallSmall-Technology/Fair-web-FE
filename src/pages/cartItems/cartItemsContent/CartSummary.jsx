@@ -1,4 +1,5 @@
 import {
+  getCartSummary,
   getTotalCartPrice,
   getTotalCartQuantity,
 } from '../../../features/cart/cartSlice';
@@ -13,11 +14,15 @@ export const CartSummary = ({
   setIsUpgraded,
 }) => {
   const cart = useSelector((state) => state.cart.cart);
-  const totalCartQuantity = useSelector(getTotalCartQuantity);
-  const totalCartPrice = useSelector(getTotalCartPrice);
+  const cartSummary = useSelector(getCartSummary);
+  const totalCartQuantity = cartSummary.total_items || 0;
+  const totalCartPrice = cartSummary.subtotal || 0;
   const VAT = (7.5 / 100) * totalCartPrice;
   const shippingFee = +1200;
   const subtTotal = totalCartPrice + VAT + shippingFee;
+  const cartPaymentPlan = cart.map((item) => item.paymentPlan);
+  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
+
   return (
     <>
       <div className=" rounded-[10px] lg:bg-[#F2F2F2] py-6 lg:px-8 h-fit">
@@ -42,26 +47,25 @@ export const CartSummary = ({
             <p className="text-right">{formatCurrency(shippingFee)}</p>
           </div>
         </div>
-        {/* { */}
-        <div>
-          <hr className="mt-8 mb-2" />
-          <div className="flex justify-between items-center">
-            <p className="font-semibold">Consolidated cart</p>
-            <Link to="" className="text-[11px] underline">
-              What is a consolidated cart?
-            </Link>
+        {isConsolidatedCart && (
+          <div>
+            <hr className="mt-8 mb-2" />
+            <div className="flex justify-between items-center">
+              <p className="font-semibold">Consolidated cart</p>
+              <Link to="" className="text-[11px] underline">
+                What is a consolidated cart?
+              </Link>
+            </div>
+            <article className="bg-[#FAFAFA] rounded-[12px] my-4 p-4">
+              <p>Hello</p>
+              <p>Hello</p>
+              <p>Hello</p>
+              <p>Hello</p>
+              <p>Hello</p>
+            </article>
+            <hr className="mt-8 mb-2" />
           </div>
-          <article className="bg-[#FAFAFA] rounded-[12px] my-4 p-4">
-            <p>Hello</p>
-            <p>Hello</p>
-            <p>Hello</p>
-            <p>Hello</p>
-            <p>Hello</p>
-          </article>
-          <hr className="mt-8 mb-2" />
-        </div>
-        {/* } */}
-
+        )}
         <div className="flex justify-between mb-8">
           <div className="flex justify-between gap-2 lg:hidden font-medium lg:text-xl w-full">
             <div className="flex gap-1">

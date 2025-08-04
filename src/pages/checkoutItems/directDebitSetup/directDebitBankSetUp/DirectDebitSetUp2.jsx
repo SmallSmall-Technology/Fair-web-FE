@@ -5,7 +5,6 @@ import { DirectDebitBankSetupFormAuthorizeConsent } from './DirectDebitBankSetup
 
 export const DirectDebitSetUp2 = () => {
   const [authorized, setAuthorized] = React.useState(false);
-  // console.log(authorized);
   return (
     <>
       <header className=" border-b-2 text-center flex justify-between items-center w-full px-4 lg:px-32 py-5">

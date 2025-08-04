@@ -19,6 +19,20 @@
   box-sizing: border-box;
 }
 
+.skeleton {
+  @apply bg-gray-200 rounded-md animate-pulse;
+}
+
+/* In your global CSS */
+.toast-yellow {
+  background-color: var(--yellow-primary) !important;
+  color: black !important;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  min-height: 0;
+}
+
 h1,
 h2,
 h3,
