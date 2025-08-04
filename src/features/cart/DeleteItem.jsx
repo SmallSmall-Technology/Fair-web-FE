@@ -1,13 +1,19 @@
-import { removeItem } from './cartSlice';
-import { useDispatch } from 'react-redux';
 import { Button } from '../../utils/Button';
 import { Trash2 } from 'lucide-react';
 
-export const DeleteItem = ({ id }) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromCart } from './cartSlice';
+
+export const DeleteItem = ({ productID }) => {
   const dispatch = useDispatch();
+  const cartSessionID =
+    useSelector((state) => state.cart.sessionID) ||
+    localStorage.getItem('cartSessionID');
 
   const handleRemoveItem = () => {
-    if (id) dispatch(removeItem(id));
+    if (productID && cartSessionID) {
+      dispatch(removeFromCart({ productID, cartSessionID }));
+    }
   };
 
   return (
@@ -21,11 +27,17 @@ export const DeleteItem = ({ id }) => {
   );
 };
 
-export const DeleteItemFromCart = ({ id }) => {
+export const DeleteItemFromCart = ({ productID }) => {
   const dispatch = useDispatch();
 
+  const cartSessionID =
+    useSelector((state) => state.cart.sessionID) ||
+    localStorage.getItem('cartSessionID');
+
   const handleRemoveItem = () => {
-    if (id) dispatch(removeItem(id));
+    if (!productID || !cartSessionID) return;
+
+    dispatch(removeFromCart({ productID, cartSessionID }));
   };
 
   return (

@@ -1,50 +1,65 @@
-import { useSelector } from 'react-redux';
+import { SunDim } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { PaymentPlan } from './PaymentPlan';
-import { DeleteItem } from '../../../features/cart/DeleteItem';
+import {
+  DeleteItem,
+  DeleteItemFromCart,
+} from '../../../features/cart/DeleteItem';
 import { formatCurrency } from '../../../utils/FormatCurrency';
-import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
 import { SaveItemForLater } from '../../../features/cart/SaveItemForLater';
 import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
-import { Link } from 'react-router-dom';
-import { SunDim } from 'lucide-react';
 
-export const CartItem = ({ item, onTogglePlan }) => {
-  const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
+export const CartItem = ({ item, onTogglePlan, isLoading }) => {
+  if (isLoading) {
+    return <div className="skeleton h-44 w-full"></div>;
+  }
+
+  console.log(item);
+
+  const { quantity } = item;
   const getDisplayedPrice = () => {
     const { paymentPlan, paymentPlanDetails, price } = item;
     switch (paymentPlan) {
       case 'full':
-        return formatCurrency(
-          paymentPlanDetails?.amount * currentQuantity || price
-        );
+        return formatCurrency(paymentPlanDetails?.amount * quantity || price);
       case 'monthly':
-        return `${formatCurrency(paymentPlanDetails?.monthlyPayment * currentQuantity || 0)}`;
+        return `${formatCurrency(paymentPlanDetails?.monthlyPayment * quantity || 0)}`;
       case 'weekly':
-        return `${formatCurrency(paymentPlanDetails?.weeklyPayment * currentQuantity || 0)} `;
+        return `${formatCurrency(paymentPlanDetails?.weeklyPayment * quantity || 0)} `;
       case 'daily':
-        return `${formatCurrency(paymentPlanDetails?.dailyPayment * currentQuantity || 0)} `;
+        return `${formatCurrency(paymentPlanDetails?.dailyPayment * quantity || 0)} `;
       default:
-        return formatCurrency(price * currentQuantity);
+        return formatCurrency(price * quantity);
     }
   };
 
   return (
     <article
-      key={item.productId}
+      key={item.productID}
       className="md:border-[1px] pb-4 md:border-[#E5E5E5] rounded-[10px] w-full h-fit"
     >
       <div className="">
         <section className="md:p-4">
           <div className="flex justify-between mb-3">
-            <div className="flex space-x-1 items-center mb-1 2xl:px-10">
-              <img
-                src="/images/sold-by-fair.svg"
-                alt="Fair company logo"
-                className="w-6 h-6"
-              />
-              <p className="underline">Fair</p>
-            </div>
-
+            {!item.venddorBrandName ? (
+              <div className="flex space-x-1 items-center mb-1 2xl:px-10">
+                <img
+                  src="/images/sold-by-fair.svg"
+                  alt="Fair company logo"
+                  className="w-6 h-6"
+                />
+                <p className="underline">Fair</p>
+              </div>
+            ) : (
+              <div className="flex space-x-1 items-center mb-1 2xl:px-10">
+                <img
+                  src={item.venddorBrandLogo || '/images/sold-by-fair.svg'}
+                  alt={item.venddorBrandName || 'Fair company logo'}
+                  className="w-6 h-6"
+                />
+                <p className="underline">{item.venddorBrandName || 'Fair'}</p>
+              </div>
+            )}
             <button
               type="submit"
               onClick={() => onTogglePlan(item.id)}
@@ -72,8 +87,8 @@ export const CartItem = ({ item, onTogglePlan }) => {
                 <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
                   <p>Qty: </p>
                   <UpdateItemQuantity
-                    id={item.id}
-                    currentQuantity={currentQuantity}
+                    productID={item.productID}
+                    currentQuantity={quantity}
                   />
                 </div>
                 <p className="text-xl font-semibold mb-6 md:hidden mt-4">
@@ -117,7 +132,7 @@ export const CartItem = ({ item, onTogglePlan }) => {
                   Save for later
                 </button>
                 <hr className="border-l border-gray-300 h-4" />
-                <DeleteItem id={item.id} />
+                <DeleteItem productID={item.productID} />
               </div>
 
               <p className="text-sm font-normal flex justify-end">
@@ -151,7 +166,7 @@ export const CartItem = ({ item, onTogglePlan }) => {
 
           <div className="flex space-x-2 items-center mb-2">
             <SaveItemForLater />
-            <DeleteItem id={item.id} />
+            <DeleteItemFromCart productID={item.productID} />
           </div>
         </div>
       </div>

@@ -42,8 +42,6 @@ const SubCategoryPage = () => {
     ? allCategories.data.categories
     : [];
 
-  // console.log(categories);
-
   const isValidSubcategory = categories?.some((cat) => {
     return (
       cat.slug.toLowerCase() === category?.toLowerCase() &&
@@ -52,8 +50,6 @@ const SubCategoryPage = () => {
       )
     );
   });
-
-  // console.log(categories);
 
   if (!isValidSubcategory) {
     return <PageNotFound />;

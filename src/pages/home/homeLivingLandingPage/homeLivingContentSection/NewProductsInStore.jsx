@@ -14,7 +14,6 @@ const NewProductsInStore = ({ onScrollProduct, item_width, containerRef }) => {
   });
 
   const products = data?.data?.products || [];
-  // console.log('Products:', products);
 
   return (
     <>

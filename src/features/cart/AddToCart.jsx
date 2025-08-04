@@ -1,25 +1,19 @@
 import { useNavigate } from 'react-router-dom';
-import { startTransition } from 'react';
+import { startTransition, useTransition } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, setSelectedPaymentPlan } from './cartSlice';
+import { addToCart, setSelectedPaymentPlan } from './cartSlice';
 import { toast } from 'react-toastify';
+import { usePaymentOptions } from '../../hooks/usePaymentOptions';
 
 export const handleAddToCart = (dispatch, product) => {
-  console.log(product);
+  const paymentOptions = usePaymentOptions(product);
   if (!product) return;
   const {
-    id,
-    name,
-    brand,
-    category,
-    subcategory,
-    image,
-    price,
-    discountPrice,
-    ratings,
-    noOfProductSold,
-    slug,
-    paymentOptions = [],
+    productID,
+    productName,
+
+    coverImage,
+    fairAppPrice,
   } = product;
   const paymentMap = {};
   paymentOptions.forEach((option) => {
@@ -29,48 +23,41 @@ export const handleAddToCart = (dispatch, product) => {
   });
 
   const newItem = {
-    id,
-    // id: `cart-${product.id}-${getSelectedPaymentPlan}-${Date.now()}`,
-    name,
-    brand,
-    category,
-    subcategory,
-    image,
-    price,
-    discountPrice,
-    ratings,
-    noOfProductSold,
-    slug,
+    productID,
+    productName,
+    coverImage,
+    fairAppPrice,
     quantity: 1,
-    totalPrice: price * 1,
+    totalPrice: fairAppPrice * 1,
+    ...identifier,
     paymentOptions: [
       {
         type: 'full',
         amount: paymentMap.full?.amount || 0,
-        totalPrice: paymentMap.full?.totalPrice || price,
+        totalPrice: paymentMap.full?.totalPrice || fairAppPrice,
       },
       {
         type: 'monthly',
         months: paymentMap.monthly?.months || 0,
         monthlyPayment: paymentMap.monthly?.monthlyPayment || 0,
-        totalPrice: paymentMap.monthly?.totalPrice || price,
+        totalPrice: paymentMap.monthly?.totalPrice || fairAppPrice,
       },
       {
         type: 'weekly',
         weeks: paymentMap.weekly?.weeks || 0,
         weeklyPayment: paymentMap.weekly?.weeklyPayment || 0,
-        totalPrice: paymentMap.weekly?.totalPrice || price,
+        totalPrice: paymentMap.weekly?.totalPrice || fairAppPrice,
       },
       {
         type: 'daily',
         days: paymentMap.daily?.days || 0,
         dailyPayment: paymentMap.daily?.dailyPayment || 0,
-        totalPrice: paymentMap.daily?.totalPrice || price,
+        totalPrice: paymentMap.daily?.totalPrice || fairAppPrice,
       },
     ],
   };
 
-  dispatch(addItem(newItem));
+  dispatch(addToCart(newItem));
 };
 
 export const AddToCart = ({ product }) => {
@@ -79,8 +66,9 @@ export const AddToCart = ({ product }) => {
     (state) => state.cart.selectedPaymentPlan
   );
   const navigate = useNavigate();
+  const [isPending, startTransition] = useTransition();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!product) return;
 
     if (!selectedPaymentPlan) {
@@ -88,8 +76,8 @@ export const AddToCart = ({ product }) => {
     }
 
     try {
+      await dispatch(addToCart(product)).unwrap();
       startTransition(() => {
-        dispatch(addItem(product));
         toast.success(
           <div className="flex items-center space-x-2 justify-between h-[42px]">
             <div className="flex space-x-1 items-center">
@@ -109,18 +97,20 @@ export const AddToCart = ({ product }) => {
           {
             icon: false,
             type: 'success',
-            className:
-              'bg-[var(--yellow-primary)] text-black text-sm px-2 py-1 rounded-md min-h-0',
+            className: 'toast-yellow',
             bodyClassName: 'm-0 p-0',
             closeButton: false,
           }
         );
       });
-
-      return true;
     } catch (error) {
-      console.error('Add to cart failed:', error);
-      return false;
+      // console.error('Add to cart failed:', error);
+      toast.error(error || 'Failed to add item to cart', {
+        className:
+          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+        bodyClassName: 'm-0 p-0',
+        closeButton: false,
+      });
     }
   };
 
@@ -128,6 +118,7 @@ export const AddToCart = ({ product }) => {
     <button
       className="group bg-[var(--yellow-primary)] flex items-center rounded-[20px] px-2 py-2 overflow-hidden transition-all duration-300 mb-"
       onClick={handleAddToCart}
+      disabled={isPending}
     >
       <div className="flex items-center transition-all duration-300 max-w-[22px] group-hover:max-w-[120px]">
         <img
@@ -136,7 +127,7 @@ export const AddToCart = ({ product }) => {
           className="w-[18px] lg:w-5 shrink-0"
         />
         <span className="ml-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          Add to cart
+          {isPending ? 'Adding...' : 'Add to cart'}
         </span>
       </div>
     </button>
