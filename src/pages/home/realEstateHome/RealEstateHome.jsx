@@ -23,7 +23,6 @@ const RealEstateHome = () => {
         <RealEstateCategory />
         <RealEstateNewProperties />
         <TodaysRealEstateDeal />
-        {/* <TodaysDeal /> */}
         <RentOut />
       </div>
     </>

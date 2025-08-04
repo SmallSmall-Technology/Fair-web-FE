@@ -1,9 +1,10 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useNavigation } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 import Logo from '../../ui/components/Logo';
 
 function PageNotFound() {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-blue-100 px-4 text-center">
       <Logo width={200} height={40} />
@@ -17,10 +18,10 @@ function PageNotFound() {
         Oops! The page you are looking for does not exist or has been moved.
       </p>
       <Link
-        to="/"
+        onClick={() => navigate(-1)}
         className="inline-block px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all shadow-md"
       >
-        Go Home
+        Go back
       </Link>
     </div>
   );

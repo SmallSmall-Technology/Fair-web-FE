@@ -10,11 +10,13 @@ export const PropertyCard = ({ property }) => {
   return (
     <article className="w-[218px] grid gap-2">
       <div
-        className="h-[218px] w-[218px] bg-cover bg-center rounded-[10px] relative transition-all duration-500"
+        className="h-[218px] w-[276px] bg-cover bg-center rounded-[10px] relative transition-all duration-500"
         style={{ backgroundImage: `url(${currentImage})` }}
       >
         <div className="flex flex-col justify-between w-full h-full px-3 py-3 rounded-[10px]">
-          <span className="bg-white p-1 w-fit text-xs pr-4">Available</span>
+          <span className="bg-white p-1 pr-2 w-fit text-xs font-outfit ">
+            Available
+          </span>
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -50,8 +52,8 @@ export const PropertyCard = ({ property }) => {
         </div>
       </div>
 
-      <div>
-        <p className="text-sm">{property?.name}</p>
+      <div className="font-inter font-normal">
+        <p className="text-sm ">{property?.name}</p>
         <div className="flex space-x-2">
           <InfoIcon
             src="/images/bed-alt(1) 21.svg"
@@ -66,11 +68,11 @@ export const PropertyCard = ({ property }) => {
       </div>
 
       <div>
-        <p className="font-semibold">
+        <p className="font-semibold font-inter">
           {formatCurrency(property?.price)}{' '}
           <span className="text-sm font-normal">/month</span>
         </p>
-        <p className="line-through text-[#96959F]">
+        <p className="text-inter font-normal text-sm line-through text-[#96959F]">
           {formatCurrency(property?.discountedPrice)}/year
         </p>
       </div>

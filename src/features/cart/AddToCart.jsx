@@ -5,62 +5,124 @@ import { addToCart, setSelectedPaymentPlan } from './cartSlice';
 import { toast } from 'react-toastify';
 import { usePaymentOptions } from '../../hooks/usePaymentOptions';
 
-export const handleAddToCart = (dispatch, product) => {
-  const paymentOptions = usePaymentOptions(product);
+// export const handleAddToCart = (dispatch, product) => {
+//   const paymentOptions = usePaymentOptions(product);
+//   console.log(product);
+//   if (!product) return;
+//   const { productID, productName, coverImage, fairAppPrice } = product;
+//   const paymentMap = {};
+//   paymentOptions.forEach((option) => {
+//     if (option.type) {
+//       paymentMap[option.type] = option;
+//     }
+//   });
+
+//   const newItem = {
+//     productID,
+//     productName,
+//     coverImage,
+//     fairAppPrice,
+//     quantity: 1,
+//     totalPrice: fairAppPrice * 1,
+//     ...identifier,
+//     paymentOptions: [
+//       {
+//         type: 'full',
+//         amount: paymentMap.full?.amount || 0,
+//         totalPrice: paymentMap.full?.totalPrice || fairAppPrice,
+//       },
+//       {
+//         type: 'monthly',
+//         months: paymentMap.monthly?.months || 0,
+//         monthlyPayment: paymentMap.monthly?.monthlyPayment || 0,
+//         totalPrice: paymentMap.monthly?.totalPrice || fairAppPrice,
+//       },
+//       {
+//         type: 'weekly',
+//         weeks: paymentMap.weekly?.weeks || 0,
+//         weeklyPayment: paymentMap.weekly?.weeklyPayment || 0,
+//         totalPrice: paymentMap.weekly?.totalPrice || fairAppPrice,
+//       },
+//       {
+//         type: 'daily',
+//         days: paymentMap.daily?.days || 0,
+//         dailyPayment: paymentMap.daily?.dailyPayment || 0,
+//         totalPrice: paymentMap.daily?.totalPrice || fairAppPrice,
+//       },
+//     ],
+//   };
+
+//   dispatch(addToCart(newItem));
+// };
+
+// handleAddToCart.js
+export const handleAddToCart = (
+  dispatch,
+  product,
+  paymentOptions,
+  selectedPaymentPlan
+) => {
   if (!product) return;
+  console.log(selectedPaymentPlan);
   const {
     productID,
-    productName,
-
+    name: productName,
     coverImage,
-    fairAppPrice,
+    price: fairAppPrice,
+    quantity = 1,
   } = product;
+
+  // Map payment options for easy access
   const paymentMap = {};
   paymentOptions.forEach((option) => {
-    if (option.type) {
-      paymentMap[option.type] = option;
-    }
+    if (option.type) paymentMap[option.type.toLowerCase()] = option;
   });
 
   const newItem = {
     productID,
     productName,
     coverImage,
-    fairAppPrice,
-    quantity: 1,
-    totalPrice: fairAppPrice * 1,
-    ...identifier,
+    quantity,
+    price: fairAppPrice,
+    totalPrice: fairAppPrice * quantity,
+    paymentPlan: selectedPaymentPlan,
     paymentOptions: [
       {
         type: 'full',
-        amount: paymentMap.full?.amount || 0,
+        amount: paymentMap.full?.amount || fairAppPrice,
         totalPrice: paymentMap.full?.totalPrice || fairAppPrice,
       },
       {
         type: 'monthly',
         months: paymentMap.monthly?.months || 0,
         monthlyPayment: paymentMap.monthly?.monthlyPayment || 0,
+        downPayment: paymentMap.monthly?.downPayment || 0,
         totalPrice: paymentMap.monthly?.totalPrice || fairAppPrice,
       },
       {
         type: 'weekly',
         weeks: paymentMap.weekly?.weeks || 0,
         weeklyPayment: paymentMap.weekly?.weeklyPayment || 0,
+        downPayment: paymentMap.weekly?.downPayment || 0,
         totalPrice: paymentMap.weekly?.totalPrice || fairAppPrice,
       },
       {
         type: 'daily',
         days: paymentMap.daily?.days || 0,
         dailyPayment: paymentMap.daily?.dailyPayment || 0,
+        downPayment: paymentMap.daily?.downPayment || 0,
         totalPrice: paymentMap.daily?.totalPrice || fairAppPrice,
       },
     ],
   };
 
+  // Dispatch the addToCart action
   dispatch(addToCart(newItem));
 };
 
 export const AddToCart = ({ product }) => {
+  // console.log(product);
+
   const dispatch = useDispatch();
   const selectedPaymentPlan = useSelector(
     (state) => state.cart.selectedPaymentPlan

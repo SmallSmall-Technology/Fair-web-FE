@@ -16,22 +16,54 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
 
   console.log(item);
 
-  const { quantity } = item;
+  const { paymentPlan, quantity } = item;
+  console.log('Item payment plan:', paymentPlan);
+
   const getDisplayedPrice = () => {
-    const { paymentPlan, paymentPlanDetails, price } = item;
+    const { paymentPlan, paymentOptionsBreakdown, price, quantity } = item;
     switch (paymentPlan) {
       case 'full':
-        return formatCurrency(paymentPlanDetails?.amount * quantity || price);
+        return formatCurrency(
+          paymentOptionsBreakdown[3].amount * quantity || price
+        );
       case 'monthly':
-        return `${formatCurrency(paymentPlanDetails?.monthlyPayment * quantity || 0)}`;
+        return `${formatCurrency(paymentOptionsBreakdown[0]?.installmentAmount * quantity || 0)}`;
       case 'weekly':
-        return `${formatCurrency(paymentPlanDetails?.weeklyPayment * quantity || 0)} `;
+        return `${formatCurrency(paymentOptionsBreakdown[1]?.installmentAmount * quantity || 0)} `;
       case 'daily':
-        return `${formatCurrency(paymentPlanDetails?.dailyPayment * quantity || 0)} `;
+        return `${formatCurrency(paymentOptionsBreakdown[2]?.installmentAmount * quantity || 0)} `;
       default:
         return formatCurrency(price * quantity);
     }
   };
+  // const getDisplayedPrice = () => {
+  //   const { paymentPlan, paymentOptionsBreakdown, price, quantity = 1 } = item;
+
+  //   // Map payment options by type
+  //   const paymentMap = (paymentOptionsBreakdown || []).reduce((acc, option) => {
+  //     if (option.type) acc[option.type.toLowerCase()] = option;
+  //     return acc;
+  //   }, {});
+
+  //   const plan = (paymentPlan || 'full').toLowerCase();
+
+  //   if (plan === 'full') {
+  //     // Full payment
+  //     return formatCurrency((price || 0) * quantity);
+  //   }
+
+  //   // For installment payments
+  //   const option = paymentMap[plan];
+  //   if (!option) return formatCurrency((price || 0) * quantity);
+
+  //   const firstPayment = (option.downPayment || 0) * quantity;
+  //   const installmentPerPeriod = (option.installmentAmount || 0) * quantity;
+  //   const periods = option.numberOfInstallments || 0;
+
+  //   return `${formatCurrency(firstPayment)} first payment + ${formatCurrency(
+  //     installmentPerPeriod
+  //   )} × ${periods} installments`;
+  // };
 
   return (
     <article

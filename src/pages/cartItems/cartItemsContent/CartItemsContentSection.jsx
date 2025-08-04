@@ -13,7 +13,10 @@ import {
   fetchCart,
 } from '../../../features/cart/cartSlice';
 import { CartSummaryExtrasAndCoupon } from './CartSummaryExtrasAndCoupon';
+// import { usePaymentOptions } from '../../hooks/usePaymentOptions';
+
 import axios from 'axios';
+import { usePaymentOptions } from '../../../hooks/usePaymentOptions';
 
 const CartItemsContentSection = React.memo(() => {
   const shippingFee = +1200;
@@ -35,23 +38,23 @@ const CartItemsContentSection = React.memo(() => {
 
   const { cart: cartItems, loading } = useSelector((state) => state.cart);
 
-  const fetchPaymentOptions = async (productID) => {
-    try {
-      const response = await axios.get(
-        `http://dev.smallsmall.com/products/${productID}`
-      );
-      return response.data.paymentOptions || [];
-    } catch (error) {
-      // console.error('Failed to fetch payment options:', error);
-      return [];
-    }
-  };
+  // const fetchPaymentOptions = async (productID) => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://dev.smallsmall.com/products/${productID}`
+  //     );
+  //     return response.data.paymentOptions || [];
+  //   } catch (error) {
+  //     // console.error('Failed to fetch payment options:', error);
+  //     return [];
+  //   }
+  // };
 
   const togglePlan = async (productID) => {
     const item = cartItems.find((item) => item.productID === productID);
     if (!item) return;
 
-    const options = await fetchPaymentOptions(item.productID);
+    const options = await usePaymentOptions(productID);
     setPaymentOptions(options);
     setPlanModalItemId(item.productID);
   };
