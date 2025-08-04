@@ -129,3 +129,5 @@ export const getUserIsAuthenticated = createSelector(
   [selectAuth],
   (auth) => auth.isAuthenticated
 );
+
+export const getUserId = createSelector([selectAuth], (auth) => auth.userId);

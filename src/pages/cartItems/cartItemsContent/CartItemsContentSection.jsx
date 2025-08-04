@@ -1,5 +1,5 @@
 import { CartItem } from './CartItem';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CartSummary } from './CartSummary';
 import { IncomeUpgrade } from './IncomeUpgrade';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,16 +7,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import {
   getTotalCartQuantity,
-  getCart,
   getTotalCartPrice,
   setItemPaymentPlan,
+  // getCart,
+  fetchCart,
 } from '../../../features/cart/cartSlice';
 import { CartSummaryExtrasAndCoupon } from './CartSummaryExtrasAndCoupon';
 import axios from 'axios';
 
 const CartItemsContentSection = React.memo(() => {
   const shippingFee = +1200;
-  const cart = useSelector(getCart);
+  // const cart = useSelector(getCart);
   const navigate = useNavigate();
   const [isUpgraded, setIsUpgraded] = useState(false);
   const [planModalItemId, setPlanModalItemId] = useState(null);
@@ -27,29 +28,36 @@ const CartItemsContentSection = React.memo(() => {
   const subtTotal = totalCartPrice + VAT + shippingFee;
   const dispatch = useDispatch();
 
-  const fetchPaymentOptions = async (productId) => {
+  // Sync Redux store
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, [dispatch]);
+
+  const { cart: cartItems, loading } = useSelector((state) => state.cart);
+
+  const fetchPaymentOptions = async (productID) => {
     try {
       const response = await axios.get(
-        `http://localhost:8002/products/${productId}`
+        `http://dev.smallsmall.com/products/${productID}`
       );
       return response.data.paymentOptions || [];
     } catch (error) {
-      console.error('Failed to fetch payment options:', error);
+      // console.error('Failed to fetch payment options:', error);
       return [];
     }
   };
 
-  const togglePlan = async (id) => {
-    const item = cart.find((item) => item.id === id);
+  const togglePlan = async (productID) => {
+    const item = cartItems.find((item) => item.productID === productID);
     if (!item) return;
 
-    const options = await fetchPaymentOptions(item.productId);
+    const options = await fetchPaymentOptions(item.productID);
     setPaymentOptions(options);
-    setPlanModalItemId(id);
+    setPlanModalItemId(item.productID);
   };
 
-  const handlePlanChange = (id, newPlan) => {
-    dispatch(setItemPaymentPlan({ id, plan: newPlan, paymentOptions }));
+  const handlePlanChange = (productID, newPlan) => {
+    dispatch(setItemPaymentPlan({ productID, plan: newPlan, paymentOptions }));
     setPlanModalItemId(null);
   };
 
@@ -66,7 +74,7 @@ const CartItemsContentSection = React.memo(() => {
         <h1 className="hidden lg:flex font-semibold text-3xl">Your Cart</h1>
         <h1 className="flex lg:hidden font-semibold text-3xl">Shopping Cart</h1>
       </div>
-      {cart.length > 0 && (
+      {cartItems.length > 0 && (
         <>
           <div className="lg:hidden mx-4">
             {subtTotal > 500000 && (
@@ -97,7 +105,7 @@ const CartItemsContentSection = React.memo(() => {
       )}
       <hr className="lg:hidden mt-6 mb-4" />
       <section className="mx-6 lg:mx-[60px] 2xl:mx-[150px]">
-        {cart.length < 1 ? (
+        {cartItems.length < 1 ? (
           <>
             <p className="mt-4 text-gray-500">Your cart is empty.</p>
             <Link to="/">Go back home to add products to cart</Link>
@@ -106,8 +114,13 @@ const CartItemsContentSection = React.memo(() => {
           <>
             <div className="grid grid-cols-1 w-full lg:grid-cols-[60%_36%] gap-6 justify-between mt-6">
               <div className="flex flex-col gap-6 lg:h-screen lg:overflow-y-auto">
-                {cart.map((item, index) => (
-                  <CartItem item={item} key={index} onTogglePlan={togglePlan} />
+                {cartItems?.map((item, index) => (
+                  <CartItem
+                    item={item}
+                    key={index}
+                    onTogglePlan={togglePlan}
+                    isLoading={loading}
+                  />
                 ))}
               </div>
               <aside>

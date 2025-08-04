@@ -1,19 +1,28 @@
 import { X } from 'lucide-react';
 import { Subtotal } from './NavBar';
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavBarCartItem } from './NavBarCartItem';
-import {
-  getCart,
-  getTotalCartQuantity,
-} from '../../../features/cart/cartSlice';
+// import {
+//   fetchCart,
+//   getCart,
+//   getTotalCartQuantity,
+// } from '../../../features/cart/cartSlice';
 import { Link } from 'react-router-dom';
+import { fetchCart } from '../../../features/cart/cartSlice';
 
 const CartDropdownItems = ({ isOpen, setIsOpen }) => {
-  const CartItems = useSelector(getCart);
-  const CartQuantity = useSelector(getTotalCartQuantity);
+  // const CartItems = useSelector(getCart);
+  // const CartItems = fetchCart();
+  // const CartQuantity = useSelector(getTotalCartQuantity);
   const [internalOpen, setInternalOpen] = useState(false);
   const menuRef = useRef(null);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, [dispatch]);
+
+  const { cart: cartItems, loading } = useSelector((state) => state.cart);
 
   useEffect(() => {
     if (isOpen) {
@@ -75,10 +84,10 @@ const CartDropdownItems = ({ isOpen, setIsOpen }) => {
         <hr className="my-3" />
 
         <section className="px-5">
-          {CartQuantity >= 1 ? (
+          {cartItems.length >= 1 ? (
             <p className="text-[#16161A]">
-              You have {CartQuantity} {CartQuantity > 1 ? 'items' : 'item'} in
-              your cart.
+              You have {cartItems.length}{' '}
+              {cartItems.length > 1 ? 'items' : 'item'} in your cart.
             </p>
           ) : (
             <div className="flex flex-col justify-between md:h-screen">
@@ -110,13 +119,13 @@ const CartDropdownItems = ({ isOpen, setIsOpen }) => {
           )}
 
           <ul className="overflow-y-auto h-[50svh] mt-4">
-            {CartItems.map((item, index) => (
+            {cartItems?.map((item, index) => (
               <NavBarCartItem item={item} key={index} />
             ))}
           </ul>
         </section>
 
-        {CartQuantity >= 1 && (
+        {cartItems.length >= 1 && (
           <div className="absolute bottom-10 w-full">
             <Subtotal />
           </div>

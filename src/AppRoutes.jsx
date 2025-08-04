@@ -51,6 +51,7 @@ import HowItWorks from './pages/howItWorks/HowItWorks';
 import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/DirectDebitSetUp1';
 import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetupPaymentSuccess';
+import { RentSmallsmall } from './pages/home/realEstateHome/realEstateContentSection/realEstateBanner/realEstateProperties/RentSmallsmall/RentSmallsmall';
 
 const AppRoutes = () => {
   return (
@@ -82,8 +83,9 @@ const AppRoutes = () => {
               <RealEstateHome />
             </Suspense>
           }
-        />
-
+        >
+          <Route path="rentsmallsmall" element={<RentSmallsmall />} />
+        </Route>
         <Route
           path="food-drink"
           element={

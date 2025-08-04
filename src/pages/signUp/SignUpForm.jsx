@@ -45,7 +45,6 @@ function SignUpForm() {
       }
     },
   });
-  // console.log(formErrors);
 
   const onSubmit = (data) => {
     const formattedData = {

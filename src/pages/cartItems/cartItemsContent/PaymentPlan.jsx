@@ -6,12 +6,12 @@ import { CartItemDailyPayment } from '../../productCategories/productDetails/pro
 import { CartItemWeeklyPayment } from '../../productCategories/productDetails/productPlan/WeeklyPaymentPlan/CartItemWeeklyPayment';
 import { CartItemMonthlyPayment } from '../../productCategories/productDetails/productPlan/MonthlyPaymentPlan/CartItemMonthlyPayment';
 
-export const PaymentPlan = ({ item }) => {
+export const PaymentPlan = ({ item, togglePlan }) => {
   const paymentMethodRef = useRef(null);
   const currentPlan = item.paymentPlan;
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const currentQuantity = useSelector(getCurrentQuantityById(item.productId));
+  const currentQuantity = useSelector(getCurrentQuantityById(item.productID));
 
   const updateScrollButtons = () => {
     const el = paymentMethodRef.current;
