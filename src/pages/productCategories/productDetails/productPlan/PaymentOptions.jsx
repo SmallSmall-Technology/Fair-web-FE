@@ -14,6 +14,9 @@ import {
 import { usePaymentOptions } from '../../../../hooks/usePaymentOptions';
 
 export const PaymentOptions = React.memo(({ product }) => {
+  const handleClick = () => {
+    handleAddToCart(dispatch, product, paymentOptions);
+  };
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const dispatch = useDispatch();
@@ -157,7 +160,16 @@ export const PaymentOptions = React.memo(({ product }) => {
         {renderSelectedPayment()}
         {selectedPaymentPlan && (
           <div className="lg:mx-0 lg:w-[80%] mt-4 mx-5">
-            <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
+            <YellowButton
+              onClick={() =>
+                handleAddToCart(
+                  dispatch,
+                  product,
+                  paymentOptions,
+                  selectedPaymentPlan
+                )
+              }
+            >
               Add to cart
             </YellowButton>
           </div>

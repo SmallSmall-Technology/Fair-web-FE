@@ -33,7 +33,7 @@ import CheckoutItemsSkeleton from './ui/components/skeletons/CheckoutItemsSkelet
 import ProductDetailsSkeleton from './ui/components/skeletons/ProductDetailsSkeleton';
 import CheckoutPaymentSkeleton from './ui/components/skeletons/CheckoutPaymentSkeleton';
 import DashboardSummarySkeleton from './ui/components/skeletons/DashboardSummarySkeleton';
-import SubCategoryPage from './pages/productCategories/SubCategoryPage';
+// import SubCategoryPage from './pages/productCategories/SubCategoryPage';
 import LandingPageSkeleton from './ui/components/skeletons/LandingPageSkeleton';
 
 import Summary from './pages/userDashboard/shopping/shoppingOverviewContents/Summary';
@@ -51,7 +51,7 @@ import HowItWorks from './pages/howItWorks/HowItWorks';
 import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/DirectDebitSetUp1';
 import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetupPaymentSuccess';
-import { RentSmallsmall } from './pages/home/realEstateHome/realEstateContentSection/realEstateBanner/realEstateProperties/RentSmallsmall/RentSmallsmall';
+import { DynamicSubCategoryPage } from './pages/DynamicSubcategoryPage';
 
 const AppRoutes = () => {
   return (
@@ -83,9 +83,13 @@ const AppRoutes = () => {
               <RealEstateHome />
             </Suspense>
           }
-        >
-          <Route path="rentsmallsmall" element={<RentSmallsmall />} />
-        </Route>
+        />
+
+        <Route
+          path=":category/:sub_category"
+          element={<DynamicSubCategoryPage />}
+        />
+
         <Route
           path="food-drink"
           element={
@@ -103,8 +107,6 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
-
-        <Route path=":category/:sub_category" element={<SubCategoryPage />} />
 
         <Route
           path=":category/:sub_category/:productID/:slug"
@@ -136,11 +138,6 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
-
-        {/* <Route
-        path="/:categoryName/:subcategory"
-        element={<LazyRoute element={<SubCategoryPage />} />}
-      /> */}
 
         <Route path=":category/*" element={<PageNotFound />} />
         <Route path="*" element={<PageNotFound />} />
