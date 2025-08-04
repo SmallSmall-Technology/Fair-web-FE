@@ -35,7 +35,7 @@ import CheckoutPaymentSkeleton from './ui/components/skeletons/CheckoutPaymentSk
 import DashboardSummarySkeleton from './ui/components/skeletons/DashboardSummarySkeleton';
 // import SubCategoryPage from './pages/productCategories/SubCategoryPage';
 import LandingPageSkeleton from './ui/components/skeletons/LandingPageSkeleton';
-
+import { DynamicSubCategoryPage } from './pages/DynamicSubcategoryPage';
 import Summary from './pages/userDashboard/shopping/shoppingOverviewContents/Summary';
 import Purchases from './pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases';
 import ForgotPassword from './pages/forgotPassword/ForgotPassword';
@@ -51,7 +51,7 @@ import HowItWorks from './pages/howItWorks/HowItWorks';
 import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/DirectDebitSetUp1';
 import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetupPaymentSuccess';
-import { DynamicSubCategoryPage } from './pages/DynamicSubcategoryPage';
+import BuyerAndVendorProtection from './pages/buyerAndVendor/BuyerAndVendorProtection';
 
 const AppRoutes = () => {
   return (
@@ -138,6 +138,20 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
+
+        <Route
+          path="buyer-vendor-protection"
+          element={
+            <Suspense fallback={<LandingPageSkeleton />}>
+              <BuyerAndVendorProtection />
+            </Suspense>
+          }
+        />
+
+        {/* <Route
+        path="/:categoryName/:subcategory"
+        element={<LazyRoute element={<SubCategoryPage />} />}
+      /> */}
 
         <Route path=":category/*" element={<PageNotFound />} />
         <Route path="*" element={<PageNotFound />} />
