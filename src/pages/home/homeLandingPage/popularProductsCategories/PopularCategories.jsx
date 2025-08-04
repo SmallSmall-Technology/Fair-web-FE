@@ -28,7 +28,7 @@ export const shopByPopularCategories = [
     desc: 'Beauty, Fashion, Household Essentials',
     color: 'bg-[#F5F5F7]',
     image: '/images/smallsmall-lifestyle.svg',
-    link: '/lifestyle',
+    link: '/lifestyle-consumer-goods',
   },
   {
     title: 'Real estate',

@@ -7,7 +7,7 @@ export const categories = [
     title: 'RentSmallsmall',
     color: 'bg-[#007DC1F9]',
     image: '/images/rentsofa.svg',
-    link: '/real-estate/rentsmallsmall',
+    link: '/real-estate/rent',
     text: 'text-white',
   },
   {

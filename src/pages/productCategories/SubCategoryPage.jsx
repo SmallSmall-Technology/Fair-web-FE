@@ -38,6 +38,9 @@ const SubCategoryPage = () => {
     cacheTime: 1000 * 60 * 60 * 24,
   });
 
+  // Check if the subcategory is valid
+  // This is used to ensure that the subcategory exists in the categories data
+  // If not, we will show a PageNotFound component
   const categories = Array.isArray(allCategories?.data?.categories)
     ? allCategories.data.categories
     : [];

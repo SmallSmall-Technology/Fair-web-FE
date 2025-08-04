@@ -33,9 +33,9 @@ import CheckoutItemsSkeleton from './ui/components/skeletons/CheckoutItemsSkelet
 import ProductDetailsSkeleton from './ui/components/skeletons/ProductDetailsSkeleton';
 import CheckoutPaymentSkeleton from './ui/components/skeletons/CheckoutPaymentSkeleton';
 import DashboardSummarySkeleton from './ui/components/skeletons/DashboardSummarySkeleton';
-import SubCategoryPage from './pages/productCategories/SubCategoryPage';
+// import SubCategoryPage from './pages/productCategories/SubCategoryPage';
 import LandingPageSkeleton from './ui/components/skeletons/LandingPageSkeleton';
-
+import { DynamicSubCategoryPage } from './pages/DynamicSubcategoryPage';
 import Summary from './pages/userDashboard/shopping/shoppingOverviewContents/Summary';
 import Purchases from './pages/userDashboard/shopping/shoppingOverviewContents/purchase/Purchases';
 import ForgotPassword from './pages/forgotPassword/ForgotPassword';
@@ -51,7 +51,6 @@ import HowItWorks from './pages/howItWorks/HowItWorks';
 import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/DirectDebitSetUp1';
 import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetupPaymentSuccess';
-import { RentSmallsmall } from './pages/home/realEstateHome/realEstateContentSection/realEstateBanner/realEstateProperties/RentSmallsmall/RentSmallsmall';
 import BuyerAndVendorProtection from './pages/buyerAndVendor/BuyerAndVendorProtection';
 
 const AppRoutes = () => {
@@ -84,9 +83,13 @@ const AppRoutes = () => {
               <RealEstateHome />
             </Suspense>
           }
-        >
-          <Route path="rentsmallsmall" element={<RentSmallsmall />} />
-        </Route>
+        />
+
+        <Route
+          path=":category/:sub_category"
+          element={<DynamicSubCategoryPage />}
+        />
+
         <Route
           path="food-drink"
           element={
@@ -104,8 +107,6 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
-
-        <Route path=":category/:sub_category" element={<SubCategoryPage />} />
 
         <Route
           path=":category/:sub_category/:productID/:slug"

@@ -180,7 +180,7 @@ export const ProductCategoriesShortcut = ({}) => {
             isLoadingSubcategories={isLoadingSubcategories}
           />
         </ul>
-        <Link className="hidden lg:flex font-medium text-[#DB1C5E] text-sm hover:text-[#FF4A8A] hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-400 rounded text-nowrap">
+        <Link className="hidden lg:flex font-calsans font-medium text-[#DB1C5E] text-sm hover:text-[#FF4A8A]  transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-400 rounded text-nowrap">
           Sales & Offers
         </Link>
       </div>
