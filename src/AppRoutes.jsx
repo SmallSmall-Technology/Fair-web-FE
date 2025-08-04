@@ -52,6 +52,7 @@ import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/Direct
 import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetupPaymentSuccess';
 import { RentSmallsmall } from './pages/home/realEstateHome/realEstateContentSection/realEstateBanner/realEstateProperties/RentSmallsmall/RentSmallsmall';
+import BuyerAndVendorProtection from './pages/buyerAndVendor/BuyerAndVendorProtection';
 
 const AppRoutes = () => {
   return (
@@ -133,6 +134,15 @@ const AppRoutes = () => {
           element={
             <Suspense fallback={<LandingPageSkeleton />}>
               <HowItWorks />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="buyer-vendor-protection"
+          element={
+            <Suspense fallback={<LandingPageSkeleton />}>
+              <BuyerAndVendorProtection />
             </Suspense>
           }
         />

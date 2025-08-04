@@ -1,4 +1,4 @@
-import Breadcrumb from './Breadcrumb';
+import Breadcrumb from '../../ui/components/Breadcrumb';
 import MainContent from './MainContent';
 import SideNav from './SideNav';
 
