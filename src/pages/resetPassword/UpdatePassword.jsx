@@ -155,6 +155,7 @@ const UpdatePassword = ({ email, disabled }) => {
             disabled={disabled}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-bg-[var(--yellow-primary)]  disabled:opacity-50"
           />
+
           <button
             type="button"
             onClick={() =>
