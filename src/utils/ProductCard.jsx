@@ -136,7 +136,7 @@ const ProductCard = ({ product, isLoading }) => {
       </TransitionLink>
       <div className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2">
         <TransitionLink
-          to={`/${productID}`}
+          to={`/${category}/${sub_category}/${productID}/${slug}`}
           className="hover:underline focus:underline focus:outline-none"
         >
           {/* <p className="text-xs lg:text-sm font-normal leading-[16.94px] min-h-12 cursor-pointer overflow-hidden lg:overflow-visible line-clamp-2 lg:line-clamp-none"> */}
