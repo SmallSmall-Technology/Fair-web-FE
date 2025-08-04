@@ -8,9 +8,9 @@ export const PropertyCard = ({ property }) => {
   const currentImage = images[currentImageIndex];
 
   return (
-    <article className="w-[218px] grid gap-2">
+    <article className="w-[170px] md:w-[276px] grid gap-2">
       <div
-        className="h-[218px] w-[276px] bg-cover bg-center rounded-[10px] relative transition-all duration-500"
+        className="h-[218px] w-[170px] md:w-[276px] bg-cover bg-center rounded-[10px] relative transition-all duration-500"
         style={{ backgroundImage: `url(${currentImage})` }}
       >
         <div className="flex flex-col justify-between w-full h-full px-3 py-3 rounded-[10px]">
@@ -54,7 +54,7 @@ export const PropertyCard = ({ property }) => {
 
       <div className="font-inter font-normal">
         <p className="text-sm ">{property?.name}</p>
-        <div className="flex space-x-2">
+        <div className="flex gap-2 flex-wrap">
           <InfoIcon
             src="/images/bed-alt(1) 21.svg"
             text={`${property?.noOfBedroom} Bed`}
