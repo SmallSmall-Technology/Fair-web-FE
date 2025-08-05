@@ -3,6 +3,7 @@ import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
 import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import { DeleteItemFromCart } from '../../../features/cart/DeleteItem';
+import { usePaymentOptions } from '../../../hooks/usePaymentOptions';
 
 export const NavBarCartItem = ({ item }) => {
   const currentQuantity = useSelector(getCurrentQuantityById(item.productID));
@@ -14,18 +15,20 @@ export const NavBarCartItem = ({ item }) => {
   //   const { cart: cartItems, loading } = useSelector((state) => state.cart);
 
   const getDisplayedPrice = () => {
-    const { paymentPlan, paymentPlanDetails, price } = item;
+    const paymentOptionsBreakdown = usePaymentOptions();
+    const { paymentPlan, price } = item;
+    // console.log(paymentOptionsBreakdown);
     switch (paymentPlan) {
       case 'full':
         return formatCurrency(
-          (paymentPlanDetails?.amount || price) * currentQuantity
+          (paymentOptionsBreakdown?.price || price) * currentQuantity
         );
       case 'monthly':
-        return `${formatCurrency(paymentPlanDetails?.monthlyPayment * currentQuantity || 0)} `;
+        return `${formatCurrency(paymentOptionsBreakdown?.monthlyPayment * currentQuantity || 0)} `;
       case 'weekly':
-        return `${formatCurrency(paymentPlanDetails?.weeklyPayment * currentQuantity || 0)}`;
+        return `${formatCurrency(paymentOptionsBreakdown?.weeklyPayment * currentQuantity || 0)}`;
       case 'daily':
-        return `${formatCurrency(paymentPlanDetails?.dailyPayment * currentQuantity || 0)} `;
+        return `${formatCurrency(paymentOptionsBreakdown?.dailyPayment * currentQuantity || 0)} `;
       default:
         return formatCurrency(price * currentQuantity);
     }
@@ -55,7 +58,7 @@ export const NavBarCartItem = ({ item }) => {
                   <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
                     <UpdateItemQuantity
                       productID={item.productID}
-                      currentQuantity={currentQuantity}
+                      currentQuantity={item.quantity}
                     />
                   </div>
                 </div>

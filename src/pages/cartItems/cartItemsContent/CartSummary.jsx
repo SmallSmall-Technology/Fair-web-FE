@@ -47,7 +47,7 @@ export const CartSummary = ({
             <p className="text-right">{formatCurrency(shippingFee)}</p>
           </div>
         </div>
-        {isConsolidatedCart && (
+        {!isConsolidatedCart && (
           <div>
             <hr className="mt-8 mb-2" />
             <div className="flex justify-between items-center">

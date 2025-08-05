@@ -9,12 +9,16 @@ import { NavBarCartItem } from './NavBarCartItem';
 //   getTotalCartQuantity,
 // } from '../../../features/cart/cartSlice';
 import { Link } from 'react-router-dom';
-import { fetchCart } from '../../../features/cart/cartSlice';
+import {
+  fetchCart,
+  getTotalCartQuantity,
+} from '../../../features/cart/cartSlice';
 
 const CartDropdownItems = ({ isOpen, setIsOpen }) => {
   // const CartItems = useSelector(getCart);
   // const CartItems = fetchCart();
-  // const CartQuantity = useSelector(getTotalCartQuantity);
+  const CartQuantity = useSelector(getTotalCartQuantity);
+  // console.log(CartQuantity);
   const [internalOpen, setInternalOpen] = useState(false);
   const menuRef = useRef(null);
   const dispatch = useDispatch();
@@ -23,6 +27,7 @@ const CartDropdownItems = ({ isOpen, setIsOpen }) => {
   }, [dispatch]);
 
   const { cart: cartItems, loading } = useSelector((state) => state.cart);
+  // console.log(cartItems);
 
   useEffect(() => {
     if (isOpen) {
