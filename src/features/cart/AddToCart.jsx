@@ -134,7 +134,7 @@ export const AddToCart = ({ product }) => {
     if (!product) return;
 
     if (!selectedPaymentPlan) {
-      dispatch(setSelectedPaymentPlan('full'));
+      dispatch(setSelectedPaymentPlan('monthly'));
     }
 
     try {

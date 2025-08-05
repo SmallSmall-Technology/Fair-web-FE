@@ -9,6 +9,7 @@ const getCartSessionId = () => {
   if (!cartSessionID) {
     cartSessionID = uuidv4();
     localStorage.setItem('cartSessionID', cartSessionID);
+    // console.log('Generated new cartSessionID:', cartSessionID);
   }
   return cartSessionID;
 };
@@ -19,21 +20,44 @@ const getCartSessionId = () => {
 export const fetchCart = createAsyncThunk(
   'cart/fetchCart',
   async (_, { rejectWithValue }) => {
+    const cartSessionID = getCartSessionId();
+    // console.log('fetchCart cartSessionID:', cartSessionID);
     try {
-      const cartSessionID = getCartSessionId();
       const response = await httpClient.get('/cart/view-cart', {
         params: { cartSessionID },
+        headers: {
+          'Content-Type': 'application/json',
+          // Add any additional headers used in Postman, e.g., Authorization or cookies
+          // 'Authorization': 'Bearer your-token',
+        },
       });
-
+      // console.log('fetchCart response:', response.data);
       if (!response.data?.success) {
         return rejectWithValue(
           response.data?.message || 'Failed to fetch cart'
         );
       }
-
       return response.data;
     } catch (error) {
+      // console.error('Fetch cart error:', error);
       return rejectWithValue(error.message || 'Failed to fetch cart');
+    }
+  }
+);
+
+// Retry fetch cart with delay
+export const retryFetchCart = createAsyncThunk(
+  'cart/retryFetchCart',
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      // Add a 500ms delay to account for potential backend persistence delay
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      const response = await dispatch(fetchCart()).unwrap();
+      // console.log('Retry fetchCart response:', response);
+      return response;
+    } catch (error) {
+      // console.error('Retry fetch cart error:', error);
+      return rejectWithValue(error.message || 'Failed to retry fetch cart');
     }
   }
 );
@@ -43,12 +67,26 @@ export const addToCart = createAsyncThunk(
   'cart/addToCart',
   async (product, { getState, dispatch, rejectWithValue }) => {
     const prevCart = [...getState().cart.cart];
+    const selectedPaymentPlan = getState().cart.selectedPaymentPlan || 'full';
+    // console.log('addToCart cartSessionID:', getCartSessionId());
+    // console.log('Adding to cart:', { product, selectedPaymentPlan });
 
-    // Default to full payment if user didn't pick one
-    // const selectedPaymentPlan = product.paymentPlan || 'full';
-    const selectedPaymentPlan = product.paymentOptionsBreakdown.filter(
-      (paymentPlan) => paymentPlan.type === option.type || 'full'
-    );
+    // Parse paymentOptionsBreakdown from product
+    let paymentOptions = [];
+    try {
+      paymentOptions = JSON.parse(product.paymentOptionsBreakdown || '[]');
+    } catch (error) {
+      // console.error('Error parsing paymentOptionsBreakdown:', error);
+    }
+
+    // Find the selected payment plan details
+    const paymentPlanDetails = paymentOptions.find(
+      (option) => option.type === selectedPaymentPlan
+    ) || {
+      type: 'full',
+      amount: product.fairAppPrice || product.productPrice,
+      totalPrice: product.fairAppPrice || product.productPrice,
+    };
 
     const normalizedProduct = {
       ...product,
@@ -56,28 +94,74 @@ export const addToCart = createAsyncThunk(
       paymentOptionsBreakdown: selectedPaymentPlan,
       selectedPaymentPlanDetails: {
         type: selectedPaymentPlan,
-        amount: product.price,
-        totalPrice: product.price * (product.quantity || 1),
+        amount: Number(
+          paymentPlanDetails.amount ||
+            product.fairAppPrice ||
+            product.productPrice
+        ),
+        totalPrice:
+          Number(
+            paymentPlanDetails.amount ||
+              product.fairAppPrice ||
+              product.productPrice
+          ) * (product.quantity || 1),
       },
+      price: Number(
+        paymentPlanDetails.amount ||
+          product.fairAppPrice ||
+          product.productPrice
+      ),
+      totalPrice:
+        Number(
+          paymentPlanDetails.amount ||
+            product.fairAppPrice ||
+            product.productPrice
+        ) * (product.quantity || 1),
     };
-    console.log(normalizedProduct);
+    // console.log('Normalized product:', normalizedProduct);
 
     // Optimistic update
     dispatch(cartSlice.actions.optimisticAdd(normalizedProduct));
 
     try {
-      // Send to backend
-      await httpClient.post('/cart/add-to-cart', {
-        productID: product.productID,
-        quantity: normalizedProduct.quantity,
-        cartSessionID: getCartSessionId(),
-        paymentPlan: selectedPaymentPlan,
-      });
+      const response = await httpClient.post(
+        '/cart/add-to-cart',
+        {
+          productID: product.productID,
+          quantity: normalizedProduct.quantity,
+          cartSessionID: getCartSessionId(),
+          paymentPlan: selectedPaymentPlan,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // Add any additional headers used in Postman
+            // 'Authorization': 'Bearer your-token',
+          },
+        }
+      );
+      // console.log('Add to cart response:', response.data);
+
+      // Check if backend returned a different payment plan
+      if (
+        response.data?.data?.product?.selectedPaymentPlan !==
+        selectedPaymentPlan
+      ) {
+        console.warn(
+          `Payment plan mismatch: Sent ${selectedPaymentPlan}, received ${response.data.data.product.selectedPaymentPlan}`
+        );
+      }
 
       // Sync with backend
-      return await dispatch(fetchCart()).unwrap();
+      const fetchResult = await dispatch(fetchCart()).unwrap();
+      // If fetchCart returns empty, retry once
+      if (!fetchResult.data?.cart?.items?.length) {
+        // console.warn('Empty cart after add, retrying fetchCart');
+        await dispatch(retryFetchCart()).unwrap();
+      }
+      return fetchResult;
     } catch (error) {
-      // Rollback on failure
+      // console.error('Add to cart error:', error);
       dispatch(cartSlice.actions.rollback(prevCart));
       toast.error('Failed to add item to cart');
       return rejectWithValue(error.message || 'Failed to add to cart');
@@ -90,10 +174,20 @@ export const removeFromCart = createAsyncThunk(
   'cart/removeFromCart',
   async ({ productID }, { dispatch, rejectWithValue }) => {
     try {
-      const response = await httpClient.post('/cart/remove-from-cart', {
-        productID,
-        cartSessionID: getCartSessionId(),
-      });
+      const response = await httpClient.post(
+        '/cart/remove-from-cart',
+        {
+          productID,
+          cartSessionID: getCartSessionId(),
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // Add any additional headers used in Postman
+          },
+        }
+      );
+      // console.log('Remove from cart response:', response.data);
 
       if (!response.data?.success) {
         return rejectWithValue(
@@ -103,12 +197,13 @@ export const removeFromCart = createAsyncThunk(
 
       return await dispatch(fetchCart()).unwrap();
     } catch (error) {
+      // console.error('Remove from cart error:', error);
       return rejectWithValue(error.message || 'Failed to remove item');
     }
   }
 );
 
-// //  --- Update item quantity ---
+// Update item quantity
 export const updateCartItem = createAsyncThunk(
   'cart/updateCartItem',
   async (
@@ -116,11 +211,21 @@ export const updateCartItem = createAsyncThunk(
     { dispatch, rejectWithValue }
   ) => {
     try {
-      const response = await httpClient.post('/cart/update-cart-item', {
-        productID,
-        cartSessionID,
-        quantity,
-      });
+      const response = await httpClient.post(
+        '/cart/update-cart-item',
+        {
+          productID,
+          cartSessionID,
+          quantity,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            // Add any additional headers used in Postman
+          },
+        }
+      );
+      // console.log('Update cart item response:', response.data);
 
       if (!response.data?.success) {
         return rejectWithValue(
@@ -128,12 +233,12 @@ export const updateCartItem = createAsyncThunk(
         );
       }
 
-      // Option 1: Refresh the cart after update
+      // Refresh the cart after update
       dispatch(fetchCart());
 
       return response.data;
     } catch (error) {
-      console.error('Update cart item failed:', error);
+      // console.error('Update cart item error:', error);
       return rejectWithValue(error.message || 'Failed to update item');
     }
   }
@@ -174,11 +279,11 @@ const cartSlice = createSlice({
 
       item.paymentPlanDetails = {
         type: plan,
-        amount: option.amount ?? item.price,
-        totalPrice: (option.totalPrice ?? item.price) * (item.quantity || 1),
+        amount: Number(option.amount || item.price),
+        totalPrice: Number(option.amount || item.price) * (item.quantity || 1),
       };
 
-      item.price = option.amount ?? item.price;
+      item.price = Number(option.amount || item.price);
       item.totalPrice = item.price * (item.quantity || 1);
 
       // Update summary
@@ -189,7 +294,7 @@ const cartSlice = createSlice({
           0
         ),
         total_amount: state.cart.reduce(
-          (sum, i) => sum + Number(i.totalPrice || i.price * (i.quantity || 1)),
+          (sum, i) => sum + Number(i.totalPrice || 0),
           0
         ),
       };
@@ -202,26 +307,51 @@ const cartSlice = createSlice({
       );
 
       if (existing) {
-        existing.quantity += 1;
-        existing.totalPrice += Number(product.price || 0);
+        existing.quantity =
+          Number(existing.quantity || 0) + Number(product.quantity || 1);
+        existing.totalPrice =
+          Number(existing.price || product.selectedPaymentPlanDetails.amount) *
+          existing.quantity;
+        toast.warn('Item quantity updated in cart');
       } else {
         state.cart.push({
           ...product,
-          quantity: 1,
-          paymentPlan: product.paymentPlan || 'full',
-          paymentPlanDetails: {
+          quantity: Number(product.quantity || 1),
+          paymentPlan: product.paymentOptionsBreakdown || 'full',
+          paymentPlanDetails: product.selectedPaymentPlanDetails || {
             type: 'full',
-            amount: product.price,
-            totalPrice: product.price,
+            amount: Number(product.fairAppPrice || product.productPrice),
+            totalPrice:
+              Number(product.fairAppPrice || product.productPrice) *
+              (product.quantity || 1),
           },
-          totalPrice: product.price,
+          price: Number(
+            product.selectedPaymentPlanDetails.amount ||
+              product.fairAppPrice ||
+              product.productPrice
+          ),
+          totalPrice:
+            Number(
+              product.selectedPaymentPlanDetails.amount ||
+                product.fairAppPrice ||
+                product.productPrice
+            ) * (product.quantity || 1),
         });
+        toast.success('Item added to cart');
       }
 
       // Update summary
-      state.cart_summary.total_items = state.cart.length;
-      state.cart_summary.total_quantity += 1;
-      state.cart_summary.total_amount += Number(product.price || 0);
+      state.cart_summary = {
+        total_items: state.cart.length,
+        total_quantity: state.cart.reduce(
+          (sum, i) => sum + Number(i.quantity || 0),
+          0
+        ),
+        total_amount: state.cart.reduce(
+          (sum, i) => sum + Number(i.totalPrice || 0),
+          0
+        ),
+      };
     },
 
     rollback: (state, action) => {
@@ -233,7 +363,7 @@ const cartSlice = createSlice({
           0
         ),
         total_amount: state.cart.reduce(
-          (sum, i) => sum + Number(i.totalPrice || i.price * (i.quantity || 1)),
+          (sum, i) => sum + Number(i.totalPrice || 0),
           0
         ),
       };
@@ -247,35 +377,88 @@ const cartSlice = createSlice({
       .addCase(fetchCart.fulfilled, (state, action) => {
         state.status = 'succeeded';
         const cartData = action.payload.data?.cart || {};
-        state.cart = (cartData.items || []).map((item) => ({
-          ...item,
-          paymentPlan: item.paymentPlan || 'full', // Default to full if missing
-        }));
-        state.cart_summary = cartData.summary || {
-          total_items: 0,
-          total_quantity: 0,
-          total_amount: 0,
-        };
+        const serverSessionID = action.payload.data?.owner?.cartSessionID;
+        if (serverSessionID) {
+          localStorage.setItem('cartSessionID', serverSessionID);
+          // console.log('Synced cartSessionID from server:', serverSessionID);
+        }
+        if (cartData.items && cartData.items.length > 0) {
+          state.cart = cartData.items.map((item) => ({
+            ...item,
+            paymentPlan: item.paymentPlan || 'full',
+            price: Number(item.price || item.fairAppPrice || item.productPrice),
+            totalPrice:
+              Number(item.price || item.fairAppPrice || item.productPrice) *
+              (item.quantity || 1),
+          }));
+          state.cart_summary = cartData.summary || {
+            total_items: 0,
+            total_quantity: 0,
+            total_amount: 0,
+          };
+        } else {
+          // console.warn(
+          //   'Empty cart received from backend, retaining current state'
+          // );
+          state.cart_summary = {
+            total_items: state.cart.length,
+            total_quantity: state.cart.reduce(
+              (sum, i) => sum + Number(i.quantity || 0),
+              0
+            ),
+            total_amount: state.cart.reduce(
+              (sum, i) => sum + Number(i.totalPrice || 0),
+              0
+            ),
+          };
+        }
       })
       .addCase(fetchCart.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload || 'Failed to fetch cart';
+        // console.error('Fetch cart error:', action.payload);
       })
       .addCase(addToCart.fulfilled, (state, action) => {
         state.status = 'succeeded';
         const cartData = action.payload.data?.cart || {};
-        state.cart = (cartData.items || []).map((item) => ({
-          ...item,
-          paymentPlan: item.paymentPlan || 'full', // Ensure default
-        }));
-        state.cart_summary = cartData.summary || state.cart_summary;
+        if (cartData.items && cartData.items.length > 0) {
+          state.cart = cartData.items.map((item) => ({
+            ...item,
+            paymentPlan: item.paymentPlan || 'full',
+            price: Number(item.price || item.fairAppPrice || item.productPrice),
+            totalPrice:
+              Number(item.price || item.fairAppPrice || item.productPrice) *
+              (item.quantity || 1),
+          }));
+          state.cart_summary = cartData.summary || state.cart_summary;
+        } else {
+          // console.warn(
+          //   'Empty cart in addToCart.fulfilled, retaining optimistic state'
+          // );
+          // Retain optimistic state
+          state.cart_summary = {
+            total_items: state.cart.length,
+            total_quantity: state.cart.reduce(
+              (sum, i) => sum + Number(i.quantity || 0),
+              0
+            ),
+            total_amount: state.cart.reduce(
+              (sum, i) => sum + Number(i.totalPrice || 0),
+              0
+            ),
+          };
+        }
       })
       .addCase(removeFromCart.fulfilled, (state, action) => {
         state.status = 'succeeded';
         const cartData = action.payload.data?.cart || {};
         state.cart = (cartData.items || []).map((item) => ({
           ...item,
-          paymentPlan: item.paymentPlan || 'full', // Ensure default
+          paymentPlan: item.paymentPlan || 'full',
+          price: Number(item.price || item.fairAppPrice || item.productPrice),
+          totalPrice:
+            Number(item.price || item.fairAppPrice || item.productPrice) *
+            (item.quantity || 1),
         }));
         state.cart_summary = cartData.summary || state.cart_summary;
       });
@@ -292,25 +475,15 @@ export const {
 export const getCart = (state) => state.cart.cart;
 export const getCartSummary = (state) => state.cart.cart_summary;
 
-export default cartSlice.reducer;
-
-// export const { optimisticAdd, optimisticRemove, rollback } = cartSlice.actions;
-
-// /* -------------------- SELECTORS -------------------- */
-// export const getCart = (state) => state.cart.cart;
-
-// export const getCartSummary = (state) => state.cart.cart_summary;
-
 export const getTotalCartQuantity = (state) => {
   const cart = Array.isArray(state.cart.cart) ? state.cart.cart : [];
   return cart.length;
 };
 export const getTotalCartPrice = (state) =>
-  state.cart.cart.reduce((sum, item) => sum + (item.total || 0), 0);
+  state.cart.cart.reduce((sum, item) => sum + (item.totalPrice || 0), 0);
 
 export const getCurrentQuantityById = (productID) => (state) =>
   state.cart.cart.find((item) => item.productID === productID)?.quantity ?? 0;
 export const getSelectedPaymentPlan = (state) => state.cart.selectedPaymentPlan;
-// export default cartSlice.reducer;
 
-// /* -------------------- ACTIONS -------------------- */
+export default cartSlice.reducer;

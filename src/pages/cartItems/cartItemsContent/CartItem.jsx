@@ -14,17 +14,14 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
     return <div className="skeleton h-44 w-full"></div>;
   }
 
-  console.log(item);
-
-  const { paymentPlan, quantity } = item;
-  console.log('Item payment plan:', paymentPlan);
-
   const getDisplayedPrice = () => {
-    const { paymentPlan, paymentOptionsBreakdown, price, quantity } = item;
+    const { paymentPlan, paymentOptionsBreakdown, fairAppPrice, quantity } =
+      item;
+    // console.log(item);
     switch (paymentPlan) {
       case 'full':
         return formatCurrency(
-          paymentOptionsBreakdown[3].amount * quantity || price
+          paymentOptionsBreakdown[3].amount * quantity || fairAppPrice
         );
       case 'monthly':
         return `${formatCurrency(paymentOptionsBreakdown[0]?.installmentAmount * quantity || 0)}`;
@@ -33,7 +30,7 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
       case 'daily':
         return `${formatCurrency(paymentOptionsBreakdown[2]?.installmentAmount * quantity || 0)} `;
       default:
-        return formatCurrency(price * quantity);
+        return formatCurrency(fairAppPrice * quantity);
     }
   };
   // const getDisplayedPrice = () => {
@@ -67,13 +64,13 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
 
   return (
     <article
-      key={item.productID}
+      key={item?.productID}
       className="md:border-[1px] pb-4 md:border-[#E5E5E5] rounded-[10px] w-full h-fit"
     >
       <div className="">
         <section className="md:p-4">
           <div className="flex justify-between mb-3">
-            {!item.venddorBrandName ? (
+            {!item?.venddorBrandName ? (
               <div className="flex space-x-1 items-center mb-1 2xl:px-10">
                 <img
                   src="/images/sold-by-fair.svg"
@@ -85,16 +82,16 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
             ) : (
               <div className="flex space-x-1 items-center mb-1 2xl:px-10">
                 <img
-                  src={item.venddorBrandLogo || '/images/sold-by-fair.svg'}
-                  alt={item.venddorBrandName || 'Fair company logo'}
+                  src={item?.venddorBrandLogo || '/images/sold-by-fair.svg'}
+                  alt={item?.venddorBrandName || 'Fair company logo'}
                   className="w-6 h-6"
                 />
-                <p className="underline">{item.venddorBrandName || 'Fair'}</p>
+                <p className="underline">{item?.venddorBrandName || 'Fair'}</p>
               </div>
             )}
             <button
               type="submit"
-              onClick={() => onTogglePlan(item.id)}
+              onClick={() => onTogglePlan(item?.id)}
               className="group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[var(--yellow-primary)] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black hover:underline"
             >
               <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-bg-[var(--yellow-primary)] "></span>
@@ -107,8 +104,8 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
             <div className="flex items-start gap-4">
               <div className="product-image">
                 <img
-                  src={item.image}
-                  alt={item.name}
+                  src={item?.image}
+                  alt={item?.name}
                   className="w-full h-full object-cover rounded"
                 />
               </div>
@@ -119,8 +116,8 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
                 <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
                   <p>Qty: </p>
                   <UpdateItemQuantity
-                    productID={item.productID}
-                    currentQuantity={quantity}
+                    productID={item?.productID}
+                    currentQuantity={item?.quantity}
                   />
                 </div>
                 <p className="text-xl font-semibold mb-6 md:hidden mt-4">
