@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   getTotalCartPrice,
-  clearCart,
+  // clearCart,
 } from '../../../features/cart/cartSlice.js';
 import {
   createOrder,
