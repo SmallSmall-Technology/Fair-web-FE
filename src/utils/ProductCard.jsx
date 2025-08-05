@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
 import { Button } from './Button';
+import { startTransition } from 'react';
 import { useDispatch } from 'react-redux';
-import { Image as ImageIcon, Share2, Star } from 'lucide-react';
-import { formatCurrency } from './FormatCurrency';
 import React, { useCallback } from 'react';
+import { formatCurrency } from './FormatCurrency';
+import { useQuery } from '@tanstack/react-query';
+import { Link, useNavigate } from 'react-router-dom';
 import { AddToCart } from '../features/cart/AddToCart';
+import { fetchSingleProduct } from '../api/product-api';
+import { Image as ImageIcon, Share2, Star } from 'lucide-react';
 import { AddFavourite } from '../features/favourite/AddFavourite';
 import { handleShareProduct } from '../features/product/ShareProduct';
 import { addItemToRecentlyViewed } from '../features/product/recentlyViewedSlice';
-import { Link, useNavigate } from 'react-router-dom';
-import { startTransition } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { fetchSingleProduct } from '../api/product-api';
 
 const TransitionLink = ({ to, children, className, ...props }) => {
   const navigate = useNavigate();
@@ -136,7 +136,7 @@ const ProductCard = ({ product, isLoading }) => {
       </TransitionLink>
       <div className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2">
         <TransitionLink
-          to={`/${productID}`}
+          to={`/${category}/${sub_category}/${productID}/${slug}`}
           className="hover:underline focus:underline focus:outline-none"
         >
           {/* <p className="text-xs lg:text-sm font-normal leading-[16.94px] min-h-12 cursor-pointer overflow-hidden lg:overflow-visible line-clamp-2 lg:line-clamp-none"> */}

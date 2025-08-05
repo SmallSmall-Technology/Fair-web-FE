@@ -23,8 +23,6 @@ const SubCategoryPage = () => {
     queryKey: ['products-by-category', category, sub_category],
     queryFn: () =>
       fetchProductsByCategoryAndSubcategory(category, sub_category),
-    staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 60 * 24,
   });
 
   const products = data?.data?.products || [];
@@ -34,10 +32,11 @@ const SubCategoryPage = () => {
   const { data: allCategories } = useQuery({
     queryKey: ['categories'],
     queryFn: getAllCategories,
-    staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 60 * 24,
   });
 
+  // Check if the subcategory is valid
+  // This is used to ensure that the subcategory exists in the categories data
+  // If not, we will show a PageNotFound component
   const categories = Array.isArray(allCategories?.data?.categories)
     ? allCategories.data.categories
     : [];
