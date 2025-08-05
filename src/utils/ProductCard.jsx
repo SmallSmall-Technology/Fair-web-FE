@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
 import { Button } from './Button';
+import { startTransition } from 'react';
 import { useDispatch } from 'react-redux';
-import { Image as ImageIcon, Share2, Star } from 'lucide-react';
-import { formatCurrency } from './FormatCurrency';
 import React, { useCallback } from 'react';
+import { formatCurrency } from './FormatCurrency';
+import { useQuery } from '@tanstack/react-query';
+import { Link, useNavigate } from 'react-router-dom';
 import { AddToCart } from '../features/cart/AddToCart';
+import { fetchSingleProduct } from '../api/product-api';
+import { Image as ImageIcon, Share2, Star } from 'lucide-react';
 import { AddFavourite } from '../features/favourite/AddFavourite';
 import { handleShareProduct } from '../features/product/ShareProduct';
 import { addItemToRecentlyViewed } from '../features/product/recentlyViewedSlice';
-import { Link, useNavigate } from 'react-router-dom';
-import { startTransition } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { fetchSingleProduct } from '../api/product-api';
 
 const TransitionLink = ({ to, children, className, ...props }) => {
   const navigate = useNavigate();
