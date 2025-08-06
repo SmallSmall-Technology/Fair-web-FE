@@ -166,7 +166,8 @@ export const AddToCart = ({ product }) => {
         );
       });
     } catch (error) {
-      // console.error('Add to cart failed:', error);
+      console.error('Add to cart failed:', error);
+
       toast.error(error || 'Failed to add item to cart', {
         className:
           'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
