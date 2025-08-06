@@ -1,37 +1,44 @@
 import React from 'react';
-import { getPaymentDates } from '../../SingleProductDetailsAside';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
+import { getPaymentDates } from '../../../../../utils/PaymentDates';
 
 export const CartItemMonthlyPayment = React.memo(({ product }) => {
   const installmentOption =
-    product.paymentPlanDetails?.type === 'monthly'
-      ? product.paymentPlanDetails
-      : null;
+    product.paymentOptionsBreakdown.find(
+      (option) => option.type === 'monthly'
+    ) || null;
+
+  if (!installmentOption) return;
+
+  const numberOfInstallments = installmentOption.numberOfInstallments || 0;
+
+  // Generate payment plan dynamically
   const paymentMonthly = [
     {
-      amount: installmentOption.monthlyPayment,
+      amount: installmentOption.downPayment,
       label: 'Pay now today',
       icon: '/images/quater-circle.svg',
     },
-    {
-      amount: installmentOption.monthlyPayment,
-      label: '2nd Payment',
-      date: getPaymentDates(new Date(), 3)[0],
-      icon: '/images/half-circle.svg',
-    },
-    {
-      amount: installmentOption.monthlyPayment,
-      label: '3rd Payment',
-      date: getPaymentDates(new Date(), 3)[1],
-      icon: '/images/one-third-circle.svg',
-    },
-    {
-      amount: installmentOption.monthlyPayment,
-      label: 'Final Payment',
-      date: getPaymentDates(new Date(), 3)[2],
-      icon: '/images/full-circle.svg',
-    },
+    ...Array.from({ length: numberOfInstallments }, (_, index) => ({
+      amount: installmentOption.installmentAmount,
+      label:
+        index + 1 === numberOfInstallments
+          ? 'Final Payment'
+          : `${index + 2}nd Payment`,
+      date: getPaymentDates(new Date(), numberOfInstallments)[index],
+      icon: getPaymentIcon(index, numberOfInstallments),
+    })),
   ];
+
+  // Helper to get icon dynamically
+  function getPaymentIcon(index, total) {
+    const icons = [
+      '/images/half-circle.svg',
+      '/images/one-third-circle.svg',
+      '/images/full-circle.svg',
+    ];
+    return icons[index] || '/images/full-circle.svg';
+  }
 
   return (
     <section className="w-full px-2">

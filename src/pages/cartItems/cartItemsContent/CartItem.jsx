@@ -89,7 +89,7 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
                 <p className="underline">{item?.venddorBrandName || 'Fair'}</p>
               </div>
             )}
-            <button
+            {/* <button
               type="submit"
               onClick={() => onTogglePlan(item?.id)}
               className="group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[var(--yellow-primary)] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black hover:underline"
@@ -98,7 +98,7 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
               <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-xs">
                 Change Plan
               </span>
-            </button>
+            </button> */}
           </div>
           <div className="grid md:grid-flow-col items-center justify-between 2xl:px-10">
             <div className="flex items-start gap-4">

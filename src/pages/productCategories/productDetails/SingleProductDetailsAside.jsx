@@ -10,23 +10,6 @@ import { SingleProductStickyHeader } from '../../../ui/components/header/SingleP
 
 export const item_width = 70;
 
-export const getPaymentDates = (startDate, months) => {
-  const dates = [];
-  const currentDate = new Date(startDate);
-  for (let i = 1; i <= months; i++) {
-    const nextDate = new Date(currentDate);
-    nextDate.setDate(currentDate.getDate() + 30 * i);
-    dates.push(
-      nextDate.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-      })
-    );
-  }
-  return dates;
-};
-
 export const SingleProductDetailsAside = React.memo(
   ({ product, shippingDate, category }) => {
     const [targetRef, isInView] = useIsInView();
