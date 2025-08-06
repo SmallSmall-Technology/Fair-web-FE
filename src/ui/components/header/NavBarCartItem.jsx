@@ -16,7 +16,6 @@ export const NavBarCartItem = ({ item }) => {
   //   const { cart: cartItems, loading } = useSelector((state) => state.cart);
 
   const getDisplayedPrice = () => {
-    // console.log(item);
     switch (paymentPlan) {
       case 'full':
         return formatCurrency(
