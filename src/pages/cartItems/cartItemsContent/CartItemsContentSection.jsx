@@ -9,21 +9,16 @@ import {
   getTotalCartQuantity,
   getTotalCartPrice,
   setItemPaymentPlan,
-  // getCart,
   fetchCart,
 } from '../../../features/cart/cartSlice';
 import { CartSummaryExtrasAndCoupon } from './CartSummaryExtrasAndCoupon';
-// import { usePaymentOptions } from '../../hooks/usePaymentOptions';
-
-import axios from 'axios';
-import { usePaymentOptions } from '../../../hooks/usePaymentOptions';
+import ChangePlanModal from '../../../utils/ChangePlanModal';
 
 const CartItemsContentSection = React.memo(() => {
   const shippingFee = +1200;
-  // const cart = useSelector(getCart);
   const navigate = useNavigate();
   const [isUpgraded, setIsUpgraded] = useState(false);
-  const [planModalItemId, setPlanModalItemId] = useState(null);
+  const [planModalOpen, setPlanModalOpen] = useState(false); // 🔹 Modal open for all items
   const [paymentOptions, setPaymentOptions] = useState([]);
   const totalCartPrice = useSelector(getTotalCartPrice);
   const VAT = (7.5 / 100) * totalCartPrice;
@@ -38,32 +33,19 @@ const CartItemsContentSection = React.memo(() => {
 
   const { cart: cartItems, loading } = useSelector((state) => state.cart);
 
-  // const fetchPaymentOptions = async (productID) => {
-  //   try {
-  //     const response = await axios.get(
-  //       `http://dev.smallsmall.com/products/${productID}`
-  //     );
-  //     return response.data.paymentOptions || [];
-  //   } catch (error) {
-  //     // console.error('Failed to fetch payment options:', error);
-  //     return [];
-  //   }
-  // };
-
-  const togglePlan = async (productID) => {
-    const item = cartItems.find((item) => item.productID === productID);
-    if (!item) return;
-
-    const options = await usePaymentOptions(productID);
-    setPaymentOptions(options);
-    setPlanModalItemId(item.productID);
+  // 🔹 Change plan for ALL items in the cart
+  const handlePlanChange = (newPlan) => {
+    cartItems.forEach((item) => {
+      dispatch(
+        setItemPaymentPlan({
+          productID: item.productID,
+          plan: newPlan,
+          paymentOptions,
+        })
+      );
+    });
+    setPlanModalOpen(false); // close modal after changing
   };
-
-  const handlePlanChange = (productID, newPlan) => {
-    dispatch(setItemPaymentPlan({ productID, plan: newPlan, paymentOptions }));
-    setPlanModalItemId(null);
-  };
-
   const handleCheckout = () => {
     if (subtTotal > 500000 && !isUpgraded) {
       return;
@@ -73,9 +55,21 @@ const CartItemsContentSection = React.memo(() => {
 
   return (
     <main className="my-5 pt-36 lg:pt-28">
-      <div className="mx-6 lg:mx-[60px] 2xl:mx-[150px]">
+      <div className="mx-6 lg:mx-[60px] 2xl:mx-[150px] flex space-x-[510px] items-center justify-between lg:justify-start mb-6">
         <h1 className="hidden lg:flex font-semibold text-3xl">Your Cart</h1>
         <h1 className="flex lg:hidden font-semibold text-3xl">Shopping Cart</h1>
+        {cartItems.length > 0 && (
+          <button
+            type="submit"
+            onClick={() => setPlanModalOpen(true)} // 🔹 Open modal for all cart items
+            className="group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[var(--yellow-primary)] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black hover:underline"
+          >
+            <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-bg-[var(--yellow-primary)] "></span>
+            <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-xs">
+              Change Plan
+            </span>
+          </button>
+        )}
       </div>
       {cartItems.length > 0 && (
         <>
@@ -89,7 +83,11 @@ const CartItemsContentSection = React.memo(() => {
             <button
               type="submit"
               onClick={handleCheckout}
-              className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 text-lg font-medium hover:bg-gray-50 ${subtTotal >= 500000 && !isUpgraded ? 'bg-[#E5E5E5] text-[#CDCBCC]' : 'bg-yellow-300 text-black'}`}
+              className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 text-lg font-medium hover:bg-gray-50 ${
+                subtTotal >= 500000 && !isUpgraded
+                  ? 'bg-[#E5E5E5] text-[#CDCBCC]'
+                  : 'bg-yellow-300 text-black'
+              }`}
             >
               <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-bg-[var(--yellow-primary)] "></span>
               <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-base">
@@ -106,6 +104,7 @@ const CartItemsContentSection = React.memo(() => {
           </div>
         </>
       )}
+
       <hr className="lg:hidden mt-6 mb-4" />
       <section className="mx-6 lg:mx-[60px] 2xl:mx-[150px]">
         {cartItems.length < 1 ? (
@@ -114,61 +113,61 @@ const CartItemsContentSection = React.memo(() => {
             <Link to="/">Go back home to add products to cart</Link>
           </>
         ) : (
-          <>
-            <div className="grid grid-cols-1 w-full lg:grid-cols-[60%_36%] gap-6 justify-between mt-6">
-              <div className="flex flex-col gap-6 lg:h-screen lg:overflow-y-auto">
-                {cartItems?.map((item, index) => (
-                  <CartItem
-                    item={item}
-                    key={index}
-                    onTogglePlan={togglePlan}
-                    isLoading={loading}
-                  />
-                ))}
-              </div>
-              <aside>
-                <CartSummary
-                  onHandleCheckout={handleCheckout}
-                  onTogglePlan={togglePlan}
-                  isUpgraded={isUpgraded}
-                  setIsUpgraded={setIsUpgraded}
-                />
-                <CartSummaryExtrasAndCoupon />
-              </aside>
+          <div className="grid grid-cols-1 w-full lg:grid-cols-[60%_36%] gap-6 justify-between mt-6">
+            <div className="flex flex-col gap-6 lg:h-screen lg:overflow-y-auto lg:scroll-smooth custom-scrollbar-hidden">
+              {cartItems?.map((item, index) => (
+                <CartItem item={item} key={index} isLoading={loading} />
+              ))}
             </div>
-          </>
+
+            <aside>
+              <CartSummary
+                onHandleCheckout={handleCheckout}
+                isUpgraded={isUpgraded}
+                setIsUpgraded={setIsUpgraded}
+              />
+              <CartSummaryExtrasAndCoupon />
+            </aside>
+          </div>
         )}
       </section>
-      {planModalItemId && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg max-w-sm w-full">
-            <h2 className="text-lg font-semibold mb-4">Select Payment Plan</h2>
-            <select
-              defaultValue={
-                cart.find((item) => item.id === planModalItemId).paymentPlan
-              }
-              onChange={(e) =>
-                handlePlanChange(planModalItemId, e.target.value)
-              }
-              className="w-full p-2 border rounded mb-4"
-            >
-              <option value="full">Full Payment</option>
-              <option value="monthly">Monthly Installments</option>
-              <option value="weekly">Weekly Installments</option>
-              <option value="daily">Daily Installments</option>
-            </select>
-            <div className="flex justify-end gap-2">
-              <button
-                onClick={() => setPlanModalItemId(null)}
-                className="px-4 py-2 bg-gray-200 rounded"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
+
+      {/* 🔹 Modal for selecting plan for ALL items */}
+      {planModalOpen && (
+        // <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        //   <div className="bg-white p-6 rounded-lg max-w-sm w-full">
+        //     <h2 className="text-lg font-semibold mb-4">Select Payment Plan</h2>
+        //     <select
+        //       onChange={(e) => handlePlanChange(e.target.value)}
+        //       className="w-full p-2 border rounded mb-4"
+        //     >
+        //       <option value="" disabled selected>
+        //         Select Payment Plan
+        //       </option>
+        //       <option value="full">Full Payment</option>
+        //       <option value="monthly">Monthly Installments</option>
+        //       <option value="weekly">Weekly Installments</option>
+        //       <option value="daily">Daily Installments</option>
+        //     </select>
+        //     <div className="flex justify-end gap-2">
+        //       <button
+        //         onClick={() => setPlanModalOpen(false)}
+        //         className="px-4 py-2 bg-gray-200 rounded"
+        //       >
+        //         Cancel
+        //       </button>
+        //     </div>
+        //   </div>
+        // </div>
+        <ChangePlanModal
+          isOpen={planModalOpen}
+          onClose={() => setPlanModalOpen(false)}
+          onSave={handlePlanChange}
+          currentPlan={paymentOptions}
+        />
       )}
     </main>
   );
 });
+
 export default CartItemsContentSection;

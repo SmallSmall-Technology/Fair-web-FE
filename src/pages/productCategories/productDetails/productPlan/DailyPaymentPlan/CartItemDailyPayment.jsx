@@ -1,51 +1,34 @@
 import React from 'react';
+import { getPaymentIcon } from '../../../../../utils/PaymentIcons';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
+import { getPaymentDates } from '../../../../../utils/PaymentDates';
 
 export const CartItemDailyPayment = React.memo(({ product }) => {
-  function getDailyPaymentDates(startDate, numberOfDays) {
-    return Array.from({ length: numberOfDays }, (_, index) => {
-      const date = new Date(startDate);
-      date.setDate(date.getDate() + index * 30);
-      return date.toISOString().split('T')[0];
-    });
-  }
   const installmentOption =
-    product.paymentPlanDetails?.type === 'daily'
-      ? product.paymentPlanDetails
-      : null;
+    product.paymentOptionsBreakdown.find((option) => option.type === 'daily') ||
+    null;
 
-  const paymentDaily = installmentOption
-    ? Array.from({ length: installmentOption.days }, (_, index) => {
-        const icons = [
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/quater-circle.svg',
-          '/images/half-circle.svg',
-          '/images/one-third-circle.svg',
-          '/images/one-third-circle.svg',
-          '/images/one-third-circle.svg',
-          '/images/full-circle.svg',
-        ];
-        const paymentNumber = index + 1;
-        return {
-          amount: installmentOption.dailyPayment,
-          label: index === 0 ? 'Pay now today' : `Payment ${paymentNumber}`,
-          date: getDailyPaymentDates(new Date(), installmentOption.days)[index],
-          icon: icons[index % icons.length],
-        };
-      })
-    : [];
+  if (!installmentOption) return;
+
+  const numberOfInstallments = installmentOption.numberOfInstallments || 0;
+
+  // Generate payment plan dynamically
+  const paymentDaily = [
+    {
+      amount: installmentOption.downPayment,
+      label: 'Pay now today',
+      icon: '/images/quater-circle.svg',
+    },
+    ...Array.from({ length: numberOfInstallments }, (_, index) => ({
+      amount: installmentOption.installmentAmount,
+      label:
+        index + 1 === numberOfInstallments
+          ? 'Final Payment'
+          : `${index + 2}nd Payment`,
+      date: getPaymentDates(new Date(), numberOfInstallments)[index],
+      icon: getPaymentIcon(index, numberOfInstallments),
+    })),
+  ];
 
   return (
     <section className="w-full px-2">
