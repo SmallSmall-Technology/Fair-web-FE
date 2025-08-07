@@ -52,7 +52,7 @@ import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/Direct
 import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetupPaymentSuccess';
 import BuyerAndVendorProtection from './pages/buyerAndVendor/BuyerAndVendorProtection';
-import MarketplaceGuidelines from './pages/marketplaceGuidelines/MarketplaceGuildlines';
+import MarketplaceGuidelines from './pages/marketplaceGuidelines/MarketplaceGuidelines';
 
 const AppRoutes = () => {
   return (
