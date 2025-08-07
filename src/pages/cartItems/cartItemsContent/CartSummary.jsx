@@ -33,7 +33,7 @@ export const CartSummary = ({
     };
 
     cart.forEach((item) => {
-      const cartPaymentPlan = item.paymentPlan;
+      const cartPaymentPlan = item.paymentPlan || item.selectedPaymentPlan;
       const option = item.paymentOptionsBreakdown?.find(
         (opt) => opt.type === cartPaymentPlan
       );

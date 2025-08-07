@@ -4,7 +4,7 @@ import httpClient from '../../api/http-clients';
 import { v4 as uuidv4 } from 'uuid';
 
 /* -------------------- Utility -------------------- */
-const getCartSessionId = () => {
+export const getCartSessionId = () => {
   let cartSessionID = localStorage.getItem('cartSessionID');
   if (!cartSessionID) {
     cartSessionID = uuidv4();
@@ -187,7 +187,7 @@ export const removeFromCart = createAsyncThunk(
   }
 );
 
-// // Update item quantity
+// Update item quantity
 export const updateCartItem = createAsyncThunk(
   'cart/updateCartItem',
   async (
@@ -223,33 +223,40 @@ export const updateCartItem = createAsyncThunk(
   }
 );
 
-// ✅ Update quantity while preserving selectedPaymentPlan
-// export const updateCartItem = createAsyncThunk(
-//   'cart/updateCartItemQuantity',
-//   async ({ productID, quantity }, { getState }) => {
-//     const state = getState();
-//     const existingItem = state.cart.cart.find(
-//       (item) => item.productID === productID
-//     );
+// Update cartitem(s) payment plan
+export const updateCartItemPaymentPlan = createAsyncThunk(
+  'cart/updateCartItemPaymentPlan',
+  async ({ productID, selectedPaymentPlan }, { getState, rejectWithValue }) => {
+    const state = getState();
+    const existingItem = state.cart.cart.find(
+      (item) => item.productID === productID
+    );
 
-//     if (!existingItem) throw new Error('Item not found in cart');
+    if (!existingItem) throw new Error('Item not found in cart');
 
-//     // ✅ Only send productID and quantity to the endpoint
-//     const response = await axios.put('/cart/update-cart-item', {
-//       productID,
-//       quantity,
-//       cartSessionID: getCartSessionId(),
-//     });
+    try {
+      const response = await httpClient.post('/cart/update-payment-plan', {
+        productID,
+        selectedPaymentPlan,
+        cartSessionID: getCartSessionId(),
+      });
 
-//     // ✅ Preserve selectedPaymentPlan locally even if API doesn't return it
-//     return {
-//       ...existingItem,
-//       ...response.data, // includes updated totals from API
-//       quantity,
-//       selectedPaymentPlan: existingItem.selectedPaymentPlan,
-//     };
-//   }
-// );
+      if (!response.data?.success) {
+        return rejectWithValue(
+          response.data?.message || 'Failed to update payment plan'
+        );
+      }
+
+      return {
+        ...response.data,
+        productID,
+        paymentPlan: selectedPaymentPlan, // ✅ fix is here
+      };
+    } catch (error) {
+      return rejectWithValue(error.message || 'Failed to update payment plan');
+    }
+  }
+);
 
 /* -------------------- SLICE -------------------- */
 
@@ -393,7 +400,7 @@ const cartSlice = createSlice({
         if (cartData.items && cartData.items.length > 0) {
           state.cart = cartData.items.map((item) => ({
             ...item,
-            paymentPlan: 'monthly' || item.paymentPlan,
+            paymentPlan: item.selectedPaymentPlan,
             price: Number(item.price || item.fairAppPrice || item.productPrice),
             totalPrice:
               Number(item.price || item.fairAppPrice || item.productPrice) *
@@ -478,6 +485,15 @@ const cartSlice = createSlice({
             ? { ...item, ...updatedItem } // ✅ preserve plan and update quantity
             : item
         );
+      })
+      .addCase(updateCartItemPaymentPlan.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        const { productID, paymentPlan } = action.payload;
+
+        const item = state.cart.find((item) => item.productID === productID);
+        if (item) {
+          item.paymentPlan = paymentPlan;
+        }
       });
   },
 });

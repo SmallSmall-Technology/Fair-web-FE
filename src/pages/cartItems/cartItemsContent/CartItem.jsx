@@ -16,7 +16,7 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
   }
 
   const displayedPrice = getDisplayedPrice({
-    paymentPlan: item.paymentPlan,
+    paymentPlan: item.paymentPlan || item.selectedPaymentPlan,
     paymentOptionsBreakdown: item.paymentOptionsBreakdown,
     fairAppPrice: item.fairAppPrice,
     quantity: item.quantity,

@@ -47,7 +47,7 @@ export const CartItemMonthlyPayment = React.memo(({ product }) => {
       <p className="lg:ml-5 text-xs font-semibold mb-2 lg:mt-[-10px]">
         Monthly
       </p>
-      <article className="flex w-[95%] mx-auto overflow-x-auto">
+      <article className="flex w-[95%] mx-auto overflow-x-auto custom-scrollbar-hidden">
         <div className="flex gap-6 ">
           {paymentMonthly.map((payment, index) => (
             <div key={index} className="flex items-center space-x-2 min-w-fit">

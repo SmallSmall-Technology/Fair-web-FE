@@ -10,6 +10,8 @@ import {
   getTotalCartPrice,
   setItemPaymentPlan,
   fetchCart,
+  updateCartItemPaymentPlan,
+  getCartSessionId,
 } from '../../../features/cart/cartSlice';
 import { CartSummaryExtrasAndCoupon } from './CartSummaryExtrasAndCoupon';
 import ChangePlanModal from '../../../utils/ChangePlanModal';
@@ -31,16 +33,20 @@ const CartItemsContentSection = React.memo(() => {
     dispatch(fetchCart());
   }, [dispatch]);
 
+  const cartSessionID =
+    useSelector((state) => state.cart.sessionID) ||
+    localStorage.getItem('cartSessionID');
+
   const { cart: cartItems, loading } = useSelector((state) => state.cart);
 
   // 🔹 Change plan for ALL items in the cart
   const handlePlanChange = (newPlan) => {
     cartItems.forEach((item) => {
       dispatch(
-        setItemPaymentPlan({
+        updateCartItemPaymentPlan({
           productID: item.productID,
-          plan: newPlan,
-          paymentOptions,
+          selectedPaymentPlan: newPlan,
+          cartSessionID,
         })
       );
     });
@@ -50,6 +56,7 @@ const CartItemsContentSection = React.memo(() => {
     if (subtTotal > 500000 && !isUpgraded) {
       return;
     }
+
     navigate('checkout');
   };
 
@@ -134,31 +141,6 @@ const CartItemsContentSection = React.memo(() => {
 
       {/* 🔹 Modal for selecting plan for ALL items */}
       {planModalOpen && (
-        // <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        //   <div className="bg-white p-6 rounded-lg max-w-sm w-full">
-        //     <h2 className="text-lg font-semibold mb-4">Select Payment Plan</h2>
-        //     <select
-        //       onChange={(e) => handlePlanChange(e.target.value)}
-        //       className="w-full p-2 border rounded mb-4"
-        //     >
-        //       <option value="" disabled selected>
-        //         Select Payment Plan
-        //       </option>
-        //       <option value="full">Full Payment</option>
-        //       <option value="monthly">Monthly Installments</option>
-        //       <option value="weekly">Weekly Installments</option>
-        //       <option value="daily">Daily Installments</option>
-        //     </select>
-        //     <div className="flex justify-end gap-2">
-        //       <button
-        //         onClick={() => setPlanModalOpen(false)}
-        //         className="px-4 py-2 bg-gray-200 rounded"
-        //       >
-        //         Cancel
-        //       </button>
-        //     </div>
-        //   </div>
-        // </div>
         <ChangePlanModal
           isOpen={planModalOpen}
           onClose={() => setPlanModalOpen(false)}

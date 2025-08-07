@@ -2,9 +2,10 @@ import React from 'react';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 
 const CartItemFulllPayment = React.memo(({ product }) => {
+  const { quantity } = product;
   const paymentsInFull = [
     {
-      amount: product.amount,
+      amount: product.price * quantity,
       label: 'Pay in full now today',
       date: new Date(),
       icon: '/images/full-circle.svg',
@@ -29,7 +30,7 @@ const CartItemFulllPayment = React.memo(({ product }) => {
               </div>
               <div className="flex flex-col items-start">
                 <p className="text-xs font-medium mt-1">
-                  {formatCurrency(product.price)}
+                  {formatCurrency(payment?.amount)}
                 </p>
                 <span className="text-[11px] text-center min-w-fit bg-bl">
                   {payment.label}
