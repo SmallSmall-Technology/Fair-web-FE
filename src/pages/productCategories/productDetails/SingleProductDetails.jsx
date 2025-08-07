@@ -2,7 +2,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { HeartHandshake } from 'lucide-react';
 import { ProductImage } from '../ProductImage';
+import { useQuery } from '@tanstack/react-query';
 import ProductCard from '../../../utils/ProductCard';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import CommentBar from '../../../features/reviewsRating/CommentBar';
@@ -14,8 +16,6 @@ import { DailyPayment } from './productPlan/DailyPaymentPlan/DailyPayment';
 import { handleShareProduct } from '../../../features/product/ShareProduct';
 import { WeeklyPayment } from './productPlan/WeeklyPaymentPlan/WeeklyPayment';
 import { MonthlyPayment } from './productPlan/MonthlyPaymentPlan/MonthlyPayment';
-import { HeartHandshake } from 'lucide-react';
-import { useQuery } from '@tanstack/react-query';
 import { fetchProductsByCategoryAndSubcategory } from '../../../api/product-api';
 
 export const SingleProductDetails = React.memo(function SingleProductDetails({
@@ -30,8 +30,6 @@ export const SingleProductDetails = React.memo(function SingleProductDetails({
   const { data, isLoading, isError } = useQuery({
     queryKey: ['relatedProducts', category, subcategory],
     queryFn: () => fetchProductsByCategoryAndSubcategory(category, subcategory),
-    staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 60 * 24,
   });
   const relatedProducts = data?.data?.products;
 

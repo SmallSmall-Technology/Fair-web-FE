@@ -15,9 +15,7 @@ const FilterBar = () => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
 
-  const handleSearch = () => {
-    console.log('Searching with filters:', filters);
-  };
+  const handleSearch = () => {};
 
   const inputClass =
     'outline-none text-sm text-[#222224] placeholder-[#222224] bg-transparent w-24';
