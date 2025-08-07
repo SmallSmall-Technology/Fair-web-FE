@@ -3,11 +3,7 @@ import { Subtotal } from './NavBar';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavBarCartItem } from './NavBarCartItem';
-// import {
-//   fetchCart,
-//   getCart,
-//   getTotalCartQuantity,
-// } from '../../../features/cart/cartSlice';
+
 import { Link } from 'react-router-dom';
 import {
   fetchCart,
@@ -15,10 +11,7 @@ import {
 } from '../../../features/cart/cartSlice';
 
 const CartDropdownItems = ({ isOpen, setIsOpen }) => {
-  // const CartItems = useSelector(getCart);
-  // const CartItems = fetchCart();
   const CartQuantity = useSelector(getTotalCartQuantity);
-  // console.log(CartQuantity);
   const [internalOpen, setInternalOpen] = useState(false);
   const menuRef = useRef(null);
   const dispatch = useDispatch();
@@ -27,7 +20,6 @@ const CartDropdownItems = ({ isOpen, setIsOpen }) => {
   }, [dispatch]);
 
   const { cart: cartItems, loading } = useSelector((state) => state.cart);
-  // console.log(cartItems);
 
   useEffect(() => {
     if (isOpen) {
