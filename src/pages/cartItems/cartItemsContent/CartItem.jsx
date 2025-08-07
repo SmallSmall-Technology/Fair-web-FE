@@ -6,61 +6,21 @@ import {
   DeleteItemFromCart,
 } from '../../../features/cart/DeleteItem';
 import { formatCurrency } from '../../../utils/FormatCurrency';
+import { getDisplayedPrice } from '../../../utils/GetDisplayedPrice';
 import { SaveItemForLater } from '../../../features/cart/SaveItemForLater';
 import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 
 export const CartItem = ({ item, onTogglePlan, isLoading }) => {
   if (isLoading) {
-    return <div className="skeleton h-44 w-full"></div>;
+    return <CartItemSkeleton />;
   }
 
-  const getDisplayedPrice = () => {
-    const { paymentPlan, paymentOptionsBreakdown, fairAppPrice, quantity } =
-      item;
-    // console.log(item);
-    switch (paymentPlan) {
-      case 'full':
-        return formatCurrency(
-          paymentOptionsBreakdown[3].amount * quantity || fairAppPrice
-        );
-      case 'monthly':
-        return `${formatCurrency(paymentOptionsBreakdown[0]?.installmentAmount * quantity || 0)}`;
-      case 'weekly':
-        return `${formatCurrency(paymentOptionsBreakdown[1]?.installmentAmount * quantity || 0)} `;
-      case 'daily':
-        return `${formatCurrency(paymentOptionsBreakdown[2]?.installmentAmount * quantity || 0)} `;
-      default:
-        return formatCurrency(fairAppPrice * quantity);
-    }
-  };
-  // const getDisplayedPrice = () => {
-  //   const { paymentPlan, paymentOptionsBreakdown, price, quantity = 1 } = item;
-
-  //   // Map payment options by type
-  //   const paymentMap = (paymentOptionsBreakdown || []).reduce((acc, option) => {
-  //     if (option.type) acc[option.type.toLowerCase()] = option;
-  //     return acc;
-  //   }, {});
-
-  //   const plan = (paymentPlan || 'full').toLowerCase();
-
-  //   if (plan === 'full') {
-  //     // Full payment
-  //     return formatCurrency((price || 0) * quantity);
-  //   }
-
-  //   // For installment payments
-  //   const option = paymentMap[plan];
-  //   if (!option) return formatCurrency((price || 0) * quantity);
-
-  //   const firstPayment = (option.downPayment || 0) * quantity;
-  //   const installmentPerPeriod = (option.installmentAmount || 0) * quantity;
-  //   const periods = option.numberOfInstallments || 0;
-
-  //   return `${formatCurrency(firstPayment)} first payment + ${formatCurrency(
-  //     installmentPerPeriod
-  //   )} × ${periods} installments`;
-  // };
+  const displayedPrice = getDisplayedPrice({
+    paymentPlan: item.paymentPlan,
+    paymentOptionsBreakdown: item.paymentOptionsBreakdown,
+    fairAppPrice: item.fairAppPrice,
+    quantity: item.quantity,
+  });
 
   return (
     <article
@@ -121,7 +81,7 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
                   />
                 </div>
                 <p className="text-xl font-semibold mb-6 md:hidden mt-4">
-                  {getDisplayedPrice()}
+                  {displayedPrice}
                 </p>
               </div>
             </div>
@@ -129,9 +89,7 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
             <div className="hidden md:grid">
               <div className="flex">
                 <div className="flex flex-col items-end">
-                  <p className="text-xl font-semibold mb-6">
-                    {getDisplayedPrice()}
-                  </p>
+                  <p className="text-xl font-semibold mb-6">{displayedPrice}</p>
                   <p className="text-[11px] font-normal max-w-[317px] mb-1">
                     COMPLETE YOUR INSTALMENT WITHOUT DEFAULT YOU ARE ELIGIBLE TO
                     UNLOCK INTEREST FREE CREDIT OF:

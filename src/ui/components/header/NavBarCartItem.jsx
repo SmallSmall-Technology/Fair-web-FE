@@ -1,36 +1,14 @@
-// import { useSelector } from 'react-redux';
-// import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
-import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
-import { formatCurrency } from '../../../utils/FormatCurrency';
+import { getDisplayedPrice } from '../../../utils/GetDisplayedPrice';
 import { DeleteItemFromCart } from '../../../features/cart/DeleteItem';
-// import { usePaymentOptions } from '../../../hooks/usePaymentOptions';
+import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 
 export const NavBarCartItem = ({ item }) => {
-  // const currentQuantity = useSelector(getCurrentQuantityById(item.productID));
-  const { paymentPlan, paymentOptionsBreakdown, fairAppPrice, quantity } = item;
-  // const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     dispatch(fetchCart());
-  //   }, [dispatch]);
-
-  //   const { cart: cartItems, loading } = useSelector((state) => state.cart);
-
-  const getDisplayedPrice = () => {
-    switch (paymentPlan) {
-      case 'full':
-        return formatCurrency(
-          paymentOptionsBreakdown[3].amount * quantity || fairAppPrice
-        );
-      case 'monthly':
-        return `${formatCurrency(paymentOptionsBreakdown[0]?.installmentAmount * quantity || 0)}`;
-      case 'weekly':
-        return `${formatCurrency(paymentOptionsBreakdown[1]?.installmentAmount * quantity || 0)} `;
-      case 'daily':
-        return `${formatCurrency(paymentOptionsBreakdown[2]?.installmentAmount * quantity || 0)} `;
-      default:
-        return formatCurrency(fairAppPrice * quantity);
-    }
-  };
+  const displayedPrice = getDisplayedPrice({
+    paymentPlan: item.paymentPlan,
+    paymentOptionsBreakdown: item.paymentOptionsBreakdown,
+    fairAppPrice: item.fairAppPrice,
+    quantity: item.quantity,
+  });
 
   return (
     <>
@@ -62,7 +40,7 @@ export const NavBarCartItem = ({ item }) => {
                 </div>
                 <DeleteItemFromCart productID={item.productID} />
               </div>
-              <p className="text-[#222224]">{getDisplayedPrice()}</p>
+              <p className="text-[#222224]">{displayedPrice}</p>
             </div>
           </div>
         </div>

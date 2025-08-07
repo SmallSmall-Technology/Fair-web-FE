@@ -4,7 +4,9 @@ import { formatCurrency } from '../../../../../utils/FormatCurrency';
 import { getPaymentDates } from '../../../../../utils/PaymentDates';
 
 export const CartItemWeeklyPayment = React.memo(({ product }) => {
+  const { quantity } = product;
   // Get the installment option for weekly payments
+
   const installmentOption =
     product.paymentOptionsBreakdown.find(
       (option) => option.type === 'weekly'
@@ -17,12 +19,12 @@ export const CartItemWeeklyPayment = React.memo(({ product }) => {
   // Generate payment plan dynamically
   const paymentWeekly = [
     {
-      amount: installmentOption.downPayment,
+      amount: installmentOption.downPayment * quantity || 0,
       label: 'Pay now today',
       icon: '/images/quater-circle.svg',
     },
     ...Array.from({ length: numberOfInstallments }, (_, index) => ({
-      amount: installmentOption.installmentAmount,
+      amount: installmentOption.installmentAmount * quantity || 0,
       label:
         index + 1 === numberOfInstallments
           ? 'Final Payment'

@@ -9,7 +9,6 @@ const getCartSessionId = () => {
   if (!cartSessionID) {
     cartSessionID = uuidv4();
     localStorage.setItem('cartSessionID', cartSessionID);
-    // console.log('Generated new cartSessionID:', cartSessionID);
   }
   return cartSessionID;
 };
@@ -21,7 +20,6 @@ export const fetchCart = createAsyncThunk(
   'cart/fetchCart',
   async (_, { rejectWithValue }) => {
     const cartSessionID = getCartSessionId();
-    // console.log('fetchCart cartSessionID:', cartSessionID);
     try {
       const response = await httpClient.get('/cart/view-cart', {
         params: { cartSessionID },
@@ -31,7 +29,6 @@ export const fetchCart = createAsyncThunk(
           // 'Authorization': 'Bearer your-token',
         },
       });
-      // console.log('fetchCart response:', response.data);
       if (!response.data?.success) {
         return rejectWithValue(
           response.data?.message || 'Failed to fetch cart'
@@ -53,7 +50,6 @@ export const retryFetchCart = createAsyncThunk(
       // Add a 500ms delay to account for potential backend persistence delay
       await new Promise((resolve) => setTimeout(resolve, 500));
       const response = await dispatch(fetchCart()).unwrap();
-      // console.log('Retry fetchCart response:', response);
       return response;
     } catch (error) {
       // console.error('Retry fetch cart error:', error);
@@ -68,16 +64,12 @@ export const addToCart = createAsyncThunk(
   async (product, { getState, dispatch, rejectWithValue }) => {
     const prevCart = [...getState().cart.cart];
     const selectedPaymentPlan = getState().cart.selectedPaymentPlan;
-    // console.log('addToCart cartSessionID:', getCartSessionId());
-    // console.log('Adding to cart:', { product, selectedPaymentPlan });
 
     // Parse paymentOptionsBreakdown from product
     let paymentOptions = [];
     try {
       paymentOptions = JSON.parse(product.paymentOptionsBreakdown || '[]');
-    } catch (error) {
-      // console.error('Error parsing paymentOptionsBreakdown:', error);
-    }
+    } catch (error) {}
 
     // Find the selected payment plan details
     const paymentPlanDetails = paymentOptions.find(
@@ -118,7 +110,6 @@ export const addToCart = createAsyncThunk(
             product.productPrice
         ) * (product.quantity || 1),
     };
-    // console.log('Normalized product:', normalizedProduct);
 
     // Optimistic update
     dispatch(cartSlice.actions.optimisticAdd(normalizedProduct));
@@ -140,7 +131,6 @@ export const addToCart = createAsyncThunk(
           },
         }
       );
-      // console.log('Add to cart response:', response.data);
 
       // Check if backend returned a different payment plan
       if (
@@ -156,14 +146,11 @@ export const addToCart = createAsyncThunk(
       const fetchResult = await dispatch(fetchCart()).unwrap();
       // If fetchCart returns empty, retry once
       if (!fetchResult.data?.cart?.items?.length) {
-        // console.warn('Empty cart after add, retrying fetchCart');
         await dispatch(retryFetchCart()).unwrap();
       }
       return fetchResult;
     } catch (error) {
-      // console.error('Add to cart error:', error);
       dispatch(cartSlice.actions.rollback(prevCart));
-      // toast.error('Failed to add item to cart');
       return rejectWithValue(error.message || 'Failed to add to cart');
     }
   }
@@ -183,11 +170,9 @@ export const removeFromCart = createAsyncThunk(
         {
           headers: {
             'Content-Type': 'application/json',
-            // Add any additional headers used in Postman
           },
         }
       );
-      // console.log('Remove from cart response:', response.data);
 
       if (!response.data?.success) {
         return rejectWithValue(
@@ -197,7 +182,6 @@ export const removeFromCart = createAsyncThunk(
 
       return await dispatch(fetchCart()).unwrap();
     } catch (error) {
-      // console.error('Remove from cart error:', error);
       return rejectWithValue(error.message || 'Failed to remove item');
     }
   }
@@ -234,7 +218,6 @@ export const updateCartItem = createAsyncThunk(
         paymentPlan: existingItem.paymentPlan,
       };
     } catch (error) {
-      // console.error('Update cart item error:', error);
       return rejectWithValue(error.message || 'Failed to update item');
     }
   }
@@ -406,7 +389,6 @@ const cartSlice = createSlice({
         const serverSessionID = action.payload.data?.owner?.cartSessionID;
         if (serverSessionID) {
           localStorage.setItem('cartSessionID', serverSessionID);
-          // console.log('Synced cartSessionID from server:', serverSessionID);
         }
         if (cartData.items && cartData.items.length > 0) {
           state.cart = cartData.items.map((item) => ({

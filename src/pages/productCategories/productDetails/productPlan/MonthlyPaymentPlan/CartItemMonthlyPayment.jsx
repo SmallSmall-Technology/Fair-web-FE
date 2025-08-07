@@ -3,6 +3,8 @@ import { formatCurrency } from '../../../../../utils/FormatCurrency';
 import { getPaymentDates } from '../../../../../utils/PaymentDates';
 
 export const CartItemMonthlyPayment = React.memo(({ product }) => {
+  const { quantity } = product;
+
   const installmentOption =
     product.paymentOptionsBreakdown.find(
       (option) => option.type === 'monthly'
@@ -15,12 +17,12 @@ export const CartItemMonthlyPayment = React.memo(({ product }) => {
   // Generate payment plan dynamically
   const paymentMonthly = [
     {
-      amount: installmentOption.downPayment,
+      amount: installmentOption.downPayment * quantity,
       label: 'Pay now today',
       icon: '/images/quater-circle.svg',
     },
     ...Array.from({ length: numberOfInstallments }, (_, index) => ({
-      amount: installmentOption.installmentAmount,
+      amount: installmentOption.installmentAmount * quantity,
       label:
         index + 1 === numberOfInstallments
           ? 'Final Payment'
