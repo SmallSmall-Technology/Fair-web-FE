@@ -4,10 +4,10 @@ import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 
 export const NavBarCartItem = ({ item }) => {
   const displayedPrice = getDisplayedPrice({
-    paymentPlan: item.paymentPlan,
-    paymentOptionsBreakdown: item.paymentOptionsBreakdown,
-    fairAppPrice: item.fairAppPrice,
-    quantity: item.quantity,
+    paymentPlan: item?.paymentPlan || item?.selectedPaymentPlan,
+    paymentOptionsBreakdown: item?.paymentOptionsBreakdown,
+    fairAppPrice: item?.fairAppPrice,
+    quantity: item.quantity || 1,
   });
 
   return (
