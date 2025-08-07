@@ -47,7 +47,6 @@ export const MonthlyPayment = React.memo(
           };
         })
       : [];
-
     return (
       <>
         <p className="font-inter font-medium mb-3 mt-4 mx-5 lg:mx-0">

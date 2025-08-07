@@ -33,14 +33,15 @@ export const CartSummary = ({
     };
 
     cart.forEach((item) => {
-      const cartPaymentPlan = item.paymentPlan;
+      const cartPaymentPlan = item.paymentPlan || item.selectedPaymentPlan;
       const option = item.paymentOptionsBreakdown?.find(
         (opt) => opt.type === cartPaymentPlan
       );
       if (!option) return;
 
       // Add first payment (down payment)
-      consolidatedPayments.firstPayment += option.downPayment || 0;
+      consolidatedPayments.firstPayment +=
+        option.downPayment * item.quantity || 0;
 
       // Determine installment count (monthly, weekly, daily)
       const installmentsCount =
@@ -58,13 +59,16 @@ export const CartSummary = ({
       );
       // Add all installments to consolidated list
       for (let i = 0; i < installmentsCount; i++) {
-        const existing = consolidatedPayments.otherPayments[i] || {
+        const existing = consolidatedPayments.otherPayments[i] *
+          item.quantity || {
           amount: 0,
           date: paymentDates[i],
         };
 
         consolidatedPayments.otherPayments[i] = {
-          amount: existing.amount + (option.installmentAmount || 0),
+          amount:
+            existing.amount +
+            (option.installmentAmount * item.quantity || 0 * item.quantity),
           date: existing.date,
         };
       }

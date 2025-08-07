@@ -8,9 +8,7 @@ import { CartItemMonthlyPayment } from '../../productCategories/productDetails/p
 
 export const PaymentPlan = ({ item, togglePlan }) => {
   const paymentMethodRef = useRef(null);
-  const currentPlan = item.paymentPlan;
-  console.log('Current Plan:', currentPlan);
-  // console.log('Other Plan:', otherPlan);
+  const currentPlan = item.paymentPlan || item.selectedPaymentPlan;
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const currentQuantity = useSelector(getCurrentQuantityById(item.productID));
