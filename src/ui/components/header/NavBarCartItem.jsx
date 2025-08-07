@@ -1,11 +1,13 @@
-import { useSelector } from 'react-redux';
-import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
+// import { useSelector } from 'react-redux';
+// import { getCurrentQuantityById } from '../../../features/cart/cartSlice';
 import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import { DeleteItemFromCart } from '../../../features/cart/DeleteItem';
+// import { usePaymentOptions } from '../../../hooks/usePaymentOptions';
 
 export const NavBarCartItem = ({ item }) => {
-  const currentQuantity = useSelector(getCurrentQuantityById(item.productID));
+  // const currentQuantity = useSelector(getCurrentQuantityById(item.productID));
+  const { paymentPlan, paymentOptionsBreakdown, fairAppPrice, quantity } = item;
   // const dispatch = useDispatch();
   //   useEffect(() => {
   //     dispatch(fetchCart());
@@ -14,20 +16,20 @@ export const NavBarCartItem = ({ item }) => {
   //   const { cart: cartItems, loading } = useSelector((state) => state.cart);
 
   const getDisplayedPrice = () => {
-    const { paymentPlan, paymentPlanDetails, price } = item;
+    // console.log(item);
     switch (paymentPlan) {
       case 'full':
         return formatCurrency(
-          (paymentPlanDetails?.amount || price) * currentQuantity
+          paymentOptionsBreakdown[3].amount * quantity || fairAppPrice
         );
       case 'monthly':
-        return `${formatCurrency(paymentPlanDetails?.monthlyPayment * currentQuantity || 0)} `;
+        return `${formatCurrency(paymentOptionsBreakdown[0]?.installmentAmount * quantity || 0)}`;
       case 'weekly':
-        return `${formatCurrency(paymentPlanDetails?.weeklyPayment * currentQuantity || 0)}`;
+        return `${formatCurrency(paymentOptionsBreakdown[1]?.installmentAmount * quantity || 0)} `;
       case 'daily':
-        return `${formatCurrency(paymentPlanDetails?.dailyPayment * currentQuantity || 0)} `;
+        return `${formatCurrency(paymentOptionsBreakdown[2]?.installmentAmount * quantity || 0)} `;
       default:
-        return formatCurrency(price * currentQuantity);
+        return formatCurrency(fairAppPrice * quantity);
     }
   };
 
@@ -55,7 +57,7 @@ export const NavBarCartItem = ({ item }) => {
                   <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
                     <UpdateItemQuantity
                       productID={item.productID}
-                      currentQuantity={currentQuantity}
+                      currentQuantity={item.quantity}
                     />
                   </div>
                 </div>
