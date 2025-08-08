@@ -24,7 +24,7 @@ export const RentSmallsmall = () => {
 
         {/* Content */}
         <div className="relative text-white p-4 lg:p-6 pt-10">
-          <h1 className="font-semibold lg:font-bold text-4xl text-balance lg:text-5xl lg:w-[600px] mb-3">
+          <h1 className="font-semibold lg:font-bold text-4xl text-balance lg:text-5xl w-[300px] lg:w-[600px] mb-3">
             Switch to a life of quality{' '}
             <span className="hidden md:block">and</span>{' '}
             <span className=" md:hidden">&</span> convenience
