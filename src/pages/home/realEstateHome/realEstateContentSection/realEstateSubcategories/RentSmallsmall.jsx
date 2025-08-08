@@ -23,18 +23,20 @@ export const RentSmallsmall = () => {
         <div className="absolute inset-0 bg-[#22222433]" />
 
         {/* Content */}
-        <div className="relative text-white p-6 pt-10">
-          <h1 className="font-semibold lg:font-bold text-3xl text-balance lg:text-5xl lg:w-[600px] mb-3">
-            Switch to a life of quality and convenience
+        <div className="relative text-white p-4 lg:p-6 pt-10">
+          <h1 className="font-semibold lg:font-bold text-4xl text-balance lg:text-5xl w-[300px] lg:w-[600px] mb-3">
+            Switch to a life of quality{' '}
+            <span className="hidden md:block">and</span>{' '}
+            <span className=" md:hidden">&</span> convenience
           </h1>
-          <p className="lg:w-[450px] font-outfit">
+          <p className="lg:w-[450px] font-outfit font-normal">
             Choose how you would like to pay rent from any of our plans, enjoy
             convenience and control your spending every month.
           </p>
 
           {/* Tabs */}
           <section className="flex flex-col justify-center items-center mt-10">
-            <div className="flex items-center gap-10 mt-4 font-outfit font-extrabold">
+            <div className="flex items-center gap-1 md:gap-10 mt-4 font-outfit font-extrabold">
               {tabs.map((tab) => (
                 <button
                   key={tab.key}
@@ -64,7 +66,7 @@ export const RentSmallsmall = () => {
           Explore a wide range of listings and discover a good place to call
           your own.
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-4 w-full">
           {properties.slice(0, 8).map((property, index) => (
             <div key={index} className="mb-6">
               <PropertyCard property={property} />

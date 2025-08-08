@@ -8,9 +8,9 @@ export const PropertyCard = ({ property }) => {
   const currentImage = images[currentImageIndex];
 
   return (
-    <article className="w-[170px] md:w-[276px] grid gap-2">
+    <article className=" md:w-[276px] grid gap-2">
       <div
-        className="h-[218px] w-[170px] md:w-[276px] bg-cover bg-center rounded-[10px] relative transition-all duration-500"
+        className="h-[218px] md:w-[276px] bg-cover bg-center rounded-[10px] relative transition-all duration-500"
         style={{ backgroundImage: `url(${currentImage})` }}
       >
         <div className="flex flex-col justify-between w-full h-full px-3 py-3 rounded-[10px]">
@@ -52,7 +52,7 @@ export const PropertyCard = ({ property }) => {
         </div>
       </div>
 
-      <div className="font-inter font-normal">
+      <div className="font-inter font-normal flex flex-col justify-center items-center md:justify-start md:items-start mt-2">
         <p className="text-sm ">{property?.name}</p>
         <div className="flex gap-2 flex-wrap">
           <InfoIcon
@@ -67,8 +67,8 @@ export const PropertyCard = ({ property }) => {
         </div>
       </div>
 
-      <div>
-        <p className="font-semibold font-inter">
+      <div className="flex flex-col items-center md:items-start">
+        <p className="font-semibold font-inter  ">
           {formatCurrency(property?.price)}{' '}
           <span className="text-sm font-normal">/month</span>
         </p>
