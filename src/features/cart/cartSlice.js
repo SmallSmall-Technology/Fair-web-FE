@@ -18,26 +18,30 @@ export const getCartSessionId = () => {
 // Fetch cart
 export const fetchCart = createAsyncThunk(
   'cart/fetchCart',
-  async (_, { rejectWithValue }) => {
+  async (_, { getState, rejectWithValue }) => {
+    const state = getState();
+    const userID = state.auth.user?.userID;
+    const { isAuthenticated } = state.auth;
     const cartSessionID = getCartSessionId();
+
     try {
-      const response = await httpClient.get('/cart/view-cart', {
-        params: { cartSessionID },
+      const payload = isAuthenticated ? { userID } : { cartSessionID };
+
+      const response = await httpClient.post('/cart/view-cart', payload, {
         headers: {
           'Content-Type': 'application/json',
-          // Add any additional headers used in Postman, e.g., Authorization or cookies
-          // 'Authorization': 'Bearer your-token',
         },
       });
+      console.log('Guest cart before transfer:', response.data);
       if (!response.data?.success) {
         return rejectWithValue(
           response.data?.message || 'Failed to fetch cart'
         );
       }
+
       return response.data;
     } catch (error) {
-      // console.error('Fetch cart error:', error);
-      return rejectWithValue(error.message || 'Failed to fetch cart');
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
@@ -64,7 +68,9 @@ export const addToCart = createAsyncThunk(
   async (product, { getState, dispatch, rejectWithValue }) => {
     const prevCart = [...getState().cart.cart];
     const selectedPaymentPlan = getState().cart.selectedPaymentPlan;
-
+    const state = getState();
+    const userId = state.auth.user?.userId;
+    // console.log('userId from addToCart:', userId);
     // Parse paymentOptionsBreakdown from product
     let paymentOptions = [];
     try {
@@ -254,6 +260,41 @@ export const updateCartItemPaymentPlan = createAsyncThunk(
       };
     } catch (error) {
       return rejectWithValue(error.message || 'Failed to update payment plan');
+    }
+  }
+);
+
+// Transfer guest cart to user cart
+export const transferGuestCartToUser = createAsyncThunk(
+  'cart/transferGuestCartToUser',
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      // 1️⃣ Get guest cart session ID
+      const guestSessionID = localStorage.getItem('cartSessionID');
+      console.log('Transferring guest cart with session ID:', guestSessionID);
+      if (!guestSessionID) return; // nothing to transfer
+
+      // 2️⃣ Call backend to transfer cart
+      const response = await httpClient.post('/cart/transfer-guest-cart', {
+        cartSessionID: guestSessionID, // fixed here ✅
+      });
+      console.log('Transfer response:', response.data);
+
+      if (!response.data?.success) {
+        return rejectWithValue(
+          response.data?.message || 'Failed to transfer cart'
+        );
+      }
+
+      // 3️⃣ Remove guest cart session ID (cart is now tied to user)
+      localStorage.removeItem('cartSessionID');
+
+      // 4️⃣ Fetch updated cart for logged-in user
+      await dispatch(fetchCart());
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );

@@ -11,7 +11,6 @@ import {
   setItemPaymentPlan,
   fetchCart,
   updateCartItemPaymentPlan,
-  getCartSessionId,
 } from '../../../features/cart/cartSlice';
 import { CartSummaryExtrasAndCoupon } from './CartSummaryExtrasAndCoupon';
 import ChangePlanModal from '../../../utils/ChangePlanModal';

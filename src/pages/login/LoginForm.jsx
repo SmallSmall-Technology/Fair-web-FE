@@ -5,6 +5,7 @@ import { Button } from '../../utils/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, clearError } from '../../features/auth/authSlice';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { transferGuestCartToUser } from '../../features/cart/cartSlice';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -47,9 +48,40 @@ const LoginForm = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!formData.email || !formData.password) {
+  //     toast.dismiss();
+  //     toast.error('Please fill in all fields', {
+  //       autoClose: 3000,
+  //       className:
+  //         'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+  //       bodyClassName: 'm-0 p-0',
+  //       closeButton: false,
+  //     });
+  //     return;
+  //   }
+
+  //   try {
+  //     await dispatch(login(formData)).unwrap();
+  //   } catch (err) {
+  //     toast.dismiss();
+  //     toast.error(
+  //       err?.response?.data?.message || 'Error logging in. Please try again.',
+  //       {
+  //         autoClose: 3000,
+  //         className:
+  //           'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+  //         bodyClassName: 'm-0 p-0',
+  //         closeButton: false,
+  //       }
+  //     );
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!formData.email || !formData.password) {
       toast.dismiss();
       toast.error('Please fill in all fields', {
@@ -61,10 +93,30 @@ const LoginForm = () => {
       });
       return;
     }
-
     try {
-      await dispatch(login(formData)).unwrap();
+      await dispatch(login(formData)).unwrap(); // Only this try/catch is for login errors
+
+      // If we reach here, login succeeded
+      const guestCartSessionID = localStorage.getItem('cartSessionID');
+      console.log(
+        'cartSessionID in localStorage:',
+        localStorage.getItem('cartSessionID')
+      );
+
+      if (guestCartSessionID) {
+        try {
+          await dispatch(
+            transferGuestCartToUser({ cartSessionID: guestCartSessionID() })
+          ).unwrap();
+          localStorage.removeItem('cartSessionID');
+        } catch (cartError) {
+          console.error('Failed to transfer guest cart:', cartError);
+          // Optional toast for cart error
+          toast.error('Some items could not be transferred from guest cart.');
+        }
+      }
     } catch (err) {
+      // This only runs if login itself failed
       toast.dismiss();
       toast.error(
         err?.response?.data?.message || 'Error logging in. Please try again.',
