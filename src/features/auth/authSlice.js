@@ -8,7 +8,6 @@ import { login as loginAPI } from '../../api/authAPI';
 import httpClient from '../../api/http-clients';
 
 const initialState = {
-  // userId: null,
   user: null,
   isAuthenticated: false,
   loading: false,
@@ -37,6 +36,7 @@ export const login = createAsyncThunk(
   }
 );
 
+// Restore session on app load
 export const restoreSession = createAsyncThunk(
   'auth/restoreSession',
   async (_, { rejectWithValue }) => {
@@ -67,10 +67,8 @@ const authSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
-    // setUserId: (state, action) => {
-    //   state.userId = action.payload;
-    // },
   },
+  // Async thunks and extra reducers
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
@@ -112,14 +110,10 @@ const authSlice = createSlice({
 export const { logout, clearError, setUserId } = authSlice.actions;
 export default authSlice.reducer;
 
-// export const getUserName = (state) => state.auth.user?.username;
-
 export const getUserName = createSelector(
   [selectAuth],
   (auth) => auth.user?.firstName
 );
-// export const getUserFullName = (state) => state.auth.user?.fullName;
-// export const getUserIsAuthenticated = (state) => state.auth.isAuthenticated;
 
 export const getUserFullName = createSelector([selectAuth], (auth) =>
   `${auth.user?.firstName || ''} ${auth.user?.lastName || ''}`.trim()
@@ -129,5 +123,3 @@ export const getUserIsAuthenticated = createSelector(
   [selectAuth],
   (auth) => auth.isAuthenticated
 );
-
-// export const getUserId = createSelector([selectAuth], (auth) => auth.userId);

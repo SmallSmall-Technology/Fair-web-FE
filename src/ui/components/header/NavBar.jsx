@@ -170,7 +170,7 @@ export const Subtotal = () => {
 
   const handleCheckoutItems = () => {
     if (location.pathname !== '/cart-items') {
-      navigate('cart-items');
+      navigate('/cart-items');
     }
   };
 
