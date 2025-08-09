@@ -5,6 +5,11 @@ import { Button } from '../../utils/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, clearError } from '../../features/auth/authSlice';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import {
+  fetchCart,
+  getCartSessionId,
+  transferGuestCartToUser,
+} from '../../features/cart/cartSlice';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -42,11 +47,13 @@ const LoginForm = () => {
     }
   }, [error]);
 
+  // Handle input changes
   const handleChange = (e) => {
     if (error) dispatch(clearError());
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -64,6 +71,22 @@ const LoginForm = () => {
 
     try {
       await dispatch(login(formData)).unwrap();
+
+      const cartSessionID = getCartSessionId();
+
+      if (cartSessionID) {
+        try {
+          await dispatch(transferGuestCartToUser(cartSessionID)).unwrap();
+        } catch {
+          toast.error('Some items could not be transferred from guest cart.', {
+            autoClose: 3000,
+            className:
+              'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+            bodyClassName: 'm-0 p-0',
+            closeButton: false,
+          });
+        }
+      }
     } catch (err) {
       toast.dismiss();
       toast.error(

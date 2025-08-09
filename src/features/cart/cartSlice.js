@@ -18,15 +18,18 @@ export const getCartSessionId = () => {
 // Fetch cart
 export const fetchCart = createAsyncThunk(
   'cart/fetchCart',
-  async (_, { rejectWithValue }) => {
+  async (_, { getState, rejectWithValue }) => {
+    const state = getState();
+    const userID = state.auth.user?.userID;
+    const { isAuthenticated } = state.auth;
     const cartSessionID = getCartSessionId();
+
     try {
-      const response = await httpClient.get('/cart/view-cart', {
-        params: { cartSessionID },
+      const payload = isAuthenticated ? { userID } : { cartSessionID };
+
+      const response = await httpClient.post('/cart/view-cart', payload, {
         headers: {
           'Content-Type': 'application/json',
-          // Add any additional headers used in Postman, e.g., Authorization or cookies
-          // 'Authorization': 'Bearer your-token',
         },
       });
       if (!response.data?.success) {
@@ -34,10 +37,10 @@ export const fetchCart = createAsyncThunk(
           response.data?.message || 'Failed to fetch cart'
         );
       }
+
       return response.data;
     } catch (error) {
-      // console.error('Fetch cart error:', error);
-      return rejectWithValue(error.message || 'Failed to fetch cart');
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
@@ -52,7 +55,6 @@ export const retryFetchCart = createAsyncThunk(
       const response = await dispatch(fetchCart()).unwrap();
       return response;
     } catch (error) {
-      // console.error('Retry fetch cart error:', error);
       return rejectWithValue(error.message || 'Failed to retry fetch cart');
     }
   }
@@ -65,7 +67,6 @@ export const addToCart = createAsyncThunk(
     const prevCart = [...getState().cart.cart];
     const selectedPaymentPlan = getState().cart.selectedPaymentPlan;
 
-    // Parse paymentOptionsBreakdown from product
     let paymentOptions = [];
     try {
       paymentOptions = JSON.parse(product.paymentOptionsBreakdown || '[]');
@@ -131,16 +132,6 @@ export const addToCart = createAsyncThunk(
           },
         }
       );
-
-      // Check if backend returned a different payment plan
-      if (
-        response.data?.data?.product?.selectedPaymentPlan !==
-        selectedPaymentPlan
-      ) {
-        console.warn(
-          `Payment plan mismatch: Sent ${selectedPaymentPlan}, received ${response.data.data.product.selectedPaymentPlan}`
-        );
-      }
 
       // Sync with backend
       const fetchResult = await dispatch(fetchCart()).unwrap();
@@ -258,6 +249,37 @@ export const updateCartItemPaymentPlan = createAsyncThunk(
   }
 );
 
+// Transfer guest cart to user cart
+
+export const transferGuestCartToUser = createAsyncThunk(
+  'cart/transferGuestCartToUser',
+  async (cartSessionID, { dispatch, rejectWithValue }) => {
+    try {
+      if (!cartSessionID) return rejectWithValue('No cart session ID found');
+
+      const response = await httpClient.post('/cart/transfer-guest-cart', {
+        cartSessionID,
+      });
+
+      if (!response.data?.success) {
+        return rejectWithValue(
+          response.data?.message || 'Failed to transfer cart'
+        );
+      }
+
+      // Remove guest cart session ID after successful transfer
+      localStorage.removeItem('cartSessionID');
+
+      // Fetch updated cart for logged-in user
+      await dispatch(fetchCart());
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
 /* -------------------- SLICE -------------------- */
 
 const initialState = {
@@ -265,7 +287,6 @@ const initialState = {
   status: 'idle',
   error: null,
   selectedPaymentPlan: 'monthly',
-
   cart_summary: { total_items: 0, total_quantity: 0, total_amount: 0 },
 };
 
@@ -321,18 +342,17 @@ const cartSlice = createSlice({
         (item) => item.productID === product.productID
       );
 
-      if (existing) {
-        existing.quantity =
-          Number(existing.quantity || 0) + Number(product.quantity || 1);
-        existing.totalPrice =
-          Number(existing.price || product.selectedPaymentPlanDetails.amount) *
-          existing.quantity;
-        toast.warn('Item quantity updated in cart');
-      } else {
+      if (!existing) {
+        // existing.quantity =
+        //   Number(existing.quantity || 0) + Number(product.quantity || 1);
+        // existing.totalPrice =
+        //   Number(existing.price || product.selectedPaymentPlanDetails.amount) *
+        //   existing.quantity;
+        // toast.warn('Item quantity updated in cart');
+
         state.cart.push({
           ...product,
           quantity: Number(product.quantity || 1),
-          // paymentPlan: product.paymentOptionsBreakdown || product.paymentPlan,
           paymentPlan: 'monthly',
           paymentPlanDetails: product.selectedPaymentPlanDetails || {
             type: '',
@@ -385,6 +405,7 @@ const cartSlice = createSlice({
       };
     },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchCart.pending, (state) => {
@@ -412,26 +433,19 @@ const cartSlice = createSlice({
             total_amount: 0,
           };
         } else {
-          // console.warn(
-          //   'Empty cart received from backend, retaining current state'
-          // );
+          // Clear cart when empty from backend
+          state.cart = [];
           state.cart_summary = {
-            total_items: state.cart.length,
-            total_quantity: state.cart.reduce(
-              (sum, i) => sum + Number(i.quantity || 0),
-              0
-            ),
-            total_amount: state.cart.reduce(
-              (sum, i) => sum + Number(i.totalPrice || 0),
-              0
-            ),
+            total_items: 0,
+            total_quantity: 0,
+            total_amount: 0,
           };
         }
       })
+
       .addCase(fetchCart.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload || 'Failed to fetch cart';
-        // console.error('Fetch cart error:', action.payload);
       })
       .addCase(addToCart.fulfilled, (state, action) => {
         state.status = 'succeeded';
@@ -447,9 +461,6 @@ const cartSlice = createSlice({
           }));
           state.cart_summary = cartData.summary || state.cart_summary;
         } else {
-          // console.warn(
-          //   'Empty cart in addToCart.fulfilled, retaining optimistic state'
-          // );
           // Retain optimistic state
           state.cart_summary = {
             total_items: state.cart.length,
@@ -518,5 +529,8 @@ export const getTotalCartPrice = (state) =>
 export const getCurrentQuantityById = (productID) => (state) =>
   state.cart.cart.find((item) => item.productID === productID)?.quantity ?? 0;
 export const getSelectedPaymentPlan = (state) => state.cart.selectedPaymentPlan;
+
+export const getExistingCartItemById = (productID) => (state) =>
+  state.cart.cart.find((item) => item.productID === productID) || null;
 
 export default cartSlice.reducer;

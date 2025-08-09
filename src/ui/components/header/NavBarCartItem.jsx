@@ -20,8 +20,8 @@ export const NavBarCartItem = ({ item }) => {
         <div className="flex space-x-2">
           <div className="w-[40%] h-[100px] p-2 flex justify-center items-center border border-[#DADADA] rounded-[12px]">
             <img
-              src={item?.image}
-              alt={item?.name}
+              src={item?.image || item?.coverImage}
+              alt={item?.name || item?.productName}
               className="w-[100%] h-full object-cover rounded-[8px]"
             />
           </div>
