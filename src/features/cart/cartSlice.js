@@ -362,18 +362,17 @@ const cartSlice = createSlice({
         (item) => item.productID === product.productID
       );
 
-      if (existing) {
-        existing.quantity =
-          Number(existing.quantity || 0) + Number(product.quantity || 1);
-        existing.totalPrice =
-          Number(existing.price || product.selectedPaymentPlanDetails.amount) *
-          existing.quantity;
-        toast.warn('Item quantity updated in cart');
-      } else {
+      if (!existing) {
+        // existing.quantity =
+        //   Number(existing.quantity || 0) + Number(product.quantity || 1);
+        // existing.totalPrice =
+        //   Number(existing.price || product.selectedPaymentPlanDetails.amount) *
+        //   existing.quantity;
+        // toast.warn('Item quantity updated in cart');
+
         state.cart.push({
           ...product,
           quantity: Number(product.quantity || 1),
-          // paymentPlan: product.paymentOptionsBreakdown || product.paymentPlan,
           paymentPlan: 'monthly',
           paymentPlanDetails: product.selectedPaymentPlanDetails || {
             type: '',
@@ -559,5 +558,8 @@ export const getTotalCartPrice = (state) =>
 export const getCurrentQuantityById = (productID) => (state) =>
   state.cart.cart.find((item) => item.productID === productID)?.quantity ?? 0;
 export const getSelectedPaymentPlan = (state) => state.cart.selectedPaymentPlan;
+
+export const getExistingCartItemById = (productID) => (state) =>
+  state.cart.cart.find((item) => item.productID === productID) || null;
 
 export default cartSlice.reducer;

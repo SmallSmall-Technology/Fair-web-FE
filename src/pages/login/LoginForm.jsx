@@ -43,43 +43,13 @@ const LoginForm = () => {
     }
   }, [error]);
 
+  // Handle input changes
   const handleChange = (e) => {
     if (error) dispatch(clearError());
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   if (!formData.email || !formData.password) {
-  //     toast.dismiss();
-  //     toast.error('Please fill in all fields', {
-  //       autoClose: 3000,
-  //       className:
-  //         'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-  //       bodyClassName: 'm-0 p-0',
-  //       closeButton: false,
-  //     });
-  //     return;
-  //   }
-
-  //   try {
-  //     await dispatch(login(formData)).unwrap();
-  //   } catch (err) {
-  //     toast.dismiss();
-  //     toast.error(
-  //       err?.response?.data?.message || 'Error logging in. Please try again.',
-  //       {
-  //         autoClose: 3000,
-  //         className:
-  //           'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-  //         bodyClassName: 'm-0 p-0',
-  //         closeButton: false,
-  //       }
-  //     );
-  //   }
-  // };
-
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {

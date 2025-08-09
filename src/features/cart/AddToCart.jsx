@@ -1,7 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { startTransition, useTransition } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, setSelectedPaymentPlan } from './cartSlice';
+import {
+  addToCart,
+  getExistingCartItemById,
+  setSelectedPaymentPlan,
+} from './cartSlice';
 import { toast } from 'react-toastify';
 import { usePaymentOptions } from '../../hooks/usePaymentOptions';
 
@@ -69,6 +73,7 @@ export const handleAddToCart = (
 };
 
 export const AddToCart = ({ product }) => {
+  const existing = useSelector(getExistingCartItemById(product?.productID));
   const dispatch = useDispatch();
   const selectedPaymentPlan = useSelector(
     (state) => state.cart.selectedPaymentPlan
@@ -81,6 +86,14 @@ export const AddToCart = ({ product }) => {
 
     if (!selectedPaymentPlan) {
       dispatch(setSelectedPaymentPlan('monthly'));
+    }
+
+    if (existing) {
+      toast.warn('Item already in cart', {
+        className:
+          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+      });
+      return;
     }
 
     try {
