@@ -32,7 +32,6 @@ export const fetchCart = createAsyncThunk(
           'Content-Type': 'application/json',
         },
       });
-      console.log('Guest cart before transfer:', response.data);
       if (!response.data?.success) {
         return rejectWithValue(
           response.data?.message || 'Failed to fetch cart'
@@ -56,7 +55,6 @@ export const retryFetchCart = createAsyncThunk(
       const response = await dispatch(fetchCart()).unwrap();
       return response;
     } catch (error) {
-      // console.error('Retry fetch cart error:', error);
       return rejectWithValue(error.message || 'Failed to retry fetch cart');
     }
   }
@@ -68,10 +66,7 @@ export const addToCart = createAsyncThunk(
   async (product, { getState, dispatch, rejectWithValue }) => {
     const prevCart = [...getState().cart.cart];
     const selectedPaymentPlan = getState().cart.selectedPaymentPlan;
-    const state = getState();
-    const userId = state.auth.user?.userId;
-    // console.log('userId from addToCart:', userId);
-    // Parse paymentOptionsBreakdown from product
+
     let paymentOptions = [];
     try {
       paymentOptions = JSON.parse(product.paymentOptionsBreakdown || '[]');
@@ -137,16 +132,6 @@ export const addToCart = createAsyncThunk(
           },
         }
       );
-
-      // Check if backend returned a different payment plan
-      if (
-        response.data?.data?.product?.selectedPaymentPlan !==
-        selectedPaymentPlan
-      ) {
-        console.warn(
-          `Payment plan mismatch: Sent ${selectedPaymentPlan}, received ${response.data.data.product.selectedPaymentPlan}`
-        );
-      }
 
       // Sync with backend
       const fetchResult = await dispatch(fetchCart()).unwrap();
@@ -265,20 +250,16 @@ export const updateCartItemPaymentPlan = createAsyncThunk(
 );
 
 // Transfer guest cart to user cart
+
 export const transferGuestCartToUser = createAsyncThunk(
   'cart/transferGuestCartToUser',
-  async (_, { dispatch, rejectWithValue }) => {
+  async (cartSessionID, { dispatch, rejectWithValue }) => {
     try {
-      // 1️⃣ Get guest cart session ID
-      const guestSessionID = localStorage.getItem('cartSessionID');
-      console.log('Transferring guest cart with session ID:', guestSessionID);
-      if (!guestSessionID) return; // nothing to transfer
+      if (!cartSessionID) return rejectWithValue('No cart session ID found');
 
-      // 2️⃣ Call backend to transfer cart
       const response = await httpClient.post('/cart/transfer-guest-cart', {
-        cartSessionID: guestSessionID, // fixed here ✅
+        cartSessionID,
       });
-      console.log('Transfer response:', response.data);
 
       if (!response.data?.success) {
         return rejectWithValue(
@@ -286,10 +267,10 @@ export const transferGuestCartToUser = createAsyncThunk(
         );
       }
 
-      // 3️⃣ Remove guest cart session ID (cart is now tied to user)
+      // Remove guest cart session ID after successful transfer
       localStorage.removeItem('cartSessionID');
 
-      // 4️⃣ Fetch updated cart for logged-in user
+      // Fetch updated cart for logged-in user
       await dispatch(fetchCart());
 
       return response.data;
@@ -306,7 +287,6 @@ const initialState = {
   status: 'idle',
   error: null,
   selectedPaymentPlan: 'monthly',
-
   cart_summary: { total_items: 0, total_quantity: 0, total_amount: 0 },
 };
 
@@ -425,6 +405,7 @@ const cartSlice = createSlice({
       };
     },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchCart.pending, (state) => {
@@ -452,26 +433,19 @@ const cartSlice = createSlice({
             total_amount: 0,
           };
         } else {
-          // console.warn(
-          //   'Empty cart received from backend, retaining current state'
-          // );
+          // Clear cart when empty from backend
+          state.cart = [];
           state.cart_summary = {
-            total_items: state.cart.length,
-            total_quantity: state.cart.reduce(
-              (sum, i) => sum + Number(i.quantity || 0),
-              0
-            ),
-            total_amount: state.cart.reduce(
-              (sum, i) => sum + Number(i.totalPrice || 0),
-              0
-            ),
+            total_items: 0,
+            total_quantity: 0,
+            total_amount: 0,
           };
         }
       })
+
       .addCase(fetchCart.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload || 'Failed to fetch cart';
-        // console.error('Fetch cart error:', action.payload);
       })
       .addCase(addToCart.fulfilled, (state, action) => {
         state.status = 'succeeded';
@@ -487,9 +461,6 @@ const cartSlice = createSlice({
           }));
           state.cart_summary = cartData.summary || state.cart_summary;
         } else {
-          // console.warn(
-          //   'Empty cart in addToCart.fulfilled, retaining optimistic state'
-          // );
           // Retain optimistic state
           state.cart_summary = {
             total_items: state.cart.length,

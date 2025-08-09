@@ -5,7 +5,11 @@ import { Button } from '../../utils/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, clearError } from '../../features/auth/authSlice';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { transferGuestCartToUser } from '../../features/cart/cartSlice';
+import {
+  fetchCart,
+  getCartSessionId,
+  transferGuestCartToUser,
+} from '../../features/cart/cartSlice';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -52,6 +56,7 @@ const LoginForm = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!formData.email || !formData.password) {
       toast.dismiss();
       toast.error('Please fill in all fields', {
@@ -63,30 +68,26 @@ const LoginForm = () => {
       });
       return;
     }
+
     try {
-      await dispatch(login(formData)).unwrap(); // Only this try/catch is for login errors
+      await dispatch(login(formData)).unwrap();
 
-      // If we reach here, login succeeded
-      const guestCartSessionID = localStorage.getItem('cartSessionID');
-      console.log(
-        'cartSessionID in localStorage:',
-        localStorage.getItem('cartSessionID')
-      );
+      const cartSessionID = getCartSessionId();
 
-      if (guestCartSessionID) {
+      if (cartSessionID) {
         try {
-          await dispatch(
-            transferGuestCartToUser({ cartSessionID: guestCartSessionID() })
-          ).unwrap();
-          localStorage.removeItem('cartSessionID');
-        } catch (cartError) {
-          console.error('Failed to transfer guest cart:', cartError);
-          // Optional toast for cart error
-          toast.error('Some items could not be transferred from guest cart.');
+          await dispatch(transferGuestCartToUser(cartSessionID)).unwrap();
+        } catch {
+          toast.error('Some items could not be transferred from guest cart.', {
+            autoClose: 3000,
+            className:
+              'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+            bodyClassName: 'm-0 p-0',
+            closeButton: false,
+          });
         }
       }
     } catch (err) {
-      // This only runs if login itself failed
       toast.dismiss();
       toast.error(
         err?.response?.data?.message || 'Error logging in. Please try again.',
