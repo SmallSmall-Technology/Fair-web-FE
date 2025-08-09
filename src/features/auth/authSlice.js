@@ -8,7 +8,7 @@ import { login as loginAPI } from '../../api/authAPI';
 import httpClient from '../../api/http-clients';
 
 const initialState = {
-  userId: null,
+  // userId: null,
   user: null,
   isAuthenticated: false,
   loading: false,
@@ -67,9 +67,9 @@ const authSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
-    setUserId: (state, action) => {
-      state.userId = action.payload;
-    },
+    // setUserId: (state, action) => {
+    //   state.userId = action.payload;
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -130,4 +130,4 @@ export const getUserIsAuthenticated = createSelector(
   (auth) => auth.isAuthenticated
 );
 
-export const getUserId = createSelector([selectAuth], (auth) => auth.userId);
+// export const getUserId = createSelector([selectAuth], (auth) => auth.userId);
