@@ -10,6 +10,8 @@ import {
 import { CartFooter } from '../../cartItems/CartFooter.jsx';
 import { Link } from 'react-router-dom';
 import { CancelPurchase } from '../../cartItems/CartHeader.jsx';
+import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
+import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.jsx';
 
 export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const cart = useSelector((state) => state.cart.cart);
@@ -23,6 +25,50 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const InstallmentPayment = cartItems.find((item) =>
     ['monthly', 'weekly', 'daily'].includes(item.paymentPlan)
   );
+  const cartPaymentPlan = cart.map(
+    (item) => item.paymentPlan || item.selectedPaymentPlan
+  );
+  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
+  const consolidatedPayments = consolidateCartPayments(cart);
+  console.log(consolidateCartPayments(cart));
+  const last_installment_debit_date =
+    consolidatedPayments.otherPayments.at(-1)?.date;
+  const first_installment_payment = consolidatedPayments.firstPayment;
+  const first_debit_date = new Date().toISOString().split('T')[0];
+  const last_installment_payment =
+    consolidatedPayments.otherPayments.at(-1)?.amount;
+  const last_installment_date = new Date(last_installment_debit_date)
+    .toISOString()
+    .split('T')[0];
+  const consolidated_total_amount = total;
+  const frequency = cartPaymentPlan[0];
+  const paymentPlan = frequency;
+  const description = '';
+  const deliveryFullAddress = '123 Victoria Island, Lagos, Nigeria';
+  const deliveryState = 'Lagos';
+  const bankCode = '';
+  const accountNumber = '';
+  const products = cart.map((item) => ({
+    productID: item.productID,
+    quantity: item.quantity,
+  }));
+
+  console.log({
+    consolidated_total_amount,
+    first_installment_payment,
+    first_debit_date,
+    last_installment_payment,
+    last_installment_date,
+    frequency,
+    paymentPlan,
+    description,
+    deliveryFullAddress,
+    deliveryState,
+    bankCode,
+    accountNumber,
+    products,
+  });
+
   return (
     <>
       <div className=" rounded-[10px] lg:bg-[#F2F2F2] lg:py-6 px-8 h-fit">
@@ -53,15 +99,59 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
             <p className="text-right">{formatCurrency(shippingFee)}</p>
           </div>
         </div>
-        <div className="flex justify-between my-8">
-          <div className=" grid-cols-1 w-full">
-            <div className="border border-t-2 border-[#222224] w-full h-0 mb-5"></div>
-            <div className="flex justify-between font-medium text-xl w-full mb-8 lg:mb-0">
-              <p>Total</p>
-              <p>{formatCurrency(total)}</p>
+        {!isConsolidatedCart && (
+          <div className="px- lg:hidden ">
+            <hr className="mt-8 mb-2" />
+            <div className="font-inter flex justify-between items-center">
+              {cart.length > 1 ? (
+                <p className="font-medium">Consolidated cart</p>
+              ) : (
+                <p className="font-medium">Cart</p>
+              )}
             </div>
 
-            <div className="lg:hidden flex flex-col justify-center gap-5">
+            {/* Payment Schedule */}
+            <article
+              className="bg-[#FAFAFA] rounded-[12px] my-4 p-4 space-y-2 
+                             h-48 overflow-y-auto scroll-smooth 
+                             scrollbar-hide"
+            >
+              {/* First Payment (always today) */}
+              <div className="flex justify-between w-full">
+                <div className="font-inter">
+                  <p>First Payment</p>
+                  <p className="text-[#828386]">Today</p>
+                </div>
+                <p className="font-calsans">
+                  {formatCurrency(consolidatedPayments.firstPayment)}
+                </p>
+              </div>
+
+              {/* Other Installments with dates */}
+              {consolidatedPayments.otherPayments.map((payment, index, arr) => (
+                <div key={index} className="flex justify-between w-full">
+                  <div className="font-inter">
+                    <p>{getPaymentLabel(index, arr.length)}</p>
+                    <p className="text-[#828386]">{payment.date}</p>
+                  </div>
+                  <p className="font-calsans">
+                    {formatCurrency(payment.amount)}
+                  </p>
+                </div>
+              ))}
+            </article>
+
+            <hr className="mt-8 mb-2" />
+          </div>
+        )}
+        <div className="flex justify-between my-8">
+          <div className=" grid-cols-1 w-full">
+            <div className="flex justify-between font-medium text-xl w-full mb-8 lg:mb-0 font-calsans">
+              <p className="text-xl">Total</p>
+              <p className="text-lg">{formatCurrency(total)}</p>
+            </div>
+
+            <div className="lg:hidden flex flex-col justify-center gap-5 font-inter">
               {!InstallmentPayment ? (
                 <YellowButton onClick={onSubmitPaymentMethod}>
                   Pay now
@@ -69,7 +159,7 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
               ) : (
                 <Link
                   to="direct-debit-setup-1"
-                  className="bg-bg-[var(--yellow-primary)] font-semibold text-base flex items-center justify-center overflow-hidden rounded-[20px] border-2 w-full mx-auto md:px-12 py-2 hover:bg-gray-50 hover:border-bg-[var(--yellow-primary)]  hover:text-black"
+                  className="bg-[var(--yellow-primary)] font-semibold text-base flex items-center justify-center overflow-hidden rounded-[20px] border-2 w-full mx-auto md:px-12 py-2 hover:bg-gray-50 hover:border-bg-[var(--yellow-primary)]  hover:text-black"
                 >
                   Set up direct debit
                 </Link>
