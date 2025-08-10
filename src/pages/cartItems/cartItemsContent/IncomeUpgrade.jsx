@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BVNUpload } from './UploadFileModal';
 import { YellowButton } from '../../../utils/Button';
+import { formatCurrency } from '../../../utils/FormatCurrency';
 
 export const IncomeUpgrade = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -29,7 +30,8 @@ export const IncomeUpgrade = () => {
             />
           </span>
           <p>
-            The item(s) in your cart is valued at <strong>N1 million </strong>
+            The item(s) in your cart is valued at{' '}
+            <strong>{formatCurrency(500000)} </strong>
             and above you are required to upgrade to tier 2.
           </p>
         </div>

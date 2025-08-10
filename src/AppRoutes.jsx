@@ -52,6 +52,7 @@ import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/Direct
 import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetupPaymentSuccess';
 import BuyerAndVendorProtection from './pages/buyerAndVendor/BuyerAndVendorProtection';
+import MarketplaceGuidelines from './pages/marketplaceGuidelines/MarketplaceGuidelines';
 
 const AppRoutes = () => {
   return (
@@ -148,6 +149,15 @@ const AppRoutes = () => {
           }
         />
 
+        <Route
+          path="marketplace-guidelines"
+          element={
+            <Suspense fallback={<LandingPageSkeleton />}>
+              <MarketplaceGuidelines />
+            </Suspense>
+          }
+        />
+
         {/* <Route
         path="/:categoryName/:subcategory"
         element={<LazyRoute element={<SubCategoryPage />} />}
@@ -177,17 +187,17 @@ const AppRoutes = () => {
         />
 
         <Route
-          path="cart-items/checkout/direct-debit-setup-1"
+          path="cart-items/checkout/mandate/create"
           element={<DirectDebitSetUp1 />}
         />
 
         <Route
-          path="cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2"
+          path="cart-items/checkout/mandate/create/setup-2"
           element={<DirectDebitSetUp2 />}
         />
 
         <Route
-          path="cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2/mono-setup-payment-success"
+          path="cart-items/checkout/mandate/create-success"
           element={<MonoSetupPaymentSuccess />}
         />
 

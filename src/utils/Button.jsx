@@ -9,7 +9,7 @@ export const Button = ({ children, onClick, className }) => {
 export const YellowButton = ({ children, onClick }) => {
   return (
     <button
-      type="submit"
+      type="button"
       onClick={onClick}
       className=" group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)]  border-2 border-bg-[var(--yellow-primary)]  w-full mx-auto  md:px-12 py-2 text-lg font-medium text-black hover:bg-gray-50 hover:text-black"
     >

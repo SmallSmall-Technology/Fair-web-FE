@@ -4,17 +4,20 @@ import { useForm } from 'react-hook-form';
 import { Minus, Search } from 'lucide-react';
 
 const banks = [
-  'GT Bank',
-  'Standard Chartered Bank',
-  'Zenith Bank',
-  'Wema Bank',
-  'United Bank for Africa',
-  'Access Bank',
-  'Union Bank',
-  'First Bank',
+  { name: 'GT Bank', code: '058' },
+  { name: 'Standard Chartered Bank', code: '068' },
+  { name: 'Zenith Bank', code: '057' },
+  { name: 'Wema Bank', code: '035' },
+  { name: 'United Bank for Africa', code: '033' },
+  { name: 'Access Bank', code: '044' },
+  { name: 'Union Bank', code: '032' },
+  { name: 'First Bank', code: '011' },
 ];
 
-export const DirectDebitBankSetupForm = ({ setAuthorized }) => {
+export const DirectDebitBankSetupForm = ({
+  setAuthorized,
+  onSubmitBankInfo,
+}) => {
   const [search, setSearch] = useState('');
   const {
     register,
@@ -24,10 +27,17 @@ export const DirectDebitBankSetupForm = ({ setAuthorized }) => {
     formState: { errors },
   } = useForm();
 
-  const selectedBank = watch('selectedBank');
+  const selectedBankName = watch('selectedBank');
   const accountNumber = watch('accountNumber');
 
   const onSubmit = () => {
+    const bankObj = banks.find((b) => b.name === selectedBankName);
+    if (!bankObj) return;
+
+    // send bank code + account number to parent (so Redux can be updated)
+    onSubmitBankInfo(bankObj.code, accountNumber);
+
+    // proceed to next step
     setAuthorized(true);
   };
 
@@ -37,31 +47,24 @@ export const DirectDebitBankSetupForm = ({ setAuthorized }) => {
       className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 pt-10 px-4 lg:px-6"
     >
       <div>
+        {/* Step Indicator */}
         <div className="flex items-center justify-between mb-8 lg:mb-4 lg:opacity-0 overflow-x-aut">
           <div className="flex items-center gap-1">
             <span className="font-medium text-[11px] text-white bg-black px-1 lg:px-2 py-[3px] rounded-[1px]">
               1
             </span>
             <p className="flex items-center text-xs whitespace-nowrap">
-              Bank Account{' '}
-              <span>
-                <Minus />
-              </span>
+              Bank Account <Minus />
             </p>
           </div>
-
           <div className="flex items-center gap-1 opacity-25">
             <span className="font-medium text-[11px] text-white bg-black px-1 lg:px-2 py-[3px] rounded-[1px]">
               2
             </span>
             <p className="flex items-center text-xs whitespace-nowrap">
-              Authorize consent
-              <span>
-                <Minus />
-              </span>
+              Authorize consent <Minus />
             </p>
           </div>
-
           <div className="flex items-center gap-1 opacity-25">
             <span className="font-medium text-[11px] text-white bg-black px-1 lg:px-2 py-[3px] rounded-[1px]">
               3
@@ -69,17 +72,19 @@ export const DirectDebitBankSetupForm = ({ setAuthorized }) => {
             <p className="text-xs whitespace-nowrap">Setup Complete</p>
           </div>
         </div>
+
         <h2 className="text-3xl font-bold mb-4 lg:mb-2">Direct debit setup</h2>
         <div className="flex items-center mb-2">
           <span className="mr-2 font-medium text-[11px] text-white bg-black p-2 py-[4px]">
             1
           </span>
-          <p className="text-sm font-medium ">
+          <p className="text-sm font-medium">
             Start by selecting your bank from the list below
           </p>
         </div>
 
-        <div className="bg-white rounded-lg border  p-4 lg:p-6 shadow-sm">
+        {/* Bank Select */}
+        <div className="bg-white rounded-lg border p-4 lg:p-6 shadow-sm">
           <p className="text-[23px] font-bold mb-2">Select your bank</p>
           <div className="relative w-full mb-8">
             <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
@@ -97,22 +102,24 @@ export const DirectDebitBankSetupForm = ({ setAuthorized }) => {
           <ul className="space-y-3 max-h-72 overflow-auto">
             {banks
               .filter((bank) =>
-                bank.toLowerCase().includes(search.toLowerCase())
+                bank.name.toLowerCase().includes(search.toLowerCase())
               )
               .map((bank) => (
                 <li
-                  key={bank}
-                  className={` text-sm font-medium flex items-center justify-between p-2 rounded cursor-pointer hover:bg-gray-50 ${
-                    selectedBank === bank ? 'bg-gray-100 border-black' : ''
+                  key={bank.code}
+                  className={`text-sm font-medium flex items-center justify-between p-2 rounded cursor-pointer hover:bg-gray-50 ${
+                    selectedBankName === bank.name
+                      ? 'bg-gray-100 border-black'
+                      : ''
                   }`}
-                  onClick={() => setValue('selectedBank', bank)}
+                  onClick={() => setValue('selectedBank', bank.name)}
                 >
-                  <span>{bank}</span>
+                  <span>{bank.name}</span>
                   <input
                     type="radio"
                     {...register('selectedBank', { required: true })}
-                    checked={selectedBank === bank}
-                    value={bank}
+                    checked={selectedBankName === bank.name}
+                    value={bank.name}
                     className="accent-black"
                   />
                 </li>
@@ -124,62 +131,26 @@ export const DirectDebitBankSetupForm = ({ setAuthorized }) => {
         </div>
       </div>
 
+      {/* Right Column */}
       <aside>
-        <div className=" items-center mb-14 hidden lg:flex">
-          <div className="flex items-center gap-2">
-            <span className="font-medium text-[11px] text-white bg-black px-2 py-[3px] rounded-[1px]">
-              1
-            </span>
-            <p className="flex items-center">
-              Bank Account{' '}
-              <span>
-                <Minus />
-              </span>
-            </p>
-          </div>
-
-          <div className="flex items-center gap-1 opacity-25">
-            <span className="font-medium text-[11px] text-white bg-black px-2 py-[3px] rounded-[1px]">
-              2
-            </span>
-            <p className="flex items-center">
-              Authorize consent
-              <span>
-                <Minus />
-              </span>
-            </p>
-          </div>
-          <div className="flex items-center gap-1 opacity-25">
-            <span className="font-medium text-[11px] text-white bg-black px-2 py-[3px] rounded-[1px]">
-              3
-            </span>
-            <p>Setup Complete</p>
-          </div>
-        </div>
-        <div
-          className={`rounded-lg flex items-center  mb-[10px] transition-opacity ${
-            !selectedBank ? 'opacity-30 pointer-events-none' : ''
-          }`}
-        >
+        <div className="rounded-lg flex items-center mb-[10px]">
           <span className="mr-2 font-medium text-[11px] text-white bg-black p-2 py-[4px]">
             2
           </span>
-          <p className="text-sm font-medium ">
+          <p className="text-sm font-medium">
             Please enter your account number for your selected bank.
           </p>
         </div>
 
         <div
-          className={`rounded-lg border p-6 shadow-sm transition-opacity ${
-            !selectedBank ? 'opacity-30 pointer-events-none' : 'bg-white'
+          className={`rounded-lg border p-6 shadow-sm ${
+            !selectedBankName ? 'opacity-30 pointer-events-none' : 'bg-white'
           }`}
         >
           <h3 className="text-[23px] font-bold mb-3">Account setup</h3>
-
           <label htmlFor="accountNumber" className="text-sm mb-2 block">
             Enter Account number
           </label>
-
           <input
             id="accountNumber"
             type="tel"
@@ -196,22 +167,20 @@ export const DirectDebitBankSetupForm = ({ setAuthorized }) => {
               input.value = input.value.replace(/\D/g, '');
             }}
             className={`w-full px-3 py-2 border rounded-md mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
-              !selectedBank ? 'border-[#DEDEDE]' : 'border-black'
+              !selectedBankName ? 'border-[#DEDEDE]' : 'border-black'
             }`}
-            disabled={!selectedBank}
+            disabled={!selectedBankName}
           />
-
           {errors.accountNumber && (
             <p className="text-sm text-red-500 mb-2">
               Please enter a valid 10-digit account number
             </p>
           )}
-
           <button
             type="submit"
-            disabled={!selectedBank || !accountNumber}
+            disabled={!selectedBankName || !accountNumber}
             className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
-              !selectedBank || !accountNumber
+              !selectedBankName || !accountNumber
                 ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                 : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
             }`}

@@ -8,6 +8,7 @@ import recentlyViewedReducer from './features/product/recentlyViewedSlice';
 import productReducer from './features/product/productSlice';
 import orderReducer from './features/order/orderSlice';
 import authReducer from './features/auth/authSlice';
+import mandateReducer from './features/mono/mandateSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   products: productReducer,
   order: orderReducer,
   auth: authReducer,
+  mandate: mandateReducer,
 });
 
 const persistConfig = {
@@ -30,6 +32,7 @@ const persistConfig = {
     'products',
     'order',
     'auth',
+    'mandate',
   ],
 };
 
