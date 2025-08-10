@@ -21,9 +21,7 @@ export const DirectDebitBankSetupFormAuthorizeConsent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(
-      '/cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2/mono-setup-payment-success'
-    );
+    navigate('/cart-items/checkout/mandate/create-success');
   };
 
   return (

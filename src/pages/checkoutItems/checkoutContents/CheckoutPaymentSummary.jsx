@@ -1,5 +1,5 @@
 import { Dot } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { YellowButton } from '../../../utils/Button.jsx';
 import { CartCoupon } from '../../../features/cart/CartCoupon.jsx';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
@@ -8,75 +8,50 @@ import {
   getTotalCartQuantity,
 } from '../../../features/cart/cartSlice.js';
 import { CartFooter } from '../../cartItems/CartFooter.jsx';
-import { Link } from 'react-router-dom';
 import { CancelPurchase } from '../../cartItems/CartHeader.jsx';
 import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
 import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.jsx';
+import { useNavigate } from 'react-router-dom';
+import { setMandateData } from '../../../features/mono/mandateSlice.js';
+import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 
 export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const cart = useSelector((state) => state.cart.cart);
   const totalCartQuantity = useSelector(getTotalCartQuantity);
   const totalCartPrice = useSelector(getTotalCartPrice);
+
   const VAT = (7.5 / 100) * totalCartPrice;
   const shippingFee = +1200;
   const subtTotal = totalCartPrice;
   const total = totalCartPrice + VAT + shippingFee;
-  const cartItems = useSelector((state) => state.cart.cart);
-  const InstallmentPayment = cartItems.find((item) =>
-    ['monthly', 'weekly', 'daily'].includes(item.paymentPlan)
-  );
+
+  // const cartItems = useSelector((state) => state.cart.cart);
+  // const InstallmentPayment = cartItems.find((item) =>
+  //   ['monthly', 'weekly', 'daily'].includes(
+  //     item.paymentPlan || item.selectedPaymentPlan
+  //   )
+  // );
+
   const cartPaymentPlan = cart.map(
     (item) => item.paymentPlan || item.selectedPaymentPlan
   );
   const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
   const consolidatedPayments = consolidateCartPayments(cart);
-  console.log(consolidateCartPayments(cart));
-  const last_installment_debit_date =
-    consolidatedPayments.otherPayments.at(-1)?.date;
-  const first_installment_payment = consolidatedPayments.firstPayment;
-  const first_debit_date = new Date().toISOString().split('T')[0];
-  const last_installment_payment =
-    consolidatedPayments.otherPayments.at(-1)?.amount;
-  const last_installment_date = new Date(last_installment_debit_date)
-    .toISOString()
-    .split('T')[0];
-  const consolidated_total_amount = total;
-  const frequency = cartPaymentPlan[0];
-  const paymentPlan = frequency;
-  const description = '';
-  const deliveryFullAddress = '123 Victoria Island, Lagos, Nigeria';
-  const deliveryState = 'Lagos';
-  const bankCode = '';
-  const accountNumber = '';
-  const products = cart.map((item) => ({
-    productID: item.productID,
-    quantity: item.quantity,
-  }));
 
-  console.log({
-    consolidated_total_amount,
-    first_installment_payment,
-    first_debit_date,
-    last_installment_payment,
-    last_installment_date,
-    frequency,
-    paymentPlan,
-    description,
-    deliveryFullAddress,
-    deliveryState,
-    bankCode,
-    accountNumber,
-    products,
-  });
+  // Function to handle proceeding to mandate creation
+  const handleProceedToMandate = useProceedToMandate();
 
   return (
     <>
-      <div className=" rounded-[10px] lg:bg-[#F2F2F2] lg:py-6 px-8 h-fit">
+      <div className="rounded-[10px] lg:bg-[#F2F2F2] lg:py-6 px-8 h-fit">
         <div className="space-y-4">
           <div className="lg:hidden ">
             <CartCoupon />
           </div>
-          <div className="flex justify-between gap-2  font-medium text-xl w-full">
+          <div className="flex justify-between gap-2 font-medium text-xl w-full">
             <div className="flex items-center">
               <p className="text-sm font-medium">Subtotal</p>
               <span className="flex text-sm font-medium">
@@ -99,8 +74,9 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
             <p className="text-right">{formatCurrency(shippingFee)}</p>
           </div>
         </div>
+
         {!isConsolidatedCart && (
-          <div className="px- lg:hidden ">
+          <div className="px- lg:hidden">
             <hr className="mt-8 mb-2" />
             <div className="font-inter flex justify-between items-center">
               {cart.length > 1 ? (
@@ -116,7 +92,7 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
                              h-48 overflow-y-auto scroll-smooth 
                              scrollbar-hide"
             >
-              {/* First Payment (always today) */}
+              {/* First Payment */}
               <div className="flex justify-between w-full">
                 <div className="font-inter">
                   <p>First Payment</p>
@@ -127,7 +103,7 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
                 </p>
               </div>
 
-              {/* Other Installments with dates */}
+              {/* Other Installments */}
               {consolidatedPayments.otherPayments.map((payment, index, arr) => (
                 <div key={index} className="flex justify-between w-full">
                   <div className="font-inter">
@@ -144,25 +120,23 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
             <hr className="mt-8 mb-2" />
           </div>
         )}
+
         <div className="flex justify-between my-8">
-          <div className=" grid-cols-1 w-full">
+          <div className="grid-cols-1 w-full">
             <div className="flex justify-between font-medium text-xl w-full mb-8 lg:mb-0 font-calsans">
               <p className="text-xl">Total</p>
               <p className="text-lg">{formatCurrency(total)}</p>
             </div>
 
             <div className="lg:hidden flex flex-col justify-center gap-5 font-inter">
-              {!InstallmentPayment ? (
+              {!consolidateCartPayments ? (
                 <YellowButton onClick={onSubmitPaymentMethod}>
                   Pay now
                 </YellowButton>
               ) : (
-                <Link
-                  to="direct-debit-setup-1"
-                  className="bg-[var(--yellow-primary)] font-semibold text-base flex items-center justify-center overflow-hidden rounded-[20px] border-2 w-full mx-auto md:px-12 py-2 hover:bg-gray-50 hover:border-bg-[var(--yellow-primary)]  hover:text-black"
-                >
+                <YellowButton onClick={handleProceedToMandate}>
                   Set up direct debit
-                </Link>
+                </YellowButton>
               )}
 
               <div className="mx-auto">
@@ -172,6 +146,7 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
           </div>
         </div>
       </div>
+
       <section className="lg:hidden">
         <CartFooter />
       </section>

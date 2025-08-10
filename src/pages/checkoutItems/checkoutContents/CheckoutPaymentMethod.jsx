@@ -17,6 +17,7 @@ import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
+import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 
 const API_URL = 'http://localhost:8002';
 
@@ -26,6 +27,7 @@ export const CheckoutPaymentMethod = () => {
   const totalCartPrice = useSelector(getTotalCartPrice);
   const cartItems = useSelector((state) => state.cart.cart);
   const onDeliveryAddress = useSelector(selectLatestDeliveryAddress);
+  const handleProceedToMandate = useProceedToMandate();
 
   const {
     register,
@@ -62,9 +64,9 @@ export const CheckoutPaymentMethod = () => {
           );
           return {
             ...item,
-            name: product.name,
-            image: product.image,
-            soldBy: product.brand,
+            name: product?.name,
+            image: product?.image,
+            soldBy: product?.brand,
           };
         })
       );
@@ -245,8 +247,9 @@ export const CheckoutPaymentMethod = () => {
 
           <div className="hidden lg:block ">
             <Link
-              to="direct-debit-setup-1"
-              // disabled={isSubmitting}
+              to="mandate/create"
+              disabled={isSubmitting}
+              onClick={handleProceedToMandate}
               className="bg-(var-yellow-primary) group relative font-semibold text-base flex items-center justify-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 hover:bg-gray-50 hover:border-bg-[var(--yellow-primary)]  hover:text-black"
             >
               Set up direct debit

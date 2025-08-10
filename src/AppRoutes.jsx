@@ -177,17 +177,17 @@ const AppRoutes = () => {
         />
 
         <Route
-          path="cart-items/checkout/direct-debit-setup-1"
+          path="cart-items/checkout/mandate/create"
           element={<DirectDebitSetUp1 />}
         />
 
         <Route
-          path="cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2"
+          path="cart-items/checkout/mandate/create/setup-2"
           element={<DirectDebitSetUp2 />}
         />
 
         <Route
-          path="cart-items/checkout/direct-debit-setup-1/direct-debit-setup-2/mono-setup-payment-success"
+          path="cart-items/checkout/mandate/create-success"
           element={<MonoSetupPaymentSuccess />}
         />
 
