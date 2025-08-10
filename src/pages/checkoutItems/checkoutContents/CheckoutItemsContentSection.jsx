@@ -10,6 +10,9 @@ import { CheckoutDeliveryAddressButton } from '../../../utils/Button.jsx';
 import { selectLatestDeliveryAddress } from '../../../features/user/userSlice.js';
 import { CheckoutPaymentMethod } from '../checkoutContents/CheckoutPaymentMethod.jsx';
 import CheckoutDeliveryAddressForm from '../checkoutAddress/CheckoutDeliveryAddressForm.jsx';
+import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
+import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
+import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.jsx';
 
 export const CheckoutItemsContentSection = () => {
   const deliveryAddress = useSelector(selectLatestDeliveryAddress);
@@ -17,6 +20,10 @@ export const CheckoutItemsContentSection = () => {
     useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cart = useSelector((state) => state.cart.cart);
+  const cartPaymentPlan = cart.map((item) => item.paymentPlan);
+  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
+  const consolidatedPayments = consolidateCartPayments(cart);
 
   const handleOpenCheckoutDeliveryAddressForm = () => {
     setShowCheckoutDeliveryAddressForm((show) => !show);
@@ -107,12 +114,59 @@ export const CheckoutItemsContentSection = () => {
         <div className="hidden lg:block">
           <CheckoutItem />
         </div>
+        {/* Consolidated Payments (only if not full payment) */}
+        {!isConsolidatedCart && (
+          <div className="px-6 hidden lg:block">
+            <hr className="mt-8 mb-2" />
+            <div className="font-inter flex justify-between items-center">
+              {cart.length > 1 ? (
+                <p className="font-medium">Consolidated cart</p>
+              ) : (
+                <p className="font-medium">Cart</p>
+              )}
+            </div>
+
+            {/* Payment Schedule */}
+            <article
+              className="bg-[#FAFAFA] rounded-[12px] my-4 p-4 space-y-2 
+                     h-48 overflow-y-auto scroll-smooth 
+                     scrollbar-hide"
+            >
+              {/* First Payment (always today) */}
+              <div className="flex justify-between w-full">
+                <div className="font-inter">
+                  <p>First Payment</p>
+                  <p className="text-[#828386]">Today</p>
+                </div>
+                <p className="font-calsans">
+                  {formatCurrency(consolidatedPayments.firstPayment)}
+                </p>
+              </div>
+
+              {/* Other Installments with dates */}
+              {consolidatedPayments.otherPayments.map((payment, index, arr) => (
+                <div key={index} className="flex justify-between w-full">
+                  <div className="font-inter">
+                    <p>{getPaymentLabel(index, arr.length)}</p>
+                    <p className="text-[#828386]">{payment.date}</p>
+                  </div>
+                  <p className="font-calsans">
+                    {formatCurrency(payment.amount)}
+                  </p>
+                </div>
+              ))}
+            </article>
+
+            <hr className="mt-8 mb-2" />
+          </div>
+        )}
         <div className=" lg:hidden border border-t-2 border-[#E5E5E5] w-full h-0 my-4"></div>
         <section className=" lg:hidden">
           <CheckoutPaymentMethod
             onSubmitPaymentMethod={handleSubmitPaymentMethod}
           />
         </section>
+
         <div className=" lg:hidden border border-t-2 border-[#E5E5E5] w-full h-0 my-4"></div>
         <CheckoutPaymentSummary
           onSubmitPaymentMethod={handleSubmitPaymentMethod}

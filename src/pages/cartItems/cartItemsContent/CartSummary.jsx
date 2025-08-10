@@ -1,10 +1,20 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { IncomeUpgrade } from './IncomeUpgrade';
+import { getPaymentDates } from '../../../utils/PaymentDates';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import { getCartSummary } from '../../../features/cart/cartSlice';
-import { getPaymentDates } from '../../../utils/PaymentDates';
-// import { getPaymentDates } from '../../productCategories/productDetails/SingleProductDetailsAside';
+import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment';
+
+/**
+ * Dynamic label for each installment
+ */
+export const getPaymentLabel = (index, length) => {
+  if (index === 0) return '2nd Payment';
+  if (index === 1) return '3rd Payment';
+  if (index === length - 1) return 'Final Payment';
+  return `${index + 2}th Payment`;
+};
 
 export const CartSummary = ({
   onHandleCheckout,
@@ -20,74 +30,7 @@ export const CartSummary = ({
   const subtTotal = totalCartPrice + VAT + shippingFee;
   const cartPaymentPlan = cart.map((item) => item.paymentPlan);
   const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
-
-  /**
-   * Consolidate all payments from items in cart
-   * - firstPayment = sum of all down payments
-   * - otherPayments = array of objects { amount, date } for each installment
-   */
-  function consolidateCartPayments(cart) {
-    const consolidatedPayments = {
-      firstPayment: 0,
-      otherPayments: [], // [{ amount, date }]
-    };
-
-    cart.forEach((item) => {
-      const cartPaymentPlan = item.paymentPlan || item.selectedPaymentPlan;
-      const option = item.paymentOptionsBreakdown?.find(
-        (opt) => opt.type === cartPaymentPlan
-      );
-      if (!option) return;
-
-      // Add first payment (down payment)
-      consolidatedPayments.firstPayment +=
-        option.downPayment * item.quantity || 0;
-
-      // Determine installment count (monthly, weekly, daily)
-      const installmentsCount =
-        option.numberOfInstallments ||
-        option.months ||
-        option.weeks ||
-        option.days ||
-        0;
-
-      // Generate payment dates dynamically
-      const paymentDates = getPaymentDates(
-        option.type,
-        new Date(),
-        installmentsCount
-      );
-      // Add all installments to consolidated list
-      for (let i = 0; i < installmentsCount; i++) {
-        const existing = consolidatedPayments.otherPayments[i] *
-          item.quantity || {
-          amount: 0,
-          date: paymentDates[i],
-        };
-
-        consolidatedPayments.otherPayments[i] = {
-          amount:
-            existing.amount +
-            (option.installmentAmount * item.quantity || 0 * item.quantity),
-          date: existing.date,
-        };
-      }
-    });
-
-    return consolidatedPayments;
-  }
-
   const consolidatedPayments = consolidateCartPayments(cart);
-
-  /**
-   * Dynamic label for each installment
-   */
-  const getPaymentLabel = (index, length) => {
-    if (index === 0) return '2nd Payment';
-    if (index === 1) return '3rd Payment';
-    if (index === length - 1) return 'Final Payment';
-    return `${index + 2}th Payment`;
-  };
 
   return (
     <>
@@ -120,7 +63,11 @@ export const CartSummary = ({
           <div>
             <hr className="mt-8 mb-2" />
             <div className="font-inter flex justify-between items-center">
-              <p className="font-medium">Consolidated cart</p>
+              {cart.length > 1 ? (
+                <p className="font-medium">Consolidated cart</p>
+              ) : (
+                <p className="font-medium">Cart</p>
+              )}
               <Link to="" className="text-[11px] underline">
                 What is a consolidated cart?
               </Link>

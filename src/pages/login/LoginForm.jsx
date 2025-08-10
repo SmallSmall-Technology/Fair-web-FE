@@ -77,14 +77,17 @@ const LoginForm = () => {
       if (cartSessionID) {
         try {
           await dispatch(transferGuestCartToUser(cartSessionID)).unwrap();
-        } catch {
-          toast.error('Some items could not be transferred from guest cart.', {
-            autoClose: 3000,
-            className:
-              'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-            bodyClassName: 'm-0 p-0',
-            closeButton: false,
-          });
+        } catch (error) {
+          // toast.error(
+          //   error || 'Some items could not be transferred from guest cart.',
+          //   {
+          //     autoClose: 3000,
+          //     className:
+          //       'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          //     bodyClassName: 'm-0 p-0',
+          //     closeButton: false,
+          //   }
+          // );
         }
       }
     } catch (err) {

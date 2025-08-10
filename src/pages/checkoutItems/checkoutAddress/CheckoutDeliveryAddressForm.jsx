@@ -7,10 +7,9 @@ import {
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUser } from '../../../api/user-api';
+import httpClient from '../../../api/http-clients';
 
 const CheckoutDeliveryAddressForm = ({
-  // eslint-disable-next-line react/prop-types
   handleOpenCheckoutDeliveryAddressForm,
 }) => {
   const {
@@ -20,58 +19,75 @@ const CheckoutDeliveryAddressForm = ({
   } = useForm({
     defaultValues: { state: '', streetAddress: '' },
   });
+
   const { user } = useSelector((state) => state.user);
-  const firstName = user.firstName || '';
-  const lastName = user.lastName || '';
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
+
+  // Function to post address
+  const postAddress = async (address) => {
+    const { data } = await httpClient.post(
+      '/user/add-delivery-address',
+      address
+    );
+    return data;
+  };
+
+  // Mutation
   const mutation = useMutation({
-    mutationFn: updateUser,
+    mutationFn: postAddress,
     onSuccess: (response) => {
-      queryClient.invalidateQueries({ queryKey: ['users'] });
-      // refetch();
+      queryClient.invalidateQueries({ queryKey: ['user/addresses'] });
+
+      // Update Redux with latest address if returned
       const updatedAddress =
-        response.data?.user?.latest_address || response.data?.latest_address;
+        response?.data?.user?.latest_address || response?.latest_address;
+
       if (updatedAddress) {
         dispatch(updateLatestDeliveryAddress(updatedAddress));
       }
-      if (response.data?.user) {
+      if (response?.data?.user) {
         dispatch(setUser(response.data.user));
       }
     },
   });
 
-  const onSubmit = async (data, event) => {
+  // Handle form submission
+  const onSubmit = async (formValues, event) => {
     event.preventDefault();
     event.stopPropagation();
+
     try {
       const payload = {
-        latest_address: {
-          streetAddress: data.streetAddress.trim(),
-          state: data.state,
-        },
-        firstName: firstName.trim(),
-        lastName: lastName.trim(),
+        streetAddress: formValues.streetAddress.trim(),
+        state: formValues.state,
       };
+
       await mutation.mutateAsync(payload);
-      dispatch(updateLatestDeliveryAddress(payload.latest_address));
+
       toast.success('Address updated successfully', {
         className:
           'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
       });
+
       handleOpenCheckoutDeliveryAddressForm();
     } catch (error) {
       toast.error(
-        error.response?.data?.message ||
+        error?.response?.data?.message ||
           error.message ||
           'Failed to update address',
         {
           autoClose: 3000,
+          className:
+            'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+          bodyClassName: 'm-0 p-0',
+          closeButton: false,
         }
       );
     }
   };
+
   return (
     <form action="submit" onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
