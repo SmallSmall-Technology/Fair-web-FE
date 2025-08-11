@@ -54,6 +54,7 @@ import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/dire
 import BuyerAndVendorProtection from './pages/buyerAndVendor/BuyerAndVendorProtection';
 import MarketplaceGuidelines from './pages/marketplaceGuidelines/MarketplaceGuidelines';
 import RefundsAndReturns from './pages/refundsAndReturns/RefundsAndReturns';
+import BuyingGuide from './pages/buyingGuide/BuyingGuide';
 
 const AppRoutes = () => {
   return (
@@ -164,6 +165,15 @@ const AppRoutes = () => {
           element={
             <Suspense fallback={<LandingPageSkeleton />}>
               <RefundsAndReturns />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="buying-guide"
+          element={
+            <Suspense fallback={<LandingPageSkeleton />}>
+              <BuyingGuide />
             </Suspense>
           }
         />

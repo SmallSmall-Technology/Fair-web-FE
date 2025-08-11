@@ -1,6 +1,9 @@
 import Breadcrumb from '../../ui/components/Breadcrumb';
 import HelpContactCard from '../../ui/components/HelpContactCard';
+import MainContentArticle from '../../ui/components/MainContentArticle';
+import MainSection from '../../ui/components/MainSection';
 import MultiColorDivider from '../../ui/components/MultiColorDivider';
+import SideBarNav from '../../ui/components/SideBarNav';
 import PageTitle from '../buyerAndVendor/PageTitle';
 
 const routes = [
@@ -16,6 +19,10 @@ function BuyingGuide() {
       <Breadcrumb routes={routes} />
       <PageTitle title="Buying guide" />
       <MultiColorDivider />
+      <MainSection>
+        <SideBarNav title="Buying articles" />
+        <MainContentArticle title="Lorem ipsum dolor sit amet" />
+      </MainSection>
       <HelpContactCard />
     </div>
   );

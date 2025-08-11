@@ -1,6 +1,9 @@
 import Breadcrumb from '../../ui/components/Breadcrumb';
 import HelpContactCard from '../../ui/components/HelpContactCard';
+import MainContentArticle from '../../ui/components/MainContentArticle';
+import MainSection from '../../ui/components/MainSection';
 import MultiColorDivider from '../../ui/components/MultiColorDivider';
+import SideBarNav from '../../ui/components/SideBarNav';
 import PageTitle from '../buyerAndVendor/PageTitle';
 
 const routes = [
@@ -16,6 +19,10 @@ function RefundsAndReturns() {
       <Breadcrumb routes={routes} />
       <PageTitle title="Refunds & Returns" />
       <MultiColorDivider />
+      <MainSection>
+        <SideBarNav title="Refunds and returns" />
+        <MainContentArticle title="Fair refund and return policy" />
+      </MainSection>
       <HelpContactCard />
     </div>
   );
