@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Hamburger from 'hamburger-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChevronRight, ShoppingCart, User, X } from 'lucide-react';
@@ -22,6 +22,7 @@ export const MobileNavBar = () => {
   const totalProductsInCart = useSelector(getTotalCartQuantity);
   const isAuthenticated = useSelector(getUserIsAuthenticated);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const hanldeCartDropdownItems = () => {
     setIsOpen((prev) => !prev);
@@ -29,6 +30,7 @@ export const MobileNavBar = () => {
 
   const handleLogOutUser = () => {
     dispatch(logout());
+    // navigate('/login');
     toast.success('Logged Out Successfully', {
       className:
         'bg-[var(--yellow-primary)] text-black text-sm rounded-md min-h-0',

@@ -1,11 +1,9 @@
-/* eslint-disable react/prop-types */
-import React, { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { passwordResetOTPVerification } from '../../api/authAPI';
 import { toast } from 'react-toastify';
 import { Check, X } from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
-import { setUserId } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 import { useSendOTP } from '../../hooks/useSendOTP';
 
@@ -103,9 +101,6 @@ export default function VerifyOtp({ verified, setVerified, email }) {
   const otpMutation = useMutation({
     mutationFn: passwordResetOTPVerification,
     onSuccess: (response) => {
-      const userId = response.data.userID;
-      dispatch(setUserId(userId));
-
       toast.success('OTP verified successfully', {
         autoClose: 3000,
         className:

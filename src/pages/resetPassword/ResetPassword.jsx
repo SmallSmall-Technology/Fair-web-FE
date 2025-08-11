@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import UpdatePassword from './UpdatePassword';
 import { Link, useLocation } from 'react-router-dom';
-import VerifyOtp from './OTPInput';
+import VerifyOtp from './VerifyOtp';
 
 const ResetPassword = () => {
   const location = useLocation();

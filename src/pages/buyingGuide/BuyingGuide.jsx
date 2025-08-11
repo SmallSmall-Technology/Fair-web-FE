@@ -9,23 +9,23 @@ import PageTitle from '../buyerAndVendor/PageTitle';
 const routes = [
   { name: 'Fair', href: '/' },
   { name: 'Support', href: '/' },
-  { name: 'Refund&Returns', href: '/' },
+  { name: 'Buying guide', href: '/' },
 ];
 
-function RefundsAndReturns() {
+function BuyingGuide() {
   // return <div>Refunds and Returns</div>;
   return (
     <div className="mx-[4em] my-[2em]">
       <Breadcrumb routes={routes} />
-      <PageTitle title="Refunds & Returns" />
+      <PageTitle title="Buying guide" />
       <MultiColorDivider />
       <MainSection>
-        <SideBarNav title="Refunds and returns" />
-        <MainContentArticle title="Fair refund and return policy" />
+        <SideBarNav title="Buying articles" />
+        <MainContentArticle title="Lorem ipsum dolor sit amet" />
       </MainSection>
       <HelpContactCard />
     </div>
   );
 }
 
-export default RefundsAndReturns;
+export default BuyingGuide;

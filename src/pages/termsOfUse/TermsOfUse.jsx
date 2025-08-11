@@ -1,4 +1,5 @@
 import Breadcrumb from '../../ui/components/Breadcrumb';
+import Main from './Main';
 import MainContent from './MainContent';
 import SideNav from './SideNav';
 
@@ -12,10 +13,7 @@ function TermsOfUse() {
   return (
     <div className="mx-[4em] my-[2em]">
       <Breadcrumb routes={routes} />
-      <div className="flex flex-row">
-        <SideNav />
-        <MainContent />
-      </div>
+      <Main />
     </div>
   );
 }

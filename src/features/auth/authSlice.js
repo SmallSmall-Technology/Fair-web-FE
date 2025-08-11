@@ -107,7 +107,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout, clearError, setUserId } = authSlice.actions;
+export const { logout, clearError } = authSlice.actions;
 export default authSlice.reducer;
 
 export const getUserName = createSelector(

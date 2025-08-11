@@ -46,10 +46,10 @@ export const getCategorySubcategories = async (category) => {
   return response.data;
 };
 
-// Fetch products by subcategory
-export const toggleProductToFavourite = async (productId) => {
+// Toggle products for favourites
+export const toggleProductToFavourite = async (productID) => {
   const response = await httpClient.post('products/toggle-favorite', {
-    productId,
+    productID,
   });
   return response.data;
 };

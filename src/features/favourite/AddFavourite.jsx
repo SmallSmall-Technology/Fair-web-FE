@@ -1,33 +1,73 @@
 import { Heart } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { Button } from '../../utils/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { addItemToFavourite, removeItemFromFavourite } from './favouriteSlice';
-import { useMutation } from '@tanstack/react-query';
-import { toggleProductToFavourite } from '../../api/product-api';
+import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
+import {
+  toggleProductToFavourite,
+  fetchFavouriteProducts,
+} from '../../api/product-api';
 
 export const AddFavourite = ({ product }) => {
-  const dispatch = useDispatch();
-  const favourite = useSelector((state) => state.favourite.favourite);
+  const queryClient = useQueryClient();
+
+  const { data: favourites = [] } = useQuery({
+    queryKey: ['favourites'],
+    queryFn: fetchFavouriteProducts,
+  });
+
+  const [isFavourite, setIsFavourite] = useState(false);
+
+  useEffect(() => {
+    if (product?.productID) {
+      setIsFavourite(favourites.some((f) => f.productID === product.productID));
+    }
+  }, [favourites, product]);
 
   const mutation = useMutation({
     mutationFn: () => toggleProductToFavourite(product.productID),
-    onSuccess: (data) => {
-      if (data?.isFavourite) {
-        dispatch(addItemToFavourite(product));
-      } else {
-        dispatch(removeItemFromFavourite(product));
+
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: ['favourites'] });
+
+      const previousFavourites = queryClient.getQueryData(['favourites']) || [];
+
+      const currentlyFav = previousFavourites.some(
+        (f) => f.productID === product.productID
+      );
+
+      const newFavourites = currentlyFav
+        ? previousFavourites.filter((f) => f.productID !== product.productID)
+        : [
+            ...previousFavourites,
+            { productID: product.productID, productDetails: product },
+          ];
+
+      queryClient.setQueryData(['favourites'], newFavourites);
+
+      setIsFavourite(!currentlyFav);
+
+      return { previousFavourites, currentlyFav };
+    },
+
+    onError: (err, _variables, context) => {
+      if (context?.previousFavourites) {
+        queryClient.setQueryData(['favourites'], context.previousFavourites);
       }
+      if (typeof context?.currentlyFav === 'boolean') {
+        setIsFavourite(context.currentlyFav);
+      }
+    },
+
+    onSettled: async (data) => {
+      await queryClient.invalidateQueries({ queryKey: ['favourites'] });
     },
   });
 
   const handleAddToFavourite = () => {
-    if (!product || !product.productID) return;
+    if (!product?.productID) return;
+    if (mutation.isLoading) return;
     mutation.mutate();
   };
-
-  const isFavourite = favourite?.some(
-    (item) => item.productID === product.productID
-  );
 
   if (!product || Object.keys(product).length === 0) return null;
 

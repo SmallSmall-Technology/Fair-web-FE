@@ -53,6 +53,8 @@ import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/direct
 import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetupPaymentSuccess';
 import BuyerAndVendorProtection from './pages/buyerAndVendor/BuyerAndVendorProtection';
 import MarketplaceGuidelines from './pages/marketplaceGuidelines/MarketplaceGuidelines';
+import RefundsAndReturns from './pages/refundsAndReturns/RefundsAndReturns';
+import BuyingGuide from './pages/buyingGuide/BuyingGuide';
 
 const AppRoutes = () => {
   return (
@@ -154,6 +156,24 @@ const AppRoutes = () => {
           element={
             <Suspense fallback={<LandingPageSkeleton />}>
               <MarketplaceGuidelines />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="refunds-returns"
+          element={
+            <Suspense fallback={<LandingPageSkeleton />}>
+              <RefundsAndReturns />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="buying-guide"
+          element={
+            <Suspense fallback={<LandingPageSkeleton />}>
+              <BuyingGuide />
             </Suspense>
           }
         />
