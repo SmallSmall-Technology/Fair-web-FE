@@ -19,7 +19,7 @@ const StyledLink = styled.a`
 
 function MainContent() {
   return (
-    <div className="ml-7 w-[75%]">
+    <main className="ml-7 w-[75%]">
       <div className="py-3 ">
         <Heading>Terms of use</Heading>
       </div>
@@ -52,7 +52,7 @@ function MainContent() {
           </Section>
         ))}
       </div>
-    </div>
+    </main>
   );
 }
 

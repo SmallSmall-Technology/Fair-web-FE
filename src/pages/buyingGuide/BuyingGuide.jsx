@@ -1,23 +1,24 @@
 import Breadcrumb from '../../ui/components/Breadcrumb';
 import HelpContactCard from '../../ui/components/HelpContactCard';
+import MultiColorDivider from '../../ui/components/MultiColorDivider';
 import PageTitle from '../buyerAndVendor/PageTitle';
-import MulticolorDivider from '../../ui/components/MultiColorDivider';
 
 const routes = [
   { name: 'Fair', href: '/' },
   { name: 'Support', href: '/' },
-  { name: 'Marketplace guidelines', href: '/' },
+  { name: 'Buying guide', href: '/' },
 ];
 
-function MarketplaceGuidelines() {
+function BuyingGuide() {
+  // return <div>Refunds and Returns</div>;
   return (
     <div className="mx-[4em] my-[2em]">
       <Breadcrumb routes={routes} />
-      <PageTitle title="Marketplace guidelines" />
-      <MulticolorDivider />
+      <PageTitle title="Buying guide" />
+      <MultiColorDivider />
       <HelpContactCard />
     </div>
   );
 }
 
-export default MarketplaceGuidelines;
+export default BuyingGuide;
