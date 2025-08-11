@@ -3,7 +3,6 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import userReducer from './features/user/userSlice';
 import cartReducer from './features/cart/cartSlice';
-import favouriteReducer from './features/favourite/favouriteSlice';
 import recentlyViewedReducer from './features/product/recentlyViewedSlice';
 import productReducer from './features/product/productSlice';
 import orderReducer from './features/order/orderSlice';
@@ -13,7 +12,6 @@ import mandateReducer from './features/mono/mandateSlice';
 const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
-  favourite: favouriteReducer,
   recentlyViewed: recentlyViewedReducer,
   products: productReducer,
   order: orderReducer,
@@ -26,7 +24,6 @@ const persistConfig = {
   storage,
   whitelist: [
     'cart',
-    'favourite',
     'user',
     'recentlyViewed',
     'products',

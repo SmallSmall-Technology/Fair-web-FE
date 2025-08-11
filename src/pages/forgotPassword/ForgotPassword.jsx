@@ -74,7 +74,6 @@ const ForgotPassword = () => {
           </Link>
         </form>
       </section>
-      {/* </div> */}
     </>
   );
 };
