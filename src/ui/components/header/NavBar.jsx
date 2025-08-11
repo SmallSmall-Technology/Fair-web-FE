@@ -11,15 +11,23 @@ import { YellowButton } from '../../../utils/Button';
 import { LoggedInUserDropdown } from './LoggedInUserDropdown';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import { ChevronDown, ChevronUp, Heart, ShoppingCart } from 'lucide-react';
-import { getTotalFavouritesQuantity } from '../../../features/favourite/favouriteSlice';
 import { getUserFirstName } from '../../../features/user/userSlice';
+import { useQuery } from '@tanstack/react-query';
+import { fetchFavouriteProducts } from '../../../api/product-api';
+
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [loggedInUserDropdown, setLoggedInUserDropdown] = useState(false);
   const userFullName = useSelector(getUserFirstName);
   const isAuthenticated = useSelector(getUserIsAuthenticated);
   const totalProductsInCart = useSelector(getTotalCartQuantity);
-  const totalFavouritesProduct = useSelector(getTotalFavouritesQuantity);
+
+  const { data: favourites = [], isLoading } = useQuery({
+    queryKey: ['favourites'],
+    queryFn: fetchFavouriteProducts,
+  });
+
+  const totalFavouritesProduct = favourites.length;
 
   const hanldeCartDropdownItems = () => {
     setIsOpen(!isOpen);
