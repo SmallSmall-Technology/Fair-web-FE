@@ -49,7 +49,7 @@ function HeroSection() {
             fraction now, enjoy now, and settle the rest stress-free.
           </p>
 
-          <LinkButton className="bg-[#FFDE11] px-5 py-3 my-5 w-auto rounded-full">
+          <LinkButton className="bg-[#FFDE11] px-5 py-3 my-5 w-auto rounded-full md:w-auto">
             Get started with Smallsmall
           </LinkButton>
         </div>
