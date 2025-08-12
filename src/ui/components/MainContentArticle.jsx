@@ -9,7 +9,8 @@ const Heading = styled.h1`
 
 function MainContentArticle({ children, title }) {
   return (
-    <div className="ml-7 my-10 md:w-[60%]">
+    // <div className="ml-7 my-10 md:w-[60%]">
+    <div className="md:p-7 my-10 col-span-2">
       <div className="py-3 ">
         <Heading>{title}</Heading>
       </div>

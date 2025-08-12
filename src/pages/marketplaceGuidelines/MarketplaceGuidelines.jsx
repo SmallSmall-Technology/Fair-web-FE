@@ -5,6 +5,7 @@ import MulticolorDivider from '../../ui/components/MultiColorDivider';
 import MainSection from '../../ui/components/MainSection';
 import SideBarNav from '../../ui/components/SideBarNav';
 import MainContentArticle from '../../ui/components/MainContentArticle';
+import PoliciesMainContent from '../../ui/components/PoliciesMainContent';
 
 const routes = [
   { name: 'Fair', href: '/' },
@@ -14,7 +15,8 @@ const routes = [
 
 function MarketplaceGuidelines() {
   return (
-    <div className="mx-[4em] my-[2em]">
+    // <div className="md:mx-[4em] md:my-[2em]">
+    <PoliciesMainContent>
       <Breadcrumb routes={routes} />
       <PageTitle title="Marketplace guidelines" />
       <MulticolorDivider />
@@ -23,7 +25,8 @@ function MarketplaceGuidelines() {
         <MainContentArticle title="Core Principles" />
       </MainSection>
       <HelpContactCard />
-    </div>
+    </PoliciesMainContent>
+    // </div>
   );
 }
 
