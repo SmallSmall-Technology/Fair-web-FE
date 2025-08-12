@@ -14,13 +14,13 @@ const routes = [
 function BuyerAndVendorProtection() {
   return (
     <PoliciesMainContent>
-      {/* <Breadcrumb routes={routes} />
+      <Breadcrumb routes={routes} />
       <PageTitle title="Platform protection" />
       <div className="grid md:grid-cols-2">
         <BuyerProtection />
         <SellerProtection />
       </div>
-      <HelpContactCard /> */}
+      <HelpContactCard />
     </PoliciesMainContent>
   );
 }
