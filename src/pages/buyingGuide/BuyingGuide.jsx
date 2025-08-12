@@ -17,14 +17,14 @@ function BuyingGuide() {
   // return <div>Refunds and Returns</div>;
   return (
     <PoliciesMainContent>
-      {/* <Breadcrumb routes={routes} />
+      <Breadcrumb routes={routes} />
       <PageTitle title="Buying guide" />
       <MultiColorDivider />
       <MainSection>
         <SideBarNav title="Buying articles" />
         <MainContentArticle title="Lorem ipsum dolor sit amet" />
       </MainSection>
-      <HelpContactCard /> */}
+      <HelpContactCard />
     </PoliciesMainContent>
   );
 }
