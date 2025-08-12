@@ -1,19 +1,20 @@
 import { Link } from 'react-router-dom';
 
 const dataContent = [
-  { label: 'Lorem ipsum dolor sit amet, consectetur', link: '/' },
-  { label: 'Lorem ipsum dolor sit amet, consectetur', link: '/' },
-  { label: 'Lorem ipsum dolor sit amet, consectetur', link: '/' },
-  { label: 'Lorem ipsum dolor sit amet, consectetur', link: '/' },
-  { label: 'Lorem ipsum dolor sit amet, consectetur', link: '/' },
-  { label: 'Lorem ipsum dolor sit amet, consectetur', link: '/' },
-  { label: 'Lorem ipsum dolor sit amet, consectetur', link: '/' },
-  { label: 'Lorem ipsum dolor sit amet, consectetur', link: '/' },
+  { label: 'Lorem ipsum dolor sit amet, consec', link: '/' },
+  { label: 'Lorem ipsum dolor sit amet, consec', link: '/' },
+  { label: 'Lorem ipsum dolor sit amet, consec', link: '/' },
+  { label: 'Lorem ipsum dolor sit amet, consec', link: '/' },
+  { label: 'Lorem ipsum dolor sit amet, consec', link: '/' },
+  { label: 'Lorem ipsum dolor sit amet, consec', link: '/' },
+  { label: 'Lorem ipsum dolor sit amet, consec', link: '/' },
+  { label: 'Lorem ipsum dolor sit amet, consec', link: '/' },
 ];
 
 function SideBarNav({ data = dataContent, title }) {
   return (
-    <div className="py-10 mr-4 w-[25%]">
+    // <div className="py-10 mr-4 w-[25%]">
+    <div className="py-10">
       <div>
         <h2>{title}</h2>
       </div>
