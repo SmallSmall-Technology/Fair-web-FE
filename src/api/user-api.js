@@ -5,6 +5,31 @@ export const updateUser = async (data) => {
   return response.data;
 };
 
+export const uploadUserDeliveryAddress = async (data) => {
+  const response = await httpClient.post('user/add-delivery-address', data);
+  return response.data;
+};
+
+export const fetchUserDeliveryAddresses = async () => {
+  const response = await httpClient.get('user/all-delivery-address');
+  return response.data;
+};
+
+export const deleteUserDeliveryAddress = async (id) => {
+  const response = await httpClient.delete(
+    `user/delete-delivery-address/${id}`
+  );
+  return response.data;
+};
+
+export const updateUserDeliveryAddress = async (id, data) => {
+  const response = await httpClient.post(
+    `user/update-delivery-address/${id}`,
+    data
+  );
+  return response.data;
+};
+
 export const getUser = async () => {
   const response = await httpClient.get('users/get-user');
   return response.data;
