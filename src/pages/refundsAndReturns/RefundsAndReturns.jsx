@@ -17,14 +17,14 @@ function RefundsAndReturns() {
   // return <div>Refunds and Returns</div>;
   return (
     <PoliciesMainContent>
-      {/* <Breadcrumb routes={routes} />
+      <Breadcrumb routes={routes} />
       <PageTitle title="Refunds & Returns" />
       <MultiColorDivider />
       <MainSection>
         <SideBarNav title="Refunds and returns" />
         <MainContentArticle title="Fair refund and return policy" />
       </MainSection>
-      <HelpContactCard /> */}
+      <HelpContactCard />
     </PoliciesMainContent>
   );
 }
