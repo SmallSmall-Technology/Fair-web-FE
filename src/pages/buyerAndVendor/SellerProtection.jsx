@@ -3,7 +3,7 @@ import ContentCard from './ContentCard';
 
 function SellerProtection() {
   return (
-    <div className="w-[50%]">
+    <div className="">
       <ColoredCard
         title="Seller protection"
         subtitle="Selling guide"

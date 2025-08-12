@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function HelpContactCard() {
   return (
-    <div className="bg-[#F6F6F6] rounded-2xl md:py-12 md:px-28 max-w-2xl my-40 mx-auto text-center">
+    <div className="bg-[#F6F6F6] rounded-2xl md:py-12 md:px-28 p-10 max-w-2xl my-40 mx-auto text-center">
       <h2 className="text-xl font-semibold text-gray-900 mb-2">
         Need more help
       </h2>

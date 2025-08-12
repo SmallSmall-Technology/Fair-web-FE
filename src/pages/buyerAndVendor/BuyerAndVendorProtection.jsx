@@ -1,5 +1,6 @@
 import Breadcrumb from '../../ui/components/Breadcrumb';
 import HelpContactCard from '../../ui/components/HelpContactCard';
+import PoliciesMainContent from '../../ui/components/PoliciesMainContent';
 import BuyerProtection from './BuyerProtection';
 import PageTitle from './PageTitle';
 import SellerProtection from './SellerProtection';
@@ -12,15 +13,15 @@ const routes = [
 
 function BuyerAndVendorProtection() {
   return (
-    <div className="mx-[4em] my-[2em]">
-      <Breadcrumb routes={routes} />
+    <PoliciesMainContent>
+      {/* <Breadcrumb routes={routes} />
       <PageTitle title="Platform protection" />
-      <div className="flex">
+      <div className="grid md:grid-cols-2">
         <BuyerProtection />
         <SellerProtection />
       </div>
-      <HelpContactCard />
-    </div>
+      <HelpContactCard /> */}
+    </PoliciesMainContent>
   );
 }
 

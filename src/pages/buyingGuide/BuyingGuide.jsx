@@ -5,6 +5,7 @@ import MainSection from '../../ui/components/MainSection';
 import MultiColorDivider from '../../ui/components/MultiColorDivider';
 import SideBarNav from '../../ui/components/SideBarNav';
 import PageTitle from '../buyerAndVendor/PageTitle';
+import PoliciesMainContent from '../../ui/components/PoliciesMainContent';
 
 const routes = [
   { name: 'Fair', href: '/' },
@@ -15,16 +16,16 @@ const routes = [
 function BuyingGuide() {
   // return <div>Refunds and Returns</div>;
   return (
-    <div className="mx-[4em] my-[2em]">
-      <Breadcrumb routes={routes} />
+    <PoliciesMainContent>
+      {/* <Breadcrumb routes={routes} />
       <PageTitle title="Buying guide" />
       <MultiColorDivider />
       <MainSection>
         <SideBarNav title="Buying articles" />
         <MainContentArticle title="Lorem ipsum dolor sit amet" />
       </MainSection>
-      <HelpContactCard />
-    </div>
+      <HelpContactCard /> */}
+    </PoliciesMainContent>
   );
 }
 
