@@ -95,7 +95,7 @@ export default function ProfileSummary() {
 
   return (
     <div className="px-2 lg:px-6">
-      <h2 className="text-[23px] font-semibold mb-6">Profile</h2>
+      <h2 className="text-[23px] font-semibold mb-6 ">Profile</h2>
       <hr />
       <div className="grid gap-3 lg:flex justify-between items-start my-4">
         <div className="border border-gray-200 rounded p-4 lg:w-[30%] text-sm">
