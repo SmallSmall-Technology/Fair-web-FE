@@ -1,92 +1,77 @@
-import { useForm } from 'react-hook-form';
-import { states } from '../../userDashboard/accountProfile/contents/profileSummary/AddressModal';
-import {
-  setUser,
-  updateLatestDeliveryAddress,
-} from '../../../features/user/userSlice';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { useDispatch, useSelector } from 'react-redux';
-import httpClient from '../../../api/http-clients';
+import { useForm } from 'react-hook-form';
+import { updateUserDeliveryAddress } from '../../../api/user-api';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { states } from '../../userDashboard/accountProfile/contents/profileSummary/AddressModal';
+import { useEffect } from 'react';
 
-const CheckoutDeliveryAddressForm = ({
-  handleOpenCheckoutDeliveryAddressForm,
-}) => {
+const CheckoutDeliveryAddressForm = ({ currentDeliveryAddress, onClose }) => {
+  const deliveryAddress = currentDeliveryAddress;
+  const queryClient = useQueryClient();
+  console.log(deliveryAddress);
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    reset,
+    formState: { errors, isValid, isSubmitting },
   } = useForm({
-    defaultValues: { state: '', streetAddress: '' },
-  });
-
-  const { user } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
-
-  // Function to post address
-  const postAddress = async (address) => {
-    const { data } = await httpClient.post(
-      '/user/add-delivery-address',
-      address
-    );
-    return data;
-  };
-
-  // Mutation
-  const mutation = useMutation({
-    mutationFn: postAddress,
-    onSuccess: (response) => {
-      queryClient.invalidateQueries({ queryKey: ['user/addresses'] });
-
-      // Update Redux with latest address if returned
-      const updatedAddress =
-        response?.data?.user?.latest_address || response?.latest_address;
-
-      if (updatedAddress) {
-        dispatch(updateLatestDeliveryAddress(updatedAddress));
-      }
-      if (response?.data?.user) {
-        dispatch(setUser(response.data.user));
-      }
+    mode: 'onChange',
+    defaultValues: {
+      streetAddress: currentDeliveryAddress?.streetAddress || '',
+      state: currentDeliveryAddress?.state || '',
     },
   });
 
-  // Handle form submission
-  const onSubmit = async (formValues, event) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    try {
-      const payload = {
-        streetAddress: formValues.streetAddress.trim(),
-        state: formValues.state,
-      };
-
-      await mutation.mutateAsync(payload);
-
+  const mutation = useMutation({
+    mutationFn: ({ id, data }) => updateUserDeliveryAddress(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['useraddresses'] });
       toast.success('Address updated successfully', {
         className:
           'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
       });
-
-      handleOpenCheckoutDeliveryAddressForm();
-    } catch (error) {
+    },
+    onError: (error) => {
       toast.error(
-        error?.response?.data?.message ||
+        error.response?.data?.message ||
           error.message ||
           'Failed to update address',
         {
           autoClose: 3000,
-          className:
-            'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-          bodyClassName: 'm-0 p-0',
-          closeButton: false,
         }
       );
+    },
+  });
+
+  const onSubmit = async (data, event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const payload = {
+      streetAddress: data.streetAddress.trim(),
+      state: data.state,
+    };
+
+    if (deliveryAddress?.id) {
+      await mutation.mutateAsync({
+        id: deliveryAddress.id,
+        data: payload,
+      });
     }
+    onClose(false);
   };
+
+  useEffect(() => {
+    const currentValues = {
+      streetAddress: deliveryAddress?.streetAddress || '',
+      state: deliveryAddress?.state || '',
+    };
+    reset(currentValues, {
+      keepDirty: false,
+      keepTouched: false,
+    });
+  }, [deliveryAddress?.streetAddress, deliveryAddress?.state, reset]);
 
   return (
     <form action="submit" onSubmit={handleSubmit(onSubmit)}>

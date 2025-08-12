@@ -7,7 +7,7 @@ const initialState = {
     lastName: '',
     email: '',
     phoneNumber: '',
-    latest_address: null,
+    current_address: null,
     isTier2: null,
     userCategory: null,
     lastLogin: null,
@@ -28,7 +28,12 @@ const userSlice = createSlice({
       state.error = null;
     },
     updateLatestDeliveryAddress: (state, action) => {
-      state.user.latest_address = action.payload;
+      state.user.current_address = action.payload;
+      state.status = 'succeeded';
+      state.error = null;
+    },
+    addDeliveryAddress: (state, action) => {
+      state.user.delivery_address = action.payload;
       state.status = 'succeeded';
       state.error = null;
     },
@@ -44,15 +49,25 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, updateLatestDeliveryAddress, setError, clearUser } =
-  userSlice.actions;
+export const {
+  setUser,
+  updateLatestDeliveryAddress,
+  addDeliveryAddress,
+  setError,
+  clearUser,
+} = userSlice.actions;
 export default userSlice.reducer;
 
 export const selectLatestDeliveryAddress = (state) => {
   const user = state.user.user;
-  return user?.latest_address?.streetAddress && user?.latest_address?.state
-    ? `${user.latest_address.streetAddress}, ${user.latest_address.state}`
+  return user?.current_address?.streetAddress && user?.current_address?.state
+    ? `${user.current_address.streetAddress}, ${user.current_address.state}`
     : 'No delivery address';
+};
+
+export const selectCurrentAddress = (state) => {
+  const user = state.user.user;
+  return user?.current_address || null;
 };
 
 export const getUserFullName = (state) => {

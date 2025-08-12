@@ -7,7 +7,10 @@ import { CartFooter } from '../../cartItems/CartFooter.jsx';
 import { makePayment } from '../../../features/order/orderSlice.js';
 import { CheckoutPaymentSummary } from './CheckoutPaymentSummary.jsx';
 import { CheckoutDeliveryAddressButton } from '../../../utils/Button.jsx';
-import { selectLatestDeliveryAddress } from '../../../features/user/userSlice.js';
+import {
+  selectCurrentAddress,
+  selectLatestDeliveryAddress,
+} from '../../../features/user/userSlice.js';
 import { CheckoutPaymentMethod } from '../checkoutContents/CheckoutPaymentMethod.jsx';
 import CheckoutDeliveryAddressForm from '../checkoutAddress/CheckoutDeliveryAddressForm.jsx';
 import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
@@ -16,13 +19,18 @@ import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.js
 
 export const CheckoutItemsContentSection = () => {
   const deliveryAddress = useSelector(selectLatestDeliveryAddress);
+  const currentDeliveryAddress = useSelector(selectCurrentAddress);
+  // console.log(deliveryAddress);
+  // console.log(currentDeliveryAddress);
   const [showCheckoutDeliveryAddressForm, setShowCheckoutDeliveryAddressForm] =
     useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.cart);
   const cartPaymentPlan = cart.map((item) => item.paymentPlan);
-  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
+  const isConsolidatedCart = cartPaymentPlan.every(
+    (plan) => plan === 'monthly'
+  );
   const consolidatedPayments = consolidateCartPayments(cart);
 
   const handleOpenCheckoutDeliveryAddressForm = () => {
@@ -63,14 +71,18 @@ export const CheckoutItemsContentSection = () => {
             <h2 className="mt-7 mb-3 font-medium text-[21px] hidden lg:block">
               Delivery address
             </h2>
-            <p className="font-semibold text-base">{deliveryAddress}</p>
+            <p className="font-semibold text-base flex space-x-1 mb-6">
+              <span>{currentDeliveryAddress.streetAddress}</span>,
+              <span>{currentDeliveryAddress.state}</span>
+            </p>
             {
               <div>
-                <article className="mb-6">
+                {/* <article className="mb-6">
                   <p className="font-semibold text-[#96959F]">
-                    <deliveryAddress />
+                    <span>{currentDeliveryAddress.streetAddress}</span>
+                    <span>{currentDeliveryAddress.state}</span>
                   </p>
-                </article>
+                </article> */}
                 {!showCheckoutDeliveryAddressForm ? (
                   <CheckoutDeliveryAddressButton
                     onClick={handleOpenCheckoutDeliveryAddressForm}
@@ -82,6 +94,8 @@ export const CheckoutItemsContentSection = () => {
                     handleOpenCheckoutDeliveryAddressForm={
                       handleOpenCheckoutDeliveryAddressForm
                     }
+                    onClose={setShowCheckoutDeliveryAddressForm}
+                    currentDeliveryAddress={currentDeliveryAddress}
                   />
                 )}
               </div>
@@ -93,6 +107,8 @@ export const CheckoutItemsContentSection = () => {
               handleOpenCheckoutDeliveryAddressForm={
                 handleOpenCheckoutDeliveryAddressForm
               }
+              currentDeliveryAddress={currentDeliveryAddress}
+              onClose={setShowCheckoutDeliveryAddressForm}
             />
           </>
         )}
