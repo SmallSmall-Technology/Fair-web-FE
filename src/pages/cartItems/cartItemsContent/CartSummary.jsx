@@ -86,7 +86,9 @@ export const CartSummary = ({
                   <p className="text-[#828386]">Today</p>
                 </div>
                 <p className="font-calsans">
-                  {formatCurrency(consolidatedPayments.firstPayment)}
+                  {formatCurrency(
+                    consolidatedPayments.firstPayment + VAT + shippingFee
+                  )}
                 </p>
               </div>
 

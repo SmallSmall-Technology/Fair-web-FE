@@ -28,17 +28,11 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const subtTotal = totalCartPrice;
   const total = totalCartPrice + VAT + shippingFee;
 
-  // const cartItems = useSelector((state) => state.cart.cart);
-  // const InstallmentPayment = cartItems.find((item) =>
-  //   ['monthly', 'weekly', 'daily'].includes(
-  //     item.paymentPlan || item.selectedPaymentPlan
-  //   )
-  // );
-
   const cartPaymentPlan = cart.map(
     (item) => item.paymentPlan || item.selectedPaymentPlan
   );
   const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
+
   const consolidatedPayments = consolidateCartPayments(cart);
 
   // Function to handle proceeding to mandate creation

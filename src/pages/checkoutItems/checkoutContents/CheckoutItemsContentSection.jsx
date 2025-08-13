@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { startTransition } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckoutItem } from './CheckoutItem.jsx';
@@ -7,7 +7,10 @@ import { CartFooter } from '../../cartItems/CartFooter.jsx';
 import { makePayment } from '../../../features/order/orderSlice.js';
 import { CheckoutPaymentSummary } from './CheckoutPaymentSummary.jsx';
 import { CheckoutDeliveryAddressButton } from '../../../utils/Button.jsx';
-import { selectCurrentAddress } from '../../../features/user/userSlice.js';
+import {
+  selectCurrentAddress,
+  selectCurrentDeliveryAddress,
+} from '../../../features/user/userSlice.js';
 import { useQuery } from '@tanstack/react-query';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 import { fetchUserDeliveryAddresses } from '../../../api/user-api.js';
@@ -16,6 +19,7 @@ import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.js
 import { CheckoutPaymentMethod } from '../checkoutContents/CheckoutPaymentMethod.jsx';
 import EditCheckoutDeliveryAddressForm from '../checkoutAddress/EditCheckoutDeliveryAddressForm.jsx';
 import AddCheckoutDelieveryAddressForm from '../checkoutAddress/AddCheckoutDelieveryAddressForm.jsx';
+import { getCartSummary } from '../../../features/cart/cartSlice.js';
 
 export const CheckoutItemsContentSection = () => {
   const [formIsOpen, setFormIsOpen] = useState(false);
@@ -28,6 +32,11 @@ export const CheckoutItemsContentSection = () => {
   const cartPaymentPlan = cart.map((item) => item.paymentPlan);
   const isConsolidatedCart = cartPaymentPlan.every((plan) => plan !== 'full');
   const consolidatedPayments = consolidateCartPayments(cart);
+  const selectedDeliveryAddress = useSelector(selectCurrentDeliveryAddress);
+  const cartSummary = useSelector(getCartSummary);
+  const totalCartPrice = cartSummary.subtotal || 0;
+  const VAT = (7.5 / 100) * totalCartPrice;
+  const shippingFee = +1200;
 
   const handleSubmitPaymentMethod = (values) => {
     if (values) {
@@ -50,7 +59,10 @@ export const CheckoutItemsContentSection = () => {
   const addresses = data?.data?.data || [];
 
   // Always use the first address if available
-  const deliveryAddress = [addresses[0]?.streetAddress, addresses[0]?.state]
+  const deliveryAddress = [
+    selectedDeliveryAddress?.streetAddress,
+    selectedDeliveryAddress?.state,
+  ]
     .filter(Boolean)
     .join(' ');
 
@@ -81,7 +93,7 @@ export const CheckoutItemsContentSection = () => {
                 {deliveryAddress || 'No delivery address'}
               </p>
 
-              {currentDeliveryAddress ? (
+              {currentDeliveryAddress || deliveryAddress ? (
                 <CheckoutDeliveryAddressButton
                   onClick={() => setFormIsOpen(true)}
                 >
@@ -156,7 +168,9 @@ export const CheckoutItemsContentSection = () => {
                   <p className="text-[#828386]">Today</p>
                 </div>
                 <p className="font-calsans">
-                  {formatCurrency(consolidatedPayments.firstPayment)}
+                  {formatCurrency(
+                    consolidatedPayments.firstPayment + VAT + shippingFee
+                  )}
                 </p>
               </div>
 
