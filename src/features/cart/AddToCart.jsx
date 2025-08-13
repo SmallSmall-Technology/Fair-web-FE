@@ -12,7 +12,8 @@ export const handleAddToCart = (
   dispatch,
   product,
   paymentOptions,
-  selectedPaymentPlan
+  selectedPaymentPlan,
+  existing
 ) => {
   if (!product) return;
   const {
@@ -69,6 +70,15 @@ export const handleAddToCart = (
 
   // Dispatch the addToCart action
   dispatch(addToCart(newItem));
+  if (existing) {
+    toast.success('Item quantity updated in cart', {
+      className: 'bg-[#ffde11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+    });
+  } else {
+    toast.success('Item added to cart', {
+      className: 'bg-[#ffde11] text-black text-sm px-1 py-1 rounded-md min-h-0',
+    });
+  }
 };
 
 export const AddToCart = ({ product }) => {

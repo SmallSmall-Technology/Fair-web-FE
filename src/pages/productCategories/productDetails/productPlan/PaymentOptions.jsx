@@ -6,16 +6,30 @@ import { WeeklyPayment } from './WeeklyPaymentPlan/WeeklyPayment';
 import { formatCurrency } from '../../../../utils/FormatCurrency';
 import { handleAddToCart } from '../../../../features/cart/AddToCart';
 import { MonthlyPayment } from './MonthlyPaymentPlan/MonthlyPayment.jsx';
+import {
+  UpdateItemQuantity,
+  UpdateItemQuantityInSingleProductPage,
+} from '../../../../features/cart/UpdateItemQuantity';
+
 import React, { useEffect, useRef, useState, startTransition } from 'react';
 import {
+  getExistingCartItemById,
   getSelectedPaymentPlan,
   setSelectedPaymentPlan,
 } from '../../../../features/cart/cartSlice';
 import { usePaymentOptions } from '../../../../hooks/usePaymentOptions';
 
 export const PaymentOptions = React.memo(({ product }) => {
+  const existing = useSelector(getExistingCartItemById(product?.productID));
+
   const handleClick = () => {
-    handleAddToCart(dispatch, product, paymentOptions);
+    handleAddToCart(
+      dispatch,
+      product,
+      paymentOptions,
+      selectedPaymentPlan,
+      existing
+    );
   };
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -161,16 +175,32 @@ export const PaymentOptions = React.memo(({ product }) => {
         {selectedPaymentPlan && (
           <div className="lg:mx-0 lg:w-[80%] mt-4 mx-5">
             <YellowButton
-              onClick={() =>
-                handleAddToCart(
-                  dispatch,
-                  product,
-                  paymentOptions,
-                  selectedPaymentPlan
-                )
+              onClick={
+                !existing
+                  ? () =>
+                      handleAddToCart(
+                        dispatch,
+                        product,
+                        paymentOptions,
+                        selectedPaymentPlan,
+                        existing
+                      )
+                  : undefined
               }
             >
-              Add to cart
+              {!existing && 'Add to cart'}
+              {existing && (
+                <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
+                  <UpdateItemQuantityInSingleProductPage
+                    productID={product?.productID}
+                    currentQuantity={existing?.quantity || 0}
+                  />
+                  <p>
+                    ({existing?.quantity || 0} item
+                    {existing?.quantity > 1 && 's'} added)
+                  </p>
+                </div>
+              )}
             </YellowButton>
           </div>
         )}

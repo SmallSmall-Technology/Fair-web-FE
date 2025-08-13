@@ -5,10 +5,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { states } from '../../userDashboard/accountProfile/contents/profileSummary/AddressModal';
 import { useEffect } from 'react';
 
-const CheckoutDeliveryAddressForm = ({ currentDeliveryAddress, onClose }) => {
+const EditCheckoutDeliveryAddressForm = ({
+  currentDeliveryAddress,
+  onClose,
+}) => {
   const deliveryAddress = currentDeliveryAddress;
   const queryClient = useQueryClient();
-  console.log(deliveryAddress);
 
   const {
     register,
@@ -25,23 +27,53 @@ const CheckoutDeliveryAddressForm = ({ currentDeliveryAddress, onClose }) => {
 
   const mutation = useMutation({
     mutationFn: ({ id, data }) => updateUserDeliveryAddress(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['useraddresses'] });
+    onMutate: async ({ id, data }) => {
+      // Cancel ongoing queries to prevent overwriting
+      await queryClient.cancelQueries({ queryKey: ['useraddresses'] });
+
+      // Snapshot previous addresses
+      const previousAddresses = queryClient.getQueryData(['useraddresses']);
+
+      // Optimistically update the cache
+      queryClient.setQueryData(['useraddresses'], (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          data: {
+            ...old.data,
+            data: old.data.data.map((addr) =>
+              addr.id === id ? { ...addr, ...data } : addr
+            ),
+          },
+        };
+      });
+
+      return { previousAddresses };
+    },
+    onError: (error, _variables, context) => {
+      // Rollback to old cache on error
+      if (context?.previousAddresses) {
+        queryClient.setQueryData(['useraddresses'], context.previousAddresses);
+      }
+      toast.error(
+        error.response?.data?.message ||
+          error.message ||
+          'Failed to update address',
+        { autoClose: 3000 }
+      );
+    },
+    onSuccess: async () => {
       toast.success('Address updated successfully', {
         className:
           'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
         bodyClassName: 'm-0 p-0',
       });
-    },
-    onError: (error) => {
-      toast.error(
-        error.response?.data?.message ||
-          error.message ||
-          'Failed to update address',
-        {
-          autoClose: 3000,
-        }
-      );
+
+      // Ensure fresh data from backend
+      await queryClient.invalidateQueries({ queryKey: ['useraddresses'] });
+      await queryClient.refetchQueries({ queryKey: ['useraddresses'] });
+
+      onClose(false);
     },
   });
 
@@ -55,11 +87,10 @@ const CheckoutDeliveryAddressForm = ({ currentDeliveryAddress, onClose }) => {
 
     if (deliveryAddress?.id) {
       await mutation.mutateAsync({
-        id: deliveryAddress.id,
+        id: deliveryAddress?.id,
         data: payload,
       });
     }
-    onClose(false);
   };
 
   useEffect(() => {
@@ -67,10 +98,7 @@ const CheckoutDeliveryAddressForm = ({ currentDeliveryAddress, onClose }) => {
       streetAddress: deliveryAddress?.streetAddress || '',
       state: deliveryAddress?.state || '',
     };
-    reset(currentValues, {
-      keepDirty: false,
-      keepTouched: false,
-    });
+    reset(currentValues, { keepDirty: false, keepTouched: false });
   }, [deliveryAddress?.streetAddress, deliveryAddress?.state, reset]);
 
   return (
@@ -137,4 +165,4 @@ const CheckoutDeliveryAddressForm = ({ currentDeliveryAddress, onClose }) => {
   );
 };
 
-export default CheckoutDeliveryAddressForm;
+export default EditCheckoutDeliveryAddressForm;
