@@ -13,6 +13,7 @@ const initialState = {
     lastLogin: null,
     createdAt: null,
     updatedAt: null,
+    delivery_address: null,
   },
   status: 'idle',
   error: null,
@@ -37,6 +38,11 @@ const userSlice = createSlice({
       state.status = 'succeeded';
       state.error = null;
     },
+    setSelectedDeliveryAddress: (state, action) => {
+      state.user.delivery_address = action.payload;
+      state.status = 'succeeded';
+      state.error = null;
+    },
     setError: (state, action) => {
       state.status = 'failed';
       state.error = action.payload;
@@ -55,12 +61,18 @@ export const {
   addDeliveryAddress,
   setError,
   clearUser,
+  setSelectedDeliveryAddress,
 } = userSlice.actions;
 export default userSlice.reducer;
 
 export const selectLatestDeliveryAddress = (state) => {
   const user = state.user.user;
   return user?.current_address?.streetAddress && user?.current_address?.state;
+};
+
+export const selectCurrentDeliveryAddress = (state) => {
+  const user = state.user.user;
+  return user?.delivery_address || null;
 };
 
 export const selectCurrentAddress = (state) => {
