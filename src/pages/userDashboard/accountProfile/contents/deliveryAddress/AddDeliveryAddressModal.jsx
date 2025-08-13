@@ -1,20 +1,15 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
-import { uploadUserDeliveryAddress } from '../../../../../api/user-api';
-import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { uploadUserDeliveryAddress } from '../../../../../api/user-api';
 
 const states = ['Lagos state'];
 
-export const AddDeliveryAddressModal = ({
-  onClose,
-  selectedAddress,
-  defaultSelectedAddress,
-}) => {
+export const AddDeliveryAddressModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
 
-  //   console.log('selected Address', selectedAddress);
   const {
     register,
     handleSubmit,
@@ -106,23 +101,6 @@ export const AddDeliveryAddressModal = ({
           >
             ×
           </button>
-
-          <h2 id="address-modal-title" className="font-medium text-sm mb-2">
-            Current delivery address
-          </h2>
-
-          <p>
-            {selectedAddress?.state}{' '}
-            <span>{selectedAddress?.streetAddress}</span>
-          </p>
-          {!defaultSelectedAddress?.state ? (
-            <p className="text-sm">No Current address</p>
-          ) : (
-            <p className="text-sm flex space-x-1">
-              <span>{defaultSelectedAddress.streetAddress},</span>
-              <span>{defaultSelectedAddress.state} </span>
-            </p>
-          )}
 
           <h2
             id="address-modal-title"

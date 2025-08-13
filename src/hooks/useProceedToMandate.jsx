@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { consolidateCartPayments } from '../utils/ConsolidateCartPayment';
 import { setMandateData } from '../features/mono/mandateSlice';
+import { selectCurrentDeliveryAddress } from '../features/user/userSlice';
 
 export const useProceedToMandate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alreadyNavigatedRef = useRef(false);
+  const selectedDeliveryAddress = useSelector(selectCurrentDeliveryAddress);
 
   const cart = useSelector((state) => state.cart.cart);
 
@@ -29,7 +31,8 @@ export const useProceedToMandate = () => {
     alreadyNavigatedRef.current = true;
 
     const payload = {
-      first_installment_payment: consolidatedPayments.firstPayment,
+      first_installment_payment:
+        consolidatedPayments.firstPayment + VAT + shippingFee,
       first_debit_date: new Date().toISOString().split('T')[0],
       last_installment_payment:
         consolidatedPayments.otherPayments.at(-1)?.amount,
@@ -42,8 +45,11 @@ export const useProceedToMandate = () => {
       frequency: cartPaymentPlan[0],
       paymentPlan: cartPaymentPlan[0],
       description: '',
-      deliveryFullAddress: '123 Victoria Island, Lagos, Nigeria',
-      deliveryState: 'Lagos',
+      deliveryFullAddress:
+        selectedDeliveryAddress?.streetAddress +
+        ', ' +
+        selectedDeliveryAddress?.state,
+      deliveryState: selectedDeliveryAddress?.state,
       bankCode: '',
       accountNumber: '',
       products: cart.map((item) => ({
@@ -51,7 +57,6 @@ export const useProceedToMandate = () => {
         quantity: item.quantity,
       })),
     };
-
     dispatch(setMandateData(payload));
     navigate('/cart-items/checkout/mandate/create', {
       state: payload,
