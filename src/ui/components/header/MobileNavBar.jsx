@@ -33,7 +33,7 @@ export const MobileNavBar = () => {
 
     // Delay navigation slightly to allow state cleanup
     setTimeout(() => {
-      navigate('/', { replace: true });
+      navigate('/login', { replace: true });
     }, 0);
 
     toast.success('Logged Out Successfully', {

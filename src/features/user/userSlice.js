@@ -60,9 +60,7 @@ export default userSlice.reducer;
 
 export const selectLatestDeliveryAddress = (state) => {
   const user = state.user.user;
-  return user?.current_address?.streetAddress && user?.current_address?.state
-    ? `${user.current_address.streetAddress}, ${user.current_address.state}`
-    : 'No delivery address';
+  return user?.current_address?.streetAddress && user?.current_address?.state;
 };
 
 export const selectCurrentAddress = (state) => {
