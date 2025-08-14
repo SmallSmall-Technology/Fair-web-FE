@@ -6,6 +6,7 @@ import MultiColorDivider from '../../ui/components/MultiColorDivider';
 import SideBarNav from '../../ui/components/SideBarNav';
 import PageTitle from '../buyerAndVendor/PageTitle';
 import PoliciesMainContent from '../../ui/components/PoliciesMainContent';
+import TopArticleCards from '../../ui/components/TopArticleCards';
 
 const routes = [
   { name: 'Fair', href: '/' },
@@ -19,6 +20,7 @@ function BuyingGuide() {
     <PoliciesMainContent>
       <Breadcrumb routes={routes} />
       <PageTitle title="Buying guide" />
+      <TopArticleCards title="Buying guide" />
       <MultiColorDivider />
       <MainSection>
         <SideBarNav title="Buying articles" />
