@@ -38,6 +38,8 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   // Function to handle proceeding to mandate creation
   const handleProceedToMandate = useProceedToMandate();
 
+  const debtProfileVerified = false;
+
   return (
     <>
       <div className="rounded-[10px] lg:bg-[#F2F2F2] lg:py-6 px-8 h-fit">
@@ -128,7 +130,10 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
                   Pay now
                 </YellowButton>
               ) : (
-                <YellowButton onClick={handleProceedToMandate}>
+                <YellowButton
+                  onClick={handleProceedToMandate}
+                  disabled={!debtProfileVerified}
+                >
                   Set up direct debit
                 </YellowButton>
               )}
