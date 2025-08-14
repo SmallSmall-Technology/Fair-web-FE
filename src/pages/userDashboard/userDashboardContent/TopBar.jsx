@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 const TopBar = () => {
   return (
-    <ul className="hidden lg:flex space-x-3 border-b-2 w-full pb-3">
+    <ul className="hidden lg:flex space-x-10 border-b-2 w-full pb-3">
       <li>
         <NavLink
           to="/user-dashboard/shopping-overview/summary"

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 export const AccountProfileSideBar = () => {
   return (
     <ul className=" lg:hidden xl:block flex items-center lg:items-start pt-2  mb-4 border-b-2 w-full pb-4 lg:border-none lg:pb-0 overflow-x-auto lg:overflow-x-clip lg:flex-col lg:space-y-4 lg:space-x-0">
-      <li className="">
+      <li className="min-w-fit">
         <NavLink
           to="/user-dashboard/account-profile/profile-summary"
           className={({ isActive }) =>
@@ -15,7 +15,7 @@ export const AccountProfileSideBar = () => {
           Profile Summary
         </NavLink>
       </li>
-      <li>
+      <li className="min-w-fit">
         <NavLink
           to="/user-dashboard/account-profile/account-verification"
           className={({ isActive }) =>
@@ -39,7 +39,7 @@ export const AccountProfileSideBar = () => {
           Delivery Address
         </NavLink>
       </li>
-      <li>
+      <li className="min-w-fit">
         <NavLink
           to="/user-dashboard/account-profile/feedback"
           className={({ isActive }) =>
@@ -51,7 +51,7 @@ export const AccountProfileSideBar = () => {
           Feedback
         </NavLink>
       </li>{' '}
-      <li>
+      <li className="min-w-fit">
         <NavLink
           to="/user-dashboard/account-profile/resolution-centre"
           className={({ isActive }) =>
