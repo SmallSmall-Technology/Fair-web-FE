@@ -30,7 +30,12 @@ export const MobileNavBar = () => {
 
   const handleLogOutUser = () => {
     dispatch(logout());
-    // navigate('/login');
+
+    // Delay navigation slightly to allow state cleanup
+    setTimeout(() => {
+      navigate('/login', { replace: true });
+    }, 0);
+
     toast.success('Logged Out Successfully', {
       className:
         'bg-[var(--yellow-primary)] text-black text-sm rounded-md min-h-0',

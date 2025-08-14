@@ -1,7 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
-import httpClient from '../../api/http-clients';
 import { v4 as uuidv4 } from 'uuid';
+import httpClient from '../../api/http-clients';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 /* -------------------- Utility -------------------- */
 export const getCartSessionId = () => {
@@ -373,7 +372,6 @@ const cartSlice = createSlice({
                 product.productPrice
             ) * (product.quantity || 1),
         });
-        // toast.success('Item added to cart');
       }
 
       // Update summary
@@ -519,10 +517,16 @@ export const {
 export const getCart = (state) => state.cart.cart;
 export const getCartSummary = (state) => state.cart.cart_summary;
 
+// export const getTotalCartQuantity = (state) => {
+//   const cart = Array.isArray(state.cart.cart) ? state.cart.cart : [];
+//   return cart.length;
+// };
+
 export const getTotalCartQuantity = (state) => {
   const cart = Array.isArray(state.cart.cart) ? state.cart.cart : [];
-  return cart.length;
+  return cart.reduce((total, item) => total + (item.quantity || 0), 0);
 };
+
 export const getTotalCartPrice = (state) =>
   state.cart.cart.reduce((sum, item) => sum + (item.totalPrice || 0), 0);
 
