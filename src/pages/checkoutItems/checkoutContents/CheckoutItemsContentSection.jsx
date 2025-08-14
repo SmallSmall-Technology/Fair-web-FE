@@ -126,7 +126,7 @@ export const CheckoutItemsContentSection = () => {
         )}
 
         {/* Desktop payment section */}
-        <section className="mt-8 hidden lg:block px-8">
+        <section className="mt-8 hidden lg:block px-">
           <div className="grid font-medium mb-4">
             <h2 className="text-[21px]">Payment method</h2>
             <p className="text-[#96959F]">All transactions are secured</p>

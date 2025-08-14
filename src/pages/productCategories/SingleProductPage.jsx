@@ -27,7 +27,7 @@ const SingleProductPage = () => {
   return (
     <>
       <main className="px-6 lg:px-10 mb-5 lg:block w-full">
-        <div className="" ref={targetRef}>
+        <div className="overflow-x-auto" ref={targetRef}>
           <ProductCategoriesShortcut />
         </div>
         <div className="flex md:hidden overflow-x-auto scrollbar-hide"></div>
