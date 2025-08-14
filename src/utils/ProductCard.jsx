@@ -41,6 +41,7 @@ const ProductCard = ({ product, isLoading }) => {
 
   const {
     productID,
+    stockStatus,
     productName,
     coverImage,
     fairAppPrice,
@@ -134,7 +135,9 @@ const ProductCard = ({ product, isLoading }) => {
           </div>
         </div>
       </TransitionLink>
-      <div className="grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2">
+      <div
+        className={`${stockStatus === 'outOfStock' ? 'opacity-50' : ''} grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2`}
+      >
         <TransitionLink
           to={`/${category}/${sub_category}/${productID}/${slug}`}
           className="hover:underline focus:underline focus:outline-none"
@@ -168,20 +171,29 @@ const ProductCard = ({ product, isLoading }) => {
         </div>
         <div className="flex items-center justify-between lg:flex-col lg:items-start lg:space-y-3">
           <div className="lg:w-[90%] flex justify-between items-center space-x-1">
-            <AddToCart product={product} />
-            <div className="flex gap-1">
-              <AddFavourite product={product} />
-              <Button
-                className="rounded-full bg-white p-2 shadow-lg border border-gray-200 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleShareProduct();
-                }}
-              >
-                <span className="sr-only">Share this product</span>
-                <Share2 className="text-black" size="15px" />
-              </Button>
-            </div>
+            {stockStatus === 'inStock' ? (
+              <>
+                <AddToCart product={product} />
+
+                <div className="flex gap-1">
+                  <AddFavourite product={product} />
+                  <Button
+                    className="rounded-full bg-white p-2 shadow-lg border border-gray-200 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleShareProduct();
+                    }}
+                  >
+                    <span className="sr-only">Share this product</span>
+                    <Share2 className="text-black" size="15px" />
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <p className=" text-red-500 font-inter font-semibold text-xl">
+                Out of stock
+              </p>
+            )}
           </div>
         </div>
       </div>

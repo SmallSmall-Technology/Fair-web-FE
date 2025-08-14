@@ -1,5 +1,4 @@
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { uploadUserDeliveryAddress } from '../../../../../api/user-api';
@@ -7,7 +6,6 @@ import { uploadUserDeliveryAddress } from '../../../../../api/user-api';
 const states = ['Lagos state'];
 
 export const AddDeliveryAddressModal = ({ onClose }) => {
-  const dispatch = useDispatch();
   const queryClient = useQueryClient();
 
   const {
@@ -55,11 +53,18 @@ export const AddDeliveryAddressModal = ({ onClose }) => {
       queryClient.invalidateQueries({ queryKey: ['useraddresses'] });
     },
     onSuccess: () => {
-      toast.success('Delivery Address added successfully', {
-        className:
-          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-        bodyClassName: 'm-0 p-0',
-      });
+      toast.success(
+        <span className="font-semibold text-base font-outfit">
+          Delivery address added successfully
+        </span>,
+        {
+          icon: false,
+          type: 'success',
+          className: 'toast-yellow',
+          bodyClassName: 'm-0 p-0',
+          closeButton: false,
+        }
+      );
       reset();
       onClose();
     },

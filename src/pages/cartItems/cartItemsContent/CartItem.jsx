@@ -11,15 +11,16 @@ import { SaveItemForLater } from '../../../features/cart/SaveItemForLater';
 import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 
 export const CartItem = ({ item, onTogglePlan, isLoading }) => {
+  console.log(item);
   if (isLoading) {
     return <CartItemSkeleton />;
   }
 
   const displayedPrice = getDisplayedPrice({
-    paymentPlan: item.paymentPlan || item.selectedPaymentPlan,
-    paymentOptionsBreakdown: item.paymentOptionsBreakdown,
-    fairAppPrice: item.fairAppPrice,
-    quantity: item.quantity,
+    paymentPlan: item?.paymentPlan || item?.selectedPaymentPlan,
+    paymentOptionsBreakdown: item?.paymentOptionsBreakdown,
+    fairAppPrice: item?.fairAppPrice || item?.price,
+    quantity: item?.quantity,
   });
 
   return (
