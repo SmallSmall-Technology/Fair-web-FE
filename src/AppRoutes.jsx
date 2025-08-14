@@ -7,7 +7,7 @@ import Login from './pages/login/Login';
 import ProtectedRoute from './ProtectedRoute';
 import UserDashboardLayout from './ui/components/layout/UserDashboardLayout';
 import VerificationSent from './pages/cartItems/cartItemsContent/VerificationSent';
-import PageNotFound from './pages/pageNotFound/PageNotFound';
+// import PageNotFound from './pages/pageNotFound/PageNotFound';
 
 import {
   RealEstateHome,
@@ -22,6 +22,7 @@ import {
   UserDashboard,
   ShoppingOverview,
   CreditWallet,
+  PageNotFound,
   DirectDebit,
   Favorites,
   RecentlyViewed,
