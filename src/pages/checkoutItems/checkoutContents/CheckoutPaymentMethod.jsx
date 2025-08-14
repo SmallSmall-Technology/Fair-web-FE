@@ -39,6 +39,9 @@ export const CheckoutPaymentMethod = () => {
     resolver: zodResolver(paymentOptionSchema),
   });
 
+  // const debtProfileVerified = useSelector((state) => state.user.debtProfileVerified);
+  const debtProfileVerified = false;
+
   const onSubmit = async (values) => {
     if (cartItems.length === 0) {
       toast.error('Your cart is empty!');
@@ -233,7 +236,11 @@ export const CheckoutPaymentMethod = () => {
 
         {!InstallmentPayment && (
           <div className="hidden lg:block">
-            <YellowButton type="submit" disabled={isSubmitting}>
+            <YellowButton
+              type="submit"
+              // disabled={isSubmitting}
+              disabled={debtProfileVerified && isSubmitting}
+            >
               {isSubmitting ? 'Processing...' : 'Pay now'}
             </YellowButton>
           </div>
@@ -246,14 +253,31 @@ export const CheckoutPaymentMethod = () => {
           </Link>
 
           <div className="hidden lg:block ">
-            <Link
+            <div>
+              <p>
+                Please note as a new user you will be verified before buying an
+                item
+              </p>
+              <Link
+                to="/user-dashboard/account-profile/account-verification"
+                className="text-xs rounded-[2px] bg-[var(--yellow-primary)] py-1 px-2"
+              >
+                Verify now
+              </Link>
+            </div>
+
+            <button
               to="mandate/create"
-              disabled={isSubmitting}
+              disabled={!debtProfileVerified && isSubmitting}
               onClick={handleProceedToMandate}
-              className="bg-(var-yellow-primary) group relative font-semibold text-base flex items-center justify-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 hover:bg-gray-50 hover:border-bg-[var(--yellow-primary)]  hover:text-black"
+              className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
+                !debtProfileVerified
+                  ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
+                  : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
+              }`}
             >
               Set up direct debit
-            </Link>
+            </button>
           </div>
         </section>
       )}

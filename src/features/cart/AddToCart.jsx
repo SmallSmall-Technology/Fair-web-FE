@@ -75,9 +75,30 @@ export const handleAddToCart = (
       className: 'bg-[#ffde11] text-black text-sm px-1 py-1 rounded-md min-h-0',
     });
   } else {
-    toast.success('Item added to cart', {
-      className: 'bg-[#ffde11] text-black text-sm px-1 py-1 rounded-md min-h-0',
-    });
+    toast.success(
+      <div className="flex items-center space-x-2 justify-between h-[42px]">
+        <div className="flex space-x-1 items-center">
+          <span className="font-light text-base">Item added to cart</span>
+          <img src="/images/blackcheckcircle.svg" alt="icon" />
+        </div>
+        {/* <div className="flex items-center space-x-2">
+          <span className="text-black">|</span>
+          <button
+            onClick={() => navigate('/cart-items')}
+            className="underline text-base font-medium"
+          >
+            View cart
+          </button>
+        </div> */}
+      </div>,
+      {
+        icon: false,
+        type: 'success',
+        className: 'toast-yellow',
+        bodyClassName: 'm-0 p-0',
+        closeButton: false,
+      }
+    );
   }
 };
 
