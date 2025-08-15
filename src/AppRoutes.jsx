@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './ui/components/layout/Layout';
 import Home from './pages/home/Home';
 import SignUp from './pages/signUp/SignUp';
@@ -261,6 +261,7 @@ const AppRoutes = () => {
                 </Suspense>
               }
             >
+              <Route index element={<Navigate to="summary" replace />} />
               <Route path="summary" element={<Summary />} />
               <Route path="purchases" element={<Purchases />} />
               <Route
@@ -315,6 +316,10 @@ const AppRoutes = () => {
                 </Suspense>
               }
             >
+              <Route
+                index
+                element={<Navigate to="profile-summary" replace />}
+              />
               <Route path="profile-summary" element={<ProfileSummary />} />
               <Route
                 path="account-verification"
