@@ -2,10 +2,11 @@ import { NavLink } from 'react-router-dom';
 
 const TopBar = () => {
   return (
-    <ul className="hidden lg:flex space-x-3 border-b-2 w-full pb-3">
+    <ul className="hidden lg:flex space-x-10 border-b-2 w-full pb-3">
       <li>
         <NavLink
-          to="/user-dashboard/shopping-overview/summary"
+          to="/user-dashboard/shopping-overview"
+          end={false}
           className={({ isActive }) =>
             isActive
               ? 'text-[#222224] border-b-2 border-black pb-[14px]'
@@ -29,7 +30,8 @@ const TopBar = () => {
       </li>{' '}
       <li>
         <NavLink
-          to="/user-dashboard/account-profile/profile-summary"
+          to="/user-dashboard/account-profile"
+          end={false}
           className={({ isActive }) =>
             isActive
               ? 'text-[#222224] border-b-2 border-black pb-[14px]'

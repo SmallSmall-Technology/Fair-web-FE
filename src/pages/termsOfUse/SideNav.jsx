@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 function SideNav() {
   return (
-    <div className="mr-4 w-[25%]">
+    <div className="md:col-span-1">
       <div className="py-3 border-b-[1px] ">
         <h2>Browse policies</h2>
       </div>

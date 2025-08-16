@@ -3,7 +3,7 @@ import SideNav from './SideNav';
 
 function Main() {
   return (
-    <section className="flex flex-row">
+    <section className="grid md:grid-cols-4 gap-9">
       <SideNav />
       <MainContent />
     </section>
