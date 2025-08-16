@@ -55,7 +55,11 @@ const DeliveryAddress = () => {
         <div>
           {isLoading && <div className="skeleton md:w-[345px] h-[95px]"></div>}
 
-          {isError && <p className="text-red-500">Failed to load addresses</p>}
+          {isError && (
+            <p className="flex items-center justify-center">
+              Failed to load addresses
+            </p>
+          )}
 
           {!isLoading && !isError && (
             <>
