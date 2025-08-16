@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-import ShoppingOverviewSideBar from './ShoppingOverviewSideBar';
 import { UserDashboardSideBar } from '../../accountProfile/UserDashboardSideBar';
 import { CreditScoreCard } from './CreditScoreCard';
 
