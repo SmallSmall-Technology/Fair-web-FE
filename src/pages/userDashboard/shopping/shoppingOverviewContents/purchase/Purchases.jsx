@@ -52,10 +52,10 @@ const Purchases = () => {
   };
 
   return (
-    <div className="lg:mx-[30p] xl:mx-[60p] py-8 md:py-0">
+    <div className="lg:mx-[30p] xl:mx-[60p] py-8 md:py-0 font-inter">
       <section>
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="font-semibold text-2xl mb-4">Purchases</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="font-semibold text-2xl mb-4 font-outfit">Purchases</h1>
           <div className="flex lg:hidden">
             <form
               onSubmit={handleSubmitMobile((data) =>
@@ -91,7 +91,7 @@ const Purchases = () => {
         </div>
 
         {allOrders?.length < 1 ? (
-          <p className="w-full py-20 rounded-md bg-[#F6F6F6] text-center text-gray-500">
+          <p className="flex justify-center items-center font-medium bg-[#F6F6F6]  rounded-[10px] h-[141px]">
             No orders were found
           </p>
         ) : (
