@@ -20,6 +20,8 @@ export const VerificationAccountCardData = [
     title: 'Residential address verification',
     description: 'Please enter your residential address for verification',
     value: 'Please verify your home address',
+    errorMessage:
+      " We're sorry, but we couldn't verify your address at this time. Please ensure you've provided a verifiable means of identification and try again. If the issue persists, contact our support team for assistance via chat, email or call. support@smallsmall.com, 08056570080",
   },
   {
     id: 3,

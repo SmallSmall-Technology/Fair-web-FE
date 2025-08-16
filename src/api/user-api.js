@@ -35,6 +35,21 @@ export const getUser = async () => {
   return response.data;
 };
 
+export const verifyAccountByID = async (data) => {
+  const response = await httpClient.post('user/verify-id', data);
+  return response.data;
+};
+
+export const verifyAccountByAddress = async (data) => {
+  const response = await httpClient.patch('user/update-user-profile', data);
+  return response.data;
+};
+
+export const verifyDebtProfile = async (data) => {
+  const response = await httpClient.post('user/verify-debt', data);
+  return response.data;
+};
+
 // export const getUser = async () => {
 //   const token = localStorage.getItem('authToken');
 //   const response = await httpClient.get('users/get-user', {
