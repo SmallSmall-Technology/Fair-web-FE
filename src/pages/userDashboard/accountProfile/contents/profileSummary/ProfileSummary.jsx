@@ -1,21 +1,18 @@
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { YellowButton } from '../../../../../utils/Button';
-import { getUser, updateUser } from '../../../../../api/user-api';
-import { toast } from 'react-toastify';
-import { AddressModal } from './AddressModal';
+import { getUser } from '../../../../../api/user-api';
+import { useQuery } from '@tanstack/react-query';
+
 import {
   setUser,
-  selectLatestDeliveryAddress,
+  selectCurrentDeliveryAddress,
 } from '../../../../../features/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function ProfileSummary() {
-  const queryClient = useQueryClient();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
-  const latestDeliveryAddress = useSelector(selectLatestDeliveryAddress);
+  // const { userData } = useSelector((state) => state.user);
+  const selectedDeliveryAddress = useSelector(selectCurrentDeliveryAddress);
 
   const { data, error, refetch } = useQuery({
     queryKey: ['users', localStorage.getItem('authToken')],
@@ -32,18 +29,19 @@ export default function ProfileSummary() {
       }
     },
   });
+  const user = data?.data;
 
-  const { register, handleSubmit, reset } = useForm({
+  const { register, reset } = useForm({
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      email: user?.email,
+      phoneNumber: user?.phoneNumber,
     },
   });
 
   const [isVerified] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -56,45 +54,44 @@ export default function ProfileSummary() {
     }
   }, [user, reset]);
 
-  const mutation = useMutation({
-    mutationFn: updateUser,
-    onSuccess: (response) => {
-      queryClient.invalidateQueries({ queryKey: ['users'] });
-      refetch();
-      dispatch(setUser(response.data?.user || response.data));
-      toast.success('Profile updated successfully', {
-        autoClose: 3000,
-        className:
-          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-        bodyClassName: 'm-0 p-0',
-        closeButton: false,
-      });
-    },
-    onError: (err) => {
-      toast.error(`Failed to update profile: ${err.message}`, {
-        autoClose: 3000,
-        className:
-          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-        bodyClassName: 'm-0 p-0',
-        closeButton: false,
-      });
-    },
-  });
+  // const mutation = useMutation({
+  //   mutationFn: updateUser,
+  //   onSuccess: (response) => {
+  //     queryClient.invalidateQueries({ queryKey: ['users'] });
+  //     refetch();
+  //     dispatch(setUser(response.data?.user || response.data));
+  //     toast.success('Profile updated successfully', {
+  //       autoClose: 3000,
+  //       className:
+  //         'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+  //       bodyClassName: 'm-0 p-0',
+  //       closeButton: false,
+  //     });
+  //   },
+  //   onError: (err) => {
+  //     toast.error(`Failed to update profile: ${err.message}`, {
+  //       autoClose: 3000,
+  //       className:
+  //         'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+  //       bodyClassName: 'm-0 p-0',
+  //       closeButton: false,
+  //     });
+  //   },
+  // });
 
-  const onSubmit = (formData) => {
-    const payload = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      phoneNumber: formData.phoneNumber,
-    };
-    mutation.mutate(payload);
-  };
+  // const onSubmit = (formData) => {
+  //   const payload = {
+  //     firstName: formData.firstName,
+  //     lastName: formData.lastName,
+  //     phoneNumber: formData.phoneNumber,
+  //   };
+  //   mutation.mutate(payload);
+  // };
 
   // if (isLoading) return <div>Loading profile...</div>;
-  if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="px-2 lg:px-6">
+    <div className="px-2 lg:px-6 font-inter">
       <h2 className="text-[23px] font-semibold mb-6 ">Profile</h2>
       <hr />
       <div className="grid gap-3 lg:flex justify-between items-start my-4">
@@ -139,7 +136,7 @@ export default function ProfileSummary() {
         </div>
       </div>
       <hr className="my-2 w-[90%]" />
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 lg:w-[90%]">
+      <form className="space-y-6 lg:w-[90%]">
         <div className="grid lg:grid-cols-[40%_1fr] gap-4 my-4 items-center">
           <p className="font-semibold text-sm">First name & Last name</p>
           <div className="flex justify-between w-full space-x-1 lg:space-x-3">
@@ -147,18 +144,20 @@ export default function ProfileSummary() {
               <input
                 type="text"
                 id="firstName"
+                disabled
                 placeholder="First name"
                 {...register('firstName')}
-                className="border p-2 rounded w-full font-medium"
+                className="border p-2 rounded w-full text-gray-400 font-medium"
               />
             </label>
             <label htmlFor="lastName" className="lg:w-1/2">
               <input
                 id="lastName"
+                disabled
                 type="text"
                 placeholder="Last name"
                 {...register('lastName')}
-                className="border p-2 rounded w-full font-medium"
+                className="border p-2 rounded w-full text-gray-400 font-medium"
               />
             </label>
           </div>
@@ -170,12 +169,12 @@ export default function ProfileSummary() {
             <p className="font-semibold text-sm">Email</p>
             <label htmlFor="email" className="lg:w-1/2">
               <input
+                disabled
                 id="email"
                 type="email"
                 placeholder="Email"
                 {...register('email')}
-                className="border p-2 rounded w-full font-medium"
-                // disabled
+                className="border p-2 rounded w-full text-gray-400 font-medium"
               />
             </label>
           </div>
@@ -184,6 +183,7 @@ export default function ProfileSummary() {
             <p className="font-semibold text-sm">Phone</p>
             <label htmlFor="phoneNumber" className="lg:w-1/2">
               <input
+                disabled
                 id="phoneNumber"
                 type="text"
                 placeholder="Phone number"
@@ -195,7 +195,7 @@ export default function ProfileSummary() {
         </div>
 
         <hr />
-        <div className="lg:w-[176px] ml-auto">
+        {/* <div className="lg:w-[176px] ml-auto">
           <YellowButton disabled={mutation.isLoading}>
             {mutation.isLoading ? (
               <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
@@ -203,15 +203,19 @@ export default function ProfileSummary() {
               'Save'
             )}
           </YellowButton>
-        </div>
+        </div> */}
       </form>
       {/* This cannot be rendered inside the form because its a form element that
       needs to be separate */}
       <div className="grid lg:grid-cols-[40%_30%] gap-4 my-4 items-center">
         <p className="font-semibold text-sm">Delivery address</p>
-        {!showModal ? (
-          <div className="flex justify-between items-start space-x-14">
-            <p>{latestDeliveryAddress}</p>
+        <p className="font-inter">
+          {selectedDeliveryAddress.streetAddress +
+            ', ' +
+            selectedDeliveryAddress.state}
+        </p>
+        {/* {!showModal ? (
+          <div className="flex justify-between items-start font-inter">
             <button
               type="button"
               className="text-black text-sm underline"
@@ -226,7 +230,7 @@ export default function ProfileSummary() {
             onClose={() => setShowModal(false)}
             refetch={refetch}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

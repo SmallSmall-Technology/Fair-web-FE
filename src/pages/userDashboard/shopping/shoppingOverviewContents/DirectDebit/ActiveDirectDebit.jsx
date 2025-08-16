@@ -4,31 +4,35 @@ import { SingleActiveDirectDebit } from './SingleActiveDirectDebit';
 import { getOngoingOrders } from '../../../../../features/order/orderSlice';
 
 export const ActiveDirectDebit = () => {
-  const ongoingOrders = useSelector(getOngoingOrders);
+  // const ongoingOrders = useSelector(getOngoingOrders);
+  const linkedAccounts = 2;
   return (
-    <div className="mb-6 lg:mb-0 lg:w-1/2 ">
+    <div className="mb-6 lg:mb-0 font-inter ">
       <div className="flex justify-between items-baseline">
-        <h1 className="font-semibold text-2xl mb-4"> Active direct debit</h1>
+        <h1 className="font-semibold text-2xl mb-4 font-outfit">
+          {' '}
+          Direct debit
+        </h1>
         <Link
           to="/user-dashboard/shopping-overview/purchased"
           className="underline font-medium text-[#737376] text-sm"
         ></Link>
       </div>
 
-      <section className="grid grid-cols-1 gap-4 border w-full rounded-[10px]">
-        {ongoingOrders.length === 0 ? (
-          <p className="text-[#A6A6A6] bg-[#F6F6F6] p-4 py-6 rounded-[10px]">
-            No active direct debit
+      <section className="grid grid-cols-1 gap-4  w-full rounded-[6px]">
+        {linkedAccounts === 0 ? (
+          <p className="flex justify-center items-center font-medium bg-[#F6F6F6]  rounded-[10px] h-[141px]">
+            No linked account
           </p>
         ) : (
-          ongoingOrders.slice(0, 2).map((item, index) => (
-            <div key={item.productID}>
-              <ul className="recently-viewed p-2">
-                <SingleActiveDirectDebit item={item} />
-              </ul>
-              {index === 0 && <hr className="border-t border-gray-200 mx-2" />}
-            </div>
-          ))
+          <div className="mt-4">
+            <button className="cursor-pointer w-fit font-outfit border border-[#222224] bg-[#F7F7F7] rounded-[30px] p-2 px-4">
+              Linked account
+            </button>
+            <hr className="mt-6 mb-4" />
+
+            <p className="text-[#737376] text-sm">Linked acount</p>
+          </div>
         )}
       </section>
     </div>
