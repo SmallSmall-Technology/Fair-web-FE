@@ -6,6 +6,7 @@ import MainSection from '../../ui/components/MainSection';
 import SideBarNav from '../../ui/components/SideBarNav';
 import MainContentArticle from '../../ui/components/MainContentArticle';
 import PoliciesMainContent from '../../ui/components/PoliciesMainContent';
+import TopArticleCards from '../../ui/components/TopArticleCards';
 
 const routes = [
   { name: 'Fair', href: '/' },
@@ -15,10 +16,10 @@ const routes = [
 
 function MarketplaceGuidelines() {
   return (
-    // <div className="md:mx-[4em] md:my-[2em]">
     <PoliciesMainContent>
       <Breadcrumb routes={routes} />
       <PageTitle title="Marketplace guidelines" />
+      <TopArticleCards title="Marketplace guidelines" />
       <MulticolorDivider />
       <MainSection>
         <SideBarNav title="Marketplace articles" />
@@ -26,7 +27,6 @@ function MarketplaceGuidelines() {
       </MainSection>
       <HelpContactCard />
     </PoliciesMainContent>
-    // </div>
   );
 }
 

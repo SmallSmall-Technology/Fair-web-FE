@@ -2,6 +2,7 @@ import Breadcrumb from '../../ui/components/Breadcrumb';
 import Main from './Main';
 import MainContent from './MainContent';
 import SideNav from './SideNav';
+import PoliciesMainContent from '../../ui/components/PoliciesMainContent';
 
 const routes = [
   { name: 'Fair', href: '/' },
@@ -11,10 +12,10 @@ const routes = [
 
 function TermsOfUse() {
   return (
-    <div className="mx-[4em] my-[2em]">
+    <PoliciesMainContent>
       <Breadcrumb routes={routes} />
       <Main />
-    </div>
+    </PoliciesMainContent>
   );
 }
 
