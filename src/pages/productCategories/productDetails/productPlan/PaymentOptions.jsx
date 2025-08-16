@@ -99,9 +99,15 @@ export const PaymentOptions = React.memo(({ product }) => {
         {renderSelectedPayment()}
         {selectedPaymentPlan && (
           <div className="lg:mx-0 lg:w-[80%] mt-4 mx-5">
-            <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
-              Add to cart
-            </YellowButton>
+            {product?.stockStatus === 'inStock' ? (
+              <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
+                Add to cart
+              </YellowButton>
+            ) : (
+              <p className="text-red-500 font-semibold text-xl font-inter text-center">
+                Out of Stock
+              </p>
+            )}
           </div>
         )}
       </div>
@@ -174,34 +180,40 @@ export const PaymentOptions = React.memo(({ product }) => {
         {renderSelectedPayment()}
         {selectedPaymentPlan && (
           <div className="lg:mx-0 lg:w-[80%] mt-4 mx-5">
-            <YellowButton
-              onClick={
-                !existing
-                  ? () =>
-                      handleAddToCart(
-                        dispatch,
-                        product,
-                        paymentOptions,
-                        selectedPaymentPlan,
-                        existing
-                      )
-                  : undefined
-              }
-            >
-              {!existing && 'Add to cart'}
-              {existing && (
-                <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
-                  <UpdateItemQuantityInSingleProductPage
-                    productID={product?.productID}
-                    currentQuantity={existing?.quantity || 0}
-                  />
-                  <p>
-                    ({existing?.quantity || 0} item
-                    {existing?.quantity > 1 && 's'} added)
-                  </p>
-                </div>
-              )}
-            </YellowButton>
+            {product?.stockStatus === 'inStock' ? (
+              <YellowButton
+                onClick={
+                  !existing
+                    ? () =>
+                        handleAddToCart(
+                          dispatch,
+                          product,
+                          paymentOptions,
+                          selectedPaymentPlan,
+                          existing
+                        )
+                    : undefined
+                }
+              >
+                {!existing && 'Add to cart'}
+                {existing && (
+                  <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
+                    <UpdateItemQuantityInSingleProductPage
+                      productID={product?.productID}
+                      currentQuantity={existing?.quantity || 0}
+                    />
+                    <p>
+                      ({existing?.quantity || 0} item
+                      {existing?.quantity > 1 && 's'} added)
+                    </p>
+                  </div>
+                )}
+              </YellowButton>
+            ) : (
+              <p className="text-red-500 font-semibold text-xl font-inter text-center">
+                Out of Stock
+              </p>
+            )}
           </div>
         )}
       </div>

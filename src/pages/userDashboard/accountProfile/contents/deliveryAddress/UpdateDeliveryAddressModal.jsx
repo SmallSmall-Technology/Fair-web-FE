@@ -26,11 +26,19 @@ export const UpdateDeliveryAddressModal = ({ address, onClose }) => {
     mutationFn: ({ id, data }) => updateUserDeliveryAddress(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['useraddresses'] });
-      toast.success('Address updated successfully', {
-        className:
-          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-        bodyClassName: 'm-0 p-0',
-      });
+      toast.success(
+        <span className="font-semibold text-base font-outfit">
+          Delivery address updated successfully
+        </span>,
+        {
+          icon: false,
+          type: 'success',
+          className: 'toast-yellow',
+          bodyClassName: 'm-0 p-0',
+          closeButton: false,
+          autoClose: 2000,
+        }
+      );
     },
     onError: (error) => {
       toast.error(
@@ -38,7 +46,12 @@ export const UpdateDeliveryAddressModal = ({ address, onClose }) => {
           error.message ||
           'Failed to update address',
         {
-          autoClose: 3000,
+          icon: false,
+          type: 'error',
+          className: 'toast-yellow',
+          bodyClassName: 'm-0 p-0',
+          closeButton: false,
+          autoClose: 2000,
         }
       );
     },

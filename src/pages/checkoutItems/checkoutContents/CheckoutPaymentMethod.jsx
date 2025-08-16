@@ -19,7 +19,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 
-const API_URL = 'http://localhost:8002';
+// const API_URL = 'http://localhost:8002';
 
 export const CheckoutPaymentMethod = () => {
   const dispatch = useDispatch();
@@ -42,104 +42,104 @@ export const CheckoutPaymentMethod = () => {
   // const debtProfileVerified = useSelector((state) => state.user.debtProfileVerified);
   const debtProfileVerified = false;
 
-  const onSubmit = async (values) => {
-    if (cartItems.length === 0) {
-      toast.error('Your cart is empty!');
-      return;
-    }
+  // const onSubmit = async (values) => {
+  //   if (cartItems.length === 0) {
+  //     toast.error('Your cart is empty!');
+  //     return;
+  //   }
 
-    if (!onDeliveryAddress || onDeliveryAddress.length === 0) {
-      toast.dismiss();
-      toast.error('Please input your delivery address', {
-        className:
-          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-        bodyClassName: 'm-0 p-0',
-        closeButton: false,
-      });
-      return;
-    }
+  //   if (!onDeliveryAddress || onDeliveryAddress.length === 0) {
+  //     toast.dismiss();
+  //     toast.error('Please input your delivery address', {
+  //       className:
+  //         'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+  //       bodyClassName: 'm-0 p-0',
+  //       closeButton: false,
+  //     });
+  //     return;
+  //   }
 
-    try {
-      const enrichedCartItems = await Promise.all(
-        cartItems.map(async (item) => {
-          const { data: product } = await axios.get(
-            `${API_URL}/products/${item.productId}`
-          );
-          return {
-            ...item,
-            name: product?.name,
-            image: product?.image,
-            soldBy: product?.brand,
-          };
-        })
-      );
+  //   try {
+  //     const enrichedCartItems = await Promise.all(
+  //       cartItems.map(async (item) => {
+  //         const { data: product } = await axios.get(
+  //           `${API_URL}/products/${item.productId}`
+  //         );
+  //         return {
+  //           ...item,
+  //           name: product?.name,
+  //           image: product?.image,
+  //           soldBy: product?.brand,
+  //         };
+  //       })
+  //     );
 
-      if (values.picked === 'interest-free-credit') {
-        const initialPayment = totalCartPrice;
+  //     if (values.picked === 'interest-free-credit') {
+  //       const initialPayment = totalCartPrice;
 
-        // const order = await dispatch(
-        //   createOrder({ cartItems: enrichedCartItems, initialPayment })
-        // ).unwrap();
+  //       // const order = await dispatch(
+  //       //   createOrder({ cartItems: enrichedCartItems, initialPayment })
+  //       // ).unwrap();
 
-        toast.info(
-          `Payment plan started with ₦${initialPayment.toFixed(2)} initial payment!`,
-          {
-            className:
-              'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-            bodyClassName: 'm-0 p-0',
-            closeButton: false,
-          }
-        );
+  //       toast.info(
+  //         `Payment plan started with ₦${initialPayment.toFixed(2)} initial payment!`,
+  //         {
+  //           className:
+  //             'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+  //           bodyClassName: 'm-0 p-0',
+  //           closeButton: false,
+  //         }
+  //       );
 
-        navigate('/cart-items/checkout/payment-success');
-      } else {
-        const order = await dispatch(
-          createOrder({
-            cartItems: enrichedCartItems,
-            initialPayment: totalCartPrice,
-          })
-        ).unwrap();
+  //       navigate('/cart-items/checkout/payment-success');
+  //     } else {
+  //       const order = await dispatch(
+  //         createOrder({
+  //           cartItems: enrichedCartItems,
+  //           initialPayment: totalCartPrice,
+  //         })
+  //       ).unwrap();
 
-        setTimeout(async () => {
-          await dispatch(
-            makePayment({ orderId: order.id, amount: 0 })
-          ).unwrap();
-          await dispatch(clearCart()).unwrap();
+  //       setTimeout(async () => {
+  //         await dispatch(
+  //           makePayment({ orderId: order.id, amount: 0 })
+  //         ).unwrap();
+  //         await dispatch(clearCart()).unwrap();
 
-          toast.success(
-            `Payment of ₦${totalCartPrice} successful via ${values.picked}!`,
-            {
-              className:
-                'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-              bodyClassName: 'm-0 p-0',
-              closeButton: false,
-            }
-          );
+  //         toast.success(
+  //           `Payment of ₦${totalCartPrice} successful via ${values.picked}!`,
+  //           {
+  //             className:
+  //               'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+  //             bodyClassName: 'm-0 p-0',
+  //             closeButton: false,
+  //           }
+  //         );
 
-          navigate('/cart-items/checkout/payment-success');
-        }, 2000);
-      }
+  //         navigate('/cart-items/checkout/payment-success');
+  //       }, 2000);
+  //     }
 
-      reset();
-      // eslint-disable-next-line no-unused-vars
-    } catch (error) {
-      toast.dismiss();
-      toast.error('Payment failed. Please try again.', {
-        className:
-          'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-        bodyClassName: 'm-0 p-0',
-        closeButton: false,
-      });
-    }
-  };
+  //     reset();
+  //     // eslint-disable-next-line no-unused-vars
+  //   } catch (error) {
+  //     toast.dismiss();
+  //     toast.error('Payment failed. Please try again.', {
+  //       className:
+  //         'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
+  //       bodyClassName: 'm-0 p-0',
+  //       closeButton: false,
+  //     });
+  //   }
+  // };
 
   const InstallmentPayment = cartItems.find((item) =>
-    ['monthly', 'weekly', 'daily'].includes(item.paymentPlan)
+    ['monthly', 'weekly', 'daily', 'full'].includes(item.paymentPlan)
   );
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} className="px-8 lg:px-0">
+      <form onSubmit={handleSubmit()} className="px-8 lg:px-0 ">
         <h1 className="lg:hidden text-lg font-bold mt-6 mb-3">
           Payment method
         </h1>
@@ -252,20 +252,20 @@ export const CheckoutPaymentMethod = () => {
             What is direct debit?
           </Link>
 
-          <div className="hidden lg:block ">
-            <div>
-              <p>
-                Please note as a new user you will be verified before buying an
-                item
-              </p>
-              <Link
-                to="/user-dashboard/account-profile/account-verification"
-                className="text-xs rounded-[2px] bg-[var(--yellow-primary)] py-1 px-2"
-              >
-                Verify now
-              </Link>
-            </div>
+          <div className="flex flex-col justify-center items-center space-y-3">
+            <p className="font-inter text-xs">
+              Please note as a new user you will be verified before buying an
+              item
+            </p>
+            <Link
+              to="/user-dashboard/account-profile/account-verification"
+              className="font-inter w-fit text-xs rounded-[2px] bg-[var(--yellow-primary)] py-3 px-6"
+            >
+              Verify now
+            </Link>
+          </div>
 
+          <div className="hidden lg:block ">
             <button
               to="mandate/create"
               disabled={!debtProfileVerified && isSubmitting}

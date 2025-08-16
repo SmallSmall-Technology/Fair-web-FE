@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { AddDeliveryAddressModal } from './AddDeliveryAddressModal';
-import { SingleDeliveryAddressBox } from './SingleDeliveryAddressBox';
-import { fetchUserDeliveryAddresses } from '../../../../../api/user-api';
 import {
   setSelectedDeliveryAddress,
   updateLatestDeliveryAddress,
 } from '../../../../../features/user/userSlice';
 import { useDispatch } from 'react-redux';
+import { AddDeliveryAddressModal } from './AddDeliveryAddressModal';
+import { SingleDeliveryAddressBox } from './SingleDeliveryAddressBox';
+import { fetchUserDeliveryAddresses } from '../../../../../api/user-api';
 
 const DeliveryAddress = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,16 +20,6 @@ const DeliveryAddress = () => {
     queryKey: ['useraddresses'],
     queryFn: fetchUserDeliveryAddresses,
   });
-
-  // Early return to prevent hook order errors
-  if (isLoading) {
-    return <div className="skeleton md:w-[345px] h-[95px]"></div>;
-  }
-
-  if (isError) {
-    console.error('Error fetching addresses:', isError);
-    return <p className="text-red-500">Failed to load addresses</p>;
-  }
 
   const addresses = data?.data?.data || [];
 
@@ -63,33 +53,46 @@ const DeliveryAddress = () => {
       <div className="grid lg:flex lg:space-x-5">
         <p className="font-inter mb-4 lg:mb-0">Your delivery addresses</p>
         <div>
-          {addresses.length === 0 ? (
-            <p className="text-sm text-gray-500">No delivery addresses found</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {addresses.map((address) => (
-                <SingleDeliveryAddressBox
-                  key={address.id}
-                  address={address}
-                  onSelectedAddress={handleSelectAddress}
-                  selectedAddressId={selectedAddressId}
-                />
-              ))}
-            </div>
+          {isLoading && <div className="skeleton md:w-[345px] h-[95px]"></div>}
+
+          {isError && (
+            <p className="flex items-center justify-center">
+              Failed to load addresses
+            </p>
           )}
 
-          <p
-            className="font-medium text-sm font-inter underline mt-8 cursor-pointer"
-            onClick={() => setIsModalOpen(true)}
-          >
-            Add another delivery address
-          </p>
+          {!isLoading && !isError && (
+            <>
+              {addresses.length === 0 ? (
+                <p className="text-sm text-gray-500">
+                  No delivery addresses found
+                </p>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {addresses.map((address) => (
+                    <SingleDeliveryAddressBox
+                      key={address.id}
+                      address={address}
+                      onSelectedAddress={handleSelectAddress}
+                      selectedAddressId={selectedAddressId}
+                    />
+                  ))}
+                </div>
+              )}
 
-          {isModalOpen && (
-            <AddDeliveryAddressModal
-              onClose={() => setIsModalOpen(false)}
-              // selectedAddress={selectedAddress}
-            />
+              <p
+                className="font-medium text-sm font-inter underline mt-8 cursor-pointer"
+                onClick={() => setIsModalOpen(true)}
+              >
+                Add another delivery address
+              </p>
+
+              {isModalOpen && (
+                <AddDeliveryAddressModal
+                  onClose={() => setIsModalOpen(false)}
+                />
+              )}
+            </>
           )}
         </div>
       </div>

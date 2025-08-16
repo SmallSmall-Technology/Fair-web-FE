@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-import { AccountProfileSideBar } from './AccountProfileSideBar';
 import { UserDashboardSideBar } from './UserDashboardSideBar';
 
 const accountProfileData = [
