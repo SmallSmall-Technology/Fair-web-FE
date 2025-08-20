@@ -1,19 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { set } from 'react-hook-form';
 
 const initialState = {
   user: {
-    id: null,
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    current_address: null,
-    isTier2: null,
-    userCategory: null,
-    lastLogin: null,
-    createdAt: null,
-    updatedAt: null,
-    delivery_address: null,
+    // id: null,
+    // firstName: '',
+    // lastName: '',
+    // email: '',
+    // phoneNumber: '',
+    // current_address: null,
+    // isTier2: null,
+    // userCategory: null,
+    // lastLogin: null,
+    // createdAt: null,
+    // updatedAt: null,
+    // delivery_address: null,
+    // debt_profile_verification: null,
+    // residentialAddress: null,
   },
   status: 'idle',
   error: null,
@@ -52,6 +55,15 @@ const userSlice = createSlice({
       state.status = 'idle';
       state.error = null;
     },
+    setDebtProfileVerification: (state, action) => {
+      state.user.debt_profile_verification = action.payload;
+      state.status = 'VERIFIED';
+      state.error = null;
+    },
+    setResidentialAddress: (state, action) => {
+      state.user.residentialAddress = action.payload;
+      state.status = 'succeeded';
+    },
   },
 });
 
@@ -62,6 +74,7 @@ export const {
   setError,
   clearUser,
   setSelectedDeliveryAddress,
+  setDebtProfileVerification,
 } = userSlice.actions;
 export default userSlice.reducer;
 
@@ -88,4 +101,9 @@ export const getUserFullName = (state) => {
 export const getUserFirstName = (state) => {
   const user = state.user.user;
   return user.firstName || 'Guest';
+};
+
+export const isUserDebtProfileVerified = (state) => {
+  const user = state.user.user;
+  return user.debt_profile_verification === 'VERIFIED';
 };

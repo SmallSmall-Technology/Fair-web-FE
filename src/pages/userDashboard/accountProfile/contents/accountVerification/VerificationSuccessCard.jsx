@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 
 export const VerificationSuccessCard = ({ title, icon, type }) => {
   const user = useSelector((state) => state.user);
+  console.log(user);
   return (
     <article className="font-inter w-full md:w-[521px] h-[184px] bg-[#F5F5F7] p-4 px-8 rounded-[6px] flex flex-col justify-between">
       {type === 'id' && (
@@ -55,7 +56,7 @@ export const VerificationSuccessCard = ({ title, icon, type }) => {
             <p className="font-semibold text-base">Address Verification</p>
           </div>
           <p className="font-semibold text-lg">
-            {user?.address || '123 Main St, Anytown, USA'}
+            {user?.residentialAddress || '123 Main St, Anytown, USA'}
           </p>
           <div className="text-sm font-semibold flex items-center space-x-2">
             <img

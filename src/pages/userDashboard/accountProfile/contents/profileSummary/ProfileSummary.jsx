@@ -11,7 +11,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function ProfileSummary() {
   const dispatch = useDispatch();
-  // const { userData } = useSelector((state) => state.user);
+
+  const user = useSelector((state) => state.user.user); // ✅ from slice
+  console.log(user);
+  const isVerified = useSelector((state) => state.user?.isVerified);
   const selectedDeliveryAddress = useSelector(selectCurrentDeliveryAddress);
 
   const { data, error, refetch } = useQuery({
@@ -19,6 +22,7 @@ export default function ProfileSummary() {
     queryFn: getUser,
     enabled: !!localStorage.getItem('authToken'),
     onSuccess: (data) => {
+      console.log(data);
       if (data?.data) {
         dispatch(setUser(data.data));
       }
@@ -29,19 +33,15 @@ export default function ProfileSummary() {
       }
     },
   });
-  const user = data?.data;
 
   const { register, reset } = useForm({
     defaultValues: {
-      firstName: user?.firstName,
-      lastName: user?.lastName,
-      email: user?.email,
-      phoneNumber: user?.phoneNumber,
+      firstName: user?.firstName || '',
+      lastName: user?.lastName || '',
+      email: user?.email || '',
+      phoneNumber: user?.phoneNumber || '',
     },
   });
-
-  const [isVerified] = useState(false);
-  // const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -53,6 +53,47 @@ export default function ProfileSummary() {
       });
     }
   }, [user, reset]);
+
+  // const { data, error, refetch } = useQuery({
+  //   queryKey: ['users', localStorage.getItem('authToken')],
+  //   queryFn: getUser,
+  //   enabled: !!localStorage.getItem('authToken'),
+  //   onSuccess: (data) => {
+  //     if (data?.data) {
+  //       dispatch(setUser(data.data));
+  //     }
+  //   },
+  //   onError: (err) => {
+  //     if (err.response?.status === 401 || err.response?.status === 404) {
+  //       window.location.href = '/login';
+  //     }
+  //   },
+  // });
+  // const user = data?.data;
+  // console.log(user);
+
+  // const { register, reset } = useForm({
+  //   defaultValues: {
+  //     firstName: user?.firstName,
+  //     lastName: user?.lastName,
+  //     email: user?.email,
+  //     phoneNumber: user?.phoneNumber,
+  //   },
+  // });
+
+  // const [isVerified] = useState(false);
+  // // const [showModal, setShowModal] = useState(false);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     reset({
+  //       firstName: user.firstName || '',
+  //       lastName: user.lastName || '',
+  //       email: user.email || '',
+  //       phoneNumber: user.phoneNumber || '',
+  //     });
+  //   }
+  // }, [user, reset]);
 
   // const mutation = useMutation({
   //   mutationFn: updateUser,

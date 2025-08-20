@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { CustomButton } from '../../../../../utils/Button';
 import { AccountVerificationModal } from './AccountVerificationModal';
 import { VerificationSuccessCard } from './VerificationSuccessCard';
+import { useSelector } from 'react-redux';
+import { isUserDebtProfileVerified } from '../../../../../features/user/userSlice';
 
 export const VerificationCard = ({
   type,
@@ -11,10 +13,12 @@ export const VerificationCard = ({
   description,
   errorMessage,
 }) => {
+  const isVerified = useSelector((state) => isUserDebtProfileVerified(state));
+  // console.log(isVerified);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [failed, setFailed] = useState(false);
-  const [verified, setVerified] = useState(false);
+  const [verified, setVerified] = useState(isVerified);
 
   return (
     <>

@@ -203,7 +203,7 @@ export const updateCartItem = createAsyncThunk(
       // return response.data;
       // ✅ Preserve selectedPaymentPlan locally even if API doesn't return it
       return {
-        ...response.data, // includes updated totals from API
+        ...response.data,
         quantity,
         paymentPlan: existingItem.paymentPlan,
       };

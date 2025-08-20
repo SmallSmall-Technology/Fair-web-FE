@@ -10,12 +10,12 @@ const App = () => {
   const [toastShown, setToastShown] = useState(false);
 
   // The chat app from DevRev implementation
-  useEffect(() => {
-    window.plugSDK.init({
-      app_id:
-        'DvRvStPZG9uOmNvcmU6ZHZydi11cy0xOmRldm8vMW5rOE8ybGtPTzpwbHVnX3NldHRpbmcvMV9ffHxfXzIwMjUtMDUtMTkgMTI6Mjg6MTguNjEzMTU2NzgyICswMDAwIFVUQw==xlxendsDvRv',
-    });
-  }, []);
+  // useEffect(() => {
+  //   window.plugSDK.init({
+  //     app_id:
+  //       'DvRvStPZG9uOmNvcmU6ZHZydi11cy0xOmRldm8vMW5rOE8ybGtPTzpwbHVnX3NldHRpbmcvMV9ffHxfXzIwMjUtMDUtMTkgMTI6Mjg6MTguNjEzMTU2NzgyICswMDAwIFVUQw==xlxendsDvRv',
+  //   });
+  // }, []);
 
   useEffect(() => {
     const updateOnlineStatus = () => {

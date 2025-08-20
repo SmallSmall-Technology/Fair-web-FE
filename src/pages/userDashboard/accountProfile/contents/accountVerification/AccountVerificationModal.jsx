@@ -9,6 +9,8 @@ import {
   verifyAccountByID,
   verifyDebtProfile,
 } from '../../../../../api/user-api';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 export const AccountVerificationModal = ({
   icon,
@@ -20,6 +22,7 @@ export const AccountVerificationModal = ({
   setVerified,
 }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -33,11 +36,118 @@ export const AccountVerificationModal = ({
     debt: verifyDebtProfile,
   };
 
+  // const { mutate, isPending, isError, error } = useMutation({
+  //   mutationFn: async (formData) => {
+  //     return mutationFnMap[type](formData);
+  //   },
+  //   onSuccess: (data) => {
+  //     dispatch({
+  //       type: 'debt',
+  //       payload: data?.data.credit_data?.eligibility_validation?.overall_status,
+  //     });
+  //     dispatch({
+  //       type: 'address',
+  //       payload: data?.residentialAddress,
+  //     });
+
+  //     setVerified(true);
+  //     closeModal();
+  //   },
+  // });
+
   const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: async (formData) => {
-      return mutationFnMap[type](formData);
+    mutationFn: async (formData) => mutationFnMap[type](formData),
+    onSuccess: (data) => {
+      // ✅ Response data available here
+      console.log('API response:', data);
+
+      // Dispatching based on type
+      if (type === 'debt') {
+        dispatch({
+          type: 'debt',
+          payload:
+            data?.data.credit_data?.eligibility_validation?.overall_status,
+        });
+      }
+
+      if (type === 'address') {
+        dispatch({
+          type: 'address',
+          payload: data?.residentialAddress,
+        });
+      }
+
+      // Verification checks
+      if (
+        data?.data?.credit_data?.eligibility_validation?.overall_status ===
+        'APPROVED'
+      ) {
+        setVerified(true);
+      } else if (data?.success) {
+        setVerified(true);
+      } else {
+        setFailed(true);
+        setVerified(false);
+      }
+
+      closeModal();
+    },
+    onError: (err) => {
+      setFailed(true);
+      setVerified(false);
+      toast(err?.message || 'Verification failed');
     },
   });
+
+  // const onSubmit = (data) => {
+  //   let payload = data;
+
+  //   if (type === 'id') {
+  //     payload = {
+  //       idType: data.idType,
+  //       idNumber: data.idNumber,
+  //     };
+  //   }
+
+  //   if (type === 'address') {
+  //     payload = {
+  //       residentialAddress: data.residentialAddress,
+  //       residentialCity: data.residentialCity,
+  //       residentialState: data.residentialState,
+  //     };
+  //   }
+
+  //   if (type === 'debt') {
+  //     payload = { bvn: data.bvn };
+  //   }
+
+  //   mutate(payload, {
+  //     onSuccess: () => {
+  //       if (
+  //         data?.data.credit_data?.eligibility_validation?.overall_status ===
+  //         'APPROVED'
+  //       ) {
+  //         setVerified(true);
+  //         closeModal();
+  //       }
+
+  //       if (data) {
+  //         data.success === true;
+  //         setVerified(true);
+  //         closeModal();
+  //       }
+
+  //       setFailed(false);
+
+  //       closeModal();
+  //     },
+  //     onError: () => {
+  //       setFailed(true);
+  //       setVerified(false);
+  //       toast(data.message);
+  //     },
+  //   });
+  // };
 
   const onSubmit = (data) => {
     let payload = data;
@@ -51,9 +161,9 @@ export const AccountVerificationModal = ({
 
     if (type === 'address') {
       payload = {
-        streetAddress: data.streetAddress,
-        // lga: data.lga,
-        state: data.state,
+        residentialAddress: data.residentialAddress,
+        residentialCity: data.residentialCity,
+        residentialState: data.residentialState,
       };
     }
 
@@ -61,17 +171,8 @@ export const AccountVerificationModal = ({
       payload = { bvn: data.bvn };
     }
 
-    mutate(payload, {
-      onSuccess: () => {
-        setVerified(true);
-        setFailed(false);
-        closeModal();
-      },
-      onError: () => {
-        setFailed(true);
-        setVerified(false);
-      },
-    });
+    // ✅ just call mutate, response is handled in onSuccess
+    mutate(payload);
   };
 
   return (
@@ -202,14 +303,14 @@ export const AccountVerificationModal = ({
                   </label>
                   <input
                     type="text"
-                    {...register('streetAddress', {
+                    {...register('residentialAddress', {
                       required: 'Street name is required',
                     })}
                     className="border w-full p-2 rounded-md"
                   />
-                  {errors.street && (
+                  {errors.residentialAddress && (
                     <p className="text-red-500 text-sm mt-1 font-inter">
-                      {isError.street}
+                      {errors.residentialAddress.message}
                     </p>
                   )}
                 </div>
@@ -219,14 +320,14 @@ export const AccountVerificationModal = ({
                   </label>
                   <input
                     type="text"
-                    {...register('lga', {
+                    {...register('residentialCity', {
                       required: 'Local Government is required',
                     })}
                     className="border w-full p-2 rounded-md"
                   />
-                  {isError.lga && (
+                  {isError.residentialCity && (
                     <p className="text-red-500 text-sm mt-1">
-                      {isError.lga.message}
+                      {isError.residentialCity.message}
                     </p>
                   )}
                 </div>
@@ -236,12 +337,14 @@ export const AccountVerificationModal = ({
                   </label>
                   <input
                     type="text"
-                    {...register('state', { required: 'State is required' })}
+                    {...register('residentialState', {
+                      required: 'State is required',
+                    })}
                     className="border w-full p-2 rounded-md"
                   />
-                  {isError.state && (
+                  {isError.residentialState && (
                     <p className="text-red-500 text-sm mt-1">
-                      {isError.state.message}
+                      {isError.residentialState.message}
                     </p>
                   )}
                 </div>
@@ -291,7 +394,7 @@ export const AccountVerificationModal = ({
               {isPending ? (
                 <span className="flex items-center gap-2">
                   <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
-                  Loading...
+                  Verifying...
                 </span>
               ) : (
                 'Verify'

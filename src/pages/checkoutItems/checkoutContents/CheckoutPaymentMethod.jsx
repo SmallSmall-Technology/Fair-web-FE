@@ -12,7 +12,10 @@ import {
   createOrder,
   makePayment,
 } from '../../../features/order/orderSlice.js';
-import { selectLatestDeliveryAddress } from '../../../features/user/userSlice.js';
+import {
+  isUserDebtProfileVerified,
+  selectLatestDeliveryAddress,
+} from '../../../features/user/userSlice.js';
 import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -28,6 +31,7 @@ export const CheckoutPaymentMethod = () => {
   const cartItems = useSelector((state) => state.cart.cart);
   const onDeliveryAddress = useSelector(selectLatestDeliveryAddress);
   const handleProceedToMandate = useProceedToMandate();
+  const debtProfileVerified = useSelector(isUserDebtProfileVerified);
 
   const {
     register,
@@ -40,7 +44,7 @@ export const CheckoutPaymentMethod = () => {
   });
 
   // const debtProfileVerified = useSelector((state) => state.user.debtProfileVerified);
-  const debtProfileVerified = false;
+  // const debtProfileVerified = false;
 
   // const onSubmit = async (values) => {
   //   if (cartItems.length === 0) {
@@ -268,10 +272,12 @@ export const CheckoutPaymentMethod = () => {
           <div className="hidden lg:block ">
             <button
               to="mandate/create"
-              disabled={!debtProfileVerified && isSubmitting}
+              // disabled={!debtProfileVerified && isSubmitting}
+              disabled={debtProfileVerified && isSubmitting}
               onClick={handleProceedToMandate}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
-                !debtProfileVerified
+                // !debtProfileVerified
+                debtProfileVerified
                   ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                   : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
               }`}
