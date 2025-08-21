@@ -4,7 +4,7 @@ import httpClient from '../../api/http-clients';
 const mandateSlice = createSlice({
   name: 'mandate',
   initialState: {
-    data: null, // stores the checkout payload
+    data: null,
   },
   reducers: {
     setMandateData: (state, action) => {

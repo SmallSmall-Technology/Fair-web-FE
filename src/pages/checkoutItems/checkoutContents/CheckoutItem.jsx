@@ -8,8 +8,8 @@ export const CheckoutItem = () => {
 
   return (
     <ul className="grid grid-cols-1 lg:px-8 gap-4 pt-20 lg:pt-10 font-inter">
-      {cart.map((item) => (
-        <article className="checkout-item" key={item?.id}>
+      {cart.map((item, index) => (
+        <article className="checkout-item" key={item?.productID}>
           <li
             className="flex flex-col lg:flex-row justify-between items-start"
             key={item.id}
@@ -54,7 +54,7 @@ export const CheckoutItem = () => {
               {formatCurrency(item?.price)}
             </p>
           </li>
-          <hr className="lg:hidden my-4" />
+          {index !== cart.length - 1 && <hr className="lg:hidden my-4" />}
         </article>
       ))}
     </ul>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { consolidateCartPayments } from '../utils/ConsolidateCartPayment';
 import { setMandateData } from '../features/mono/mandateSlice';
-import { selectCurrentDeliveryAddress } from '../features/user/userSlice';
+import { selectCurrentDeliveryAddress } from '../features/order/deliveryAddressSlice';
 
 export const useProceedToMandate = () => {
   const dispatch = useDispatch();
