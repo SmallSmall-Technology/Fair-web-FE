@@ -63,18 +63,25 @@ export default function FooterTop() {
             <span>Get the app</span>
           </h4>
           <div className="flex items-center gap-4  mr-4">
-            <a href="#" className="block">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.smallsmallfair.app"
+              className="block"
+            >
               <img
                 src="/images/google-store.svg"
                 alt="Get it on Google Play"
                 className="h-10"
               />
             </a>
-            <a href="#" className="block">
+            <a
+              href="https://apps.apple.com/pa/app/smallsmall/id6550924061"
+              className="block"
+            >
               <img
                 src="/images/app-store.svg"
                 alt="Download on the App Store"
                 className="h-10"
+                href="https://apps.apple.com/pa/app/smallsmall/id6550924061"
               />
             </a>
           </div>
