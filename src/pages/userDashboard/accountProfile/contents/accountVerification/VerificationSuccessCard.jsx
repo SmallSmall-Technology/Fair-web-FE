@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
+import { selectVerificationData } from '../../../../../features/user/accountVerificationSlice';
 
 export const VerificationSuccessCard = ({ title, icon, type }) => {
-  const user = useSelector((state) => state.user);
-  console.log(user);
+  const data = useSelector((state) => selectVerificationData(state, type));
+
   return (
     <article className="font-inter w-full md:w-[521px] h-[184px] bg-[#F5F5F7] p-4 px-8 rounded-[6px] flex flex-col justify-between">
       {type === 'id' && (
@@ -56,7 +57,11 @@ export const VerificationSuccessCard = ({ title, icon, type }) => {
             <p className="font-semibold text-base">Address Verification</p>
           </div>
           <p className="font-semibold text-lg">
-            {user?.residentialAddress || '123 Main St, Anytown, USA'}
+            {data?.residentialAddress +
+              ', ' +
+              data?.residentialCity +
+              ', ' +
+              data?.residentialState}
           </p>
           <div className="text-sm font-semibold flex items-center space-x-2">
             <img
@@ -64,7 +69,7 @@ export const VerificationSuccessCard = ({ title, icon, type }) => {
               alt="Check Icon"
               className="w-[15px] h-[15px]"
             />
-            <p>Debt Profile Verified</p>
+            <p>Residential Address Verified</p>
           </div>
         </>
       )}

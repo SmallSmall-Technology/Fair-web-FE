@@ -3,11 +3,16 @@ import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateUserDeliveryAddress } from '../../../../../api/user-api';
+import { selectCurrentAddress } from '../../../../../features/order/deliveryAddressSlice';
+import { useSelector } from 'react-redux';
 
 export const states = ['Lagos state', 'Abuja state'];
 
 export const UpdateDeliveryAddressModal = ({ address, onClose }) => {
   const queryClient = useQueryClient();
+  const currentDeliveryAddress = useSelector(selectCurrentAddress);
+  const { data: user } = useSelector((state) => state.user);
+  const { latest_address } = user;
 
   const {
     register,
@@ -113,8 +118,15 @@ export const UpdateDeliveryAddressModal = ({ address, onClose }) => {
           <h2 id="address-modal-title" className="font-medium text-sm mb-2">
             Current delivery address
           </h2>
-          <p className="text-sm flex space-x-1">
-            <span>{address.streetAddress}</span>,<span>{address.state}</span>
+          <p className="text-sm flex">
+            <span>
+              {currentDeliveryAddress?.streetAddress ||
+                latest_address?.streetAddress}
+            </span>
+            ,
+            <span>
+              {currentDeliveryAddress?.state || latest_address?.state}
+            </span>
           </p>
         </div>
 

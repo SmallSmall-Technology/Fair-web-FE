@@ -8,6 +8,8 @@ import productReducer from './features/product/productSlice';
 import orderReducer from './features/order/orderSlice';
 import authReducer from './features/auth/authSlice';
 import mandateReducer from './features/mono/mandateSlice';
+import deliveryReducer from './features/order/deliveryAddressSlice';
+import accountVerificationReducer from './features/user/accountVerificationSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -15,8 +17,10 @@ const rootReducer = combineReducers({
   recentlyViewed: recentlyViewedReducer,
   products: productReducer,
   order: orderReducer,
+  delivery: deliveryReducer,
   auth: authReducer,
   mandate: mandateReducer,
+  accountVerification: accountVerificationReducer,
 });
 
 const persistConfig = {
@@ -28,8 +32,10 @@ const persistConfig = {
     'recentlyViewed',
     'products',
     'order',
+    'delivery',
     'auth',
     'mandate',
+    'accountVerification',
   ],
 };
 

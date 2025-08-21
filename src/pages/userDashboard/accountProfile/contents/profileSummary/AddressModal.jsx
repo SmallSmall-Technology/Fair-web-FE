@@ -11,10 +11,10 @@ import {
 
 export const states = [
   'Lagos state',
-  'Abuja state',
-  'Oyo state',
-  'Kaduna state',
-  'Rivers state',
+  // 'Abuja state',
+  // 'Oyo state',
+  // 'Kaduna state',
+  // 'Rivers state',
 ];
 
 export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {

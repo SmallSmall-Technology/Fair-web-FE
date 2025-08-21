@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { CustomButton } from '../../../../../utils/Button';
 import { AccountVerificationModal } from './AccountVerificationModal';
 import { VerificationSuccessCard } from './VerificationSuccessCard';
-import { useSelector } from 'react-redux';
-import { isUserDebtProfileVerified } from '../../../../../features/user/userSlice';
+import {
+  selectError,
+  selectVerificationStatus,
+} from '../../../../../features/user/accountVerificationSlice';
 
 export const VerificationCard = ({
   type,
@@ -13,19 +16,34 @@ export const VerificationCard = ({
   description,
   errorMessage,
 }) => {
-  const isVerified = useSelector((state) => isUserDebtProfileVerified(state));
-  // console.log(isVerified);
+  const isVerified = useSelector((state) =>
+    selectVerificationStatus(state, type)
+  );
+
+  console.log(isVerified);
+
+  const error = useSelector(selectError);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [failed, setFailed] = useState(false);
-  const [verified, setVerified] = useState(isVerified);
+  // const [failed, setFailed] = useState(false);
+
+  const handleVerificationSuccess = (isApproved) => {
+    if (isApproved) {
+      setModalIsOpen(false);
+      // setFailed(isVerified);
+    }
+  };
+
+  const handleVerificationFailure = () => {
+    // setFailed(isVerified);
+    setModalIsOpen(false);
+  };
 
   return (
     <>
-      {verified ? (
+      {isVerified ? (
         <VerificationSuccessCard title={title} icon={icon} type={type} />
       ) : (
-        <li className="gri md:flex  items-center justify-between space-x-4 w-full border border-[#E5E5E5] rounded-[6px] p-2">
+        <li className="gri md:flex items-center justify-between space-x-4 w-full border border-[#E5E5E5] rounded-[6px] p-2">
           <div className="flex space-x-2 md:items-center w-full">
             <div className="bg-[#F5F5F7] md:p-4 p-3 rounded-[6px] w-[49.99px] md:w-[93px] h-fit flex items-center justify-center">
               <img
@@ -38,7 +56,7 @@ export const VerificationCard = ({
               <p className="font-semibold font-inter">{title}</p>
               <p className="text-sm font-inter font-normal">{value}</p>
 
-              <div className="md:hidden mt-4 mb-2 flex justify-between w-full items-center ">
+              <div className="md:hidden mt-4 mb-2 flex justify-between w-full items-center">
                 <CustomButton
                   padding="py-1 px-4 rounded"
                   text="Verify now"
@@ -48,7 +66,7 @@ export const VerificationCard = ({
                 <p className="text-[#96959F] text-xs font-inter">
                   Not verified{' '}
                   <span>
-                    {failed && (
+                    {isVerified && (
                       <img src="/public/images/failed-icon.svg" alt="Failed" />
                     )}
                   </span>
@@ -61,7 +79,7 @@ export const VerificationCard = ({
               <p className="text-[#96959F] text-xs font-inter flex items-baseline">
                 Not verified{' '}
                 <span className="ml-3">
-                  {failed && (
+                  {isVerified && (
                     <img
                       src="/public/images/failed-icon.svg"
                       alt="Failed"
@@ -73,7 +91,7 @@ export const VerificationCard = ({
               </p>
               <CustomButton
                 padding="py-1 px-4 rounded"
-                text={failed ? 'Try again' : 'Verify now'}
+                text={isVerified ? 'Try again' : 'Verify now'}
                 width="121px"
                 onClick={() => setModalIsOpen(true)}
                 className="mt-"
@@ -82,11 +100,10 @@ export const VerificationCard = ({
           </div>
         </li>
       )}
-      {failed && (
+      {isVerified === 'true' && (
         <article className="border border-[#BE0F02] p-2 bg-[#FEF0F0] rounded-[6px]">
           <p className="text-[#BE0F02] font-inter text-sm mt-1">
-            <strong>Verification Failed:</strong>
-            {errorMessage}
+            <strong>Verification Failed:</strong> {errorMessage}
           </p>
         </article>
       )}
@@ -98,10 +115,8 @@ export const VerificationCard = ({
         description={description}
         closeModal={() => setModalIsOpen(false)}
         modalIsOpen={modalIsOpen}
-        isLoading={isLoading}
-        // failed={failed}
-        setFailed={setFailed}
-        setVerified={setVerified}
+        setFailed={handleVerificationFailure}
+        setVerified={handleVerificationSuccess}
       />
     </>
   );
