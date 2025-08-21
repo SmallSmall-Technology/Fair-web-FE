@@ -1,94 +1,26 @@
 import { useForm } from 'react-hook-form';
-import { useState, useEffect } from 'react';
-import { getUser } from '../../../../../api/user-api';
-import { useQuery } from '@tanstack/react-query';
 
-import {
-  setUser,
-  selectCurrentDeliveryAddress,
-} from '../../../../../features/user/userSlice';
-import { useDispatch, useSelector } from 'react-redux';
+// import {
+//   selectCurrentDeliveryAddress,
+// } from '../../../../../features/user/userSlice';
+import { useSelector } from 'react-redux';
+import { selectCurrentAddress } from '../../../../../features/order/deliveryAddressSlice';
 
 export default function ProfileSummary() {
-  const dispatch = useDispatch();
-  // const { userData } = useSelector((state) => state.user);
-  const selectedDeliveryAddress = useSelector(selectCurrentDeliveryAddress);
+  const isVerified = useSelector((state) => state.user?.isVerified);
+  const selectedDeliveryAddress = useSelector(selectCurrentAddress);
+  const { data: user } = useSelector((state) => state.user);
 
-  const { data, error, refetch } = useQuery({
-    queryKey: ['users', localStorage.getItem('authToken')],
-    queryFn: getUser,
-    enabled: !!localStorage.getItem('authToken'),
-    onSuccess: (data) => {
-      if (data?.data) {
-        dispatch(setUser(data.data));
-      }
-    },
-    onError: (err) => {
-      if (err.response?.status === 401 || err.response?.status === 404) {
-        window.location.href = '/login';
-      }
-    },
-  });
-  const user = data?.data;
+  // console.log('User:', user);
 
-  const { register, reset } = useForm({
+  const { register } = useForm({
     defaultValues: {
-      firstName: user?.firstName,
-      lastName: user?.lastName,
-      email: user?.email,
-      phoneNumber: user?.phoneNumber,
+      firstName: user?.firstName || '',
+      lastName: user?.lastName || '',
+      email: user?.email || '',
+      phoneNumber: user?.phoneNumber || '',
     },
   });
-
-  const [isVerified] = useState(false);
-  // const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    if (user) {
-      reset({
-        firstName: user.firstName || '',
-        lastName: user.lastName || '',
-        email: user.email || '',
-        phoneNumber: user.phoneNumber || '',
-      });
-    }
-  }, [user, reset]);
-
-  // const mutation = useMutation({
-  //   mutationFn: updateUser,
-  //   onSuccess: (response) => {
-  //     queryClient.invalidateQueries({ queryKey: ['users'] });
-  //     refetch();
-  //     dispatch(setUser(response.data?.user || response.data));
-  //     toast.success('Profile updated successfully', {
-  //       autoClose: 3000,
-  //       className:
-  //         'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-  //       bodyClassName: 'm-0 p-0',
-  //       closeButton: false,
-  //     });
-  //   },
-  //   onError: (err) => {
-  //     toast.error(`Failed to update profile: ${err.message}`, {
-  //       autoClose: 3000,
-  //       className:
-  //         'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
-  //       bodyClassName: 'm-0 p-0',
-  //       closeButton: false,
-  //     });
-  //   },
-  // });
-
-  // const onSubmit = (formData) => {
-  //   const payload = {
-  //     firstName: formData.firstName,
-  //     lastName: formData.lastName,
-  //     phoneNumber: formData.phoneNumber,
-  //   };
-  //   mutation.mutate(payload);
-  // };
-
-  // if (isLoading) return <div>Loading profile...</div>;
 
   return (
     <div className="px-2 lg:px-6 font-inter">
@@ -210,9 +142,12 @@ export default function ProfileSummary() {
       <div className="grid lg:grid-cols-[40%_30%] gap-4 my-4 items-center">
         <p className="font-semibold text-sm">Delivery address</p>
         <p className="font-inter">
-          {selectedDeliveryAddress.streetAddress +
-            ', ' +
-            selectedDeliveryAddress.state}
+          {selectedDeliveryAddress?.streetAddress +
+            ' ' +
+            selectedDeliveryAddress?.state ||
+            user?.latest_address?.streetAddress +
+              ', ' +
+              user?.latest_address?.state}
         </p>
         {/* {!showModal ? (
           <div className="flex justify-between items-start font-inter">

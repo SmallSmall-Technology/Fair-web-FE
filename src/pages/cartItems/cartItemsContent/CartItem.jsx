@@ -11,7 +11,6 @@ import { SaveItemForLater } from '../../../features/cart/SaveItemForLater';
 import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 
 export const CartItem = ({ item, onTogglePlan, isLoading }) => {
-  console.log(item);
   if (isLoading) {
     return <CartItemSkeleton />;
   }

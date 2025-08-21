@@ -41,6 +41,19 @@ const TopBar = () => {
           Account profile
         </NavLink>
       </li>{' '}
+      <li>
+        <NavLink
+          to="/user-dashboard/rental"
+          end={false}
+          className={({ isActive }) =>
+            isActive
+              ? 'text-[#222224] border-b-2 border-black pb-[14px]'
+              : 'text-[#737376]'
+          }
+        >
+          Rental
+        </NavLink>
+      </li>{' '}
     </ul>
   );
 };

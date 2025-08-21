@@ -41,12 +41,18 @@ export const verifyAccountByID = async (data) => {
 };
 
 export const verifyAccountByAddress = async (data) => {
-  const response = await httpClient.patch('user/update-user-profile', data);
+  const response = await httpClient.patch(
+    'user/add-resendential-address',
+    data
+  );
   return response.data;
 };
 
 export const verifyDebtProfile = async (data) => {
-  const response = await httpClient.post('user/verify-debt', data);
+  const response = await httpClient.post(
+    'validate-bvn-and-get-credit-summary',
+    data
+  );
   return response.data;
 };
 

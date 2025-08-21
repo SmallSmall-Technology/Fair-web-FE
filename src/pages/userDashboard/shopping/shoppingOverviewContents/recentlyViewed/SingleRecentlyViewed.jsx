@@ -2,7 +2,6 @@ import { formatCurrency } from '../../../../../utils/FormatCurrency';
 import { ChevronRight } from 'lucide-react';
 
 export const SingleRecentlyViewed = ({ item }) => {
-  console.log(item);
   return (
     <li className="recentlyviewed-item grid grid-cols-1 gap-3">
       <div className="flex items-center py-3 px-2 justify-between text-balance">

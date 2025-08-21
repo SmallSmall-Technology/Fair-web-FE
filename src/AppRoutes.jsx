@@ -21,7 +21,7 @@ import {
   CheckoutPaymentSuccess,
   UserDashboard,
   ShoppingOverview,
-  CreditWallet,
+  // CreditWallet,
   PageNotFound,
   DirectDebit,
   Favorites,
@@ -56,6 +56,7 @@ import BuyerAndVendorProtection from './pages/buyerAndVendor/BuyerAndVendorProte
 import MarketplaceGuidelines from './pages/marketplaceGuidelines/MarketplaceGuidelines';
 import RefundsAndReturns from './pages/refundsAndReturns/RefundsAndReturns';
 import BuyingGuide from './pages/buyingGuide/BuyingGuide';
+import { CreditWallet } from './pages/userDashboard/shopping/shoppingOverviewContents/creditWallet/CreditWallet';
 
 const AppRoutes = () => {
   return (

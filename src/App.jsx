@@ -4,6 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import ScrollToTop from './utils/ScrollToTop';
 import { BrowserRouter } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { fetchUser } from './features/user/userSlice';
 
 const App = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -16,6 +18,12 @@ const App = () => {
         'DvRvStPZG9uOmNvcmU6ZHZydi11cy0xOmRldm8vMW5rOE8ybGtPTzpwbHVnX3NldHRpbmcvMV9ffHxfXzIwMjUtMDUtMTkgMTI6Mjg6MTguNjEzMTU2NzgyICswMDAwIFVUQw==xlxendsDvRv',
     });
   }, []);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
 
   useEffect(() => {
     const updateOnlineStatus = () => {
