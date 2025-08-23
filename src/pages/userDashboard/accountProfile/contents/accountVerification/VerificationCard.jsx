@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CustomButton } from '../../../../../utils/Button';
-import { AccountVerificationModal } from './AccountVerificationModal';
 import { VerificationSuccessCard } from './VerificationSuccessCard';
+import { AccountVerificationModal } from './AccountVerificationModal';
 import {
   selectError,
   selectVerificationStatus,
@@ -24,17 +24,14 @@ export const VerificationCard = ({
 
   const error = useSelector(selectError);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  // const [failed, setFailed] = useState(false);
 
   const handleVerificationSuccess = (isApproved) => {
     if (isApproved) {
       setModalIsOpen(false);
-      // setFailed(isVerified);
     }
   };
 
   const handleVerificationFailure = () => {
-    // setFailed(isVerified);
     setModalIsOpen(false);
   };
 

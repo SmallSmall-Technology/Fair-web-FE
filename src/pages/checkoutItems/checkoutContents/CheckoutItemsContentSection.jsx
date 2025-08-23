@@ -20,6 +20,7 @@ import {
   selectCurrentAddress,
   selectCurrentDeliveryAddress,
 } from '../../../features/order/deliveryAddressSlice.js';
+import { CheckoutDeliveryOptions } from './CheckoutDeliveryOptions.jsx';
 
 export const CheckoutItemsContentSection = () => {
   const [formIsOpen, setFormIsOpen] = useState(false);
@@ -128,8 +129,14 @@ export const CheckoutItemsContentSection = () => {
           />
         )}
 
+        <section className="mt-8">
+          <h2 className="font-calsans font-normal text-[21px] mb-4">
+            Delivery options
+          </h2>
+          <CheckoutDeliveryOptions />
+        </section>
         {/* Desktop payment section */}
-        <section className="mt-8 hidden lg:block px-">
+        <section className="mt-8 hidden lg:block">
           <div className="grid font-medium mb-4">
             <h2 className="text-[21px]">Payment method</h2>
             <p className="text-[#96959F]">All transactions are secured</p>

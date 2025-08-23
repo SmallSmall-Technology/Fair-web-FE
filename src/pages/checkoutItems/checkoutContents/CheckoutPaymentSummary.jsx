@@ -25,9 +25,9 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const totalCartPrice = useSelector(getTotalCartPrice);
 
   const VAT = (7.5 / 100) * totalCartPrice;
-  const shippingFee = +1200;
+  // const shippingFee = +1200;
   const subtTotal = totalCartPrice;
-  const total = totalCartPrice + VAT + shippingFee;
+  const total = totalCartPrice + VAT;
 
   const cartPaymentPlan = cart.map(
     (item) => item.paymentPlan || item.selectedPaymentPlan
@@ -68,10 +68,10 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
             <p className="text-right">{formatCurrency(VAT)}</p>
           </div>
 
-          <div className="flex justify-between">
+          {/* <div className="flex justify-between">
             <p className="font-medium text-sm">Shipping</p>
             <p className="text-right">{formatCurrency(shippingFee)}</p>
-          </div>
+          </div> */}
         </div>
 
         {!isConsolidatedCart && (
