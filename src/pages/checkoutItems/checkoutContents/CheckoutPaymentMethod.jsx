@@ -1,35 +1,18 @@
-import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useNavigate, Link } from 'react-router-dom';
-import { YellowButton } from '../../../utils/Button.jsx';
-import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import {
-  getTotalCartPrice,
-  // clearCart,
-} from '../../../features/cart/cartSlice.js';
-import {
-  createOrder,
-  makePayment,
-} from '../../../features/order/orderSlice.js';
-import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { createMonoCustomer } from '../../../api/orderAPI.js';
+import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
-import { selectLatestDeliveryAddress } from '../../../features/order/deliveryAddressSlice.js';
 import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
-import { useMutation } from '@tanstack/react-query';
-import { createMonoCustomer } from '../../../api/orderAPI.js';
 
 export const CheckoutPaymentMethod = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const totalCartPrice = useSelector(getTotalCartPrice);
   const cartItems = useSelector((state) => state.cart.cart);
-  const onDeliveryAddress = useSelector(selectLatestDeliveryAddress);
-  // console.log(handleProceedToMandate);
-  // const { data: user } = useSelector((state) => state.user);
 
   const isVerified = useSelector((state) =>
     selectVerificationStatus(state, 'debt')
@@ -139,6 +122,7 @@ export const CheckoutPaymentMethod = () => {
                   <img src="/images/MonoLogo.svg" alt="Mono Logo" />
                 </label>
               </div>
+              <hr />
               <div className="lg:px-4 py-1 lg:py-2">
                 <label
                   htmlFor="paystack-direct-debit"
@@ -161,22 +145,6 @@ export const CheckoutPaymentMethod = () => {
                   <img src="/images/PaystackLogo.svg" alt="Paystack Logo" />
                 </label>
               </div>
-              {/* <hr className="hidden lg:block" />
-              <div className="lg:px-4 py-1 lg:py-2">
-                <label htmlFor="interest-free-credit" className="text-sm">
-                  <input
-                    type="radio"
-                    id="interest-free-credit"
-                    {...register('picked')}
-                    value="interest-free-credit"
-                    className="px-4 py-10 mr-2"
-                  />
-                  Smallsmall Interest Free Credit{' '}
-                  <span className="text-[#96959F] text-xs">
-                    (Balance: {formatCurrency(0)})
-                  </span>
-                </label>
-              </div> */}
             </>
           )}
         </div>
@@ -186,20 +154,7 @@ export const CheckoutPaymentMethod = () => {
             {errors.picked.message}
           </div>
         )}
-
-        {/* {!InstallmentPayment && (
-          <div className="hidden lg:block">
-            <YellowButton
-              type="submit"
-              // disabled={isSubmitting}
-              disabled={isVerified && isSubmitting}
-            >
-              {isSubmitting ? 'Processing...' : 'Pay now'}
-            </YellowButton>
-          </div>
-        )} */}
       </form>
-      {/* {InstallmentPayment && ( */}
       <section className=" grid gap-14 px-8">
         {!isVerified && (
           <>
@@ -237,7 +192,6 @@ export const CheckoutPaymentMethod = () => {
           </button>
         </div>
       </section>
-      {/* )} */}
     </div>
   );
 };
