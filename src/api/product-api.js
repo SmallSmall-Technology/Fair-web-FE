@@ -73,21 +73,3 @@ export const fetchReviewsForProduct = async (productId) => {
   );
   return response.data;
 };
-
-export const fetchCartItems = async ({
-  isAuthenticated,
-  userId,
-  cartSessionID,
-}) => {
-  try {
-    const params = isAuthenticated ? { userId } : { cartSessionID };
-    const response = await httpClient.get('/cart/view-cart', { params });
-    if (!response.data?.success) {
-      throw new Error(response.data?.message || 'Failed to fetch cart');
-    }
-    return response.data;
-  } catch (error) {
-    console.error('Failed to fetch cart:', error);
-    throw error.message || 'Failed to fetch cart';
-  }
-};

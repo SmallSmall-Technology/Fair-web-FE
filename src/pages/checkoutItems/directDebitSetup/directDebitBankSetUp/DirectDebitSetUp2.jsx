@@ -1,75 +1,111 @@
-import { X } from 'lucide-react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-
-import { DirectDebitBankSetupForm } from './DirectDebitBankSetupForm';
-import { DirectDebitBankSetupFormAuthorizeConsent } from './DirectDebitBankSetupFormAuthorizeConsent';
-import React from 'react';
-import {
-  selectMandateData,
-  setMandateData,
-} from '../../../../features/mono/mandateSlice';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { PaymentFooter } from '../PaymentFooter';
+import { CustomButton } from '../../../../utils/Button';
+import { Minus, MoveDown, MoveRight } from 'lucide-react';
+import { formatCurrency } from '../../../../utils/FormatCurrency';
+import { SendMoneyCard } from '../../../../ui/components/SendMoneyCard';
 
 export const DirectDebitSetUp2 = () => {
-  const { state } = useLocation();
+  const bankDetails = useSelector((state) => state.mandate.bankDetails);
+
+  const mono = {
+    bankName: 'WEMA BANK',
+    accountNumber: '0987654321',
+  };
+
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  // Pull from Redux if not passed from previous page
-  const mandateFromRedux = useSelector(selectMandateData);
-  const mandateData = state || mandateFromRedux;
-
-  const [authorized, setAuthorized] = React.useState(false);
-
-  // If no mandate data, redirect back to step 1
-  React.useEffect(() => {
-    if (!mandateData) {
-      navigate('/cart-items/checkout/mandate/create');
-    }
-  }, [mandateData, navigate]);
-
-  // Handle bank code + account update
-  const handleBankInfoSubmit = (bankCode, accountNumber) => {
-    dispatch(
-      setMandateData({
-        ...mandateData,
-        bankCode,
-        accountNumber,
-      })
-    );
-    setAuthorized(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate('/cart-items/checkout/mandate/create-success');
   };
 
   return (
-    <>
-      <header className="border-b-2 text-center flex justify-between items-center w-full px-4 lg:px-32 py-5">
-        <Link to="/" className="w-[128px] lg:w-[149px]">
-          <img
-            src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
-            alt="Smallsmall Logo"
-            className="w-full"
-          />
-        </Link>
-        <Link
-          to="/cart-items/checkout"
-          className="bg-[#ECEDF1] px-3 md:px-5 py-2 rounded-[5px] text-sm font-medium flex items-center border"
-        >
-          <X color="#EF4237" />
-          <span>Cancel Setup</span>
-        </Link>
-      </header>
+    <section className="font-inter max-w-6xl mx-auto grid gap-10 pt-10 px-4 lg:px-6 ">
+      <>
+        <div className="font-inter font-medium text-xs flex items-center justify-start mb-8 lg:mb-4 lg:justify-end ">
+          <div className="flex items-center gap-1">
+            <span className="font-medium text-[11px] text-white bg-black px-1 lg:px-2 py-[3px] rounded-[1px]">
+              1
+            </span>
+            <p className="flex items-center text-xs whitespace-nowrap">
+              Bank Account{' '}
+              <span>
+                <Minus />
+              </span>
+            </p>
+          </div>
 
-      <section className="bg-[#FAFAFA]">
-        {!authorized ? (
-          <DirectDebitBankSetupForm
-            onSubmitBankInfo={handleBankInfoSubmit} // Pass function to child
-            initialBankCode={mandateData?.bankCode || ''}
-            initialAccountNumber={mandateData?.accountNumber || ''}
+          <div className="flex items-center gap-1">
+            <span className="font-medium text-[11px] text-white bg-black px-1 lg:px-2 py-[3px] rounded-[1px]">
+              2
+            </span>
+            <p className="flex items-center text-xs whitespace-nowrap">
+              Authorize consent
+              <span>
+                <Minus />
+              </span>
+            </p>
+          </div>
+
+          <div className="flex items-center gap-1 opacity-25">
+            <span className="font-medium text-[11px] text-white bg-black px-1 lg:px-2 py-[3px] rounded-[1px]">
+              3
+            </span>
+            <p className="text-xs whitespace-nowrap">Setup Complete</p>
+          </div>
+        </div>
+        <h2 className="font-outfit text-3xl font-bold mb-4 lg:mb-2">
+          Direct debit setup
+        </h2>
+        <p className="text-sm font-medium mb-4 lg:max-w-[804px]">
+          A transfer of{' '}
+          <span className="font-semibold">{formatCurrency(50)}</span> serves as
+          your formal consent to authorize and link direct debit for this order
+          to your bank account, enabling seamless recurring payments.
+        </p>
+        <div className="flex items-center">
+          <span className="mr-2 font-medium text-[11px] text-white bg-black p-2 py-[4px]">
+            2
+          </span>
+          <p className="text-sm font-medium ">Authorize consent</p>
+        </div>
+      </>
+
+      <div className="w-full lg:max-w-[855px]">
+        <div className="grid gap-3 lg:flex items-center space-y-8 lg:space-y-0 lg:justify-between ">
+          <SendMoneyCard
+            action="Send from"
+            bankName={bankDetails?.bankName}
+            accountNumber={bankDetails?.accountNumber}
+            amount={'₦50'}
           />
-        ) : (
-          <DirectDebitBankSetupFormAuthorizeConsent />
-        )}
-      </section>
-    </>
+          <MoveRight className="hidden lg:flex" size={70} />
+          <MoveDown className=" lg:hidden w-full" size={40} />
+
+          <SendMoneyCard
+            action="Send to"
+            bankName={mono?.bankName}
+            monoAccountNumber={mono?.accountNumber}
+          />
+        </div>
+        <div className=" flex flex-col  lg:w-[377px] lg:ml-auto ">
+          <p className="lg:pr-5 pt-2 pb-4 text-center">
+            This wema bank account expires in 23:50 secs
+          </p>
+          <CustomButton
+            text="I have sent the money"
+            bgColor="var(--yellow-primary)"
+            hoverColor="var(--btn-hover-bg-primary)"
+            width="lg:w-[400px]"
+            fontWeight="font-medium"
+            textSize="text-sm"
+            onClick={handleSubmit}
+          />
+        </div>
+      </div>
+      <PaymentFooter />
+    </section>
   );
 };

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCompletedOrders } from '../../../features/order/orderSlice';
-import { logout } from '../../../features/auth/authSlice';
+import { logout, performLogout } from '../../../features/auth/authSlice';
 import { getUserFullName } from '../../../features/user/userSlice';
 
 export const LoggedInUserDropdown = ({
@@ -39,7 +39,7 @@ export const LoggedInUserDropdown = ({
   }, []);
 
   const handleLogOutUser = () => {
-    dispatch(logout());
+    dispatch(performLogout());
     toast.success('Logged Out Successfully', {
       className:
         'bg-[var(--yellow-primary)] text-black text-sm rounded-md min-h-0',

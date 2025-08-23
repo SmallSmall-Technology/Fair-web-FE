@@ -19,6 +19,8 @@ import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 import { selectLatestDeliveryAddress } from '../../../features/order/deliveryAddressSlice.js';
 import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
+import { useMutation } from '@tanstack/react-query';
+import { createMonoCustomer } from '../../../api/orderAPI.js';
 
 export const CheckoutPaymentMethod = () => {
   const dispatch = useDispatch();
@@ -26,12 +28,31 @@ export const CheckoutPaymentMethod = () => {
   const totalCartPrice = useSelector(getTotalCartPrice);
   const cartItems = useSelector((state) => state.cart.cart);
   const onDeliveryAddress = useSelector(selectLatestDeliveryAddress);
-  const handleProceedToMandate = useProceedToMandate();
+  // console.log(handleProceedToMandate);
   // const { data: user } = useSelector((state) => state.user);
 
   const isVerified = useSelector((state) =>
     selectVerificationStatus(state, 'debt')
   );
+
+  const proceedToMandate = useProceedToMandate();
+
+  const { mutate: createMonoUser, isPending } = useMutation({
+    mutationFn: createMonoCustomer,
+    onSuccess: () => {
+      toast.success('Mono customer created successfully');
+      proceedToMandate();
+    },
+    onError: (error) => {
+      toast.error(
+        error?.response?.data?.message || 'Error creating Mono customer'
+      );
+    },
+  });
+
+  const handleCreateMonoCustomer = () => {
+    createMonoUser();
+  };
 
   const {
     register,
@@ -118,6 +139,28 @@ export const CheckoutPaymentMethod = () => {
                   <img src="/images/MonoLogo.svg" alt="Mono Logo" />
                 </label>
               </div>
+              <div className="lg:px-4 py-1 lg:py-2">
+                <label
+                  htmlFor="paystack-direct-debit"
+                  className="text-sm flex items-center justify-between"
+                >
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      id="paystack-direct-debit"
+                      {...register('picked')}
+                      value="paystack-direct-debit"
+                      className="px-4 py-10 mr-2"
+                      defaultChecked
+                    />
+                    Direct debit
+                    {/* <span className="text-xs rounded-[2px] bg-[var(--yellow-primary)] py-1 px-2">
+                      Recommended
+                    </span> */}
+                  </div>
+                  <img src="/images/PaystackLogo.svg" alt="Paystack Logo" />
+                </label>
+              </div>
               {/* <hr className="hidden lg:block" />
               <div className="lg:px-4 py-1 lg:py-2">
                 <label htmlFor="interest-free-credit" className="text-sm">
@@ -144,7 +187,7 @@ export const CheckoutPaymentMethod = () => {
           </div>
         )}
 
-        {!InstallmentPayment && (
+        {/* {!InstallmentPayment && (
           <div className="hidden lg:block">
             <YellowButton
               type="submit"
@@ -154,7 +197,7 @@ export const CheckoutPaymentMethod = () => {
               {isSubmitting ? 'Processing...' : 'Pay now'}
             </YellowButton>
           </div>
-        )}
+        )} */}
       </form>
       {/* {InstallmentPayment && ( */}
       <section className=" grid gap-14 px-8">
@@ -182,15 +225,15 @@ export const CheckoutPaymentMethod = () => {
         <div className="hidden lg:block ">
           <button
             type="button"
-            disabled={!isVerified || isSubmitting}
-            onClick={handleProceedToMandate}
+            disabled={!isVerified || isSubmitting || isPending}
+            onClick={handleCreateMonoCustomer}
             className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
               !isVerified
                 ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                 : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
             }`}
           >
-            Set up direct debit
+            {isPending ? 'Setting up...' : 'Set up direct debit'}
           </button>
         </div>
       </section>

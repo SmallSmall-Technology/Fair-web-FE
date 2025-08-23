@@ -7,7 +7,6 @@ import Login from './pages/login/Login';
 import ProtectedRoute from './ProtectedRoute';
 import UserDashboardLayout from './ui/components/layout/UserDashboardLayout';
 import VerificationSent from './pages/cartItems/cartItemsContent/VerificationSent';
-// import PageNotFound from './pages/pageNotFound/PageNotFound';
 
 import {
   RealEstateHome,
@@ -21,7 +20,6 @@ import {
   CheckoutPaymentSuccess,
   UserDashboard,
   ShoppingOverview,
-  // CreditWallet,
   PageNotFound,
   DirectDebit,
   Favorites,
@@ -34,7 +32,6 @@ import CheckoutItemsSkeleton from './ui/components/skeletons/CheckoutItemsSkelet
 import ProductDetailsSkeleton from './ui/components/skeletons/ProductDetailsSkeleton';
 import CheckoutPaymentSkeleton from './ui/components/skeletons/CheckoutPaymentSkeleton';
 import DashboardSummarySkeleton from './ui/components/skeletons/DashboardSummarySkeleton';
-// import SubCategoryPage from './pages/productCategories/SubCategoryPage';
 import LandingPageSkeleton from './ui/components/skeletons/LandingPageSkeleton';
 import { DynamicSubCategoryPage } from './pages/DynamicSubcategoryPage';
 import Summary from './pages/userDashboard/shopping/shoppingOverviewContents/Summary';
@@ -49,14 +46,14 @@ import ResolutionCentre from './pages/userDashboard/accountProfile/contents/reso
 import UserAccountProfile from './pages/userDashboard/accountProfile/UserAccountProfile';
 import TermsOfUse from './pages/termsOfUse/TermsOfUse';
 import HowItWorks from './pages/howItWorks/HowItWorks';
-import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/DirectDebitSetUp1';
-import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetupPaymentSuccess';
 import BuyerAndVendorProtection from './pages/buyerAndVendor/BuyerAndVendorProtection';
 import MarketplaceGuidelines from './pages/marketplaceGuidelines/MarketplaceGuidelines';
 import RefundsAndReturns from './pages/refundsAndReturns/RefundsAndReturns';
 import BuyingGuide from './pages/buyingGuide/BuyingGuide';
 import { CreditWallet } from './pages/userDashboard/shopping/shoppingOverviewContents/creditWallet/CreditWallet';
+import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp1';
+import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 
 const AppRoutes = () => {
   return (

@@ -57,7 +57,7 @@ export const CheckoutItemsContentSection = () => {
   if (isError) {
   }
 
-  const addresses = data?.data?.data || [];
+  // const addresses = data?.data?.data || [];
 
   const deliveryAddress = [
     currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
@@ -66,7 +66,6 @@ export const CheckoutItemsContentSection = () => {
     .filter(Boolean)
     .join(' ');
 
-  // console.log(currentDeliveryAddress);
   return (
     <section className="grid lg:grid-cols-[60%_40%] lg:px-[76p]">
       <main className="w-full pt-8 lg:block lg:px-8">

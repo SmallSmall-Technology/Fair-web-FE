@@ -1,24 +1,20 @@
-/* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Minus, Search } from 'lucide-react';
-
-const banks = [
-  { name: 'GT Bank', code: '058' },
-  { name: 'Standard Chartered Bank', code: '068' },
-  { name: 'Zenith Bank', code: '057' },
-  { name: 'Wema Bank', code: '035' },
-  { name: 'United Bank for Africa', code: '033' },
-  { name: 'Access Bank', code: '044' },
-  { name: 'Union Bank', code: '032' },
-  { name: 'First Bank', code: '011' },
-];
-
-export const DirectDebitBankSetupForm = ({
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { getMonoBanks, validateAccountNumber } from '../../../../api/orderAPI';
+import {
   setAuthorized,
-  onSubmitBankInfo,
-}) => {
+  setBankDetails,
+  setMandateData,
+} from '../../../../features/mono/mandateSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+export const DirectDebitBankSetupForm = () => {
   const [search, setSearch] = useState('');
+  const [verified, setVerified] = useState(false);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -26,19 +22,61 @@ export const DirectDebitBankSetupForm = ({
     setValue,
     formState: { errors },
   } = useForm();
-
   const selectedBankName = watch('selectedBank');
   const accountNumber = watch('accountNumber');
 
+  const navigate = useNavigate();
+
+  const { data: monoBanks } = useQuery({
+    queryKey: ['monoBanks'],
+    queryFn: getMonoBanks,
+  });
+
+  const availableBanks = monoBanks?.data?.banks.filter(
+    (bank) => bank?.direct_debit === true
+  );
+  const bankDetails = useSelector((state) => state.mandate.bankDetails);
+  const mandateData = useSelector((state) => state.mandate.mandateData);
+
+  const { mutate: validateAcc, isPending: isValidating } = useMutation({
+    mutationFn: ({ nipCode, accountNumber }) =>
+      validateAccountNumber(nipCode, accountNumber),
+    onSuccess: (res) => {
+      const isAuthorized = res.data?.status === 'successful';
+      setVerified(isAuthorized);
+
+      if (!isAuthorized) {
+        toast.error('Account number not authorized');
+        return; // 🚫 stop here
+      }
+
+      // If authorized → update state + navigate
+      dispatch(setBankDetails(res?.data));
+      dispatch(
+        setMandateData({
+          bankCode: res.data?.bankCode,
+          accountNumber: res.data?.accountNumber,
+        })
+      );
+      dispatch(setAuthorized(true));
+
+      navigate('setup-2', {
+        state: { mandateData: res.data, bankDetails: res.data },
+      });
+    },
+  });
+
   const onSubmit = () => {
-    const bankObj = banks.find((b) => b.name === selectedBankName);
+    const bankObj = availableBanks.find((b) => b.name === selectedBankName);
     if (!bankObj) return;
 
-    // send bank code + account number to parent (so Redux can be updated)
-    onSubmitBankInfo(bankObj.code, accountNumber);
+    const bankPayload = {
+      nipCode: bankObj?.nip_code,
+      accountNumber,
+    };
 
-    // proceed to next step
-    setAuthorized(true);
+    // only trigger validation — don't navigate here
+    validateAcc(bankPayload);
   };
 
   return (
@@ -100,13 +138,13 @@ export const DirectDebitBankSetupForm = ({
           </div>
 
           <ul className="space-y-3 max-h-72 overflow-auto">
-            {banks
-              .filter((bank) =>
+            {availableBanks
+              ?.filter((bank) =>
                 bank.name.toLowerCase().includes(search.toLowerCase())
               )
               .map((bank) => (
                 <li
-                  key={bank.code}
+                  key={bank.nip_code}
                   className={`text-sm font-medium flex items-center justify-between p-2 rounded cursor-pointer hover:bg-gray-50 ${
                     selectedBankName === bank.name
                       ? 'bg-gray-100 border-black'
@@ -178,15 +216,20 @@ export const DirectDebitBankSetupForm = ({
           )}
           <button
             type="submit"
-            disabled={!selectedBankName || !accountNumber}
+            disabled={!selectedBankName || !accountNumber || isValidating}
             className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
               !selectedBankName || !accountNumber
                 ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                 : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
             }`}
           >
-            Authorise
+            {isValidating ? 'Validating...' : 'Authorize'}
           </button>
+          {verified && (
+            <p className="text-sm text-green-500 mt-2">
+              Bank details validated successfully!
+            </p>
+          )}
         </div>
       </aside>
     </form>
