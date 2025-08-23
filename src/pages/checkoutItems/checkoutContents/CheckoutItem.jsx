@@ -38,7 +38,7 @@ export const CheckoutItem = () => {
                       currentQuantity={item?.quantity}
                     />
                   </div>
-                  <p className=" font-semibold mb-3">
+                  <p className="font-semibold mb-3">
                     {formatCurrency(item.price)}
                   </p>
                   <p className="text-xs">Delivery</p>
@@ -50,7 +50,7 @@ export const CheckoutItem = () => {
               </div>
             </div>
 
-            <p className="hidden lg:block font-semibold font-calsans">
+            <p className="hidden lg:block font-semibold font-inter text-sm">
               {formatCurrency(item?.price)}
             </p>
           </li>

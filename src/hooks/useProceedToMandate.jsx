@@ -17,8 +17,8 @@ export const useProceedToMandate = () => {
     0
   );
   const VAT = (7.5 / 100) * totalCartPrice;
-  const shippingFee = 1200;
-  const total = totalCartPrice + VAT + shippingFee;
+  // const shippingFee = 1200;
+  const total = totalCartPrice + VAT;
 
   const cartPaymentPlan = cart.map(
     (item) => item.paymentPlan || item.selectedPaymentPlan
@@ -31,8 +31,9 @@ export const useProceedToMandate = () => {
     alreadyNavigatedRef.current = true;
 
     const payload = {
-      first_installment_payment:
-        consolidatedPayments.firstPayment + VAT + shippingFee,
+      // first_installment_payment:
+      //   consolidatedPayments.firstPayment + VAT + shippingFee,
+      first_installment_payment: null,
       first_debit_date: new Date().toISOString().split('T')[0],
       last_installment_payment:
         consolidatedPayments.otherPayments.at(-1)?.amount,

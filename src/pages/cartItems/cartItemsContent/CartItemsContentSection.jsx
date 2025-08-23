@@ -16,7 +16,6 @@ import { CartSummaryExtrasAndCoupon } from './CartSummaryExtrasAndCoupon';
 import ChangePlanModal from '../../../utils/ChangePlanModal';
 
 const CartItemsContentSection = React.memo(() => {
-  const shippingFee = +1200;
   const navigate = useNavigate();
   const [isUpgraded, setIsUpgraded] = useState(false);
   const [planModalOpen, setPlanModalOpen] = useState(false); // 🔹 Modal open for all items
@@ -24,7 +23,7 @@ const CartItemsContentSection = React.memo(() => {
   const totalCartPrice = useSelector(getTotalCartPrice);
   const VAT = (7.5 / 100) * totalCartPrice;
   const totalCartQuantity = useSelector(getTotalCartQuantity);
-  const subtTotal = totalCartPrice + VAT + shippingFee;
+  const subtTotal = totalCartPrice + VAT;
   const dispatch = useDispatch();
 
   // Sync Redux store
