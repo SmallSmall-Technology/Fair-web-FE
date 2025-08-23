@@ -14,6 +14,7 @@ import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.js
 import { useNavigate } from 'react-router-dom';
 import { setMandateData } from '../../../features/mono/mandateSlice.js';
 import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
+import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
 
 export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const dispatch = useDispatch();
@@ -38,7 +39,9 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   // Function to handle proceeding to mandate creation
   const handleProceedToMandate = useProceedToMandate();
 
-  const debtProfileVerified = false;
+  const isVerified = useSelector((state) =>
+    selectVerificationStatus(state, 'debt')
+  );
 
   return (
     <>
@@ -132,7 +135,7 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
               ) : (
                 <YellowButton
                   onClick={handleProceedToMandate}
-                  disabled={!debtProfileVerified}
+                  disabled={!isVerified}
                 >
                   Set up direct debit
                 </YellowButton>

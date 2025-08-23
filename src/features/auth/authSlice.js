@@ -133,6 +133,7 @@ import {
 import { login as loginAPI } from '../../api/authAPI';
 import httpClient from '../../api/http-clients';
 import { fetchUser } from '../user/userSlice'; // user slice handles user state
+import { clearCart } from '../cart/cartSlice';
 
 const initialState = {
   token: null,
@@ -229,6 +230,11 @@ const authSlice = createSlice({
 
 export const { logout, clearError } = authSlice.actions;
 export default authSlice.reducer;
+
+export const performLogout = () => (dispatch) => {
+  dispatch(logout());
+  dispatch(clearCart());
+};
 
 // Selectors
 export const selectAuth = (state) => state.auth;

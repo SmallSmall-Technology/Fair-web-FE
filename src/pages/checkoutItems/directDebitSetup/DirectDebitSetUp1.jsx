@@ -10,7 +10,6 @@ export const DirectDebitSetUp1 = () => {
 
   const mandateFromRedux = useSelector(selectMandateData);
   const mandateData = state || mandateFromRedux;
-  console.log(mandateFromRedux);
 
   const orderAmount = mandateData ? mandateData?.consolidated_total_amount : 0;
 
