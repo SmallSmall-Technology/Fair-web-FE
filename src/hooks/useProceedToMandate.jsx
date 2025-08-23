@@ -1,16 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
-import { consolidateCartPayments } from '../utils/ConsolidateCartPayment';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { setMandateData } from '../features/mono/mandateSlice';
-import { selectCurrentDeliveryAddress } from '../features/order/deliveryAddressSlice';
+import { consolidateCartPayments } from '../utils/ConsolidateCartPayment';
+import { selectCurrentAddress } from '../features/order/deliveryAddressSlice';
 
 export const useProceedToMandate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alreadyNavigatedRef = useRef(false);
-  const selectedDeliveryAddress = useSelector(selectCurrentDeliveryAddress);
-
+  const selectedDeliveryAddress = useSelector(selectCurrentAddress);
   const cart = useSelector((state) => state.cart.cart);
 
   const totalCartPrice = cart.reduce(
@@ -25,6 +24,7 @@ export const useProceedToMandate = () => {
     (item) => item.paymentPlan || item.selectedPaymentPlan
   );
   const consolidatedPayments = consolidateCartPayments(cart);
+  const user = useSelector((state) => state.user);
 
   const proceed = () => {
     if (alreadyNavigatedRef.current) return;
@@ -47,16 +47,16 @@ export const useProceedToMandate = () => {
       description: '',
       deliveryFullAddress:
         selectedDeliveryAddress?.streetAddress +
-        ', ' +
-        selectedDeliveryAddress?.state,
-      deliveryState: selectedDeliveryAddress?.state,
-      bankCode: '',
-      accountNumber: '',
+          ', ' +
+          selectedDeliveryAddress?.state || user?.latest_address?.streetAddress,
+      deliveryState:
+        selectedDeliveryAddress?.state || user?.latest_address?.state,
       products: cart.map((item) => ({
         productID: item.productID,
         quantity: item.quantity,
       })),
     };
+
     dispatch(setMandateData(payload));
     navigate('/cart-items/checkout/mandate/create', {
       state: payload,
