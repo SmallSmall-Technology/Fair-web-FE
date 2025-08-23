@@ -1,21 +1,56 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { formatCurrency } from '../../../utils/FormatCurrency';
+import { setSelectedDeliveryOption } from '../../../features/order/deliveryAddressSlice';
 
 export const CheckoutDeliveryOptions = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: { picked: '' },
-  });
-
   const standard_delivery_amount = 'FREE';
   const express_delivery_amount = 3000;
   const same_day_delivery_amount = 5000;
+
+  const [deliveryOptions] = useState([
+    {
+      label: 'STANDARD DELIVERY ( 3-5 DAYS )',
+      amount: standard_delivery_amount,
+      value: 'standard',
+    },
+    {
+      label: 'EXPRESS DELIVERY',
+      amount: formatCurrency(express_delivery_amount),
+      value: 'express',
+    },
+    {
+      label: 'SAME DAY DELIVERY',
+      amount: formatCurrency(same_day_delivery_amount),
+      value: 'sameDay',
+    },
+  ]);
+
+  const dispatch = useDispatch();
+
+  const {
+    register,
+    formState: { errors },
+  } = useForm({
+    defaultValues: { picked: 'standard' },
+  });
+
+  const handleChange = (e) => {
+    const selectedValue = e.target.value;
+    const selectedOption = deliveryOptions.find(
+      (option) => option.value === selectedValue
+    );
+    if (selectedOption) {
+      console.log('Selected delivery option:', selectedOption);
+      dispatch(setSelectedDeliveryOption(selectedOption));
+    }
+    console.log('Selected delivery option value:', selectedValue);
+  };
+
   return (
     <div>
-      <form onSubmit={handleSubmit()} className="px-8 lg:px-0 ">
+      <form className="px-8 lg:px-0">
         <h1 className="lg:hidden text-lg font-bold mt-6 mb-3">
           Payment method
         </h1>
@@ -29,77 +64,38 @@ export const CheckoutDeliveryOptions = () => {
             Payment Options
           </span>
 
-          <div className="lg:px-4 py-1 lg:py-2">
-            <label
-              htmlFor="direct-debit"
-              className="text-sm flex items-center justify-between"
-            >
-              <div className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  id="direct-debit"
-                  {...register('picked')}
-                  value="direct debit"
-                  className="px-4 py-10 mr-2"
-                  defaultChecked
-                />
-                STANDARD DELIVERY ( 3-5 DAYS )
-              </div>
-              <p className="font-inter font-semibold text-sm">
-                {standard_delivery_amount}
-              </p>
-            </label>
-          </div>
-          <hr className="hidden lg:block" />
-
-          <div className="lg:px-4 py-1 lg:py-2">
-            <label
-              htmlFor="paystack-direct-debit"
-              className="text-sm flex items-center justify-between"
-            >
-              <div className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  id="paystack-direct-debit"
-                  {...register('picked')}
-                  value="paystack-direct-debit"
-                  className="px-4 py-10 mr-2"
-                  defaultChecked
-                />
-                EXPRESS DELIVERY
-              </div>
-              <p className="font-inter font-semibold text-sm">
-                {formatCurrency(express_delivery_amount)}
-              </p>
-            </label>
-          </div>
-          <hr className="hidden lg:block" />
-          <div className="lg:px-4 py-1 lg:py-2">
-            <label
-              htmlFor="paystack-direct-debit"
-              className="text-sm flex items-center justify-between"
-            >
-              <div className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  id="paystack-direct-debit"
-                  {...register('picked')}
-                  value="paystack-direct-debit"
-                  className="px-4 py-10 mr-2"
-                  defaultChecked
-                />
-                SAME DAY DELIVERY
-              </div>
-              <p className="font-inter font-semibold text-sm">
-                {formatCurrency(same_day_delivery_amount)}
-              </p>
-            </label>
-          </div>
+          {deliveryOptions?.map((deliveryOption, index) => (
+            <div key={deliveryOption?.value} className="">
+              <label
+                htmlFor={deliveryOption?.value}
+                className=" px-4 py-2 text-sm flex items-center justify-between w-full cursor-pointer"
+              >
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    id={deliveryOption?.value}
+                    {...register('picked', {
+                      required: 'Please select a delivery option',
+                    })}
+                    value={deliveryOption?.value}
+                    className="mr-2"
+                    defaultChecked={deliveryOption?.value === 'standard'}
+                    onChange={handleChange}
+                  />
+                  {deliveryOption?.label}
+                </div>
+                <p className="font-inter font-semibold text-sm">
+                  {deliveryOption?.amount}
+                </p>
+              </label>
+              {index !== deliveryOptions?.length - 1 && <hr />}
+            </div>
+          ))}
         </div>
 
         {errors.picked && (
           <div className="text-red-500 text-xs mt-3">
-            {errors.picked.message}
+            {errors?.picked?.message}
           </div>
         )}
       </form>
