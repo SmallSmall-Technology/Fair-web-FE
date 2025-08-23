@@ -26,8 +26,7 @@ export const CartSummary = ({
   const totalCartQuantity = cartSummary.total_items || 0;
   const totalCartPrice = cartSummary.subtotal || 0;
   const VAT = (7.5 / 100) * totalCartPrice;
-  const shippingFee = +1200;
-  const subtTotal = totalCartPrice + VAT + shippingFee;
+  const subtTotal = totalCartPrice + VAT;
   const cartPaymentPlan = cart.map((item) => item.paymentPlan);
   const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
   const consolidatedPayments = consolidateCartPayments(cart);
@@ -38,7 +37,7 @@ export const CartSummary = ({
         <hr className="lg:hidden mb-8" />
 
         {/* Cart Summary: Items, VAT, Shipping */}
-        <div className="space-y-4">
+        <div className="font-inter font-medium space-y-4">
           <div className="flex justify-between">
             <p className="hidden lg:flex font-medium">
               {cart.length > 1 ? 'items' : 'item'} ({totalCartQuantity}) total
@@ -50,11 +49,6 @@ export const CartSummary = ({
           <div className="flex justify-between">
             <p className="font-medium">VAT</p>
             <p className="text-right">{formatCurrency(VAT)}</p>
-          </div>
-
-          <div className="flex justify-between">
-            <p className="font-medium">Shipping</p>
-            <p className="text-right">{formatCurrency(shippingFee)}</p>
           </div>
         </div>
 
@@ -86,9 +80,7 @@ export const CartSummary = ({
                   <p className="text-[#828386]">Today</p>
                 </div>
                 <p className="font-calsans">
-                  {formatCurrency(
-                    consolidatedPayments.firstPayment + VAT + shippingFee
-                  )}
+                  {formatCurrency(consolidatedPayments.firstPayment + VAT)}
                 </p>
               </div>
 
@@ -133,7 +125,7 @@ export const CartSummary = ({
           <button
             type="submit"
             onClick={onHandleCheckout}
-            className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 text-lg font-medium hover:bg-gray-50 ${
+            className={`font-calsans group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 text-lg font-medium hover:bg-gray-50 ${
               subtTotal >= 500000 && !isUpgraded
                 ? 'bg-[#E5E5E5] text-[#CDCBCC]'
                 : 'bg-yellow-300 text-black'
@@ -141,7 +133,7 @@ export const CartSummary = ({
           >
             <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full" />
             <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-base">
-              Go to Checkout
+              Checkout
             </span>
           </button>
         </div>
@@ -150,7 +142,7 @@ export const CartSummary = ({
           <button
             type="submit"
             onClick={onHandleCheckout}
-            className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 text-lg font-medium hover:bg-gray-50 ${
+            className={`font-calsans group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 text-lg font-medium hover:bg-gray-50 ${
               subtTotal >= 500000 && !isUpgraded
                 ? 'bg-[#E5E5E5] text-[#CDCBCC]'
                 : 'bg-yellow-300 text-black'

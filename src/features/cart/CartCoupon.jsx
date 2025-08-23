@@ -20,7 +20,7 @@ export const CartCoupon = () => {
   return (
     <div className="mt-8">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-2 lg:w-[70%]">
+        <div className="grid gap-2 lg:w-[70%] font-inter">
           <label htmlFor="coupon" className="flex items-center">
             <span>
               <img src="../../../images/label.svg" alt="label logo" />
