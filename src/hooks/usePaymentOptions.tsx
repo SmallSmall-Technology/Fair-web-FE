@@ -1,4 +1,3 @@
-// hooks/usePaymentOptions.ts
 import { useMemo } from 'react';
 
 export const usePaymentOptions = (product: any) => {

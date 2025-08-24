@@ -16,15 +16,15 @@ export const useProceedToMandate = () => {
   const selectedDeliveryOption = useSelector(selectDeliveryOption);
   const cart = useSelector((state) => state.cart.cart);
 
-  console.log(selectedDeliveryOption);
-
   const totalCartPrice = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
   const VAT = (7.5 / 100) * totalCartPrice;
-  // const shippingFee = 1200;
-  const total = totalCartPrice + VAT;
+  const shippingFee = selectedDeliveryOption?.amount;
+  // console.log(shippingFee);
+
+  const total = totalCartPrice + VAT + shippingFee;
 
   const cartPaymentPlan = cart.map(
     (item) => item.paymentPlan || item.selectedPaymentPlan
@@ -37,9 +37,9 @@ export const useProceedToMandate = () => {
     alreadyNavigatedRef.current = true;
 
     const payload = {
-      // first_installment_payment:
-      //   consolidatedPayments.firstPayment + VAT + shippingFee,
-      first_installment_payment: null,
+      first_installment_payment:
+        consolidatedPayments.firstPayment + VAT + shippingFee,
+      // first_installment_payment: null,
       first_debit_date: new Date().toISOString().split('T')[0],
       last_installment_payment:
         consolidatedPayments.otherPayments.at(-1)?.amount,
@@ -51,7 +51,7 @@ export const useProceedToMandate = () => {
       consolidated_total_amount: total,
       frequency: cartPaymentPlan[0],
       paymentPlan: cartPaymentPlan[0],
-      description: '',
+      description: null,
       deliveryFullAddress:
         selectedDeliveryAddress?.streetAddress +
           ', ' +
@@ -62,6 +62,7 @@ export const useProceedToMandate = () => {
         productID: item.productID,
         quantity: item.quantity,
       })),
+      deliveryOption: null,
     };
 
     dispatch(setMandateData(payload));
