@@ -4,19 +4,35 @@ import httpClient from '../../api/http-clients';
 const mandateSlice = createSlice({
   name: 'mandate',
   initialState: {
-    data: null, // stores the checkout payload
+    data: {},
+    authorized: false,
+    bankDetails: {},
   },
   reducers: {
     setMandateData: (state, action) => {
-      state.data = action.payload;
+      state.data = {
+        ...state.data, // keep existing fields
+        ...action.payload, // update only what’s new
+      };
+    },
+    setBankDetails: (state, action) => {
+      state.bankDetails = action.payload;
     },
     clearMandateData: (state) => {
-      state.data = null;
+      state.data = {};
+    },
+    setAuthorized: (state, action) => {
+      state.authorized = action.payload;
     },
   },
 });
 
-export const { setMandateData, clearMandateData } = mandateSlice.actions;
+export const {
+  setMandateData,
+  clearMandateData,
+  setAuthorized,
+  setBankDetails,
+} = mandateSlice.actions;
 export const selectMandateData = (state) => state.mandate.data;
 export default mandateSlice.reducer;
 

@@ -6,6 +6,7 @@ import { getTotalCartQuantity } from '../../../features/cart/cartSlice';
 import {
   getUserIsAuthenticated,
   logout,
+  performLogout,
 } from '../../../features/auth/authSlice';
 import { toast } from 'react-toastify';
 import { useEffect, useRef, useState } from 'react';
@@ -29,7 +30,7 @@ export const MobileNavBar = () => {
   };
 
   const handleLogOutUser = () => {
-    dispatch(logout());
+    dispatch(performLogout());
 
     // Delay navigation slightly to allow state cleanup
     setTimeout(() => {

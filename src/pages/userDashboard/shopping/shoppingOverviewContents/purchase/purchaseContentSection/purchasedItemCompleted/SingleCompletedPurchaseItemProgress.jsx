@@ -1,11 +1,11 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ChevronRight } from 'lucide-react';
 import { PaymentHistory } from './PaymentHistory';
 import { formatCurrency } from '../../../../../../../utils/FormatCurrency';
 import { completedPurchaseProgressData } from '../../../../../userDashboardData';
-import { selectLatestDeliveryAddress } from '../../../../../../../features/user/userSlice';
-import React from 'react';
+import { selectLatestDeliveryAddress } from '../../../../../../../features/order/deliveryAddressSlice';
 
 const SingleCompletedPurchaseItemProgress = React.memo(
   ({ product, onToggleExpand, index, item }) => {

@@ -1,0 +1,52 @@
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  current_address: null,
+  delivery_address: null,
+  latest_address: null,
+  deliveryOption: null,
+};
+
+const deliverySlice = createSlice({
+  name: 'delivery',
+  initialState,
+  reducers: {
+    updateLatestDeliveryAddress: (state, action) => {
+      state.latest_address = action.payload;
+    },
+    addDeliveryAddress: (state, action) => {
+      state.delivery_address = action.payload;
+    },
+    setSelectedDeliveryAddress: (state, action) => {
+      state.current_address = action.payload;
+    },
+    setSelectedDeliveryOption: (state, action) => {
+      state.deliveryOption = action.payload;
+    },
+    clearDeliveryAddresses: (state) => {
+      state.current_address = null;
+      state.delivery_address = null;
+      state.latest_address = null;
+      state.deliveryOption = null;
+    },
+  },
+});
+
+// ✅ export actions
+export const {
+  updateLatestDeliveryAddress,
+  addDeliveryAddress,
+  setSelectedDeliveryAddress,
+  clearDeliveryAddresses,
+  setSelectedDeliveryOption,
+} = deliverySlice.actions;
+
+export default deliverySlice.reducer;
+
+// ✅ selectors
+export const selectLatestDeliveryAddress = (state) =>
+  state.delivery.latest_address;
+export const selectCurrentDeliveryAddress = (state) =>
+  state.delivery.delivery_address;
+export const selectCurrentAddress = (state) => state.delivery.current_address;
+export const selectDeliveryOption = (state) => state.delivery.deliveryOption;

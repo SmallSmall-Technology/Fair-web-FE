@@ -1,4 +1,4 @@
-import WalletBalance from './CreditWallet';
+import CreditWalletSummary from './creditWallet/CreditWalletSummary';
 import { useSelector } from 'react-redux';
 import { RecentlyViewedSummary } from './recentlyViewed/RecentlyViewedSummary';
 
@@ -8,7 +8,7 @@ import {
   getOngoingOrders,
 } from '../../../../features/order/orderSlice';
 import { RecentlyPurchased } from './purchase/RecentlyPurchased';
-import { ActiveDirectDebit } from './DirectDebit/ActiveDirectDebit';
+import { SingleActiveDirectDebit } from './DirectDebit/SingleActiveDirectDebit';
 import { CreditScoreCard } from '../shoppingOverview/CreditScoreCard';
 
 const Summary = () => {
@@ -64,11 +64,12 @@ const Summary = () => {
       {ongoingOrders ? (
         <div className="grid grid-cols-1  justify-between gap-4">
           <div className="lg:flex gap-2 w-full">
-            <ActiveDirectDebit />
+            {/* <ActiveDirectDebit /> */}
+            <SingleActiveDirectDebit item={ongoingOrders} />
             <RecentlyPurchased />
           </div>
           <div className="lg:flex gap-2 w-full">
-            <WalletBalance />
+            <CreditWalletSummary />
             <RecentlyViewedSummary />
           </div>
         </div>
@@ -79,7 +80,7 @@ const Summary = () => {
             <RecentlyViewedSummary />
           </div>
           <div className="lg:flex gap-2 w-full">
-            <WalletBalance />
+            <CreditWalletSummary />
           </div>
         </div>
       )}

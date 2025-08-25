@@ -1,20 +1,32 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getUser } from '../../api/user-api';
+import httpClient from '../../api/http-clients'; // axios instance
+
+// Async thunk for fetching user
+export const fetchUser = createAsyncThunk(
+  'user/fetchUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      if (!token) {
+        return rejectWithValue('No auth token found');
+      }
+
+      httpClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      const { data } = await getUser();
+
+      return data; // return actual user object
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || 'Failed to fetch user'
+      );
+    }
+  }
+);
 
 const initialState = {
-  user: {
-    id: null,
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    current_address: null,
-    isTier2: null,
-    userCategory: null,
-    lastLogin: null,
-    createdAt: null,
-    updatedAt: null,
-    delivery_address: null,
-  },
+  data: null,
   status: 'idle',
   error: null,
 };
@@ -24,34 +36,59 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.user = { ...state.user, ...action.payload };
+      state.data = { ...state.data, ...action.payload };
       state.status = 'succeeded';
       state.error = null;
     },
-    updateLatestDeliveryAddress: (state, action) => {
-      state.user.current_address = action.payload;
-      state.status = 'succeeded';
-      state.error = null;
-    },
-    addDeliveryAddress: (state, action) => {
-      state.user.delivery_address = action.payload;
-      state.status = 'succeeded';
-      state.error = null;
-    },
-    setSelectedDeliveryAddress: (state, action) => {
-      state.user.delivery_address = action.payload;
-      state.status = 'succeeded';
-      state.error = null;
-    },
+    // updateLatestDeliveryAddress: (state, action) => {
+    //   if (state.data) {
+    //     state.data.current_address = action.payload;
+    //   }
+    // },
+    // addDeliveryAddress: (state, action) => {
+    //   if (state.data) {
+    //     state.data.delivery_address = action.payload;
+    //   }
+    // },
+    // setSelectedDeliveryAddress: (state, action) => {
+    //   if (state.data) {
+    //     state.data.delivery_address = action.payload;
+    //   }
+    // },
     setError: (state, action) => {
       state.status = 'failed';
       state.error = action.payload;
     },
     clearUser: (state) => {
-      state.user = initialState.user;
+      state.data = null;
       state.status = 'idle';
       state.error = null;
     },
+    setDebtProfileVerification: (state, action) => {
+      if (state.data) {
+        state.data.debt_profile_verification = action.payload;
+      }
+    },
+    setResidentialAddress: (state, action) => {
+      if (state.data) {
+        state.data.residentialAddress = action.payload;
+      }
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUser.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.data = action.payload;
+      })
+      .addCase(fetchUser.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      });
   },
 });
 
@@ -62,30 +99,30 @@ export const {
   setError,
   clearUser,
   setSelectedDeliveryAddress,
+  setDebtProfileVerification,
+  setResidentialAddress,
 } = userSlice.actions;
+
 export default userSlice.reducer;
 
-export const selectLatestDeliveryAddress = (state) => {
-  const user = state.user.user;
-  return user?.current_address?.streetAddress && user?.current_address?.state;
-};
+// ✅ Fix selectors
+// export const selectLatestDeliveryAddress = (state) =>
+//   state.user.data?.current_address || null;
 
-export const selectCurrentDeliveryAddress = (state) => {
-  const user = state.user.user;
-  return user?.delivery_address || null;
-};
+// export const selectCurrentDeliveryAddress = (state) =>
+//   state.user.data?.delivery_address || null;
 
-export const selectCurrentAddress = (state) => {
-  const user = state.user.user;
-  return user?.current_address || null;
-};
+// export const selectCurrentAddress = (state) =>
+//   state.user.data?.current_address || null;
 
 export const getUserFullName = (state) => {
-  const user = state.user.user;
-  return `${user.firstName} ${user.lastName}`.trim() || 'Guest';
+  const user = state.user.data;
+  if (!user) return 'Guest';
+  return `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Guest';
 };
 
-export const getUserFirstName = (state) => {
-  const user = state.user.user;
-  return user.firstName || 'Guest';
-};
+export const getUserFirstName = (state) =>
+  state.user.data?.firstName || 'Guest';
+
+export const isUserDebtProfileVerified = (state) =>
+  state.user.data?.debt_profile_verification === 'VERIFIED';

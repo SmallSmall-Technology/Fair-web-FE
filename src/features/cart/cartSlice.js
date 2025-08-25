@@ -24,13 +24,8 @@ export const fetchCart = createAsyncThunk(
     const cartSessionID = getCartSessionId();
 
     try {
-      const payload = isAuthenticated ? { userID } : { cartSessionID };
-
-      const response = await httpClient.post('/cart/view-cart', payload, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const params = isAuthenticated ? { userID } : { cartSessionID };
+      const response = await httpClient.post('/cart/view-cart', { params });
       if (!response.data?.success) {
         return rejectWithValue(
           response.data?.message || 'Failed to fetch cart'
@@ -115,22 +110,11 @@ export const addToCart = createAsyncThunk(
     dispatch(cartSlice.actions.optimisticAdd(normalizedProduct));
 
     try {
-      const response = await httpClient.post(
-        '/cart/add-to-cart',
-        {
-          productID: product.productID,
-          quantity: normalizedProduct.quantity,
-          cartSessionID: getCartSessionId(),
-          // paymentPlan: selectedPaymentPlan,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            // Add any additional headers used in Postman
-            // 'Authorization': 'Bearer your-token',
-          },
-        }
-      );
+      const response = await httpClient.post('/cart/add-to-cart', {
+        productID: product.productID,
+        quantity: normalizedProduct.quantity,
+        cartSessionID: getCartSessionId(),
+      });
 
       // Sync with backend
       const fetchResult = await dispatch(fetchCart()).unwrap();
@@ -203,7 +187,7 @@ export const updateCartItem = createAsyncThunk(
       // return response.data;
       // ✅ Preserve selectedPaymentPlan locally even if API doesn't return it
       return {
-        ...response.data, // includes updated totals from API
+        ...response.data,
         quantity,
         paymentPlan: existingItem.paymentPlan,
       };
@@ -342,13 +326,6 @@ const cartSlice = createSlice({
       );
 
       if (!existing) {
-        // existing.quantity =
-        //   Number(existing.quantity || 0) + Number(product.quantity || 1);
-        // existing.totalPrice =
-        //   Number(existing.price || product.selectedPaymentPlanDetails.amount) *
-        //   existing.quantity;
-        // toast.warn('Item quantity updated in cart');
-
         state.cart.push({
           ...product,
           quantity: Number(product.quantity || 1),
@@ -400,6 +377,14 @@ const cartSlice = createSlice({
           (sum, i) => sum + Number(i.totalPrice || 0),
           0
         ),
+      };
+    },
+    clearCart: (state) => {
+      state.cart = [];
+      state.cart_summary = {
+        total_items: 0,
+        total_quantity: 0,
+        total_amount: 0,
       };
     },
   },
@@ -512,6 +497,7 @@ export const {
   setItemPaymentPlan,
   optimisticAdd,
   rollback,
+  clearCart,
 } = cartSlice.actions;
 
 export const getCart = (state) => state.cart.cart;

@@ -47,7 +47,7 @@ export const ShoppingOverview = lazy(
 export const CreditWallet = lazy(
   () =>
     import(
-      './pages/userDashboard/shopping/shoppingOverviewContents/CreditWallet'
+      './pages/userDashboard/shopping/shoppingOverviewContents/creditWallet/CreditWallet'
     )
 );
 

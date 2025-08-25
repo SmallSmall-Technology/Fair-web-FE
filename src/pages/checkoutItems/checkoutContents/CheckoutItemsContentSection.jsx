@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { startTransition } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { CheckoutItem } from './CheckoutItem.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { CartFooter } from '../../cartItems/CartFooter.jsx';
+import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 import { makePayment } from '../../../features/order/orderSlice.js';
+import { getCartSummary } from '../../../features/cart/cartSlice.js';
+import { fetchUserDeliveryAddresses } from '../../../api/user-api.js';
 import { CheckoutPaymentSummary } from './CheckoutPaymentSummary.jsx';
 import { CheckoutDeliveryAddressButton } from '../../../utils/Button.jsx';
-import {
-  selectCurrentAddress,
-  selectCurrentDeliveryAddress,
-} from '../../../features/user/userSlice.js';
-import { useQuery } from '@tanstack/react-query';
-import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
-import { fetchUserDeliveryAddresses } from '../../../api/user-api.js';
 import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
 import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.jsx';
 import { CheckoutPaymentMethod } from '../checkoutContents/CheckoutPaymentMethod.jsx';
 import EditCheckoutDeliveryAddressForm from '../checkoutAddress/EditCheckoutDeliveryAddressForm.jsx';
 import AddCheckoutDelieveryAddressForm from '../checkoutAddress/AddCheckoutDelieveryAddressForm.jsx';
-import { getCartSummary } from '../../../features/cart/cartSlice.js';
+import {
+  selectCurrentAddress,
+  selectCurrentDeliveryAddress,
+} from '../../../features/order/deliveryAddressSlice.js';
+import { CheckoutDeliveryOptions } from './CheckoutDeliveryOptions.jsx';
 
 export const CheckoutItemsContentSection = () => {
   const [formIsOpen, setFormIsOpen] = useState(false);
   const [addFormIsOpen, setAddFormIsOpen] = useState(false);
   const currentDeliveryAddress = useSelector(selectCurrentAddress);
+  const { data: user } = useSelector((state) => state.user);
+  const { latest_address } = user;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,15 +56,13 @@ export const CheckoutItemsContentSection = () => {
   });
 
   if (isError) {
-    console.error('Error fetching addresses:', isError);
   }
 
-  const addresses = data?.data?.data || [];
+  // const addresses = data?.data?.data || [];
 
-  // Always use the first address if available
   const deliveryAddress = [
-    selectedDeliveryAddress?.streetAddress,
-    selectedDeliveryAddress?.state,
+    currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
+    currentDeliveryAddress?.state || latest_address?.state,
   ]
     .filter(Boolean)
     .join(' ');
@@ -78,7 +79,7 @@ export const CheckoutItemsContentSection = () => {
         <div className="lg:hidden border border-t-2 border-[#E5E5E5] w-full h-0 my-4"></div>
 
         {/* Address section */}
-        <div className="px- pt-8">
+        <div className="px-5 pt-8">
           <h2 className="mt-7 mb-3 font-medium text-[21px] lg:hidden">
             Shipping address
           </h2>
@@ -112,10 +113,13 @@ export const CheckoutItemsContentSection = () => {
 
         {/* Edit address form */}
         {formIsOpen && (
-          <EditCheckoutDeliveryAddressForm
-            currentDeliveryAddress={addresses[0]}
-            onClose={() => setFormIsOpen(false)}
-          />
+          <div className="px-5 md:px-0">
+            <EditCheckoutDeliveryAddressForm
+              // currentDeliveryAddress={addresses[0]}
+              currentDeliveryAddress={currentDeliveryAddress}
+              onClose={() => setFormIsOpen(false)}
+            />
+          </div>
         )}
 
         {/* Add address form */}
@@ -125,8 +129,14 @@ export const CheckoutItemsContentSection = () => {
           />
         )}
 
+        <section className="mt-8">
+          <h2 className="font-calsans font-normal text-[21px] mb-4">
+            Delivery options
+          </h2>
+          <CheckoutDeliveryOptions />
+        </section>
         {/* Desktop payment section */}
-        <section className="mt-8 hidden lg:block px-">
+        <section className="mt-8 hidden lg:block">
           <div className="grid font-medium mb-4">
             <h2 className="text-[21px]">Payment method</h2>
             <p className="text-[#96959F]">All transactions are secured</p>

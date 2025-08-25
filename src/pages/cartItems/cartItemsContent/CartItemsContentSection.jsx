@@ -16,7 +16,6 @@ import { CartSummaryExtrasAndCoupon } from './CartSummaryExtrasAndCoupon';
 import ChangePlanModal from '../../../utils/ChangePlanModal';
 
 const CartItemsContentSection = React.memo(() => {
-  const shippingFee = +1200;
   const navigate = useNavigate();
   const [isUpgraded, setIsUpgraded] = useState(false);
   const [planModalOpen, setPlanModalOpen] = useState(false); // 🔹 Modal open for all items
@@ -24,7 +23,7 @@ const CartItemsContentSection = React.memo(() => {
   const totalCartPrice = useSelector(getTotalCartPrice);
   const VAT = (7.5 / 100) * totalCartPrice;
   const totalCartQuantity = useSelector(getTotalCartQuantity);
-  const subtTotal = totalCartPrice + VAT + shippingFee;
+  const subtTotal = totalCartPrice + VAT;
   const dispatch = useDispatch();
 
   // Sync Redux store
@@ -61,14 +60,16 @@ const CartItemsContentSection = React.memo(() => {
 
   return (
     <main className="my-5 pt-36 lg:pt-28">
-      <div className="mx-6 lg:mx-[60px] 2xl:mx-[150px] flex space-x-[510px] items-center justify-between lg:justify-start mb-6">
+      <div className="mx-6 lg:mx-[60px] 2xl:mx-[150px] grid md:flex lg:space-x-[510px] items-center justify-between lg:justify-start mb-6">
         <h1 className="hidden lg:flex font-semibold text-3xl">Your Cart</h1>
-        <h1 className="flex lg:hidden font-semibold text-3xl">Shopping Cart</h1>
+        <h1 className="flex lg:hidden font-semibold text-3xl mb-5">
+          Shopping Cart
+        </h1>
         {cartItems.length > 0 && (
           <button
             type="submit"
             onClick={() => setPlanModalOpen(true)} // 🔹 Open modal for all cart items
-            className="group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[var(--yellow-primary)] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black hover:underline"
+            className="font-inter group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[var(--yellow-primary)] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black hover:underline"
           >
             <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-bg-[var(--yellow-primary)] "></span>
             <span className="relative transform duration-700 group-hover:-translate-x-1 mx-auto font-medium text-xs">
@@ -89,10 +90,10 @@ const CartItemsContentSection = React.memo(() => {
             <button
               type="submit"
               onClick={handleCheckout}
-              className={`group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 text-lg font-medium hover:bg-gray-50 ${
+              className={`font-inter font-medium group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 text-lg hover:bg-gray-50 ${
                 subtTotal >= 500000 && !isUpgraded
                   ? 'bg-[#E5E5E5] text-[#CDCBCC]'
-                  : 'bg-yellow-300 text-black'
+                  : 'bg-[var(--yellow-primary)] text-black'
               }`}
             >
               <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-bg-[var(--yellow-primary)] "></span>

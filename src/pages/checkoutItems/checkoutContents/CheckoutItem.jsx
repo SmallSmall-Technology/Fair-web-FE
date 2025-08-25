@@ -8,8 +8,8 @@ export const CheckoutItem = () => {
 
   return (
     <ul className="grid grid-cols-1 lg:px-8 gap-4 pt-20 lg:pt-10 font-inter">
-      {cart.map((item) => (
-        <article className="checkout-item" key={item?.id}>
+      {cart.map((item, index) => (
+        <article className="checkout-item" key={item?.productID}>
           <li
             className="flex flex-col lg:flex-row justify-between items-start"
             key={item.id}
@@ -38,7 +38,7 @@ export const CheckoutItem = () => {
                       currentQuantity={item?.quantity}
                     />
                   </div>
-                  <p className=" font-semibold mb-3">
+                  <p className="font-semibold mb-3">
                     {formatCurrency(item.price)}
                   </p>
                   <p className="text-xs">Delivery</p>
@@ -50,11 +50,11 @@ export const CheckoutItem = () => {
               </div>
             </div>
 
-            <p className="hidden lg:block font-semibold font-calsans">
+            <p className="hidden lg:block font-semibold font-inter text-sm">
               {formatCurrency(item?.price)}
             </p>
           </li>
-          <hr className="lg:hidden my-4" />
+          {index !== cart.length - 1 && <hr className="lg:hidden my-4" />}
         </article>
       ))}
     </ul>

@@ -11,7 +11,6 @@ import { SaveItemForLater } from '../../../features/cart/SaveItemForLater';
 import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
 
 export const CartItem = ({ item, onTogglePlan, isLoading }) => {
-  console.log(item);
   if (isLoading) {
     return <CartItemSkeleton />;
   }
@@ -87,7 +86,7 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
               </div>
             </div>
 
-            <div className="hidden md:grid">
+            <div className="font-inter hidden md:grid">
               <div className="flex">
                 <div className="flex flex-col items-end">
                   <p className="text-xl font-semibold mb-6">{displayedPrice}</p>
@@ -135,7 +134,7 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
 
         <div className="hidden md:flex items-center mx-4">
           <hr className="flex-grow border-[#E5E5E5]" />
-          <p className="px-4 py-2 text-xs font-semibold text-gray-700 bg-[#F6F6F6] rounded-[20px]">
+          <p className="font-inter px-4 py-2 text-xs font-semibold text-gray-700 bg-[#F6F6F6] rounded-[20px]">
             Payment Plan
           </p>
           <hr className="flex-grow border-[#E5E5E5]" />

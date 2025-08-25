@@ -1,38 +1,45 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
-import { consolidateCartPayments } from '../utils/ConsolidateCartPayment';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { setMandateData } from '../features/mono/mandateSlice';
-import { selectCurrentDeliveryAddress } from '../features/user/userSlice';
+import { consolidateCartPayments } from '../utils/ConsolidateCartPayment';
+import {
+  selectCurrentAddress,
+  selectDeliveryOption,
+} from '../features/order/deliveryAddressSlice';
 
 export const useProceedToMandate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alreadyNavigatedRef = useRef(false);
-  const selectedDeliveryAddress = useSelector(selectCurrentDeliveryAddress);
-
+  const selectedDeliveryAddress = useSelector(selectCurrentAddress);
+  const selectedDeliveryOption = useSelector(selectDeliveryOption);
   const cart = useSelector((state) => state.cart.cart);
+
+  console.log(selectedDeliveryOption);
 
   const totalCartPrice = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
   const VAT = (7.5 / 100) * totalCartPrice;
-  const shippingFee = 1200;
-  const total = totalCartPrice + VAT + shippingFee;
+  // const shippingFee = 1200;
+  const total = totalCartPrice + VAT;
 
   const cartPaymentPlan = cart.map(
     (item) => item.paymentPlan || item.selectedPaymentPlan
   );
   const consolidatedPayments = consolidateCartPayments(cart);
+  const user = useSelector((state) => state.user);
 
   const proceed = () => {
     if (alreadyNavigatedRef.current) return;
     alreadyNavigatedRef.current = true;
 
     const payload = {
-      first_installment_payment:
-        consolidatedPayments.firstPayment + VAT + shippingFee,
+      // first_installment_payment:
+      //   consolidatedPayments.firstPayment + VAT + shippingFee,
+      first_installment_payment: null,
       first_debit_date: new Date().toISOString().split('T')[0],
       last_installment_payment:
         consolidatedPayments.otherPayments.at(-1)?.amount,
@@ -47,16 +54,16 @@ export const useProceedToMandate = () => {
       description: '',
       deliveryFullAddress:
         selectedDeliveryAddress?.streetAddress +
-        ', ' +
-        selectedDeliveryAddress?.state,
-      deliveryState: selectedDeliveryAddress?.state,
-      bankCode: '',
-      accountNumber: '',
+          ', ' +
+          selectedDeliveryAddress?.state || user?.latest_address?.streetAddress,
+      deliveryState:
+        selectedDeliveryAddress?.state || user?.latest_address?.state,
       products: cart.map((item) => ({
         productID: item.productID,
         quantity: item.quantity,
       })),
     };
+
     dispatch(setMandateData(payload));
     navigate('/cart-items/checkout/mandate/create', {
       state: payload,

@@ -14,6 +14,7 @@ import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.js
 import { useNavigate } from 'react-router-dom';
 import { setMandateData } from '../../../features/mono/mandateSlice.js';
 import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
+import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
 
 export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const dispatch = useDispatch();
@@ -24,9 +25,9 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const totalCartPrice = useSelector(getTotalCartPrice);
 
   const VAT = (7.5 / 100) * totalCartPrice;
-  const shippingFee = +1200;
+  // const shippingFee = +1200;
   const subtTotal = totalCartPrice;
-  const total = totalCartPrice + VAT + shippingFee;
+  const total = totalCartPrice + VAT;
 
   const cartPaymentPlan = cart.map(
     (item) => item.paymentPlan || item.selectedPaymentPlan
@@ -38,7 +39,9 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   // Function to handle proceeding to mandate creation
   const handleProceedToMandate = useProceedToMandate();
 
-  const debtProfileVerified = false;
+  const isVerified = useSelector((state) =>
+    selectVerificationStatus(state, 'debt')
+  );
 
   return (
     <>
@@ -65,10 +68,10 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
             <p className="text-right">{formatCurrency(VAT)}</p>
           </div>
 
-          <div className="flex justify-between">
+          {/* <div className="flex justify-between">
             <p className="font-medium text-sm">Shipping</p>
             <p className="text-right">{formatCurrency(shippingFee)}</p>
-          </div>
+          </div> */}
         </div>
 
         {!isConsolidatedCart && (
@@ -132,7 +135,7 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
               ) : (
                 <YellowButton
                   onClick={handleProceedToMandate}
-                  disabled={!debtProfileVerified}
+                  disabled={!isVerified}
                 >
                   Set up direct debit
                 </YellowButton>
