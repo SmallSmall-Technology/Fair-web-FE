@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { startTransition } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 import { CheckoutItem } from './CheckoutItem.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { CartFooter } from '../../cartItems/CartFooter.jsx';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 import { makePayment } from '../../../features/order/orderSlice.js';
 import { getCartSummary } from '../../../features/cart/cartSlice.js';
-import { fetchUserDeliveryAddresses } from '../../../api/user-api.js';
 import { CheckoutPaymentSummary } from './CheckoutPaymentSummary.jsx';
 import { CheckoutDeliveryAddressButton } from '../../../utils/Button.jsx';
 import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
@@ -18,7 +16,7 @@ import EditCheckoutDeliveryAddressForm from '../checkoutAddress/EditCheckoutDeli
 import AddCheckoutDelieveryAddressForm from '../checkoutAddress/AddCheckoutDelieveryAddressForm.jsx';
 import {
   selectCurrentAddress,
-  selectCurrentDeliveryAddress,
+  selectDeliveryOption,
 } from '../../../features/order/deliveryAddressSlice.js';
 import { CheckoutDeliveryOptions } from './CheckoutDeliveryOptions.jsx';
 
@@ -31,15 +29,15 @@ export const CheckoutItemsContentSection = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const cart = useSelector((state) => state.cart.cart);
-  const cartPaymentPlan = cart.map((item) => item.paymentPlan);
+  const cart = useSelector((state) => state?.cart.cart);
+  const cartPaymentPlan = cart.map((item) => item?.paymentPlan);
   const isConsolidatedCart = cartPaymentPlan.every((plan) => plan !== 'full');
   const consolidatedPayments = consolidateCartPayments(cart);
-  const selectedDeliveryAddress = useSelector(selectCurrentDeliveryAddress);
+  const selectedDeliveryOption = useSelector(selectDeliveryOption);
+  const shippingFee = selectedDeliveryOption?.amount;
   const cartSummary = useSelector(getCartSummary);
-  const totalCartPrice = cartSummary.subtotal || 0;
+  const totalCartPrice = cartSummary?.subtotal || 0;
   const VAT = (7.5 / 100) * totalCartPrice;
-  const shippingFee = +1200;
 
   const handleSubmitPaymentMethod = (values) => {
     if (values) {
@@ -50,22 +48,12 @@ export const CheckoutItemsContentSection = () => {
     }
   };
 
-  const { data, isError } = useQuery({
-    queryKey: ['useraddresses'],
-    queryFn: fetchUserDeliveryAddresses,
-  });
-
-  if (isError) {
-  }
-
-  // const addresses = data?.data?.data || [];
-
   const deliveryAddress = [
     currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
     currentDeliveryAddress?.state || latest_address?.state,
   ]
     .filter(Boolean)
-    .join(' ');
+    .join(', ');
 
   return (
     <section className="grid lg:grid-cols-[60%_40%] lg:px-[76p]">
@@ -115,7 +103,6 @@ export const CheckoutItemsContentSection = () => {
         {formIsOpen && (
           <div className="px-5 md:px-0">
             <EditCheckoutDeliveryAddressForm
-              // currentDeliveryAddress={addresses[0]}
               currentDeliveryAddress={currentDeliveryAddress}
               onClose={() => setFormIsOpen(false)}
             />
@@ -130,7 +117,7 @@ export const CheckoutItemsContentSection = () => {
         )}
 
         <section className="mt-8">
-          <h2 className="font-calsans font-normal text-[21px] mb-4">
+          <h2 className="font-calsans font-normal text-[21px] mb-4 mx-6 md:mx-0">
             Delivery options
           </h2>
           <CheckoutDeliveryOptions />
@@ -148,7 +135,7 @@ export const CheckoutItemsContentSection = () => {
         </section>
       </main>
 
-      {/* ASIDE SECTION — UNTOUCHED */}
+      {/* ASIDE SECTION  */}
       <aside className=" border-l-2 h-full pt-8 lg:bg-[#F2F2F2] lg:pr-[12px]">
         <p className="hidden lg:block font-semibold pl-8 pt-6">
           Review your order

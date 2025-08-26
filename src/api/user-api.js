@@ -42,7 +42,7 @@ export const verifyAccountByID = async (data) => {
 
 export const verifyAccountByAddress = async (data) => {
   const response = await httpClient.patch(
-    'user/add-resendential-address',
+    'user/add-resindential-address',
     data
   );
   return response.data;

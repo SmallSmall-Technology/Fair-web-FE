@@ -1,11 +1,11 @@
 import React from 'react';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 
-const CartItemFulllPayment = React.memo(({ product }) => {
+const CartItemFullPayment = React.memo(({ product }) => {
   const { quantity } = product;
   const paymentsInFull = [
     {
-      amount: product.price * quantity,
+      amount: product?.price * quantity,
       label: 'Pay in full now today',
       date: new Date(),
       icon: '/images/full-circle.svg',
@@ -19,12 +19,12 @@ const CartItemFulllPayment = React.memo(({ product }) => {
       </p>
       <article className="flex">
         <div className="flex space-x-5 w-full">
-          {paymentsInFull.map((payment, index) => (
+          {paymentsInFull?.map((payment, index) => (
             <div key={index} className="flex items-center space-x-2 min-w-fit">
               <div className="h- w-7">
                 <img
-                  src={payment.icon}
-                  alt={`${payment.label} payment icon`}
+                  src={payment?.icon}
+                  alt={`${payment?.label} payment icon`}
                   className="h-full w-full"
                 />
               </div>
@@ -33,7 +33,7 @@ const CartItemFulllPayment = React.memo(({ product }) => {
                   {formatCurrency(payment?.amount)}
                 </p>
                 <span className="text-[11px] text-center min-w-fit bg-bl">
-                  {payment.label}
+                  {payment?.label}
                 </span>
               </div>
             </div>
@@ -44,4 +44,4 @@ const CartItemFulllPayment = React.memo(({ product }) => {
   );
 });
 
-export default CartItemFulllPayment;
+export default CartItemFullPayment;
