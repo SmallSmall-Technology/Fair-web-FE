@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { formatCurrency } from '../../../utils/FormatCurrency';
-import { setSelectedDeliveryOption } from '../../../features/order/deliveryAddressSlice';
 import { setMandateData } from '../../../features/mono/mandateSlice';
+import { setSelectedDeliveryOption } from '../../../features/order/deliveryAddressSlice';
 
 export const CheckoutDeliveryOptions = () => {
-  const standard_delivery_amount = 'FREE';
+  const standard_delivery_amount = 0;
   const express_delivery_amount = 3000;
   const same_day_delivery_amount = 5000;
 
@@ -43,9 +43,8 @@ export const CheckoutDeliveryOptions = () => {
       (option) => option.value === selectedValue
     );
     if (selectedOption) {
-      console.log('Selected delivery option:', selectedOption);
       dispatch(setSelectedDeliveryOption(selectedOption));
-      dispatch(setMandateData({ deliveryOption: selectedOption }));
+      dispatch(setMandateData({ deliveryOption: selectedOption.value }));
     }
   };
 
@@ -80,15 +79,14 @@ export const CheckoutDeliveryOptions = () => {
                     })}
                     value={deliveryOption?.value}
                     className="mr-2"
-                    defaultChecked={deliveryOption?.value === 'standard'}
                     onChange={handleChange}
                   />
                   {deliveryOption?.label}
                 </div>
                 <p className="font-inter font-semibold text-sm">
-                  {typeof deliveryOption?.amount === 'number'
-                    ? formatCurrency(deliveryOption?.amount)
-                    : deliveryOption?.amount}
+                  {deliveryOption?.amount === 0
+                    ? 'FREE'
+                    : formatCurrency(deliveryOption?.amount)}
                 </p>
               </label>
               {index !== deliveryOptions?.length - 1 && <hr />}

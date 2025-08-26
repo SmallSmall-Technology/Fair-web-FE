@@ -10,6 +10,7 @@ import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
+import { Globe } from 'lucide-react';
 
 export const CheckoutPaymentMethod = () => {
   const cartItems = useSelector((state) => state.cart.cart);
@@ -23,7 +24,6 @@ export const CheckoutPaymentMethod = () => {
   const { mutate: createMonoUser, isPending } = useMutation({
     mutationFn: createMonoCustomer,
     onSuccess: () => {
-      toast.success('Mono customer created successfully');
       proceedToMandate();
     },
     onError: (error) => {
@@ -37,6 +37,10 @@ export const CheckoutPaymentMethod = () => {
     createMonoUser();
   };
 
+  const handlePayOnline = () => {
+    // Implement the payment logic here
+  };
+
   const {
     register,
     handleSubmit,
@@ -47,9 +51,11 @@ export const CheckoutPaymentMethod = () => {
     resolver: zodResolver(paymentOptionSchema),
   });
 
-  const InstallmentPayment = cartItems.find((item) =>
-    ['monthly', 'weekly', 'daily', 'full'].includes(item.paymentPlan)
-  );
+  const InstallmentPayment = cartItems.some((item) => {
+    return ['monthly', 'weekly', 'daily'].includes(
+      item.paymentPlan || item.selectedPaymentPlan
+    );
+  });
 
   return (
     <div>
@@ -70,18 +76,24 @@ export const CheckoutPaymentMethod = () => {
           {!InstallmentPayment ? (
             <>
               <div className="lg:px-4 py-1 lg:py-2">
-                <label htmlFor="debit-card" className="text-sm">
-                  <input
-                    type="radio"
-                    id="debit-card"
-                    {...register('picked')}
-                    value="debit card"
-                    className="px-4 py-10 mr-2"
-                  />
-                  Debit card
+                <label
+                  htmlFor="pay-online"
+                  className="text-sm flex items-center justify-between"
+                >
+                  <div className="flex items-center">
+                    <Globe />
+                    <input
+                      type="button"
+                      id="pay-online"
+                      {...register('picked')}
+                      value="Pay online"
+                      className="px-4"
+                      defaultChecked
+                    />
+                  </div>
                 </label>
               </div>
-              <hr className="hidden lg:block" />
+              {/* <hr className="hidden lg:block" />
               <div className="lg:px-4 py-1 lg:py-2">
                 <label htmlFor="interest-free-credit" className="text-sm">
                   <input
@@ -96,7 +108,7 @@ export const CheckoutPaymentMethod = () => {
                     (Balance: {formatCurrency(0)})
                   </span>
                 </label>
-              </div>
+              </div> */}
             </>
           ) : (
             <>
@@ -135,12 +147,9 @@ export const CheckoutPaymentMethod = () => {
                       {...register('picked')}
                       value="paystack-direct-debit"
                       className="px-4 py-10 mr-2"
-                      defaultChecked
+                      disabled
                     />
                     Direct debit
-                    {/* <span className="text-xs rounded-[2px] bg-[var(--yellow-primary)] py-1 px-2">
-                      Recommended
-                    </span> */}
                   </div>
                   <img src="/images/PaystackLogo.svg" alt="Paystack Logo" />
                 </label>
@@ -178,18 +187,33 @@ export const CheckoutPaymentMethod = () => {
         )}
 
         <div className="hidden lg:block ">
-          <button
-            type="button"
-            disabled={!isVerified || isSubmitting || isPending}
-            onClick={handleCreateMonoCustomer}
-            className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
-              !isVerified
-                ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
-                : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
-            }`}
-          >
-            {isPending ? 'Setting up...' : 'Set up direct debit'}
-          </button>
+          {InstallmentPayment ? (
+            <button
+              type="button"
+              disabled={!isVerified || isSubmitting || isPending}
+              onClick={handleCreateMonoCustomer}
+              className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
+                !isVerified
+                  ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
+                  : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
+              }`}
+            >
+              {isPending ? 'Setting up...' : 'Set up direct debit'}
+            </button>
+          ) : (
+            <button
+              type="button"
+              disabled={!isVerified || isSubmitting || isPending}
+              onClick={handlePayOnline}
+              className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
+                !isVerified
+                  ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
+                  : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
+              }`}
+            >
+              {isPending ? 'Setting up...' : 'Pay now'}
+            </button>
+          )}
         </div>
       </section>
     </div>

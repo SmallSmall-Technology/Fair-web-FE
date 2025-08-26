@@ -39,7 +39,6 @@ export const useProceedToMandate = () => {
     const payload = {
       first_installment_payment:
         consolidatedPayments.firstPayment + VAT + shippingFee,
-      // first_installment_payment: null,
       first_debit_date: new Date().toISOString().split('T')[0],
       last_installment_payment:
         consolidatedPayments.otherPayments.at(-1)?.amount,

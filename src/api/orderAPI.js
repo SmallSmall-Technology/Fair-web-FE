@@ -10,10 +10,18 @@ export const getMonoBanks = async () => {
   return response.data;
 };
 
-export const validateAccountNumber = async (nipCode, accountNumber) => {
-  const response = await httpClient.post('orders/validate-account-number', {
-    nipCode,
-    accountNumber,
-  });
+export const validateAccountNumber = async (data) => {
+  const response = await httpClient.post(
+    'orders/validate-account-number',
+    data
+  );
+  return response.data.data;
+};
+
+export const createMonoMandate = async (data) => {
+  const response = await httpClient.post(
+    'orders/create-mono-order-mandate',
+    data
+  );
   return response.data;
 };
