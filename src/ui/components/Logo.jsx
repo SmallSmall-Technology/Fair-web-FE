@@ -4,7 +4,7 @@ function Logo({ width = 120, height = 40, className = '' }) {
   return (
     <Link
       to="/"
-      aria-label="Small small Home"
+      // aria-label="Small small Home"
       // className={className}
       // className="transition-transform focus:scale-105 focus:outline-none"
     >
