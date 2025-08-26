@@ -117,22 +117,22 @@ const SelectBankAccount = ({
         <ul className="space-y-3 max-h-72 overflow-auto">
           {availableBanks
             ?.filter((bank) =>
-              bank.name.toLowerCase().includes(searchTerm.toLowerCase())
+              bank?.name.toLowerCase().includes(searchTerm?.toLowerCase())
             )
             .map((bank) => (
               <li
-                key={bank.nip_code}
+                key={bank?.nip_code}
                 className={`text-sm font-medium flex items-center justify-between p-2 rounded cursor-pointer hover:bg-gray-50 ${
                   selectedBank === bank.name ? 'bg-gray-100 border-black ' : ''
                 }`}
                 onClick={() => setSelectedBank(bank)}
               >
-                <span>{bank.name}</span>
+                <span>{bank?.name}</span>
                 <input
                   type="radio"
-                  checked={selectedBank === bank}
-                  onChange={() => setSelectedBank(bank.name)}
-                  value={bank.name}
+                  checked={selectedBank === bank.name || bank === selectedBank}
+                  onChange={() => setSelectedBank(bank?.name)}
+                  value={bank?.name}
                   className="accent-black"
                 />
               </li>

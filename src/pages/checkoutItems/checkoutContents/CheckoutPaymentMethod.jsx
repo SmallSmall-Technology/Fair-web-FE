@@ -190,10 +190,10 @@ export const CheckoutPaymentMethod = () => {
           {InstallmentPayment ? (
             <button
               type="button"
-              disabled={!isVerified || isSubmitting || isPending}
+              disabled={isVerified || isSubmitting || isPending}
               onClick={handleCreateMonoCustomer}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
-                !isVerified
+                isVerified
                   ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                   : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
               }`}
@@ -203,7 +203,7 @@ export const CheckoutPaymentMethod = () => {
           ) : (
             <button
               type="button"
-              disabled={!isVerified || isSubmitting || isPending}
+              disabled={isVerified || isSubmitting || isPending}
               onClick={handlePayOnline}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
                 !isVerified

@@ -61,7 +61,7 @@ export const useProceedToMandate = () => {
         productID: item.productID,
         quantity: item.quantity,
       })),
-      deliveryOption: null,
+      deliveryType: null,
     };
 
     dispatch(setMandateData(payload));

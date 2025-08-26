@@ -51,9 +51,9 @@ export const CheckoutItemsContentSection = () => {
   const deliveryAddress = [
     currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
     currentDeliveryAddress?.state || latest_address?.state,
-  ];
-  // .filter(Boolean)
-  // .join(' ');
+  ]
+    .filter(Boolean)
+    .join(', ');
 
   return (
     <section className="grid lg:grid-cols-[60%_40%] lg:px-[76p]">
