@@ -510,17 +510,18 @@ export const getCartSummary = (state) => state.cart.cart_summary;
 
 export const getTotalCartQuantity = (state) => {
   const cart = Array.isArray(state.cart.cart) ? state.cart.cart : [];
-  return cart.reduce((total, item) => total + (item.quantity || 0), 0);
+  return cart?.reduce((total, item) => total + (item.quantity || 0), 0);
 };
 
 export const getTotalCartPrice = (state) =>
-  state.cart.cart.reduce((sum, item) => sum + (item.totalPrice || 0), 0);
+  state?.cart?.cart?.reduce((sum, item) => sum + (item.totalPrice || 0), 0);
 
 export const getCurrentQuantityById = (productID) => (state) =>
-  state.cart.cart.find((item) => item.productID === productID)?.quantity ?? 0;
+  state?.cart?.cart?.find((item) => item.productID === productID)?.quantity ??
+  0;
 export const getSelectedPaymentPlan = (state) => state.cart.selectedPaymentPlan;
 
 export const getExistingCartItemById = (productID) => (state) =>
-  state.cart.cart.find((item) => item.productID === productID) || null;
+  state?.cart?.cart?.find((item) => item.productID === productID) || null;
 
 export default cartSlice.reducer;

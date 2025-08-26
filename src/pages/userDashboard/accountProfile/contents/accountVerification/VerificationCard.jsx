@@ -20,8 +20,6 @@ export const VerificationCard = ({
     selectVerificationStatus(state, type)
   );
 
-  console.log(isVerified);
-
   const error = useSelector(selectError);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 

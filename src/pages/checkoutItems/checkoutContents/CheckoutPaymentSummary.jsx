@@ -1,4 +1,5 @@
 import { Dot } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { YellowButton } from '../../../utils/Button.jsx';
 import { CartCoupon } from '../../../features/cart/CartCoupon.jsx';
@@ -9,31 +10,28 @@ import {
 } from '../../../features/cart/cartSlice.js';
 import { CartFooter } from '../../cartItems/CartFooter.jsx';
 import { CancelPurchase } from '../../cartItems/CartHeader.jsx';
+import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
 import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.jsx';
-import { useNavigate } from 'react-router-dom';
-import { setMandateData } from '../../../features/mono/mandateSlice.js';
-import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
+import { selectDeliveryOption } from '../../../features/order/deliveryAddressSlice.js';
 
 export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const cart = useSelector((state) => state.cart.cart);
   const totalCartQuantity = useSelector(getTotalCartQuantity);
   const totalCartPrice = useSelector(getTotalCartPrice);
 
   const VAT = (7.5 / 100) * totalCartPrice;
-  // const shippingFee = +1200;
-  const subtTotal = totalCartPrice;
-  const total = totalCartPrice + VAT;
+  const selectedDeliveryOption = useSelector(selectDeliveryOption);
+  const shippingFee = selectedDeliveryOption?.amount;
+  const subtTotal = totalCartPrice + shippingFee + VAT || 0;
+
+  const total = totalCartPrice + shippingFee + VAT;
 
   const cartPaymentPlan = cart.map(
     (item) => item.paymentPlan || item.selectedPaymentPlan
   );
   const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
-
   const consolidatedPayments = consolidateCartPayments(cart);
 
   // Function to handle proceeding to mandate creation
@@ -63,15 +61,13 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
 
           <div className="flex justify-between">
             <p className="font-medium text-sm">
-              VAT <span className="text-[#96959F]">7.5%</span>
+              VAT{' '}
+              <span className="text-[#96959F]">
+                7.5%(added to your first payment)
+              </span>
             </p>
             <p className="text-right">{formatCurrency(VAT)}</p>
           </div>
-
-          {/* <div className="flex justify-between">
-            <p className="font-medium text-sm">Shipping</p>
-            <p className="text-right">{formatCurrency(shippingFee)}</p>
-          </div> */}
         </div>
 
         {!isConsolidatedCart && (

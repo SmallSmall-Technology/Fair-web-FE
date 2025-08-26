@@ -104,8 +104,8 @@ export const AccountVerificationModal = ({
         (type === 'debt' &&
           data?.data?.credit_data?.eligibility_validation?.overall_status ===
             'APPROVED') ||
-        (type === 'address' && data?.success) ||
-        (type === 'id' && data?.success);
+        (type === 'address' && data?.success === true) ||
+        (type === 'id' && data?.success === true);
 
       setVerified(isApproved);
       setFailed(!isApproved);
