@@ -26,11 +26,12 @@ export const CartHeader = () => {
 export const CancelPurchase = () => {
   return (
     <div className="bg-[#ECEDF1] rounded-lg overflow-clip">
-      <Link to="/cart-items">
-        <Button className="flex space-x-1 items-center hover:shadow-lg p-2  border border-[#ECEDF1]">
-          <X color="#EF4237" />
-          <span className="font-medium text-sm">Cancel purchase</span>{' '}
-        </Button>
+      <Link
+        className="flex space-x-1 items-center hover:shadow-lg p-2  border border-[#ECEDF1]"
+        to="/cart-items"
+      >
+        <X color="#EF4237" />
+        <span className="font-medium text-sm">Cancel purchase</span>{' '}
       </Link>
     </div>
   );
