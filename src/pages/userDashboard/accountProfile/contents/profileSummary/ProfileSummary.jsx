@@ -8,8 +8,6 @@ export default function ProfileSummary() {
   const selectedDeliveryAddress = useSelector(selectCurrentAddress);
   const { data: user } = useSelector((state) => state.user);
 
-  console.log(selectedDeliveryAddress);
-
   // console.log('User:', user);
 
   const { register } = useForm({
