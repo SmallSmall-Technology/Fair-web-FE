@@ -19,8 +19,14 @@ function FooterNav({ menuFooter }) {
               {section.links.map((item) => (
                 <li key={item.name} className="mb-4">
                   <Link
-                    {...(item.name === 'Help center'
-                      ? { target: '_blank' }
+                    {...([
+                      'About us',
+                      'Help center',
+                      'Careers',
+                      'Press',
+                      'Vendor app',
+                    ].includes(item.name)
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
                       : {})}
                     to={item.link}
                   >

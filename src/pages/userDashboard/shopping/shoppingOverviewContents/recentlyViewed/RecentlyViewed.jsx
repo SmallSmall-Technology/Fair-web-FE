@@ -4,7 +4,7 @@ import ProductCard from '../../../../../utils/ProductCard';
 
 const RecentlyViewed = () => {
   const recentlyViewed = useSelector(getRecentlyViewed);
-
+  console.log(recentlyViewed);
   return (
     <section>
       <div className="flex mx-auto w-full">

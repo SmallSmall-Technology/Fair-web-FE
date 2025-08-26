@@ -30,22 +30,42 @@ const Footer = () => {
           <div className="mb-10">
             <p className="mb-4">Find us on</p>
             <div className="flex">
-              <Link to="" className="mr-4">
+              <Link
+                target="_blank"
+                to="https://www.facebook.com/share/178MEVgz2x/"
+                className="mr-4"
+              >
                 <img src="/images/Facebook.svg" alt="Small small facebook" />
               </Link>
-              <Link to="" className="mr-4">
+              <Link
+                target="_blank"
+                to="https://www.instagram.com/smallsmallhq?igsh=MTdpcXRnbHpkbWF1Nw=="
+                className="mr-4"
+              >
                 <img src="/images/Instagram.svg" alt="Small small Instagram" />
               </Link>
-              <Link to="" className="mr-4">
+              <Link
+                target="_blank"
+                to="https://x.com/smallsmallhq?t=q29s6kaowgXx7rk5kbs-NA&s=09"
+                className="mr-4"
+              >
                 <img src="/images/x-logo.svg" alt="Small small Twitter" />
               </Link>
-              <Link to="" className="mr-4">
+              <Link
+                target="_blank"
+                to="https://www.linkedin.com/company/small-small-technology/services/request-proposal"
+                className="mr-4"
+              >
                 <img src="/images/LinkedIn.svg" alt="Small small Linkedin" />
               </Link>
-              <Link to="" className="mr-4">
+              <Link
+                target="_blank"
+                to="https://www.youtube.com/@thesmallsmallhq"
+                className="mr-4"
+              >
                 <img src="/images/YouTube.svg" alt="Small small YouTube" />
               </Link>
-              <Link to="" className="mr-4">
+              <Link target="_blank" to="#" className="mr-4">
                 <img src="/images/Whatsapp.svg" alt="Small small Whatsapp" />
               </Link>
             </div>

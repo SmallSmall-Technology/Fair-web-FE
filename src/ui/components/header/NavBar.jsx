@@ -14,6 +14,7 @@ import { ChevronDown, ChevronUp, Heart, ShoppingCart } from 'lucide-react';
 import { getUserFirstName } from '../../../features/user/userSlice';
 import { useQuery } from '@tanstack/react-query';
 import { fetchFavouriteProducts } from '../../../api/product-api';
+import DownloadApp from '../../../utils/DownloadApp';
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,21 +43,7 @@ export const NavBar = () => {
     <nav aria-label="Main navigation" className="font-inter font-medium">
       <ul className="flex items-center space-x-6">
         <li className="lg:hidden xl:flex items-center space-x-1 font-medium text-[#333]">
-          <a
-            href="/download"
-            aria-label="Download our mobile app"
-            className="text-[#737376] hover:text-black focus:text-black focus:outline-none focus:ring-2 focus:ring-black transition-colors motion-safe:duration-200 hover:underline"
-          >
-            Download app
-            <img
-              src="/images/mobile-phone.svg"
-              alt="Mobile phone icon"
-              width={24}
-              height={24}
-              className="inline-block ml-1 transition-transform hover:scale-110 motion-safe:duration-200"
-              loading="lazy"
-            />
-          </a>
+          <DownloadApp />
         </li>
         {!isAuthenticated ? (
           <>

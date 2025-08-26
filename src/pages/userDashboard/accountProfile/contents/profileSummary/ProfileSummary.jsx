@@ -139,12 +139,14 @@ export default function ProfileSummary() {
       <div className="grid lg:grid-cols-[40%_30%] gap-4 my-4 items-center">
         <p className="font-semibold text-sm">Delivery address</p>
         <p className="font-inter">
-          {selectedDeliveryAddress?.streetAddress +
-            ' ' +
-            selectedDeliveryAddress?.state ||
-            user?.latest_address?.streetAddress +
-              ', ' +
-              user?.latest_address?.state}
+          {selectedDeliveryAddress === null
+            ? 'No Delivery Address yet'
+            : selectedDeliveryAddress?.streetAddress +
+                ' ' +
+                selectedDeliveryAddress?.state ||
+              user?.latest_address?.streetAddress +
+                ', ' +
+                user?.latest_address?.state}
         </p>
         {/* {!showModal ? (
           <div className="flex justify-between items-start font-inter">

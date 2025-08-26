@@ -41,7 +41,7 @@ const ProductCard = ({ product, isLoading }) => {
 
   const {
     productID,
-    stockStatus,
+    inStock,
     productName,
     coverImage,
     fairAppPrice,
@@ -50,6 +50,8 @@ const ProductCard = ({ product, isLoading }) => {
     average_rating,
     total_review_count,
   } = product || {};
+
+  console.log(inStock);
 
   const { data } = useQuery({
     queryKey: ['product-card', productID],
@@ -136,7 +138,7 @@ const ProductCard = ({ product, isLoading }) => {
         </div>
       </TransitionLink>
       <div
-        className={`${stockStatus === 'outOfStock' ? 'opacity-50' : ''} grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2`}
+        className={`${inStock === 'true' ? '' : 'opacity-50'} grid grid-cols-1 space-y-2 text-[#222224] w-[146px] md:w-[218px] mt-2 px-2`}
       >
         <TransitionLink
           to={`/${category}/${sub_category}/${productID}/${slug}`}
@@ -171,7 +173,7 @@ const ProductCard = ({ product, isLoading }) => {
         </div>
         <div className="flex items-center justify-between lg:flex-col lg:items-start lg:space-y-3">
           <div className="lg:w-[90%] flex justify-between items-center space-x-1">
-            {stockStatus === 'inStock' ? (
+            {inStock === 'true' ? (
               <>
                 <AddToCart product={product} />
 
