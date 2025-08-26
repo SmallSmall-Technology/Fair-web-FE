@@ -130,6 +130,8 @@ const DeliveryAddress = () => {
   const { data: user } = useSelector((state) => state.user);
   const { latest_address } = user;
 
+  console.log(user);
+
   const dispatch = useDispatch();
 
   // Get Redux state
@@ -149,7 +151,7 @@ const DeliveryAddress = () => {
   // Set default address if none selected
   useEffect(() => {
     if (!selectedAddressId && addresses.length > 0) {
-      setSelectedAddressId(latest_address.id);
+      setSelectedAddressId(latest_address?.id);
       setSelectedAddress(latest_address);
       dispatch(setSelectedDeliveryAddress(latest_address));
       dispatch(updateLatestDeliveryAddress(latest_address));
