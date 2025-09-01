@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux';
 import { selectVerificationData } from '../../../../../features/user/accountVerificationSlice';
+import { use } from 'react';
+import { isUserDebtProfileVerified } from '../../../../../features/user/userSlice';
 
 export const VerificationSuccessCard = ({ title, icon, type }) => {
   const data = useSelector((state) => selectVerificationData(state, type));
-
+  const user = useSelector((state) => state.user);
   return (
     <article className="font-inter w-full md:w-[521px] h-[184px] bg-[#F5F5F7] p-4 px-8 rounded-[6px] flex flex-col justify-between">
       {type === 'id' && (

@@ -2,7 +2,7 @@ import { Minus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PaymentFooter } from '../PaymentFooter';
 
-const MonoSetupPaymentSuccess = () => {
+const PaystackSetupPaymentSuccess = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white px-4">
       <div className="max-w-[490px] w-full text-center flex flex-col items-center justify-center">
@@ -115,4 +115,4 @@ const MonoSetupPaymentSuccess = () => {
   );
 };
 
-export default MonoSetupPaymentSuccess;
+export default PaystackSetupPaymentSuccess;
