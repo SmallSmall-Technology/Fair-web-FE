@@ -2,7 +2,7 @@ import React from 'react';
 import { X } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { DirectDebitBankSetupForm } from './directDebitSetupForm/DirectDebitBankSetupForm';
+// import { DirectDebitBankSetupForm } from './directDebitSetupForm/DirectDebitBankSetupForm';
 import { selectMandateData } from '../../../../features/paystack/mandateSlice';
 
 export const DirectDebitSetUp1 = () => {
@@ -39,9 +39,9 @@ export const DirectDebitSetUp1 = () => {
         </Link>
       </header>
 
-      <section className="bg-[#FAFAFA]">
+      {/* <section className="bg-[#FAFAFA]">
         <DirectDebitBankSetupForm />
-      </section>
+      </section> */}
     </>
   );
 };

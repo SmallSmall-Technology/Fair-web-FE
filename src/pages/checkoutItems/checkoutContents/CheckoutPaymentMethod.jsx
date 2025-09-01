@@ -16,34 +16,31 @@ import {
 } from '../../../features/order/deliveryAddressSlice.js';
 import { setMandateData } from '../../../features/paystack/mandateSlice.js';
 import { useEffect } from 'react';
+import { createPaystackMandate } from '../../../api/orderAPI.js';
+import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx';
 
 export const CheckoutPaymentMethod = () => {
   const cartItems = useSelector((state) => state.cart.cart);
-
   const isVerified = useSelector((state) =>
     selectVerificationStatus(state, 'debt')
   );
-
   const deliveryType = useSelector(selectedDeliveryType);
-  console.log(deliveryType);
-
   const dispatch = useDispatch();
-
   const proceedToMandate = useProceedToMandate();
 
-  // useEffect(() => {
-  //   if (isVerified) {
-  //     handleCreatePaystackCustomer();
-  //   }
-  // }, [isVerified]);
-
-  const handleCreatePaystackCustomer = () => {
+  useEffect(() => {
     if (!deliveryType) return;
     dispatch(setMandateData({ deliveryType: deliveryType.value }));
-    proceedToMandate();
+  }, [deliveryType]);
+
+  const mandateData = useSelector((state) => state.mandate.data);
+
+  const { createMandate, isValidating } = useCreateMandate();
+
+  const handleCreatePaystackCustomer = () => {
+    if (!mandateData) return;
+    createMandate(mandateData);
   };
-  const mandateData = useSelector((state) => state.mandate);
-  console.log('mandateData', mandateData);
 
   const handlePayOnline = () => {
     // Implement the payment logic here
@@ -155,7 +152,7 @@ export const CheckoutPaymentMethod = () => {
           </>
         )}
 
-        <div className="hidden lg:block ">
+        <div className="hidden lg:block">
           {InstallmentPayment ? (
             <button
               type="button"

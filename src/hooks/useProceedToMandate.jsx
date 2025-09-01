@@ -65,9 +65,9 @@ export const useProceedToMandate = () => {
       // deliveryType: null,
     };
     dispatch(setMandateData(payload));
-    navigate('/cart-items/checkout/mandate/create', {
-      state: payload,
-    });
+    // navigate('/cart-items/checkout/mandate/create', {
+    //   state: payload,
+    // });
   };
 
   return proceed;
