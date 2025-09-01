@@ -7,6 +7,7 @@ import {
   verifyAccountByID,
   verifyAccountByAddress,
   verifyDebtProfile,
+  getUser,
 } from '../../../../../api/user-api';
 import { toast } from 'react-toastify';
 import {
@@ -42,8 +43,9 @@ export const AccountVerificationModal = ({
     selectVerificationStatus(state, type)
   );
   const data = useSelector((state) => selectVerificationData(state, type));
-  // console.log(data);
-  // console.log(data?.credit_data?.eligibility_validation?.overall_status);
+
+  // const verify = useSelector(isUserDebtProfileVerified);
+  // console.log('verify', verify);
 
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
@@ -94,16 +96,12 @@ export const AccountVerificationModal = ({
   const { mutate, isPending } = useMutation({
     mutationFn: async (formData) => mutationFnMap[type](formData),
     onSuccess: (data) => {
-      // console.log(data);
-      // console.log(data?.credit_data?.validation?.overall_status);
       const { action, getPayload } = reduxDispatchMap[type];
       dispatch(action(getPayload(data)));
 
       // Determine verification status
       const isApproved =
-        (type === 'debt' &&
-          data?.data?.credit_data?.eligibility_validation?.overall_status ===
-            'APPROVED') ||
+        (type === 'debt' && verify.length > 1 === true) ||
         (type === 'address' && data?.success === true) ||
         (type === 'id' && data?.success === true);
 
@@ -125,7 +123,6 @@ export const AccountVerificationModal = ({
       toast.error(errorMessage);
     },
   });
-
   const onSubmit = (formData) => {
     const payloadMap = {
       id: {

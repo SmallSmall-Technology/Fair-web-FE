@@ -16,13 +16,14 @@ import EditCheckoutDeliveryAddressForm from '../checkoutAddress/EditCheckoutDeli
 import AddCheckoutDelieveryAddressForm from '../checkoutAddress/AddCheckoutDelieveryAddressForm.jsx';
 import {
   selectCurrentAddress,
-  selectDeliveryOption,
+  selectedDeliveryType,
 } from '../../../features/order/deliveryAddressSlice.js';
-import { CheckoutDeliveryOptions } from './CheckoutDeliveryOptions.jsx';
+import { CheckoutDeliveryTypes } from './CheckoutDeliveryTypes.jsx';
 
 export const CheckoutItemsContentSection = () => {
   const [formIsOpen, setFormIsOpen] = useState(false);
   const [addFormIsOpen, setAddFormIsOpen] = useState(false);
+
   const currentDeliveryAddress = useSelector(selectCurrentAddress);
   const { data: user } = useSelector((state) => state.user);
   const { latest_address } = user;
@@ -33,8 +34,8 @@ export const CheckoutItemsContentSection = () => {
   const cartPaymentPlan = cart.map((item) => item?.paymentPlan);
   const isConsolidatedCart = cartPaymentPlan.every((plan) => plan !== 'full');
   const consolidatedPayments = consolidateCartPayments(cart);
-  const selectedDeliveryOption = useSelector(selectDeliveryOption);
-  const shippingFee = selectedDeliveryOption?.amount;
+  const userSelectedDeliveryType = useSelector(selectedDeliveryType);
+  const shippingFee = userSelectedDeliveryType?.amount;
   const cartSummary = useSelector(getCartSummary);
   const totalCartPrice = cartSummary?.subtotal || 0;
   const VAT = (7.5 / 100) * totalCartPrice;
@@ -120,7 +121,7 @@ export const CheckoutItemsContentSection = () => {
           <h2 className="font-calsans font-normal text-[21px] mb-4 mx-6 md:mx-0">
             Delivery options
           </h2>
-          <CheckoutDeliveryOptions />
+          <CheckoutDeliveryTypes />
         </section>
         {/* Desktop payment section */}
         <section className="mt-8 hidden lg:block">

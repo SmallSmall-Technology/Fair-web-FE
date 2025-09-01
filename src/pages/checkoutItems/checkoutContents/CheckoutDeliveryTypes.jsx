@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { formatCurrency } from '../../../utils/FormatCurrency';
-import { setMandateData } from '../../../features/mono/mandateSlice';
-import { setSelectedDeliveryOption } from '../../../features/order/deliveryAddressSlice';
+import { setMandateData } from '../../../features/paystack/mandateSlice';
+import { setSelectedDeliveryType } from '../../../features/order/deliveryAddressSlice';
 
-export const CheckoutDeliveryOptions = () => {
+export const CheckoutDeliveryTypes = () => {
   const standard_delivery_amount = 0;
   const express_delivery_amount = 3000;
   const same_day_delivery_amount = 5000;
 
-  const [deliveryOptions] = useState([
+  const [deliveryTypes] = useState([
     {
       label: 'STANDARD DELIVERY ( 3-5 DAYS )',
       amount: standard_delivery_amount,
@@ -39,12 +39,12 @@ export const CheckoutDeliveryOptions = () => {
 
   const handleChange = (e) => {
     const selectedValue = e.target.value;
-    const selectedOption = deliveryOptions.find(
+    const selectedType = deliveryTypes.find(
       (option) => option.value === selectedValue
     );
-    if (selectedOption) {
-      dispatch(setSelectedDeliveryOption(selectedOption));
-      dispatch(setMandateData({ deliveryOption: selectedOption.value }));
+    if (selectedType) {
+      dispatch(setSelectedDeliveryType(selectedType));
+      dispatch(setMandateData({ deliveryType: selectedValue }));
     }
   };
 
@@ -64,32 +64,32 @@ export const CheckoutDeliveryOptions = () => {
             Payment Options
           </span>
 
-          {deliveryOptions?.map((deliveryOption, index) => (
-            <div key={deliveryOption?.value} className="">
+          {deliveryTypes?.map((deliveryType, index) => (
+            <div key={deliveryType?.value} className="">
               <label
-                htmlFor={deliveryOption?.value}
+                htmlFor={deliveryType?.value}
                 className=" px-4 py-2 text-sm flex items-center justify-between w-full cursor-pointer"
               >
                 <div className="flex items-center space-x-2">
                   <input
                     type="radio"
-                    id={deliveryOption?.value}
+                    id={deliveryType?.value}
                     {...register('picked', {
                       required: 'Please select a delivery option',
                     })}
-                    value={deliveryOption?.value}
+                    value={deliveryType?.value}
                     className="mr-2"
                     onChange={handleChange}
                   />
-                  {deliveryOption?.label}
+                  {deliveryType?.label}
                 </div>
                 <p className="font-inter font-semibold text-sm">
-                  {deliveryOption?.amount === 0
+                  {deliveryType?.amount === 0
                     ? 'FREE'
-                    : formatCurrency(deliveryOption?.amount)}
+                    : formatCurrency(deliveryType?.amount)}
                 </p>
               </label>
-              {index !== deliveryOptions?.length - 1 && <hr />}
+              {index !== deliveryTypes?.length - 1 && <hr />}
             </div>
           ))}
         </div>

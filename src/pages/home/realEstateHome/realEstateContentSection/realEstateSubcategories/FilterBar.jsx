@@ -17,7 +17,6 @@ const FilterBar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(filters);
   };
 
   const selectClass =

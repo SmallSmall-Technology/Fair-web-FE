@@ -46,14 +46,14 @@ import ResolutionCentre from './pages/userDashboard/accountProfile/contents/reso
 import UserAccountProfile from './pages/userDashboard/accountProfile/UserAccountProfile';
 import TermsOfUse from './pages/termsOfUse/TermsOfUse';
 import HowItWorks from './pages/howItWorks/HowItWorks';
-import MonoSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/MonoSetupPaymentSuccess';
+import PaystackSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/PaystackSetupPaymentSuccess';
 import BuyerAndVendorProtection from './pages/buyerAndVendor/BuyerAndVendorProtection';
 import MarketplaceGuidelines from './pages/marketplaceGuidelines/MarketplaceGuidelines';
 import RefundsAndReturns from './pages/refundsAndReturns/RefundsAndReturns';
 import BuyingGuide from './pages/buyingGuide/BuyingGuide';
 import { CreditWallet } from './pages/userDashboard/shopping/shoppingOverviewContents/creditWallet/CreditWallet';
-import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp1';
-import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
+// import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp1';
+// import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 
 const AppRoutes = () => {
   return (
@@ -205,7 +205,7 @@ const AppRoutes = () => {
           }
         />
 
-        <Route
+        {/* <Route
           path="cart-items/checkout/mandate/create"
           element={<DirectDebitSetUp1 />}
         />
@@ -213,11 +213,11 @@ const AppRoutes = () => {
         <Route
           path="cart-items/checkout/mandate/create/setup-2"
           element={<DirectDebitSetUp2 />}
-        />
+        /> */}
 
         <Route
           path="cart-items/checkout/mandate/create-success"
-          element={<MonoSetupPaymentSuccess />}
+          element={<PaystackSetupPaymentSuccess />}
         />
 
         <Route

@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { Trash } from 'lucide-react';
+import { useDispatch } from 'react-redux';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteUserDeliveryAddress } from '../../../../../api/user-api';
 import { UpdateDeliveryAddressModal } from './UpdateDeliveryAddressModal';
+import { setDeleteAddress } from '../../../../../features/order/deliveryAddressSlice';
 
 export const SingleDeliveryAddressBox = ({
   address,
   onSelectedAddress,
   selectedAddressId,
 }) => {
+  const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -21,6 +24,7 @@ export const SingleDeliveryAddressBox = ({
 
   const handleDelete = (id) => {
     deleteAddressMutation.mutate(id);
+    dispatch(setDeleteAddress());
   };
 
   return (
