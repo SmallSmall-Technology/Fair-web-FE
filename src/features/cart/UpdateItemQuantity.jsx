@@ -62,12 +62,18 @@ export const UpdateItemQuantityInSingleProductPage = ({
   };
 
   return (
-    <div className="flex items-center space-x-2 lg:space-x-1">
-      <Button onClick={() => handleUpdate(currentQuantity - 1)}>
+    <div className="flex items-center space-x-2 lg:space-x-1 my-2">
+      <Button
+        className="bg-[var(--yellow-primary)] px-2 py-2 hover:bg-[var(--btn-hover-bg-primary)] transition-all duration-300 rounded-md shadow-md"
+        onClick={() => handleUpdate(currentQuantity - 1)}
+      >
         <Minus />
       </Button>
       <p className="px-4 text-black font-inter text-lg">{currentQuantity}</p>
-      <Button onClick={() => handleUpdate(currentQuantity + 1)}>
+      <Button
+        className="bg-[var(--yellow-primary)] px-2 py-2 hover:bg-[var(--btn-hover-bg-primary)] transition-all duration-300 rounded-md shadow-md"
+        onClick={() => handleUpdate(currentQuantity + 1)}
+      >
         <Plus />
       </Button>
     </div>

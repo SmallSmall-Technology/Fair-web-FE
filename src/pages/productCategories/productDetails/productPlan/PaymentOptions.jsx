@@ -99,14 +99,44 @@ export const PaymentOptions = React.memo(({ product }) => {
         {renderSelectedPayment()}
         {selectedPaymentPlan && (
           <div className="lg:mx-0 lg:w-[80%] mt-4 mx-5">
-            {product?.stockStatus === 'inStock' ? (
-              <YellowButton onClick={() => handleAddToCart(dispatch, product)}>
+            {product?.stockStatus === 'inStock' && !existing && (
+              <YellowButton
+                onClick={
+                  !existing
+                    ? () =>
+                        handleAddToCart(
+                          dispatch,
+                          product,
+                          paymentOptions,
+                          selectedPaymentPlan,
+                          existing
+                        )
+                    : undefined
+                }
+              >
                 Add to cart
               </YellowButton>
-            ) : (
+            )}
+
+            {product?.stockStatus !== 'inStock' && (
               <p className="text-red-500 font-semibold text-xl font-inter text-center">
                 Out of Stock
               </p>
+            )}
+
+            {product?.stockStatus === 'inStock' && existing ? (
+              <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
+                <UpdateItemQuantityInSingleProductPage
+                  productID={product?.productID}
+                  currentQuantity={existing?.quantity || 0}
+                />
+                <p>
+                  ({existing?.quantity || 0} item
+                  {existing?.quantity > 1 && 's'} added)
+                </p>
+              </div>
+            ) : (
+              ''
             )}
           </div>
         )}
@@ -180,7 +210,7 @@ export const PaymentOptions = React.memo(({ product }) => {
         {renderSelectedPayment()}
         {selectedPaymentPlan && (
           <div className="lg:mx-0 lg:w-[80%] mt-4 mx-5">
-            {product?.stockStatus === 'inStock' ? (
+            {product?.stockStatus === 'inStock' && !existing && (
               <YellowButton
                 onClick={
                   !existing
@@ -195,24 +225,29 @@ export const PaymentOptions = React.memo(({ product }) => {
                     : undefined
                 }
               >
-                {!existing && 'Add to cart'}
-                {existing && (
-                  <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
-                    <UpdateItemQuantityInSingleProductPage
-                      productID={product?.productID}
-                      currentQuantity={existing?.quantity || 0}
-                    />
-                    <p>
-                      ({existing?.quantity || 0} item
-                      {existing?.quantity > 1 && 's'} added)
-                    </p>
-                  </div>
-                )}
+                Add to cart
               </YellowButton>
-            ) : (
+            )}
+
+            {product?.stockStatus !== 'inStock' && (
               <p className="text-red-500 font-semibold text-xl font-inter text-center">
                 Out of Stock
               </p>
+            )}
+
+            {product?.stockStatus === 'inStock' && existing ? (
+              <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
+                <UpdateItemQuantityInSingleProductPage
+                  productID={product?.productID}
+                  currentQuantity={existing?.quantity || 0}
+                />
+                <p>
+                  ({existing?.quantity || 0} item
+                  {existing?.quantity > 1 && 's'} added)
+                </p>
+              </div>
+            ) : (
+              ''
             )}
           </div>
         )}
@@ -220,3 +255,9 @@ export const PaymentOptions = React.memo(({ product }) => {
     </>
   );
 });
+
+{
+  /* <p className="text-red-500 font-semibold text-xl font-inter text-center">
+  Out of Stock
+</p>; */
+}
