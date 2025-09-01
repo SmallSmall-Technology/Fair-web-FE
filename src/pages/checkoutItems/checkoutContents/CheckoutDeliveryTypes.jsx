@@ -39,11 +39,9 @@ export const CheckoutDeliveryTypes = () => {
 
   const handleChange = (e) => {
     const selectedValue = e.target.value;
-    console.log('Selected delivery type:', selectedValue);
     const selectedType = deliveryTypes.find(
       (option) => option.value === selectedValue
     );
-    console.log(selectedType);
     if (selectedType) {
       dispatch(setSelectedDeliveryType(selectedType));
       dispatch(setMandateData({ deliveryType: selectedValue }));

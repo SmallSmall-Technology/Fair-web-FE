@@ -15,7 +15,6 @@ export const useProceedToMandate = () => {
   const selectedDeliveryAddress = useSelector(selectCurrentAddress);
   const userSelectedDeliveryType = useSelector(selectedDeliveryType);
   const cart = useSelector((state) => state.cart.cart);
-  // console.log('selectedDeliveryAddress', selectedDeliveryAddress);
 
   const totalCartPrice = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,

@@ -1485,18 +1485,18 @@ export const menuFooter = [
   {
     title: 'Smallsmall',
     links: [
-      { name: 'About us', link: '/about-us' },
+      { name: 'About us', link: 'https://smallsmall.com/about' },
       // { name: 'Privacy policy', link: '/privacy-policy' },
       { name: 'Feedback', link: '/feedback' },
-      { name: 'Press', link: '/press' },
+      { name: 'Press', link: 'https://media.smallsmall.com/' },
       { name: 'Legal', link: '/legal' },
-      { name: 'Careers', link: '/careers' },
+      { name: 'Careers', link: 'https://jobs.cvviz.com/smallsmall_' },
     ],
   },
   {
     title: 'Shop',
     links: [
-      { name: 'Categories', link: '/categories' },
+      // { name: 'Categories', link: '/categories' },
       { name: 'Deals', link: '/deals' },
       { name: 'Trending', link: '/trending' },
       { name: 'Buying guide', link: '/buying-guide' },
@@ -1510,7 +1510,10 @@ export const menuFooter = [
       { name: 'Start selling', link: '/start-selling' },
       { name: 'How to sell', link: '/how-to-sell' },
       { name: 'Getting paid', link: '/getting-paid' },
-      { name: 'Vendor app', link: '/vendor-app' },
+      {
+        name: 'Vendor app',
+        link: 'https://apps.apple.com/us/app/fair-vendor/id6504993151',
+      },
     ],
   },
   {
@@ -1525,7 +1528,7 @@ export const menuFooter = [
       { name: 'Buyer protection', link: 'buyer-vendor-protection' },
       { name: 'Seller protection', link: 'buyer-vendor-protection' },
       { name: 'Refunds and returns', link: '/refunds-returns' },
-      { name: 'Renting terms&conditions', link: '/renting-terms-conditions' },
+      { name: 'Renting terms&conditions', link: '/terms-of-use' },
     ],
   },
 ];

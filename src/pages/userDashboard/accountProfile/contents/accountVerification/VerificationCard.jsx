@@ -26,7 +26,6 @@ export const VerificationCard = ({
     debt: selectVerificationStatus(state, 'debt'),
   }));
 
-  console.log(verificationStatuses);
   // { id: true/false, address: true/false, debt: true/false }
 
   const error = useSelector(selectError);
