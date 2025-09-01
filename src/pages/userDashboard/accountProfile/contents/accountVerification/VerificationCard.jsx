@@ -7,6 +7,7 @@ import {
   selectError,
   selectVerificationStatus,
 } from '../../../../../features/user/accountVerificationSlice';
+import { isUserDebtProfileVerified } from '../../../../../features/user/userSlice';
 
 export const VerificationCard = ({
   type,
@@ -19,6 +20,14 @@ export const VerificationCard = ({
   const isVerified = useSelector((state) =>
     selectVerificationStatus(state, type)
   );
+  const verificationStatuses = useSelector((state) => ({
+    id: selectVerificationStatus(state, 'id'),
+    address: selectVerificationStatus(state, 'address'),
+    debt: selectVerificationStatus(state, 'debt'),
+  }));
+
+  console.log(verificationStatuses);
+  // { id: true/false, address: true/false, debt: true/false }
 
   const error = useSelector(selectError);
   const [modalIsOpen, setModalIsOpen] = useState(false);

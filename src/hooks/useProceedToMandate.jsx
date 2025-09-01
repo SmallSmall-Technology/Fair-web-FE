@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setMandateData } from '../features/mono/mandateSlice';
+import { setMandateData } from '../features/paystack/mandateSlice';
 import { consolidateCartPayments } from '../utils/ConsolidateCartPayment';
 import {
   selectCurrentAddress,
-  selectDeliveryOption,
+  selectedDeliveryType,
 } from '../features/order/deliveryAddressSlice';
 
 export const useProceedToMandate = () => {
@@ -13,17 +13,17 @@ export const useProceedToMandate = () => {
   const navigate = useNavigate();
   const alreadyNavigatedRef = useRef(false);
   const selectedDeliveryAddress = useSelector(selectCurrentAddress);
-  const selectedDeliveryOption = useSelector(selectDeliveryOption);
+  const userSelectedDeliveryType = useSelector(selectedDeliveryType);
   const cart = useSelector((state) => state.cart.cart);
+  // console.log('selectedDeliveryAddress', selectedDeliveryAddress);
 
   const totalCartPrice = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const VAT = (7.5 / 100) * totalCartPrice;
-  const shippingFee = selectedDeliveryOption?.amount;
-  // console.log(shippingFee);
 
+  const VAT = (7.5 / 100) * totalCartPrice;
+  const shippingFee = userSelectedDeliveryType?.amount || 0;
   const total = totalCartPrice + VAT + shippingFee;
 
   const cartPaymentPlan = cart.map(
@@ -49,8 +49,8 @@ export const useProceedToMandate = () => {
         .split('T')[0],
       consolidated_total_amount: total,
       frequency: cartPaymentPlan[0],
-      paymentPlan: cartPaymentPlan[0],
-      description: null,
+      paymentMethod: cartPaymentPlan[0],
+      description: 'Getting product',
       deliveryFullAddress:
         selectedDeliveryAddress?.streetAddress +
           ', ' +
@@ -61,9 +61,9 @@ export const useProceedToMandate = () => {
         productID: item.productID,
         quantity: item.quantity,
       })),
-      deliveryType: null,
-    };
 
+      // deliveryType: null,
+    };
     dispatch(setMandateData(payload));
     navigate('/cart-items/checkout/mandate/create', {
       state: payload,

@@ -1,14 +1,20 @@
 import { useForm } from 'react-hook-form';
 
 import { useSelector } from 'react-redux';
-import { selectCurrentAddress } from '../../../../../features/order/deliveryAddressSlice';
+import {
+  selectCurrentAddress,
+  selectLatestDeliveryAddress,
+} from '../../../../../features/order/deliveryAddressSlice';
+import { fetchUserDeliveryAddresses } from '../../../../../api/user-api';
+import { useQuery } from '@tanstack/react-query';
 
 export default function ProfileSummary() {
   const isVerified = useSelector((state) => state.user?.isVerified);
-  const selectedDeliveryAddress = useSelector(selectCurrentAddress);
   const { data: user } = useSelector((state) => state.user);
 
-  // console.log('User:', user);
+  // const selectedDeliveryAddress = useSelector(selectCurrentAddress);
+
+  // console.log('delivery Address', selectedDeliveryAddress);
 
   const { register } = useForm({
     defaultValues: {
@@ -18,6 +24,13 @@ export default function ProfileSummary() {
       phoneNumber: user?.phoneNumber || '',
     },
   });
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['useraddresses'],
+    queryFn: fetchUserDeliveryAddresses,
+  });
+
+  const addresses = data?.data?.data || [];
 
   return (
     <div className="px-2 lg:px-6 font-inter">
@@ -124,45 +137,18 @@ export default function ProfileSummary() {
         </div>
 
         <hr />
-        {/* <div className="lg:w-[176px] ml-auto">
-          <YellowButton disabled={mutation.isLoading}>
-            {mutation.isLoading ? (
-              <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
-            ) : (
-              'Save'
-            )}
-          </YellowButton>
-        </div> */}
       </form>
       {/* This cannot be rendered inside the form because its a form element that
       needs to be separate */}
       <div className="grid lg:grid-cols-[40%_30%] gap-4 my-4 items-center">
         <p className="font-semibold text-sm">Delivery address</p>
         <p className="font-inter">
-          {selectedDeliveryAddress?.streetAddress +
-            ' ' +
-            selectedDeliveryAddress?.state ||
-            user?.latest_address?.streetAddress +
-              ', ' +
-              user?.latest_address?.state}
+          {addresses[0] ? (
+            <>{addresses[0]?.streetAddress + ' ' + addresses[0]?.state}</>
+          ) : (
+            <span className="text-gray-400">No delivery address selected</span>
+          )}
         </p>
-        {/* {!showModal ? (
-          <div className="flex justify-between items-start font-inter">
-            <button
-              type="button"
-              className="text-black text-sm underline"
-              onClick={() => setShowModal(true)}
-            >
-              Edit
-            </button>
-          </div>
-        ) : (
-          <AddressModal
-            currentAddress={data?.latest_address}
-            onClose={() => setShowModal(false)}
-            refetch={refetch}
-          />
-        )} */}
       </div>
     </div>
   );

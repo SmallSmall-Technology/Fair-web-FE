@@ -1,16 +1,21 @@
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createMonoCustomer } from '../../../api/orderAPI.js';
 import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
 import { Globe } from 'lucide-react';
+import {
+  selectedDeliveryType,
+  setSelectedDeliveryType,
+} from '../../../features/order/deliveryAddressSlice.js';
+import { setMandateData } from '../../../features/paystack/mandateSlice.js';
+import { useEffect } from 'react';
 
 export const CheckoutPaymentMethod = () => {
   const cartItems = useSelector((state) => state.cart.cart);
@@ -19,23 +24,26 @@ export const CheckoutPaymentMethod = () => {
     selectVerificationStatus(state, 'debt')
   );
 
+  const deliveryType = useSelector(selectedDeliveryType);
+  console.log(deliveryType);
+
+  const dispatch = useDispatch();
+
   const proceedToMandate = useProceedToMandate();
 
-  const { mutate: createMonoUser, isPending } = useMutation({
-    mutationFn: createMonoCustomer,
-    onSuccess: () => {
-      proceedToMandate();
-    },
-    onError: (error) => {
-      toast.error(
-        error?.response?.data?.message || 'Error creating Mono customer'
-      );
-    },
-  });
+  // useEffect(() => {
+  //   if (isVerified) {
+  //     handleCreatePaystackCustomer();
+  //   }
+  // }, [isVerified]);
 
-  const handleCreateMonoCustomer = () => {
-    createMonoUser();
+  const handleCreatePaystackCustomer = () => {
+    if (!deliveryType) return;
+    dispatch(setMandateData({ deliveryType: deliveryType.value }));
+    proceedToMandate();
   };
+  const mandateData = useSelector((state) => state.mandate);
+  console.log('mandateData', mandateData);
 
   const handlePayOnline = () => {
     // Implement the payment logic here
@@ -93,48 +101,9 @@ export const CheckoutPaymentMethod = () => {
                   </div>
                 </label>
               </div>
-              {/* <hr className="hidden lg:block" />
-              <div className="lg:px-4 py-1 lg:py-2">
-                <label htmlFor="interest-free-credit" className="text-sm">
-                  <input
-                    type="radio"
-                    id="interest-free-credit"
-                    {...register('picked')}
-                    value="interest-free-credit"
-                    className="px-4 py-10 mr-2"
-                  />
-                  Smallsmall Interest Free Credit{' '}
-                  <span className="text-[#96959F] text-xs">
-                    (Balance: {formatCurrency(0)})
-                  </span>
-                </label>
-              </div> */}
             </>
           ) : (
             <>
-              <div className="lg:px-4 py-1 lg:py-2">
-                <label
-                  htmlFor="direct-debit"
-                  className="text-sm flex items-center justify-between"
-                >
-                  <div className="flex items-center space-x-2">
-                    <input
-                      type="radio"
-                      id="direct-debit"
-                      {...register('picked')}
-                      value="direct debit"
-                      className="px-4 py-10 mr-2"
-                      defaultChecked
-                    />
-                    Direct debit
-                    <span className="text-xs rounded-[2px] bg-[var(--yellow-primary)] py-1 px-2">
-                      Recommended
-                    </span>
-                  </div>
-                  <img src="/images/MonoLogo.svg" alt="Mono Logo" />
-                </label>
-              </div>
-              <hr />
               <div className="lg:px-4 py-1 lg:py-2">
                 <label
                   htmlFor="paystack-direct-debit"
@@ -147,7 +116,7 @@ export const CheckoutPaymentMethod = () => {
                       {...register('picked')}
                       value="paystack-direct-debit"
                       className="px-4 py-10 mr-2"
-                      disabled
+                      defaultChecked
                     />
                     Direct debit
                   </div>
@@ -190,20 +159,19 @@ export const CheckoutPaymentMethod = () => {
           {InstallmentPayment ? (
             <button
               type="button"
-              disabled={isVerified || isSubmitting || isPending}
-              onClick={handleCreateMonoCustomer}
+              disabled={!isVerified}
+              onClick={handleCreatePaystackCustomer}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
-                isVerified
+                !isVerified
                   ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                   : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
               }`}
             >
-              {isPending ? 'Setting up...' : 'Set up direct debit'}
+              Set up direct debit
             </button>
           ) : (
             <button
               type="button"
-              disabled={isVerified || isSubmitting || isPending}
               onClick={handlePayOnline}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
                 !isVerified
@@ -211,7 +179,7 @@ export const CheckoutPaymentMethod = () => {
                   : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
               }`}
             >
-              {isPending ? 'Setting up...' : 'Pay now'}
+              Pay now
             </button>
           )}
         </div>

@@ -14,7 +14,7 @@ import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
 import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.jsx';
 import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
-import { selectDeliveryOption } from '../../../features/order/deliveryAddressSlice.js';
+import { selectedDeliveryType } from '../../../features/order/deliveryAddressSlice.js';
 
 export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const cart = useSelector((state) => state.cart.cart);
@@ -22,8 +22,9 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const totalCartPrice = useSelector(getTotalCartPrice);
 
   const VAT = (7.5 / 100) * totalCartPrice;
-  const selectedDeliveryOption = useSelector(selectDeliveryOption);
-  const shippingFee = selectedDeliveryOption?.amount;
+  const userSelectedDeliveryType = useSelector(selectedDeliveryType);
+
+  const shippingFee = userSelectedDeliveryType?.amount;
   const subtTotal = totalCartPrice + shippingFee + VAT || 0;
 
   const total = totalCartPrice + shippingFee + VAT;

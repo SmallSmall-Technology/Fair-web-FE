@@ -4,7 +4,7 @@ const initialState = {
   current_address: null,
   delivery_address: null,
   latest_address: null,
-  deliveryOption: null,
+  deliveryType: null,
 };
 
 const deliverySlice = createSlice({
@@ -20,14 +20,17 @@ const deliverySlice = createSlice({
     setSelectedDeliveryAddress: (state, action) => {
       state.current_address = action.payload;
     },
-    setSelectedDeliveryOption: (state, action) => {
-      state.deliveryOption = action.payload;
+    setSelectedDeliveryType: (state, action) => {
+      state.deliveryType = action.payload;
+    },
+    setDeleteAddress: (state, action) => {
+      state.current_address = null;
     },
     clearDeliveryAddresses: (state) => {
       state.current_address = null;
       state.delivery_address = null;
       state.latest_address = null;
-      state.deliveryOption = null;
+      state.deliveryType = null;
     },
   },
 });
@@ -38,7 +41,8 @@ export const {
   addDeliveryAddress,
   setSelectedDeliveryAddress,
   clearDeliveryAddresses,
-  setSelectedDeliveryOption,
+  setSelectedDeliveryType,
+  setDeleteAddress,
 } = deliverySlice.actions;
 
 export default deliverySlice.reducer;
@@ -49,4 +53,4 @@ export const selectLatestDeliveryAddress = (state) =>
 export const selectCurrentDeliveryAddress = (state) =>
   state.delivery.delivery_address;
 export const selectCurrentAddress = (state) => state.delivery.current_address;
-export const selectDeliveryOption = (state) => state.delivery.deliveryOption;
+export const selectedDeliveryType = (state) => state.delivery.deliveryType;
