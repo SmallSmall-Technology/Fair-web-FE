@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { isUserDebtProfileVerified } from './userSlice';
 
 const initialState = {
   verificationStatus: {
     id: { isVerified: false, data: null },
     address: { isVerified: false, data: null },
-    debt: { isVerified: false, data: null },
+    debt: { isVerified: false, data: null }, // <- we won’t manually maintain this anymore
   },
   loading: false,
   error: null,
@@ -26,9 +27,6 @@ const accountVerificationSlice = createSlice({
     },
     setDebt: (state, action) => {
       state.verificationStatus.debt.data = action.payload;
-      state.verificationStatus.debt.isVerified =
-        action.payload?.credit_data?.eligibility_validation?.overall_status ===
-        'APPROVED';
       state.error = null;
     },
     setLoading: (state, action) => {
@@ -49,6 +47,7 @@ const accountVerificationSlice = createSlice({
   },
 });
 
+// Actions
 export const {
   setId,
   setAddress,
@@ -58,12 +57,19 @@ export const {
   clearVerification,
 } = accountVerificationSlice.actions;
 
-// Selectors
-export const selectVerificationStatus = (state, type) =>
-  state.accountVerification.verificationStatus[type]?.isVerified || false;
+// ✅ Selectors
+export const selectVerificationStatus = (state, type) => {
+  if (type === 'debt') {
+    return isUserDebtProfileVerified(state);
+  }
+  return (
+    state.accountVerification.verificationStatus[type]?.isVerified || false
+  );
+};
 
 export const selectVerificationData = (state, type) =>
   state.accountVerification.verificationStatus[type]?.data || null;
+
 export const selectLoading = (state) => state.accountVerification.loading;
 export const selectError = (state) => state.accountVerification.error;
 

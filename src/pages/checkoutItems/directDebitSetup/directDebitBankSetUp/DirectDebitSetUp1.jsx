@@ -2,8 +2,8 @@ import React from 'react';
 import { X } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { DirectDebitBankSetupForm } from './DirectDebitBankSetupForm';
-import { selectMandateData } from '../../../../features/mono/mandateSlice';
+// import { DirectDebitBankSetupForm } from './directDebitSetupForm/DirectDebitBankSetupForm';
+import { selectMandateData } from '../../../../features/paystack/mandateSlice';
 
 export const DirectDebitSetUp1 = () => {
   const { state } = useLocation();
@@ -39,9 +39,9 @@ export const DirectDebitSetUp1 = () => {
         </Link>
       </header>
 
-      <section className="bg-[#FAFAFA]">
+      {/* <section className="bg-[#FAFAFA]">
         <DirectDebitBankSetupForm />
-      </section>
+      </section> */}
     </>
   );
 };

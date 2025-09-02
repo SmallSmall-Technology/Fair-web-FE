@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { PaymentFooter } from './PaymentFooter';
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { selectMandateData } from '../../../features/mono/mandateSlice';
+import { selectMandateData } from '../../../features/paystack/mandateSlice';
 
 export const DirectDebitSetUp1 = () => {
   const { state } = useLocation();

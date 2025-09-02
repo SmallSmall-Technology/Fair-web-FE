@@ -14,7 +14,8 @@ import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
 import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.jsx';
 import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
-import { selectDeliveryOption } from '../../../features/order/deliveryAddressSlice.js';
+import { selectedDeliveryType } from '../../../features/order/deliveryAddressSlice.js';
+import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx';
 
 export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const cart = useSelector((state) => state.cart.cart);
@@ -22,8 +23,9 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const totalCartPrice = useSelector(getTotalCartPrice);
 
   const VAT = (7.5 / 100) * totalCartPrice;
-  const selectedDeliveryOption = useSelector(selectDeliveryOption);
-  const shippingFee = selectedDeliveryOption?.amount;
+  const userSelectedDeliveryType = useSelector(selectedDeliveryType);
+
+  const shippingFee = userSelectedDeliveryType?.amount;
   const subtTotal = totalCartPrice + shippingFee + VAT || 0;
 
   const total = totalCartPrice + shippingFee + VAT;
@@ -35,7 +37,15 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const consolidatedPayments = consolidateCartPayments(cart);
 
   // Function to handle proceeding to mandate creation
-  const handleProceedToMandate = useProceedToMandate();
+
+  const mandateData = useSelector((state) => state.mandate.data);
+
+  const { createMandate, isValidating } = useCreateMandate();
+
+  const handleCreatePaystackCustomer = () => {
+    if (!mandateData) return;
+    createMandate(mandateData);
+  };
 
   const isVerified = useSelector((state) =>
     selectVerificationStatus(state, 'debt')
@@ -130,7 +140,7 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
                 </YellowButton>
               ) : (
                 <YellowButton
-                  onClick={handleProceedToMandate}
+                  onClick={handleCreatePaystackCustomer}
                   disabled={!isVerified}
                 >
                   Set up direct debit

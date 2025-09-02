@@ -9,7 +9,7 @@ import recentlyViewedReducer from './features/product/recentlyViewedSlice';
 import productReducer from './features/product/productSlice';
 import orderReducer from './features/order/orderSlice';
 import authReducer from './features/auth/authSlice';
-import mandateReducer from './features/mono/mandateSlice';
+import mandateReducer from './features/paystack/mandateSlice';
 import deliveryReducer from './features/order/deliveryAddressSlice';
 import accountVerificationReducer from './features/user/accountVerificationSlice';
 

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getUser } from '../../api/user-api';
-import httpClient from '../../api/http-clients'; // axios instance
+import httpClient from '../../api/http-clients';
 
 // Async thunk for fetching user
 export const fetchUser = createAsyncThunk(
@@ -16,7 +16,7 @@ export const fetchUser = createAsyncThunk(
 
       const { data } = await getUser();
 
-      return data; // return actual user object
+      return data;
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.message || 'Failed to fetch user'
@@ -125,4 +125,4 @@ export const getUserFirstName = (state) =>
   state.user.data?.firstName || 'Guest';
 
 export const isUserDebtProfileVerified = (state) =>
-  state.user.data?.debt_profile_verification === 'VERIFIED';
+  Boolean(state.user.data?.bvn);

@@ -40,14 +40,13 @@ export default mandateSlice.reducer;
 export const createMandate = (mandateData) => async (dispatch) => {
   try {
     const { data } = await httpClient.post(
-      'orders/create-mono-order-mandate',
+      'orders/create-paystack-order-mandate',
       mandateData
     );
 
-    dispatch(setMandateData(data)); // store the mandate info from API
+    dispatch(setMandateData(data));
     return data;
   } catch (error) {
-    console.error('Error creating mandate:', error);
     throw error;
   }
 };
