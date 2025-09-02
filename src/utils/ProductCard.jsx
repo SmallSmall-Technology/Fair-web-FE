@@ -51,8 +51,6 @@ const ProductCard = ({ product, isLoading }) => {
     total_review_count,
   } = product || {};
 
-  console.log(inStock);
-
   const { data } = useQuery({
     queryKey: ['product-card', productID],
     queryFn: () => fetchSingleProduct(productID),

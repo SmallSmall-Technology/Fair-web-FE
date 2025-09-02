@@ -6,10 +6,6 @@ import { WeeklyPayment } from './WeeklyPaymentPlan/WeeklyPayment';
 import { formatCurrency } from '../../../../utils/FormatCurrency';
 import { handleAddToCart } from '../../../../features/cart/AddToCart';
 import { MonthlyPayment } from './MonthlyPaymentPlan/MonthlyPayment.jsx';
-import {
-  UpdateItemQuantity,
-  UpdateItemQuantityInSingleProductPage,
-} from '../../../../features/cart/UpdateItemQuantity';
 
 import React, { useEffect, useRef, useState, startTransition } from 'react';
 import {
@@ -18,6 +14,7 @@ import {
   setSelectedPaymentPlan,
 } from '../../../../features/cart/cartSlice';
 import { usePaymentOptions } from '../../../../hooks/usePaymentOptions';
+import UpdateItemQuantity from '../../../../features/cart/UpdateItemQuantity';
 
 export const PaymentOptions = React.memo(({ product }) => {
   const existing = useSelector(getExistingCartItemById(product?.productID));
@@ -126,9 +123,10 @@ export const PaymentOptions = React.memo(({ product }) => {
 
             {product?.stockStatus === 'inStock' && existing ? (
               <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
-                <UpdateItemQuantityInSingleProductPage
+                <UpdateItemQuantity
                   productID={product?.productID}
                   currentQuantity={existing?.quantity || 0}
+                  variant="single"
                 />
                 <p>
                   ({existing?.quantity || 0} item
@@ -237,9 +235,10 @@ export const PaymentOptions = React.memo(({ product }) => {
 
             {product?.stockStatus === 'inStock' && existing ? (
               <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">
-                <UpdateItemQuantityInSingleProductPage
+                <UpdateItemQuantity
                   productID={product?.productID}
                   currentQuantity={existing?.quantity || 0}
+                  variant="single"
                 />
                 <p>
                   ({existing?.quantity || 0} item
