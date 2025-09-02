@@ -42,6 +42,11 @@ export const CheckoutPaymentMethod = () => {
     createMandate(mandateData);
   };
 
+  const handleProceedToMandate = () => {
+    if (!mandateData) return;
+    proceedToMandate(mandateData);
+  };
+
   const handlePayOnline = () => {
     // Implement the payment logic here
   };
@@ -157,14 +162,14 @@ export const CheckoutPaymentMethod = () => {
             <button
               type="button"
               disabled={!isVerified}
-              onClick={handleCreatePaystackCustomer}
+              onClick={handleProceedToMandate}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
                 !isVerified
                   ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                   : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
               }`}
             >
-              Set up direct debit
+              Checkout securely
             </button>
           ) : (
             <button

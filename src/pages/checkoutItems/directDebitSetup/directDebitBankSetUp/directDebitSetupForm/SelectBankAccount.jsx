@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { getBanksList } from '../../../../../api/orderAPI';
+// import { getBanksList } from '../../../../../api/orderAPI';
 import { Search } from 'lucide-react';
 
 export const SelectBankAccount = ({
@@ -10,19 +10,19 @@ export const SelectBankAccount = ({
   setAvailableBanks,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { data: paystackBanks } = useQuery({
-    queryKey: ['paystackBanks'],
-    queryFn: getBanksList,
-  });
-  useEffect(() => {
-    if (paystackBanks?.banks) {
-      setAvailableBanks(
-        paystackBanks.banks.filter(
-          (bank) => bank?.available_for_direct_debit && bank?.active
-        )
-      );
-    }
-  }, [paystackBanks, setAvailableBanks]);
+  // const { data: paystackBanks } = useQuery({
+  //   queryKey: ['paystackBanks'],
+  //   queryFn: getBanksList,
+  // });
+  // useEffect(() => {
+  //   if (paystackBanks?.banks) {
+  //     setAvailableBanks(
+  //       paystackBanks.banks.filter(
+  //         (bank) => bank?.available_for_direct_debit && bank?.active
+  //       )
+  //     );
+  //   }
+  // }, [paystackBanks, setAvailableBanks]);
 
   return (
     <section>
@@ -46,7 +46,7 @@ export const SelectBankAccount = ({
 
         {/* Bank list */}
         <ul className="space-y-3 max-h-72 overflow-auto">
-          {availableBanks
+          {/* {availableBanks
             ?.filter((bank) =>
               bank?.name.toLowerCase().includes(searchTerm?.toLowerCase())
             )
@@ -67,7 +67,7 @@ export const SelectBankAccount = ({
                   className="accent-black"
                 />
               </li>
-            ))}
+            ))} */}
         </ul>
       </div>
     </section>

@@ -52,8 +52,8 @@ import MarketplaceGuidelines from './pages/marketplaceGuidelines/MarketplaceGuid
 import RefundsAndReturns from './pages/refundsAndReturns/RefundsAndReturns';
 import BuyingGuide from './pages/buyingGuide/BuyingGuide';
 import { CreditWallet } from './pages/userDashboard/shopping/shoppingOverviewContents/creditWallet/CreditWallet';
-// import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp1';
-// import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
+import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp1';
+import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
 
 const AppRoutes = () => {
   return (
@@ -205,7 +205,7 @@ const AppRoutes = () => {
           }
         />
 
-        {/* <Route
+        <Route
           path="cart-items/checkout/mandate/create"
           element={<DirectDebitSetUp1 />}
         />
@@ -213,7 +213,7 @@ const AppRoutes = () => {
         <Route
           path="cart-items/checkout/mandate/create/setup-2"
           element={<DirectDebitSetUp2 />}
-        /> */}
+        />
 
         <Route
           path="cart-items/checkout/mandate/create-success"

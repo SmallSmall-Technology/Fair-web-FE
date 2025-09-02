@@ -143,7 +143,7 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
                   onClick={handleCreatePaystackCustomer}
                   disabled={!isVerified}
                 >
-                  Set up direct debit
+                  Checkout securely
                 </YellowButton>
               )}
 
