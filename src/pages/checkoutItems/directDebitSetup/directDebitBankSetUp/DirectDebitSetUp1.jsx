@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { selectMandateData } from '../../../../features/paystack/mandateSlice';
 import { DirectDebitBankSetupForm } from './directDebitSetupForm/DirectDebitBankSetupForm';
+import Stepper from '../../../../ui/components/Stepper';
 
 export const DirectDebitSetUp1 = () => {
   const { state } = useLocation();
@@ -49,6 +50,7 @@ export const DirectDebitSetUp1 = () => {
             direct debit mandate for your upcoming installments.
           </p>
         </div>
+        <Stepper currentStep={1} />
       </div>
 
       <section>
