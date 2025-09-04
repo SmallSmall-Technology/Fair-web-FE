@@ -10,7 +10,7 @@ const steps = [
 
 export default function Stepper({ currentStep = 2 }) {
   return (
-    <div className="w-full max-w-3xl mx-auto bg-white rounded-xl shadow p-6 pb-12 my-4">
+    <div className="w-full md:max-w-3xl mx-auto bg-white rounded-xl shadow p-6 pb-12 my-4">
       <h2 className="font-semibold text-lg mb-2">Order Placing</h2>
 
       <div className="flex items-center justify-between relative pb-">

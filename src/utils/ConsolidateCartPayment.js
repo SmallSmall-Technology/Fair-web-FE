@@ -3,7 +3,7 @@ import { getPaymentDates } from './PaymentDates';
 export function consolidateCartPayments(cart) {
   const consolidatedPayments = {
     firstPayment: 0,
-    otherPayments: [], // [{ amount, date }]
+    otherPayments: [],
   };
 
   cart.forEach((item) => {

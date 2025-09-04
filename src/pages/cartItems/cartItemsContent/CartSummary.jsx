@@ -30,6 +30,7 @@ export const CartSummary = ({
   const cartPaymentPlan = cart.map((item) => item.paymentPlan);
   const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
   const consolidatedPayments = consolidateCartPayments(cart);
+  // const secondInstallmentPayment = consolidatedPayments.otherPayments[0];
 
   return (
     <>
@@ -80,7 +81,7 @@ export const CartSummary = ({
                   <p className="text-[#828386]">Today</p>
                 </div>
                 <p className="font-calsans">
-                  {formatCurrency(consolidatedPayments.firstPayment + VAT)}
+                  {formatCurrency(consolidatedPayments?.firstPayment + VAT)}
                 </p>
               </div>
 

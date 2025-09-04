@@ -39,6 +39,7 @@ export const CheckoutItemsContentSection = () => {
   const cartSummary = useSelector(getCartSummary);
   const totalCartPrice = cartSummary?.subtotal || 0;
   const VAT = (7.5 / 100) * totalCartPrice;
+  const downPayment = consolidatedPayments.firstPayment + VAT + shippingFee;
 
   const handleSubmitPaymentMethod = (values) => {
     if (values) {
@@ -165,11 +166,7 @@ export const CheckoutItemsContentSection = () => {
                   <p>First Payment</p>
                   <p className="text-[#828386]">Today</p>
                 </div>
-                <p className="font-calsans">
-                  {formatCurrency(
-                    consolidatedPayments.firstPayment + VAT + shippingFee
-                  )}
-                </p>
+                <p className="font-calsans">{formatCurrency(downPayment)}</p>
               </div>
 
               {consolidatedPayments.otherPayments.map((payment, index, arr) => (

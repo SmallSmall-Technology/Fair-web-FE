@@ -2,11 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import {
-  createPaystackMandate,
-  //   getBanksList,
-  //   validateAccountNumber,
-} from '../../../../../api/orderAPI';
+import { createPaystackMandate } from '../../../../../api/orderAPI';
 import {
   setAuthorized,
   setBankDetails,
@@ -23,15 +19,10 @@ export const DirectDebitBankSetupForm = () => {
   const navigate = useNavigate();
   const mandateData = useSelector(selectMandateData);
 
-  console.log(mandateData);
-
   return (
-    <section className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 pt-10 px-4 lg:px-6">
+    <section className="md:flex md:max-w-6xl mx-auto md:space-x-10 space-y-8 md:space-y-0 justify-between">
       <MakeDownPayment />
-
-      <aside>
-        <MakeDirectDebit />
-      </aside>
+      <MakeDirectDebit />
     </section>
   );
 };

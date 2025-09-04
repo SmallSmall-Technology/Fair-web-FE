@@ -9,7 +9,6 @@ export const NavBarCartItem = ({ item }) => {
     fairAppPrice: item?.fairAppPrice || item?.price,
     quantity: item.quantity || 1,
   });
-  // console.log(item);
 
   return (
     <>
