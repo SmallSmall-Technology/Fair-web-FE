@@ -14,8 +14,6 @@ export default function ProfileSummary() {
 
   // const selectedDeliveryAddress = useSelector(selectCurrentAddress);
 
-  // console.log('delivery Address', selectedDeliveryAddress);
-
   const { register } = useForm({
     defaultValues: {
       firstName: user?.firstName || '',

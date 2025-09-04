@@ -6,10 +6,8 @@ import { CustomButton } from '../../../../../utils/Button';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 import { createPaystackMandate } from '../../../../../api/orderAPI';
 
-export const MakeDirectDebit = () => {
+export const MakeDirectDebit = ({ downPaymentPaid, setDownPaymentPaid }) => {
   const mandateData = useSelector((state) => state.mandate.data);
-  console.log(mandateData, 'mandateData');
-
   // Create Paystack mandate
   const { mutate: createMandate, isPending: isValidating } = useMutation({
     mutationFn: () => createPaystackMandate(mandateData),
@@ -29,9 +27,14 @@ export const MakeDirectDebit = () => {
   return (
     <section className="w-full">
       <p className="text-sm font-outfit mb-4 font-semibold">
-        <span className="mr-1 font-normal">Step 1.</span>Make your down payment
+        <span className="mr-1 font-normal">Step 2.</span>Make your direct debit
       </p>
-      <div className="bg-white rounded-xl border border-[#DEDEDE] p-4 lg:p-6 py-8 shadow-sm flex flex-col justify-center items-center">
+
+      <div
+        className={`rounded-xl border p-4 lg:p-6 py-8 shadow-sm flex flex-col justify-center items-center
+        ${downPaymentPaid ? 'bg-white border-[#DEDEDE]' : 'bg-[#FFFFFF]  text-[#D9D9D9] cursor-not-allowed'}
+      `}
+      >
         <p className="text-lg font-semibold font-outfit">DIRECT DEBIT</p>
         <div className="border border-[#DEDEDE] w-full mx-10 mt-3 mb-4"></div>
         <p className="font-inter text-sm font-normal mb-3">
@@ -49,7 +52,9 @@ export const MakeDirectDebit = () => {
           <CustomButton
             text={isValidating ? 'Setting up...' : 'Set up Direct Debit'}
             onClick={handleCreateMandate}
-            disabled={isValidating}
+            disabled={isValidating || !downPaymentPaid}
+            bgColor={downPaymentPaid ? 'var(--yellow-primary)' : '#F6F6F6'}
+            className={!downPaymentPaid && 'text-[#E8EBEA] '}
           />
         </div>
 

@@ -33,11 +33,8 @@ export const useProceedToMandate = () => {
     consolidatedPayments?.otherPayments[0].amount;
 
   const second_installment_date = new Date(
-    // consolidatedPayments?.otherPayments[0]?.date
     consolidatedPayments?.otherPayments[0]?.date
   );
-
-  console.log(second_installment_date);
 
   const user = useSelector((state) => state.user);
 
@@ -46,9 +43,8 @@ export const useProceedToMandate = () => {
     alreadyNavigatedRef.current = true;
 
     const payload = {
-      second_installment_payment: secondInstallmentPayment,
-      // consolidatedPayments.firstPayment + VAT + shippingFee,
-      second_debit_date: new Date(second_installment_date)
+      first_installment_payment: secondInstallmentPayment,
+      first_debit_date: new Date(second_installment_date)
         .toISOString()
         .split('T')[0],
 
@@ -78,7 +74,10 @@ export const useProceedToMandate = () => {
     };
     dispatch(setMandateData(payload));
     navigate('/cart-items/checkout/mandate/create', {
-      state: payload,
+      state: {
+        ...payload,
+        downPayment: consolidatedPayments.firstPayment + VAT + shippingFee,
+      },
     });
   };
 

@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
@@ -27,6 +27,7 @@ export const CheckoutPaymentMethod = () => {
   const deliveryType = useSelector(selectedDeliveryType);
   const dispatch = useDispatch();
   const proceedToMandate = useProceedToMandate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!deliveryType) return;

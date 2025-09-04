@@ -58,6 +58,15 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
           <div className="lg:hidden ">
             <CartCoupon />
           </div>
+          <div className="flex justify-between">
+            <p className="font-medium text-sm">
+              VAT{' '}
+              <span className="text-[#96959F]">
+                7.5%(added to your first payment)
+              </span>
+            </p>
+            <p className="text-right">{formatCurrency(VAT)}</p>
+          </div>
           <div className="flex justify-between gap-2 font-medium text-xl w-full">
             <div className="flex items-center">
               <p className="text-sm font-medium">Subtotal</p>
@@ -67,16 +76,6 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
               </span>
             </div>
             <p className="font-normal text-base">{formatCurrency(subtTotal)}</p>
-          </div>
-
-          <div className="flex justify-between">
-            <p className="font-medium text-sm">
-              VAT{' '}
-              <span className="text-[#96959F]">
-                7.5%(added to your first payment)
-              </span>
-            </p>
-            <p className="text-right">{formatCurrency(VAT)}</p>
           </div>
         </div>
 

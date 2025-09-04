@@ -44,9 +44,6 @@ export const AccountVerificationModal = ({
   );
   const data = useSelector((state) => selectVerificationData(state, type));
 
-  // const verify = useSelector(isUserDebtProfileVerified);
-  // console.log('verify', verify);
-
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
