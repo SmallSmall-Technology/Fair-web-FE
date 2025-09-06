@@ -1,69 +1,67 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
-import { Search } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import PaystackPop from '@paystack/inline-js';
+import { useMutation } from '@tanstack/react-query';
+import { useSelector, useDispatch } from 'react-redux';
 import { CustomButton } from '../../../../../utils/Button';
-import { formatCurrency } from '../../../../../utils/FormatCurrency';
 import { createPaystackMandate } from '../../../../../api/orderAPI';
+import { formatCurrency } from '../../../../../utils/FormatCurrency';
+import { useDownOrFullPayment } from '../../../../../hooks/useDownOrFullPayment';
+import { setDownPaymentSuccess } from '../../../../../features/order/fullPaymentSlice';
+import { useValidateFullOrDownPayment } from '../../../../../hooks/useValidateFullOrDownpayment';
 
 export const MakeDownPayment = ({ downPayment }) => {
-  const mandateData = useSelector((state) => state.mandate.data);
+  const downPaymentSuccess = useSelector(
+    (state) => state.fullPayment.downPaymentSuccess
+  );
+  const dispatch = useDispatch();
+  const [reference, setReference] = useState(null);
 
-  const {
-    products,
-    consolidated_total_amount,
-    paymentMethod,
-    deliveryState,
-    deliveryFullAddress,
-    deliveryType,
-  } = mandateData;
-
-  const mandateDataForDownPayment = {
-    products,
-    consolidated_total_amount: downPayment,
-    paymentMethod,
-    deliveryState,
-    deliveryFullAddress,
-    deliveryType,
-  };
-
-  const { mutate: payForDownPayment, isPending: isValidating } = useMutation({
-    mutationFn: () => createPaystackMandate(mandateDataForDownPayment),
-    onSuccess: (res) => {
-      const redirectUrl = res.data?.redirect_url;
-      if (redirectUrl) {
-        window.open(redirectUrl, '_blank');
-      }
-    },
-  });
-
-  const handlePayDownPayment = () => {
-    if (!downPayment) return;
-    payForDownPayment(mandateDataForDownPayment);
-  };
+  const { handlePayDownPayment, isValidating } =
+    useDownOrFullPayment(downPayment);
 
   return (
     <section className="w-full">
-      <p className="text-sm font-outfit mb-4 font-semibold">
-        <span className="mr-1 font-normal">Step 1.</span>Make your down payment
+      <p
+        className={`${downPaymentSuccess ? 'text-[#3DB54A]' : ''} text-sm font-outfit mb-4 font-semibold flex items-center gap-2 `}
+      >
+        <span className="mr-1 font-normal">Step 1.</span>
+        {downPaymentSuccess ? 'Complete' : 'Make your down payment'}
+        {downPaymentSuccess && (
+          <img src="/images/check 1.svg" alt="Check icon" />
+        )}
       </p>
-      <div className="bg-white rounded-xl border border-[#DEDEDE] p-4 lg:p-6 py-8 shadow-sm flex flex-col justify-center items-center">
-        <p className="text-lg font-semibold font-outfit">DOWN PAYMENT</p>
-        <div className="border border-[#DEDEDE] w-full mx-10 mt-3 mb-4"></div>
-        <p className="font-inter text-sm font-normal mb-3">Amount to pay</p>
-        <p className="font-outfit font-semibold text-3xl mb-4">
-          {formatCurrency(downPayment)}
-        </p>
-        <div className="w-full md:w-2/3">
-          <CustomButton
-            text="Pay now"
-            role="button"
-            disabled={isValidating}
-            onClick={handlePayDownPayment}
-            className="md:w-2/3"
-          />
+
+      {downPaymentSuccess ? (
+        <div className="bg-white rounded-xl border border-[#DEDEDE] p-4 lg:p-6 py-8 shadow-sm flex flex-col justify-start items-start">
+          <p className="text-sm font-semibold font-outfit mb-4">DOWN PAYMENT</p>
+
+          <p className="font-outfit font-semibold text-3xl mb-4">
+            {formatCurrency(downPayment)}
+          </p>
+          <div className="w-full md:w-2/3 flex items-center gap-2">
+            <p className="font-outfit font-medium">Payment Successful </p>
+            <img src="/images/check 1.svg" alt="Check icon" />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="bg-white rounded-xl border border-[#DEDEDE] p-4 lg:p-6 py-8 shadow-sm flex flex-col justify-center items-center">
+          <p className="text-lg font-semibold font-outfit">DOWN PAYMENT</p>
+          <div className="border border-[#DEDEDE] w-full mx-10 mt-3 mb-4"></div>
+          <p className="font-inter text-sm font-normal mb-3">Amount to pay</p>
+          <p className="font-outfit font-semibold text-3xl mb-4">
+            {formatCurrency(downPayment)}
+          </p>
+          <div className="w-full md:w-2/3">
+            <CustomButton
+              text={isValidating ? 'Processing...' : 'Pay now'}
+              role="button"
+              disabled={isValidating}
+              onClick={handlePayDownPayment}
+              className="md:w-2/3"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 };

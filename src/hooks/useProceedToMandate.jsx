@@ -30,7 +30,7 @@ export const useProceedToMandate = () => {
   );
   const consolidatedPayments = consolidateCartPayments(cart);
   const secondInstallmentPayment =
-    consolidatedPayments?.otherPayments[0].amount;
+    consolidatedPayments?.otherPayments[0]?.amount;
 
   const second_installment_date = new Date(
     consolidatedPayments?.otherPayments[0]?.date
@@ -60,11 +60,13 @@ export const useProceedToMandate = () => {
       paymentMethod: cartPaymentPlan[0],
       description: 'Getting product',
       deliveryFullAddress:
-        selectedDeliveryAddress?.streetAddress +
-          ', ' +
-          selectedDeliveryAddress?.state || user?.latest_address?.streetAddress,
+        selectedDeliveryAddress?.streetAddress && selectedDeliveryAddress?.state
+          ? `${selectedDeliveryAddress.streetAddress}, ${selectedDeliveryAddress.state}`
+          : user?.latest_address?.streetAddress,
+
       deliveryState:
         selectedDeliveryAddress?.state || user?.latest_address?.state,
+
       products: cart.map((item) => ({
         productID: item.productID,
         quantity: item.quantity,

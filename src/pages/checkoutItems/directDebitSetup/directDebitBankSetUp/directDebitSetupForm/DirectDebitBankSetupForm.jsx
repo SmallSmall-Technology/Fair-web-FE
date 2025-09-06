@@ -20,19 +20,11 @@ export const DirectDebitBankSetupForm = () => {
   const mandateData = useSelector(selectMandateData);
   const location = useLocation();
   const downPayment = location.state?.downPayment;
-  const [downPaymentPaid, setDownPaymentPaid] = useState(false);
 
   return (
     <section className="md:flex md:max-w-6xl mx-auto md:space-x-10 space-y-8 md:space-y-0 justify-between">
-      <MakeDownPayment
-        downPayment={downPayment}
-        downPaymentPaid={downPaymentPaid}
-        setDownPaymentPaid={setDownPaymentPaid}
-      />
-      <MakeDirectDebit
-        downPaymentPaid={downPaymentPaid}
-        setDownPaymentPaid={setDownPaymentPaid}
-      />
+      <MakeDownPayment downPayment={downPayment} />
+      <MakeDirectDebit />
     </section>
   );
 };

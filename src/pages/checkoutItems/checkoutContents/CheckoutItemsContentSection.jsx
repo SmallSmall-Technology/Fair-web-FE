@@ -31,11 +31,13 @@ export const CheckoutItemsContentSection = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state?.cart.cart);
-  const cartPaymentPlan = cart.map((item) => item?.paymentPlan);
+  const cartPaymentPlan = cart.map(
+    (item) => item?.paymentPlan || item?.selectedPaymentPlan
+  );
   const isConsolidatedCart = cartPaymentPlan.every((plan) => plan !== 'full');
   const consolidatedPayments = consolidateCartPayments(cart);
   const userSelectedDeliveryType = useSelector(selectedDeliveryType);
-  const shippingFee = userSelectedDeliveryType?.amount;
+  const shippingFee = userSelectedDeliveryType?.amount || 0;
   const cartSummary = useSelector(getCartSummary);
   const totalCartPrice = cartSummary?.subtotal || 0;
   const VAT = (7.5 / 100) * totalCartPrice;
@@ -166,7 +168,7 @@ export const CheckoutItemsContentSection = () => {
                   <p>First Payment</p>
                   <p className="text-[#828386]">Today</p>
                 </div>
-                <p className="font-calsans">{formatCurrency(downPayment)}</p>
+                <p className="font-calsans">{formatCurrency(+downPayment)}</p>
               </div>
 
               {consolidatedPayments.otherPayments.map((payment, index, arr) => (

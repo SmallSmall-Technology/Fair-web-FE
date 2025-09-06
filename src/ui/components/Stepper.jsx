@@ -1,5 +1,6 @@
 import React from 'react';
 import { Check, ShoppingCart } from 'lucide-react';
+import { useSelector } from 'react-redux';
 
 const steps = [
   { id: 1, label: 'Checkout' },
@@ -8,7 +9,11 @@ const steps = [
   { id: 4 },
 ];
 
-export default function Stepper({ currentStep = 2 }) {
+export default function Stepper({ currentStep }) {
+  const downPaymentSuccess = useSelector(
+    (state) => state.fullPayment.downPaymentSuccess
+  );
+
   return (
     <div className="w-full md:max-w-3xl mx-auto bg-white rounded-xl shadow p-6 pb-12 my-4">
       <h2 className="font-semibold text-lg mb-2">Order Placing</h2>
@@ -16,8 +21,10 @@ export default function Stepper({ currentStep = 2 }) {
       <div className="flex items-center justify-between relative pb-">
         {steps.map((step, index) => {
           const isCompleted = step.id < currentStep;
-          const isActive = step.id === currentStep;
-          const isNextAfterCompleted = step.id === currentStep + 1;
+          const isActive =
+            step.id === currentStep || (step.id === 2 && downPaymentSuccess);
+          const isNextAfterCompleted =
+            step.id === currentStep + (downPaymentSuccess ? 2 : 1);
 
           return (
             <div key={step.id} className="flex items-center w-full relative">

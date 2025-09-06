@@ -18,6 +18,7 @@ import { setMandateData } from '../../../features/paystack/mandateSlice.js';
 import { useEffect } from 'react';
 import { createPaystackMandate } from '../../../api/orderAPI.js';
 import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx';
+import { useDownOrFullPayment } from '../../../hooks/useDownOrFullPayment.jsx';
 
 export const CheckoutPaymentMethod = () => {
   const cartItems = useSelector((state) => state.cart.cart);
@@ -35,6 +36,8 @@ export const CheckoutPaymentMethod = () => {
   }, [deliveryType]);
 
   const mandateData = useSelector((state) => state.mandate.data);
+  console.log('mandateData', mandateData);
+  const downPayment = mandateData?.consolidated_total_amount;
 
   const { createMandate, isValidating } = useCreateMandate();
 
@@ -48,9 +51,8 @@ export const CheckoutPaymentMethod = () => {
     proceedToMandate(mandateData);
   };
 
-  const handlePayOnline = () => {
-    // Implement the payment logic here
-  };
+  const { handlePayDownPayment, isValidating: Processing } =
+    useDownOrFullPayment(downPayment);
 
   const {
     register,
@@ -175,14 +177,15 @@ export const CheckoutPaymentMethod = () => {
           ) : (
             <button
               type="button"
-              onClick={handlePayOnline}
+              disabled={!isVerified || Processing}
+              onClick={handlePayDownPayment}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
                 !isVerified
                   ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                   : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
               }`}
             >
-              Pay now
+              {Processing ? 'Processing...' : 'Pay now'}
             </button>
           )}
         </div>

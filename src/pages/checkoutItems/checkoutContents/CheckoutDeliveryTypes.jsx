@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { formatCurrency } from '../../../utils/FormatCurrency';
@@ -36,6 +36,14 @@ export const CheckoutDeliveryTypes = () => {
   } = useForm({
     defaultValues: { picked: 'standard' },
   });
+
+  useEffect(() => {
+    const defaultType = deliveryTypes.find((d) => d.value === 'standard');
+    if (defaultType) {
+      dispatch(setSelectedDeliveryType(defaultType));
+      dispatch(setMandateData({ deliveryType: defaultType.value }));
+    }
+  }, [dispatch, deliveryTypes]);
 
   const handleChange = (e) => {
     const selectedValue = e.target.value;

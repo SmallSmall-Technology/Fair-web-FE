@@ -33,10 +33,8 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const cartPaymentPlan = cart.map(
     (item) => item.paymentPlan || item.selectedPaymentPlan
   );
-  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
+  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan !== 'full');
   const consolidatedPayments = consolidateCartPayments(cart);
-
-  // Function to handle proceeding to mandate creation
 
   const mandateData = useSelector((state) => state.mandate.data);
 
@@ -61,11 +59,17 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
           <div className="flex justify-between">
             <p className="font-medium text-sm">
               VAT{' '}
-              <span className="text-[#96959F]">
-                7.5%(added to your first payment)
-              </span>
+              {isConsolidatedCart === true ? (
+                <span className="text-[#96959F]">
+                  7.5%(added to your first payment)
+                </span>
+              ) : null}
             </p>
             <p className="text-right">{formatCurrency(VAT)}</p>
+          </div>
+          <div className="flex justify-between">
+            <p className="font-medium text-sm">Shipping fee</p>
+            <p className="text-right">{formatCurrency(shippingFee)}</p>
           </div>
           <div className="flex justify-between gap-2 font-medium text-xl w-full">
             <div className="flex items-center">

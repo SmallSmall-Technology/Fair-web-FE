@@ -5,10 +5,19 @@ import { useSelector } from 'react-redux';
 import { CustomButton } from '../../../../../utils/Button';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 import { createPaystackMandate } from '../../../../../api/orderAPI';
+import { consolidateCartPayments } from '../../../../../utils/ConsolidateCartPayment';
 
-export const MakeDirectDebit = ({ downPaymentPaid, setDownPaymentPaid }) => {
+export const MakeDirectDebit = () => {
   const mandateData = useSelector((state) => state.mandate.data);
-  // Create Paystack mandate
+  const cart = useSelector((state) => state.cart.cart);
+  const consolidatedPayments = consolidateCartPayments(cart);
+  const directDebitPaymentFrequency =
+    consolidatedPayments?.otherPayments.length;
+
+  const downPaymentSuccess = useSelector(
+    (state) => state.fullPayment.downPaymentSuccess
+  );
+
   const { mutate: createMandate, isPending: isValidating } = useMutation({
     mutationFn: () => createPaystackMandate(mandateData),
     onSuccess: (res) => {
@@ -20,7 +29,7 @@ export const MakeDirectDebit = ({ downPaymentPaid, setDownPaymentPaid }) => {
   });
 
   const handleCreateMandate = () => {
-    if (!selectedBank || !accountNumber) return;
+    if (!downPaymentSuccess) return;
     createMandate();
   };
 
@@ -32,7 +41,7 @@ export const MakeDirectDebit = ({ downPaymentPaid, setDownPaymentPaid }) => {
 
       <div
         className={`rounded-xl border p-4 lg:p-6 py-8 shadow-sm flex flex-col justify-center items-center
-        ${downPaymentPaid ? 'bg-white border-[#DEDEDE]' : 'bg-[#FFFFFF]  text-[#D9D9D9] cursor-not-allowed'}
+        ${downPaymentSuccess ? 'bg-white border-[#DEDEDE]' : 'bg-[#FFFFFF]  text-[#D9D9D9] cursor-not-allowed'}
       `}
       >
         <p className="text-lg font-semibold font-outfit">DIRECT DEBIT</p>
@@ -41,20 +50,22 @@ export const MakeDirectDebit = ({ downPaymentPaid, setDownPaymentPaid }) => {
           Total Installment Amount
         </p>
         <p className="font-outfit font-semibold text-3xl mb-4">
-          {formatCurrency(mandateData?.second_installment_payment)}
+          {formatCurrency(mandateData?.first_installment_payment)}
         </p>
         <p className="font-inter text-sm font-normal mb-3">
           Number of Installment
         </p>
-        <p className="font-outfit font-semibold text-3xl mb-4">3</p>
+        <p className="font-outfit font-semibold text-3xl mb-4">
+          {directDebitPaymentFrequency}
+        </p>
 
         <div className="w-full md:w-2/3">
           <CustomButton
             text={isValidating ? 'Setting up...' : 'Set up Direct Debit'}
             onClick={handleCreateMandate}
-            disabled={isValidating || !downPaymentPaid}
-            bgColor={downPaymentPaid ? 'var(--yellow-primary)' : '#F6F6F6'}
-            className={!downPaymentPaid && 'text-[#E8EBEA] '}
+            disabled={isValidating || !downPaymentSuccess}
+            bgColor={downPaymentSuccess ? 'var(--yellow-primary)' : '#F6F6F6'}
+            className={!downPaymentSuccess && 'text-[#E8EBEA] '}
           />
         </div>
 

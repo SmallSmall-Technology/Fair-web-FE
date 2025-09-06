@@ -30,7 +30,6 @@ export const CartSummary = ({
   const cartPaymentPlan = cart.map((item) => item.paymentPlan);
   const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
   const consolidatedPayments = consolidateCartPayments(cart);
-  // const secondInstallmentPayment = consolidatedPayments.otherPayments[0];
 
   return (
     <>
