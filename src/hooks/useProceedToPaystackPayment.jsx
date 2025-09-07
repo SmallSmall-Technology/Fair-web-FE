@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
-import { createPaystackMandate } from '../api/orderAPI';
+import { createPaystackOrder } from '../api/orderAPI';
 import { clearCart } from '../features/cart/cartSlice';
 
 export function useCreateMandate() {
@@ -14,7 +14,7 @@ export function useCreateMandate() {
     error,
     data,
   } = useMutation({
-    mutationFn: (mandateData) => createPaystackMandate(mandateData),
+    mutationFn: (mandateData) => createPaystackOrder(mandateData),
     onSuccess: (res) => {
       dispatch(clearCart());
 

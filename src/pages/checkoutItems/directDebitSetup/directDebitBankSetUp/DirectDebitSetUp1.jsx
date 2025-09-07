@@ -2,8 +2,10 @@ import React from 'react';
 import { X } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import { DirectDebitBankSetupForm } from './directDebitSetupForm/DirectDebitBankSetupForm';
 import { selectMandateData } from '../../../../features/paystack/mandateSlice';
+import { DirectDebitBankSetupForm } from './directDebitSetupForm/DirectDebitBankSetupForm';
+import Stepper from '../../../../ui/components/Stepper';
+import { CartFooter } from '../../../cartItems/CartFooter';
 
 export const DirectDebitSetUp1 = () => {
   const { state } = useLocation();
@@ -21,27 +23,41 @@ export const DirectDebitSetUp1 = () => {
   }, [mandateData, navigate]);
 
   return (
-    <>
-      <header className="font-inter border-b-2 text-center flex justify-between items-center w-full px-4 lg:px-32 py-5">
-        <Link to="/" className="w-[128px] lg:w-[149px]">
-          <img
-            src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
-            alt="Smallsmall Logo"
-            className="w-full"
-          />
-        </Link>
-        <Link
-          to="/cart-items/checkout"
-          className="bg-[#ECEDF1] px-3 md:px-5 py-2 rounded-[5px] text-sm font-medium flex items-center border"
-        >
-          <X color="#EF4237" />
-          <span>Cancel Setup</span>
-        </Link>
-      </header>
+    <div className="bg-[#FAFAFA] w-full px-4">
+      <div className="w-full lg:max-w-[540px] mx-auto mb-8">
+        <header className="w-full py-16 text-center grid  md:flex justify-center md:justify-between items-center">
+          <Link to="/" className="w-[149px] mb-4 md:mb-0">
+            <img
+              src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"
+              alt="Smallsmall Logo"
+              loading="eager"
+              className="motion-safe:transition-transform w-full"
+            />
+          </Link>
+          <Link
+            to="/cart-items/checkout"
+            className="bg-[#222224] text-white px-4 md:px-6 py-4 rounded-full text-xs font-medium flex justify-center items-center"
+          >
+            Cancel
+          </Link>
+        </header>
+        <div className="flex flex-col justify-center items-center gap-2">
+          <h2 className="text-[23px] font-bold font-outfit">
+            Start your payment setup
+          </h2>
+          <p className="font-normal text-xs font-inter itext-center text-start mx-4">
+            Follow the steps below to secure your purchase and set up your
+            installment payments.First, make your down payment. Then, set up a
+            direct debit mandate for your upcoming installments.
+          </p>
+        </div>
+        <Stepper currentStep={1} />
+      </div>
 
-      {/* <section className="bg-[#FAFAFA]">
+      <section>
         <DirectDebitBankSetupForm />
-      </section> */}
-    </>
+      </section>
+      <CartFooter />
+    </div>
   );
 };

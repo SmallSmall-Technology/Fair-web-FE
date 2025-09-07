@@ -14,7 +14,6 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
   if (isLoading) {
     return <CartItemSkeleton />;
   }
-
   const displayedPrice = getDisplayedPrice({
     paymentPlan: item?.paymentPlan || item?.selectedPaymentPlan,
     paymentOptionsBreakdown: item?.paymentOptionsBreakdown,

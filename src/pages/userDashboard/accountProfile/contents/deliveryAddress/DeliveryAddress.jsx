@@ -26,9 +26,6 @@ const DeliveryAddress = () => {
   const currentAddress = useSelector(selectCurrentAddress);
   const latestAddress = useSelector(selectLatestDeliveryAddress);
 
-  // console.log('Redux current address:', currentAddress);
-  // console.log('Redux latest address:', latestAddress);
-
   const { data, isLoading, isError } = useQuery({
     queryKey: ['useraddresses'],
     queryFn: fetchUserDeliveryAddresses,
