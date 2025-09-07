@@ -29,6 +29,13 @@ export const useProceedToMandate = () => {
     (item) => item.paymentPlan || item.selectedPaymentPlan
   );
   const consolidatedPayments = consolidateCartPayments(cart);
+  const secondInstallmentPayment =
+    consolidatedPayments?.otherPayments[0]?.amount;
+
+  const second_installment_date = new Date(
+    consolidatedPayments?.otherPayments[0]?.date
+  );
+
   const user = useSelector((state) => state.user);
 
   const proceed = () => {
@@ -36,11 +43,13 @@ export const useProceedToMandate = () => {
     alreadyNavigatedRef.current = true;
 
     const payload = {
-      first_installment_payment:
-        consolidatedPayments.firstPayment + VAT + shippingFee,
-      first_debit_date: new Date().toISOString().split('T')[0],
+      first_installment_payment: secondInstallmentPayment,
+      first_debit_date: new Date(second_installment_date)
+        .toISOString()
+        .split('T')[0],
+
       last_installment_payment:
-        consolidatedPayments.otherPayments.at(-1)?.amount,
+        consolidatedPayments?.otherPayments.at(-1)?.amount,
       last_installment_date: new Date(
         consolidatedPayments.otherPayments.at(-1)?.date
       )
@@ -51,11 +60,13 @@ export const useProceedToMandate = () => {
       paymentMethod: cartPaymentPlan[0],
       description: 'Getting product',
       deliveryFullAddress:
-        selectedDeliveryAddress?.streetAddress +
-          ', ' +
-          selectedDeliveryAddress?.state || user?.latest_address?.streetAddress,
+        selectedDeliveryAddress?.streetAddress && selectedDeliveryAddress?.state
+          ? `${selectedDeliveryAddress.streetAddress}, ${selectedDeliveryAddress.state}`
+          : user?.latest_address?.streetAddress,
+
       deliveryState:
         selectedDeliveryAddress?.state || user?.latest_address?.state,
+
       products: cart.map((item) => ({
         productID: item.productID,
         quantity: item.quantity,
@@ -64,9 +75,12 @@ export const useProceedToMandate = () => {
       // deliveryType: null,
     };
     dispatch(setMandateData(payload));
-    // navigate('/cart-items/checkout/mandate/create', {
-    //   state: payload,
-    // });
+    navigate('/cart-items/checkout/mandate/create', {
+      state: {
+        ...payload,
+        downPayment: consolidatedPayments.firstPayment + VAT + shippingFee,
+      },
+    });
   };
 
   return proceed;

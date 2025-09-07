@@ -1,6 +1,6 @@
 import { getDisplayedPrice } from '../../../utils/GetDisplayedPrice';
 import { DeleteItemFromCart } from '../../../features/cart/DeleteItem';
-import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
+import UpdateItemQuantity from '../../../features/cart/UpdateItemQuantity';
 
 export const NavBarCartItem = ({ item }) => {
   const displayedPrice = getDisplayedPrice({
@@ -9,11 +9,10 @@ export const NavBarCartItem = ({ item }) => {
     fairAppPrice: item?.fairAppPrice || item?.price,
     quantity: item.quantity || 1,
   });
-  // console.log(item);
 
   return (
     <>
-      <li className="grid grid-cols-1 py-4 lg:px-5">
+      <li className="grid grid-cols-1 py-4 lg:px-2">
         <div className="flex items-baseline mb-4 space-x-2">
           <img src="/images/fair-logo.svg" alt="" width={48} />
           <p className="pb-0">Fair</p>
@@ -27,9 +26,9 @@ export const NavBarCartItem = ({ item }) => {
             />
           </div>
 
-          <div className="flex flex-col space-y- justify-between w-full">
+          <div className="flex flex-col  justify-between w-full">
             <p>{item?.name}</p>
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between items-center w-full">
               <div className="flex space-x-4">
                 <div>
                   <div className="text-[#222224] font-medium text-sm flex items-center space-x-2">

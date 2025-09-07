@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
@@ -16,8 +16,9 @@ import {
 } from '../../../features/order/deliveryAddressSlice.js';
 import { setMandateData } from '../../../features/paystack/mandateSlice.js';
 import { useEffect } from 'react';
-import { createPaystackMandate } from '../../../api/orderAPI.js';
+import { createPaystackOrder } from '../../../api/orderAPI.js';
 import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx';
+import { useDownOrFullPayment } from '../../../hooks/useDownOrFullPayment.jsx';
 
 export const CheckoutPaymentMethod = () => {
   const cartItems = useSelector((state) => state.cart.cart);
@@ -27,6 +28,7 @@ export const CheckoutPaymentMethod = () => {
   const deliveryType = useSelector(selectedDeliveryType);
   const dispatch = useDispatch();
   const proceedToMandate = useProceedToMandate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!deliveryType) return;
@@ -34,6 +36,8 @@ export const CheckoutPaymentMethod = () => {
   }, [deliveryType]);
 
   const mandateData = useSelector((state) => state.mandate.data);
+  console.log('mandateData', mandateData);
+  const downPayment = mandateData?.consolidated_total_amount;
 
   const { createMandate, isValidating } = useCreateMandate();
 
@@ -42,9 +46,13 @@ export const CheckoutPaymentMethod = () => {
     createMandate(mandateData);
   };
 
-  const handlePayOnline = () => {
-    // Implement the payment logic here
+  const handleProceedToMandate = () => {
+    if (!mandateData) return;
+    proceedToMandate(mandateData);
   };
+
+  const { handlePayDownPayment, isValidating: Processing } =
+    useDownOrFullPayment(downPayment);
 
   const {
     register,
@@ -157,26 +165,27 @@ export const CheckoutPaymentMethod = () => {
             <button
               type="button"
               disabled={!isVerified}
-              onClick={handleCreatePaystackCustomer}
+              onClick={handleProceedToMandate}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
                 !isVerified
                   ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                   : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
               }`}
             >
-              Set up direct debit
+              Checkout securely
             </button>
           ) : (
             <button
               type="button"
-              onClick={handlePayOnline}
+              disabled={!isVerified || Processing}
+              onClick={handlePayDownPayment}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
                 !isVerified
                   ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                   : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
               }`}
             >
-              Pay now
+              {Processing ? 'Processing...' : 'Pay now'}
             </button>
           )}
         </div>

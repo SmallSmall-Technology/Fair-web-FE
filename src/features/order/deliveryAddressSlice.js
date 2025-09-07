@@ -35,7 +35,6 @@ const deliverySlice = createSlice({
   },
 });
 
-// ✅ export actions
 export const {
   updateLatestDeliveryAddress,
   addDeliveryAddress,
@@ -47,7 +46,6 @@ export const {
 
 export default deliverySlice.reducer;
 
-// ✅ selectors
 export const selectLatestDeliveryAddress = (state) =>
   state.delivery.latest_address;
 export const selectCurrentDeliveryAddress = (state) =>

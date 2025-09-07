@@ -9,7 +9,8 @@ import orderReducer from './features/order/orderSlice';
 import authReducer from './features/auth/authSlice';
 import mandateReducer from './features/paystack/mandateSlice';
 import deliveryReducer from './features/order/deliveryAddressSlice';
-import accountVerificationReducer from './features/user/accountVerificationSlice';
+import fullPaymentReducer from './features/order/fullPaymentSlice';
+// import accountVerificationReducer from './features/user/accountVerificationSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   delivery: deliveryReducer,
   auth: authReducer,
   mandate: mandateReducer,
-  accountVerification: accountVerificationReducer,
+  // accountVerification: accountVerificationReducer,
+  fullPayment: fullPaymentReducer,
 });
 
 const persistConfig = {
@@ -35,7 +37,8 @@ const persistConfig = {
     'delivery',
     'auth',
     'mandate',
-    'accountVerification',
+    // 'accountVerification',
+    'fullPayment',
   ],
 };
 
