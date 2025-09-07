@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { createPaystackMandate } from '../../../../../api/orderAPI';
+import { createPaystackOrder } from '../../../../../api/orderAPI';
 import {
   setAuthorized,
   setBankDetails,

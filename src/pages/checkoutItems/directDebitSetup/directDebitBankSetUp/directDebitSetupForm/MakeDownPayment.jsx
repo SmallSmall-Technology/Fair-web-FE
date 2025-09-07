@@ -3,18 +3,19 @@ import PaystackPop from '@paystack/inline-js';
 import { useMutation } from '@tanstack/react-query';
 import { useSelector, useDispatch } from 'react-redux';
 import { CustomButton } from '../../../../../utils/Button';
-import { createPaystackMandate } from '../../../../../api/orderAPI';
+import { createPaystackOrder } from '../../../../../api/orderAPI';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 import { useDownOrFullPayment } from '../../../../../hooks/useDownOrFullPayment';
-import { setDownPaymentSuccess } from '../../../../../features/order/fullPaymentSlice';
 import { useValidateFullOrDownPayment } from '../../../../../hooks/useValidateFullOrDownpayment';
 
 export const MakeDownPayment = ({ downPayment }) => {
   const downPaymentSuccess = useSelector(
     (state) => state.fullPayment.downPaymentSuccess
   );
+
+  console.log('downPaymentSuccess', downPaymentSuccess);
+
   const dispatch = useDispatch();
-  const [reference, setReference] = useState(null);
 
   const { handlePayDownPayment, isValidating } =
     useDownOrFullPayment(downPayment);

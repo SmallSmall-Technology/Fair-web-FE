@@ -4,7 +4,10 @@ import { Search } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { CustomButton } from '../../../../../utils/Button';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
-import { createPaystackMandate } from '../../../../../api/orderAPI';
+import {
+  createPaystackMandate,
+  createPaystackOrder,
+} from '../../../../../api/orderAPI';
 import { consolidateCartPayments } from '../../../../../utils/ConsolidateCartPayment';
 
 export const MakeDirectDebit = () => {
@@ -17,14 +20,21 @@ export const MakeDirectDebit = () => {
   const downPaymentSuccess = useSelector(
     (state) => state.fullPayment.downPaymentSuccess
   );
+  const paystackOrderReference = useSelector(
+    (state) => state.fullPayment.paystackOrderReference
+  );
+
+  console.log(paystackOrderReference);
 
   const { mutate: createMandate, isPending: isValidating } = useMutation({
-    mutationFn: () => createPaystackMandate(mandateData),
+    mutationFn: () =>
+      createPaystackMandate({ reference: paystackOrderReference }),
     onSuccess: (res) => {
-      const redirectUrl = res.data?.redirect_url;
-      if (redirectUrl) {
-        window.open(redirectUrl, '_blank');
-      }
+      // const redirectUrl = res.data?.redirect_url;
+      // if (redirectUrl) {
+      //   window.open(redirectUrl, '_blank');
+      // }
+      console.log(res);
     },
   });
 

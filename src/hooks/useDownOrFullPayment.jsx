@@ -2,14 +2,20 @@ import { useState } from 'react';
 import PaystackPop from '@paystack/inline-js';
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPaystackMandate } from '../api/orderAPI';
+import { createPaystackOrder } from '../api/orderAPI';
 import { useValidateFullOrDownPayment } from './useValidateFullOrDownPayment';
-import { setDownPaymentSuccess } from '../features/order/fullPaymentSlice';
+import {
+  setDownPaymentSuccess,
+  setPaystackOrderReference,
+} from '../features/order/fullPaymentSlice';
 
 export function useDownOrFullPayment(downPayment) {
-  const [reference, setReference] = useState(null);
   const mandateData = useSelector((state) => state.mandate.data);
   const dispatch = useDispatch();
+
+  const paystackOrderReference = useSelector(
+    (state) => state.fullPayment.paystackOrderReference
+  );
 
   const {
     products,
@@ -30,10 +36,10 @@ export function useDownOrFullPayment(downPayment) {
   };
 
   const { data: validationData, refetch: refetchValidation } =
-    useValidateFullOrDownPayment(reference);
+    useValidateFullOrDownPayment(paystackOrderReference);
 
   const { mutate: payForDownPayment, isPending: isValidating } = useMutation({
-    mutationFn: () => createPaystackMandate(mandateDataForDownPayment),
+    mutationFn: () => createPaystackOrder(mandateDataForDownPayment),
     onSuccess: (res) => {
       const {
         reference: newReference,
@@ -50,15 +56,17 @@ export function useDownOrFullPayment(downPayment) {
           amount: amount * 100,
           currency: 'NGN',
           onSuccess: (transaction) => {
-            setReference(newReference);
+            setPaystackOrderReference(newReference);
 
             if (
               transaction.status === 'success' &&
               transaction.message === 'Approved'
             ) {
               dispatch(setDownPaymentSuccess(true));
+              dispatch(setPaystackOrderReference(newReference));
             } else {
               dispatch(setDownPaymentSuccess(false));
+              dispatch(setPaystackOrderReference(null));
             }
 
             refetchValidation();

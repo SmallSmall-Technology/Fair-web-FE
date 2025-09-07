@@ -16,7 +16,7 @@ import {
 } from '../../../features/order/deliveryAddressSlice.js';
 import { setMandateData } from '../../../features/paystack/mandateSlice.js';
 import { useEffect } from 'react';
-import { createPaystackMandate } from '../../../api/orderAPI.js';
+import { createPaystackOrder } from '../../../api/orderAPI.js';
 import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx';
 import { useDownOrFullPayment } from '../../../hooks/useDownOrFullPayment.jsx';
 

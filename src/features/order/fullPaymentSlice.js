@@ -4,11 +4,15 @@ const fullPaymentSlice = createSlice({
   name: 'fullPayment',
   initialState: {
     downPaymentSuccess: false,
+    paystackOrderReference: null,
     error: null,
   },
   reducers: {
     setDownPaymentSuccess: (state, action) => {
       state.downPaymentSuccess = action.payload;
+    },
+    setPaystackOrderReference: (state, action) => {
+      state.paystackOrderReference = action.payload;
     },
     setError: (state, action) => {
       state.error = action.payload;
@@ -17,5 +21,6 @@ const fullPaymentSlice = createSlice({
 });
 
 // ✅ Correct exports
-export const { setDownPaymentSuccess, setError } = fullPaymentSlice.actions;
+export const { setDownPaymentSuccess, setPaystackOrderReference, setError } =
+  fullPaymentSlice.actions;
 export default fullPaymentSlice.reducer;
