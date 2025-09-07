@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import { Search, Minus } from 'lucide-react';
 import { selectMandateData } from '../../../../../features/paystack/mandateSlice';
 import { MakeDownPayment } from './MakeDownPayment';
-import { MakeDirectDebit } from './MakeDirectDebit';
+import { MakeDirectDebit } from './makeDirectDebit/MakeDirectDebit';
 
 export const DirectDebitBankSetupForm = () => {
   const dispatch = useDispatch();

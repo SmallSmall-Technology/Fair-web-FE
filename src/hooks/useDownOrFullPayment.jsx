@@ -41,6 +41,7 @@ export function useDownOrFullPayment(downPayment) {
   const { mutate: payForDownPayment, isPending: isValidating } = useMutation({
     mutationFn: () => createPaystackOrder(mandateDataForDownPayment),
     onSuccess: (res) => {
+      console.log('Paystack order created successfully:', res);
       const {
         reference: newReference,
         email,
