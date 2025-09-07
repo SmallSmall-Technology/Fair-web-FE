@@ -8,7 +8,7 @@ import {
 import { formatCurrency } from '../../../utils/FormatCurrency';
 import { getDisplayedPrice } from '../../../utils/GetDisplayedPrice';
 import { SaveItemForLater } from '../../../features/cart/SaveItemForLater';
-import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
+import UpdateItemQuantity from '../../../features/cart/UpdateItemQuantity';
 
 export const CartItem = ({ item, onTogglePlan, isLoading }) => {
   if (isLoading) {

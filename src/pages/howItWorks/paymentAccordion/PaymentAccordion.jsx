@@ -6,22 +6,25 @@ const paymentData = [
   {
     title: 'Stretch Your Budget Further',
     content:
-      'Pick an item with an instalment payment plan that suits your budget and lifestyle. Our instalment plans are designed to help you enjoy what you want, when you want it.',
+      'Pick an item with an instalment payment plan that suits your budget and lifestyle, Our instalment plans are designed to help you enjoy what you want, when you want it.',
     image: '/images/stretch-budget.svg',
   },
   {
     title: 'Direct debit',
-    content: 'Automatically deducts payments from your bank account when due.',
+    content:
+      'Our direct debit feature streamlines the payment process by allowing automatic deductions directly from your bank account for recurring purchases. It simplifies transactions, ensuring that you never miss a payment.',
     image: '/images/direct-debit.svg',
   },
   {
     title: 'Enjoy Now, Pay Later',
-    content: 'Buy now and split your payment into manageable instalments.',
+    content:
+      "Receive & enjoy your purchase immediately while making manageable payments over time—it's that easy!",
     image: '/images/pay-later.svg',
   },
   {
     title: 'Manage Your Payments',
-    content: 'Track, update or reschedule your payments from your dashboard.',
+    content:
+      'Stay on track with a simple payment schedule. You’ll receive reminders and can access your account anytime!',
     image: '/images/manage-payments.svg',
   },
 ];

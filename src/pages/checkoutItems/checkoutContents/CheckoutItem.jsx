@@ -1,10 +1,12 @@
 import { X } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { formatCurrency } from '../../../utils/FormatCurrency';
-import { UpdateItemQuantity } from '../../../features/cart/UpdateItemQuantity';
+import UpdateItemQuantity from '../../../features/cart/UpdateItemQuantity';
 
 export const CheckoutItem = () => {
   const cart = useSelector((state) => state?.cart.cart);
+
+  console.log(cart);
 
   return (
     <ul className="grid grid-cols-1 lg:px-8 gap-4 pt-20 lg:pt-10 font-inter">
@@ -31,12 +33,16 @@ export const CheckoutItem = () => {
                   {item?.quantity}
                 </div>
                 <div className="lg:hidden text-[#222224] font-medium text-sm">
-                  <div className="flex items-center space-x-2">
+                  {/* <div className="flex items-center space-x-2">
                     <p>Qty: </p>
                     <UpdateItemQuantity
-                      id={item?.id}
+                      productID={item?.productID}
                       currentQuantity={item?.quantity}
                     />
+                  </div> */}
+                  <div className="flex text-[#96959F] font-medium text-sm mb-2 lg:flex items-center">
+                    <X size={17} />
+                    <span>{item?.quantity}</span>
                   </div>
                   <p className="font-semibold mb-3">
                     {formatCurrency(item.price)}
