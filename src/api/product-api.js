@@ -24,10 +24,13 @@ export const fetchSingleProduct = async (productId) => {
 // Fetch products by category and subcategory
 export const fetchProductsByCategoryAndSubcategory = async (
   category,
-  subcategory
+  subcategory,
+  limit = 10,
+  page = 1
 ) => {
   const response = await httpClient.get(
-    `products/subcategory?category=${category}&subcategory=${subcategory}`
+    // `products/subcategory?category=${category}&subcategory=${subcategory}`
+    `products/subcategory?category=${category}&subcategory=${subcategory}&limit=${limit}&page=${page}`
   );
   return response.data;
 };

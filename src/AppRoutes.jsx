@@ -89,7 +89,11 @@ const AppRoutes = () => {
 
         <Route
           path=":category/:sub_category"
-          element={<DynamicSubCategoryPage />}
+          element={
+            <Suspense fallback={<LandingPageSkeleton />}>
+              <DynamicSubCategoryPage />
+            </Suspense>
+          }
         />
 
         <Route
