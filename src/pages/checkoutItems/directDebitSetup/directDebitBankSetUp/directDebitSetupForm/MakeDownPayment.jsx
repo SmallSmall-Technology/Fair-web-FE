@@ -6,7 +6,7 @@ import { CustomButton } from '../../../../../utils/Button';
 import { createPaystackOrder } from '../../../../../api/orderAPI';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 import { useDownOrFullPayment } from '../../../../../hooks/useDownOrFullPayment';
-import { useValidateFullOrDownPayment } from '../../../../../hooks/useValidateFullOrDownpayment';
+// import { useValidateFullOrDownPayment } from '../../../../../hooks/useValidateFullOrDownPayment';
 
 export const MakeDownPayment = ({ downPayment }) => {
   const downPaymentSuccess = useSelector(
