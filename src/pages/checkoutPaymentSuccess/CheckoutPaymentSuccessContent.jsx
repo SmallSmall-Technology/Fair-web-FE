@@ -1,13 +1,17 @@
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { formatCurrency } from '../../utils/FormatCurrency';
 import { getTotalCartPrice } from '../../features/cart/cartSlice';
-import { Link } from 'react-router-dom';
 
 export const CheckoutPaymentSuccessContent = () => {
   const cartItems = useSelector((state) => state.cart.cart);
+  const location = useLocation();
+  const { masterOrderID, totalAmount, timestamp } = location.state || {};
 
-  const currentPlan = cartItems.find((item) => item.paymentPlan === 'full');
-  const orderNumber = 'I7xAA6b';
+  const currentPlan = cartItems.find(
+    (item) => item?.paymentPlan || item?.selectedPaymentPlan === 'full'
+  );
+  const orderNumber = masterOrderID || 'N/A';
 
   const total = useSelector(getTotalCartPrice);
   return (
@@ -35,8 +39,10 @@ export const CheckoutPaymentSuccessContent = () => {
               </ul>
               <ul className="leading-7">
                 <li className="font-medium">{orderNumber}</li>
-                <li className="font-medium">12, Dec, 2020</li>
-                <li className="font-medium">{formatCurrency(total)}</li>
+                <li className="font-medium">
+                  {new Date(timestamp).toLocaleDateString()}
+                </li>
+                <li className="font-medium">{formatCurrency(totalAmount)}</li>
               </ul>
             </div>
             <p className="text-[#96959F]">

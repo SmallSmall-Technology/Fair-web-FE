@@ -47,7 +47,7 @@ export const CheckoutItemsContentSection = () => {
     if (values) {
       dispatch(makePayment());
       startTransition(() => {
-        navigate('/cart-items/checkout/payment-success');
+        // navigate('/cart-items/checkout/payment-success');
       });
     }
   };

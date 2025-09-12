@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PaystackPop from '@paystack/inline-js';
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +8,8 @@ import {
   setDownPaymentSuccess,
   setPaystackOrderReference,
 } from '../features/order/fullPaymentSlice';
+import { clearCart } from '../features/cart/cartSlice';
+// import { clearCart } from '../features/cart/cartSlice';
 
 export function useDownOrFullPayment(downPayment) {
   const mandateData = useSelector((state) => state.mandate.data);
@@ -16,6 +18,10 @@ export function useDownOrFullPayment(downPayment) {
   const paystackOrderReference = useSelector(
     (state) => state.fullPayment.paystackOrderReference
   );
+
+  // const downPaymentSuccess = useSelector(
+  //   (state) => state.fullPayment.downPaymentSuccess
+  // );
 
   const {
     products,
@@ -37,11 +43,21 @@ export function useDownOrFullPayment(downPayment) {
 
   const { data: validationData, refetch: refetchValidation } =
     useValidateFullOrDownPayment(paystackOrderReference);
+  // console.log('validationData from useDownOrFullPayment', validationData);
+
+  useEffect(() => {
+    const { payment_verified, status } = validationData || {};
+    if (payment_verified === true && status === 'success') {
+      dispatch(setDownPaymentSuccess(true));
+    } else {
+      dispatch(setDownPaymentSuccess(false));
+    }
+  }, [validationData]);
 
   const { mutate: payForDownPayment, isPending: isValidating } = useMutation({
     mutationFn: () => createPaystackOrder(mandateDataForDownPayment),
     onSuccess: (res) => {
-      console.log('Paystack order created successfully:', res);
+      // console.log('Paystack order created successfully:', res);
       const {
         reference: newReference,
         email,
@@ -56,25 +72,25 @@ export function useDownOrFullPayment(downPayment) {
           email,
           amount: amount * 100,
           currency: 'NGN',
+          reference: newReference,
           onSuccess: (transaction) => {
-            setPaystackOrderReference(newReference);
+            // console.log('transaction', transaction);
+            dispatch(setPaystackOrderReference(transaction.reference));
 
             if (
               transaction.status === 'success' &&
               transaction.message === 'Approved'
             ) {
-              dispatch(setDownPaymentSuccess(true));
-              dispatch(setPaystackOrderReference(newReference));
+              dispatch(setPaystackOrderReference(transaction.reference));
+              dispatch(clearCart());
             } else {
-              dispatch(setDownPaymentSuccess(false));
               dispatch(setPaystackOrderReference(null));
             }
 
             refetchValidation();
           },
           onError: (error) => {
-            console.error('Payment failed:', error);
-            dispatch(setDownPaymentSuccess(false));
+            dispatch(setPaystackOrderReference(null));
           },
         });
       }

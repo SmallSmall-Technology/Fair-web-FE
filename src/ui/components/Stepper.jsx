@@ -14,13 +14,21 @@ export default function Stepper({ currentStep }) {
     (state) => state.fullPayment.downPaymentSuccess
   );
 
+  const directDebitInitiation = useSelector(
+    (state) => state.fullPayment.directDebitInitiation
+  );
+
   return (
     <div className="w-full md:max-w-3xl mx-auto bg-white rounded-xl shadow p-6 pb-12 my-4">
       <h2 className="font-semibold text-lg mb-2">Order Placing</h2>
 
       <div className="flex items-center justify-between relative pb-">
         {steps.map((step, index) => {
-          const isCompleted = step.id < currentStep;
+          // const isCompleted = step.id < currentStep;
+          const isCompleted =
+            step.id < currentStep ||
+            (step.id === 2 && downPaymentSuccess) ||
+            (step.id === 3 && directDebitInitiation);
           const isActive =
             step.id === currentStep || (step.id === 2 && downPaymentSuccess);
           const isNextAfterCompleted =
