@@ -60,19 +60,21 @@ export const CheckoutPaymentMethod = () => {
     validationData,
   } = useDownOrFullPayment(downPayment);
 
-  // const onPay = () => {
-  //   handlePayDownPayment();
-  // };
-
   useEffect(() => {
     if (
       validationData?.payment_verified &&
       validationData?.status === 'success'
     ) {
       const { masterOrderID, totalAmount, timestamp } = validationData;
-      // navigate('/cart-items/checkout/payment-success', {
-      //   state: { masterOrderID, totalAmount, timestamp },
-      // });
+
+      navigate(
+        `/cart-items/checkout/payment-success/${validationData?.reference}`,
+        {
+          state: { masterOrderID, totalAmount, timestamp },
+          replace: true,
+        }
+      );
+      dispatch(clearCart());
     }
   }, [validationData, navigate]);
 
@@ -86,11 +88,9 @@ export const CheckoutPaymentMethod = () => {
     resolver: zodResolver(paymentOptionSchema),
   });
 
-  const InstallmentPayment = cartItems.some((item) => {
-    return ['monthly', 'weekly', 'daily'].includes(
-      item.paymentPlan || item.selectedPaymentPlan
-    );
-  });
+  const InstallmentPayment = !cartItems.every(
+    (item) => item.paymentPlan === 'full' && item.selectedPaymentPlan === 'full'
+  );
 
   return (
     <div>
@@ -201,7 +201,6 @@ export const CheckoutPaymentMethod = () => {
               type="button"
               disabled={!isVerified || Processing}
               onClick={handlePayDownPayment}
-              // onClick={onPay}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
                 !isVerified
                   ? 'bg-[#DEDEDE] cursor-not-allowed text-white'

@@ -19,10 +19,6 @@ export function useDownOrFullPayment(downPayment) {
     (state) => state.fullPayment.paystackOrderReference
   );
 
-  // const downPaymentSuccess = useSelector(
-  //   (state) => state.fullPayment.downPaymentSuccess
-  // );
-
   const {
     products,
     consolidated_total_amount,
@@ -43,7 +39,6 @@ export function useDownOrFullPayment(downPayment) {
 
   const { data: validationData, refetch: refetchValidation } =
     useValidateFullOrDownPayment(paystackOrderReference);
-  // console.log('validationData from useDownOrFullPayment', validationData);
 
   useEffect(() => {
     const { payment_verified, status } = validationData || {};
@@ -57,7 +52,6 @@ export function useDownOrFullPayment(downPayment) {
   const { mutate: payForDownPayment, isPending: isValidating } = useMutation({
     mutationFn: () => createPaystackOrder(mandateDataForDownPayment),
     onSuccess: (res) => {
-      // console.log('Paystack order created successfully:', res);
       const {
         reference: newReference,
         email,
@@ -74,7 +68,6 @@ export function useDownOrFullPayment(downPayment) {
           currency: 'NGN',
           reference: newReference,
           onSuccess: (transaction) => {
-            // console.log('transaction', transaction);
             dispatch(setPaystackOrderReference(transaction.reference));
 
             if (

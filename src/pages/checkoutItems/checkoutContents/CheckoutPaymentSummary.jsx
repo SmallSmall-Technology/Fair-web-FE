@@ -14,13 +14,23 @@ import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
 import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.jsx';
 import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
-import { selectedDeliveryType } from '../../../features/order/deliveryAddressSlice.js';
+import {
+  selectCurrentAddress,
+  selectedDeliveryType,
+} from '../../../features/order/deliveryAddressSlice.js';
 import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx';
+import { useDownOrFullPayment } from '../../../hooks/useDownOrFullPayment.jsx';
+import { useEffect } from 'react';
+import { setMandateData } from '../../../features/paystack/mandateSlice.js';
 
-export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
+export const CheckoutPaymentSummary = () => {
   const cart = useSelector((state) => state.cart.cart);
   const totalCartQuantity = useSelector(getTotalCartQuantity);
   const totalCartPrice = useSelector(getTotalCartPrice);
+  const dispatch = useDispatch();
+  const currentDeliveryAddress = useSelector(selectCurrentAddress);
+  const { data: user } = useSelector((state) => state.user);
+  const { latest_address } = user;
 
   const VAT = (7.5 / 100) * totalCartPrice;
   const userSelectedDeliveryType = useSelector(selectedDeliveryType);
@@ -33,12 +43,48 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const cartPaymentPlan = cart.map(
     (item) => item.paymentPlan || item.selectedPaymentPlan
   );
-  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan !== 'full');
+
+  const isConsolidatedCart = !cart.every(
+    (item) => item.paymentPlan === 'full' && item.selectedPaymentPlan === 'full'
+  );
+
   const consolidatedPayments = consolidateCartPayments(cart);
+  const downPayment = consolidatedPayments.firstPayment + VAT + shippingFee;
+  const fullPayment = totalCartPrice + VAT + shippingFee;
+  const proceedToMandate = useProceedToMandate();
 
   const mandateData = useSelector((state) => state.mandate.data);
 
   const { createMandate, isValidating } = useCreateMandate();
+
+  const {
+    handlePayDownPayment,
+    isValidating: Processing,
+    validationData,
+  } = useDownOrFullPayment(isConsolidatedCart ? downPayment : fullPayment);
+
+  const deliveryAddress = [
+    currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
+    currentDeliveryAddress?.state || latest_address?.state,
+  ]
+    .filter(Boolean)
+    .join(', ');
+
+  useEffect(() => {
+    if (!isConsolidatedCart) {
+      dispatch(
+        setMandateData({
+          products: cart,
+          consolidated_total_amount: fullPayment,
+          paymentMethod: 'full',
+          deliveryState: currentDeliveryAddress?.state || latest_address?.state,
+          deliveryFullAddress:
+            currentDeliveryAddress?.streetAddress ||
+            latest_address?.streetAddress,
+        })
+      );
+    }
+  }, [shippingFee]);
 
   const handleCreatePaystackCustomer = () => {
     if (!mandateData) return;
@@ -48,6 +94,11 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
   const isVerified = useSelector((state) =>
     selectVerificationStatus(state, 'debt')
   );
+
+  const handleProceedToMandate = () => {
+    if (!mandateData) return;
+    proceedToMandate(mandateData);
+  };
 
   return (
     <>
@@ -59,7 +110,7 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
           <div className="flex justify-between">
             <p className="font-medium text-sm">
               VAT{' '}
-              {isConsolidatedCart === true ? (
+              {isConsolidatedCart ? (
                 <span className="text-[#96959F]">
                   7.5%(added to your first payment)
                 </span>
@@ -83,7 +134,7 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
           </div>
         </div>
 
-        {!isConsolidatedCart && (
+        {isConsolidatedCart && (
           <div className="px- lg:hidden">
             <hr className="mt-8 mb-2" />
             <div className="font-inter flex justify-between items-center">
@@ -137,18 +188,35 @@ export const CheckoutPaymentSummary = ({ onSubmitPaymentMethod }) => {
             </div>
 
             <div className="lg:hidden flex flex-col justify-center gap-5 font-inter">
-              {!consolidateCartPayments ? (
-                <YellowButton onClick={onSubmitPaymentMethod}>
-                  Pay now
-                </YellowButton>
-              ) : (
-                <YellowButton
-                  onClick={handleCreatePaystackCustomer}
-                  disabled={!isVerified}
-                >
-                  Checkout securely
-                </YellowButton>
-              )}
+              <div className=" lg:hidden">
+                {isConsolidatedCart ? (
+                  <button
+                    type="button"
+                    disabled={!isVerified}
+                    onClick={handleProceedToMandate}
+                    className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
+                      !isVerified
+                        ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
+                        : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
+                    }`}
+                  >
+                    Checkout securely
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    disabled={!isVerified || Processing}
+                    onClick={handlePayDownPayment}
+                    className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
+                      !isVerified
+                        ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
+                        : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
+                    }`}
+                  >
+                    {Processing ? 'Processing...' : 'Pay now'}
+                  </button>
+                )}
+              </div>
 
               <div className="mx-auto">
                 <CancelPurchase />

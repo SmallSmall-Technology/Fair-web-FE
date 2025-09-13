@@ -15,16 +15,16 @@ const SingleOngoingPurchaseProgress = React.memo(
         <div className="flex items-start gap-6">
           <div className="bg-[#FAFAFA] h-[104px] w-[104px] border border-[#E8EBEA] rounded-[7px] flex justify-center items-center">
             <img
-              src={product.image}
+              src={product?.coverImage}
               alt="Freezer"
               className="w-[76px] h-[76px] object-cover "
               loading="lazy"
             />
           </div>
           <div className="flex-1 space-y-3">
-            <h2 className="font-semibold text-lg">{product.name}</h2>
+            <h2 className="font-semibold text-lg">{product?.productName}</h2>
             <p className="text-[11px] hidden md:flex">
-              Qty - x{product.quantity}
+              Qty - x{product?.quantity}
             </p>
           </div>
           <div className="hidden md:flex flex-col items-end gap-2">
@@ -89,7 +89,7 @@ const SingleOngoingPurchaseProgress = React.memo(
               <span>Next due payment</span>
               <br />
               <span className="text-base font-medium">
-                {formatCurrency(product.paymentPlanDetails.monthlyPayment)}
+                {formatCurrency(product?.paymentPlanDetails?.monthlyPayment)}
               </span>
             </div>
 
@@ -130,9 +130,9 @@ const SingleOngoingPurchaseProgress = React.memo(
         <div>
           <h3 className="font-semibold text-[11px]">ITEM DETAILS</h3>
           <p className="text-[13px]">
-            Order id: <strong>160345</strong>
+            Order id: <strong>{product?.orderId}</strong>
           </p>
-          <p className="text-sm">{product.name}</p>
+          <p className="text-sm">{product?.productName}</p>
           <p className="text-sm">50" TV Crystal UHD</p>
           <p className="text-sm">Model: A6X | SKU: H36E8LI5JUTNAFAMZ</p>
           <p className="text-sm">

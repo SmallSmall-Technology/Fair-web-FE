@@ -2,24 +2,63 @@ import { Search } from 'lucide-react';
 import { useState, memo } from 'react';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import {
-  getOngoingOrders,
-  getCompletedOrders,
-  getCancelledOrders,
-} from '/src/features/order/orderSlice.js';
+// import {
+//   getOngoingOrders,
+//   getCompletedOrders,
+//   getCancelledOrders,
+// } from '/src/features/order/orderSlice.js';
 import PurchaseCancelled from './purchaseContentSection/purchaseItemCancelled/PurchaseCancelled';
 import PurchaseCompleted from './purchaseContentSection/purchasedItemCompleted/PurchaseCompleted';
 import PurchaseItemsOngoing from './purchaseContentSection/purchasedItemsOngoing/PurchaseItemsOngoing';
+import { useQuery } from '@tanstack/react-query';
+import { getAllOrders } from '../../../../../api/orderAPI';
+import { useOrders } from './useOrders';
 
 const Purchases = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
   const [formIsActive, setFormIsActive] = useState(false);
 
-  // Get orders from Redux store
-  const onGoingOrders = useSelector(getOngoingOrders);
-  const completedOrders = useSelector(getCompletedOrders);
-  const cancelledOrders = useSelector(getCancelledOrders);
-  const allOrders = useSelector((state) => state.order.orders);
+  // const { data, isFetching } = useQuery({
+  //   queryKey: ['allOrders'],
+  //   queryFn: () => getAllOrders(),
+  //   staleTime: 5 * 60 * 1000,
+  // });
+
+  // const allOrders = data?.orders || [];
+
+  // const onGoingOrders = allOrders.filter(
+  //   (order) =>
+  //     [
+  //       'direct_debit_in_progress',
+  //       'pending_full_payment',
+  //       'processing',
+  //     ].includes(order.orderStatus) || order.fullPaymentStatus === 'pending'
+  // );
+
+  // const completedOrders = allOrders.filter(
+  //   (order) =>
+  //     ['successful', 'completed'].includes(order.orderStatus) ||
+  //     order.fullPaymentStatus === 'success'
+  // );
+
+  // const cancelledOrders = allOrders.filter(
+  //   (order) =>
+  //     ['failed', 'cancelled'].includes(order.orderStatus) ||
+  //     order.fullPaymentStatus === 'failed'
+  // );
+
+  const {
+    allOrders,
+    onGoingOrders,
+    completedOrders,
+    cancelledOrders,
+    isFetching,
+  } = useOrders();
+
+  // console.log('allOrders', allOrders);
+  // console.log('onGoingOrders', onGoingOrders);
+  // console.log('completedOrders', completedOrders);
+  // console.log('cancelledOrders', cancelledOrders);
 
   // Mobile search form
   const {
@@ -43,7 +82,7 @@ const Purchases = () => {
     const searchTerm = data.search.trim().toLowerCase();
     if (searchTerm) {
       const filteredOrders = allOrders.filter((order) =>
-        order.id.toLowerCase().includes(searchTerm)
+        order.items.orderID.toLowerCase().includes(searchTerm)
       );
       // Note: filteredOrders is computed but not used; consider dispatching to Redux or updating state
     }
@@ -188,9 +227,24 @@ const Purchases = () => {
 
             <hr className="my-4" />
 
-            {activeTab === 'ongoing' && <PurchaseItemsOngoing />}
-            {activeTab === 'completed' && <PurchaseCompleted />}
-            {activeTab === 'cancelled' && <PurchaseCancelled />}
+            {activeTab === 'ongoing' && (
+              <PurchaseItemsOngoing
+                onGoingOrders={onGoingOrders}
+                isFetching={isFetching}
+              />
+            )}
+            {activeTab === 'completed' && (
+              <PurchaseCompleted
+                completedOrders={completedOrders}
+                isFetching={isFetching}
+              />
+            )}
+            {activeTab === 'cancelled' && (
+              <PurchaseCancelled
+                cancelledOrders={cancelledOrders}
+                isFetching={isFetching}
+              />
+            )}
           </>
         )}
       </section>

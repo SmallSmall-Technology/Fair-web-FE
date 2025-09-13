@@ -29,3 +29,10 @@ export const getOrderDetails = async (orderId) => {
   const response = await httpClient.get(`/orders/get-single-order/${orderId}`);
   return response.data;
 };
+
+export const getAllOrders = async () => {
+  const response = await httpClient.get(
+    'orders/get-all-orders?page=1&per_page=100'
+  );
+  return response.data.data;
+};

@@ -6,7 +6,6 @@ const fullPaymentSlice = createSlice({
     downPaymentSuccess: false,
     paystackOrderReference: null,
     error: null,
-    directDebitInitiation: false,
   },
   reducers: {
     setDownPaymentSuccess: (state, action) => {
@@ -18,17 +17,17 @@ const fullPaymentSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
-    setDirectDebitInitiation: (state, action) => {
-      state.directDebitInitiation = action.payload;
+    resetFullPayment: (state) => {
+      state.downPaymentSuccess = false;
+      state.paystackOrderReference = null;
     },
   },
 });
 
-// ✅ Correct exports
 export const {
   setDownPaymentSuccess,
   setPaystackOrderReference,
   setError,
-  setDirectDebitInitiation,
+  resetFullPayment,
 } = fullPaymentSlice.actions;
 export default fullPaymentSlice.reducer;

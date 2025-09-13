@@ -10,11 +10,14 @@ import {
 import { RecentlyPurchased } from './purchase/RecentlyPurchased';
 import { SingleActiveDirectDebit } from './DirectDebit/SingleActiveDirectDebit';
 import { CreditScoreCard } from '../shoppingOverview/CreditScoreCard';
+import { useOrders } from './purchase/useOrders';
 
 const Summary = () => {
-  const ongoingOrders = useSelector(getOngoingOrders);
-  const onCompletedOrders = useSelector(getCompletedOrders);
-  const onCancelledOrders = useSelector(getCancelledOrders);
+  //  const OrdersPage = () => {
+  const { isFetching, onGoingOrders, completedOrders, cancelledOrders } =
+    useOrders();
+
+  if (isFetching) return <p>Loading orders...</p>;
 
   return (
     <section className="grid grid-cols-1 gap-6 ">
@@ -29,7 +32,7 @@ const Summary = () => {
                   <img src="/images/time-half-past.svg" alt="clock" />
                 </span>
                 <span className="font-semibold text-3xl">
-                  {ongoingOrders.length}
+                  {onGoingOrders.length}
                 </span>
               </p>
             </li>
@@ -41,7 +44,7 @@ const Summary = () => {
                   <img src="/images/export-box.svg" alt="export box" />
                 </span>
                 <span className="font-semibold text-3xl">
-                  {onCompletedOrders.length}
+                  {completedOrders.length}
                 </span>
               </p>
             </li>
@@ -53,7 +56,7 @@ const Summary = () => {
                   <img src="/images/export-box.svg" alt="export box" />
                 </span>
                 <span className="font-semibold text-3xl">
-                  {onCancelledOrders.length}
+                  {cancelledOrders.length}
                 </span>
               </p>
             </li>
@@ -61,11 +64,11 @@ const Summary = () => {
         </div>
       </article>
 
-      {ongoingOrders ? (
+      {onGoingOrders ? (
         <div className="grid grid-cols-1  justify-between gap-4">
           <div className="lg:flex gap-2 w-full">
             {/* <ActiveDirectDebit /> */}
-            <SingleActiveDirectDebit item={ongoingOrders} />
+            {/* <SingleActiveDirectDebit orders={onGoingOrders} /> */}
             <RecentlyPurchased />
           </div>
           <div className="lg:flex gap-2 w-full">
