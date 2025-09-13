@@ -3,9 +3,9 @@ import { formatCurrency } from '../../../../../../../utils/FormatCurrency';
 import { useState } from 'react';
 import SingleCompletedPurchaseItemProgress from './SingleCompletedPurchaseItemProgress';
 
-export const SingleCompletedPurchasedItem = ({ item }) => {
+export const SingleCompletedPurchasedItem = ({ orders }) => {
   const [expandedIndex, setExpandedIndex] = useState(null);
-  const products = item.items;
+  const products = orders;
 
   const toggleExpand = (index) => {
     if (expandedIndex === index) {
@@ -17,7 +17,7 @@ export const SingleCompletedPurchasedItem = ({ item }) => {
 
   return (
     <article>
-      {products.map((product, index) => (
+      {products.items?.map((product, index) => (
         <>
           {expandedIndex !== index && (
             <>
@@ -29,27 +29,27 @@ export const SingleCompletedPurchasedItem = ({ item }) => {
                   <div className="flex space-x-4">
                     <div className="min-w-[51px] max-w-[51px] h-[51px] lg:h-24 lg:min-w-24 lg:max-w-24">
                       <img
-                        src={product.image || '/placeholder-image.jpg'}
+                        src={product?.coverImage || '/placeholder-image.jpg'}
                         className="min-h-full min-w-full rounded-lg object-cover border bg-[#FAFAFA] border-[#E8EBEA] p-1"
-                        alt={`${product.name.slice(0, 20) + '...'}`}
+                        alt={`${product?.productName.slice(0, 20) + '...'}`}
                       />
                     </div>
                     <p className="mb-4 font-medium lg:hidden">
-                      {product.name || 'Unnamed Product'}
+                      {product?.productName || 'Unnamed Product'}
                     </p>
                   </div>
                   <div className="flex flex-col ">
                     <div className="flex lg:flex">
                       <p className="hidden lg:block mb-4 font-medium">
-                        {product.name || 'Unnamed Product'}
+                        {product?.productName || 'Unnamed Product'}
                       </p>
                     </div>
                     <div className="grid gap-2 lg:flex lg:justify-between lg:space-x-5">
                       <div className="flex space-x-6 lg:w-full">
                         <div>
                           <p className="text-[11px] text-[#222224]">Order ID</p>
-                          <p className="text-xs font-mediumtext-[#222224]">
-                            <strong>{`${item.id.slice(0, 7) + '...'}`}</strong>
+                          <p className="text-xs font-medium text-[#222224]">
+                            <strong>{product?.orderID}</strong>
                           </p>
                         </div>
                         <div>
@@ -57,13 +57,13 @@ export const SingleCompletedPurchasedItem = ({ item }) => {
                             Order Date
                           </p>
                           <p className="text-xs font-medium text-[#222224]">
-                            <strong>{item.orderDate || '20 Jan, 2025'}</strong>
+                            <strong>{orders?.createdAt}</strong>
                           </p>
                         </div>
                         <div>
                           <p className="text-[11px] text-[#222224]">Sold By</p>
                           <p className="text-xs font-medium text-[#222224]">
-                            <strong>{product.soldBy || 'Fair'}</strong>
+                            <strong>{product?.soldBy || 'Fair'}</strong>
                           </p>
                         </div>
                         <div className="lg:hidden  flex flex-col gap-3 items-end">
@@ -83,7 +83,8 @@ export const SingleCompletedPurchasedItem = ({ item }) => {
                                 Payment status
                               </p>
                               <p className="text-xs font-semibold ">
-                                {formatCurrency(product.price)} paid in full
+                                {formatCurrency(orders?.totalAmount)} paid in
+                                full
                               </p>
                             </div>
                           </div>{' '}

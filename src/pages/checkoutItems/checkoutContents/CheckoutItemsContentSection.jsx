@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { startTransition } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CheckoutItem } from './CheckoutItem.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { CartFooter } from '../../cartItems/CartFooter.jsx';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
-import { makePayment } from '../../../features/order/orderSlice.js';
 import { getCartSummary } from '../../../features/cart/cartSlice.js';
 import { CheckoutPaymentSummary } from './CheckoutPaymentSummary.jsx';
 import { CheckoutDeliveryAddressButton } from '../../../utils/Button.jsx';
@@ -19,6 +18,7 @@ import {
   selectedDeliveryType,
 } from '../../../features/order/deliveryAddressSlice.js';
 import { CheckoutDeliveryTypes } from './CheckoutDeliveryTypes.jsx';
+import { setMandateData } from '../../../features/paystack/mandateSlice.js';
 
 export const CheckoutItemsContentSection = () => {
   const [formIsOpen, setFormIsOpen] = useState(false);
@@ -34,7 +34,7 @@ export const CheckoutItemsContentSection = () => {
   const cartPaymentPlan = cart.map(
     (item) => item?.paymentPlan || item?.selectedPaymentPlan
   );
-  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan !== 'full');
+  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
   const consolidatedPayments = consolidateCartPayments(cart);
   const userSelectedDeliveryType = useSelector(selectedDeliveryType);
   const shippingFee = userSelectedDeliveryType?.amount || 0;
@@ -42,12 +42,13 @@ export const CheckoutItemsContentSection = () => {
   const totalCartPrice = cartSummary?.subtotal || 0;
   const VAT = (7.5 / 100) * totalCartPrice;
   const downPayment = consolidatedPayments.firstPayment + VAT + shippingFee;
+  const fullPayment = totalCartPrice + VAT + shippingFee;
 
   const handleSubmitPaymentMethod = (values) => {
     if (values) {
-      dispatch(makePayment());
+      // dispatch(makePayment());
       startTransition(() => {
-        navigate('/cart-items/checkout/payment-success');
+        // navigate('/cart-items/checkout/payment-success');
       });
     }
   };
@@ -58,6 +59,22 @@ export const CheckoutItemsContentSection = () => {
   ]
     .filter(Boolean)
     .join(', ');
+
+  useEffect(() => {
+    if (!isConsolidatedCart) {
+      dispatch(
+        setMandateData({
+          products: cart,
+          consolidated_total_amount: fullPayment,
+          paymentMethod: 'full',
+          deliveryState: currentDeliveryAddress?.state || latest_address?.state,
+          deliveryFullAddress:
+            currentDeliveryAddress?.streetAddress ||
+            latest_address?.streetAddress,
+        })
+      );
+    }
+  }, [shippingFee]);
 
   return (
     <section className="grid lg:grid-cols-[60%_40%] lg:px-[76p]">
@@ -133,7 +150,8 @@ export const CheckoutItemsContentSection = () => {
             <p className="text-[#96959F]">All transactions are secured</p>
           </div>
           <CheckoutPaymentMethod
-            onSubmitPaymentMethod={handleSubmitPaymentMethod}
+          // onSubmitPaymentMethod={handleSubmitPaymentMethod}
+          // totalAmount={downPayment}
           />
           <CartFooter />
         </section>
@@ -147,7 +165,7 @@ export const CheckoutItemsContentSection = () => {
         <div className="hidden lg:block">
           <CheckoutItem />
         </div>
-        {isConsolidatedCart && (
+        {!isConsolidatedCart && (
           <div className="px-6 hidden lg:block">
             <hr className="mt-8 mb-2" />
             <div className="font-inter flex justify-between items-center">
@@ -178,7 +196,7 @@ export const CheckoutItemsContentSection = () => {
                     <p className="text-[#828386]">{payment.date}</p>
                   </div>
                   <p className="font-calsans">
-                    {formatCurrency(payment.amount)}
+                    {formatCurrency(payment?.amount)}
                   </p>
                 </div>
               ))}
@@ -190,13 +208,13 @@ export const CheckoutItemsContentSection = () => {
         <div className=" lg:hidden border border-t-2 border-[#E5E5E5] w-full h-0 my-4"></div>
         <section className=" lg:hidden">
           <CheckoutPaymentMethod
-            onSubmitPaymentMethod={handleSubmitPaymentMethod}
+          // onSubmitPaymentMethod={handleSubmitPaymentMethod}
           />
         </section>
 
         <div className=" lg:hidden border border-t-2 border-[#E5E5E5] w-full h-0 my-4"></div>
         <CheckoutPaymentSummary
-          onSubmitPaymentMethod={handleSubmitPaymentMethod}
+        // onSubmitPaymentMethod={handleSubmitPaymentMethod}
         />
       </aside>
     </section>

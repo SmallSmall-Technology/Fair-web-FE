@@ -18,7 +18,7 @@ import ChangePlanModal from '../../../utils/ChangePlanModal';
 const CartItemsContentSection = React.memo(() => {
   const navigate = useNavigate();
   const [isUpgraded, setIsUpgraded] = useState(false);
-  const [planModalOpen, setPlanModalOpen] = useState(false); // 🔹 Modal open for all items
+  const [planModalOpen, setPlanModalOpen] = useState(false);
   const [paymentOptions, setPaymentOptions] = useState([]);
   const totalCartPrice = useSelector(getTotalCartPrice);
   const VAT = (7.5 / 100) * totalCartPrice;

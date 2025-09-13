@@ -36,9 +36,6 @@ const SubCategoryPage = () => {
 
   const products = data?.data?.products || [];
 
-  console.log(data);
-  // console.log(data);
-
   // Fetch all categories for the shortcut
   // This is used to validate the subcategory and display the shortcut
   const { data: allCategories } = useQuery({
@@ -70,7 +67,7 @@ const SubCategoryPage = () => {
     <>
       <Header />
       <main className=" lg:mx-[60px] mb-20">
-        <div className="flex px-0 ">
+        <div className="flex px-0 overflow-x-auto">
           <ProductCategoriesShortcut categories={categories} />
         </div>
 

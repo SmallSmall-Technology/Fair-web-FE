@@ -11,7 +11,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { Search, Minus } from 'lucide-react';
 import { selectMandateData } from '../../../../../features/paystack/mandateSlice';
-import { MakeDownPayment } from './MakeDownPayment';
+import { MakeDownPayment } from './makeDownPayment/MakeDownPayment';
 import { MakeDirectDebit } from './makeDirectDebit/MakeDirectDebit';
 
 export const DirectDebitBankSetupForm = () => {
@@ -22,7 +22,7 @@ export const DirectDebitBankSetupForm = () => {
   const downPayment = location.state?.downPayment;
 
   return (
-    <section className="md:flex md:max-w-6xl mx-auto md:space-x-10 space-y-8 md:space-y-0 justify-between">
+    <section className="md:flex md:max-w-6xl mx-auto md:space-x-14 space-y-8 md:space-y-0 justify-between">
       <MakeDownPayment downPayment={downPayment} />
       <MakeDirectDebit />
     </section>

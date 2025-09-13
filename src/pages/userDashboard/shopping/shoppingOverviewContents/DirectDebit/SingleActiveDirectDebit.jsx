@@ -2,33 +2,33 @@ import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 
-export const SingleActiveDirectDebit = ({ item }) => {
+export const SingleActiveDirectDebit = ({ orders }) => {
   return (
     <li className="recentlyviewed-item grid grid-cols-1 gap-3">
-      {item.map((product, index) => (
+      {orders?.items.map((product, index) => (
         <div key={index}>
           <Link>
             <div className="flex lg:items-center py-3 px- justify-between text-balance">
               <div className="flex lg:items-center md:space-x-3 gap-1">
                 <div className="h-[60px] w-[60px] border rounded-xl flex justify-center items-center">
                   <img
-                    src={product?.image || '/placeholder-image.jpg'}
+                    src={product?.coverImage || '/placeholder-image.jpg'}
                     className="h-[44px] w-[44px] rounded-lg object-cover"
-                    alt={product?.name}
+                    alt={product?.productName}
                   />
                 </div>
                 <div>
                   <p className="mb-3 text-xs md:text-sm text-balance">
-                    {product.name.length > 30
-                      ? product.name.slice(0, 30) + '...'
-                      : product?.name || 'Unnamed Product'}
+                    {product.productName.length > 30
+                      ? product.productName.slice(0, 30) + '...'
+                      : product?.productName || 'Unnamed Product'}
                   </p>
                   <div className="flex gap-4">
                     <div>
                       <p className="text-[#737376] text-xs font-normal">Next</p>
                       <p className="text-xs md:text-sm">
-                        {product?.price
-                          ? `${formatCurrency(product.price)}`
+                        {product?.totalAmount
+                          ? `${formatCurrency(product.totalAmount)}`
                           : 'Price not available'}
                       </p>
                     </div>

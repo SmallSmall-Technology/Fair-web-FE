@@ -6,8 +6,6 @@ import UpdateItemQuantity from '../../../features/cart/UpdateItemQuantity';
 export const CheckoutItem = () => {
   const cart = useSelector((state) => state?.cart.cart);
 
-  console.log(cart);
-
   return (
     <ul className="grid grid-cols-1 lg:px-8 gap-4 pt-20 lg:pt-10 font-inter">
       {cart.map((item, index) => (
