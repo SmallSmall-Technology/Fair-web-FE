@@ -39,6 +39,30 @@ export const fetchCart = createAsyncThunk(
   }
 );
 
+// Clear cart
+export const clearCart = createAsyncThunk(
+  'cart/clearCart',
+  async (_, { getState, rejectWithValue }) => {
+    const state = getState();
+    const cartSessionID = getCartSessionId();
+
+    try {
+      const response = await httpClient.post('/cart/clear-cart', {
+        cartSessionID,
+      });
+      if (!response.data?.success) {
+        return rejectWithValue(
+          response.data?.message || 'Failed to clear cart'
+        );
+      }
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
 // Retry fetch cart with delay
 export const retryFetchCart = createAsyncThunk(
   'cart/retryFetchCart',
@@ -379,14 +403,14 @@ const cartSlice = createSlice({
         ),
       };
     },
-    clearCart: (state) => {
-      state.cart = [];
-      state.cart_summary = {
-        total_items: 0,
-        total_quantity: 0,
-        total_amount: 0,
-      };
-    },
+    // clearCart: (state) => {
+    //   state.cart = [];
+    //   state.cart_summary = {
+    //     total_items: 0,
+    //     total_quantity: 0,
+    //     total_amount: 0,
+    //   };
+    // },
   },
 
   extraReducers: (builder) => {
@@ -497,7 +521,7 @@ export const {
   setItemPaymentPlan,
   optimisticAdd,
   rollback,
-  clearCart,
+  // clearCart,
 } = cartSlice.actions;
 
 export const getCart = (state) => state.cart.cart;

@@ -12,17 +12,26 @@ import {
 } from '../../api/product-api.js';
 import ProductCardSkeleton from '../../ui/components/skeletons/ProductCardSkeleton.jsx';
 import { ProductCategoriesShortcut } from './productCategoriesShortcut/ProductCategoriesShortcut.jsx';
+import { useState } from 'react';
 
 const SubCategoryPage = () => {
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const { category, sub_category } = useParams();
+
+  const limit = 10;
 
   // Fetch products by category and subcategory
   // This will be used to display products under the selected subcategory
   const { data, isFetching } = useQuery({
-    queryKey: ['products-by-category', category, sub_category],
+    queryKey: ['products-by-category', category, sub_category, page, limit],
     queryFn: () =>
-      fetchProductsByCategoryAndSubcategory(category, sub_category),
+      fetchProductsByCategoryAndSubcategory(
+        category,
+        sub_category,
+        limit,
+        page
+      ),
   });
 
   const products = data?.data?.products || [];
@@ -50,15 +59,15 @@ const SubCategoryPage = () => {
     );
   });
 
-  if (!isValidSubcategory) {
-    return <PageNotFound />;
-  }
+  // if (!isValidSubcategory) {
+  //   return <PageNotFound />;
+  // }
 
   return (
     <>
       <Header />
       <main className=" lg:mx-[60px] mb-20">
-        <div className="flex px-0 ">
+        <div className="flex px-0 overflow-x-auto">
           <ProductCategoriesShortcut categories={categories} />
         </div>
 
@@ -136,7 +145,13 @@ const SubCategoryPage = () => {
             </p>
           )}
           <div className="flex justify-center md:justify-start">
-            <Pagination />
+            {products?.length !== 0 && (
+              <Pagination
+                page={page}
+                setPage={setPage}
+                totalPages={data?.data?.totalPages}
+              />
+            )}
           </div>
         </section>
       </main>

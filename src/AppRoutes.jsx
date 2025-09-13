@@ -53,7 +53,7 @@ import RefundsAndReturns from './pages/refundsAndReturns/RefundsAndReturns';
 import BuyingGuide from './pages/buyingGuide/BuyingGuide';
 import { CreditWallet } from './pages/userDashboard/shopping/shoppingOverviewContents/creditWallet/CreditWallet';
 import { DirectDebitSetUp1 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp1';
-import { DirectDebitSetUp2 } from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/DirectDebitSetUp2';
+import DirectDebitInitialized from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/directDebitSetupForm/directDebitInitialized/DirectDebitInitialized';
 
 const AppRoutes = () => {
   return (
@@ -89,7 +89,11 @@ const AppRoutes = () => {
 
         <Route
           path=":category/:sub_category"
-          element={<DynamicSubCategoryPage />}
+          element={
+            <Suspense fallback={<LandingPageSkeleton />}>
+              <DynamicSubCategoryPage />
+            </Suspense>
+          }
         />
 
         <Route
@@ -211,8 +215,8 @@ const AppRoutes = () => {
         />
 
         <Route
-          path="cart-items/checkout/mandate/create/setup-2"
-          element={<DirectDebitSetUp2 />}
+          path="cart-items/checkout/direct-debit/success/:orderId"
+          element={<DirectDebitInitialized />}
         />
 
         <Route
@@ -225,7 +229,7 @@ const AppRoutes = () => {
           element={<VerificationSent />}
         />
         <Route
-          path="cart-items/checkout/payment-success"
+          path="cart-items/checkout/payment-success/:reference"
           element={
             <Suspense fallback={<CheckoutPaymentSkeleton />}>
               <CheckoutPaymentSuccess />

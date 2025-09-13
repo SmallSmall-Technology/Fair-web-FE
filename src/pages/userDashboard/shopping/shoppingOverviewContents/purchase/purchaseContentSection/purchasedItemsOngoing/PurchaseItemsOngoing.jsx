@@ -1,38 +1,70 @@
+// import { useState } from 'react';
+// import { useSelector } from 'react-redux';
+// import { PurchasedItemOngoing } from './PurchasedItemOngoing';
+// import { Pagination } from '../../../../../../productCategories/Pagination';
+// // import { getonGoingOrders } from '../../../../../../../features/order/orderSlice';
+
+// const PurchaseItemsOngoing = ({ onGoingOrders, isFetching }) => {
+//   const [expandedIndex, setExpandedIndex] = useState(null);
+
+//   const toggleExpand = (index) => {
+//     if (expandedIndex === index) {
+//       setExpandedIndex(null);
+//     } else {
+//       setExpandedIndex(index);
+//     }
+//   };
+
+//   return (
+//     <section>
+//       {onGoingOrders.length < 1 ? (
+//         <p className="w-full py-20 rounded-md bg-[#F6F6F6] text-center text-gray-500">
+//           No ongoing orders were found
+//         </p>
+//       ) : (
+//         <div>
+//           {onGoingOrders.map((orders, index) => (
+//             <div key={orders.id || index}>
+//               <PurchasedItemOngoing orders={orders || []} />
+//             </div>
+//           ))}
+//           <div className="flex justify-center md:justify-end mt-10">
+//             <Pagination />
+//           </div>
+//         </div>
+//       )}
+//     </section>
+//   );
+// };
+
+// export default PurchaseItemsOngoing;
+
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { PurchasedItemOngoing } from './PurchasedItemOngoing';
 import { Pagination } from '../../../../../../productCategories/Pagination';
-import { getOngoingOrders } from '../../../../../../../features/order/orderSlice';
 
-const PurchaseItemsOngoing = () => {
-  const ongoingOrders = useSelector(getOngoingOrders);
+const PurchaseItemsOngoing = ({ onGoingOrders, isFetching }) => {
   const [expandedIndex, setExpandedIndex] = useState(null);
-  // const orderItems = item.items || [];
 
   const toggleExpand = (index) => {
-    if (expandedIndex === index) {
-      setExpandedIndex(null);
-    } else {
-      setExpandedIndex(index);
-    }
+    setExpandedIndex(expandedIndex === index ? null : index);
   };
 
   return (
     <section>
-      {ongoingOrders.length < 1 ? (
+      {isFetching ? (
+        <p className="w-full py-20 rounded-md bg-[#F6F6F6] text-center text-gray-500">
+          Loading ongoing orders...
+        </p>
+      ) : onGoingOrders.length === 0 ? (
         <p className="w-full py-20 rounded-md bg-[#F6F6F6] text-center text-gray-500">
           No ongoing orders were found
         </p>
       ) : (
         <div>
-          {ongoingOrders.map((item, index) => (
-            <div key={item.id || index}>
-              <PurchasedItemOngoing
-                item={item}
-                // onToggleExpand={toggleExpand}
-                // expandedIndex={expandedIndex}
-                // setExpandedIndex={setExpandedIndex}
-              />
+          {onGoingOrders.map((orders, index) => (
+            <div key={orders.id || index}>
+              <PurchasedItemOngoing orders={orders || []} />
             </div>
           ))}
           <div className="flex justify-center md:justify-end mt-10">

@@ -159,10 +159,10 @@ const LoginForm = () => {
         disabled={loading}
       >
         {loading ? (
-          <>
+          <div className="flex items-center justify-center">
             <span className="font-inter mr-1">Logging in...</span>
             <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
-          </>
+          </div>
         ) : (
           'Log in'
         )}

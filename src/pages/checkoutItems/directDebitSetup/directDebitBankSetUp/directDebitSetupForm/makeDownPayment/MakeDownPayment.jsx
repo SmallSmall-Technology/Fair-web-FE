@@ -2,18 +2,19 @@ import { useState } from 'react';
 import PaystackPop from '@paystack/inline-js';
 import { useMutation } from '@tanstack/react-query';
 import { useSelector, useDispatch } from 'react-redux';
-import { CustomButton } from '../../../../../utils/Button';
-import { createPaystackOrder } from '../../../../../api/orderAPI';
-import { formatCurrency } from '../../../../../utils/FormatCurrency';
-import { useDownOrFullPayment } from '../../../../../hooks/useDownOrFullPayment';
-import { useValidateFullOrDownPayment } from '../../../../../hooks/useValidateFullOrDownpayment';
+import { CustomButton } from '../../../../../../utils/Button';
+import { createPaystackOrder } from '../../../../../../api/orderAPI';
+import { formatCurrency } from '../../../../../../utils/FormatCurrency';
+import { useDownOrFullPayment } from '../../../../../../hooks/useDownOrFullPayment';
+import { Link } from 'react-router-dom';
+// import { useValidateFullOrDownPayment } from '../../../../../hooks/useValidateFullOrDownPayment';
 
 export const MakeDownPayment = ({ downPayment }) => {
+  const mandateData = useSelector((state) => state.mandate.data);
+
   const downPaymentSuccess = useSelector(
     (state) => state.fullPayment.downPaymentSuccess
   );
-
-  console.log('downPaymentSuccess', downPaymentSuccess);
 
   const dispatch = useDispatch();
 
@@ -23,7 +24,7 @@ export const MakeDownPayment = ({ downPayment }) => {
   return (
     <section className="w-full">
       <p
-        className={`${downPaymentSuccess ? 'text-[#3DB54A]' : ''} text-sm font-outfit mb-4 font-semibold flex items-center gap-2 `}
+        className={`${downPaymentSuccess ? 'text-[#3DB54A]' : ''} text-sm font-outfit mb-4 font-semibold flex items-center gap-2`}
       >
         <span className="mr-1 font-normal">Step 1.</span>
         {downPaymentSuccess ? 'Complete' : 'Make your down payment'}
@@ -47,7 +48,10 @@ export const MakeDownPayment = ({ downPayment }) => {
       ) : (
         <div className="bg-white rounded-xl border border-[#DEDEDE] p-4 lg:p-6 py-8 shadow-sm flex flex-col justify-center items-center">
           <p className="text-lg font-semibold font-outfit">DOWN PAYMENT</p>
-          <div className="border border-[#DEDEDE] w-full mx-10 mt-3 mb-4"></div>
+
+          {/* Replace with <hr /> for consistency */}
+          <hr className="w-full my-3 border-t border-gray-300" />
+
           <p className="font-inter text-sm font-normal mb-3">Amount to pay</p>
           <p className="font-outfit font-semibold text-3xl mb-4">
             {formatCurrency(downPayment)}

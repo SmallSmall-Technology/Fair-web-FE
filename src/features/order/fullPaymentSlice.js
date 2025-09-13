@@ -17,10 +17,17 @@ const fullPaymentSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    resetFullPayment: (state) => {
+      state.downPaymentSuccess = false;
+      state.paystackOrderReference = null;
+    },
   },
 });
 
-// ✅ Correct exports
-export const { setDownPaymentSuccess, setPaystackOrderReference, setError } =
-  fullPaymentSlice.actions;
+export const {
+  setDownPaymentSuccess,
+  setPaystackOrderReference,
+  setError,
+  resetFullPayment,
+} = fullPaymentSlice.actions;
 export default fullPaymentSlice.reducer;
