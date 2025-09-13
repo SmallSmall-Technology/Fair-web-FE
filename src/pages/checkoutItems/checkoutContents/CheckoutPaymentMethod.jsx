@@ -60,23 +60,23 @@ export const CheckoutPaymentMethod = () => {
     validationData,
   } = useDownOrFullPayment(downPayment);
 
-  useEffect(() => {
-    if (
-      validationData?.payment_verified &&
-      validationData?.status === 'success'
-    ) {
-      const { masterOrderID, totalAmount, timestamp } = validationData;
+  // useEffect(() => {
+  //   if (
+  //     validationData?.payment_verified &&
+  //     validationData?.status === 'success'
+  //   ) {
+  //     const { masterOrderID, totalAmount, timestamp } = validationData;
 
-      navigate(
-        `/cart-items/checkout/payment-success/${validationData?.reference}`,
-        {
-          state: { masterOrderID, totalAmount, timestamp },
-          replace: true,
-        }
-      );
-      dispatch(clearCart());
-    }
-  }, [validationData, navigate]);
+  //     navigate(
+  //       `/cart-items/checkout/payment-success/${validationData?.reference}`,
+  //       {
+  //         state: { masterOrderID, totalAmount, timestamp },
+  //         replace: true,
+  //       }
+  //     );
+  //     dispatch(clearCart());
+  //   }
+  // }, [validationData, navigate]);
 
   const {
     register,
