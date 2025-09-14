@@ -9,6 +9,10 @@ export const PurchasedItemOngoing = React.memo(({ orders }) => {
   const orderItems = orders?.items || [];
   const singleOrders = orders || {};
 
+  // console.log('Ongoing orders:', orders);
+  // console.log('Order items:', orderItems);
+  // console.log('Single order:', singleOrders);
+
   const handleToggle = useCallback((index) => {
     setExpandedIndex((prev) => (prev === index ? null : index));
   }, []);
@@ -156,7 +160,7 @@ export const PurchasedItemOngoing = React.memo(({ orders }) => {
                           Next due payment
                         </p>
                         <p className="text-[12px] font-medium text-[#222224]">
-                          Jan 24, 2025
+                          {singleOrders?.nextDueDate || 'N/A'}
                         </p>
                       </div>
                       <div>

@@ -5,7 +5,6 @@ import SingleCompletedPurchaseItemProgress from './SingleCompletedPurchaseItemPr
 
 export const SingleCompletedPurchasedItem = ({ orders }) => {
   const [expandedIndex, setExpandedIndex] = useState(null);
-  const products = orders;
 
   const toggleExpand = (index) => {
     if (expandedIndex === index) {
@@ -17,7 +16,7 @@ export const SingleCompletedPurchasedItem = ({ orders }) => {
 
   return (
     <article>
-      {products.items?.map((product, index) => (
+      {orders.items?.map((product, index) => (
         <>
           {expandedIndex !== index && (
             <>
@@ -129,11 +128,12 @@ export const SingleCompletedPurchasedItem = ({ orders }) => {
           {expandedIndex === index && (
             <div className="my-6">
               <SingleCompletedPurchaseItemProgress
-                product={product}
+                order={product}
                 onToggleExpand={toggleExpand}
                 expandedIndex={expandedIndex}
                 index={index}
-                item={item}
+                // item={item}
+                orders={orders}
               />
             </div>
           )}
