@@ -63,14 +63,14 @@ export const selectVerificationStatus = (state, type) => {
     return isUserDebtProfileVerified(state);
   }
   return (
-    state.accountVerification.verificationStatus[type]?.isVerified || false
+    state.accountVerification?.verificationStatus[type]?.isVerified || false
   );
 };
 
 export const selectVerificationData = (state, type) =>
-  state.accountVerification.verificationStatus[type]?.data || null;
+  state.accountVerification?.verificationStatus[type]?.data || null;
 
-export const selectLoading = (state) => state.accountVerification.loading;
-export const selectError = (state) => state.accountVerification.error;
+export const selectLoading = (state) => state.accountVerification?.loading;
+export const selectError = (state) => state.accountVerification?.error;
 
 export default accountVerificationSlice.reducer;
