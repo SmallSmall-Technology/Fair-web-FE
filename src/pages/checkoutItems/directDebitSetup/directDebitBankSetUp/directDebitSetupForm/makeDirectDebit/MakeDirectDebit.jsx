@@ -1,17 +1,19 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CustomButton } from '../../../../../../utils/Button';
 import { formatCurrency } from '../../../../../../utils/FormatCurrency';
 import {
   createPaystackMandate,
   createPaystackOrder,
+  getOrderDetails,
 } from '../../../../../../api/orderAPI';
 import { consolidateCartPayments } from '../../../../../../utils/ConsolidateCartPayment';
-import { Link } from 'react-router-dom';
-import { GlobalMandateTermsModal } from './GlobalMandateTermsModal';
-import { DebitDirectMandateTermsModal } from './DebitDirectMandateTermsModal';
+import { Link, useNavigate } from 'react-router-dom';
+import { GlobalMandateTermsModal } from './directDebitMandateModals/GlobalMandateTermsModal';
+import { DebitDirectMandateTermsModal } from './directDebitMandateModals/DebitDirectMandateTermsModal';
+import { toast } from 'react-toastify';
 
 export const MakeDirectDebit = () => {
   const mandateData = useSelector((state) => state.mandate.data);
@@ -19,6 +21,8 @@ export const MakeDirectDebit = () => {
   const consolidatedPayments = consolidateCartPayments(cart);
   const [isGlobalModalOpen, setGlobalModalOpen] = useState(false);
   const [isDirectDebitModalOpen, setDirectDebitModalOpen] = useState(false);
+  const [orderId, setOrderId] = useState(null);
+  const dispatch = useDispatch();
 
   const directDebitPaymentFrequency =
     consolidatedPayments?.otherPayments.length;
@@ -29,6 +33,8 @@ export const MakeDirectDebit = () => {
   const paystackOrderReference = useSelector(
     (state) => state.fullPayment.paystackOrderReference
   );
+
+  const navigate = useNavigate();
 
   const handleDisplayGlobalMandateModals = () => {
     setGlobalModalOpen((prev) => !prev);
@@ -41,11 +47,22 @@ export const MakeDirectDebit = () => {
     mutationFn: () =>
       createPaystackMandate({ reference: paystackOrderReference }),
     onSuccess: (res) => {
-      // const redirectUrl = res.data?.redirect_url;
+      setOrderId(res?.data?.master_order_id);
+      const redirectUrl = res.data?.redirect_url;
+      if (redirectUrl) {
+        window.open(redirectUrl, '_blank');
+      }
       // if (redirectUrl) {
-      //   window.open(redirectUrl, '_blank');
+      //   window.location.href = redirectUrl;
       // }
-      console.log(res);
+      if (res.success === true) {
+        navigate(
+          `/cart-items/checkout/direct-debit/success/${res?.data?.master_order_id}`
+        );
+      }
+    },
+    onError: (error) => {
+      toast.error('Failed to create mandate. Please try again.');
     },
   });
 
@@ -61,7 +78,6 @@ export const MakeDirectDebit = () => {
           <span className="mr-1 font-normal">Step 2.</span>Make your direct
           debit
         </p>
-
         <div
           className={`rounded-xl border p-4 lg:p-6 py-8 shadow-sm flex flex-col justify-center items-center
         ${downPaymentSuccess ? 'bg-white border-[#DEDEDE]' : 'bg-[#FFFFFF]  text-[#D9D9D9] cursor-not-allowed'}

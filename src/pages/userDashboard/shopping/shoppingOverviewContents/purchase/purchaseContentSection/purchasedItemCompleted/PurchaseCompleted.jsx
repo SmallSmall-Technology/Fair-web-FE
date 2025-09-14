@@ -2,8 +2,7 @@ import { useSelector } from 'react-redux';
 import { SingleCompletedPurchasedItem } from './SingleCompletedPurchasedItem';
 import { getCompletedOrders } from '../../../../../../../features/order/orderSlice';
 
-const PurchaseCompleted = () => {
-  const completedOrders = useSelector(getCompletedOrders);
+const PurchaseCompleted = ({ completedOrders }) => {
   return (
     <section>
       {completedOrders.length < 1 ? (
@@ -12,9 +11,9 @@ const PurchaseCompleted = () => {
         </p>
       ) : (
         <div>
-          {completedOrders.map((item, index) => (
-            <div key={item.id || index}>
-              <SingleCompletedPurchasedItem item={item} key={index} />
+          {completedOrders.map((orders, index) => (
+            <div key={orders.id || index}>
+              <SingleCompletedPurchasedItem orders={orders} key={index} />
             </div>
           ))}
         </div>

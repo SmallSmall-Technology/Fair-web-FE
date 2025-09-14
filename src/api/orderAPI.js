@@ -6,10 +6,10 @@ export const createPaystackOrder = async (data) => {
 };
 
 export const validateFullOrDownPayment = async (reference) => {
-  const response = await httpClient.get(
-    `orders/validate-paystack-payment/${reference}`
-  );
-  return response.data;
+  const response = await httpClient.post('orders/validate-paystack-payment', {
+    reference,
+  });
+  return response.data.data;
 };
 
 // export const payInFull = async (data) => {
@@ -23,4 +23,16 @@ export const createPaystackMandate = async (data) => {
     data
   );
   return response.data;
+};
+
+export const getOrderDetails = async (orderId) => {
+  const response = await httpClient.get(`/orders/get-single-order/${orderId}`);
+  return response.data;
+};
+
+export const getAllOrders = async () => {
+  const response = await httpClient.get(
+    'orders/get-all-orders?page=1&per_page=100'
+  );
+  return response.data.data;
 };

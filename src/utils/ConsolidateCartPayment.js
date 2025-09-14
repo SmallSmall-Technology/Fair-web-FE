@@ -7,15 +7,15 @@ export function consolidateCartPayments(cart) {
   };
 
   cart.forEach((item) => {
-    const cartPaymentPlan = item.paymentPlan || item.selectedPaymentPlan;
-    const option = item.paymentOptionsBreakdown?.find(
-      (opt) => opt.type === cartPaymentPlan
+    const cartPaymentPlan = item?.paymentPlan || item?.selectedPaymentPlan;
+    const option = item?.paymentOptionsBreakdown?.find(
+      (opt) => opt?.type === cartPaymentPlan
     );
     if (!option) return;
 
     // Add first payment
     consolidatedPayments.firstPayment +=
-      (option.downPayment || 0) * (item.quantity || 1);
+      (option?.downPayment || 0) * (item?.quantity || 1);
 
     // Determine number of installments
     const installmentsCount =

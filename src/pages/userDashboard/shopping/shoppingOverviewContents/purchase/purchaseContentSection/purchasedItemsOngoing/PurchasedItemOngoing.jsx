@@ -4,9 +4,10 @@ import { ChevronRight } from 'lucide-react';
 import { formatCurrency } from '../../../../../../../utils/FormatCurrency';
 import SingleOngoingPurchaseProgress from './SingleOngoingPurchaseProgress/SingleOngoingPurchaseProgress';
 
-export const PurchasedItemOngoing = React.memo(({ item }) => {
+export const PurchasedItemOngoing = React.memo(({ orders }) => {
   const [expandedIndex, setExpandedIndex] = useState(null);
-  const orderItems = item.items || [];
+  const orderItems = orders?.items || [];
+  const singleOrders = orders || {};
 
   const handleToggle = useCallback((index) => {
     setExpandedIndex((prev) => (prev === index ? null : index));
@@ -14,7 +15,7 @@ export const PurchasedItemOngoing = React.memo(({ item }) => {
 
   return (
     <article>
-      {orderItems.map((orderItem, index) => (
+      {orderItems?.map((orderItem, index) => (
         <section key={index}>
           <div
             key={orderItem.id || index}
@@ -25,18 +26,18 @@ export const PurchasedItemOngoing = React.memo(({ item }) => {
                 <div className="flex gap-2">
                   <div className="min-w-[51px] max-w-[51px] h-[51px] lg:h-24 lg:min-w-24 lg:max-w-24">
                     <img
-                      src={orderItem.image}
+                      src={orderItem.coverImage}
                       className="h-full w-full rounded-lg object-cover border bg-[#FAFAFA] border-[#E8EBEA] p-1"
-                      alt={`${orderItem.name.slice(0, 30) + '...'}`}
+                      alt={`${orderItem.productName.slice(0, 30) + '...'}`}
                     />
                   </div>
                   <p className="mb-4 font-medium lg:hidden ">
-                    {orderItem.name || 'Unnamed Product'}
+                    {orderItem.productName || 'Unnamed Product'}
                   </p>
                 </div>
                 <div className="hidden lg:block lg:flex-1 ml-4">
                   <p className="mb-4 font-medium">
-                    {orderItem.name || 'Unnamed Product'}
+                    {orderItem.productName || 'Unnamed Product'}
                   </p>
 
                   <div className="flex justify-between space-x-5  ">
@@ -45,7 +46,7 @@ export const PurchasedItemOngoing = React.memo(({ item }) => {
                         <div>
                           <p className="text-[11px] text-[#222224]">Order ID</p>
                           <p className="text-[12px] font-medium text-[#222224]">
-                            <span>{item?.i || 'I7xAA6b'}</span>
+                            <span>{orderItem?.orderID}</span>
                           </p>
                         </div>
                         <div>
@@ -53,7 +54,7 @@ export const PurchasedItemOngoing = React.memo(({ item }) => {
                             Order Date
                           </p>
                           <p className="text-[12px] font-medium text-[#222224]">
-                            <span>{item.orderDate || '20 Jan, 2025'}</span>
+                            <span>{singleOrders?.createdAt}</span>
                           </p>
                         </div>
                         <div>
@@ -100,9 +101,12 @@ export const PurchasedItemOngoing = React.memo(({ item }) => {
                           <div className="text-[12px] text-[#222224] flex items-center space-x-1">
                             <p>
                               <span>
-                                {formatCurrency(orderItem.price)} paid of{' '}
+                                {formatCurrency(orderItems?.totalAmountPaid)}{' '}
+                                paid of{' '}
                               </span>
-                              {formatCurrency(Number(orderItem.totalAmount))}
+                              {formatCurrency(
+                                Number(singleOrders?.totalAmount)
+                              )}
                             </p>
                             <img src="/images/time-half-past.svg" alt="clock" />
                           </div>
@@ -124,13 +128,13 @@ export const PurchasedItemOngoing = React.memo(({ item }) => {
                     <div>
                       <p className="text-[11px] text-[#222224]">Order ID</p>
                       <p className="text-[12px] text-[#222224]">
-                        <span>{item?.i || 'I7xAA6b'}</span>
+                        <span>{orderItem?.orderID}</span>
                       </p>
                     </div>
                     <div>
                       <p className="text-[11px] text-[#222224]">Order Date</p>
                       <p className="text-[12px] font-medium text-[#222224]">
-                        <span>{item.orderDate || '20 Jan, 2025'}</span>
+                        <span>{singleOrders?.createdAt}</span>
                       </p>
                     </div>
                     <div>

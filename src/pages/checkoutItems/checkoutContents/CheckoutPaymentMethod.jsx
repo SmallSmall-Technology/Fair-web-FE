@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 import { createPaystackOrder } from '../../../api/orderAPI.js';
 import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx';
 import { useDownOrFullPayment } from '../../../hooks/useDownOrFullPayment.jsx';
+import { clearCart } from '../../../features/cart/cartSlice.js';
 
 export const CheckoutPaymentMethod = () => {
   const cartItems = useSelector((state) => state.cart.cart);
@@ -29,6 +30,9 @@ export const CheckoutPaymentMethod = () => {
   const dispatch = useDispatch();
   const proceedToMandate = useProceedToMandate();
   const navigate = useNavigate();
+  const downPaymentSuccess = useSelector(
+    (state) => state.fullPayment.downPaymentSuccess
+  );
 
   useEffect(() => {
     if (!deliveryType) return;
@@ -36,7 +40,6 @@ export const CheckoutPaymentMethod = () => {
   }, [deliveryType]);
 
   const mandateData = useSelector((state) => state.mandate.data);
-  console.log('mandateData', mandateData);
   const downPayment = mandateData?.consolidated_total_amount;
 
   const { createMandate, isValidating } = useCreateMandate();
@@ -51,8 +54,29 @@ export const CheckoutPaymentMethod = () => {
     proceedToMandate(mandateData);
   };
 
-  const { handlePayDownPayment, isValidating: Processing } =
-    useDownOrFullPayment(downPayment);
+  const {
+    handlePayDownPayment,
+    isValidating: Processing,
+    validationData,
+  } = useDownOrFullPayment(downPayment);
+
+  // useEffect(() => {
+  //   if (
+  //     validationData?.payment_verified &&
+  //     validationData?.status === 'success'
+  //   ) {
+  //     const { masterOrderID, totalAmount, timestamp } = validationData;
+
+  //     navigate(
+  //       `/cart-items/checkout/payment-success/${validationData?.reference}`,
+  //       {
+  //         state: { masterOrderID, totalAmount, timestamp },
+  //         replace: true,
+  //       }
+  //     );
+  //     dispatch(clearCart());
+  //   }
+  // }, [validationData, navigate]);
 
   const {
     register,
@@ -64,11 +88,9 @@ export const CheckoutPaymentMethod = () => {
     resolver: zodResolver(paymentOptionSchema),
   });
 
-  const InstallmentPayment = cartItems.some((item) => {
-    return ['monthly', 'weekly', 'daily'].includes(
-      item.paymentPlan || item.selectedPaymentPlan
-    );
-  });
+  const InstallmentPayment = !cartItems.every(
+    (item) => item.paymentPlan === 'full' && item.selectedPaymentPlan === 'full'
+  );
 
   return (
     <div>

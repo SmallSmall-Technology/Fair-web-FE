@@ -6,9 +6,8 @@ import { formatCurrency } from '../../../utils/FormatCurrency';
 import { getCartSummary } from '../../../features/cart/cartSlice';
 import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment';
 
-/**
- * Dynamic label for each installment
- */
+// Dynamic label for each installment
+
 export const getPaymentLabel = (index, length) => {
   if (index === 0) return '2nd Payment';
   if (index === 1) return '3rd Payment';
