@@ -54,7 +54,7 @@ export const DirectDebitSetupComplete = ({ orderDetails }) => {
         <div className="flex justify-between items-center w-full mt-4 mb-2 px-4 lg:px-6">
           <p>DOWNPAYMENT</p>
           <p className="font-semibold font-outfit">
-            {formatCurrency(order?.totalAmount)}
+            {formatCurrency(order?.downPaymentAmount)}
           </p>
         </div>
       </div>

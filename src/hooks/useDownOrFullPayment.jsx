@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import PaystackPop from '@paystack/inline-js';
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,9 +9,10 @@ import {
   setPaystackOrderReference,
 } from '../features/order/fullPaymentSlice';
 import { clearCart } from '../features/cart/cartSlice';
+import { setMandateData } from '../features/paystack/mandateSlice';
 // import { clearCart } from '../features/cart/cartSlice';
 
-export function useDownOrFullPayment(downPayment) {
+export function useDownOrFullPayment(fullPayment) {
   const mandateData = useSelector((state) => state.mandate.data);
   const dispatch = useDispatch();
 
@@ -19,23 +20,18 @@ export function useDownOrFullPayment(downPayment) {
     (state) => state.fullPayment.paystackOrderReference
   );
 
-  const {
-    products,
-    consolidated_total_amount,
-    paymentMethod,
-    deliveryState,
-    deliveryFullAddress,
-    deliveryType,
-  } = mandateData;
-
-  const mandateDataForDownPayment = {
-    products,
-    consolidated_total_amount: downPayment,
-    paymentMethod: 'full',
-    deliveryState,
-    deliveryFullAddress,
-    deliveryType,
+  const mandateDataForFullPayment = {
+    consolidated_total_amount: mandateData?.consolidated_total_amount,
+    products: mandateData?.products,
+    paymentMethod: mandateData?.paymentMethod,
+    deliveryState: mandateData?.deliveryState,
+    deliveryFullAddress: mandateData?.deliveryFullAddress,
+    deliveryType: mandateData?.deliveryType,
   };
+
+  useEffect(() => {
+    setPaystackOrderReference(null);
+  }, [paystackOrderReference]);
 
   const { data: validationData, refetch: refetchValidation } =
     useValidateFullOrDownPayment(paystackOrderReference);
@@ -50,7 +46,10 @@ export function useDownOrFullPayment(downPayment) {
   }, [validationData]);
 
   const { mutate: payForDownPayment, isPending: isValidating } = useMutation({
-    mutationFn: () => createPaystackOrder(mandateDataForDownPayment),
+    mutationFn: () =>
+      createPaystackOrder(
+        !fullPayment ? mandateData : mandateDataForFullPayment
+      ),
     onSuccess: (res) => {
       const {
         reference: newReference,
@@ -76,6 +75,7 @@ export function useDownOrFullPayment(downPayment) {
             ) {
               dispatch(setPaystackOrderReference(transaction.reference));
               dispatch(clearCart());
+              dispatch(setMandateData(null));
             } else {
               dispatch(setPaystackOrderReference(null));
             }
@@ -91,8 +91,8 @@ export function useDownOrFullPayment(downPayment) {
   });
 
   const handlePayDownPayment = () => {
-    if (!downPayment) return;
-    payForDownPayment(mandateDataForDownPayment);
+    // if (!downPayment) return;
+    payForDownPayment(mandateData);
   };
 
   return {

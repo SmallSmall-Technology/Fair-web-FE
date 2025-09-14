@@ -19,7 +19,7 @@ export const DirectDebitBankSetupForm = () => {
   const navigate = useNavigate();
   const mandateData = useSelector(selectMandateData);
   const location = useLocation();
-  const downPayment = location.state?.downPayment;
+  const downPayment = String(location.state?.downPayment);
 
   return (
     <section className="md:flex md:max-w-6xl mx-auto md:space-x-14 space-y-8 md:space-y-0 justify-between">

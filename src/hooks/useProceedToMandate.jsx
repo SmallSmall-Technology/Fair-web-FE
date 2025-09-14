@@ -29,12 +29,9 @@ export const useProceedToMandate = () => {
     (item) => item.paymentPlan || item.selectedPaymentPlan
   );
   const consolidatedPayments = consolidateCartPayments(cart);
-  const secondInstallmentPayment =
-    consolidatedPayments?.otherPayments[0]?.amount;
 
-  const second_installment_date = new Date(
-    consolidatedPayments?.otherPayments[0]?.date
-  );
+  const firstInstallmentPayment =
+    consolidatedPayments?.firstPayment + VAT + shippingFee;
 
   const user = useSelector((state) => state.user);
 
@@ -43,10 +40,8 @@ export const useProceedToMandate = () => {
     alreadyNavigatedRef.current = true;
 
     const payload = {
-      first_installment_payment: secondInstallmentPayment,
-      first_debit_date: new Date(second_installment_date)
-        .toISOString()
-        .split('T')[0],
+      first_installment_payment: firstInstallmentPayment,
+      first_debit_date: new Date().toISOString().split('T')[0],
 
       last_installment_payment:
         consolidatedPayments?.otherPayments.at(-1)?.amount,

@@ -18,6 +18,7 @@ const Summary = () => {
     useOrders();
 
   if (isFetching) return <p>Loading orders...</p>;
+  console.log('onGoingOrders', onGoingOrders);
 
   return (
     <section className="grid grid-cols-1 gap-6 ">
