@@ -55,18 +55,24 @@ const SingleOngoingPurchaseProgress = React.memo(
               <span>Item price</span>
               <br />
               <span className="text-base font-medium">
-                {formatCurrency(product.totalAmount)}
+                {formatCurrency(product?.totalAmount)}
               </span>
             </div>
 
             <div>
-              {product.paymentPlan !== 'full' && (
+              {product.paymentType === 'direct debit' ? (
                 <div className="text-[11px]">
                   <span>Installment duration</span>
                   <br />
                   <span className="text-base font-medium">
-                    {product.paymentPlanDetails?.months} months
+                    {order?.paymentPlanDetails?.months} months
                   </span>
+                </div>
+              ) : (
+                <div className="text-[11px]">
+                  <span>Installment duration</span>
+                  <br />
+                  <span className="text-base font-medium">Paid Once</span>
                 </div>
               )}
             </div>
@@ -75,7 +81,7 @@ const SingleOngoingPurchaseProgress = React.memo(
               <span>Total amount paid</span>
               <br />
               <span className="text-base font-medium">
-                {formatCurrency(product.price)}
+                {formatCurrency(product?.totalAmount)}
               </span>
             </div>
 

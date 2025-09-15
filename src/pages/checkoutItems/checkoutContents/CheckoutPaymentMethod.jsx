@@ -15,13 +15,14 @@ import {
   setSelectedDeliveryType,
 } from '../../../features/order/deliveryAddressSlice.js';
 import { setMandateData } from '../../../features/paystack/mandateSlice.js';
-import { useEffect } from 'react';
+import { use, useEffect, useState } from 'react';
 import { createPaystackOrder } from '../../../api/orderAPI.js';
 import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx';
 import { useDownOrFullPayment } from '../../../hooks/useDownOrFullPayment.jsx';
 import { clearCart } from '../../../features/cart/cartSlice.js';
 
 export const CheckoutPaymentMethod = () => {
+  const [fullPayment, setFullPayment] = useState(false);
   const cartItems = useSelector((state) => state.cart.cart);
   const isVerified = useSelector((state) =>
     selectVerificationStatus(state, 'debt')
@@ -34,8 +35,13 @@ export const CheckoutPaymentMethod = () => {
     (state) => state.fullPayment.downPaymentSuccess
   );
 
+  const InstallmentPayment = !cartItems.every(
+    (item) => item.paymentPlan === 'full' || item.selectedPaymentPlan === 'full'
+  );
+
   useEffect(() => {
     if (!deliveryType) return;
+    setFullPayment(!InstallmentPayment);
     dispatch(setMandateData({ deliveryType: deliveryType.value }));
   }, [deliveryType]);
 
@@ -58,7 +64,7 @@ export const CheckoutPaymentMethod = () => {
     handlePayDownPayment,
     isValidating: Processing,
     validationData,
-  } = useDownOrFullPayment(downPayment);
+  } = useDownOrFullPayment(fullPayment);
 
   // useEffect(() => {
   //   if (
@@ -87,10 +93,6 @@ export const CheckoutPaymentMethod = () => {
     defaultValues: { picked: '' },
     resolver: zodResolver(paymentOptionSchema),
   });
-
-  const InstallmentPayment = !cartItems.every(
-    (item) => item.paymentPlan === 'full' && item.selectedPaymentPlan === 'full'
-  );
 
   return (
     <div>

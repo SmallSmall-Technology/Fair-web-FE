@@ -60,6 +60,8 @@ export const CheckoutItemsContentSection = () => {
     .filter(Boolean)
     .join(', ');
 
+  console.log(deliveryAddress);
+
   useEffect(() => {
     if (!isConsolidatedCart) {
       dispatch(

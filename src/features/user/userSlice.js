@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getUser } from '../../api/user-api';
 import httpClient from '../../api/http-clients';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Async thunk for fetching user
 export const fetchUser = createAsyncThunk(
@@ -40,21 +40,6 @@ const userSlice = createSlice({
       state.status = 'succeeded';
       state.error = null;
     },
-    // updateLatestDeliveryAddress: (state, action) => {
-    //   if (state.data) {
-    //     state.data.current_address = action.payload;
-    //   }
-    // },
-    // addDeliveryAddress: (state, action) => {
-    //   if (state.data) {
-    //     state.data.delivery_address = action.payload;
-    //   }
-    // },
-    // setSelectedDeliveryAddress: (state, action) => {
-    //   if (state.data) {
-    //     state.data.delivery_address = action.payload;
-    //   }
-    // },
     setError: (state, action) => {
       state.status = 'failed';
       state.error = action.payload;
@@ -104,16 +89,6 @@ export const {
 } = userSlice.actions;
 
 export default userSlice.reducer;
-
-// ✅ Fix selectors
-// export const selectLatestDeliveryAddress = (state) =>
-//   state.user.data?.current_address || null;
-
-// export const selectCurrentDeliveryAddress = (state) =>
-//   state.user.data?.delivery_address || null;
-
-// export const selectCurrentAddress = (state) =>
-//   state.user.data?.current_address || null;
 
 export const getUserFullName = (state) => {
   const user = state.user.data;
