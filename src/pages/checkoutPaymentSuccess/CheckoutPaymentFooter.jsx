@@ -8,11 +8,15 @@ export const CheckoutPaymentFooter = () => {
         <span>
           <Copyright size={14} />
         </span>
-        Fair by Smallsmall Technology 2025
+        Smallsmall Technology 2025
       </li>
       <li className="text-xs">
-        <a href="https://fairapp.ng" target="_blank" rel="noopener noreferrer">
-          fairapp.ng
+        <a
+          href="https://smallsmall.ng"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          smallsmall.ng
         </a>
       </li>
       <li className="text-xs">

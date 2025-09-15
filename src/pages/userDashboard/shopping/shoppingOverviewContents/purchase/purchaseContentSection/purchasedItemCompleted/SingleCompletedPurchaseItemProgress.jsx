@@ -218,12 +218,12 @@ const SingleCompletedPurchaseItemProgress = React.memo(
               </div>
 
               <div>
-                {order.paymentPlan !== 'full' ? (
+                {orders.paymentType === 'direct debit' ? (
                   <div className="text-[11px]">
                     <span>Installment duration</span>
                     <br />
                     <span className="text-base font-medium">
-                      {order.paymentPlanDetails?.months} months
+                      {order?.paymentPlanDetails?.months} months
                     </span>
                   </div>
                 ) : (

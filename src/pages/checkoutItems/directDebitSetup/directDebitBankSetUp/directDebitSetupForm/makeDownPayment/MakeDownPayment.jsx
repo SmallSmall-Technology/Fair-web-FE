@@ -13,7 +13,6 @@ import { setMandateData } from '../../../../../../features/paystack/mandateSlice
 
 export const MakeDownPayment = ({ downPayment }) => {
   const mandateData = useSelector((state) => state.mandate.data);
-  console.log('mandateData in MakeDownPayment:', mandateData);
   const currentDeliveryAddress = useSelector(selectCurrentAddress);
   const { data: user } = useSelector((state) => state.user);
   const { latest_address } = user;
@@ -24,8 +23,6 @@ export const MakeDownPayment = ({ downPayment }) => {
   ]
     .filter(Boolean)
     .join(', ');
-
-  // console.log('deliveryAddress:', deliveryAddress);
 
   // useEffect(() => {
   //   if (!mandateData) return;

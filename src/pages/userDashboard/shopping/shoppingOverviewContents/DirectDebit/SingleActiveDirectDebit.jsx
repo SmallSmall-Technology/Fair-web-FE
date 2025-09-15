@@ -3,15 +3,11 @@ import { ChevronRight } from 'lucide-react';
 import { formatCurrency } from '../../../../../utils/FormatCurrency';
 
 export const SingleActiveDirectDebit = ({ orders }) => {
-  console.log('orders in SingleActiveDirectDebit:', orders);
-
   // Flatten all items from all orders
   const allItems = orders.flatMap((order) => order.items || []);
 
   // Get only the first 3 items
   const recentItems = allItems.slice(0, 2);
-
-  console.log('recentItems:', recentItems);
 
   return (
     <li className="recentlyviewed-item grid grid-cols-1 gap-3">

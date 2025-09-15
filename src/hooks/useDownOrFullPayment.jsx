@@ -10,28 +10,41 @@ import {
 } from '../features/order/fullPaymentSlice';
 import { clearCart } from '../features/cart/cartSlice';
 import { setMandateData } from '../features/paystack/mandateSlice';
-// import { clearCart } from '../features/cart/cartSlice';
+import { useNavigate } from 'react-router-dom';
+import { selectedDeliveryType } from '../features/order/deliveryAddressSlice';
 
 export function useDownOrFullPayment(fullPayment) {
   const mandateData = useSelector((state) => state.mandate.data);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const paystackOrderReference = useSelector(
     (state) => state.fullPayment.paystackOrderReference
   );
 
+  const userSelectedDeliveryType = useSelector(selectedDeliveryType);
+  const cart = useSelector((state) => state.cart.cart);
+
+  // Calculate total cart price
+  const totalCartPrice = cart.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+
+  // Calculate VAT and shipping fee
+  const VAT = (7.5 / 100) * totalCartPrice;
+  const shippingFee = userSelectedDeliveryType?.amount || 0;
+  const total = totalCartPrice + VAT + shippingFee;
+
+  // Prepare mandate data for full payment
   const mandateDataForFullPayment = {
-    consolidated_total_amount: mandateData?.consolidated_total_amount,
+    consolidated_total_amount: total,
     products: mandateData?.products,
     paymentMethod: mandateData?.paymentMethod,
     deliveryState: mandateData?.deliveryState,
     deliveryFullAddress: mandateData?.deliveryFullAddress,
     deliveryType: mandateData?.deliveryType,
   };
-
-  useEffect(() => {
-    setPaystackOrderReference(null);
-  }, [paystackOrderReference]);
 
   const { data: validationData, refetch: refetchValidation } =
     useValidateFullOrDownPayment(paystackOrderReference);
@@ -40,6 +53,8 @@ export function useDownOrFullPayment(fullPayment) {
     const { payment_verified, status } = validationData || {};
     if (payment_verified === true && status === 'success') {
       dispatch(setDownPaymentSuccess(true));
+      dispatch(setMandateData(null));
+      // dispatch(setPaystackOrderReference(null));
     } else {
       dispatch(setDownPaymentSuccess(false));
     }
@@ -70,12 +85,30 @@ export function useDownOrFullPayment(fullPayment) {
             dispatch(setPaystackOrderReference(transaction.reference));
 
             if (
+              fullPayment &&
+              transaction.status === 'success' &&
+              transaction.message === 'Approved'
+            ) {
+              dispatch(setMandateData(null));
+              dispatch(setPaystackOrderReference(null));
+
+              navigate(
+                `/cart-items/checkout/payment-success/${transaction.reference}`,
+                {
+                  state: {
+                    masterOrderID: res?.data?.masterOrderID,
+                    totalAmount: transaction?.amount,
+                  },
+                }
+              );
+            }
+            if (
               transaction.status === 'success' &&
               transaction.message === 'Approved'
             ) {
               dispatch(setPaystackOrderReference(transaction.reference));
               dispatch(clearCart());
-              dispatch(setMandateData(null));
+              // dispatch(setMandateData(null));
             } else {
               dispatch(setPaystackOrderReference(null));
             }

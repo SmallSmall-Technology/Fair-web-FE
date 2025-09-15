@@ -9,9 +9,9 @@ export const PurchasedItemOngoing = React.memo(({ orders }) => {
   const orderItems = orders?.items || [];
   const singleOrders = orders || {};
 
-  console.log('Ongoing orders:', orders);
-  console.log('Order items:', orderItems);
-  console.log('Single order:', singleOrders);
+  // console.log('Ongoing orders:', orders);
+  // console.log('Order items:', orderItems);
+  // console.log('Single order:', singleOrders);
 
   const handleToggle = useCallback((index) => {
     setExpandedIndex((prev) => (prev === index ? null : index));
