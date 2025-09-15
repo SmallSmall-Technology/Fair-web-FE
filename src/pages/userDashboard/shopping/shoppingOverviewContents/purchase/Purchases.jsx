@@ -2,50 +2,16 @@ import { Search } from 'lucide-react';
 import { useState, memo } from 'react';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-// import {
-//   getOngoingOrders,
-//   getCompletedOrders,
-//   getCancelledOrders,
-// } from '/src/features/order/orderSlice.js';
+
 import PurchaseCancelled from './purchaseContentSection/purchaseItemCancelled/PurchaseCancelled';
 import PurchaseCompleted from './purchaseContentSection/purchasedItemCompleted/PurchaseCompleted';
 import PurchaseItemsOngoing from './purchaseContentSection/purchasedItemsOngoing/PurchaseItemsOngoing';
 import { useQuery } from '@tanstack/react-query';
-import { getAllOrders } from '../../../../../api/orderAPI';
 import { useOrders } from './useOrders';
 
 const Purchases = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
   const [formIsActive, setFormIsActive] = useState(false);
-
-  // const { data, isFetching } = useQuery({
-  //   queryKey: ['allOrders'],
-  //   queryFn: () => getAllOrders(),
-  //   staleTime: 5 * 60 * 1000,
-  // });
-
-  // const allOrders = data?.orders || [];
-
-  // const onGoingOrders = allOrders.filter(
-  //   (order) =>
-  //     [
-  //       'direct_debit_in_progress',
-  //       'pending_full_payment',
-  //       'processing',
-  //     ].includes(order.orderStatus) || order.fullPaymentStatus === 'pending'
-  // );
-
-  // const completedOrders = allOrders.filter(
-  //   (order) =>
-  //     ['successful', 'completed'].includes(order.orderStatus) ||
-  //     order.fullPaymentStatus === 'success'
-  // );
-
-  // const cancelledOrders = allOrders.filter(
-  //   (order) =>
-  //     ['failed', 'cancelled'].includes(order.orderStatus) ||
-  //     order.fullPaymentStatus === 'failed'
-  // );
 
   const {
     allOrders,
@@ -84,7 +50,6 @@ const Purchases = () => {
       const filteredOrders = allOrders.filter((order) =>
         order.items.orderID.toLowerCase().includes(searchTerm)
       );
-      // Note: filteredOrders is computed but not used; consider dispatching to Redux or updating state
     }
     reset();
     setFormIsActive(false);

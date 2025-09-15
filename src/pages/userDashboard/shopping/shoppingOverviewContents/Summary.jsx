@@ -68,7 +68,7 @@ const Summary = () => {
         <div className="grid grid-cols-1  justify-between gap-4">
           <div className="lg:flex gap-2 w-full">
             {/* <ActiveDirectDebit /> */}
-            {/* <SingleActiveDirectDebit orders={onGoingOrders} /> */}
+            <SingleActiveDirectDebit orders={onGoingOrders} />
             <RecentlyPurchased />
           </div>
           <div className="lg:flex gap-2 w-full">

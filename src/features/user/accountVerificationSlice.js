@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { isUserDebtProfileVerified } from './userSlice';
 
 const initialState = {
@@ -62,15 +62,27 @@ export const selectVerificationStatus = (state, type) => {
   if (type === 'debt') {
     return isUserDebtProfileVerified(state);
   }
-  return (
-    state.accountVerification.verificationStatus[type]?.isVerified || false
-  );
+  return state.accountVerification?.verificationStatus[type]?.isVerified;
 };
+// export const selectVerificationStatus = createSelector(
+//   (state) => state.accountVerification?.verificationStatus,
+//   (verificationStatus) => ({
+//     id: verificationStatus?.id || false,
+//     address: verificationStatus?.address || false,
+//     debt: verificationStatus?.debt || false,
+//   })
+// );
+
+// export const selectVerificationStatus = (type) =>
+//   createSelector(
+//     (state) => state.accountVerification?.verificationStatus,
+//     (verificationStatus) => verificationStatus?.[type] || false
+//   );
 
 export const selectVerificationData = (state, type) =>
-  state.accountVerification.verificationStatus[type]?.data || null;
+  state.accountVerification?.verificationStatus[type]?.data || null;
 
-export const selectLoading = (state) => state.accountVerification.loading;
-export const selectError = (state) => state.accountVerification.error;
+export const selectLoading = (state) => state.accountVerification?.loading;
+export const selectError = (state) => state.accountVerification?.error;
 
 export default accountVerificationSlice.reducer;

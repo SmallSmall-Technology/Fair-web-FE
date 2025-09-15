@@ -5,8 +5,9 @@ import { getTotalCartPrice } from '../../features/cart/cartSlice';
 
 export const CheckoutPaymentSuccessContent = () => {
   const cartItems = useSelector((state) => state.cart.cart);
+
   const location = useLocation();
-  const { masterOrderID, totalAmount, timestamp } = location.state || {};
+  const { masterOrderID, totalAmount } = location.state || {};
 
   const currentPlan = cartItems.find(
     (item) => item?.paymentPlan || item?.selectedPaymentPlan === 'full'
@@ -101,66 +102,45 @@ export const CheckoutPaymentSuccessContent = () => {
           </div>
           <hr className="my-4" />
           <div className="text-[#96959F]">
-            <p className="font-semibold mb-3">
-              Setup & activate direct debit to complete your order!
-            </p>
-            <p className="text-sm font-normal mb-2">Whats next?</p>
-            <ul className="text-sm text-[#96959F] flex flex-col leading-7 list-disc mx-5 min-w[413px]">
-              <li>
-                To set up your direct debit payment, please keep an eye on your
-                email inbox. You will receive an email shortly with detailed
-                instructions on how to complete the setup process.
-              </li>
-              <li>
-                You will receive a confirmation email shortly with the details
-                of your order after direct debit is active.
-              </li>
-              <li>
-                Your item(s) will be shipped to the address provided during
-                checkout.
-              </li>
-              <li>You can track your order status through your account.</li>
-              <li>
-                You will receive an email confirmation for each scheduled
-                instalment payment processed.
-              </li>
-            </ul>
-            <p className="text-sm font-normal pt-6">Important</p>
-            <ul className="text-sm leading-7 list-disc mx-5 min-w[413px]">
-              <li>
-                If you do not see the email within the next few minutes, please
-                check your spam or junk folder.
-              </li>
-              <li>
-                Ensure that the email address you provided during sign up is
-                correct to avoid any delays.
-              </li>
-            </ul>
-          </div>
-
-          <hr className="my-4" />
-
-          <div>
             <div className="flex justify-between mb-4">
               <ul className="leading-7 text-sm ">
                 <li className="text-[#96959F]">Order number</li>
                 <li className="text-[#96959F]">Order date</li>
                 <li className="text-[#96959F]">Order paid</li>
               </ul>
-              <ul className="leading-7 text-sm font-medium flex flex-col items-end">
+              <ul className="font-inter text-black leading-7 text-sm font-medium flex flex-col items-end">
                 <li className="font-medium">{orderNumber}</li>
-                <li className="font-medium">12, Dec, 2020</li>
-                <li className="font-medium">{formatCurrency(total)}</li>
+                <li className="font-medium">
+                  {new Date().toLocaleDateString()}
+                </li>
+
+                <li className="font-medium ">{formatCurrency(total)}</li>
               </ul>
             </div>
+            <p className=" mb-3">This is a confirmation of your order</p>
+            <hr className="my-4" />
+
+            <p className="text-sm font-normal mb-2">Whats next?</p>
+            <ul className="text-sm text-[#96959F] flex flex-col leading-7 list-disc mx-5 min-w[413px]">
+              <li>
+                You will receive a confirmation email shortly with the details
+                of your order.
+              </li>
+              <li>
+                Your item(s) will be shipped to the address provided during
+                checkout.
+              </li>
+              <li>You can track your order status through your account.</li>
+            </ul>
           </div>
 
           <hr className="mb-4 mt-6" />
 
           <div className="text-[#96959F]">
             <p className="leading-7 text-sm font-medium">
-              If you have any questions or need assistance, feel free to reach
-              out to our customer support team at
+              We appreciate your business and hope you enjoy your purchase! If
+              you have any questions or need assistance, feel free to reach out
+              to our customer support team at
               <span className="underline">
                 <Link to="/">help@fairapp.ng</Link>
               </span>
