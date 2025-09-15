@@ -11,10 +11,17 @@ import {
 import { clearCart } from '../features/cart/cartSlice';
 import { setMandateData } from '../features/paystack/mandateSlice';
 import { useNavigate } from 'react-router-dom';
-import { selectedDeliveryType } from '../features/order/deliveryAddressSlice';
+import {
+  selectCurrentAddress,
+  selectedDeliveryType,
+} from '../features/order/deliveryAddressSlice';
 
 export function useDownOrFullPayment(fullPayment) {
   const mandateData = useSelector((state) => state.mandate.data);
+  const currentDeliveryAddress = useSelector(selectCurrentAddress);
+
+  const user = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -31,6 +38,17 @@ export function useDownOrFullPayment(fullPayment) {
     0
   );
 
+  const deliveryAddress = [
+    currentDeliveryAddress?.streetAddress ||
+      user?.latest_address?.streetAddress,
+    currentDeliveryAddress?.state || user?.latest_address?.state,
+  ]
+    .filter(Boolean)
+    .join(', ');
+
+  // console.log('deliveryAddress', deliveryAddress);
+  // console.log('currentDelivery', currentDeliveryAddress);
+
   // Calculate VAT and shipping fee
   const VAT = (7.5 / 100) * totalCartPrice;
   const shippingFee = userSelectedDeliveryType?.amount || 0;
@@ -42,9 +60,15 @@ export function useDownOrFullPayment(fullPayment) {
     products: mandateData?.products,
     paymentMethod: mandateData?.paymentMethod,
     deliveryState: mandateData?.deliveryState,
-    deliveryFullAddress: mandateData?.deliveryFullAddress,
-    deliveryType: mandateData?.deliveryType,
+    deliveryFullAddress:
+      currentDeliveryAddress?.streetAddress && currentDeliveryAddress?.state
+        ? `${currentDeliveryAddress.streetAddress}, ${currentDeliveryAddress.state}`
+        : user?.latest_address?.streetAddress,
+
+    deliveryState: currentDeliveryAddress?.state || user?.latest_address?.state,
   };
+
+  // console.log('mandateDataForFullPayment', mandateDataForFullPayment);
 
   const { data: validationData, refetch: refetchValidation } =
     useValidateFullOrDownPayment(paystackOrderReference);

@@ -34,7 +34,9 @@ export const CheckoutItemsContentSection = () => {
   const cartPaymentPlan = cart.map(
     (item) => item?.paymentPlan || item?.selectedPaymentPlan
   );
-  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
+  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan !== 'full');
+
+  console.log('isCOnsolidated', isConsolidatedCart);
   const consolidatedPayments = consolidateCartPayments(cart);
   const userSelectedDeliveryType = useSelector(selectedDeliveryType);
   const shippingFee = userSelectedDeliveryType?.amount || 0;
@@ -165,7 +167,7 @@ export const CheckoutItemsContentSection = () => {
         <div className="hidden lg:block">
           <CheckoutItem />
         </div>
-        {!isConsolidatedCart && (
+        {isConsolidatedCart && (
           <div className="px-6 hidden lg:block">
             <hr className="mt-8 mb-2" />
             <div className="font-inter flex justify-between items-center">
