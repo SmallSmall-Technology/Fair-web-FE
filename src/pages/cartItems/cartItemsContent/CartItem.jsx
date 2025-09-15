@@ -21,6 +21,11 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
     quantity: item?.quantity,
   });
 
+  const expectedDeliveryDate = new Date();
+  expectedDeliveryDate.setDate(expectedDeliveryDate.getDate() + 10);
+
+  const formattedDate = expectedDeliveryDate.toISOString().split('T')[0];
+
   return (
     <article
       key={item?.productID}
@@ -123,9 +128,7 @@ export const CartItem = ({ item, onTogglePlan, isLoading }) => {
 
               <p className="text-sm font-normal flex justify-end">
                 Shipping: Arrives by{' '}
-                <span className="font-medium">
-                  {item?.deliveryDate || 'Jan, 20 2025'}
-                </span>
+                <span className="font-medium pl-2">{formattedDate}</span>
               </p>
             </div>
           </div>

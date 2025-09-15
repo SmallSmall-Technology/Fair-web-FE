@@ -25,6 +25,7 @@ export const CheckoutItemsContentSection = () => {
   const [addFormIsOpen, setAddFormIsOpen] = useState(false);
 
   const currentDeliveryAddress = useSelector(selectCurrentAddress);
+
   const { data: user } = useSelector((state) => state.user);
   const { latest_address } = user;
 
@@ -34,7 +35,8 @@ export const CheckoutItemsContentSection = () => {
   const cartPaymentPlan = cart.map(
     (item) => item?.paymentPlan || item?.selectedPaymentPlan
   );
-  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan === 'full');
+  const isConsolidatedCart = cartPaymentPlan.every((plan) => plan !== 'full');
+
   const consolidatedPayments = consolidateCartPayments(cart);
   const userSelectedDeliveryType = useSelector(selectedDeliveryType);
   const shippingFee = userSelectedDeliveryType?.amount || 0;
@@ -44,15 +46,6 @@ export const CheckoutItemsContentSection = () => {
   const downPayment = consolidatedPayments.firstPayment + VAT + shippingFee;
   const fullPayment = totalCartPrice + VAT + shippingFee;
 
-  const handleSubmitPaymentMethod = (values) => {
-    if (values) {
-      // dispatch(makePayment());
-      startTransition(() => {
-        // navigate('/cart-items/checkout/payment-success');
-      });
-    }
-  };
-
   const deliveryAddress = [
     currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
     currentDeliveryAddress?.state || latest_address?.state,
@@ -60,6 +53,7 @@ export const CheckoutItemsContentSection = () => {
     .filter(Boolean)
     .join(', ');
 
+  // console.log('isConsolidatedCart', isConsolidatedCart);
   useEffect(() => {
     if (!isConsolidatedCart) {
       dispatch(
@@ -67,10 +61,7 @@ export const CheckoutItemsContentSection = () => {
           products: cart,
           consolidated_total_amount: fullPayment,
           paymentMethod: 'full',
-          deliveryState: currentDeliveryAddress?.state || latest_address?.state,
-          deliveryFullAddress:
-            currentDeliveryAddress?.streetAddress ||
-            latest_address?.streetAddress,
+          deliveryFullAddress: deliveryAddress,
         })
       );
     }
@@ -165,7 +156,7 @@ export const CheckoutItemsContentSection = () => {
         <div className="hidden lg:block">
           <CheckoutItem />
         </div>
-        {!isConsolidatedCart && (
+        {isConsolidatedCart && (
           <div className="px-6 hidden lg:block">
             <hr className="mt-8 mb-2" />
             <div className="font-inter flex justify-between items-center">

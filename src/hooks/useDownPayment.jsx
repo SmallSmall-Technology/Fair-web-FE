@@ -11,10 +11,18 @@ import {
 import { clearCart } from '../features/cart/cartSlice';
 import { setMandateData } from '../features/paystack/mandateSlice';
 import { useNavigate } from 'react-router-dom';
-import { selectedDeliveryType } from '../features/order/deliveryAddressSlice';
+import {
+  selectCurrentAddress,
+  selectedDeliveryType,
+} from '../features/order/deliveryAddressSlice';
 
-export function useDownOrFullPayment(fullPayment) {
+export function useDownPayment() {
   const mandateData = useSelector((state) => state.mandate.data);
+
+  const currentDeliveryAddress = useSelector(selectCurrentAddress);
+  const { data: user } = useSelector((state) => state.user);
+  const { latest_address } = user;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -31,20 +39,17 @@ export function useDownOrFullPayment(fullPayment) {
     0
   );
 
+  const deliveryAddress = [
+    currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
+    currentDeliveryAddress?.state || latest_address?.state,
+  ]
+    .filter(Boolean)
+    .join(', ');
+
   // Calculate VAT and shipping fee
   const VAT = (7.5 / 100) * totalCartPrice;
   const shippingFee = userSelectedDeliveryType?.amount || 0;
   const total = totalCartPrice + VAT + shippingFee;
-
-  // Prepare mandate data for full payment
-  const mandateDataForFullPayment = {
-    consolidated_total_amount: total,
-    products: mandateData?.products,
-    paymentMethod: mandateData?.paymentMethod,
-    deliveryState: mandateData?.deliveryState,
-    deliveryFullAddress: mandateData?.deliveryFullAddress,
-    deliveryType: mandateData?.deliveryType,
-  };
 
   const { data: validationData, refetch: refetchValidation } =
     useValidateFullOrDownPayment(paystackOrderReference);
@@ -53,18 +58,13 @@ export function useDownOrFullPayment(fullPayment) {
     const { payment_verified, status } = validationData || {};
     if (payment_verified === true && status === 'success') {
       dispatch(setDownPaymentSuccess(true));
-      dispatch(setMandateData(null));
-      // dispatch(setPaystackOrderReference(null));
     } else {
       dispatch(setDownPaymentSuccess(false));
     }
   }, [validationData]);
 
   const { mutate: payForDownPayment, isPending: isValidating } = useMutation({
-    mutationFn: () =>
-      createPaystackOrder(
-        !fullPayment ? mandateData : mandateDataForFullPayment
-      ),
+    mutationFn: () => createPaystackOrder(mandateData),
     onSuccess: (res) => {
       const {
         reference: newReference,
@@ -123,8 +123,8 @@ export function useDownOrFullPayment(fullPayment) {
     },
   });
 
-  const handlePayDownPayment = () => {
-    // if (!downPayment) return;
+  const handlePayDownPayment = (downPayment) => {
+    if (!downPayment) return;
     payForDownPayment(mandateData);
   };
 

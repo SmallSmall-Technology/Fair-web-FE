@@ -48,7 +48,7 @@ const CartItemsContentSection = React.memo(() => {
         })
       );
     });
-    setPlanModalOpen(false); // close modal after changing
+    setPlanModalOpen(false);
   };
   const handleCheckout = () => {
     if (subtTotal > 500000 && !isUpgraded) {
@@ -68,7 +68,7 @@ const CartItemsContentSection = React.memo(() => {
         {cartItems.length > 0 && (
           <button
             type="submit"
-            onClick={() => setPlanModalOpen(true)} // 🔹 Open modal for all cart items
+            onClick={() => setPlanModalOpen(true)}
             className="font-inter group relative inline-flex items-center overflow-hidden h-[22px] px-5 bg-[var(--yellow-primary)] text-xs rounded-2xl text-black hover:bg-gray-50 hover:text-black hover:underline"
           >
             <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-white opacity-100 transition-all group-hover:top-0 group-hover:h-full hover:border-bg-[var(--yellow-primary)] "></span>

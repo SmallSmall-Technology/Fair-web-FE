@@ -96,11 +96,22 @@ export const useProceedToMandate = () => {
   const navigate = useNavigate();
   const alreadyNavigatedRef = useRef(false);
 
-  const selectedDeliveryAddress = useSelector(selectCurrentAddress);
-
   const userSelectedDeliveryType = useSelector(selectedDeliveryType);
   const cart = useSelector((state) => state.cart.cart);
-  const user = useSelector((state) => state.user);
+  // const user = useSelector((state) => state.user);
+
+  const currentDeliveryAddress = useSelector(selectCurrentAddress);
+  const { data: user } = useSelector((state) => state.user);
+  const { latest_address } = user;
+
+  const deliveryAddress = [
+    currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
+    currentDeliveryAddress?.state || latest_address?.state,
+  ]
+    .filter(Boolean)
+    .join(', ');
+
+  // console.log('delivery', deliveryAddress);
 
   const totalCartPrice = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -118,33 +129,6 @@ export const useProceedToMandate = () => {
 
   const firstInstallmentPayment =
     consolidatedPayments?.firstPayment + VAT + shippingFee;
-
-  //  We'll keep a local state for the final delivery address
-  const [finalDeliveryAddress, setFinalDeliveryAddress] = useState('');
-  const [finalDeliveryState, setFinalDeliveryState] = useState('');
-
-  // This useEffect will run whenever selectedDeliveryAddress or user changes
-  useEffect(() => {
-    let address = '';
-    let state = '';
-
-    if (
-      selectedDeliveryAddress?.streetAddress &&
-      selectedDeliveryAddress?.state
-    ) {
-      address = `${selectedDeliveryAddress.streetAddress}, ${selectedDeliveryAddress.state}`;
-      state = selectedDeliveryAddress.state;
-    } else if (
-      user?.latest_address?.streetAddress &&
-      user?.latest_address?.state
-    ) {
-      address = `${user.latest_address.streetAddress}, ${user.latest_address.state}`;
-      state = user.latest_address.state;
-    }
-
-    setFinalDeliveryAddress(address);
-    setFinalDeliveryState(state);
-  }, [selectedDeliveryAddress, user]);
 
   const proceed = () => {
     if (alreadyNavigatedRef.current) return;
@@ -166,8 +150,8 @@ export const useProceedToMandate = () => {
       frequency: cartPaymentPlan[0],
       paymentMethod: cartPaymentPlan[0],
       description: 'Getting product',
-      deliveryFullAddress: finalDeliveryAddress,
-      deliveryState: finalDeliveryState,
+      deliveryFullAddress: deliveryAddress,
+      deliveryState: 'Lagos',
       products: cart.map((item) => ({
         productID: item.productID,
         quantity: item.quantity,
