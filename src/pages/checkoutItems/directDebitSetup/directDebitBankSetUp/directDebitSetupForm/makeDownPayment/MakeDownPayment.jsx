@@ -5,11 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { CustomButton } from '../../../../../../utils/Button';
 import { createPaystackOrder } from '../../../../../../api/orderAPI';
 import { formatCurrency } from '../../../../../../utils/FormatCurrency';
-import { useDownOrFullPayment } from '../../../../../../hooks/useDownOrFullPayment';
+import { useFullPayment } from '../../../../../../hooks/useFullPayment';
 import { Link } from 'react-router-dom';
 import { selectCurrentAddress } from '../../../../../../features/order/deliveryAddressSlice';
-import { setMandateData } from '../../../../../../features/paystack/mandateSlice';
-// import { useValidateFullOrDownPayment } from '../../../../../hooks/useValidateFullOrDownPayment';
+import { useDownPayment } from '../../../../../../hooks/useDownPayment';
+// import { setMandateData } from '../../../../../../features/paystack/mandateSlice';
 
 export const MakeDownPayment = ({ downPayment }) => {
   const mandateData = useSelector((state) => state.mandate.data);
@@ -24,28 +24,14 @@ export const MakeDownPayment = ({ downPayment }) => {
     .filter(Boolean)
     .join(', ');
 
-  // useEffect(() => {
-  //   if (!mandateData) return;
-  //   {
-  //     dispatch(
-  //       setMandateData({
-  //         deliveryState: currentDeliveryAddress?.state || latest_address?.state,
-  //         deliveryFullAddress:
-  //           currentDeliveryAddress?.streetAddress ||
-  //           latest_address?.streetAddress,
-  //       })
-  //     );
-  //   }
-  // }, [mandateData]);
-
   const downPaymentSuccess = useSelector(
     (state) => state.fullPayment.downPaymentSuccess
   );
 
   const dispatch = useDispatch();
 
-  const { handlePayDownPayment, isValidating } =
-    useDownOrFullPayment(downPayment);
+  const { handlePayDownPayment, isValidating, validationData } =
+    useDownPayment(downPayment);
 
   return (
     <section className="w-full">

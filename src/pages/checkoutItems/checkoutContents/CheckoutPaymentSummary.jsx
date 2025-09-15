@@ -19,9 +19,10 @@ import {
   selectedDeliveryType,
 } from '../../../features/order/deliveryAddressSlice.js';
 import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx';
-import { useDownOrFullPayment } from '../../../hooks/useDownOrFullPayment.jsx';
+import { useFullPayment } from '../../../hooks/useFullPayment.jsx';
 import { useEffect } from 'react';
 import { setMandateData } from '../../../features/paystack/mandateSlice.js';
+import { useDownPayment } from '../../../hooks/useDownPayment.jsx';
 
 export const CheckoutPaymentSummary = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -57,12 +58,6 @@ export const CheckoutPaymentSummary = () => {
 
   const { createMandate, isValidating } = useCreateMandate();
 
-  const {
-    handlePayDownPayment,
-    isValidating: Processing,
-    validationData,
-  } = useDownOrFullPayment(isConsolidatedCart ? downPayment : fullPayment);
-
   const deliveryAddress = [
     currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
     currentDeliveryAddress?.state || latest_address?.state,
@@ -70,21 +65,35 @@ export const CheckoutPaymentSummary = () => {
     .filter(Boolean)
     .join(', ');
 
-  useEffect(() => {
-    if (!isConsolidatedCart) {
-      dispatch(
-        setMandateData({
-          products: cart,
-          consolidated_total_amount: fullPayment,
-          paymentMethod: 'full',
-          deliveryState: currentDeliveryAddress?.state || latest_address?.state,
-          deliveryFullAddress:
-            currentDeliveryAddress?.streetAddress ||
-            latest_address?.streetAddress,
-        })
-      );
-    }
-  }, [shippingFee]);
+  // console.log(deliveryAddress);
+
+  const {
+    handlePayFullPayment,
+    isValidating: Processing,
+    validationData,
+  } = useFullPayment();
+
+  const {
+    handlePayDownPayment,
+    isValidating: isVerifying,
+    validationData: downPaymentValidationData,
+  } = useDownPayment();
+
+  // useEffect(() => {
+  //   if (!isConsolidatedCart) {
+  //     dispatch(
+  //       setMandateData({
+  //         products: cart,
+  //         consolidated_total_amount: fullPayment,
+  //         paymentMethod: 'full',
+  //         deliveryState: currentDeliveryAddress?.state || latest_address?.state,
+  //         deliveryFullAddress:
+  //           currentDeliveryAddress?.streetAddress ||
+  //           latest_address?.streetAddress,
+  //       })
+  //     );
+  //   }
+  // }, [shippingFee]);
 
   const handleCreatePaystackCustomer = () => {
     if (!mandateData) return;
@@ -206,7 +215,7 @@ export const CheckoutPaymentSummary = () => {
                   <button
                     type="button"
                     disabled={!isVerified || Processing}
-                    onClick={handlePayDownPayment}
+                    onClick={handlePayFullPayment}
                     className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
                       !isVerified
                         ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
