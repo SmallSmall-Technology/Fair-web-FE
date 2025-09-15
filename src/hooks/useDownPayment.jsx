@@ -16,7 +16,7 @@ import {
   selectedDeliveryType,
 } from '../features/order/deliveryAddressSlice';
 
-export function useDownOrFullPayment(fullPayment) {
+export function useDownPayment() {
   const mandateData = useSelector((state) => state.mandate.data);
 
   const currentDeliveryAddress = useSelector(selectCurrentAddress);
@@ -51,17 +51,6 @@ export function useDownOrFullPayment(fullPayment) {
   const shippingFee = userSelectedDeliveryType?.amount || 0;
   const total = totalCartPrice + VAT + shippingFee;
 
-  // Prepare mandate data for full payment
-  const mandateDataForFullPayment = {
-    consolidated_total_amount: total,
-    products: mandateData?.products,
-    paymentMethod: mandateData?.paymentMethod,
-    deliveryFullAddress: deliveryAddress,
-    deliveryType: userSelectedDeliveryType?.label,
-  };
-
-  // console.log('mandateDataForFullPayment', mandateDataForFullPayment);
-
   const { data: validationData, refetch: refetchValidation } =
     useValidateFullOrDownPayment(paystackOrderReference);
 
@@ -69,18 +58,13 @@ export function useDownOrFullPayment(fullPayment) {
     const { payment_verified, status } = validationData || {};
     if (payment_verified === true && status === 'success') {
       dispatch(setDownPaymentSuccess(true));
-      // dispatch(setMandateData(null));
-      // dispatch(setPaystackOrderReference(null));
     } else {
       dispatch(setDownPaymentSuccess(false));
     }
   }, [validationData]);
 
   const { mutate: payForDownPayment, isPending: isValidating } = useMutation({
-    mutationFn: () =>
-      createPaystackOrder(
-        fullPayment === false ? mandateData : mandateDataForFullPayment
-      ),
+    mutationFn: () => createPaystackOrder(mandateData),
     onSuccess: (res) => {
       const {
         reference: newReference,
@@ -139,8 +123,8 @@ export function useDownOrFullPayment(fullPayment) {
     },
   });
 
-  const handlePayDownPayment = () => {
-    // if (!downPayment) return;
+  const handlePayDownPayment = (downPayment) => {
+    if (!downPayment) return;
     payForDownPayment(mandateData);
   };
 

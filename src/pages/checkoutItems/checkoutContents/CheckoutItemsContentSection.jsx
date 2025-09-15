@@ -53,18 +53,19 @@ export const CheckoutItemsContentSection = () => {
     .filter(Boolean)
     .join(', ');
 
-  // useEffect(() => {
-  //   if (!isConsolidatedCart) {
-  //     dispatch(
-  //       setMandateData({
-  //         products: cart,
-  //         consolidated_total_amount: fullPayment,
-  //         paymentMethod: 'full',
-  //         deliveryFullAddress: deliveryAddress,
-  //       })
-  //     );
-  //   }
-  // }, [shippingFee]);
+  // console.log('isConsolidatedCart', isConsolidatedCart);
+  useEffect(() => {
+    if (!isConsolidatedCart) {
+      dispatch(
+        setMandateData({
+          products: cart,
+          consolidated_total_amount: fullPayment,
+          paymentMethod: 'full',
+          deliveryFullAddress: deliveryAddress,
+        })
+      );
+    }
+  }, [shippingFee]);
 
   return (
     <section className="grid lg:grid-cols-[60%_40%] lg:px-[76p]">

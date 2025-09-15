@@ -19,8 +19,9 @@ import { setMandateData } from '../../../features/paystack/mandateSlice.js';
 import { use, useEffect, useState } from 'react';
 import { createPaystackOrder } from '../../../api/orderAPI.js';
 import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx';
-import { useDownOrFullPayment } from '../../../hooks/useDownOrFullPayment.jsx';
+import { useFullPayment } from '../../../hooks/useFullPayment.jsx';
 import { clearCart } from '../../../features/cart/cartSlice.js';
+import { useDownPayment } from '../../../hooks/useDownPayment.jsx';
 
 export const CheckoutPaymentMethod = () => {
   const [fullPayment, setFullPayment] = useState(false);
@@ -86,10 +87,16 @@ export const CheckoutPaymentMethod = () => {
   };
 
   const {
-    handlePayDownPayment,
+    handlePayFullPayment,
     isValidating: Processing,
     validationData,
-  } = useDownOrFullPayment(fullPayment);
+  } = useFullPayment();
+
+  //  const {
+  //   handlePayDownPayment,
+  //   isValidating: downPaymentIsProcessing,
+  //   validationData: downPaymentValidationData,
+  // } = useDownPayment();
 
   const {
     register,
@@ -210,7 +217,7 @@ export const CheckoutPaymentMethod = () => {
             <button
               type="button"
               disabled={!isVerified || Processing}
-              onClick={handlePayDownPayment}
+              onClick={handlePayFullPayment}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
                 !isVerified
                   ? 'bg-[#DEDEDE] cursor-not-allowed text-white'

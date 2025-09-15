@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, ShoppingCart } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import { useSelector } from 'react-redux';
 
 const steps = [
@@ -38,9 +38,7 @@ export default function Stepper({ currentStep }) {
         ${isCompleted ? 'bg-[#3DB54A]' : ''}
         ${!isCompleted && !isActive && !isNextAfterCompleted ? 'bg-gray-200' : ''}
       `}
-                >
-                  {isCompleted ? <Check size={14} /> : null}
-                </div>
+                ></div>
               )}
 
               {/* Connector Line */}

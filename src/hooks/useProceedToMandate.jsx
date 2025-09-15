@@ -96,11 +96,22 @@ export const useProceedToMandate = () => {
   const navigate = useNavigate();
   const alreadyNavigatedRef = useRef(false);
 
-  const selectedDeliveryAddress = useSelector(selectCurrentAddress);
-
   const userSelectedDeliveryType = useSelector(selectedDeliveryType);
   const cart = useSelector((state) => state.cart.cart);
-  const user = useSelector((state) => state.user);
+  // const user = useSelector((state) => state.user);
+
+  const currentDeliveryAddress = useSelector(selectCurrentAddress);
+  const { data: user } = useSelector((state) => state.user);
+  const { latest_address } = user;
+
+  const deliveryAddress = [
+    currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
+    currentDeliveryAddress?.state || latest_address?.state,
+  ]
+    .filter(Boolean)
+    .join(', ');
+
+  // console.log('delivery', deliveryAddress);
 
   const totalCartPrice = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -139,13 +150,8 @@ export const useProceedToMandate = () => {
       frequency: cartPaymentPlan[0],
       paymentMethod: cartPaymentPlan[0],
       description: 'Getting product',
-      deliveryFullAddress:
-        selectedDeliveryAddress?.streetAddress && selectedDeliveryAddress?.state
-          ? `${selectedDeliveryAddress.streetAddress}, ${selectedDeliveryAddress.state}`
-          : user?.latest_address?.streetAddress,
-
-      deliveryState:
-        selectedDeliveryAddress?.state || user?.latest_address?.state,
+      deliveryFullAddress: deliveryAddress,
+      deliveryState: 'Lagos',
       products: cart.map((item) => ({
         productID: item.productID,
         quantity: item.quantity,
