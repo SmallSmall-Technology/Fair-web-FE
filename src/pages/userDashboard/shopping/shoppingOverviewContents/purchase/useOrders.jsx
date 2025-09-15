@@ -12,14 +12,13 @@ export const useOrders = () => {
 
   const allOrders = data?.orders || [];
 
-  const onGoingOrders = allOrders.filter(
-    (order) =>
-      [
-        'direct_debit_in_progress',
-        'pending_full_payment',
-        'processing',
-        'pending',
-      ].includes(order.orderStatus) || order.fullPaymentStatus === 'pending'
+  const onGoingOrders = allOrders.filter((order) =>
+    [
+      'direct_debit_in_progress',
+      'pending_full_payment',
+      'ongoing',
+      'active',
+    ].includes(order.orderStatus)
   );
 
   const completedOrders = allOrders.filter(
@@ -30,7 +29,7 @@ export const useOrders = () => {
 
   const cancelledOrders = allOrders.filter(
     (order) =>
-      ['failed', 'cancelled'].includes(order.orderStatus) ||
+      ['failed', 'cancelled', 'pending'].includes(order.orderStatus) ||
       order.fullPaymentStatus === 'failed'
   );
 

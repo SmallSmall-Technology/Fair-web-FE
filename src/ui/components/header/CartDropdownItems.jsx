@@ -82,10 +82,15 @@ const CartDropdownItems = ({ isOpen, setIsOpen }) => {
 
         <section className="px-5">
           {cartItems.length >= 1 ? (
-            <p className="text-[#16161A]">
-              You have {cartItems.length}{' '}
-              {cartItems.length > 1 ? 'items' : 'item'} in your cart.
-            </p>
+            <div className="flex justify-between items-center">
+              <p className="text-[#16161A]">
+                You have {cartItems.length}{' '}
+                {cartItems.length > 1 ? 'items' : 'item'} in your cart.
+              </p>
+              <Link to="/cart-items" className="underline ">
+                View cart
+              </Link>
+            </div>
           ) : (
             <div className="flex flex-col justify-between md:h-screen">
               <p className="hidden text-[#16161A] md:flex items-center font-semibold">
