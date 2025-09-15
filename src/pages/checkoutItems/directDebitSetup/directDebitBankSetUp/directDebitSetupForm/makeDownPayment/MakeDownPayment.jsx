@@ -9,7 +9,6 @@ import { useDownOrFullPayment } from '../../../../../../hooks/useDownOrFullPayme
 import { Link } from 'react-router-dom';
 import { selectCurrentAddress } from '../../../../../../features/order/deliveryAddressSlice';
 import { setMandateData } from '../../../../../../features/paystack/mandateSlice';
-// import { useValidateFullOrDownPayment } from '../../../../../hooks/useValidateFullOrDownPayment';
 
 export const MakeDownPayment = ({ downPayment }) => {
   const mandateData = useSelector((state) => state.mandate.data);
@@ -23,20 +22,6 @@ export const MakeDownPayment = ({ downPayment }) => {
   ]
     .filter(Boolean)
     .join(', ');
-
-  // useEffect(() => {
-  //   if (!mandateData) return;
-  //   {
-  //     dispatch(
-  //       setMandateData({
-  //         deliveryState: currentDeliveryAddress?.state || latest_address?.state,
-  //         deliveryFullAddress:
-  //           currentDeliveryAddress?.streetAddress ||
-  //           latest_address?.streetAddress,
-  //       })
-  //     );
-  //   }
-  // }, [mandateData]);
 
   const downPaymentSuccess = useSelector(
     (state) => state.fullPayment.downPaymentSuccess

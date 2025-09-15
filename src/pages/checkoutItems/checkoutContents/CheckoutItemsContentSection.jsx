@@ -25,6 +25,7 @@ export const CheckoutItemsContentSection = () => {
   const [addFormIsOpen, setAddFormIsOpen] = useState(false);
 
   const currentDeliveryAddress = useSelector(selectCurrentAddress);
+
   const { data: user } = useSelector((state) => state.user);
   const { latest_address } = user;
 
@@ -36,7 +37,6 @@ export const CheckoutItemsContentSection = () => {
   );
   const isConsolidatedCart = cartPaymentPlan.every((plan) => plan !== 'full');
 
-  console.log('isCOnsolidated', isConsolidatedCart);
   const consolidatedPayments = consolidateCartPayments(cart);
   const userSelectedDeliveryType = useSelector(selectedDeliveryType);
   const shippingFee = userSelectedDeliveryType?.amount || 0;
@@ -46,15 +46,6 @@ export const CheckoutItemsContentSection = () => {
   const downPayment = consolidatedPayments.firstPayment + VAT + shippingFee;
   const fullPayment = totalCartPrice + VAT + shippingFee;
 
-  const handleSubmitPaymentMethod = (values) => {
-    if (values) {
-      // dispatch(makePayment());
-      startTransition(() => {
-        // navigate('/cart-items/checkout/payment-success');
-      });
-    }
-  };
-
   const deliveryAddress = [
     currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
     currentDeliveryAddress?.state || latest_address?.state,
@@ -62,21 +53,18 @@ export const CheckoutItemsContentSection = () => {
     .filter(Boolean)
     .join(', ');
 
-  useEffect(() => {
-    if (!isConsolidatedCart) {
-      dispatch(
-        setMandateData({
-          products: cart,
-          consolidated_total_amount: fullPayment,
-          paymentMethod: 'full',
-          deliveryState: currentDeliveryAddress?.state || latest_address?.state,
-          deliveryFullAddress:
-            currentDeliveryAddress?.streetAddress ||
-            latest_address?.streetAddress,
-        })
-      );
-    }
-  }, [shippingFee]);
+  // useEffect(() => {
+  //   if (!isConsolidatedCart) {
+  //     dispatch(
+  //       setMandateData({
+  //         products: cart,
+  //         consolidated_total_amount: fullPayment,
+  //         paymentMethod: 'full',
+  //         deliveryFullAddress: deliveryAddress,
+  //       })
+  //     );
+  //   }
+  // }, [shippingFee]);
 
   return (
     <section className="grid lg:grid-cols-[60%_40%] lg:px-[76p]">

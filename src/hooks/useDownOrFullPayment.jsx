@@ -18,9 +18,10 @@ import {
 
 export function useDownOrFullPayment(fullPayment) {
   const mandateData = useSelector((state) => state.mandate.data);
-  const currentDeliveryAddress = useSelector(selectCurrentAddress);
 
-  const user = useSelector((state) => state.user);
+  const currentDeliveryAddress = useSelector(selectCurrentAddress);
+  const { data: user } = useSelector((state) => state.user);
+  const { latest_address } = user;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,15 +40,11 @@ export function useDownOrFullPayment(fullPayment) {
   );
 
   const deliveryAddress = [
-    currentDeliveryAddress?.streetAddress ||
-      user?.latest_address?.streetAddress,
-    currentDeliveryAddress?.state || user?.latest_address?.state,
+    currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
+    currentDeliveryAddress?.state || latest_address?.state,
   ]
     .filter(Boolean)
     .join(', ');
-
-  // console.log('deliveryAddress', deliveryAddress);
-  // console.log('currentDelivery', currentDeliveryAddress);
 
   // Calculate VAT and shipping fee
   const VAT = (7.5 / 100) * totalCartPrice;
@@ -59,13 +56,8 @@ export function useDownOrFullPayment(fullPayment) {
     consolidated_total_amount: total,
     products: mandateData?.products,
     paymentMethod: mandateData?.paymentMethod,
-    deliveryState: mandateData?.deliveryState,
-    deliveryFullAddress:
-      currentDeliveryAddress?.streetAddress && currentDeliveryAddress?.state
-        ? `${currentDeliveryAddress.streetAddress}, ${currentDeliveryAddress.state}`
-        : user?.latest_address?.streetAddress,
-
-    deliveryState: currentDeliveryAddress?.state || user?.latest_address?.state,
+    deliveryFullAddress: deliveryAddress,
+    deliveryType: userSelectedDeliveryType?.label,
   };
 
   // console.log('mandateDataForFullPayment', mandateDataForFullPayment);
