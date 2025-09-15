@@ -53,7 +53,7 @@ export function useDownOrFullPayment(fullPayment) {
     const { payment_verified, status } = validationData || {};
     if (payment_verified === true && status === 'success') {
       dispatch(setDownPaymentSuccess(true));
-      dispatch(setMandateData(null));
+      // dispatch(setMandateData(null));
       // dispatch(setPaystackOrderReference(null));
     } else {
       dispatch(setDownPaymentSuccess(false));
@@ -63,7 +63,7 @@ export function useDownOrFullPayment(fullPayment) {
   const { mutate: payForDownPayment, isPending: isValidating } = useMutation({
     mutationFn: () =>
       createPaystackOrder(
-        !fullPayment ? mandateData : mandateDataForFullPayment
+        fullPayment === false ? mandateData : mandateDataForFullPayment
       ),
     onSuccess: (res) => {
       const {

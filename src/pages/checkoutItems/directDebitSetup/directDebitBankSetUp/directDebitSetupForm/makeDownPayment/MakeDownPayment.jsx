@@ -87,7 +87,7 @@ export const MakeDownPayment = ({ downPayment }) => {
               text={isValidating ? 'Processing...' : 'Pay now'}
               role="button"
               disabled={isValidating}
-              onClick={handlePayInFull}
+              onClick={handlePayDownPayment}
               className="md:w-2/3"
             />
           </div>

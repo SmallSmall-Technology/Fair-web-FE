@@ -11,6 +11,7 @@ import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
 import { Globe } from 'lucide-react';
 import {
+  selectCurrentAddress,
   selectedDeliveryType,
   setSelectedDeliveryType,
 } from '../../../features/order/deliveryAddressSlice.js';
@@ -23,7 +24,7 @@ import { clearCart } from '../../../features/cart/cartSlice.js';
 
 export const CheckoutPaymentMethod = () => {
   const [fullPayment, setFullPayment] = useState(false);
-  const cartItems = useSelector((state) => state.cart.cart);
+  const cart = useSelector((state) => state.cart.cart);
   const isVerified = useSelector((state) =>
     selectVerificationStatus(state, 'debt')
   );
@@ -34,16 +35,40 @@ export const CheckoutPaymentMethod = () => {
   const downPaymentSuccess = useSelector(
     (state) => state.fullPayment.downPaymentSuccess
   );
+  const currentDeliveryAddress = useSelector(selectCurrentAddress);
+  const { data: user } = useSelector((state) => state.user);
+  const { latest_address } = user;
 
-  const InstallmentPayment = !cartItems.every(
-    (item) => item.paymentPlan === 'full' || item.selectedPaymentPlan === 'full'
-  );
+  const deliveryAddress = [
+    currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
+    currentDeliveryAddress?.state || latest_address?.state,
+  ]
+    .filter(Boolean)
+    .join(', ');
+
+  const isConsolidatedCart = cart.some((item) => item.paymentPlan !== 'full');
 
   useEffect(() => {
     if (!deliveryType) return;
-    setFullPayment(!InstallmentPayment);
-    dispatch(setMandateData({ deliveryType: deliveryType.value }));
-  }, [deliveryType]);
+
+    setFullPayment(!isConsolidatedCart);
+
+    dispatch(
+      setMandateData({
+        deliveryState: currentDeliveryAddress?.state || latest_address?.state,
+        deliveryFullAddress:
+          currentDeliveryAddress?.streetAddress ||
+          latest_address?.streetAddress,
+        deliveryType: deliveryType.value,
+      })
+    );
+  }, [
+    deliveryType,
+    currentDeliveryAddress,
+    latest_address,
+    isConsolidatedCart,
+    dispatch,
+  ]);
 
   const mandateData = useSelector((state) => state.mandate.data);
   const downPayment = mandateData?.consolidated_total_amount;
@@ -65,24 +90,6 @@ export const CheckoutPaymentMethod = () => {
     isValidating: Processing,
     validationData,
   } = useDownOrFullPayment(fullPayment);
-
-  // useEffect(() => {
-  //   if (
-  //     validationData?.payment_verified &&
-  //     validationData?.status === 'success'
-  //   ) {
-  //     const { masterOrderID, totalAmount, timestamp } = validationData;
-
-  //     navigate(
-  //       `/cart-items/checkout/payment-success/${validationData?.reference}`,
-  //       {
-  //         state: { masterOrderID, totalAmount, timestamp },
-  //         replace: true,
-  //       }
-  //     );
-  //     dispatch(clearCart());
-  //   }
-  // }, [validationData, navigate]);
 
   const {
     register,
@@ -110,49 +117,47 @@ export const CheckoutPaymentMethod = () => {
             Payment Options
           </span>
 
-          {!InstallmentPayment ? (
-            <>
-              <div className="lg:px-4 py-1 lg:py-2">
-                <label
-                  htmlFor="pay-online"
-                  className="text-sm flex items-center justify-between"
-                >
-                  <div className="flex items-center">
-                    <Globe />
-                    <input
-                      type="button"
-                      id="pay-online"
-                      {...register('picked')}
-                      value="Pay online"
-                      className="px-4"
-                      defaultChecked
-                    />
-                  </div>
-                </label>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="lg:px-4 py-1 lg:py-2">
-                <label
-                  htmlFor="paystack-direct-debit"
-                  className="text-sm flex items-center justify-between"
-                >
-                  <div className="flex items-center space-x-2">
-                    <input
-                      type="radio"
-                      id="paystack-direct-debit"
-                      {...register('picked')}
-                      value="paystack-direct-debit"
-                      className="px-4 py-10 mr-2"
-                      defaultChecked
-                    />
-                    Direct debit
-                  </div>
-                  <img src="/images/PaystackLogo.svg" alt="Paystack Logo" />
-                </label>
-              </div>
-            </>
+          {!isConsolidatedCart && (
+            <div className="lg:px-4 py-1 lg:py-2">
+              <label
+                htmlFor="pay-online"
+                className="text-sm flex items-center justify-between"
+              >
+                <div className="flex items-center">
+                  <Globe />
+                  <input
+                    type="button"
+                    id="pay-online"
+                    {...register('picked')}
+                    value="Pay online"
+                    className="px-4"
+                    defaultChecked
+                  />
+                </div>
+              </label>
+            </div>
+          )}
+
+          {isConsolidatedCart && (
+            <div className="lg:px-4 py-1 lg:py-2">
+              <label
+                htmlFor="paystack-direct-debit"
+                className="text-sm flex items-center justify-between"
+              >
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    id="paystack-direct-debit"
+                    {...register('picked')}
+                    value="paystack-direct-debit"
+                    className="px-4 py-10 mr-2"
+                    defaultChecked
+                  />
+                  Direct debit
+                </div>
+                <img src="/images/PaystackLogo.svg" alt="Paystack Logo" />
+              </label>
+            </div>
           )}
         </div>
 
@@ -185,7 +190,8 @@ export const CheckoutPaymentMethod = () => {
         )}
 
         <div className="hidden lg:block">
-          {InstallmentPayment ? (
+          {/* {isConsolidatedCart ? ( */}
+          {isConsolidatedCart && (
             <button
               type="button"
               disabled={!isVerified}
@@ -198,7 +204,9 @@ export const CheckoutPaymentMethod = () => {
             >
               Checkout securely
             </button>
-          ) : (
+          )}
+
+          {!isConsolidatedCart && (
             <button
               type="button"
               disabled={!isVerified || Processing}
