@@ -46,7 +46,7 @@ import ResolutionCentre from './pages/userDashboard/accountProfile/contents/reso
 import UserAccountProfile from './pages/userDashboard/accountProfile/UserAccountProfile';
 import TermsOfUse from './pages/termsOfUse/TermsOfUse';
 import HowItWorks from './pages/howItWorks/HowItWorks';
-import PaystackSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/PaystackSetupPaymentSuccess';
+// import PaystackSetupPaymentSuccess from './pages/checkoutItems/directDebitSetup/directDebitBankSetUp/PaystackSetupPaymentSuccess';
 import BuyerAndVendorProtection from './pages/buyerAndVendor/BuyerAndVendorProtection';
 import MarketplaceGuidelines from './pages/marketplaceGuidelines/MarketplaceGuidelines';
 import RefundsAndReturns from './pages/refundsAndReturns/RefundsAndReturns';
@@ -219,10 +219,10 @@ const AppRoutes = () => {
           element={<DirectDebitInitialized />}
         />
 
-        <Route
+        {/* <Route
           path="cart-items/checkout/mandate/create-success"
           element={<PaystackSetupPaymentSuccess />}
-        />
+        /> */}
 
         <Route
           path="verification-document-sent"
