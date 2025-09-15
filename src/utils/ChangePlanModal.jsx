@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function ChangePlanModal({
   isOpen,
@@ -24,7 +25,7 @@ export default function ChangePlanModal({
   const otherPlans = plans.filter((p) => p.type !== currentPlan);
 
   if (!isOpen) return null;
-
+  const cart = useSelector((state) => state.cart.cart);
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white w-[95%] md:w-[376px] rounded-lg shadow-lg py-6 relative">
@@ -69,21 +70,23 @@ export default function ChangePlanModal({
               ${selectedPlan === plan.type ? 'border-[#FFDE11] bg-[#FFF8CF]' : 'hover:border-gray-300'}`}
             >
               <div>
-                <p className="font-inter font-medium">{plan.label}</p>
-                <p className="font-inter text-sm text-gray-500">{plan.price}</p>
+                <p className="font-inter font-medium">{plan?.label}</p>
+                <p className="font-inter text-sm text-gray-500">
+                  {/* {plan?.price} */}
+                </p>
               </div>
 
               <div className="flex items-center gap-2">
-                {plan.tag && (
+                {plan?.tag && (
                   <span className="text-xs bg-[#FFDE11] px-2 py-0.5 rounded">
-                    {plan.tag}
+                    {plan?.tag}
                   </span>
                 )}
                 <input
                   type="radio"
                   name="plan"
-                  checked={selectedPlan === plan.type}
-                  onChange={() => setSelectedPlan(plan.type)}
+                  checked={selectedPlan === plan?.type}
+                  onChange={() => setSelectedPlan(plan?.type)}
                   className="accent-[#FFDE11]"
                 />
               </div>

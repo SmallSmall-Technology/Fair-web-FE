@@ -93,30 +93,27 @@ export function useFullPayment(fullPayment) {
           onSuccess: (transaction) => {
             dispatch(setPaystackOrderReference(transaction.reference));
 
-            if (
-              fullPayment &&
-              transaction.status === 'success' &&
-              transaction.message === 'Approved'
-            ) {
-              dispatch(setMandateData(null));
-              dispatch(setPaystackOrderReference(null));
+            // if (
+            //   fullPayment &&
+            //   transaction.status === 'success' &&
+            //   transaction.message === 'Approved'
+            // ) {
+            //   dispatch(setMandateData(null));
+            //   dispatch(setPaystackOrderReference(null));
 
-              navigate(
-                `/cart-items/checkout/payment-success/${transaction.reference}`,
-                {
-                  state: {
-                    masterOrderID: res?.data?.masterOrderID,
-                    totalAmount: transaction?.amount,
-                  },
-                }
-              );
-            }
+            //   // navigate(
+            //   //   `/cart-items/checkout/payment-success/${transaction.reference}`
+            //   // );
+            // }
             if (
               transaction.status === 'success' &&
               transaction.message === 'Approved'
             ) {
               dispatch(setPaystackOrderReference(transaction.reference));
               dispatch(clearCart());
+              navigate(
+                `/cart-items/checkout/payment-success/${transaction.reference}`
+              );
               // dispatch(setMandateData(null));
             } else {
               dispatch(setPaystackOrderReference(null));
@@ -132,8 +129,9 @@ export function useFullPayment(fullPayment) {
     },
   });
 
+  // console.log('fullPayment', fullPayment);
   const handlePayFullPayment = () => {
-    // if (!downPayment) return;
+    // if (!fullPayment) return;
     payForDownPayment(mandateDataForFullPayment);
   };
 
