@@ -21,10 +21,10 @@ const Purchases = () => {
     isFetching,
   } = useOrders();
 
-  // console.log('allOrders', allOrders);
-  // console.log('onGoingOrders', onGoingOrders);
-  // console.log('completedOrders', completedOrders);
-  // console.log('cancelledOrders', cancelledOrders);
+  console.log('allOrders', allOrders);
+  console.log('onGoingOrders', onGoingOrders);
+  console.log('completedOrders', completedOrders);
+  console.log('cancelledOrders', cancelledOrders);
 
   // Mobile search form
   const {
