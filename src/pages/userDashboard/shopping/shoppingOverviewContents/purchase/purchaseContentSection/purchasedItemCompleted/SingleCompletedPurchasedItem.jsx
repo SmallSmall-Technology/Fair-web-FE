@@ -1,6 +1,6 @@
 import { ChevronRight, CircleCheck } from 'lucide-react';
 import { formatCurrency } from '../../../../../../../utils/FormatCurrency';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import SingleCompletedPurchaseItemProgress from './SingleCompletedPurchaseItemProgress';
 
 export const SingleCompletedPurchasedItem = ({ orders }) => {
@@ -17,7 +17,7 @@ export const SingleCompletedPurchasedItem = ({ orders }) => {
   return (
     <article>
       {orders.items?.map((product, index) => (
-        <>
+        <React.Fragment key={index}>
           {expandedIndex !== index && (
             <>
               <div
@@ -137,7 +137,7 @@ export const SingleCompletedPurchasedItem = ({ orders }) => {
               />
             </div>
           )}
-        </>
+        </React.Fragment>
       ))}
       {expandedIndex === null && <hr className="mt-8" />}
     </article>
