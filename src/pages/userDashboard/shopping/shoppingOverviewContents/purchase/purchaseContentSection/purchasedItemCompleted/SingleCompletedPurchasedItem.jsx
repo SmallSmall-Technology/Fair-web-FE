@@ -1,11 +1,10 @@
 import { ChevronRight, CircleCheck } from 'lucide-react';
 import { formatCurrency } from '../../../../../../../utils/FormatCurrency';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import SingleCompletedPurchaseItemProgress from './SingleCompletedPurchaseItemProgress';
 
 export const SingleCompletedPurchasedItem = ({ orders }) => {
   const [expandedIndex, setExpandedIndex] = useState(null);
-  const products = orders;
 
   const toggleExpand = (index) => {
     if (expandedIndex === index) {
@@ -17,8 +16,8 @@ export const SingleCompletedPurchasedItem = ({ orders }) => {
 
   return (
     <article>
-      {products.items?.map((product, index) => (
-        <>
+      {orders.items?.map((product, index) => (
+        <React.Fragment key={index}>
           {expandedIndex !== index && (
             <>
               <div
@@ -129,15 +128,16 @@ export const SingleCompletedPurchasedItem = ({ orders }) => {
           {expandedIndex === index && (
             <div className="my-6">
               <SingleCompletedPurchaseItemProgress
-                product={product}
+                order={product}
                 onToggleExpand={toggleExpand}
                 expandedIndex={expandedIndex}
                 index={index}
-                item={item}
+                // item={item}
+                orders={orders}
               />
             </div>
           )}
-        </>
+        </React.Fragment>
       ))}
       {expandedIndex === null && <hr className="mt-8" />}
     </article>

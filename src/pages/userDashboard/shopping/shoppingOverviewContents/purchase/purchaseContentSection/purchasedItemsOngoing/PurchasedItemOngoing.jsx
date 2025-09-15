@@ -9,6 +9,10 @@ export const PurchasedItemOngoing = React.memo(({ orders }) => {
   const orderItems = orders?.items || [];
   const singleOrders = orders || {};
 
+  // console.log('Ongoing orders:', orders);
+  // console.log('Order items:', orderItems);
+  // console.log('Single order:', singleOrders);
+
   const handleToggle = useCallback((index) => {
     setExpandedIndex((prev) => (prev === index ? null : index));
   }, []);
@@ -101,12 +105,10 @@ export const PurchasedItemOngoing = React.memo(({ orders }) => {
                           <div className="text-[12px] text-[#222224] flex items-center space-x-1">
                             <p>
                               <span>
-                                {formatCurrency(orderItems?.totalAmountPaid)}{' '}
-                                paid of{' '}
+                                {formatCurrency(orders?.downPaymentAmount)} paid
+                                of{' '}
                               </span>
-                              {formatCurrency(
-                                Number(singleOrders?.totalAmount)
-                              )}
+                              {formatCurrency(Number(orders?.totalAmount))}
                             </p>
                             <img src="/images/time-half-past.svg" alt="clock" />
                           </div>
@@ -117,7 +119,11 @@ export const PurchasedItemOngoing = React.memo(({ orders }) => {
                           Payment type
                         </p>
                         <p className="text-[12px] text-[#222224]">
-                          Direct debit
+                          <span className="text-base font-medium">
+                            {orders?.paymentType
+                              ?.toLowerCase()
+                              .replace(/\b\w/g, (char) => char.toUpperCase())}
+                          </span>
                         </p>
                       </div>
                     </div>
@@ -156,7 +162,7 @@ export const PurchasedItemOngoing = React.memo(({ orders }) => {
                           Next due payment
                         </p>
                         <p className="text-[12px] font-medium text-[#222224]">
-                          Jan 24, 2025
+                          {singleOrders?.nextDueDate || 'N/A'}
                         </p>
                       </div>
                       <div>
@@ -164,10 +170,12 @@ export const PurchasedItemOngoing = React.memo(({ orders }) => {
                           Payment status
                         </p>
                         <p className="text-[12px] font-medium text-[#222224] flex items-start space-x-1">
-                          <span>{formatCurrency(orderItem.price)}</span>
+                          <span>
+                            {formatCurrency(orders.downPaymentAmount)}
+                          </span>
                           <span>paid of</span>
                           <span>
-                            {formatCurrency(Number(orderItem.totalAmount))}
+                            {formatCurrency(Number(orders.totalAmount))}
                           </span>
                           <img
                             src="/images/time-half-past.svg"

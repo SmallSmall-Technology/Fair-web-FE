@@ -3,21 +3,19 @@ import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCompletedOrders } from '../../../features/order/orderSlice';
 import { logout, performLogout } from '../../../features/auth/authSlice';
 import { getUserFullName } from '../../../features/user/userSlice';
+import { useOrders } from '../../../pages/userDashboard/shopping/shoppingOverviewContents/purchase/useOrders';
 
 export const LoggedInUserDropdown = ({
-  // eslint-disable-next-line react/prop-types
   loggedInUserDropdown,
-  // eslint-disable-next-line react/prop-types
   setLoggedInUserDropdown,
 }) => {
   const menuRef = useRef(null);
   const [isMounted, setIsMounted] = useState(false);
   const userFullName = useSelector(getUserFullName);
-  const completedOrders = useSelector(getCompletedOrders);
   const dispatch = useDispatch();
+  const { onGoingOrders } = useOrders();
 
   useEffect(() => {
     if (loggedInUserDropdown) {
@@ -80,7 +78,7 @@ export const LoggedInUserDropdown = ({
           >
             <span>Purchases</span>
             <span className="bg-[var(--yellow-primary)] px-3 text-[10px]">
-              {completedOrders.length}
+              {onGoingOrders.length}
             </span>
           </Link>
         </div>

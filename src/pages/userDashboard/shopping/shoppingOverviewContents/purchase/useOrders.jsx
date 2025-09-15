@@ -18,6 +18,7 @@ export const useOrders = () => {
         'direct_debit_in_progress',
         'pending_full_payment',
         'processing',
+        'pending',
       ].includes(order.orderStatus) || order.fullPaymentStatus === 'pending'
   );
 

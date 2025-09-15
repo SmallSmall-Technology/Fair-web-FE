@@ -89,7 +89,10 @@ export const MakeDirectDebit = () => {
             Total Installment Amount
           </p>
           <p className="font-outfit font-semibold text-3xl mb-4">
-            {formatCurrency(mandateData?.first_installment_payment)}
+            {formatCurrency(
+              mandateData?.consolidated_total_amount -
+                mandateData?.first_installment_payment
+            )}
           </p>
           <p className="font-inter text-sm font-normal mb-3">
             Number of Installment

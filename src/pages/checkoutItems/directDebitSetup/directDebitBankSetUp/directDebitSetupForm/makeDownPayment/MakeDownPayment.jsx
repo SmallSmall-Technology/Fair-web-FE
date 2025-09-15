@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import PaystackPop from '@paystack/inline-js';
 import { useMutation } from '@tanstack/react-query';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,10 +7,36 @@ import { createPaystackOrder } from '../../../../../../api/orderAPI';
 import { formatCurrency } from '../../../../../../utils/FormatCurrency';
 import { useDownOrFullPayment } from '../../../../../../hooks/useDownOrFullPayment';
 import { Link } from 'react-router-dom';
+import { selectCurrentAddress } from '../../../../../../features/order/deliveryAddressSlice';
+import { setMandateData } from '../../../../../../features/paystack/mandateSlice';
 // import { useValidateFullOrDownPayment } from '../../../../../hooks/useValidateFullOrDownPayment';
 
 export const MakeDownPayment = ({ downPayment }) => {
   const mandateData = useSelector((state) => state.mandate.data);
+  const currentDeliveryAddress = useSelector(selectCurrentAddress);
+  const { data: user } = useSelector((state) => state.user);
+  const { latest_address } = user;
+
+  const deliveryAddress = [
+    currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
+    currentDeliveryAddress?.state || latest_address?.state,
+  ]
+    .filter(Boolean)
+    .join(', ');
+
+  // useEffect(() => {
+  //   if (!mandateData) return;
+  //   {
+  //     dispatch(
+  //       setMandateData({
+  //         deliveryState: currentDeliveryAddress?.state || latest_address?.state,
+  //         deliveryFullAddress:
+  //           currentDeliveryAddress?.streetAddress ||
+  //           latest_address?.streetAddress,
+  //       })
+  //     );
+  //   }
+  // }, [mandateData]);
 
   const downPaymentSuccess = useSelector(
     (state) => state.fullPayment.downPaymentSuccess
@@ -61,7 +87,7 @@ export const MakeDownPayment = ({ downPayment }) => {
               text={isValidating ? 'Processing...' : 'Pay now'}
               role="button"
               disabled={isValidating}
-              onClick={handlePayDownPayment}
+              onClick={handlePayInFull}
               className="md:w-2/3"
             />
           </div>

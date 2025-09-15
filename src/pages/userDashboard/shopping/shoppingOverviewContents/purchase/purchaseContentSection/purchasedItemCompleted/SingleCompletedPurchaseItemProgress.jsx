@@ -8,42 +8,74 @@ import { completedPurchaseProgressData } from '../../../../../userDashboardData'
 import { selectLatestDeliveryAddress } from '../../../../../../../features/order/deliveryAddressSlice';
 
 const SingleCompletedPurchaseItemProgress = React.memo(
-  ({ product, onToggleExpand, index, item }) => {
-    const payments = completedPurchaseProgressData.payments;
-    const deliveryAddress = useSelector(selectLatestDeliveryAddress);
+  ({ order, onToggleExpand, index, orders }) => {
+    const payments = completedPurchaseProgressData?.payments;
 
     return (
       <>
         <div className="max-w-4x mx-auto bg-white  rounded-lg md:p-6 space-y-6 text-gray-800 md:border">
           <div className="flex items-start gap-6">
-            <div className="bg-[#FAFAFA] h-[104px] w-[104px] border border-[#E8EBEA] rounded-[7px] flex justify-center items-center">
-              <img
-                src={product.image}
-                alt="Freezer"
-                className="w-[76px] h-[76px] object-cover "
-                loading="lazy"
-              />
-            </div>
+            {/* <div className="bg-[#FAFAFA] h-[104px] w-[104px] border border-[#E8EBEA] rounded-[7px] flex justify-center items-center">
+              {
+                <img
+                  src={order?.coverImage || '/placeholder-image.jpg'}
+                  alt="Freezer"
+                  className="w-[76px] h-[76px] object-cover "
+                  loading="lazy"
+                />
+              }
+            </div> */}
+            {orders?.items.map((order, orderIndex) => (
+              <div key={orderIndex} className="mb-6">
+                {/* Order Container */}
+                <div className="flex flex-wrap gap-3">
+                  {orders.items?.map((item, itemIndex) => (
+                    <div
+                      key={itemIndex}
+                      className="bg-[#FAFAFA] h-[104px] w-[104px] border border-[#E8EBEA] rounded-[7px] flex justify-center items-center"
+                    >
+                      <img
+                        src={order?.coverImage || '/placeholder-image.jpg'}
+                        alt={item?.productName || 'Product'}
+                        className="w-[76px] h-[76px] object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
             <div className="flex-1 space-y-1">
-              <h2 className="font-semibold lg:text-lg">{product.name}</h2>
-              <div className="hidden lg:flex lg:space-x-11">
+              <p className="text-[13px]">
+                Order number:{' '}
+                <span className="font-medium text-lg">{order?.orderID}</span>
+              </p>
+              <div>
+                <p className="font-semibold text-[11px]">Item(s)</p>
+                {orders?.items?.map((item, idx) => (
+                  <p key={idx} className="text-[14px] font-normal">
+                    {item?.productName}
+                  </p>
+                ))}
+              </div>
+              {/* <h2 className="font-semibold lg:text-lg">{orders?.orderID}</h2> */}
+              {/* <div className="hidden lg:flex lg:space-x-11">
                 <p className="text-[13px]">
-                  Order id:{' '}
-                  <span className="font-medium">
-                    {`${item.id.slice(0, 7) + '...'}`}
-                  </span>
+                  Order number:{' '}
+                  <span className="font-medium text-lg">{order?.orderID}</span>
                 </p>
                 <p className="text-[13px]">
                   Order date:{' '}
-                  <span className="font-medium">{product.deliveryDate}</span>
+                  <span className="font-medium">{order?.deliveryDate}</span>
                 </p>
-              </div>
-              <p className="hidden lg:flex text-[11px]">
-                Sold by <span className="font-semibold">{product.soldBy}</span>
-              </p>
-              <p className="hidden lg:flex text-[11px] md:flex">
-                Qty - x{product.quantity}
-              </p>
+              </div> */}
+              {/* <p className="hidden lg:flex text-[11px]">
+                Sold by <span className="font-semibold">{order?.soldBy}</span>
+              </p> */}
+              {/* <p className="hidden lg:flex text-[11px] md:flex">
+                Qty - x{order?.quantity}
+              </p> */}
             </div>
             <div className="hidden lg:flex flex-col gap-3 items-end ">
               <div className="bg-[#3DB54A] text-sm rounded-full h-11 w-11 flex items-center justify-center text-white outline-image">
@@ -64,21 +96,18 @@ const SingleCompletedPurchaseItemProgress = React.memo(
           <div className="grid gap-2">
             <div className="flex justify-between items-start lg:hidden ">
               <p className="text-[13px]">
-                Order id:{' '}
-                <span className="font-medium">
-                  {`${item.id.slice(0, 7) + '...'}`}
-                </span>
+                Order id: <span className="font-medium">{order?.orderID}</span>
               </p>
               <p className="text-[13px]">
                 Order date:{' '}
-                <span className="font-medium">{product.deliveryDate}</span>
+                <span className="font-medium">{order?.deliveryDate}</span>
               </p>
             </div>
             <p className="flex lg:hidden text-[11px]">
-              Sold by <span className="font-semibold">{product.soldBy}</span>
+              Sold by <span className="font-semibold">{order?.soldBy}</span>
             </p>
             <p className="flex lg:hidden text-[11px] md:flex">
-              Qty - x{product.quantity}
+              Qty - x{order?.quantity}
             </p>
           </div>
           <hr className="my-3" />
@@ -98,17 +127,17 @@ const SingleCompletedPurchaseItemProgress = React.memo(
                 <span>Item price</span>
                 <br />
                 <span className="text-base font-medium">
-                  {formatCurrency(product.totalAmount)}
+                  {formatCurrency(orders?.totalAmount)}
                 </span>
               </div>
 
               <div>
-                {product.paymentPlan !== 'full' ? (
+                {orders.paymentType === 'direct debit' ? (
                   <div className="text-[11px]">
                     <span>Installment duration</span>
                     <br />
                     <span className="text-base font-medium">
-                      {product.paymentPlanDetails?.months} months
+                      {order?.paymentPlanDetails?.months} months
                     </span>
                   </div>
                 ) : (
@@ -124,7 +153,7 @@ const SingleCompletedPurchaseItemProgress = React.memo(
                 <span>Total amount paid</span>
                 <br />
                 <span className="text-base font-medium">
-                  {formatCurrency(product.price)}
+                  {formatCurrency(orders?.totalAmount)}
                 </span>
               </div>
 
@@ -145,10 +174,7 @@ const SingleCompletedPurchaseItemProgress = React.memo(
 
               <div className="hidden lg:block text-[11px]">
                 <p className="">Please leave a review for this item</p>
-                <Link
-                  // to={`/${categoryName}/${id}/${slug}`}
-                  className="text-xs font-semibold bg-[var(--yellow-primary)] p-2 flex justify-center rounded-[6px]"
-                >
+                <Link className="text-xs font-semibold bg-[var(--yellow-primary)] p-2 flex justify-center rounded-[6px]">
                   Leave a review
                 </Link>
               </div>
@@ -156,7 +182,11 @@ const SingleCompletedPurchaseItemProgress = React.memo(
               <div className="text-[11px]">
                 Payment option
                 <br />
-                <span className="text-base font-medium">Direct debit</span>
+                <span className="text-base font-medium">
+                  {orders?.paymentType
+                    ?.toLowerCase()
+                    .replace(/\b\w/g, (char) => char.toUpperCase())}
+                </span>
               </div>
 
               <div className="lg:col-span-">
@@ -183,17 +213,17 @@ const SingleCompletedPurchaseItemProgress = React.memo(
                 <span>Item price</span>
                 <br />
                 <span className="text-base font-medium">
-                  {formatCurrency(product.totalAmount)}
+                  {formatCurrency(order?.totalAmount)}
                 </span>
               </div>
 
               <div>
-                {product.paymentPlan !== 'full' ? (
+                {orders.paymentType === 'direct debit' ? (
                   <div className="text-[11px]">
                     <span>Installment duration</span>
                     <br />
                     <span className="text-base font-medium">
-                      {product.paymentPlanDetails?.months} months
+                      {order?.paymentPlanDetails?.months} months
                     </span>
                   </div>
                 ) : (
@@ -209,7 +239,7 @@ const SingleCompletedPurchaseItemProgress = React.memo(
                 <span>Total amount paid</span>
                 <br />
                 <span className="text-base font-medium">
-                  {formatCurrency(product.price)}
+                  {formatCurrency(order.price)}
                 </span>
               </div>
 
@@ -276,7 +306,7 @@ const SingleCompletedPurchaseItemProgress = React.memo(
             <div className="grid gap-2">
               <p className="text-[11px] font-semibold">SHIPPED ADDRESS</p>
               <p className="text-[13px] font-normal">
-                {deliveryAddress[0].address}
+                {orders?.deliveryFullAddress}
               </p>
             </div>
             <div className="hidden lg:grid gap-2">
