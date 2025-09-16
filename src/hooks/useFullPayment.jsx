@@ -15,9 +15,11 @@ import {
   selectCurrentAddress,
   selectedDeliveryType,
 } from '../features/order/deliveryAddressSlice';
+import { useOrders } from '../pages/userDashboard/shopping/shoppingOverviewContents/purchase/useOrders';
 
 export function useFullPayment(fullPayment) {
   const mandateData = useSelector((state) => state.mandate.data);
+  const { refetchOrders } = useOrders();
 
   const currentDeliveryAddress = useSelector(selectCurrentAddress);
   const { data: user } = useSelector((state) => state.user);
@@ -93,28 +95,16 @@ export function useFullPayment(fullPayment) {
           onSuccess: (transaction) => {
             dispatch(setPaystackOrderReference(transaction.reference));
 
-            // if (
-            //   fullPayment &&
-            //   transaction.status === 'success' &&
-            //   transaction.message === 'Approved'
-            // ) {
-            //   dispatch(setMandateData(null));
-            //   dispatch(setPaystackOrderReference(null));
-
-            //   // navigate(
-            //   //   `/cart-items/checkout/payment-success/${transaction.reference}`
-            //   // );
-            // }
             if (
               transaction.status === 'success' &&
               transaction.message === 'Approved'
             ) {
               dispatch(setPaystackOrderReference(transaction.reference));
               dispatch(clearCart());
+              refetchOrders();
               navigate(
                 `/cart-items/checkout/payment-success/${transaction.reference}`
               );
-              // dispatch(setMandateData(null));
             } else {
               dispatch(setPaystackOrderReference(null));
             }
@@ -129,9 +119,7 @@ export function useFullPayment(fullPayment) {
     },
   });
 
-  // console.log('fullPayment', fullPayment);
   const handlePayFullPayment = () => {
-    // if (!fullPayment) return;
     payForDownPayment(mandateDataForFullPayment);
   };
 
