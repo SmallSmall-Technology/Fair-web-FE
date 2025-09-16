@@ -24,11 +24,11 @@ const Purchases = () => {
     refetchOrders,
   } = useOrders();
 
-  console.log('allOrders', allOrders);
-  console.log('onGoingOrders', onGoingOrders);
-  console.log('completedOrders', completedOrders);
-  console.log('cancelledOrders', cancelledOrders);
-  console.log('pendingOrders', pendingOrders);
+  // console.log('allOrders', allOrders);
+  // console.log('onGoingOrders', onGoingOrders);
+  // console.log('completedOrders', completedOrders);
+  // console.log('cancelledOrders', cancelledOrders);
+  // console.log('pending orders', pendingOrders);
 
   // Mobile search form
   const {
@@ -51,9 +51,11 @@ const Purchases = () => {
   const handleSearchQuery = (data, reset) => {
     const searchTerm = data.search.trim().toLowerCase();
     if (searchTerm) {
-      const filteredOrders = allOrders.filter((order) =>
-        order.items.orderID.toLowerCase().includes(searchTerm)
-      );
+      const filteredOrders = allOrders.filter((order, i) => {
+        console.log(order);
+        return order.orderNumber?.toLowerCase().includes(searchTerm);
+      });
+      console.log(filteredOrders);
     }
     reset();
     setFormIsActive(false);
