@@ -65,15 +65,15 @@ export function useFullPayment(fullPayment) {
   const { data: validationData, refetch: refetchValidation } =
     useValidateFullOrDownPayment(paystackOrderReference);
 
-  useEffect(() => {
-    const { payment_verified, status } = validationData || {};
-    if (payment_verified === true && status === 'success') {
-      dispatch(setDownPaymentSuccess(true));
-      // dispatch(setPaystackOrderReference(null));
-    } else {
-      dispatch(setDownPaymentSuccess(false));
-    }
-  }, [validationData]);
+  // useEffect(() => {
+  //   const { payment_verified, status } = validationData || {};
+  //   if (payment_verified === true && status === 'success') {
+  //     dispatch(setDownPaymentSuccess(true));
+  //     // dispatch(setPaystackOrderReference(null));
+  //   } else {
+  //     dispatch(setDownPaymentSuccess(false));
+  //   }
+  // }, [validationData]);
 
   const { mutate: payForDownPayment, isPending: isValidating } = useMutation({
     mutationFn: () => createPaystackOrder(mandateDataForFullPayment),

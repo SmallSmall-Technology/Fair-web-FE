@@ -26,6 +26,8 @@ export const DirectDebitSetUp1 = () => {
     (state) => state.fullPayment.downPaymentSuccess
   );
 
+  console.log(downPaymentSuccess);
+
   return (
     <div className="bg-[#FAFAFA] w-full px-4">
       <div className="w-full lg:max-w-[540px] mx-auto mb-8">
