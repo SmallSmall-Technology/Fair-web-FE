@@ -1,10 +1,13 @@
-// hooks/useOrders.js
 import { useQuery } from '@tanstack/react-query';
 import { getAllOrders } from '../../../../../api/orderAPI';
-// import { getAllOrders } from '../api/orderAPI';
 
 export const useOrders = () => {
-  const { data, isFetching, ...rest } = useQuery({
+  const {
+    data,
+    isFetching,
+    refetch: refetchOrders,
+    ...rest
+  } = useQuery({
     queryKey: ['allOrders'],
     queryFn: getAllOrders,
     staleTime: 5 * 60 * 1000, // 5 mins
@@ -33,12 +36,20 @@ export const useOrders = () => {
       order.fullPaymentStatus === 'failed'
   );
 
+  const pendingOrders = allOrders.filter(
+    (order) =>
+      ['pending'].includes(order.orderStatus) ||
+      order.fullPaymentStatus === 'pending'
+  );
+
   return {
     allOrders,
     onGoingOrders,
     completedOrders,
     cancelledOrders,
+    pendingOrders,
     isFetching,
-    ...rest, // pass through other react-query values like error, refetch
+    refetchOrders,
+    ...rest,
   };
 };
