@@ -14,6 +14,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GlobalMandateTermsModal } from './directDebitMandateModals/GlobalMandateTermsModal';
 import { DebitDirectMandateTermsModal } from './directDebitMandateModals/DebitDirectMandateTermsModal';
 import { toast } from 'react-toastify';
+import { setPaystackOrderReference } from '../../../../../../features/order/fullPaymentSlice';
+import { clearCart } from '../../../../../../features/cart/cartSlice';
 
 export const MakeDirectDebit = () => {
   const mandateData = useSelector((state) => state.mandate.data);
@@ -59,6 +61,8 @@ export const MakeDirectDebit = () => {
         navigate(
           `/cart-items/checkout/direct-debit/success/${res?.data?.master_order_id}`
         );
+        dispatch(setPaystackOrderReference(null));
+        dispatch(clearCart());
       }
     },
     onError: (error) => {

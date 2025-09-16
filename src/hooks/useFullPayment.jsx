@@ -69,6 +69,7 @@ export function useFullPayment(fullPayment) {
     const { payment_verified, status } = validationData || {};
     if (payment_verified === true && status === 'success') {
       dispatch(setDownPaymentSuccess(true));
+      // dispatch(setPaystackOrderReference(null));
     } else {
       dispatch(setDownPaymentSuccess(false));
     }

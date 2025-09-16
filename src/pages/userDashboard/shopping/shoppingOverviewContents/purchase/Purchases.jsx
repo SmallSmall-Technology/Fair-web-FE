@@ -24,10 +24,11 @@ const Purchases = () => {
     refetchOrders,
   } = useOrders();
 
-  console.log('allOrders', allOrders);
+  // console.log('allOrders', allOrders);
   // console.log('onGoingOrders', onGoingOrders);
   // console.log('completedOrders', completedOrders);
   // console.log('cancelledOrders', cancelledOrders);
+  // console.log('pending orders', pendingOrders);
 
   // Mobile search form
   const {

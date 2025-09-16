@@ -1,29 +1,10 @@
-import { use, useEffect, useState } from 'react';
-import PaystackPop from '@paystack/inline-js';
-import { useMutation } from '@tanstack/react-query';
 import { useSelector, useDispatch } from 'react-redux';
 import { CustomButton } from '../../../../../../utils/Button';
-import { createPaystackOrder } from '../../../../../../api/orderAPI';
 import { formatCurrency } from '../../../../../../utils/FormatCurrency';
-import { useFullPayment } from '../../../../../../hooks/useFullPayment';
-import { Link } from 'react-router-dom';
 import { selectCurrentAddress } from '../../../../../../features/order/deliveryAddressSlice';
 import { useDownPayment } from '../../../../../../hooks/useDownPayment';
-// import { setMandateData } from '../../../../../../features/paystack/mandateSlice';
 
 export const MakeDownPayment = ({ downPayment }) => {
-  const mandateData = useSelector((state) => state.mandate.data);
-  const currentDeliveryAddress = useSelector(selectCurrentAddress);
-  const { data: user } = useSelector((state) => state.user);
-  const { latest_address } = user;
-
-  const deliveryAddress = [
-    currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
-    currentDeliveryAddress?.state || latest_address?.state,
-  ]
-    .filter(Boolean)
-    .join(', ');
-
   const downPaymentSuccess = useSelector(
     (state) => state.fullPayment.downPaymentSuccess
   );

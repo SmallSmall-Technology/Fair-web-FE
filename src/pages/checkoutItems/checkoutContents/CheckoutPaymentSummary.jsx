@@ -73,33 +73,6 @@ export const CheckoutPaymentSummary = () => {
     validationData,
   } = useFullPayment();
 
-  const {
-    handlePayDownPayment,
-    isValidating: isVerifying,
-    validationData: downPaymentValidationData,
-  } = useDownPayment();
-
-  // useEffect(() => {
-  //   if (!isConsolidatedCart) {
-  //     dispatch(
-  //       setMandateData({
-  //         products: cart,
-  //         consolidated_total_amount: fullPayment,
-  //         paymentMethod: 'full',
-  //         deliveryState: currentDeliveryAddress?.state || latest_address?.state,
-  //         deliveryFullAddress:
-  //           currentDeliveryAddress?.streetAddress ||
-  //           latest_address?.streetAddress,
-  //       })
-  //     );
-  //   }
-  // }, [shippingFee]);
-
-  const handleCreatePaystackCustomer = () => {
-    if (!mandateData) return;
-    createMandate(mandateData);
-  };
-
   const isVerified = useSelector((state) =>
     selectVerificationStatus(state, 'debt')
   );
