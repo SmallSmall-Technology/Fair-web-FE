@@ -140,7 +140,7 @@ export const SingleCompletedPurchasedItem = ({ orders }) => {
         {expandedIndex === index && (
           <div className="my-6">
             <SingleCompletedPurchaseItemProgress
-              order={product}
+              order={orders}
               onToggleExpand={toggleExpand}
               expandedIndex={expandedIndex}
               index={index}
