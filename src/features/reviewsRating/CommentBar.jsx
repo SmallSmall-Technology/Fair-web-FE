@@ -18,7 +18,7 @@ const CommentBar = ({ product }) => {
   return (
     <>
       <section>
-        <div className="relative mb-5">
+        {/* <div className="relative mb-5">
           <label htmlFor="comment" className="sr-only">
             Drop a review for this product
           </label>
@@ -37,7 +37,7 @@ const CommentBar = ({ product }) => {
           >
             <CircleArrowUp size={30} fill="#A6A6A6" color="white" />
           </button>
-        </div>
+        </div> */}
       </section>
 
       <section className="grid grid-cols-1 gap-6">
@@ -47,13 +47,13 @@ const CommentBar = ({ product }) => {
         </div>
         <UsersReviews />
       </section>
-      {isOpen === true && (
+      {/* {isOpen === true && (
         <ReviewModal
           onClose={() => setIsOpen(false)}
           review={review}
           setReview={setReview}
         />
-      )}
+      )} */}
     </>
   );
 };
