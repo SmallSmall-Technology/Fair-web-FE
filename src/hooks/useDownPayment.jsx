@@ -15,9 +15,11 @@ import {
   selectCurrentAddress,
   selectedDeliveryType,
 } from '../features/order/deliveryAddressSlice';
+import { useOrders } from '../pages/userDashboard/shopping/shoppingOverviewContents/purchase/useOrders';
 
 export function useDownPayment() {
   const mandateData = useSelector((state) => state.mandate.data);
+  const { refetchOrders } = useOrders();
 
   const currentDeliveryAddress = useSelector(selectCurrentAddress);
   const { data: user } = useSelector((state) => state.user);
@@ -91,6 +93,7 @@ export function useDownPayment() {
             ) {
               dispatch(setMandateData(null));
               dispatch(setPaystackOrderReference(null));
+              refetchOrders();
 
               navigate(
                 `/cart-items/checkout/payment-success/${transaction.reference}`,

@@ -8,6 +8,7 @@ import PurchaseCompleted from './purchaseContentSection/purchasedItemCompleted/P
 import PurchaseItemsOngoing from './purchaseContentSection/purchasedItemsOngoing/PurchaseItemsOngoing';
 import { useQuery } from '@tanstack/react-query';
 import { useOrders } from './useOrders';
+import { PurchasePending } from './purchaseContentSection/purchasePending/PurchasePending';
 
 const Purchases = () => {
   const [activeTab, setActiveTab] = useState('ongoing');
@@ -18,7 +19,9 @@ const Purchases = () => {
     onGoingOrders,
     completedOrders,
     cancelledOrders,
+    pendingOrders,
     isFetching,
+    refetchOrders,
   } = useOrders();
 
   console.log('allOrders', allOrders);
@@ -106,6 +109,17 @@ const Purchases = () => {
               <div className="flex justify-between md:justify-start md:space-x-4 w-full lg:justify-start lg:space-x-3">
                 <button
                   className={`p-2 rounded-[30px] text-sm lg:text-base border ${
+                    activeTab === 'pending'
+                      ? 'border-black text-black font-medium'
+                      : 'border-[#737376] text-[#737376]'
+                  }`}
+                  onClick={() => setActiveTab('pending')}
+                  aria-label="View pending orders"
+                >
+                  Pending <span>({pendingOrders?.length || 0})</span>
+                </button>
+                <button
+                  className={`p-2 rounded-[30px] text-sm lg:text-base border ${
                     activeTab === 'ongoing'
                       ? 'border-black text-black font-medium'
                       : 'border-[#737376] text-[#737376]'
@@ -145,6 +159,15 @@ const Purchases = () => {
                     handleSearchQuery(data, resetDesktop)
                   )}
                 >
+                  {activeTab === 'pending' && (
+                    <p className="w-full flex justify-end items-center">
+                      <span className="text-[#96959F] text-sm mr-1">
+                        Pending{' '}
+                      </span>
+                      {pendingOrders.length}
+                    </p>
+                  )}
+
                   {activeTab === 'completed' && (
                     <p className="w-full flex justify-end items-center">
                       <span className="text-[#96959F] text-sm mr-1">
@@ -198,18 +221,28 @@ const Purchases = () => {
               <PurchaseItemsOngoing
                 onGoingOrders={onGoingOrders}
                 isFetching={isFetching}
+                refetchOrders={refetchOrders}
               />
             )}
             {activeTab === 'completed' && (
               <PurchaseCompleted
                 completedOrders={completedOrders}
                 isFetching={isFetching}
+                refetchOrders={refetchOrders}
+              />
+            )}
+            {activeTab === 'pending' && (
+              <PurchasePending
+                pendingOrders={pendingOrders}
+                isFetching={isFetching}
+                refetchOrders={refetchOrders}
               />
             )}
             {activeTab === 'cancelled' && (
               <PurchaseCancelled
                 cancelledOrders={cancelledOrders}
                 isFetching={isFetching}
+                refetchOrders={refetchOrders}
               />
             )}
           </>
