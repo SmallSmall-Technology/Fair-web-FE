@@ -14,6 +14,7 @@ import {
 } from '../../../features/cart/cartSlice';
 import { CartSummaryExtrasAndCoupon } from './CartSummaryExtrasAndCoupon';
 import ChangePlanModal from '../../../utils/ChangePlanModal';
+import { setDownPaymentSuccess } from '../../../features/order/fullPaymentSlice';
 
 const CartItemsContentSection = React.memo(() => {
   const navigate = useNavigate();
@@ -54,6 +55,7 @@ const CartItemsContentSection = React.memo(() => {
     if (subtTotal > 1000000 && !isUpgraded) {
       return;
     }
+    dispatch(setDownPaymentSuccess(false));
 
     navigate('checkout');
   };

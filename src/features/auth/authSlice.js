@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { login as loginAPI } from '../../api/authAPI';
 import httpClient from '../../api/http-clients';
-import { fetchUser } from '../user/userSlice'; // user slice handles user state
+import { fetchUser } from '../user/userSlice';
 import { clearCart } from '../cart/cartSlice';
 import { clearMandateData } from '../paystack/mandateSlice';
 

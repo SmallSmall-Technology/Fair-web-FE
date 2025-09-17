@@ -4,6 +4,7 @@ import { updateUserDeliveryAddress } from '../../../api/user-api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { states } from '../../userDashboard/accountProfile/contents/profileSummary/AddressModal';
 import { useEffect } from 'react';
+import { CustomButton } from '../../../utils/Button';
 
 const EditCheckoutDeliveryAddressForm = ({
   currentDeliveryAddress,
@@ -25,7 +26,7 @@ const EditCheckoutDeliveryAddressForm = ({
     },
   });
 
-  const mutation = useMutation({
+  const { mutation, isPending } = useMutation({
     mutationFn: ({ id, data }) => updateUserDeliveryAddress(id, data),
     onMutate: async ({ id, data }) => {
       // Cancel ongoing queries to prevent overwriting
@@ -78,8 +79,9 @@ const EditCheckoutDeliveryAddressForm = ({
   });
 
   const onSubmit = async (data, event) => {
-    event.preventDefault();
-    event.stopPropagation();
+    // event.preventDefault();
+    // event.stopPropagation();
+    console.log('click');
     const payload = {
       streetAddress: data.streetAddress.trim(),
       state: data.state,
@@ -92,7 +94,6 @@ const EditCheckoutDeliveryAddressForm = ({
       });
     }
   };
-
   useEffect(() => {
     const currentValues = {
       streetAddress: deliveryAddress?.streetAddress || '',
@@ -137,7 +138,7 @@ const EditCheckoutDeliveryAddressForm = ({
           {...register('streetAddress', {
             required: 'Street address is required',
           })}
-          disabled={isSubmitting}
+          disabled={isPending}
         />
         {errors.streetAddress && (
           <p className="text-xs text-red-500 mt-1">
@@ -147,18 +148,13 @@ const EditCheckoutDeliveryAddressForm = ({
       </div>
 
       <div className="flex justify-between gap-4 mt-4">
-        <div className="w-[187px]">
-          <button
+        <div>
+          <CustomButton
+            text={isPending ? 'Saving...' : 'Save delivery address'}
             type="submit"
-            disabled={isSubmitting || !isValid}
+            disabled={isPending || !isValid}
             className="w-full bg-[var(--yellow-primary)] text-sm font-medium py-2 px-6 rounded-[5px] hover:bg-[#ffdf11e3] transition disabled:opacity-50"
-          >
-            {isSubmitting ? (
-              <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
-            ) : (
-              'Save delivery address'
-            )}
-          </button>
+          />
         </div>
       </div>
     </form>

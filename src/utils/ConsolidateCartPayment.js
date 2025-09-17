@@ -6,8 +6,6 @@ export function consolidateCartPayments(cart) {
     otherPayments: [],
   };
 
-  console.log(cart);
-
   cart.forEach((item) => {
     const cartPaymentPlan = item?.paymentPlan || item?.selectedPaymentPlan;
     const option = item?.paymentOptionsBreakdown?.find(

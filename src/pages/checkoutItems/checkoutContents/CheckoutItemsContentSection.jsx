@@ -53,7 +53,6 @@ export const CheckoutItemsContentSection = () => {
     .filter(Boolean)
     .join(', ');
 
-  // console.log('isConsolidatedCart', isConsolidatedCart);
   useEffect(() => {
     if (!isConsolidatedCart) {
       dispatch(
@@ -140,10 +139,7 @@ export const CheckoutItemsContentSection = () => {
             <h2 className="text-[21px]">Payment method</h2>
             <p className="text-[#96959F]">All transactions are secured</p>
           </div>
-          <CheckoutPaymentMethod
-          // onSubmitPaymentMethod={handleSubmitPaymentMethod}
-          // totalAmount={downPayment}
-          />
+          <CheckoutPaymentMethod />
           <CartFooter />
         </section>
       </main>
@@ -198,15 +194,11 @@ export const CheckoutItemsContentSection = () => {
         )}
         <div className=" lg:hidden border border-t-2 border-[#E5E5E5] w-full h-0 my-4"></div>
         <section className=" lg:hidden">
-          <CheckoutPaymentMethod
-          // onSubmitPaymentMethod={handleSubmitPaymentMethod}
-          />
+          <CheckoutPaymentMethod />
         </section>
 
         <div className=" lg:hidden border border-t-2 border-[#E5E5E5] w-full h-0 my-4"></div>
-        <CheckoutPaymentSummary
-        // onSubmitPaymentMethod={handleSubmitPaymentMethod}
-        />
+        <CheckoutPaymentSummary />
       </aside>
     </section>
   );

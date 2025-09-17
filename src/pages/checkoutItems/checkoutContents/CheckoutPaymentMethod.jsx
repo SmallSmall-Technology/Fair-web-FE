@@ -8,7 +8,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
-import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
 import { Globe } from 'lucide-react';
 import {
   selectCurrentAddress,
@@ -22,13 +21,14 @@ import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx
 import { useFullPayment } from '../../../hooks/useFullPayment.jsx';
 import { clearCart } from '../../../features/cart/cartSlice.js';
 import { useDownPayment } from '../../../hooks/useDownPayment.jsx';
+import { selectDebtVerificationStatus } from '../../../features/user/verificationSlices/debtVerificationSlice.js';
+import { setDownPaymentSuccess } from '../../../features/order/fullPaymentSlice.js';
 
 export const CheckoutPaymentMethod = () => {
   const [fullPayment, setFullPayment] = useState(false);
   const cart = useSelector((state) => state.cart.cart);
-  const isVerified = useSelector((state) =>
-    selectVerificationStatus(state, 'debt')
-  );
+  const isVerified = useSelector(selectDebtVerificationStatus);
+
   const deliveryType = useSelector(selectedDeliveryType);
   const dispatch = useDispatch();
   const proceedToMandate = useProceedToMandate();
@@ -84,6 +84,7 @@ export const CheckoutPaymentMethod = () => {
   const handleProceedToMandate = () => {
     if (!mandateData) return;
     proceedToMandate(mandateData);
+    dispatch(setDownPaymentSuccess(false));
   };
 
   const {
@@ -201,10 +202,10 @@ export const CheckoutPaymentMethod = () => {
           {isConsolidatedCart && (
             <button
               type="button"
-              disabled={!isVerified}
+              disabled={!isVerified || !deliveryAddress || Processing}
               onClick={handleProceedToMandate}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
-                !isVerified
+                !isVerified || !deliveryAddress
                   ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                   : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
               }`}
@@ -216,10 +217,10 @@ export const CheckoutPaymentMethod = () => {
           {!isConsolidatedCart && (
             <button
               type="button"
-              disabled={!isVerified || Processing}
+              disabled={!isVerified || Processing || !deliveryAddress}
               onClick={handlePayFullPayment}
               className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
-                !isVerified
+                !isVerified || !deliveryAddress
                   ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                   : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
               }`}

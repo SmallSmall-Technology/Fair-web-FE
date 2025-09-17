@@ -1,6 +1,7 @@
 import storage from 'redux-persist/lib/storage';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
+
 import userReducer from './features/user/userSlice';
 import cartReducer from './features/cart/cartSlice';
 import recentlyViewedReducer from './features/product/recentlyViewedSlice';
@@ -10,7 +11,10 @@ import authReducer from './features/auth/authSlice';
 import mandateReducer from './features/paystack/mandateSlice';
 import deliveryReducer from './features/order/deliveryAddressSlice';
 import fullPaymentReducer from './features/order/fullPaymentSlice';
-// import accountVerificationReducer from './features/user/accountVerificationSlice';
+
+// import idVerificationReducer from './features/user/verificationSlices/idVerificationSlice';
+import addressVerificationReducer from './features/user/verificationSlices/addressVerifcationSlice';
+import debtVerificationReducer from './features/user/verificationSlices/debtVerificationSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -21,8 +25,11 @@ const rootReducer = combineReducers({
   delivery: deliveryReducer,
   auth: authReducer,
   mandate: mandateReducer,
-  // accountVerification: accountVerificationReducer,
   fullPayment: fullPaymentReducer,
+
+  // idVerification: idVerificationReducer,
+  addressVerification: addressVerificationReducer,
+  debtVerification: debtVerificationReducer,
 });
 
 const persistConfig = {
@@ -37,8 +44,11 @@ const persistConfig = {
     'delivery',
     'auth',
     'mandate',
-    // 'accountVerification',
     'fullPayment',
+
+    'idVerification',
+    'addressVerification',
+    'debtVerification',
   ],
   blacklist: ['loading', 'error'],
 };
