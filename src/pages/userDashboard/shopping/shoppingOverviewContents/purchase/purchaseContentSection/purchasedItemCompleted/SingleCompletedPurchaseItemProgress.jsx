@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ChevronRight } from 'lucide-react';
 import { PaymentHistory } from './PaymentHistory';
+import { OrderImagesCarousel } from '../../orderImagesCarousel';
 import { formatCurrency } from '../../../../../../../utils/FormatCurrency';
 import { completedPurchaseProgressData } from '../../../../../userDashboardData';
-import { selectLatestDeliveryAddress } from '../../../../../../../features/order/deliveryAddressSlice';
-import { OrderImagesCarousel } from '../../orderImagesCarousel';
 import ReviewModal from '../../../../../../productCategories/productDetails/UserReview/ReviewModal';
+import { selectLatestDeliveryAddress } from '../../../../../../../features/order/deliveryAddressSlice';
 
 const SingleCompletedPurchaseItemProgress = React.memo(
   ({ order, onToggleExpand, index, orders }) => {
@@ -159,8 +159,8 @@ const SingleCompletedPurchaseItemProgress = React.memo(
                 {isOpen === true && (
                   <ReviewModal
                     onClose={() => setIsOpen(false)}
-                    review={review}
-                    setReview={setReview}
+                    // review={review}
+                    // setReview={setReview}
                   />
                 )}
               </div>
@@ -283,8 +283,8 @@ const SingleCompletedPurchaseItemProgress = React.memo(
                 {isOpen === true && (
                   <ReviewModal
                     onClose={() => setIsOpen(false)}
-                    review={review}
-                    setReview={setReview}
+                    // review={review}
+                    // setReview={setReview}
                   />
                 )}
               </div>
@@ -354,8 +354,8 @@ const SingleCompletedPurchaseItemProgress = React.memo(
           {isOpen === true && (
             <ReviewModal
               onClose={() => setIsOpen(false)}
-              review={review}
-              setReview={setReview}
+              // review={review}
+              // setReview={setReview}
             />
           )}
         </div>

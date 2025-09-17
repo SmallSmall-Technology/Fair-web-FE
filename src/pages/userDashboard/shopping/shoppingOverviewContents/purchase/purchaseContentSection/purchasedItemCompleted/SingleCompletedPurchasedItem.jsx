@@ -27,23 +27,31 @@ export const SingleCompletedPurchasedItem = ({ orders }) => {
               className="flex items-start lg:px-2 justify-between text-balance"
             >
               <div className="grid gap-4 lg:flex items-ceter justify-between lg:space-x-3">
-                <div className="flex items-start gap-6">
+                <div className="flex items-start gap-2 lg:gap-6">
                   <OrderImagesCarousel orders={orders} />
 
-                  <div className="flex-1 space-y-1">
-                    <p className="text-[13px] flex items-baseline gap-1">
-                      Order number:{' '}
-                      <span className="font-medium text-lg ">
-                        {orders?.orderNumber}
-                      </span>
-                    </p>
+                  <div className="flex space-y-1">
                     <div>
-                      <p className="font-semibold text-[11px]">Item(s)</p>
-                      {orders?.items?.map((item, idx) => (
-                        <p key={idx} className="text-[14px] font-normal">
-                          {item?.productName}
-                        </p>
-                      ))}
+                      <p className="text-[13px] flex items-baseline gap-1">
+                        Order number:{' '}
+                        <span className="font-medium text-lg ">
+                          {orders?.orderNumber}
+                        </span>
+                      </p>
+                      <div>
+                        <p className="font-semibold text-[11px]">Item(s)</p>
+                        {orders?.items?.map((item, idx) => (
+                          <p key={idx} className="text-[14px] font-normal">
+                            {item?.productName}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="lg:hidden  flex flex-col gap-3 items-end">
+                      <p className="text-[11px]">Completed</p>
+                      <div className="bg-[#3DB54A] text-sm rounded-full h-[30px] w-[30px] flex items-center justify-center text-white outline-image">
+                        3/3
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -76,12 +84,12 @@ export const SingleCompletedPurchasedItem = ({ orders }) => {
                           <strong>{orders?.soldBy || 'Fair'}</strong>
                         </p>
                       </div> */}
-                      <div className="lg:hidden  flex flex-col gap-3 items-end">
+                      {/* <div className="lg:hidden  flex flex-col gap-3 items-end">
+                        <p className="text-[11px]">Completed</p>
                         <div className="bg-[#3DB54A] text-sm rounded-full h-[30px] w-[30px] flex items-center justify-center text-white outline-image">
                           3/3
                         </div>
-                        <p className="text-[11px]">Cycle completed</p>
-                      </div>
+                      </div> */}
                     </div>
 
                     <div className="flex items-center w-full">

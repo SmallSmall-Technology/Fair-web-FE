@@ -18,7 +18,7 @@ function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [formErrors, setFormErrors] = useState({});
 
-  const { mutate: signUpUser, isLoading } = useMutation({
+  const { mutate: signUpUser, isPending: isLoading } = useMutation({
     mutationFn: signUp,
     onSuccess: () => {
       toast.success('Account created successfully! Please log in.', {
@@ -173,7 +173,14 @@ function SignUpForm() {
         type="submit"
         className="w-full mt-4 py-3 px-6 text-lg font-medium text-black bg-[var(--yellow-primary)] rounded-full border-2 border-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
       >
-        {isLoading ? 'Creating account...' : 'Create account'}
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+            <span className="font-inter mr-1">Creating account...</span>
+            <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
+          </div>
+        ) : (
+          'Create account'
+        )}
       </Button>
     </form>
   );

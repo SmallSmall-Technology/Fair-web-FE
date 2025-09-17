@@ -40,6 +40,7 @@ const persistConfig = {
     // 'accountVerification',
     'fullPayment',
   ],
+  blacklist: ['loading', 'error'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

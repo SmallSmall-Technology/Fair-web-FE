@@ -3,7 +3,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Button } from '../../utils/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, clearError } from '../../features/auth/authSlice';
+import { login, clearError, resetLoading } from '../../features/auth/authSlice';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import {
   fetchCart,
@@ -15,9 +15,13 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { isAuthenticated, loading, error } = useSelector(
-    (state) => state.auth
-  );
+  const { isAuthenticated, error } = useSelector((state) => state.auth);
+
+  const { loading } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(resetLoading());
+  }, [dispatch]);
 
   const [formData, setFormData] = useState({
     email: '',
