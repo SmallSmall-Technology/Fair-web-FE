@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { paymentOptionSchema } from '../../../utils/Validation.js';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
@@ -23,8 +23,10 @@ import { clearCart } from '../../../features/cart/cartSlice.js';
 import { useDownPayment } from '../../../hooks/useDownPayment.jsx';
 import { selectDebtVerificationStatus } from '../../../features/user/verificationSlices/debtVerificationSlice.js';
 import { setDownPaymentSuccess } from '../../../features/order/fullPaymentSlice.js';
+import { CustomButton } from '../../../utils/Button.jsx';
+import { fetchUserDeliveryAddresses } from '../../../api/user-api.js';
 
-export const CheckoutPaymentMethod = () => {
+export const CheckoutPaymentMethod = ({ newDeliveryAddress }) => {
   const [fullPayment, setFullPayment] = useState(false);
   const cart = useSelector((state) => state.cart.cart);
   const isVerified = useSelector(selectDebtVerificationStatus);
@@ -56,10 +58,8 @@ export const CheckoutPaymentMethod = () => {
 
     dispatch(
       setMandateData({
-        deliveryState: currentDeliveryAddress?.state || latest_address?.state,
-        deliveryFullAddress:
-          currentDeliveryAddress?.streetAddress ||
-          latest_address?.streetAddress,
+        deliveryState: currentDeliveryAddress?.state,
+        deliveryFullAddress: currentDeliveryAddress?.streetAddress,
         deliveryType: deliveryType.value,
       })
     );
@@ -73,6 +73,7 @@ export const CheckoutPaymentMethod = () => {
 
   const mandateData = useSelector((state) => state.mandate.data);
   const downPayment = mandateData?.consolidated_total_amount;
+  const currentAddress = useSelector(selectCurrentAddress);
 
   const { createMandate, isValidating } = useCreateMandate();
 
@@ -93,12 +94,6 @@ export const CheckoutPaymentMethod = () => {
     validationData,
   } = useFullPayment();
 
-  //  const {
-  //   handlePayDownPayment,
-  //   isValidating: downPaymentIsProcessing,
-  //   validationData: downPaymentValidationData,
-  // } = useDownPayment();
-
   const {
     register,
     handleSubmit,
@@ -108,6 +103,13 @@ export const CheckoutPaymentMethod = () => {
     defaultValues: { picked: '' },
     resolver: zodResolver(paymentOptionSchema),
   });
+
+  // const { data, isLoading, isError } = useQuery({
+  //   queryKey: ['useraddresses'],
+  //   queryFn: fetchUserDeliveryAddresses,
+  // });
+
+  // const addresses = data?.data?.data || [];
 
   return (
     <div>
@@ -198,35 +200,26 @@ export const CheckoutPaymentMethod = () => {
         )}
 
         <div className="hidden lg:block">
-          {/* {isConsolidatedCart ? ( */}
           {isConsolidatedCart && (
-            <button
-              type="button"
-              disabled={!isVerified || !deliveryAddress || Processing}
+            <CustomButton
+              text="Checkout securely"
               onClick={handleProceedToMandate}
-              className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
-                !isVerified || !deliveryAddress
-                  ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
-                  : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
-              }`}
-            >
-              Checkout securely
-            </button>
+              disabled={
+                !isVerified || !deliveryAddress || Processing || !currentAddress
+              }
+              className="mt-4 w-full"
+            />
           )}
 
           {!isConsolidatedCart && (
-            <button
-              type="button"
-              disabled={!isVerified || Processing || !deliveryAddress}
+            <CustomButton
+              text={Processing ? 'Processing...' : 'Pay now'}
               onClick={handlePayFullPayment}
-              className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
-                !isVerified || !deliveryAddress
-                  ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
-                  : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
-              }`}
-            >
-              {Processing ? 'Processing...' : 'Pay now'}
-            </button>
+              disabled={
+                !isVerified || Processing || !deliveryAddress || !currentAddress
+              }
+              className="mt-4 w-full"
+            />
           )}
         </div>
       </section>

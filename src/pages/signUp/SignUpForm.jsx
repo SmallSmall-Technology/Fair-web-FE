@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Eye, EyeOff } from 'lucide-react';
-import { Button } from '../../utils/Button';
+import { Button, CustomButton } from '../../utils/Button';
 import { useMutation } from '@tanstack/react-query';
 import { signUp } from '../../api/authAPI';
 import { useNavigate } from 'react-router-dom';
@@ -168,20 +168,26 @@ function SignUpForm() {
         )}
       </div>
 
-      <Button
-        disabled={isLoading}
+      <CustomButton
         type="submit"
-        className="w-full mt-4 py-3 px-6 text-lg font-medium text-black bg-[var(--yellow-primary)] rounded-full border-2 border-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
-      >
-        {isLoading ? (
-          <div className="flex items-center justify-center">
-            <span className="font-inter mr-1">Creating account...</span>
-            <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
-          </div>
-        ) : (
-          'Create account'
-        )}
-      </Button>
+        text={
+          isLoading ? (
+            <div className="flex items-center justify-center">
+              <span className="font-inter mr-1">Creating account...</span>
+              <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
+            </div>
+          ) : (
+            'Create account'
+          )
+        }
+        bgColor="var(--yellow-primary)"
+        hoverColor="var(--btn-hover-bg-primary)"
+        width="100%"
+        textSize="1.125rem"
+        fontWeight="500"
+        disabled={isLoading}
+        className="mt-4 py-3 px-6 border-2 border-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
+      />
     </form>
   );
 }

@@ -52,7 +52,8 @@ export const CustomButton = ({
   style = {},
 }) => {
   const buttonStyles = {
-    backgroundColor: bgColor,
+    backgroundColor: disabled ? '#DEDEDE' : bgColor,
+    color: disabled ? '#fff' : '#000',
     width,
     fontWeight,
     fontSize: textSize,

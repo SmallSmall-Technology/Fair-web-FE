@@ -79,9 +79,6 @@ const EditCheckoutDeliveryAddressForm = ({
   });
 
   const onSubmit = async (data, event) => {
-    // event.preventDefault();
-    // event.stopPropagation();
-    console.log('click');
     const payload = {
       streetAddress: data.streetAddress.trim(),
       state: data.state,

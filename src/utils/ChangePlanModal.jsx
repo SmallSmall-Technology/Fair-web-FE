@@ -5,7 +5,7 @@ export default function ChangePlanModal({
   isOpen,
   onClose,
   onSave,
-  currentPlan = 'full', // default
+  currentPlan = 'full',
   plans = [
     { type: 'full', label: 'Pay in full', price: '₦245,000 One time' },
     { type: 'weekly', label: 'Weekly', price: '₦10,000 per week' },

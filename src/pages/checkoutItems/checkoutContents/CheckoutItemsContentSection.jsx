@@ -7,7 +7,10 @@ import { CartFooter } from '../../cartItems/CartFooter.jsx';
 import { formatCurrency } from '../../../utils/FormatCurrency.jsx';
 import { getCartSummary } from '../../../features/cart/cartSlice.js';
 import { CheckoutPaymentSummary } from './CheckoutPaymentSummary.jsx';
-import { CheckoutDeliveryAddressButton } from '../../../utils/Button.jsx';
+import {
+  CheckoutDeliveryAddressButton,
+  CustomButton,
+} from '../../../utils/Button.jsx';
 import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
 import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.jsx';
 import { CheckoutPaymentMethod } from '../checkoutContents/CheckoutPaymentMethod.jsx';
@@ -19,11 +22,15 @@ import {
 } from '../../../features/order/deliveryAddressSlice.js';
 import { CheckoutDeliveryTypes } from './CheckoutDeliveryTypes.jsx';
 import { setMandateData } from '../../../features/paystack/mandateSlice.js';
+import { UpdateDeliveryAddressModal } from '../../userDashboard/accountProfile/contents/deliveryAddress/UpdateDeliveryAddressModal.jsx';
+import { AddDeliveryAddressModal } from '../../userDashboard/accountProfile/contents/deliveryAddress/AddDeliveryAddressModal.jsx';
+import { fetchUserDeliveryAddresses } from '../../../api/user-api.js';
+import { useQuery } from '@tanstack/react-query';
 
 export const CheckoutItemsContentSection = () => {
   const [formIsOpen, setFormIsOpen] = useState(false);
   const [addFormIsOpen, setAddFormIsOpen] = useState(false);
-
+  const [newDeliveryAddress, setNewDeliveryAddress] = useState(null);
   const currentDeliveryAddress = useSelector(selectCurrentAddress);
 
   const { data: user } = useSelector((state) => state.user);
@@ -46,12 +53,20 @@ export const CheckoutItemsContentSection = () => {
   const downPayment = consolidatedPayments.firstPayment + VAT + shippingFee;
   const fullPayment = totalCartPrice + VAT + shippingFee;
 
-  const deliveryAddress = [
-    currentDeliveryAddress?.streetAddress || latest_address?.streetAddress,
-    currentDeliveryAddress?.state || latest_address?.state,
-  ]
-    .filter(Boolean)
-    .join(', ');
+  const deliveryAddress = currentDeliveryAddress
+    ? [
+        currentDeliveryAddress?.addressData?.streetAddress,
+        currentDeliveryAddress?.addressData?.state,
+      ]
+        .filter(Boolean)
+        .join(', ')
+    : 'No delivery address added yet';
+
+  const currentAddressObject = useSelector(selectCurrentAddress);
+  const currentAddress =
+    currentAddressObject?.addressData?.streetAddress +
+    ', ' +
+    currentAddressObject?.addressData?.state;
 
   useEffect(() => {
     if (!isConsolidatedCart) {
@@ -60,11 +75,19 @@ export const CheckoutItemsContentSection = () => {
           products: cart,
           consolidated_total_amount: fullPayment,
           paymentMethod: 'full',
-          deliveryFullAddress: deliveryAddress,
+          deliveryFullAddress:
+            newDeliveryAddress || deliveryAddress || currentAddress,
         })
       );
     }
   }, [shippingFee]);
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['useraddresses'],
+    queryFn: fetchUserDeliveryAddresses,
+  });
+
+  const addresses = data?.data?.data || [];
 
   return (
     <section className="grid lg:grid-cols-[60%_40%] lg:px-[76p]">
@@ -90,21 +113,31 @@ export const CheckoutItemsContentSection = () => {
           {!formIsOpen && !addFormIsOpen && (
             <>
               <p className="font-semibold text-base flex space-x-1 mb-6">
-                {deliveryAddress || 'No delivery address'}
+                {deliveryAddress ? (
+                  deliveryAddress
+                ) : addresses[0]?.streetAddress ? (
+                  <>
+                    {addresses[0].streetAddress} {addresses[0].state}
+                  </>
+                ) : (
+                  <span className="text-gray-400">
+                    No delivery address selected
+                  </span>
+                )}
               </p>
 
-              {currentDeliveryAddress || deliveryAddress ? (
-                <CheckoutDeliveryAddressButton
+              {currentDeliveryAddress ? (
+                <CustomButton
                   onClick={() => setFormIsOpen(true)}
-                >
-                  Edit delivery address
-                </CheckoutDeliveryAddressButton>
+                  text={'Edit delivery address'}
+                  width={'40%'}
+                />
               ) : (
-                <CheckoutDeliveryAddressButton
+                <CustomButton
                   onClick={() => setAddFormIsOpen(true)}
-                >
-                  Add delivery address
-                </CheckoutDeliveryAddressButton>
+                  text={'Add delivery address'}
+                  width={'40%'}
+                />
               )}
             </>
           )}
@@ -113,17 +146,21 @@ export const CheckoutItemsContentSection = () => {
         {/* Edit address form */}
         {formIsOpen && (
           <div className="px-5 md:px-0">
-            <EditCheckoutDeliveryAddressForm
-              currentDeliveryAddress={currentDeliveryAddress}
+            <UpdateDeliveryAddressModal
               onClose={() => setFormIsOpen(false)}
+              address={currentAddress}
+              deliveryAddress={deliveryAddress}
+              setNewDeliveryAddress={setNewDeliveryAddress}
+              addresses={addresses}
             />
           </div>
         )}
 
         {/* Add address form */}
         {addFormIsOpen && (
-          <AddCheckoutDelieveryAddressForm
+          <AddDeliveryAddressModal
             onClose={() => setAddFormIsOpen(false)}
+            setNewDeliveryAddress={setNewDeliveryAddress}
           />
         )}
 
@@ -139,7 +176,7 @@ export const CheckoutItemsContentSection = () => {
             <h2 className="text-[21px]">Payment method</h2>
             <p className="text-[#96959F]">All transactions are secured</p>
           </div>
-          <CheckoutPaymentMethod />
+          <CheckoutPaymentMethod newDeliveryAddress={newDeliveryAddress} />
           <CartFooter />
         </section>
       </main>

@@ -6,7 +6,6 @@ import { OrderImagesCarousel } from '../../OrderImagesCarousel';
 
 export const SingleCompletedPurchasedItem = ({ orders }) => {
   const [expandedIndex, setExpandedIndex] = useState(null);
-  console.log('Rendering SingleCompletedPurchasedItem', orders);
 
   const toggleExpand = (index) => {
     if (expandedIndex === index) {
