@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { DirectDebitSetupComplete } from './DirectDebitSetUpComplete';
 import { DownPaymentSuccessForm } from './DownPaymentSuccessForm';
 import { useQuery } from '@tanstack/react-query';
@@ -13,7 +13,10 @@ import { setMandateData } from '../../../../../../features/paystack/mandateSlice
 
 const DirectDebitInitialized = () => {
   const dispatch = useDispatch();
-  const { orderId } = useParams();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const orderId = params.get('orderid');
+  console.log('orderId', orderId);
   const {
     data: orderDetails,
     isFetching,

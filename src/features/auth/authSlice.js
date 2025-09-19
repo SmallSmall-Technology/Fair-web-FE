@@ -112,6 +112,7 @@ export default authSlice.reducer;
 export const performLogout = () => (dispatch) => {
   dispatch(logout());
   dispatch(clearCart());
+  dispatch(clearMandateData());
 };
 
 // Selectors
