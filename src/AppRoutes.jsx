@@ -215,7 +215,7 @@ const AppRoutes = () => {
         />
 
         <Route
-          path="cart-items/checkout/direct-debit/success/:orderId"
+          path="cart-items/checkout/direct-debit/success/"
           element={<DirectDebitInitialized />}
         />
 

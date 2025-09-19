@@ -38,11 +38,13 @@ export const useOrders = () => {
       order.fullPaymentStatus === 'failed'
   );
 
-  const pendingOrders = allOrders.filter(
-    (order) =>
-      ['pending'].includes(order.orderStatus) ||
-      order.fullPaymentStatus === 'pending'
-  );
+  const pendingOrders = allOrders.filter((order) => {
+    if (order.downPaymentStatus === 'pending') return false;
+
+    return (
+      order.orderStatus === 'pending' || order.fullPaymentStatus === 'pending'
+    );
+  });
 
   return {
     allOrders,

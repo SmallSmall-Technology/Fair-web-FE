@@ -22,7 +22,10 @@ import { useFullPayment } from '../../../hooks/useFullPayment.jsx';
 import { clearCart } from '../../../features/cart/cartSlice.js';
 import { useDownPayment } from '../../../hooks/useDownPayment.jsx';
 import { selectDebtVerificationStatus } from '../../../features/user/verificationSlices/debtVerificationSlice.js';
-import { setDownPaymentSuccess } from '../../../features/order/fullPaymentSlice.js';
+import {
+  resetFullPayment,
+  setDownPaymentSuccess,
+} from '../../../features/order/fullPaymentSlice.js';
 import { CustomButton } from '../../../utils/Button.jsx';
 import { fetchUserDeliveryAddresses } from '../../../api/user-api.js';
 
@@ -86,6 +89,7 @@ export const CheckoutPaymentMethod = ({ newDeliveryAddress }) => {
     if (!mandateData) return;
     proceedToMandate(mandateData);
     dispatch(setDownPaymentSuccess(false));
+    dispatch(resetFullPayment());
   };
 
   const {
