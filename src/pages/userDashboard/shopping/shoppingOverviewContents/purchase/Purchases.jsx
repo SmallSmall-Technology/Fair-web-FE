@@ -52,10 +52,8 @@ const Purchases = () => {
     const searchTerm = data.search.trim().toLowerCase();
     if (searchTerm) {
       const filteredOrders = allOrders.filter((order, i) => {
-        console.log(order);
         return order.orderNumber?.toLowerCase().includes(searchTerm);
       });
-      console.log(filteredOrders);
     }
     reset();
     setFormIsActive(false);

@@ -2,6 +2,7 @@ import SignUpForm from './SignUpForm';
 import { Link } from 'react-router-dom';
 import LinkButton from '../../utils/LinkButton';
 import Logo from '../../ui/components/Logo';
+import { CustomButton } from '../../utils/Button';
 
 function SignUp() {
   return (
@@ -59,12 +60,17 @@ function SignUp() {
 
           <div className="hidden lg:block text-center">
             <p>Already have an account?</p>
-            <LinkButton
-              link="/login"
-              className="w-full bg-[#FFF8CF] text-center rounded-full border-yellow-400 py-3 mt-2 text-lg font-medium text-black hover:bg-yellow-400"
-            >
-              Log in
-            </LinkButton>
+            <Link to="/login" className="block w-full">
+              <CustomButton
+                text="Log in"
+                bgColor="#FFF8CF"
+                hoverColor="#FACC15"
+                width="100%"
+                textSize="1.125rem"
+                fontWeight="500"
+                className="text-center  border-yellow-400 py-3 mt-2 text-black hover:bg-yellow-400"
+              />
+            </Link>
           </div>
         </div>
       </div>

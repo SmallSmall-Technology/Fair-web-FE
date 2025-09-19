@@ -13,7 +13,7 @@ import { CancelPurchase } from '../../cartItems/CartHeader.jsx';
 import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
 import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.jsx';
-import { selectVerificationStatus } from '../../../features/user/accountVerificationSlice.js';
+// import { selectVerificationStatus } from '../../../features/user/verificationSlices/idVerificationSlice.js';
 import {
   selectCurrentAddress,
   selectedDeliveryType,
@@ -23,6 +23,8 @@ import { useFullPayment } from '../../../hooks/useFullPayment.jsx';
 import { useEffect } from 'react';
 import { setMandateData } from '../../../features/paystack/mandateSlice.js';
 import { useDownPayment } from '../../../hooks/useDownPayment.jsx';
+import { selectDebtVerificationStatus } from '../../../features/user/verificationSlices/debtVerificationSlice.js';
+import { setDownPaymentSuccess } from '../../../features/order/fullPaymentSlice.js';
 
 export const CheckoutPaymentSummary = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -65,21 +67,18 @@ export const CheckoutPaymentSummary = () => {
     .filter(Boolean)
     .join(', ');
 
-  // console.log(deliveryAddress);
-
   const {
     handlePayFullPayment,
     isValidating: Processing,
     validationData,
   } = useFullPayment();
 
-  const isVerified = useSelector((state) =>
-    selectVerificationStatus(state, 'debt')
-  );
+  const isVerified = useSelector(selectDebtVerificationStatus);
 
   const handleProceedToMandate = () => {
     if (!mandateData) return;
     proceedToMandate(mandateData);
+    dispatch(setDownPaymentSuccess(false));
   };
 
   return (
@@ -174,10 +173,10 @@ export const CheckoutPaymentSummary = () => {
                 {isConsolidatedCart ? (
                   <button
                     type="button"
-                    disabled={!isVerified}
+                    disabled={!isVerified || !deliveryAddress || Processing}
                     onClick={handleProceedToMandate}
                     className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
-                      !isVerified
+                      !isVerified || !deliveryAddress
                         ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                         : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
                     }`}
@@ -187,10 +186,10 @@ export const CheckoutPaymentSummary = () => {
                 ) : (
                   <button
                     type="button"
-                    disabled={!isVerified || Processing}
+                    disabled={!isVerified || Processing || !deliveryAddress}
                     onClick={handlePayFullPayment}
                     className={`w-full py-2 rounded-[5px] text-black font-medium mt-4 ${
-                      !isVerified
+                      !isVerified || !deliveryAddress
                         ? 'bg-[#DEDEDE] cursor-not-allowed text-white'
                         : 'bg-[var(--yellow-primary)] hover:bg-yellow-500'
                     }`}

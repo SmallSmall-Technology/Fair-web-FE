@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ChevronRight } from 'lucide-react';
 import { PaymentHistory } from './PaymentHistory';
+import { OrderImagesCarousel } from '../../orderImagesCarousel';
 import { formatCurrency } from '../../../../../../../utils/FormatCurrency';
 import { completedPurchaseProgressData } from '../../../../../userDashboardData';
+import ReviewModal from '../../../../../../productCategories/productDetails/UserReview/ReviewModal';
 import { selectLatestDeliveryAddress } from '../../../../../../../features/order/deliveryAddressSlice';
-import { OrderImagesCarousel } from '../../orderImagesCarousel';
 
 const SingleCompletedPurchaseItemProgress = React.memo(
   ({ order, onToggleExpand, index, orders }) => {
     const payments = completedPurchaseProgressData?.payments;
+    const [isOpen, setIsOpen] = useState(false);
+    const [orderId, setOrderId] = useState(orders.orderNumber);
+
+    const handleModalOpen = () => {
+      setOrderId(product?.orderId);
+      setIsOpen(true);
+    };
 
     return (
       <>
@@ -127,11 +135,34 @@ const SingleCompletedPurchaseItemProgress = React.memo(
                 </span>
               </div>
 
-              <div className="hidden lg:block text-[11px]">
+              {/* <div className="hidden lg:block text-[11px]">
                 <p className="">Please leave a review for this item</p>
                 <Link className="text-xs font-semibold bg-[var(--yellow-primary)] p-2 flex justify-center rounded-[6px]">
                   Leave a review
                 </Link>
+                {isOpen === true && (
+                  <ReviewModal
+                    onClose={() => setIsOpen(false)}
+                    review={review}
+                    setReview={setReview}
+                  />
+                )}
+              </div> */}
+              <div className="hidden lg:block text-[11px]">
+                <p className="">Please leave a review for this item</p>
+                <Link
+                  className="text-xs font-semibold bg-[var(--yellow-primary)] p-2 flex justify-center rounded-[6px]"
+                  onClick={() => setIsOpen(true)}
+                >
+                  Leave a review
+                </Link>
+                {isOpen === true && (
+                  <ReviewModal
+                    onClose={() => setIsOpen(false)}
+                    // review={review}
+                    // setReview={setReview}
+                  />
+                )}
               </div>
 
               <div className="text-[11px]">
@@ -232,7 +263,7 @@ const SingleCompletedPurchaseItemProgress = React.memo(
                 </span>
               </div>
 
-              <div className="hidden lg:block text-[11px]">
+              {/* <div className="hidden lg:block text-[11px]">
                 <p className="">Please leave a review for this item</p>
                 <Link
                   to=""
@@ -240,6 +271,22 @@ const SingleCompletedPurchaseItemProgress = React.memo(
                 >
                   Leave a review
                 </Link>
+              </div> */}
+              <div className="hidden lg:block text-[11px]">
+                <p className="">Please leave a review for this item</p>
+                <Link
+                  className="text-xs font-semibold bg-[var(--yellow-primary)] p-2 flex justify-center rounded-[6px]"
+                  onClick={() => setIsOpen(true)}
+                >
+                  Leave a review
+                </Link>
+                {isOpen === true && (
+                  <ReviewModal
+                    onClose={() => setIsOpen(false)}
+                    // review={review}
+                    // setReview={setReview}
+                  />
+                )}
               </div>
 
               <div className="text-[11px]">
@@ -285,7 +332,7 @@ const SingleCompletedPurchaseItemProgress = React.memo(
           </div>
         </div>
         <div className="lg:hidden my-5 bg-[#E5E5E5] h-[6px]"></div>
-        <div className=" lg:hidden text-[11px]">
+        {/* <div className=" lg:hidden text-[11px]">
           <p className=" flex justify-center mb-1">
             Please leave a review for this item
           </p>
@@ -295,6 +342,22 @@ const SingleCompletedPurchaseItemProgress = React.memo(
           >
             Leave a review
           </Link>
+        </div> */}
+        <div className="hidden lg:block text-[11px]">
+          <p className="">Please leave a review for this item</p>
+          <Link
+            className="text-xs font-semibold bg-[var(--yellow-primary)] p-2 flex justify-center rounded-[6px]"
+            onClick={() => setIsOpen(true)}
+          >
+            Leave a review
+          </Link>
+          {isOpen === true && (
+            <ReviewModal
+              onClose={() => setIsOpen(false)}
+              // review={review}
+              // setReview={setReview}
+            />
+          )}
         </div>
       </>
     );

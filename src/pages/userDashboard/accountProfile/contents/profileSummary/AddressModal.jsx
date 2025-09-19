@@ -9,13 +9,7 @@ import {
   setUser,
 } from '../../../../../features/user/userSlice';
 
-export const states = [
-  'Lagos state',
-  // 'Abuja state',
-  // 'Oyo state',
-  // 'Kaduna state',
-  // 'Rivers state',
-];
+export const states = ['Lagos state'];
 
 export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
   const dispatch = useDispatch();
@@ -145,8 +139,8 @@ export const AddressModal = ({ currentAddress = {}, onClose, refetch }) => {
             Current delivery address
           </h2>
           <p className="text-sm">
-            {user?.latest_address?.streetAddress || 'No deliver address'}
-            {user?.latest_address?.state && `, ${user?.latest_address?.state}`}
+            {/* {user?.latest_address?.streetAddress || 'No deliver address'}
+            {user?.latest_address?.state && `, ${user?.latest_address?.state}`} */}
           </p>
         </div>
 

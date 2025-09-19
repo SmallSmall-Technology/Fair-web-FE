@@ -12,8 +12,6 @@ export default function ProfileSummary() {
   const isVerified = useSelector((state) => state.user?.isVerified);
   const { data: user } = useSelector((state) => state.user);
 
-  // const selectedDeliveryAddress = useSelector(selectCurrentAddress);
-
   const { register } = useForm({
     defaultValues: {
       firstName: user?.firstName || '',
@@ -136,8 +134,7 @@ export default function ProfileSummary() {
 
         <hr />
       </form>
-      {/* This cannot be rendered inside the form because its a form element that
-      needs to be separate */}
+
       <div className="grid lg:grid-cols-[40%_30%] gap-4 my-4 items-center">
         <p className="font-semibold text-sm">Delivery address</p>
         <p className="font-inter">

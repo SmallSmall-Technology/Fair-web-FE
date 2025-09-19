@@ -28,7 +28,12 @@ export const NavBar = () => {
     queryFn: fetchFavouriteProducts,
   });
 
-  const totalFavouritesProduct = favourites.length;
+  // Filter favourites to only in-stock products once
+  const inStockFavourites = favourites.filter(
+    (product) => product.inStock === true || product.inStock === 'true'
+  );
+
+  const totalFavouritesProduct = inStockFavourites.length;
 
   const hanldeCartDropdownItems = () => {
     setIsOpen(!isOpen);

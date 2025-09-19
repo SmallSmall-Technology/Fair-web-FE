@@ -1,11 +1,11 @@
-import { debtVerificationData } from './data';
-import { DebtVerification } from './DebtVerification';
+import { addressVerificationData } from './data';
+import { AddressVerification } from './AddressVerification';
 
-export const DebtVerificationCard = () => {
-  const data = debtVerificationData?.data;
+export const AddressVerificationCard = () => {
+  const data = addressVerificationData?.data;
   return (
     <li className="w-full md:w-[789px] grid gap-4">
-      <DebtVerification
+      <AddressVerification
         key={data?.id}
         type={data?.type}
         icon={data?.icon}

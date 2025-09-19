@@ -2,11 +2,14 @@ import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { uploadUserDeliveryAddress } from '../../../../../api/user-api';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedDeliveryAddress } from '../../../../../features/order/deliveryAddressSlice';
 
 const states = ['Lagos state'];
 
-export const AddDeliveryAddressModal = ({ onClose }) => {
+export const AddDeliveryAddressModal = ({ onClose, setNewDeliveryAddress }) => {
   const queryClient = useQueryClient();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -52,7 +55,8 @@ export const AddDeliveryAddressModal = ({ onClose }) => {
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['useraddresses'] });
     },
-    onSuccess: () => {
+    onSuccess: (res) => {
+      dispatch(setSelectedDeliveryAddress(res?.data));
       toast.success(
         <span className="font-semibold text-base font-outfit">
           Delivery address added successfully
