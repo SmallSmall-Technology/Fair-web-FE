@@ -57,13 +57,19 @@ export function useDownPayment() {
     useValidateFullOrDownPayment(paystackOrderReference);
 
   useEffect(() => {
-    const { payment_verified, status } = validationData || {};
-    if (payment_verified === true && status === 'success') {
+    if (!validationData) {
+      dispatch(setDownPaymentSuccess(false));
+      return;
+    }
+
+    const { payment_verified, status } = validationData;
+
+    if (payment_verified && status === 'success') {
       dispatch(setDownPaymentSuccess(true));
     } else {
       dispatch(setDownPaymentSuccess(false));
     }
-  }, [validationData]);
+  }, [validationData, dispatch]);
 
   const { mutate: payForDownPayment, isPending: isValidating } = useMutation({
     mutationFn: () => createPaystackOrder(mandateData),
@@ -129,6 +135,8 @@ export function useDownPayment() {
   const handlePayDownPayment = (downPayment) => {
     if (!downPayment) return;
     payForDownPayment(mandateData);
+    dispatch(setMandateData(null));
+    dispatch(clearCart());
   };
 
   return {

@@ -45,22 +45,43 @@ export const MakeDirectDebit = () => {
     setDirectDebitModalOpen((prev) => !prev);
   };
 
+  // const { mutate: createMandate, isPending: isValidating } = useMutation({
+  //   mutationFn: () =>
+  //     createPaystackMandate({ reference: paystackOrderReference }),
+  //   onSuccess: (res) => {
+  //     setOrderId(res?.data?.master_order_id);
+  //     const redirectUrl = res.data?.redirect_url;
+  //     if (redirectUrl) {
+  //       window.open(redirectUrl, '_blank');
+  //     }
+  //     // if (redirectUrl) {
+  //     //   window.location.href = redirectUrl;
+  //     // }
+  //     if (res.success === true) {
+  //       navigate(`/cart-items/checkout/direct-debit/success`);
+  //       dispatch(setPaystackOrderReference(null));
+  //       dispatch(clearCart());
+  //     }
+  //   },
+  //   onError: (error) => {
+  //     toast.error('Failed to create mandate. Please try again.');
+  //   },
+  // });
+
   const { mutate: createMandate, isPending: isValidating } = useMutation({
     mutationFn: () =>
       createPaystackMandate({ reference: paystackOrderReference }),
     onSuccess: (res) => {
       setOrderId(res?.data?.master_order_id);
       const redirectUrl = res.data?.redirect_url;
+
       if (redirectUrl) {
-        window.open(redirectUrl, '_blank');
+        window.location.href = redirectUrl;
+        return;
       }
-      // if (redirectUrl) {
-      //   window.location.href = redirectUrl;
-      // }
+
       if (res.success === true) {
-        navigate(
-          `/cart-items/checkout/direct-debit/success/${res?.data?.master_order_id}`
-        );
+        navigate(`/cart-items/checkout/direct-debit/success`);
         dispatch(setPaystackOrderReference(null));
         dispatch(clearCart());
       }

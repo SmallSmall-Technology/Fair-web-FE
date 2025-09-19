@@ -1,4 +1,5 @@
 import { useOrders } from '../../useOrders';
+import { PendingOrdersCard } from './PendingOrdersCard';
 
 export const PurchasePending = () => {
   const { pendingOrders, isFetching, refetchOrders } = useOrders();
@@ -18,37 +19,6 @@ export const PurchasePending = () => {
           </p>
         )}
       </section>
-    </div>
-  );
-};
-
-const PendingOrdersCard = ({ order }) => {
-  return (
-    <div className="border p-4 rounded-md mb-4">
-      <div className="flex justify-between">
-        <div>
-          <p className="text-[11px]">Order number</p>
-          <h3 className="text-base font-bold">
-            {order?.items?.[0]?.orderID ?? 'N/A'}
-          </h3>
-        </div>
-        <p className="text-sm text-gray-600">
-          {new Date(order?.createdAt).toLocaleDateString()}
-        </p>
-      </div>
-
-      <div>
-        <p className="text-[11px]">Order amount</p>
-        <h3 className="text-sm font-medium">{order?.totalAmount}</h3>
-      </div>
-
-      <div>
-        <p className="text-[11px]">Item</p>
-        <h3 className="text-sm font-medium">{order?.productName}</h3>
-      </div>
-
-      <p className="font-medium text-[13px]">Your order is being processed</p>
-      <p className="text-gray-600">Direct debit status: {order?.orderStatus}</p>
     </div>
   );
 };
