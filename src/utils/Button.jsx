@@ -52,7 +52,8 @@ export const CustomButton = ({
   style = {},
 }) => {
   const buttonStyles = {
-    backgroundColor: bgColor,
+    backgroundColor: disabled ? '#DEDEDE' : bgColor,
+    color: disabled ? '#fff' : '#000',
     width,
     fontWeight,
     fontSize: textSize,
@@ -66,10 +67,10 @@ export const CustomButton = ({
       disabled={disabled}
       style={buttonStyles}
       onMouseOver={(e) => {
-        e.target.style.backgroundColor = hoverColor;
+        if (!disabled) e.target.style.backgroundColor = hoverColor;
       }}
       onMouseOut={(e) => {
-        e.target.style.backgroundColor = bgColor;
+        if (!disabled) e.target.style.backgroundColor = bgColor;
       }}
       className={`text-black py-2 px-4 rounded transition-colors duration-300 font-inter ${
         disabled ? 'opacity-50 cursor-not-allowed' : ''

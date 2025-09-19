@@ -2,6 +2,7 @@ import LoginForm from './LoginForm';
 import { Link } from 'react-router-dom';
 
 import Logo from '../../ui/components/Logo';
+import { CustomButton } from '../../utils/Button';
 
 const Login = () => {
   return (
@@ -37,8 +38,16 @@ const Login = () => {
               </p>
               <p className="text-sm text-gray-500 md:hidden">
                 New to Fair?{' '}
-                <Link to="/sign-up" className="text-blue-600">
-                  Create account
+                <Link to="/sign-up" className="inline-block">
+                  <CustomButton
+                    text="Create account"
+                    bgColor="#FFF8CF"
+                    hoverColor="#FACC15"
+                    width="100%"
+                    textSize="1.125rem"
+                    fontWeight="500"
+                    className="text-center  border-yellow-400 py-3 mt-2 text-black hover:bg-yellow-400"
+                  />
                 </Link>
               </p>
             </div>
@@ -69,11 +78,16 @@ const Login = () => {
 
               <div className="text-center grid gap-5 max-w-md lg:mx-aut">
                 <p className="text-sm">New to Fair?</p>
-                <Link
-                  to="/sign-up"
-                  className="bg-[#FFF8CF] rounded-full border-bg-[var(--yellow-primary)]  w-full px-8 py-3 text-lg font-medium text-black hover:bg-[var(--yellow-primary)] hover:text-black"
-                >
-                  Create account
+                <Link to="/sign-up" className="inline-block">
+                  <CustomButton
+                    text="Create account"
+                    bgColor="#FFF8CF"
+                    hoverColor="#FACC15"
+                    width="100%"
+                    textSize="1.125rem"
+                    fontWeight="500"
+                    className="text-center  border-yellow-400 py-3 mt-2 text-black hover:bg-yellow-400"
+                  />
                 </Link>
               </div>
             </div>

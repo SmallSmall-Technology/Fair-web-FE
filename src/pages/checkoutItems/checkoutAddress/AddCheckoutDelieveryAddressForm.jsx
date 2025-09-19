@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { states } from '../../userDashboard/accountProfile/contents/profileSummary/AddressModal';
 import { uploadUserDeliveryAddress } from '../../../api/user-api';
+import { CustomButton } from '../../../utils/Button';
 
 const AddCheckoutDelieveryAddressForm = ({ onClose }) => {
   const queryClient = useQueryClient();
@@ -14,10 +15,10 @@ const AddCheckoutDelieveryAddressForm = ({ onClose }) => {
     reset,
   } = useForm({ mode: 'onChange' });
 
-  const mutation = useMutation({
+  const { mutation, isPending } = useMutation({
     mutationFn: (data) => uploadUserDeliveryAddress(data),
     onSuccess: () => {
-      queryClient.invalidateQueries(['useraddresses']); // refresh addresses
+      queryClient.invalidateQueries(['useraddresses']);
       toast.success('Address added successfully', {
         className:
           'bg-[var(--yellow-primary)] text-black text-sm px-1 py-1 rounded-md min-h-0',
@@ -75,7 +76,7 @@ const AddCheckoutDelieveryAddressForm = ({ onClose }) => {
           {...register('streetAddress', {
             required: 'Street address is required',
           })}
-          disabled={isSubmitting}
+          disabled={isPending}
         />
         {errors.streetAddress && (
           <p className="text-xs text-red-500 mt-1">
@@ -85,17 +86,14 @@ const AddCheckoutDelieveryAddressForm = ({ onClose }) => {
       </div>
 
       <div className="flex justify-between gap-4 mt-4">
-        <button
-          type="submit"
-          disabled={isSubmitting || !isValid}
-          className="w-full bg-[var(--yellow-primary)] text-sm font-medium py-2 px-6 rounded-[5px] hover:bg-[#ffdf11e3] transition disabled:opacity-50"
-        >
-          {isSubmitting ? (
-            <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
-          ) : (
-            'Save delivery address'
-          )}
-        </button>
+        <div>
+          <CustomButton
+            text={isPending ? 'Saving...' : 'Save delivery address'}
+            type="submit"
+            disabled={isPending || !isValid}
+            className="w-full bg-[var(--yellow-primary)] text-sm font-medium py-2 px-6 rounded-[5px] hover:bg-[#ffdf11e3] transition disabled:opacity-50"
+          ></CustomButton>
+        </div>
       </div>
     </form>
   );

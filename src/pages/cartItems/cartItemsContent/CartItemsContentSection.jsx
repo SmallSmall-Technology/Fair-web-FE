@@ -14,6 +14,7 @@ import {
 } from '../../../features/cart/cartSlice';
 import { CartSummaryExtrasAndCoupon } from './CartSummaryExtrasAndCoupon';
 import ChangePlanModal from '../../../utils/ChangePlanModal';
+import { setDownPaymentSuccess } from '../../../features/order/fullPaymentSlice';
 
 const CartItemsContentSection = React.memo(() => {
   const navigate = useNavigate();
@@ -51,9 +52,10 @@ const CartItemsContentSection = React.memo(() => {
     setPlanModalOpen(false);
   };
   const handleCheckout = () => {
-    if (subtTotal > 500000 && !isUpgraded) {
+    if (subtTotal > 1000000 && !isUpgraded) {
       return;
     }
+    dispatch(setDownPaymentSuccess(false));
 
     navigate('checkout');
   };
@@ -81,7 +83,7 @@ const CartItemsContentSection = React.memo(() => {
       {cartItems.length > 0 && (
         <>
           <div className="lg:hidden mx-4">
-            {subtTotal > 500000 && (
+            {subtTotal > 1000000 && (
               <IncomeUpgrade onUpgrade={() => setIsUpgraded(true)} />
             )}
           </div>
@@ -91,7 +93,7 @@ const CartItemsContentSection = React.memo(() => {
               type="submit"
               onClick={handleCheckout}
               className={`font-inter font-medium group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 text-lg hover:bg-gray-50 ${
-                subtTotal >= 500000 && !isUpgraded
+                subtTotal >= 1000000 && !isUpgraded
                   ? 'bg-[#E5E5E5] text-[#CDCBCC]'
                   : 'bg-[var(--yellow-primary)] text-black'
               }`}

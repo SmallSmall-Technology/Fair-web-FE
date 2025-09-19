@@ -1,0 +1,30 @@
+export const AddressVerificationSuccessCard = ({
+  icon,
+  title,
+  data,
+  addressData,
+}) => {
+  return (
+    <>
+      <article className="font-inter w-full md:w-[521px] h-[184px] bg-[#F5F5F7] p-4 px-8 rounded-[6px] flex flex-col justify-between">
+        <div className="flex items-center">
+          <img src={icon} alt={title} className="w-10 h-10 mr-2" />
+          <p className="font-semibold text-base">Address Verification</p>
+        </div>
+        <p className="font-semibold text-lg">
+          {data?.residentialAddress || addressData?.residentialAddress},{' '}
+          {data?.residentialCity || addressData?.residentialCity},{' '}
+          {data?.residentialState || addressData?.residentialState}
+        </p>
+        <div className="text-sm font-semibold flex items-center space-x-2">
+          <img
+            src="/images/check 1.svg"
+            alt="Check Icon"
+            className="w-[15px] h-[15px]"
+          />
+          <p>Residential Address Verified</p>
+        </div>
+      </article>
+    </>
+  );
+};

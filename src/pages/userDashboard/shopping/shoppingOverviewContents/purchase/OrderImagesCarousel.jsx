@@ -27,11 +27,11 @@ export const OrderImagesCarousel = ({ orders }) => {
 
   return (
     <div className="mb-6 flex justify-center">
-      <div className="bg-[#FAFAFA] h-[104px] w-[104px] border border-[#E8EBEA] rounded-[7px] flex justify-center items-center">
+      <div className="bg-[#FAFAFA] h-[51px] w-[51px] lg:h-[104px] lg:w-[104px] border border-[#E8EBEA] rounded-[7px] flex justify-center items-center">
         <img
           src={currentItem?.coverImage || '/placeholder-image.jpg'}
           alt={currentItem?.productName || 'Product image'}
-          className="w-[76px] h-[76px] object-cover"
+          className="lg:w-[76px] lg:h-[76px] object-cover"
           loading="lazy"
         />
       </div>

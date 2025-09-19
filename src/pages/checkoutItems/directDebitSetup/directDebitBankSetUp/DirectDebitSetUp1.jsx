@@ -26,10 +26,17 @@ export const DirectDebitSetUp1 = () => {
     (state) => state.fullPayment.downPaymentSuccess
   );
 
+  console.log(downPaymentSuccess);
   return (
     <div className="bg-[#FAFAFA] w-full px-4">
       <div className="w-full lg:max-w-[540px] mx-auto mb-8">
-        <header className="w-full py-8 md:py-16 text-center grid md:flex justify-center md:justify-between items-center">
+        <header
+          className={`py-8 md:py-16 ${
+            downPaymentSuccess
+              ? 'w-full flex justify-center mx-auto'
+              : 'grid md:flex justify-center md:justify-between items-center'
+          }`}
+        >
           <Link to="/" className="w-[149px] mb-4 md:mb-0">
             <img
               src="/images/SST_LOGO_HORIZONTAL_WEB_DARK.svg"

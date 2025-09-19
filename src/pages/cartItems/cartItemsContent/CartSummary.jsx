@@ -125,7 +125,7 @@ export const CartSummary = ({
             type="submit"
             onClick={onHandleCheckout}
             className={`font-calsans group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 text-lg font-medium hover:bg-gray-50 ${
-              subtTotal >= 500000 && !isUpgraded
+              subtTotal >= 1000000 && !isUpgraded
                 ? 'bg-[#E5E5E5] text-[#CDCBCC]'
                 : 'bg-yellow-300 text-black'
             }`}
@@ -142,7 +142,7 @@ export const CartSummary = ({
             type="submit"
             onClick={onHandleCheckout}
             className={`font-calsans group relative inline-flex items-center overflow-hidden rounded-[20px] bg-[var(--yellow-primary)] border-2 w-full mx-auto md:px-12 py-2 text-lg font-medium hover:bg-gray-50 ${
-              subtTotal >= 500000 && !isUpgraded
+              subtTotal >= 1000000 && !isUpgraded
                 ? 'bg-[#E5E5E5] text-[#CDCBCC]'
                 : 'bg-yellow-300 text-black'
             }`}
@@ -157,7 +157,7 @@ export const CartSummary = ({
 
       {/* Income Upgrade prompt */}
       <div className="mt-8 hidden lg:block">
-        {subtTotal >= 500000 && (
+        {subtTotal >= 1000000 && (
           <IncomeUpgrade onUpgrade={() => setIsUpgraded(true)} />
         )}
       </div>

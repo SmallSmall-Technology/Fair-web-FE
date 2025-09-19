@@ -1,9 +1,9 @@
 import { toast } from 'react-toastify';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { Button } from '../../utils/Button';
+import { Button, CustomButton } from '../../utils/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, clearError } from '../../features/auth/authSlice';
+import { login, clearError, resetLoading } from '../../features/auth/authSlice';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import {
   fetchCart,
@@ -15,9 +15,13 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { isAuthenticated, loading, error } = useSelector(
-    (state) => state.auth
-  );
+  const { isAuthenticated, error } = useSelector((state) => state.auth);
+
+  const { loading } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(resetLoading());
+  }, [dispatch]);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -153,20 +157,26 @@ const LoginForm = () => {
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
 
-      <Button
+      <CustomButton
         type="submit"
-        className="w-full bg-[var(--yellow-primary)] text-black rounded-full py-3 text-lg font-medium  hover:text-black disabled:opacity-50"
+        text={
+          loading ? (
+            <div className="flex items-center justify-center">
+              <span className="font-inter mr-1">Logging in...</span>
+              <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
+            </div>
+          ) : (
+            'Log in'
+          )
+        }
+        bgColor="var(--yellow-primary)"
+        hoverColor="var(--btn-hover-bg-primary)"
+        width="100%"
+        fontWeight="500"
+        textSize="1.125rem"
         disabled={loading}
-      >
-        {loading ? (
-          <div className="flex items-center justify-center">
-            <span className="font-inter mr-1">Logging in...</span>
-            <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
-          </div>
-        ) : (
-          'Log in'
-        )}
-      </Button>
+        className="mt-4 py-3 px-6 border-2 border-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
+      />
 
       <Link
         to="/forgot-password"

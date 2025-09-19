@@ -11,7 +11,7 @@ import orderReducer from './features/order/orderSlice';
 import authReducer from './features/auth/authSlice';
 import mandateReducer from './features/paystack/mandateSlice';
 import deliveryReducer from './features/order/deliveryAddressSlice';
-import accountVerificationReducer from './features/user/accountVerificationSlice';
+import accountVerificationReducer from './features/user/verificationSlices/idVerificationSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,

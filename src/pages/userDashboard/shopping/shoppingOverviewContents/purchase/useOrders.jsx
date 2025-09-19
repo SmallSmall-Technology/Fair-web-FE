@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getAllOrders } from '../../../../../api/orderAPI';
+import { useEffect } from 'react';
 
 export const useOrders = () => {
   const {
@@ -10,7 +11,8 @@ export const useOrders = () => {
   } = useQuery({
     queryKey: ['allOrders'],
     queryFn: getAllOrders,
-    staleTime: 5 * 60 * 1000, // 5 mins
+    // refetchInterval: 5000,
+    refetchOnWindowFocus: 'always',
   });
 
   const allOrders = data?.orders || [];
@@ -32,7 +34,7 @@ export const useOrders = () => {
 
   const cancelledOrders = allOrders.filter(
     (order) =>
-      ['failed', 'cancelled', 'pending'].includes(order.orderStatus) ||
+      ['failed', 'cancelled'].includes(order.orderStatus) ||
       order.fullPaymentStatus === 'failed'
   );
 
