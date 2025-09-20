@@ -76,7 +76,7 @@ export const AddressVerification = ({
 
   return (
     <>
-      {localVerified || addressDataFromSlice.success === true ? (
+      {localVerified || addressDataFromSlice?.success === true ? (
         <AddressVerificationSuccessCard
           title={title}
           icon={icon}
