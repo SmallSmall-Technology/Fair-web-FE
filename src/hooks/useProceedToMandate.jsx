@@ -50,22 +50,15 @@ export const useProceedToMandate = () => {
 
     const payload = {
       first_installment_payment: firstInstallmentPayment,
-      first_debit_date: new Date().toISOString().split('T')[0],
 
       last_installment_payment:
         consolidatedPayments?.otherPayments.at(-1)?.amount,
-      last_installment_date: new Date(
-        consolidatedPayments.otherPayments.at(-1)?.date
-      )
-        .toISOString()
-        .split('T')[0],
 
       consolidated_total_amount: total,
       frequency: cartPaymentPlan[0],
       paymentMethod: cartPaymentPlan[0],
       description: 'Getting product',
       deliveryFullAddress: deliveryAddress,
-      deliveryState: 'Lagos',
       products: cart.map((item) => ({
         productID: item.productID,
         quantity: item.quantity,
