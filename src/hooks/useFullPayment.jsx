@@ -90,7 +90,6 @@ export function useFullPayment(fullPayment) {
               setLocalReference(transaction.reference);
 
               // optional: still update Redux if needed
-              // dispatch(setPaystackOrderReference(transaction.reference));
               dispatch(clearCart());
               refetchOrders();
 
@@ -98,7 +97,7 @@ export function useFullPayment(fullPayment) {
               const validationResponse = await refetchValidation();
               if (validationResponse?.data?.payment_verified === true) {
                 navigate(
-                  `/cart-items/checkout/payment-success/${transaction.reference}`,
+                  `/cart-items/checkout/payment-success/${res?.data?.masterOrderID}`,
                   {
                     state: { amount: validationResponse?.data?.amount },
                     replace: true,
