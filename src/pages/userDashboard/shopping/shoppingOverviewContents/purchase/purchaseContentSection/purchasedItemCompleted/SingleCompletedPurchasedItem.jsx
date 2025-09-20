@@ -10,7 +10,6 @@ export const SingleCompletedPurchasedItem = ({
   index,
 }) => {
   const isExpanded = expandedIndex === index;
-  console.log('orders in single', orders);
 
   return (
     <article>
@@ -24,7 +23,7 @@ export const SingleCompletedPurchasedItem = ({
                 <div>
                   <p className="text-[13px] flex items-baseline gap-1">
                     Order number:{' '}
-                    <span className="font-medium text-lg ">
+                    <span className="font-medium lg:text-lg ">
                       {orders?.orderNumber}
                     </span>
                   </p>

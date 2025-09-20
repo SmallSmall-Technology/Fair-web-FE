@@ -5,34 +5,48 @@ import { DeliveryProgress } from './DeliveryProgress';
 import { progressData } from '../../../../../../userDashboardData';
 import { formatCurrency } from '../../../../../../../../utils/FormatCurrency';
 import React from 'react';
+import { OrderImagesCarousel } from '../../../OrderImagesCarousel';
 
 const SingleOngoingPurchaseProgress = React.memo(
-  ({ product, toggleExpand, index }) => {
+  ({ orders, onToggleExpand, index }) => {
     const payments = progressData.payments;
     const deliveries = progressData.deliveries;
+
+    const paidCount = orders?.paidInstallments || 1;
+    const totalCount = orders?.installmentCount + 1;
+
     return (
       <div className="max-w-4x mx-auto bg-white md:shadow-lg rounded-lg md:p-6 space-y-6 text-gray-800 md:border">
-        <div className="flex items-start gap-6">
-          <div className="bg-[#FAFAFA] h-[104px] w-[104px] border border-[#E8EBEA] rounded-[7px] flex justify-center items-center">
-            <img
-              src={product?.coverImage}
-              alt="Freezer"
-              className="w-[76px] h-[76px] object-cover "
-              loading="lazy"
-            />
-          </div>
-          <div className="flex-1 space-y-3">
-            <h2 className="font-semibold text-lg">{product?.productName}</h2>
-            <p className="text-[11px] hidden md:flex">
-              Qty - x{product?.quantity}
-            </p>
+        <div className="flex items-start justify-between gap-6">
+          <div className="flex items-start justify-start lg:justify-between space-x-3">
+            <OrderImagesCarousel orders={orders} />
+
+            <div className="flex space-y-1">
+              <div>
+                <p className="text-[13px] flex items-baseline gap-1">
+                  Order number:{' '}
+                  <span className="font-medium lg:text-lg ">
+                    {orders?.orderNumber}
+                  </span>
+                </p>
+                <div>
+                  <p className="font-semibold text-[11px]">Item(s)</p>
+                  {orders?.items?.map((item, idx) => (
+                    <p key={idx} className="text-[14px] font-normal">
+                      {item?.productName}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
           <div className="hidden md:flex flex-col items-end gap-2">
-            <CircularProgress />
+            <CircularProgress paid={paidCount} totalCount={totalCount} />
+
             <p className="text-[11px]">Payment Circle</p>
             <p
               className="font-normal text-sm flex items-center justify-end space-x-1 cursor-pointer mt-2 lg:mt-0"
-              onClick={() => toggleExpand(index)}
+              onClick={() => onToggleExpand(index)}
             >
               <button className="underline">Hide Order</button>
               <span>
@@ -42,12 +56,22 @@ const SingleOngoingPurchaseProgress = React.memo(
           </div>
         </div>
 
+        <p
+          className="lg:hidden font-normal text-sm flex items-center justify-end space-x-1 cursor-pointer mt-2 lg:mt-0"
+          onClick={() => onToggleExpand(index)}
+        >
+          <button className="underline">Hide Order</button>
+          <span>
+            <ChevronRight size={12} />
+          </span>
+        </p>
+        <hr className="lg:hidden border border-[#E8EBEA] my-4" />
         <div className="lg:space-y-2 md:px-8">
           <div className="flex justify-between items-start">
             <h3 className="font-semibold text-[11px]">PAYMENT DETAILS</h3>
             <div className="md:hidden flex flex-col items-end">
               <p className="text-[11px]">Payment Circle</p>
-              <CircularProgress />
+              <CircularProgress paid={paidCount} totalCount={totalCount} />
             </div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 text-sm">
@@ -55,17 +79,17 @@ const SingleOngoingPurchaseProgress = React.memo(
               <span>Item price</span>
               <br />
               <span className="text-base font-medium">
-                {formatCurrency(product?.totalAmount)}
+                {formatCurrency(orders?.totalAmount)}
               </span>
             </div>
 
             <div>
-              {product.paymentType === 'direct debit' ? (
+              {orders?.paymentType === 'direct debit' ? (
                 <div className="text-[11px]">
                   <span>Installment duration</span>
                   <br />
                   <span className="text-base font-medium">
-                    {order?.paymentPlanDetails?.months} months
+                    {orders?.installmentCount} months
                   </span>
                 </div>
               ) : (
@@ -81,7 +105,7 @@ const SingleOngoingPurchaseProgress = React.memo(
               <span>Total amount paid</span>
               <br />
               <span className="text-base font-medium">
-                {formatCurrency(product?.totalAmount)}
+                {formatCurrency(orders?.totalAmount)}
               </span>
             </div>
 
@@ -95,7 +119,7 @@ const SingleOngoingPurchaseProgress = React.memo(
               <span>Next due payment</span>
               <br />
               <span className="text-base font-medium">
-                {formatCurrency(product?.paymentPlanDetails?.monthlyPayment)}
+                {formatCurrency(orders?.paymentPlanDetails?.monthlyPayment)}
               </span>
             </div>
 
@@ -135,15 +159,27 @@ const SingleOngoingPurchaseProgress = React.memo(
         <hr />
         <div>
           <h3 className="font-semibold text-[11px]">ITEM DETAILS</h3>
-          <p className="text-[13px]">
-            Order id: <strong>{product?.orderId}</strong>
-          </p>
-          <p className="text-sm">{product?.productName}</p>
-          <p className="text-sm">50" TV Crystal UHD</p>
-          <p className="text-sm">Model: A6X | SKU: H36E8LI5JUTNAFAMZ</p>
-          <p className="text-sm">
-            Sold by <strong>{product.soldBy}</strong>
-          </p>
+
+          <section className="text-[13px]">
+            {orders?.items?.map((item, idx) => (
+              <div key={idx} className="my-2">
+                <p className="text-[14px] font-medium">{item?.productName}</p>
+                <div className="text-[11px]">
+                  <p className="text-xs">{item?.description || 'N/A'}</p>
+                  <p>
+                    Model : <strong>{item?.model || 'N/A'}</strong>
+                  </p>
+                  <p>
+                    SKU: <strong>{item?.sku || 'N/A'}</strong>
+                  </p>
+                </div>
+                <p>
+                  Sold by:{' '}
+                  <strong className="font-bold">{item?.soldBy || 'N/A'}</strong>
+                </p>
+              </div>
+            ))}
+          </section>
         </div>
       </div>
     );

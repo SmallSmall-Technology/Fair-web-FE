@@ -47,8 +47,6 @@ export const RecentlyPurchased = () => {
 };
 
 const SingleRecentlyPurchased = ({ product }) => {
-  console.log('single product', product);
-
   return (
     <li className="recentlyviewed-item grid grid-cols-1 gap-3">
       <Link to={`/user-dashboard/shopping-overview/purchases`}>
