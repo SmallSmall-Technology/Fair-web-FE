@@ -20,6 +20,7 @@ import { useOrders } from '../pages/userDashboard/shopping/shoppingOverviewConte
 export function useFullPayment(fullPayment) {
   const mandateData = useSelector((state) => state.mandate.data);
   const { refetchOrders } = useOrders();
+  const [localReference, setLocalReference] = useState(null);
 
   const currentDeliveryAddress = useSelector(selectCurrentAddress);
   const { data: user } = useSelector((state) => state.user);
@@ -62,19 +63,6 @@ export function useFullPayment(fullPayment) {
     deliveryType: userSelectedDeliveryType?.label,
   };
 
-  const { data: validationData, refetch: refetchValidation } =
-    useValidateFullOrDownPayment(paystackOrderReference);
-
-  // useEffect(() => {
-  //   const { payment_verified, status } = validationData || {};
-  //   if (payment_verified === true && status === 'success') {
-  //     dispatch(setDownPaymentSuccess(true));
-  //     // dispatch(setPaystackOrderReference(null));
-  //   } else {
-  //     dispatch(setDownPaymentSuccess(false));
-  //   }
-  // }, [validationData]);
-
   const { mutate: payForDownPayment, isPending: isValidating } = useMutation({
     mutationFn: () => createPaystackOrder(mandateDataForFullPayment),
     onSuccess: (res) => {
@@ -93,32 +81,48 @@ export function useFullPayment(fullPayment) {
           amount: amount * 100,
           currency: 'NGN',
           reference: newReference,
-          onSuccess: (transaction) => {
-            dispatch(setPaystackOrderReference(transaction.reference));
-
+          onSuccess: async (transaction) => {
             if (
               transaction.status === 'success' &&
               transaction.message === 'Approved'
             ) {
-              dispatch(setPaystackOrderReference(transaction.reference));
+              // ✅ Save reference to local state immediately
+              setLocalReference(transaction.reference);
+
+              // optional: still update Redux if needed
+              // dispatch(setPaystackOrderReference(transaction.reference));
               dispatch(clearCart());
               refetchOrders();
-              navigate(
-                `/cart-items/checkout/payment-success/${transaction.reference}`
-              );
+
+              // ✅ Trigger validation AFTER local state is set
+              const validationResponse = await refetchValidation();
+              if (validationResponse?.data?.payment_verified === true) {
+                navigate(
+                  `/cart-items/checkout/payment-success/${transaction.reference}`,
+                  {
+                    state: { amount: validationResponse?.data?.amount },
+                    replace: true,
+                  }
+                );
+              } else {
+                console.error('Validation failed:', validationResponse?.error);
+              }
             } else {
+              setLocalReference(null);
               dispatch(setPaystackOrderReference(null));
             }
-
-            refetchValidation();
           },
-          onError: (error) => {
+          onError: () => {
+            setLocalReference(null);
             dispatch(setPaystackOrderReference(null));
           },
         });
       }
     },
   });
+
+  const { data: validationData, refetch: refetchValidation } =
+    useValidateFullOrDownPayment(localReference);
 
   const handlePayFullPayment = () => {
     payForDownPayment(mandateDataForFullPayment);

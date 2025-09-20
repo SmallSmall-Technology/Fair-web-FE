@@ -1,8 +1,13 @@
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import { SingleCompletedPurchasedItem } from './SingleCompletedPurchasedItem';
-import { getCompletedOrders } from '../../../../../../../features/order/orderSlice';
 
 const PurchaseCompleted = ({ completedOrders }) => {
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
+  const toggleExpand = (index) => {
+    setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
   return (
     <section>
       {completedOrders.length < 1 ? (
@@ -11,11 +16,26 @@ const PurchaseCompleted = ({ completedOrders }) => {
         </p>
       ) : (
         <div>
-          {completedOrders.map((orders, index) => (
-            <div key={orders.id || index}>
-              <SingleCompletedPurchasedItem orders={orders} key={index} />
-            </div>
-          ))}
+          {expandedIndex !== null ? (
+            // Render only the expanded order
+            <SingleCompletedPurchasedItem
+              orders={completedOrders[expandedIndex]}
+              index={expandedIndex}
+              toggleExpand={toggleExpand}
+              expandedIndex={expandedIndex}
+            />
+          ) : (
+            //  Render all in collapsed view when none is expanded
+            completedOrders.map((orders, index) => (
+              <SingleCompletedPurchasedItem
+                key={orders.orderNumber || index}
+                orders={orders}
+                index={index}
+                toggleExpand={toggleExpand}
+                expandedIndex={expandedIndex}
+              />
+            ))
+          )}
         </div>
       )}
     </section>

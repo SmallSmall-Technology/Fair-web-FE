@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { CustomButton } from '../../../../../../utils/Button';
 import { formatCurrency } from '../../../../../../utils/FormatCurrency';
-import { selectCurrentAddress } from '../../../../../../features/order/deliveryAddressSlice';
 import { useDownPayment } from '../../../../../../hooks/useDownPayment';
+import { selectCurrentAddress } from '../../../../../../features/order/deliveryAddressSlice';
 
 export const MakeDownPayment = ({ downPayment }) => {
   const downPaymentSuccess = useSelector(

@@ -16,7 +16,6 @@ const DirectDebitInitialized = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const orderId = params.get('orderid');
-  console.log('orderId', orderId);
   const {
     data: orderDetails,
     isFetching,

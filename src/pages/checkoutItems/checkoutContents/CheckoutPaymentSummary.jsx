@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Dot } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,18 +14,16 @@ import { CancelPurchase } from '../../cartItems/CartHeader.jsx';
 import { useProceedToMandate } from '../../../hooks/useProceedToMandate.jsx';
 import { consolidateCartPayments } from '../../../utils/ConsolidateCartPayment.js';
 import { getPaymentLabel } from '../../cartItems/cartItemsContent/CartSummary.jsx';
-// import { selectVerificationStatus } from '../../../features/user/verificationSlices/idVerificationSlice.js';
 import {
   selectCurrentAddress,
   selectedDeliveryType,
 } from '../../../features/order/deliveryAddressSlice.js';
-import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx';
-import { useFullPayment } from '../../../hooks/useFullPayment.jsx';
-import { useEffect } from 'react';
-import { setMandateData } from '../../../features/paystack/mandateSlice.js';
 import { useDownPayment } from '../../../hooks/useDownPayment.jsx';
-import { selectDebtVerificationStatus } from '../../../features/user/verificationSlices/debtVerificationSlice.js';
+import { useFullPayment } from '../../../hooks/useFullPayment.jsx';
+import { setMandateData } from '../../../features/paystack/mandateSlice.js';
+import { useCreateMandate } from '../../../hooks/useProceedToPaystackPayment.jsx';
 import { setDownPaymentSuccess } from '../../../features/order/fullPaymentSlice.js';
+import { selectDebtVerificationStatus } from '../../../features/user/verificationSlices/debtVerificationSlice.js';
 
 export const CheckoutPaymentSummary = () => {
   const cart = useSelector((state) => state.cart.cart);

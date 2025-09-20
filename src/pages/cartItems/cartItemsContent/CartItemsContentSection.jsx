@@ -35,7 +35,8 @@ const CartItemsContentSection = React.memo(() => {
     useSelector((state) => state.cart.sessionID) ||
     localStorage.getItem('cartSessionID');
 
-  const { cart: cartItems, loading } = useSelector((state) => state.cart);
+  const { cart: cartItems, status } = useSelector((state) => state.cart);
+  const loading = status === 'loading';
 
   // 🔹 Change plan for ALL items in the cart
   const handlePlanChange = (newPlan) => {
@@ -139,13 +140,14 @@ const CartItemsContentSection = React.memo(() => {
         )}
       </section>
 
-      {/* 🔹 Modal for selecting plan for ALL items */}
+      {/*  Modal for selecting plan for ALL items */}
       {planModalOpen && (
         <ChangePlanModal
           isOpen={planModalOpen}
           onClose={() => setPlanModalOpen(false)}
           onSave={handlePlanChange}
           currentPlan={paymentOptions}
+          loading={loading}
         />
       )}
     </main>

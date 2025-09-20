@@ -6,7 +6,7 @@ const PurchaseItemsOngoing = ({ onGoingOrders, isFetching }) => {
   const [expandedIndex, setExpandedIndex] = useState(null);
 
   const toggleExpand = (index) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
+    setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
   return (
@@ -21,11 +21,27 @@ const PurchaseItemsOngoing = ({ onGoingOrders, isFetching }) => {
         </p>
       ) : (
         <div>
-          {onGoingOrders.map((orders, index) => (
-            <div key={orders.id || index}>
-              <PurchasedItemOngoing orders={orders || []} />
-            </div>
-          ))}
+          {expandedIndex !== null ? (
+            // Show only the expanded order
+            <PurchasedItemOngoing
+              orders={onGoingOrders[expandedIndex]}
+              index={expandedIndex}
+              toggleExpand={toggleExpand}
+              expandedIndex={expandedIndex}
+            />
+          ) : (
+            // Show all in collapsed view when none is expanded
+            onGoingOrders.map((orders, index) => (
+              <PurchasedItemOngoing
+                key={orders.orderNumber || index}
+                orders={orders}
+                index={index}
+                toggleExpand={toggleExpand}
+                expandedIndex={expandedIndex}
+              />
+            ))
+          )}
+
           <div className="flex justify-center md:justify-end mt-10">
             <Pagination />
           </div>

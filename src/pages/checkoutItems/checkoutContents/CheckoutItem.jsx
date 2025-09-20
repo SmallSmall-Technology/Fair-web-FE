@@ -47,8 +47,7 @@ export const CheckoutItem = () => {
                   </p>
                   <p className="text-xs">Delivery</p>
                   <p className="text-xs font-medium">
-                    Est. delivery: by{' '}
-                    <span>{item?.deliveryDate || 'Jan, 20, 2025'}</span>
+                    Est. delivery: by <span>{item?.deliveryDate || 'N/A'}</span>
                   </p>
                 </div>
               </div>
