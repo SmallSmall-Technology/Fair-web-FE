@@ -26,7 +26,7 @@ const Purchases = () => {
 
   // console.log('allOrders', allOrders);
   // console.log('onGoingOrders', onGoingOrders);
-  // console.log('completedOrders', completedOrders);
+  console.log('completedOrders', completedOrders);
   // console.log('cancelledOrders', cancelledOrders);
   // console.log('pending orders', pendingOrders);
 
