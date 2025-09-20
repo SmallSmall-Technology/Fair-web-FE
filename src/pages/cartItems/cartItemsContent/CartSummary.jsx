@@ -104,7 +104,7 @@ export const CartSummary = ({
         {/* Subtotal Section */}
         <div className="flex justify-between mb-8">
           <div className="flex justify-between gap-2 lg:hidden font-medium lg:text-xl w-full">
-            <div className="flex gap-1">
+            <div className="flex gap-1 ">
               <p>Subtotal</p>
               <span>
                 ({totalCartQuantity} {cart.length > 1 ? 'items' : 'item'})
@@ -113,7 +113,7 @@ export const CartSummary = ({
             <p>{formatCurrency(subtTotal)}</p>
           </div>
 
-          <div className="font-calsans hidden lg:flex justify-between text-xl w-full">
+          <div className="font-calsans hidden lg:flex justify-between text-xl w-full mt-3">
             <p>Subtotal</p>
             <p>{formatCurrency(subtTotal)}</p>
           </div>

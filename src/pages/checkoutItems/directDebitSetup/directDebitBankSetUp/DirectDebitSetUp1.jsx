@@ -22,6 +22,23 @@ export const DirectDebitSetUp1 = () => {
     }
   }, [mandateData, navigate]);
 
+  // Prevent back button navigation
+  React.useEffect(() => {
+    // Push a new state into the history stack so back button won't leave this page
+    window.history.pushState(null, '', window.location.href);
+
+    const handlePopState = () => {
+      // When user presses back, push them forward again
+      window.history.pushState(null, '', window.location.href);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
   const downPaymentSuccess = useSelector(
     (state) => state.fullPayment.downPaymentSuccess
   );

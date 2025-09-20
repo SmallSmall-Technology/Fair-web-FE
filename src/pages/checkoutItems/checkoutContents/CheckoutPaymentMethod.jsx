@@ -92,11 +92,7 @@ export const CheckoutPaymentMethod = ({ newDeliveryAddress }) => {
     dispatch(resetFullPayment());
   };
 
-  const {
-    handlePayFullPayment,
-    isValidating: Processing,
-    validationData,
-  } = useFullPayment();
+  const { handlePayFullPayment, isValidating: Processing } = useFullPayment();
 
   const {
     register,

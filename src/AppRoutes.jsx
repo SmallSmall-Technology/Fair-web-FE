@@ -219,11 +219,6 @@ const AppRoutes = () => {
           element={<DirectDebitInitialized />}
         />
 
-        {/* <Route
-          path="cart-items/checkout/mandate/create-success"
-          element={<PaystackSetupPaymentSuccess />}
-        /> */}
-
         <Route
           path="verification-document-sent"
           element={<VerificationSent />}

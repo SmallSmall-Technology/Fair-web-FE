@@ -6,6 +6,7 @@ export default function ChangePlanModal({
   onClose,
   onSave,
   currentPlan = 'full',
+  loading,
   plans = [
     { type: 'full', label: 'Pay in full', price: '₦245,000 One time' },
     { type: 'weekly', label: 'Weekly', price: '₦10,000 per week' },
@@ -103,7 +104,7 @@ export default function ChangePlanModal({
             onClick={() => onSave(selectedPlan)}
             className="bg-[#FFDE11] text-black font-medium px-6 py-2 rounded hover:bg-yellow-300"
           >
-            Save
+            {loading ? 'Saving...' : 'Save '}
           </button>
         </div>
       </div>

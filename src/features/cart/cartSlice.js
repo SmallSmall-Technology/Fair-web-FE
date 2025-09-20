@@ -248,7 +248,7 @@ export const updateCartItemPaymentPlan = createAsyncThunk(
       return {
         ...response.data,
         productID,
-        paymentPlan: selectedPaymentPlan, // ✅ fix is here
+        paymentPlan: selectedPaymentPlan,
       };
     } catch (error) {
       return rejectWithValue(error.message || 'Failed to update payment plan');
@@ -295,6 +295,7 @@ const initialState = {
   error: null,
   selectedPaymentPlan: 'monthly',
   cart_summary: { total_items: 0, total_quantity: 0, total_amount: 0 },
+  loading: false,
 };
 
 const cartSlice = createSlice({
@@ -500,18 +501,29 @@ const cartSlice = createSlice({
 
         state.cart = state.cart.map((item) =>
           item.productID === updatedItem.productID
-            ? { ...item, ...updatedItem } // ✅ preserve plan and update quantity
+            ? { ...item, ...updatedItem }
             : item
         );
       })
+
+      .addCase(updateCartItemPaymentPlan.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
       .addCase(updateCartItemPaymentPlan.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        const { productID, paymentPlan } = action.payload;
 
-        const item = state.cart.find((item) => item.productID === productID);
-        if (item) {
-          item.paymentPlan = paymentPlan;
-        }
+        const { paymentPlan } = action.payload;
+
+        // Update every item in the cart with the new paymentPlan
+        state.cart = state.cart.map((item) => ({
+          ...item,
+          paymentPlan,
+        }));
+      })
+      .addCase(updateCartItemPaymentPlan.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload || 'Failed to update payment plan';
       });
   },
 });
