@@ -208,23 +208,29 @@ const AppRoutes = () => {
             </Suspense>
           }
         />
-
         <Route
           path="cart-items/checkout/mandate/create"
           element={<DirectDebitSetUp1 />}
         />
-
         <Route
           path="cart-items/checkout/direct-debit/success/"
           element={<DirectDebitInitialized />}
         />
-
         <Route
           path="verification-document-sent"
           element={<VerificationSent />}
         />
-        <Route
+        {/* <Route
           path="cart-items/checkout/payment-success/:reference"
+          element={
+            <Suspense fallback={<CheckoutPaymentSkeleton />}>
+              <CheckoutPaymentSuccess />
+            </Suspense>
+          }
+        /> */}
+        /{' '}
+        <Route
+          path="cart-items/checkout/payment-success/:orderId"
           element={
             <Suspense fallback={<CheckoutPaymentSkeleton />}>
               <CheckoutPaymentSuccess />

@@ -1,11 +1,14 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { formatCurrency } from '../../utils/FormatCurrency';
 import { useEffect } from 'react';
 
 export const CheckoutPaymentSuccessContent = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { masterOrderID, amount } = location.state || {};
+  const { amount } = location.state || {};
+  const { orderId } = useParams();
+
+  console.log('orderId', orderId);
 
   useEffect(() => {
     // If there's no amount (user came directly to URL), redirect away
@@ -13,8 +16,6 @@ export const CheckoutPaymentSuccessContent = () => {
       navigate('/cart-items', { replace: true });
     }
   }, [amount, navigate]);
-
-  const orderNumber = masterOrderID || 'N/A';
 
   return (
     <article className="">
@@ -35,7 +36,7 @@ export const CheckoutPaymentSuccessContent = () => {
               <li className="text-[#96959F]">Order paid</li>
             </ul>
             <ul className="font-inter text-black leading-7 text-sm font-medium flex flex-col items-end">
-              <li className="font-medium">{orderNumber}</li>
+              <li className="font-medium">{orderId || 'N/A'}</li>
               <li className="font-medium">{new Date().toLocaleDateString()}</li>
 
               <li className="font-medium ">{formatCurrency(amount)}</li>
